@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>StudyMAF</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!--
+    NOTE: The access gate (Task 4) and external tutor link get wired up in a later step.
+    This page renders whatever lesson JSON it is given. Lesson text lives ONLY in the
+    JSON files under /data — never inline in this HTML.
+  -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <h1 class="brand">Study<span>MAF</span></h1>
+      <div class="header-controls">
+        <label for="lesson-picker" class="visually-hidden">Choose a lesson</label>
+        <select id="lesson-picker" aria-label="Choose a lesson"></select>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="lesson-root">
+    <p class="status" id="status">Loading…</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>StudyMAF — private study tool (MVP). Static site, no accounts, nothing sensitive.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
