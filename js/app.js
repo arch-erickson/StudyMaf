@@ -111,6 +111,9 @@ window.App = (function () {
     pinfo.appendChild(el("h1", null, "Your classes"));
     pinfo.appendChild(el("p", null, "Pick a class to study, or add a new one."));
     profile.appendChild(pinfo);
+    var nbBtn = ib("btn ghost", "bookOpen", "Notebook (" + Store.notebookEntries().length + ")");
+    nbBtn.style.marginLeft = "auto"; nbBtn.onclick = function () { location.hash = "#/notebook"; };
+    profile.appendChild(nbBtn);
     page.appendChild(profile);
 
     var head = el("div", "section-head");
@@ -207,6 +210,55 @@ window.App = (function () {
       if (syl) Store.setUpload(cls.id, "syllabus", syl.name);
       books.forEach(function (b) { if (b.value) Store.addTextbook(cls.id, b.kind, b.value); });
       closeModal(); renderDashboard();
+    };
+  }
+
+  // ====================================================================
+  // NOTEBOOK (saved scratch-work pages)
+  // ====================================================================
+  function renderNotebook() {
+    appEl.innerHTML = "";
+    var page = el("div", "page wrap");
+    var crumbs = el("div", "crumbs"); crumbs.innerHTML = "<a href='#/'>← All classes</a>"; page.appendChild(crumbs);
+    page.appendChild(el("h1", null, "Notebook"));
+    page.appendChild(el("p", "section-sub", "Your saved scratch work, newest first."));
+
+    var entries = Store.notebookEntries();
+    if (!entries.length) {
+      page.appendChild(el("p", "empty-hint", "Nothing saved yet. Open a problem, tap Scratch work, solve it by hand, then Save As."));
+      appEl.appendChild(page); return;
+    }
+    var grid = el("div", "nb-grid");
+    entries.forEach(function (en) {
+      var card = el("button", "nb-card");
+      var thumb = el("div", "thumb"); if (en.image) thumb.style.backgroundImage = "url(" + en.image + ")";
+      var meta = el("div", "meta");
+      meta.appendChild(el("h3", null, en.title || en.lessonName));
+      var d = new Date(en.date);
+      meta.appendChild(el("p", null, en.lessonName + " · " + d.toLocaleDateString() + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })));
+      card.append(thumb, meta);
+      card.onclick = function () { viewNotebookEntry(en); };
+      grid.appendChild(card);
+    });
+    page.appendChild(grid);
+    appEl.appendChild(page);
+  }
+  function viewNotebookEntry(en) {
+    var m = modal(
+      "<h2>" + esc(en.title || en.lessonName) + "</h2>" +
+      "<div class='sa-preview' style='max-height:420px'><img src='" + en.image + "' alt='work' style='max-height:420px'></div>" +
+      "<div class='modal-actions'><button class='btn subtle' id='nb-del'>Delete</button>" +
+      "<button class='btn ghost' id='nb-share'>Share</button>" +
+      "<a class='btn primary' href='" + en.image + "' download='studymaf-work.png'>Download</a></div>", { wide: true });
+    m.querySelector("#nb-del").onclick = function () { Store.removeNotebookEntry(en.id); closeModal(); renderNotebook(); };
+    m.querySelector("#nb-share").onclick = function () {
+      try {
+        var arr = en.image.split(","), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length, u8 = new Uint8Array(n);
+        while (n--) u8[n] = bstr.charCodeAt(n);
+        var file = new File([u8], "studymaf-work.png", { type: mime });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) navigator.share({ files: [file], title: en.title || "StudyMAF" });
+        else window.open(en.image, "_blank");
+      } catch (e) { window.open(en.image, "_blank"); }
     };
   }
 
@@ -412,7 +464,7 @@ window.App = (function () {
 
       var tools = el("div", "q-tools");
       var hintBtn = ib("btn subtle", "bulb", "Hint");
-      var padBtn = ib("btn subtle", "edit", "Notepad");
+      var padBtn = ib("btn subtle", "edit", "Scratch work");
       var calcBtn = ib("btn subtle", "calculator", "Calculator");
       tools.append(hintBtn, padBtn, calcBtn); inner.appendChild(tools);
 
@@ -429,7 +481,7 @@ window.App = (function () {
       inner.appendChild(steps);
 
       hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
-      padBtn.onclick = function () { Calculator.open("notepad"); };
+      padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: p.id, problemLabel: "Problem " + (idx + 1), prompt: p.prompt }); };
       calcBtn.onclick = function () { Calculator.open(); };
       input.addEventListener("keydown", function (e) { if (e.key === "Enter") nextBtn.click(); });
 
@@ -675,7 +727,9 @@ window.App = (function () {
   function route() {
     var hash = location.hash || "#/";
     var m = hash.match(/^#\/class\/(.+)$/);
-    if (m) renderClass(m[1]); else renderDashboard();
+    if (m) renderClass(m[1]);
+    else if (hash === "#/notebook") renderNotebook();
+    else renderDashboard();
   }
 
   function bindHeader() {
@@ -717,10 +771,19 @@ window.App = (function () {
   function refreshCurrentView() { if (!document.querySelector(".session")) route(); }
 
   function seedIfEmpty() {
-    if (Store.classes().length) return;
-    // Seed the PHYS 1442 class generated from the uploaded syllabus.
+    // One-time migration: make sure the PHYS 1442 class (from the uploaded syllabus)
+    // exists, even for users who already had the earlier demo seed. Runs once.
+    if (Store.flag("phys1442-seed")) return;
+    Store.setFlag("phys1442-seed");
+
+    // Remove the old auto-seeded "Algebra I" demo (only if untouched).
+    Store.classes().slice().forEach(function (c) {
+      if (c.name === "Algebra I" && (c.lessonIds || []).join() === "sample") Store.removeClass(c.id);
+    });
+
+    var already = Store.classes().some(function (c) { return c.name.indexOf("PHYS 1442") === 0; });
     var physIds = lessonIndex.filter(function (l) { return l.id.indexOf("phys1442") === 0; }).map(function (l) { return l.id; });
-    if (physIds.length) {
+    if (!already && physIds.length) {
       var c = Store.addClass({ name: "PHYS 1442 — General Physics II", semester: "Fall", year: String(new Date().getFullYear()), lessonIds: physIds });
       Store.setUpload(c.id, "syllabus", "PHYS1442.pdf");
       Store.addTextbook(c.id, "name", "University Physics Volume 2, OpenStax");

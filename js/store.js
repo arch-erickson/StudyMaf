@@ -21,7 +21,10 @@ window.Store = (function () {
       progress: {},   // "classId::lessonId" -> { done: {problemId:true}, xp: number }
       drawings: {},    // "classId::lessonId::problemId" -> dataURL
       uploads: {},     // classId -> { syllabus, textbook, homework:[] }
-      modes: {}        // classId -> { online:bool }
+      modes: {},       // classId -> { online:bool }
+      notebook: [],    // saved works: { id, lessonId, lessonName, title, date, image }
+      scratch: {},     // resume data: "cid::lid::pid" -> strokes JSON string
+      flags: {}        // one-time migration flags
     };
   }
   function save() {
@@ -31,6 +34,10 @@ window.Store = (function () {
 
   return {
     all: function () { return state; },
+
+    // ----- one-time migration flags -----
+    flag: function (name) { return !!(state.flags && state.flags[name]); },
+    setFlag: function (name) { state.flags = state.flags || {}; state.flags[name] = true; save(); },
 
     // ----- accent -----
     getAccent: function () { return state.accent; },
@@ -111,6 +118,28 @@ window.Store = (function () {
     getMode: function (cid) { return state.modes[cid] || { online: false }; },
     setOnline: function (cid, on) {
       var m = state.modes[cid] || { online: false }; m.online = on; state.modes[cid] = m; save();
+    },
+
+    // ----- notebook (saved scratch-work pages) -----
+    notebookEntries: function () { return (state.notebook || []).slice().reverse(); },
+    addNotebookEntry: function (entry) {
+      state.notebook = state.notebook || [];
+      entry.id = "nb" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+      entry.date = entry.date || new Date().toISOString();
+      state.notebook.push(entry); save(); return entry;
+    },
+    removeNotebookEntry: function (id) {
+      state.notebook = (state.notebook || []).filter(function (e) { return e.id !== id; }); save();
+    },
+
+    // ----- scratch resume (vector strokes per problem, for auto-save) -----
+    _skey: function (cid, lid, pid) { return (cid || "_") + "::" + (lid || "_") + "::" + (pid || "_"); },
+    getScratch: function (cid, lid, pid) { return (state.scratch || {})[this._skey(cid, lid, pid)] || null; },
+    saveScratch: function (cid, lid, pid, strokesJSON) {
+      state.scratch = state.scratch || {};
+      if (strokesJSON) state.scratch[this._skey(cid, lid, pid)] = strokesJSON;
+      else delete state.scratch[this._skey(cid, lid, pid)];
+      save();
     }
   };
 })();
