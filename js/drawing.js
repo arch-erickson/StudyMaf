@@ -20,12 +20,13 @@ window.Drawing = (function () {
     var head = el("div", "draw-head");
     head.appendChild(el("span", "title", "Scratch work" + (ctxRef.title ? " — " + ctxRef.title : "")));
     var tools = el("div", "draw-tools");
-    var penBtn = el("button", null, "✎"); penBtn.title = "Pen"; penBtn.setAttribute("aria-pressed", "true");
-    var eraBtn = el("button", null, "▨"); eraBtn.title = "Eraser"; eraBtn.setAttribute("aria-pressed", "false");
+    var ic = function (n) { return window.Icons ? Icons.get(n) : ""; };
+    var penBtn = el("button"); penBtn.innerHTML = ic("pen"); penBtn.title = "Pen"; penBtn.setAttribute("aria-pressed", "true");
+    var eraBtn = el("button"); eraBtn.innerHTML = ic("eraser"); eraBtn.title = "Eraser"; eraBtn.setAttribute("aria-pressed", "false");
     var colorInp = el("input", "pen-color"); colorInp.type = "color"; colorInp.value = color; colorInp.title = "Pen color";
     var sizeInp = el("input"); sizeInp.type = "range"; sizeInp.min = "1"; sizeInp.max = "16"; sizeInp.value = String(size); sizeInp.title = "Size"; sizeInp.style.width = "90px";
-    var undoBtn = el("button", null, "↶"); undoBtn.title = "Undo";
-    var clearBtn = el("button", null, "🗑"); clearBtn.title = "Clear";
+    var undoBtn = el("button"); undoBtn.innerHTML = ic("undo"); undoBtn.title = "Undo";
+    var clearBtn = el("button"); clearBtn.innerHTML = ic("trash"); clearBtn.title = "Clear";
     tools.append(penBtn, eraBtn, colorInp, sizeInp, undoBtn, clearBtn);
     head.appendChild(tools); modal.appendChild(head);
 
@@ -37,8 +38,8 @@ window.Drawing = (function () {
     // foot
     var foot = el("div", "draw-foot");
     var closeBtn = el("button", "btn subtle", "Close");
-    var sendBtn = el("button", "btn ghost", "Send to tutor");
-    var saveBtn = el("button", "btn primary", "Save to problem");
+    var sendBtn = el("button", "btn ghost"); sendBtn.innerHTML = ic("send") + "<span>Send to tutor</span>";
+    var saveBtn = el("button", "btn primary"); saveBtn.innerHTML = ic("save") + "<span>Save to problem</span>";
     foot.append(closeBtn, sendBtn, saveBtn); modal.appendChild(foot);
 
     overlay.appendChild(modal);

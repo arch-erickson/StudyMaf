@@ -13,6 +13,9 @@ window.App = (function () {
   // ---------- helpers ----------
   function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
   function h(html) { var d = document.createElement("div"); d.innerHTML = html; return d; }
+  function icon(name) { return window.Icons ? Icons.get(name) : ""; }
+  // button with an SVG icon + text label
+  function ib(cls, iconName, label) { var b = el("button", cls); b.innerHTML = icon(iconName) + "<span>" + esc(label) + "</span>"; return b; }
   function fetchJSON(path) { return fetch(path, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
 
@@ -47,11 +50,11 @@ window.App = (function () {
     t.appendChild(card); t.style.alignItems = "flex-start"; t.style.paddingTop = "80px"; t.style.pointerEvents = "none";
     fx.appendChild(t); setTimeout(function () { t.remove(); }, 1400);
   }
-  function reward(xp, emoji, label) {
+  function reward(xp, iconName, label) {
     var fx = document.getElementById("fx-layer");
     var pop = el("div", "reward-pop");
     var card = el("div", "reward-card");
-    card.appendChild(el("div", "big", emoji || "🎉"));
+    var big = el("div", "big"); big.innerHTML = icon(iconName || "check"); card.appendChild(big);
     if (label) card.appendChild(el("div", null, label));
     card.appendChild(el("div", "xp", "+" + xp + " XP"));
     pop.appendChild(card); fx.appendChild(pop);
@@ -152,19 +155,27 @@ window.App = (function () {
         "<input type='checkbox' class='lz' value='" + esc(l.id) + "' checked> " + esc(l.title) + "</label>";
     }).join("");
     var m = modal(
-      "<h2>Add a class</h2><p class='modal-sub'>Fill in the basics. Lessons load from your data files.</p>" +
+      "<h2>Add a class</h2><p class='modal-sub'>Fill in the basics and attach your course materials up front. Lessons load from your data files.</p>" +
       "<div class='field'><label>Class name</label><input id='ac-name' placeholder='e.g. Algebra I'></div>" +
       "<div class='row2'>" +
       "<div class='field'><label>Semester</label><select id='ac-sem'><option>Fall</option><option>Spring</option><option>Summer</option><option>Winter</option></select></div>" +
       "<div class='field'><label>Year</label><input id='ac-year' value='" + new Date().getFullYear() + "'></div>" +
       "</div>" +
+      "<div class='row2'>" +
+      "<div class='field'><label>Syllabus <span style='font-weight:400;color:var(--ink-soft)'>(required to tailor lessons)</span></label><input id='ac-syl' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
+      "<div class='field'><label>Textbook <span style='font-weight:400;color:var(--ink-soft)'>(optional)</span></label><input id='ac-txt' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
+      "</div>" +
+      "<div class='notice' style='margin-bottom:16px'><strong>Static MVP.</strong>Files stay on your device (names remembered). Generating lessons from the syllabus/textbook happens in the AI stage.</div>" +
       "<div class='field'><label>Lessons to include</label>" + (opts || "<p class='modal-sub'>No lessons in data/index.json yet.</p>") + "</div>" +
       "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='ac-save'>Create class</button></div>"
     );
     m.querySelector("#ac-save").onclick = function () {
       var name = m.querySelector("#ac-name").value.trim() || "Untitled Class";
       var chosen = Array.prototype.slice.call(m.querySelectorAll(".lz:checked")).map(function (x) { return x.value; });
-      Store.addClass({ name: name, semester: m.querySelector("#ac-sem").value, year: m.querySelector("#ac-year").value, lessonIds: chosen });
+      var cls = Store.addClass({ name: name, semester: m.querySelector("#ac-sem").value, year: m.querySelector("#ac-year").value, lessonIds: chosen });
+      var syl = m.querySelector("#ac-syl").files[0], txt = m.querySelector("#ac-txt").files[0];
+      if (syl) Store.setUpload(cls.id, "syllabus", syl.name);
+      if (txt) Store.setUpload(cls.id, "textbook", txt.name);
       closeModal(); renderDashboard();
     };
   }
@@ -194,12 +205,11 @@ window.App = (function () {
     var mode = Store.getMode(id);
     var tb = el("div", "toolbar");
     var g1 = el("div", "group");
-    var calcBtn = el("button", "btn ghost", "🖩 Calculator"); calcBtn.onclick = function () { Calculator.open(); };
-    var sylBtn = el("button", "btn ghost", "⬆ Syllabus"); sylBtn.onclick = function () { uploadDialog(id, "syllabus"); };
-    var txtBtn = el("button", "btn ghost", "📘 Textbook"); txtBtn.onclick = function () { uploadDialog(id, "textbook"); };
-    var hwBtn = el("button", "btn ghost", "📝 Homework"); hwBtn.onclick = function () { homeworkMode(id); };
-    var testBtn = el("button", "btn ghost", "🎯 Test mode"); testBtn.onclick = function () { testModeIntro(id); };
-    g1.append(calcBtn, sylBtn, txtBtn, hwBtn, testBtn);
+    var calcBtn = ib("btn ghost", "calculator", "Calculator"); calcBtn.onclick = function () { Calculator.open(); };
+    var hwBtn = ib("btn ghost", "edit", "Homework"); hwBtn.onclick = function () { homeworkMode(id); };
+    var testBtn = ib("btn ghost", "target", "Test mode"); testBtn.onclick = function () { testModeIntro(id); };
+    var matBtn = ib("btn ghost", "book", "Materials"); matBtn.onclick = function () { materialsDialog(id); };
+    g1.append(calcBtn, hwBtn, testBtn, matBtn);
     tb.appendChild(g1);
     tb.appendChild(el("div", "spacer"));
     // online toggle
@@ -248,7 +258,7 @@ window.App = (function () {
     var track = el("div", "progress-track"); var fill = el("div", "progress-fill"); fill.style.width = pct + "%"; track.appendChild(fill);
     mp.appendChild(track); mp.appendChild(el("span", "progress-pct", pct + "%"));
     main.appendChild(mp); btn.appendChild(main);
-    btn.appendChild(el("span", "lesson-caret", "▸"));
+    var caret = el("span", "lesson-caret"); caret.innerHTML = icon("chevronRight"); btn.appendChild(caret);
     row.appendChild(btn);
 
     var panel = el("div", "lesson-panel"); panel.hidden = true;
@@ -267,11 +277,11 @@ window.App = (function () {
           var sum = el("p", "lp-summary", lesson.summary); panel.appendChild(sum); StudyMath.render(sum);
           var acts = el("div", "lp-actions");
           var startLbl = doneN > 0 && doneN < total ? "Continue" : (doneN >= total ? "Practice again" : "Start lesson");
-          var start = el("button", "btn primary", "▶ " + startLbl);
+          var start = ib("btn primary", "play", startLbl);
           start.onclick = function () { startSession(cls, lid, lesson); };
-          var concepts = el("button", "btn ghost", "📖 Read concepts");
+          var concepts = ib("btn ghost", "bookOpen", "Read concepts");
           concepts.onclick = function () { conceptReader(lesson); };
-          var test = el("button", "btn ghost", "🎯 Practice test");
+          var test = ib("btn ghost", "target", "Practice test");
           test.onclick = function () { startTest(cls, lid, lesson); };
           acts.append(start, concepts, test);
           panel.appendChild(acts);
@@ -339,9 +349,9 @@ window.App = (function () {
 
     var session = el("div", "session");
     var top = el("div", "session-top");
-    var closeX = el("button", "close-x", "✕"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
+    var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
     var track = el("div", "session-progress"); var fill = el("div", "fill"); track.appendChild(fill);
-    var streakEl = el("div", "session-streak", "🔥 0");
+    var streakEl = el("div", "session-streak"); function setStreak(n) { streakEl.innerHTML = icon("flame") + "<span>" + n + "</span>"; } setStreak(0);
     top.append(closeX, track, streakEl); session.appendChild(top);
 
     var body = el("div", "session-body"); var inner = el("div", "session-inner"); body.appendChild(inner); session.appendChild(body);
@@ -356,7 +366,7 @@ window.App = (function () {
     function render() {
       if (idx >= problems.length) return finish();
       fill.style.width = Math.round(idx / problems.length * 100) + "%";
-      streakEl.textContent = "🔥 " + streak;
+      setStreak(streak);
       var p = problems[idx];
       inner.innerHTML = "";
       inner.appendChild(el("span", "q-badge " + p.difficulty, p.difficulty));
@@ -370,9 +380,9 @@ window.App = (function () {
       ab.appendChild(input); inner.appendChild(ab);
 
       var tools = el("div", "q-tools");
-      var hintBtn = el("button", "btn subtle", "💡 Hint");
-      var drawBtn = el("button", "btn subtle", "✎ Scratch work");
-      var calcBtn = el("button", "btn subtle", "🖩 Calculator");
+      var hintBtn = ib("btn subtle", "bulb", "Hint");
+      var drawBtn = ib("btn subtle", "edit", "Scratch work");
+      var calcBtn = ib("btn subtle", "calculator", "Calculator");
       tools.append(hintBtn, drawBtn, calcBtn); inner.appendChild(tools);
 
       var hintPanel = el("div", "hint-panel"); hintPanel.hidden = true;
@@ -404,13 +414,13 @@ window.App = (function () {
             verdict.textContent = "Correct!"; verdict.className = "verdict right";
             streak++; var xp = 10 + (p.difficulty === "hard" ? 5 : 0) + (p.difficulty === "stretch" ? 10 : 0);
             Store.markProblemDone(cls.id, lid, p.id, xp);
-            reward(xp, streak >= 3 ? "🔥" : "✅", streak >= 3 ? streak + " in a row!" : "Nice!");
+            reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
           } else {
             verdict.textContent = "Not quite — check the solution."; verdict.className = "verdict wrong";
             streak = 0;
             Store.markProblemDone(cls.id, lid, p.id, 2); // small XP for the attempt
           }
-          streakEl.textContent = "🔥 " + streak;
+          setStreak(streak);
           nextBtn.textContent = idx + 1 >= problems.length ? "Finish" : "Next →";
         } else {
           idx++; render();
@@ -421,7 +431,9 @@ window.App = (function () {
       fill.style.width = "100%";
       inner.innerHTML = "";
       var done = el("div"); done.style.textAlign = "center"; done.style.paddingTop = "40px";
-      done.appendChild(el("div", null, "🏆")).style.fontSize = "3.5rem";
+      var tro = el("div"); tro.innerHTML = icon("award"); tro.style.color = "var(--accent)";
+      var tsvg = tro.querySelector("svg"); if (tsvg) { tsvg.style.width = "3.5rem"; tsvg.style.height = "3.5rem"; }
+      done.appendChild(tro);
       done.appendChild(el("h2", null, "Lesson complete!"));
       var p2 = Store.lessonProgress(cls.id, lid);
       done.appendChild(el("p", null, "Total XP for this lesson: " + p2.xp));
@@ -440,7 +452,7 @@ window.App = (function () {
   // ====================================================================
   function testModeIntro(id) {
     modal(
-      "<h2>Test mode 🎯</h2>" +
+      "<h2>Test mode</h2>" +
       "<div class='notice'><strong>How it works.</strong>Test mode drills you until your mistakes are cleared, then lets you take a timed practice exam. " +
       "In the full AI stage it will target your specific weak spots; for now it builds the exam from your lesson's problem bank.</div>" +
       "<p class='modal-sub'>Open a lesson below and choose <strong>Practice test</strong> to configure a timed exam.</p>" +
@@ -472,9 +484,9 @@ window.App = (function () {
   function runExam(cls, lid, problems, minutes) {
     var session = el("div", "session");
     var top = el("div", "session-top");
-    var closeX = el("button", "close-x", "✕"); closeX.onclick = function () { clearInterval(timer); session.remove(); renderClass(cls.id); };
+    var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { clearInterval(timer); session.remove(); renderClass(cls.id); };
     var title = el("div"); title.style.flex = "1"; title.style.fontWeight = "700"; title.textContent = "Practice exam · " + problems.length + " questions";
-    var clock = el("div", "session-streak", "⏱ " + minutes + ":00");
+    var clock = el("div", "session-streak", minutes + ":00");
     top.append(closeX, title, clock); session.appendChild(top);
 
     var body = el("div", "session-body"); var inner = el("div", "session-inner"); inner.style.maxWidth = "760px";
@@ -488,7 +500,7 @@ window.App = (function () {
       var ab = el("div", "answer-box"); var input = document.createElement("input"); input.type = "text"; input.placeholder = "Answer…";
       ab.appendChild(input); card.appendChild(ab); inputs.push({ input: input, p: p, card: card });
       var tools = el("div", "q-tools");
-      var hintBtn = el("button", "btn subtle", "💡 Hint");
+      var hintBtn = ib("btn subtle", "bulb", "Hint");
       var hp = el("p"); hp.hidden = true; hp.style.fontStyle = "italic"; hp.style.color = "var(--ink-soft)"; hp.textContent = p.hint;
       hintBtn.onclick = function () { hp.hidden = !hp.hidden; StudyMath.render(hp); };
       tools.appendChild(hintBtn); card.appendChild(tools); card.appendChild(hp);
@@ -502,7 +514,7 @@ window.App = (function () {
     var remaining = minutes * 60;
     var timer = setInterval(function () {
       remaining--; var m = Math.floor(remaining / 60), s = remaining % 60;
-      clock.textContent = "⏱ " + m + ":" + (s < 10 ? "0" : "") + s;
+      clock.textContent = m + ":" + (s < 10 ? "0" : "") + s;
       if (remaining <= 0) { clearInterval(timer); grade(); }
     }, 1000);
 
@@ -517,9 +529,9 @@ window.App = (function () {
       });
       var perfect = correct === inputs.length;
       var xp = perfect ? 50 : correct * 5;
-      if (perfect) reward(50, "🏆", "Perfect score!");
+      if (perfect) reward(50, "award", "Perfect score!");
 
-      var fb = "<h2>" + (perfect ? "Perfect! 🏆" : "Score: " + correct + " / " + inputs.length) + "</h2>";
+      var fb = "<h2>" + (perfect ? "Perfect!" : "Score: " + correct + " / " + inputs.length) + "</h2>";
       if (perfect) {
         fb += "<div class='notice'><strong>+50 XP</strong>You nailed every question. You're ready for the real thing.</div>";
       } else {
@@ -559,9 +571,26 @@ window.App = (function () {
     };
   }
 
+  function materialsDialog(id) {
+    var u = Store.getUploads(id);
+    var m = modal(
+      "<h2>Course materials</h2>" +
+      "<p class='modal-sub'>Attached when you created the class. Update them any time.</p>" +
+      "<div class='field'><label>Syllabus</label><div style='display:flex;gap:8px;align-items:center'>" +
+      "<span style='flex:1;color:" + (u.syllabus ? "var(--ink)" : "var(--ink-soft)") + "'>" + esc(u.syllabus || "None attached") + "</span>" +
+      "<button class='btn subtle' id='m-syl'>" + (u.syllabus ? "Replace" : "Add") + "</button></div></div>" +
+      "<div class='field'><label>Textbook</label><div style='display:flex;gap:8px;align-items:center'>" +
+      "<span style='flex:1;color:" + (u.textbook ? "var(--ink)" : "var(--ink-soft)") + "'>" + esc(u.textbook || "None attached") + "</span>" +
+      "<button class='btn subtle' id='m-txt'>" + (u.textbook ? "Replace" : "Add") + "</button></div></div>" +
+      "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>"
+    );
+    m.querySelector("#m-syl").onclick = function () { uploadDialog(id, "syllabus"); };
+    m.querySelector("#m-txt").onclick = function () { uploadDialog(id, "textbook"); };
+  }
+
   function homeworkMode(id) {
     var m = modal(
-      "<h2>Homework mode 📝</h2>" +
+      "<h2>Homework mode</h2>" +
       "<div class='notice'><strong>Study for a specific assignment.</strong>Upload a homework file and the AI stage will build " +
       "practice around exactly those question types. For now you can attach it and practice from your lesson bank.</div>" +
       "<div class='field'><label>Homework file</label><input id='hw-file' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
@@ -596,7 +625,9 @@ window.App = (function () {
   }
 
   function bindHeader() {
-    document.getElementById("open-calc").onclick = function () { Calculator.open(); };
+    var c = document.getElementById("open-calc");
+    c.innerHTML = icon("calculator") + "<span>Calculator</span>";
+    c.onclick = function () { Calculator.open(); };
     document.getElementById("open-accent").onclick = openAccentPicker;
   }
   function openAccentPicker() {

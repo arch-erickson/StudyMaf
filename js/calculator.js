@@ -1,197 +1,320 @@
-/* StudyMAF — floating calculator: scientific + graphing.
- * Toggle either or both tabs; the dock can be minimized, maximized, and dragged
- * (floats over the lesson). No external libs.
+/* StudyMAF — advanced calculator: a scientific calculator that expands into a
+ * Desmos-style multi-equation graphing tool.
  *
- * Expression evaluation: input is restricted to a math whitelist, then compiled.
- * This is the user's own local tool (no untrusted input); the whitelist blocks
- * anything that isn't math.
+ * - Scientific keypad with a "2nd" layer (inverse trig, hyperbolic, roots, logs…).
+ * - "Graph" toggle expands the panel: add any number of equations of any
+ *   complexity (polynomial, trig, exp, log, rational, abs…), each its own color.
+ * - Pan (drag) and zoom (wheel / buttons) the plane.
+ * - The scientific keypad inserts tokens into the focused equation row, so you
+ *   build formulas with the same buttons.
+ * - Minimize / maximize (enlarge for more room) / drag to float over the lesson.
  */
 window.Calculator = (function () {
   "use strict";
-  var dock, display, graphCanvas, graphInput, current = "", activeTab = "sci", maximized = false;
+  var dock, sciDisplay, sciExpr = "", second = false, graphOn = false, maximized = false;
+  var eqs = [], eqSeq = 0, activeInput = null, graphCanvas, view = null;
+  var EQ_COLORS = ["#EF8354", "#1971c2", "#0ca678", "#e64980", "#7048e8", "#f59f00", "#e03131", "#4F5D75"];
 
-  // ---- safe-ish math compile ----
-  function compile(expr) {
-    var e = String(expr)
-      .replace(/\bpi\b/gi, "Math.PI").replace(/\be\b/g, "Math.E")
-      .replace(/\bsin\b/g, "Math.sin").replace(/\bcos\b/g, "Math.cos").replace(/\btan\b/g, "Math.tan")
+  function ic(n) { return window.Icons ? Icons.get(n) : ""; }
+  function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
+
+  // ---------- expression compiler (implicit mult + rich function set) ----------
+  function compile(raw) {
+    var e = String(raw).trim();
+    if (!e) throw new Error("empty");
+    // strip a leading "y =" / "f(x) ="
+    e = e.replace(/^\s*[a-zA-Z]\w*\s*(\([^)]*\))?\s*=\s*/, "");
+    // implicit multiplication: 2x -> 2*x, 3( -> 3*(, )( -> )*( , )x -> )*x
+    e = e.replace(/(\d(?:\.\d+)?)\s*([a-zA-Z(])/g, "$1*$2").replace(/\)\s*([a-zA-Z0-9(])/g, ")*$1");
+    // constants + functions
+    e = e
+      .replace(/\btau\b/gi, "(2*Math.PI)").replace(/\bpi\b/gi, "Math.PI").replace(/\be\b/g, "Math.E")
+      .replace(/\basinh\b/g, "Math.asinh").replace(/\bacosh\b/g, "Math.acosh").replace(/\batanh\b/g, "Math.atanh")
+      .replace(/\bsinh\b/g, "Math.sinh").replace(/\bcosh\b/g, "Math.cosh").replace(/\btanh\b/g, "Math.tanh")
       .replace(/\basin\b/g, "Math.asin").replace(/\bacos\b/g, "Math.acos").replace(/\batan\b/g, "Math.atan")
-      .replace(/\bsqrt\b/g, "Math.sqrt").replace(/\bln\b/g, "Math.log").replace(/\blog\b/g, "Math.log10")
-      .replace(/\babs\b/g, "Math.abs").replace(/\^/g, "**");
-    // whitelist: digits, operators, parens, dot, x, comma, Math.<fn>, whitespace
-    if (/Math\.[a-zA-Z0-9]+|[-+*/(). ,0-9x]/.test(e) === false) throw new Error("empty");
-    var stripped = e.replace(/Math\.[a-zA-Z0-9]+/g, "").replace(/[-+*/(). ,0-9x]|\*\*/g, "");
-    if (stripped.length) throw new Error("bad chars");
+      .replace(/\bsin\b/g, "Math.sin").replace(/\bcos\b/g, "Math.cos").replace(/\btan\b/g, "Math.tan")
+      .replace(/\bsqrt\b/g, "Math.sqrt").replace(/\bcbrt\b/g, "Math.cbrt").replace(/\bexp\b/g, "Math.exp")
+      .replace(/\bln\b/g, "Math.log").replace(/\blog2\b/g, "Math.log2").replace(/\blog10\b/g, "Math.log10").replace(/\blog\b/g, "Math.log10")
+      .replace(/\babs\b/g, "Math.abs").replace(/\bfloor\b/g, "Math.floor").replace(/\bceil\b/g, "Math.ceil")
+      .replace(/\bround\b/g, "Math.round").replace(/\bsign\b/g, "Math.sign").replace(/\bmin\b/g, "Math.min").replace(/\bmax\b/g, "Math.max")
+      .replace(/\^/g, "**");
+    // whitelist check
+    var stripped = e.replace(/Math\.[a-zA-Z0-9]+/g, "").replace(/\*\*/g, "").replace(/[-+*/%(). ,0-9x]/g, "");
+    if (stripped.length) throw new Error("bad token: " + stripped);
     /* eslint-disable no-new-func */
-    return new Function("x", "return (" + e + ");");
+    return new Function("x", "with(Math){return (" + e + ");}");
   }
-  function evalNumber(expr) { return compile(expr)(0); }
+  function round(n) { return Math.abs(n) < 1e-12 ? 0 : Math.round(n * 1e10) / 1e10; }
 
-  function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
-
+  // ================= build dock =================
   function build() {
     dock.innerHTML = "";
     dock.hidden = false; dock.setAttribute("aria-hidden", "false");
+    dock.className = "calc-dock" + (graphOn ? " graph" : "");
 
     var head = el("div", "calc-head");
     head.appendChild(el("span", "title", "Calculator"));
-    var bMin = el("button", null, "—"); bMin.title = "Minimize";
-    var bMax = el("button", null, "▢"); bMax.title = "Maximize";
-    var bClose = el("button", null, "✕"); bClose.title = "Close";
-    head.appendChild(bMin); head.appendChild(bMax); head.appendChild(bClose);
+    var gTog = el("button", "head-btn graph-toggle"); gTog.innerHTML = ic("graph"); gTog.title = "Toggle graphing";
+    gTog.setAttribute("aria-pressed", String(graphOn));
+    var bMin = el("button", "head-btn"); bMin.innerHTML = ic("minus"); bMin.title = "Minimize";
+    var bMax = el("button", "head-btn"); bMax.innerHTML = ic("maximize"); bMax.title = "Enlarge";
+    var bClose = el("button", "head-btn"); bClose.innerHTML = ic("x"); bClose.title = "Close";
+    head.append(gTog, bMin, bMax, bClose);
     dock.appendChild(head);
 
-    var tabs = el("div", "calc-tabs");
-    var tSci = el("button", null, "Scientific"); var tGraph = el("button", null, "Graphing");
-    tabs.appendChild(tSci); tabs.appendChild(tGraph); dock.appendChild(tabs);
+    var main = el("div", "calc-main");
+    dock.appendChild(main);
 
-    var body = el("div", "calc-body"); dock.appendChild(body);
+    if (graphOn) main.appendChild(buildGraphPane());
+    main.appendChild(buildSci());
 
-    function renderTab() {
-      tSci.setAttribute("aria-selected", activeTab === "sci");
-      tGraph.setAttribute("aria-selected", activeTab === "graph");
-      body.innerHTML = "";
-      if (activeTab === "sci") renderSci(body); else renderGraph(body);
-    }
-    tSci.onclick = function () { activeTab = "sci"; renderTab(); };
-    tGraph.onclick = function () { activeTab = "graph"; renderTab(); };
-
+    gTog.onclick = function () { graphOn = !graphOn; build(); };
     bMin.onclick = function () { dock.classList.toggle("min"); };
-    bMax.onclick = function () { toggleMax(); };
-    bClose.onclick = function () { close(); };
+    bMax.onclick = toggleMax;
+    bClose.onclick = close;
 
     makeDraggable(dock, head);
-    renderTab();
-    positionDefault();
+    if (!maximized) positionDefault();
+    if (graphOn) requestAnimationFrame(function () { if (!view) resetView(); redraw(); });
   }
 
-  function renderSci(body) {
-    display = el("div", "calc-display", current || "0");
-    body.appendChild(display);
+  // ---------- scientific side ----------
+  function buildSci() {
+    var wrap = el("div", "calc-sci");
+    sciDisplay = el("div", "calc-display", sciExpr || "0");
+    wrap.appendChild(sciDisplay);
+
+    var secRow = el("div", "calc-second-row");
+    var secBtn = el("button", "calc-key mod" + (second ? " on" : ""), "2nd");
+    secBtn.onclick = function () { second = !second; build(); };
+    secRow.appendChild(secBtn);
+    var hint = el("span", "calc-mode-hint", graphOn ? "keys build the focused equation" : "");
+    secRow.appendChild(hint);
+    wrap.appendChild(secRow);
+
     var grid = el("div", "calc-grid");
-    var keys = [
-      ["sin", "fn"], ["cos", "fn"], ["tan", "fn"], ["(", "fn"], [")", "fn"],
-      ["ln", "fn"], ["log", "fn"], ["sqrt", "fn"], ["^", "op"], ["C", "op"],
-      ["7"], ["8"], ["9"], ["/", "op"], ["⌫", "op"],
-      ["4"], ["5"], ["6"], ["*", "op"],  ["pi", "fn"],
-      ["1"], ["2"], ["3"], ["-", "op"],  ["e", "fn"],
-      ["0"], ["."], ["+", "op", "wide"], ["=", "eq"]
-    ];
-    keys.forEach(function (k) {
-      var b = el("button", k[1] || "", k[0]);
-      if (k[2]) b.classList.add(k[2]);
-      b.onclick = function () { press(k[0]); };
+    keypad().forEach(function (k) {
+      var b = el("button", "calc-key" + (k.cls ? " " + k.cls : ""), k.label);
+      b.onclick = function () { press(k.ins != null ? k.ins : k.label, k.act); };
       grid.appendChild(b);
     });
-    body.appendChild(grid);
+    wrap.appendChild(grid);
+    return wrap;
   }
 
-  function press(k) {
-    if (k === "C") { current = ""; }
-    else if (k === "⌫") { current = current.slice(0, -1); }
-    else if (k === "=") {
-      try { current = String(round(evalNumber(current))); }
-      catch (e) { current = "Error"; }
+  function keypad() {
+    var trig = second
+      ? [{ label: "sin⁻¹", ins: "asin(", cls: "fn" }, { label: "cos⁻¹", ins: "acos(", cls: "fn" }, { label: "tan⁻¹", ins: "atan(", cls: "fn" }]
+      : [{ label: "sin", ins: "sin(", cls: "fn" }, { label: "cos", ins: "cos(", cls: "fn" }, { label: "tan", ins: "tan(", cls: "fn" }];
+    var logs = second
+      ? [{ label: "sinh", ins: "sinh(", cls: "fn" }, { label: "cosh", ins: "cosh(", cls: "fn" }, { label: "eˣ", ins: "exp(", cls: "fn" }]
+      : [{ label: "ln", ins: "ln(", cls: "fn" }, { label: "log", ins: "log(", cls: "fn" }, { label: "log₂", ins: "log2(", cls: "fn" }];
+    var roots = second
+      ? [{ label: "∛", ins: "cbrt(", cls: "fn" }, { label: "xʸ", ins: "^", cls: "fn" }, { label: "|x|", ins: "abs(", cls: "fn" }]
+      : [{ label: "√", ins: "sqrt(", cls: "fn" }, { label: "x²", ins: "^2", cls: "fn" }, { label: "^", ins: "^", cls: "fn" }];
+    return [].concat(
+      [{ label: "2nd", cls: "mod" + (second ? " on" : ""), act: "second" }], trig,
+      [{ label: "(", cls: "fn" }, { label: ")", cls: "fn" }],
+      logs, roots,
+      [{ label: "π", ins: "pi", cls: "fn" }, { label: "e", ins: "e", cls: "fn" }],
+      [{ label: "7" }, { label: "8" }, { label: "9" }, { label: "÷", ins: "/", cls: "op" }, { label: "DEL", cls: "op", act: "del" }, { label: "C", cls: "op", act: "clear" }],
+      [{ label: "4" }, { label: "5" }, { label: "6" }, { label: "×", ins: "*", cls: "op" }, { label: "%", ins: "%", cls: "op" }, { label: "x", ins: "x", cls: "var" }],
+      [{ label: "1" }, { label: "2" }, { label: "3" }, { label: "−", ins: "-", cls: "op" }, { label: ",", cls: "op" }, { label: "=", cls: "eq", act: "equals" }],
+      [{ label: "0", cls: "wide" }, { label: ".", }, { label: "+", ins: "+", cls: "op" }, { label: "Ans", cls: "op", act: "ans" }]
+    );
+  }
+
+  var lastAns = "";
+  function press(token, act) {
+    // In graph mode with a focused equation row, keys build that equation.
+    if (graphOn && activeInput && !act) { insertAtCursor(activeInput, token); triggerEq(activeInput); return; }
+    if (act === "second") { second = !second; build(); return; }
+    if (act === "clear") { sciExpr = ""; }
+    else if (act === "del") { sciExpr = sciExpr.slice(0, -1); }
+    else if (act === "ans") { sciExpr += lastAns; }
+    else if (act === "equals") {
+      try { var v = round(compile(sciExpr)(0)); lastAns = String(v); sciExpr = String(v); }
+      catch (e) { sciExpr = "Error"; }
     } else {
-      if (current === "Error") current = "";
-      var fns = ["sin", "cos", "tan", "ln", "log", "sqrt"];
-      current += (fns.indexOf(k) >= 0) ? (k + "(") : k;
+      if (sciExpr === "Error" || sciExpr === "0") sciExpr = "";
+      sciExpr += token;
     }
-    if (display) display.textContent = current || "0";
+    if (sciDisplay) sciDisplay.textContent = sciExpr || "0";
   }
-  function round(n) { return Math.round(n * 1e10) / 1e10; }
+  function insertAtCursor(input, token) {
+    var s = input.selectionStart || input.value.length, en = input.selectionEnd || s;
+    input.value = input.value.slice(0, s) + token + input.value.slice(en);
+    var pos = s + token.length; input.setSelectionRange(pos, pos); input.focus();
+  }
 
-  function renderGraph(body) {
-    var controls = el("div", "graph-controls");
-    graphInput = el("input"); graphInput.type = "text"; graphInput.placeholder = "y = e.g.  2*x + 1  or  x^2 - 3";
-    graphInput.value = graphInput.value || "2*x + 1";
-    var plot = el("button", "btn primary", "Plot"); plot.style.padding = "8px 14px";
-    controls.appendChild(graphInput); controls.appendChild(plot); body.appendChild(controls);
+  // ---------- graphing pane ----------
+  function buildGraphPane() {
+    var pane = el("div", "calc-graphpane");
 
-    var wrap = el("div", "graph-canvas-wrap");
+    var list = el("div", "eq-list"); pane.appendChild(list);
+    if (!eqs.length) addEq("2x + 1");
+    eqs.forEach(function (q) { list.appendChild(eqRow(q)); });
+    var addBtn = el("button", "eq-add"); addBtn.innerHTML = ic("plus") + "<span>Add equation</span>";
+    addBtn.onclick = function () { addEq(""); build(); };
+    pane.appendChild(addBtn);
+
+    var canvasWrap = el("div", "graph-canvas-wrap");
     graphCanvas = document.createElement("canvas");
-    var w = 336, h = 260, dpr = window.devicePixelRatio || 1;
-    graphCanvas.width = w * dpr; graphCanvas.height = h * dpr;
-    graphCanvas.style.width = "100%"; graphCanvas.style.aspectRatio = w + " / " + h;
-    graphCanvas.getContext("2d").scale(dpr, dpr);
-    wrap.appendChild(graphCanvas); body.appendChild(wrap);
-    body.appendChild(el("p", "graph-hint", "Use x as the variable. Functions: sin, cos, tan, ln, log, sqrt, ^, pi, e."));
+    canvasWrap.appendChild(graphCanvas); pane.appendChild(canvasWrap);
 
-    plot.onclick = function () { drawGraph(graphInput.value); };
-    graphInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter") drawGraph(graphInput.value); });
-    drawGraph(graphInput.value);
+    var bar = el("div", "graph-toolbar");
+    var zi = el("button", "gt-btn"); zi.innerHTML = ic("zoomIn"); zi.title = "Zoom in";
+    var zo = el("button", "gt-btn"); zo.innerHTML = ic("zoomOut"); zo.title = "Zoom out";
+    var rs = el("button", "gt-btn"); rs.innerHTML = ic("refresh"); rs.title = "Reset view";
+    zi.onclick = function () { zoom(0.8); }; zo.onclick = function () { zoom(1.25); }; rs.onclick = function () { resetView(); redraw(); };
+    var readout = el("span", "graph-readout"); readout.id = "graph-readout";
+    bar.append(zi, zo, rs, readout);
+    pane.appendChild(bar);
+
+    setupGraphInteractions(canvasWrap);
+    return pane;
   }
 
-  function drawGraph(expr) {
-    var ctx = graphCanvas.getContext("2d");
-    var W = 336, H = 260, pad = 6;
-    var xR = [-10, 10], yR = [-10, 10];
-    function X(x) { return pad + (x - xR[0]) / (xR[1] - xR[0]) * (W - pad * 2); }
-    function Y(y) { return pad + (yR[1] - y) / (yR[1] - yR[0]) * (H - pad * 2); }
+  function addEq(expr) { eqs.push({ id: ++eqSeq, expr: expr, color: EQ_COLORS[eqs.length % EQ_COLORS.length], visible: true }); }
+  function eqRow(q) {
+    var row = el("div", "eq-row");
+    var dot = el("button", "eq-dot"); dot.style.background = q.color; dot.title = q.visible ? "Hide" : "Show";
+    dot.innerHTML = q.visible ? "" : ic("eyeOff");
+    dot.onclick = function () { q.visible = !q.visible; dot.innerHTML = q.visible ? "" : ic("eyeOff"); redraw(); };
+    var inp = document.createElement("input"); inp.type = "text"; inp.className = "eq-input";
+    inp.value = q.expr; inp.placeholder = "y = …  (use x)"; inp.spellcheck = false;
+    inp.addEventListener("focus", function () { activeInput = inp; });
+    inp.addEventListener("input", function () { q.expr = inp.value; markValidity(inp, q.expr); redraw(); });
+    inp._eq = q;
+    var rm = el("button", "eq-rm"); rm.innerHTML = ic("trash"); rm.title = "Remove";
+    rm.onclick = function () { eqs = eqs.filter(function (z) { return z.id !== q.id; }); if (activeInput === inp) activeInput = null; build(); };
+    row.append(dot, inp, rm);
+    markValidity(inp, q.expr);
+    return row;
+  }
+  function markValidity(inp, expr) {
+    if (!expr.trim()) { inp.classList.remove("bad"); return; }
+    try { compile(expr); inp.classList.remove("bad"); } catch (e) { inp.classList.add("bad"); }
+  }
+  function triggerEq(inp) { if (inp._eq) { inp._eq.expr = inp.value; markValidity(inp, inp.value); redraw(); } }
+
+  // ---------- view + drawing ----------
+  function resetView() { view = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 }; }
+  function zoom(f) {
+    if (!view) resetView();
+    var cx = (view.xmin + view.xmax) / 2, cy = (view.ymin + view.ymax) / 2;
+    var hw = (view.xmax - view.xmin) / 2 * f, hh = (view.ymax - view.ymin) / 2 * f;
+    view = { xmin: cx - hw, xmax: cx + hw, ymin: cy - hh, ymax: cy + hh }; redraw();
+  }
+  function sizeCanvas() {
+    var wrap = graphCanvas.parentElement, r = wrap.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    var w = Math.max(240, r.width), hgt = Math.max(200, r.height || 260);
+    graphCanvas.width = w * dpr; graphCanvas.height = hgt * dpr;
+    graphCanvas.style.width = "100%";
+    var ctx = graphCanvas.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx: ctx, w: w, h: hgt };
+  }
+  function niceStep(range, target) {
+    var raw = range / target, mag = Math.pow(10, Math.floor(Math.log10(raw))), n = raw / mag;
+    var s = n < 1.5 ? 1 : n < 3 ? 2 : n < 7 ? 5 : 10; return s * mag;
+  }
+  function redraw() {
+    if (!graphOn || !graphCanvas) return; if (!view) resetView();
+    var c = sizeCanvas(), ctx = c.ctx, W = c.w, H = c.h;
+    function X(x) { return (x - view.xmin) / (view.xmax - view.xmin) * W; }
+    function Y(y) { return H - (y - view.ymin) / (view.ymax - view.ymin) * H; }
     ctx.clearRect(0, 0, W, H); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = "#eef0f3"; ctx.lineWidth = 1;
-    for (var g = -10; g <= 10; g++) {
-      ctx.beginPath(); ctx.moveTo(X(g), pad); ctx.lineTo(X(g), H - pad); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(pad, Y(g)); ctx.lineTo(W - pad, Y(g)); ctx.stroke();
-    }
-    ctx.strokeStyle = "#2D3142"; ctx.lineWidth = 1.4;
-    ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(W - pad, Y(0)); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(X(0), pad); ctx.lineTo(X(0), H - pad); ctx.stroke();
 
-    var f; try { f = compile(expr); } catch (e) {
-      ctx.fillStyle = "#e8590c"; ctx.font = "12px Inter"; ctx.textAlign = "center";
-      ctx.fillText("Can't plot that expression", W / 2, H / 2); return;
+    var sx = niceStep(view.xmax - view.xmin, 10), sy = niceStep(view.ymax - view.ymin, 8);
+    ctx.font = "11px Inter, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "top";
+    ctx.strokeStyle = "#eef0f3"; ctx.fillStyle = "#9aa1ac"; ctx.lineWidth = 1;
+    for (var gx = Math.ceil(view.xmin / sx) * sx; gx <= view.xmax; gx += sx) {
+      ctx.beginPath(); ctx.moveTo(X(gx), 0); ctx.lineTo(X(gx), H); ctx.stroke();
+      if (Math.abs(gx) > 1e-9) ctx.fillText(fmt(gx), X(gx), Math.min(H - 14, Math.max(2, Y(0) + 4)));
     }
-    var accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#EF8354";
-    ctx.strokeStyle = accent; ctx.lineWidth = 2.4; ctx.beginPath();
-    var started = false;
-    for (var px = 0; px <= W; px++) {
-      var xv = xR[0] + (px / W) * (xR[1] - xR[0]); var yv;
-      try { yv = f(xv); } catch (e2) { started = false; continue; }
-      if (!isFinite(yv)) { started = false; continue; }
-      var sy = Y(yv);
-      if (sy < -50 || sy > H + 50) { started = false; continue; }
-      if (!started) { ctx.moveTo(X(xv), sy); started = true; } else { ctx.lineTo(X(xv), sy); }
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (var gy = Math.ceil(view.ymin / sy) * sy; gy <= view.ymax; gy += sy) {
+      ctx.beginPath(); ctx.moveTo(0, Y(gy)); ctx.lineTo(W, Y(gy)); ctx.stroke();
+      if (Math.abs(gy) > 1e-9) ctx.fillText(fmt(gy), Math.min(W - 4, Math.max(24, X(0) - 6)), Y(gy));
     }
-    ctx.stroke();
+    // axes
+    ctx.strokeStyle = "#2D3142"; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(0, Y(0)); ctx.lineTo(W, Y(0)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(X(0), 0); ctx.lineTo(X(0), H); ctx.stroke();
+
+    // curves
+    eqs.forEach(function (q) {
+      if (!q.visible || !q.expr.trim()) return;
+      var f; try { f = compile(q.expr); } catch (e) { return; }
+      ctx.strokeStyle = q.color; ctx.lineWidth = 2.2; ctx.beginPath();
+      var started = false, prevY = null;
+      for (var px = 0; px <= W; px++) {
+        var xv = view.xmin + px / W * (view.xmax - view.xmin), yv;
+        try { yv = f(xv); } catch (e2) { started = false; continue; }
+        if (typeof yv !== "number" || !isFinite(yv)) { started = false; prevY = null; continue; }
+        var sy2 = Y(yv);
+        if (prevY !== null && Math.abs(sy2 - prevY) > H * 1.5) { started = false; } // asymptote break
+        if (!started) { ctx.moveTo(px, sy2); started = true; } else ctx.lineTo(px, sy2);
+        prevY = sy2;
+      }
+      ctx.stroke();
+    });
+  }
+  function fmt(n) { n = round(n); return Math.abs(n) >= 1000 || (Math.abs(n) < 0.001 && n !== 0) ? n.toExponential(0) : String(n); }
+
+  function setupGraphInteractions(wrap) {
+    var dragging = false, lx = 0, ly = 0;
+    wrap.addEventListener("pointerdown", function (e) { dragging = true; lx = e.clientX; ly = e.clientY; wrap.setPointerCapture(e.pointerId); });
+    wrap.addEventListener("pointermove", function (e) {
+      var r = graphCanvas.getBoundingClientRect();
+      var ro = document.getElementById("graph-readout");
+      if (ro) { var mx = view.xmin + (e.clientX - r.left) / r.width * (view.xmax - view.xmin); var my = view.ymin + (1 - (e.clientY - r.top) / r.height) * (view.ymax - view.ymin); ro.textContent = "(" + fmt(mx) + ", " + fmt(my) + ")"; }
+      if (!dragging) return;
+      var dx = (e.clientX - lx) / r.width * (view.xmax - view.xmin);
+      var dy = (e.clientY - ly) / r.height * (view.ymax - view.ymin);
+      view.xmin -= dx; view.xmax -= dx; view.ymin += dy; view.ymax += dy;
+      lx = e.clientX; ly = e.clientY; redraw();
+    });
+    wrap.addEventListener("pointerup", function () { dragging = false; });
+    wrap.addEventListener("wheel", function (e) { e.preventDefault(); zoom(e.deltaY > 0 ? 1.1 : 0.9); }, { passive: false });
   }
 
+  // ---------- window controls ----------
   function positionDefault() {
+    dock.style.left = "auto"; dock.style.top = "auto"; dock.style.transform = "none";
     dock.style.right = "24px"; dock.style.bottom = "24px";
-    dock.style.left = "auto"; dock.style.top = "auto";
-    dock.style.width = "360px"; dock.style.height = "auto"; maximized = false;
+    dock.style.width = ""; dock.style.height = ""; maximized = false;
   }
   function toggleMax() {
     maximized = !maximized;
     if (maximized) {
-      dock.classList.remove("min");
+      dock.classList.remove("min"); dock.classList.add("max");
       dock.style.left = "50%"; dock.style.top = "50%"; dock.style.right = "auto"; dock.style.bottom = "auto";
-      dock.style.transform = "translate(-50%,-50%)"; dock.style.width = "min(560px, 94vw)";
-    } else { dock.style.transform = "none"; positionDefault(); }
+      dock.style.transform = "translate(-50%,-50%)";
+    } else { dock.classList.remove("max"); dock.style.transform = "none"; positionDefault(); }
+    if (graphOn) requestAnimationFrame(redraw);
   }
-
   function makeDraggable(node, handle) {
-    var ox = 0, oy = 0, dragging = false;
+    var d = false, ox = 0, oy = 0;
     handle.addEventListener("pointerdown", function (e) {
-      if (maximized) return;
-      dragging = true; var r = node.getBoundingClientRect();
-      node.style.left = r.left + "px"; node.style.top = r.top + "px";
-      node.style.right = "auto"; node.style.bottom = "auto"; node.style.transform = "none";
-      ox = e.clientX - r.left; oy = e.clientY - r.top;
-      handle.setPointerCapture(e.pointerId);
+      if (maximized || e.target.closest(".head-btn")) return;
+      d = true; var r = node.getBoundingClientRect();
+      node.style.left = r.left + "px"; node.style.top = r.top + "px"; node.style.right = "auto"; node.style.bottom = "auto"; node.style.transform = "none";
+      ox = e.clientX - r.left; oy = e.clientY - r.top; handle.setPointerCapture(e.pointerId);
     });
     handle.addEventListener("pointermove", function (e) {
-      if (!dragging) return;
-      node.style.left = Math.max(0, Math.min(window.innerWidth - 80, e.clientX - ox)) + "px";
+      if (!d) return;
+      node.style.left = Math.max(0, Math.min(window.innerWidth - 120, e.clientX - ox)) + "px";
       node.style.top = Math.max(0, Math.min(window.innerHeight - 40, e.clientY - oy)) + "px";
     });
-    handle.addEventListener("pointerup", function () { dragging = false; });
+    handle.addEventListener("pointerup", function () { d = false; });
   }
 
-  function open(tab) {
+  function open(mode) {
     dock = document.getElementById("calc-dock");
-    if (tab) activeTab = tab;
-    if (dock.hidden) build(); else { dock.classList.remove("min"); }
+    if (mode === "graph") graphOn = true;
+    if (dock.hidden) build(); else dock.classList.remove("min");
   }
   function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); }
 
