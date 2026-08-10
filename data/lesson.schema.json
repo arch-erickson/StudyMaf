@@ -17,21 +17,25 @@
     },
     "figures": {
       "type": "array",
-      "description": "Optional data-driven diagrams the page renders in a consistent house style. The CODE owns how each type is drawn; the data only supplies parameters. Supported types: 'coordinate-plane' (params: lines[] of {label, slope, intercept, color?}, xRange[min,max], yRange[min,max]), 'number-line' (params: min, max, points[] of {value, label?}).",
-      "items": {
+      "description": "Optional lesson-level diagrams (same shape as a concept/example figure).",
+      "items": { "$ref": "#/$defs/figure" }
+    },
+    "glossary": {
+      "type": "object",
+      "description": "Keyword definitions. Any key that appears in concept/example text is auto-outlined and clickable. Each entry gives a first-time-reader plain explanation AND how the term is used in this class.",
+      "additionalProperties": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["type", "caption"],
+        "required": ["plain", "in_class"],
         "properties": {
-          "type": { "type": "string", "enum": ["coordinate-plane", "number-line"] },
-          "caption": { "type": "string", "minLength": 1 },
-          "params": { "type": "object" }
+          "plain": { "type": "string", "minLength": 1 },
+          "in_class": { "type": "string", "minLength": 1 }
         }
       }
     },
     "concept_sections": {
       "type": "array",
-      "description": "Ordered simple-to-complex progression. Level 1 is the simplest, grounded starting point; complexity grows as level increases.",
+      "description": "Ordered simple-to-complex progression. Level 1 is the simplest, grounded starting point; complexity grows as level increases. Every section should carry a figure.",
       "minItems": 1,
       "items": {
         "type": "object",
@@ -40,13 +44,14 @@
         "properties": {
           "level": { "type": "integer", "minimum": 1 },
           "heading": { "type": "string", "minLength": 1 },
-          "explanation": { "type": "string", "minLength": 1 }
+          "explanation": { "type": "string", "minLength": 1 },
+          "figure": { "$ref": "#/$defs/figure" }
         }
       }
     },
     "real_world_examples": {
       "type": "array",
-      "description": "Exactly 3 grounded examples.",
+      "description": "Exactly 3 grounded examples. Each card is collapsible and should carry a deeper 'detail' explanation and a figure.",
       "minItems": 3,
       "maxItems": 3,
       "items": {
@@ -56,7 +61,9 @@
         "properties": {
           "title": { "type": "string", "minLength": 1 },
           "scenario": { "type": "string", "minLength": 1 },
-          "how_the_math_applies": { "type": "string", "minLength": 1 }
+          "how_the_math_applies": { "type": "string", "minLength": 1 },
+          "detail": { "type": "string", "minLength": 1 },
+          "figure": { "$ref": "#/$defs/figure" }
         }
       }
     },
@@ -92,6 +99,19 @@
           },
           "hint": { "type": "string", "minLength": 1 }
         }
+      }
+    }
+  },
+  "$defs": {
+    "figure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "description": "A diagram rendered by the code in a consistent house style; data supplies only parameters. Types: 'schematic' (params.viewBox[w,h] + params.elements[] of primitives: charge {x,y,sign,label,r}, vector/arrow {x1,y1,x2,y2,label,color}, line {x1,y1,x2,y2,color,dash}, circle {x,y,r,dash,label,color}, plate {x,y,w,h,charge}, point {x,y,label,color}, label {x,y,text,color,size}, lens {x,y,h,kind}, ray same as vector); 'coordinate-plane'; 'number-line'.",
+      "properties": {
+        "type": { "type": "string", "enum": ["schematic", "coordinate-plane", "number-line"] },
+        "caption": { "type": "string" },
+        "params": { "type": "object" }
       }
     }
   }

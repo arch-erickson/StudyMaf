@@ -16,6 +16,60 @@ window.App = (function () {
   function icon(name) { return window.Icons ? Icons.get(name) : ""; }
   // button with an SVG icon + text label
   function ib(cls, iconName, label) { var b = el("button", cls); b.innerHTML = icon(iconName) + "<span>" + esc(label) + "</span>"; return b; }
+
+  // ---- rich text: renders math ($...$) AND outlines glossary keywords ----
+  function splitMath(text) {
+    var out = [], re = /(\$\$[^$]*\$\$|\$[^$]*\$)/g, last = 0, m;
+    while ((m = re.exec(text))) { if (m.index > last) out.push({ math: false, s: text.slice(last, m.index) }); out.push({ math: true, s: m[0] }); last = m.index + m[0].length; }
+    if (last < text.length) out.push({ math: false, s: text.slice(last) });
+    return out;
+  }
+  function richText(container, text, glossary) {
+    container.innerHTML = "";
+    if (text == null) return container;
+    var keys = glossary ? Object.keys(glossary) : [];
+    keys.sort(function (a, b) { return b.length - a.length; });
+    var re = keys.length ? new RegExp("\\b(" + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|") + ")\\b", "gi") : null;
+    var used = {};
+    splitMath(text).forEach(function (seg) {
+      if (seg.math || !re) { container.appendChild(document.createTextNode(seg.s)); return; }
+      var s = seg.s, last = 0, m;
+      re.lastIndex = 0;
+      while ((m = re.exec(s))) {
+        if (m.index > last) container.appendChild(document.createTextNode(s.slice(last, m.index)));
+        var matched = m[0], key = null, lm = matched.toLowerCase();
+        for (var i = 0; i < keys.length; i++) if (keys[i].toLowerCase() === lm) { key = keys[i]; break; }
+        if (key && !used[key.toLowerCase()]) {
+          used[key.toLowerCase()] = true;
+          var b = el("button", "kw", matched);
+          b.onclick = (function (k) { return function () { showKeyword(k, glossary[k]); }; })(key);
+          container.appendChild(b);
+        } else { container.appendChild(document.createTextNode(matched)); }
+        last = m.index + matched.length;
+      }
+      if (last < s.length) container.appendChild(document.createTextNode(s.slice(last)));
+    });
+    StudyMath.render(container);
+    return container;
+  }
+  // keyword definitions open in their OWN layer, above the concept reader (which
+  // lives in modal-host), so the reader is never destroyed.
+  function showKeyword(term, def) {
+    if (!def) return;
+    var layer = el("div", "overlay kw-layer");
+    layer.style.zIndex = "95";
+    var m = el("div", "modal");
+    m.innerHTML = "<div class='kw-modal'><h2>" + esc(term) + "</h2>" +
+      "<div class='kw-block'><div class='kw-label plain'>In plain terms</div><p id='kw-plain'></p></div>" +
+      "<div class='kw-block inclass'><div class='kw-label'>In this class</div><p id='kw-class'></p></div>" +
+      "<div class='modal-actions'><button class='btn primary' id='kw-ok'>Got it</button></div></div>";
+    layer.appendChild(m); document.body.appendChild(layer);
+    richText(m.querySelector("#kw-plain"), def.plain, null);
+    richText(m.querySelector("#kw-class"), def.in_class, null);
+    function close() { layer.remove(); }
+    m.querySelector("#kw-ok").onclick = close;
+    layer.onclick = function (e) { if (e.target === layer) close(); };
+  }
   function fetchJSON(path) { return fetch(path, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
 
@@ -374,14 +428,15 @@ window.App = (function () {
     return row;
   }
 
-  // ---------- concept reader (sequential reveal + figures + examples) ----------
+  // ---------- concept reader (sequential reveal + per-concept diagrams,
+  //            keyword definitions, expandable real-world examples) ----------
   function conceptReader(lesson) {
-    var body = "<h2>" + esc(lesson.title) + "</h2><p class='modal-sub'>Concepts build from simple to complex. Reveal the next level when ready.</p><div id='cr-body'></div>";
+    var gloss = lesson.glossary || null;
+    var body = "<h2>" + esc(lesson.title) + "</h2>" +
+      "<p class='modal-sub'>Concepts build from simple to complex. Reveal the next level when ready. " +
+      "<span class='kw-hint'>Outlined words are clickable definitions.</span></p><div id='cr-body'></div>";
     var m = modal(body + "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>", { wide: true });
     var host = m.querySelector("#cr-body");
-
-    // figures first (relevant diagrams)
-    (lesson.figures || []).forEach(function (fig) { host.appendChild(Figures.element(fig)); });
 
     var sections = (lesson.concept_sections || []).slice().sort(function (a, b) { return a.level - b.level; });
     var listWrap = el("div", "concept-list"); host.appendChild(listWrap);
@@ -392,8 +447,9 @@ window.App = (function () {
       var c = el("div", "concept");
       c.appendChild(el("span", "level-tag", "Level " + s.level));
       c.appendChild(el("h3", null, s.heading));
-      var p = el("p", null, s.explanation); c.appendChild(p);
-      listWrap.appendChild(c); StudyMath.render(c);
+      var p = el("p"); c.appendChild(p); richText(p, s.explanation, gloss);
+      if (s.figure) c.appendChild(Figures.element(s.figure));
+      listWrap.appendChild(c);
       shown++; renderReveal();
     }
     function renderReveal() {
@@ -405,18 +461,36 @@ window.App = (function () {
     }
     showNext();
 
-    // examples
+    // real-world examples — horizontal cards that expand to detail + diagram
     if ((lesson.real_world_examples || []).length) {
       host.appendChild(el("h3", "step-block", "Real-world examples"));
-      var cards = el("div", "example-cards");
+      var list = el("div", "example-list");
       lesson.real_world_examples.forEach(function (ex) {
-        var card = el("div", "card");
-        card.appendChild(el("h4", null, ex.title));
-        card.appendChild(el("p", "sc", ex.scenario));
-        var ap = el("p", "ap"); ap.innerHTML = "<strong>How the math applies:</strong> " + esc(ex.how_the_math_applies);
-        card.appendChild(ap); cards.appendChild(card); StudyMath.render(card);
+        var card = el("div", "ex-card"); card.setAttribute("aria-expanded", "false");
+        var head = el("button", "ex-head");
+        var htext = el("div", "ex-head-text");
+        htext.appendChild(el("h4", null, ex.title));
+        var sc = el("p", "ex-scenario"); richText(sc, ex.scenario, gloss); htext.appendChild(sc);
+        head.appendChild(htext);
+        var car = el("span", "ex-caret"); car.innerHTML = icon("chevronRight"); head.appendChild(car);
+        card.appendChild(head);
+
+        var panel = el("div", "ex-panel"); panel.hidden = true;
+        var ap = el("div", "ex-applies");
+        ap.appendChild(el("span", "ex-tag", "How the math applies"));
+        var apt = el("p"); richText(apt, ex.how_the_math_applies, gloss); ap.appendChild(apt);
+        panel.appendChild(ap);
+        if (ex.detail) { var dt = el("p", "ex-detail"); richText(dt, ex.detail, gloss); panel.appendChild(dt); }
+        if (ex.figure) panel.appendChild(Figures.element(ex.figure));
+        card.appendChild(panel);
+
+        head.onclick = function () {
+          var open = card.getAttribute("aria-expanded") === "true";
+          card.setAttribute("aria-expanded", String(!open)); panel.hidden = open;
+        };
+        list.appendChild(card);
       });
-      host.appendChild(cards);
+      host.appendChild(list);
     }
   }
 

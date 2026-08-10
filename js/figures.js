@@ -102,16 +102,90 @@ window.Figures = (function () {
     return c.cv;
   }
 
+  // ---- schematic: declarative SVG diagrams in one consistent house style ----
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var C = { pos: "#E8553A", neg: "#2F6DB5", ink: "#2D3142", soft: "#8b93a1", line: "#c7cdd6" };
+  function col(c) { if (!c) return C.ink; if (c === "accent") return accent(); return C[c] || c; }
+  function sv(tag, attrs) { var e = document.createElementNS(SVGNS, tag); for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]); return e; }
+  function txt(x, y, s, fill, size, anchor) { var t = sv("text", { x: x, y: y, fill: fill || C.ink, "font-size": size || 13, "font-family": "Inter, sans-serif", "font-weight": 600, "text-anchor": anchor || "middle", "dominant-baseline": "middle" }); t.textContent = s; return t; }
+
+  function schematic(params) {
+    var p = params || {}, vb = p.viewBox || [340, 210];
+    var svg = sv("svg", { viewBox: "0 0 " + vb[0] + " " + vb[1], width: "100%", preserveAspectRatio: "xMidYMid meet" });
+    svg.style.maxHeight = "260px";
+    var defs = sv("defs");
+    ["ink", "pos", "neg", "soft", "accent"].forEach(function (name) {
+      var m = sv("marker", { id: "arh-" + name, viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" });
+      m.appendChild(sv("path", { d: "M0 0 L10 5 L0 10 z", fill: name === "accent" ? accent() : C[name] }));
+      defs.appendChild(m);
+    });
+    svg.appendChild(defs);
+
+    (p.elements || []).forEach(function (e) {
+      var g;
+      switch (e.kind) {
+        case "line":
+          svg.appendChild(sv("line", { x1: e.x1, y1: e.y1, x2: e.x2, y2: e.y2, stroke: col(e.color), "stroke-width": e.width || 2, "stroke-dasharray": e.dash ? "5 4" : null, "stroke-linecap": "round" }));
+          break;
+        case "vector": case "arrow": case "ray": {
+          var cc = e.color || (e.kind === "ray" ? "accent" : "ink");
+          var mk = cc === "accent" ? "arh-accent" : ("arh-" + (C[cc] ? cc : "ink"));
+          svg.appendChild(sv("line", { x1: e.x1, y1: e.y1, x2: e.x2, y2: e.y2, stroke: col(cc), "stroke-width": e.width || 2.4, "stroke-linecap": "round", "marker-end": "url(#" + mk + ")" }));
+          if (e.label) svg.appendChild(txt((e.x1 + e.x2) / 2 + (e.dx || 0), (e.y1 + e.y2) / 2 + (e.dy || -8), e.label, col(cc), 12));
+          break;
+        }
+        case "circle":
+          svg.appendChild(sv("circle", { cx: e.x, cy: e.y, r: e.r || 40, fill: "none", stroke: col(e.color || "soft"), "stroke-width": e.width || 1.8, "stroke-dasharray": e.dash ? "6 5" : null }));
+          if (e.label) svg.appendChild(txt(e.x, e.y - (e.r || 40) - 8, e.label, col(e.color || "soft"), 12));
+          break;
+        case "charge": {
+          var r = e.r || 15, cl = e.sign === "-" ? C.neg : C.pos;
+          g = sv("g");
+          g.appendChild(sv("circle", { cx: e.x, cy: e.y, r: r, fill: cl }));
+          var sign = sv("line", { x1: e.x - r * 0.5, y1: e.y, x2: e.x + r * 0.5, y2: e.y, stroke: "#fff", "stroke-width": 2.4, "stroke-linecap": "round" });
+          g.appendChild(sign);
+          if (e.sign !== "-") g.appendChild(sv("line", { x1: e.x, y1: e.y - r * 0.5, x2: e.x, y2: e.y + r * 0.5, stroke: "#fff", "stroke-width": 2.4, "stroke-linecap": "round" }));
+          if (e.label) g.appendChild(txt(e.x, e.y + r + 12, e.label, C.ink, 12));
+          svg.appendChild(g);
+          break;
+        }
+        case "plate": {
+          var w = e.w || 12, h = e.h || 90;
+          svg.appendChild(sv("rect", { x: e.x, y: e.y, width: w, height: h, rx: 2, fill: e.charge === "-" ? C.neg : (e.charge === "+" ? C.pos : C.soft) }));
+          if (e.label) svg.appendChild(txt(e.x + w / 2, e.y - 10, e.label, C.ink, 12));
+          break;
+        }
+        case "point":
+          svg.appendChild(sv("circle", { cx: e.x, cy: e.y, r: e.r || 4, fill: col(e.color || "ink") }));
+          if (e.label) svg.appendChild(txt(e.x, e.y - 12, e.label, col(e.color || "ink"), 12));
+          break;
+        case "lens": {
+          var lh = e.h || 90, cx = e.x, cy = e.y;
+          var bulge = e.kind === "concave" ? -10 : 14;
+          svg.appendChild(sv("path", { d: "M" + cx + " " + (cy - lh / 2) + " q " + bulge + " " + lh / 2 + " 0 " + lh + " q " + (-bulge) + " " + (-lh / 2) + " 0 " + (-lh), fill: "rgba(47,109,181,.14)", stroke: C.neg, "stroke-width": 1.8 }));
+          svg.appendChild(sv("line", { x1: cx, y1: cy - lh / 2 - 6, x2: cx, y2: cy + lh / 2 + 6, stroke: C.line, "stroke-width": 1, "stroke-dasharray": "3 3" }));
+          break;
+        }
+        case "label":
+          svg.appendChild(txt(e.x, e.y, e.text, col(e.color), e.size || 13, e.anchor));
+          break;
+      }
+    });
+    return svg;
+  }
+
   function draw(fig) {
     if (fig.type === "coordinate-plane") return coordinatePlane(fig.params);
     if (fig.type === "number-line") return numberLine(fig.params);
+    if (fig.type === "schematic") return schematic(fig.params);
     return null;
   }
 
-  // Build a .figure element (canvas + caption) for a figure spec.
+  // Build a .figure element (canvas/svg + caption) for a figure spec.
   function element(fig) {
+    if (!fig) return null;
     var wrap = document.createElement("div"); wrap.className = "figure";
-    var cv = draw(fig); if (cv) wrap.appendChild(cv);
+    var node = draw(fig); if (node) wrap.appendChild(node);
     if (fig.caption) {
       var cap = document.createElement("p"); cap.className = "cap"; cap.textContent = fig.caption;
       wrap.appendChild(cap); StudyMath.render(cap);

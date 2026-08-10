@@ -373,3 +373,35 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .nb-card .meta { padding: 12px 14px; }
 .nb-card .meta h3 { margin: 0 0 4px; font-size: .98rem; }
 .nb-card .meta p { margin: 0; color: var(--ink-soft); font-size: .8rem; }
+
+/* ---------- Concept keywords ---------- */
+.kw { font: inherit; font-size: inherit; color: var(--accent); background: none; border: none; cursor: pointer;
+  border-bottom: 2px dotted var(--accent); padding: 0 1px; border-radius: 2px; }
+.kw:hover { background: var(--accent-soft); }
+.kw-hint { font-style: italic; color: var(--ink-soft); }
+.kw-modal .kw-block { background: var(--surface-2); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+.kw-modal .kw-block.inclass { background: var(--accent-soft); }
+.kw-modal .kw-label { font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--slate); margin-bottom: 6px; }
+.kw-modal .kw-block.inclass .kw-label { color: var(--accent); }
+.kw-modal .kw-block p { margin: 0; }
+
+/* ---------- Real-world example cards (horizontal, expandable) ---------- */
+.example-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+.ex-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+.ex-head { width: 100%; display: flex; align-items: center; gap: 14px; padding: 15px 18px; background: none; border: none; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+.ex-head:hover { background: var(--surface-2); }
+.ex-head-text { flex: 1; min-width: 0; }
+.ex-head-text h4 { margin: 0 0 3px; font-size: 1.02rem; }
+.ex-scenario { margin: 0; font-size: .9rem; color: var(--ink-soft); }
+.ex-caret { color: var(--ink-soft); flex: none; display: inline-flex; transition: transform .2s ease; }
+.ex-card[aria-expanded="true"] .ex-caret { transform: rotate(90deg); }
+.ex-panel { padding: 0 18px 18px; border-top: 1px solid var(--line); }
+.ex-panel[hidden] { display: none; }
+.ex-applies { margin-top: 14px; }
+.ex-tag { display: inline-block; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 6px; }
+.ex-applies p, .ex-detail { margin: 0 0 10px; }
+.ex-detail { color: var(--ink-soft); font-size: .95rem; }
+
+/* figure sizing inside concepts/examples */
+.figure { margin-top: 12px; }
+.figure svg { display: block; width: 100%; height: auto; background: #fff; border-radius: 8px; }
