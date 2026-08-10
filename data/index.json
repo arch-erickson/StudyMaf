@@ -1,0 +1,9 @@
+{
+  "lessons": [
+    {
+      "id": "sample",
+      "title": "Linear Equations in One Variable",
+      "file": "lessons/sample.json"
+    }
+  ]
+}
