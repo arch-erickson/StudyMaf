@@ -1,9 +1,10 @@
 {
   "lessons": [
-    {
-      "id": "sample",
-      "title": "Linear Equations in One Variable",
-      "file": "lessons/sample.json"
-    }
+    { "id": "phys1442-01-coulomb",     "title": "Electric Charge & Coulomb's Law",   "file": "lessons/phys1442-01-coulomb.json" },
+    { "id": "phys1442-02-efield",      "title": "The Electric Field",                "file": "lessons/phys1442-02-efield.json" },
+    { "id": "phys1442-03-gauss",       "title": "Gauss's Law",                        "file": "lessons/phys1442-03-gauss.json" },
+    { "id": "phys1442-04-potential",   "title": "Electric Potential",                 "file": "lessons/phys1442-04-potential.json" },
+    { "id": "phys1442-05-capacitance", "title": "Capacitance & Capacitors",           "file": "lessons/phys1442-05-capacitance.json" },
+    { "id": "sample",                  "title": "Linear Equations in One Variable",   "file": "lessons/sample.json" }
   ]
 }

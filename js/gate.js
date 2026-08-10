@@ -1,18 +1,18 @@
 /* StudyMAF — SOFT access gate.
  *
- * ⚠️ THIS IS NOT REAL SECURITY. It is a client-side passphrase prompt whose only
- * job is to stop a casual visitor from reading the site. The passphrase lives in
+ * ⚠️ THIS IS NOT REAL SECURITY. It is a client-side password prompt whose only
+ * job is to stop a casual visitor from reading the site. The password lives in
  * this file, which anyone can view — do NOT put anything sensitive behind it.
  * That's fine here: there is nothing sensitive on this site (it's study material).
  *
- * Change the passphrase below to whatever you like. Set it to "" to disable the gate.
+ * Change the password below to whatever you like. Set it to "" to disable the gate.
  */
 (function () {
   "use strict";
-  var PASSPHRASE = "studymaf";              // <-- change this to your own soft passphrase
+  var PASSWORD = "studymaf";                 // <-- change this to your own soft password
   var SESSION_KEY = "studymaf.gate.ok";
 
-  if (!PASSPHRASE) return;                   // gate disabled
+  if (!PASSWORD) return;                      // gate disabled
   try { if (sessionStorage.getItem(SESSION_KEY) === "1") return; } catch (e) { return; }
 
   // Build a blocking overlay before the app is usable.
@@ -24,8 +24,8 @@
     "<div style='background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.35);" +
       "padding:34px 30px;max-width:360px;width:100%;text-align:center'>" +
       "<div style='font-size:1.7rem;font-weight:800;color:#2D3142;margin-bottom:4px'>Study<span style='color:#EF8354'>MAF</span></div>" +
-      "<p style='color:#6b7280;font-size:.9rem;margin:0 0 20px'>Enter the passphrase to continue.</p>" +
-      "<input id='gate-input' type='password' placeholder='Passphrase' autocomplete='off' " +
+      "<p style='color:#6b7280;font-size:.9rem;margin:0 0 20px'>Enter the password to continue.</p>" +
+      "<input id='gate-input' type='password' placeholder='Password' autocomplete='off' " +
         "style='width:100%;font:inherit;font-size:1rem;padding:12px 14px;border:2px solid #e4e7ec;border-radius:10px;box-sizing:border-box'>" +
       "<p id='gate-err' style='color:#e03131;font-size:.82rem;height:16px;margin:8px 0 0'></p>" +
       "<button id='gate-go' style='margin-top:12px;width:100%;font:inherit;font-weight:700;padding:12px;border:none;" +
@@ -39,7 +39,7 @@
     var go = overlay.querySelector("#gate-go");
     input.focus();
     function attempt() {
-      if (input.value === PASSPHRASE) {
+      if (input.value === PASSWORD) {
         try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
         overlay.remove();
       } else {

@@ -11,8 +11,9 @@
  */
 window.Calculator = (function () {
   "use strict";
-  var dock, sciDisplay, sciExpr = "", second = false, graphOn = false, maximized = false;
+  var dock, sciDisplay, sciExpr = "", second = false, graphOn = false, notepadOn = false, maximized = false;
   var eqs = [], eqSeq = 0, activeInput = null, graphCanvas, view = null;
+  var padCanvas, padCtx, padColor = "#2D3142", padTool = "pen", padImage = null;
   var EQ_COLORS = ["#EF8354", "#1971c2", "#0ca678", "#e64980", "#7048e8", "#f59f00", "#e03131", "#4F5D75"];
 
   function ic(n) { return window.Icons ? Icons.get(n) : ""; }
@@ -50,25 +51,29 @@ window.Calculator = (function () {
   function build() {
     dock.innerHTML = "";
     dock.hidden = false; dock.setAttribute("aria-hidden", "false");
-    dock.className = "calc-dock" + (graphOn ? " graph" : "");
+    dock.className = "calc-dock" + (graphOn ? " graph" : "") + (notepadOn ? " notepad" : "") + (maximized ? " max" : "");
 
     var head = el("div", "calc-head");
     head.appendChild(el("span", "title", "Calculator"));
+    var nTog = el("button", "head-btn np-toggle"); nTog.innerHTML = ic("edit"); nTog.title = "Toggle notepad";
+    nTog.setAttribute("aria-pressed", String(notepadOn));
     var gTog = el("button", "head-btn graph-toggle"); gTog.innerHTML = ic("graph"); gTog.title = "Toggle graphing";
     gTog.setAttribute("aria-pressed", String(graphOn));
     var bMin = el("button", "head-btn"); bMin.innerHTML = ic("minus"); bMin.title = "Minimize";
     var bMax = el("button", "head-btn"); bMax.innerHTML = ic("maximize"); bMax.title = "Enlarge";
     var bClose = el("button", "head-btn"); bClose.innerHTML = ic("x"); bClose.title = "Close";
-    head.append(gTog, bMin, bMax, bClose);
+    head.append(nTog, gTog, bMin, bMax, bClose);
     dock.appendChild(head);
 
     var main = el("div", "calc-main");
     dock.appendChild(main);
 
+    if (notepadOn) main.appendChild(buildNotepad());
     if (graphOn) main.appendChild(buildGraphPane());
     main.appendChild(buildSci());
 
-    gTog.onclick = function () { graphOn = !graphOn; build(); };
+    nTog.onclick = function () { if (notepadOn) padImage = snapshotPad(); notepadOn = !notepadOn; build(); };
+    gTog.onclick = function () { if (notepadOn) padImage = snapshotPad(); graphOn = !graphOn; build(); };
     bMin.onclick = function () { dock.classList.toggle("min"); };
     bMax.onclick = toggleMax;
     bClose.onclick = close;
@@ -76,6 +81,46 @@ window.Calculator = (function () {
     makeDraggable(dock, head);
     if (!maximized) positionDefault();
     if (graphOn) requestAnimationFrame(function () { if (!view) resetView(); redraw(); });
+    if (notepadOn) requestAnimationFrame(setupPad);
+  }
+
+  // ---------- notepad (write while the calculator stays open) ----------
+  function buildNotepad() {
+    var pane = el("div", "calc-notepad");
+    var bar = el("div", "np-bar");
+    var penB = el("button", "np-btn" + (padTool === "pen" ? " on" : "")); penB.innerHTML = ic("pen"); penB.title = "Pen";
+    var erB = el("button", "np-btn" + (padTool === "eraser" ? " on" : "")); erB.innerHTML = ic("eraser"); erB.title = "Eraser";
+    var col = document.createElement("input"); col.type = "color"; col.value = padColor; col.className = "np-color"; col.title = "Ink color";
+    var clr = el("button", "np-btn"); clr.innerHTML = ic("trash"); clr.title = "Clear";
+    bar.append(penB, erB, col, clr);
+    bar.appendChild(el("span", "np-label", "Notepad"));
+    pane.appendChild(bar);
+    var wrap = el("div", "np-canvas-wrap");
+    padCanvas = document.createElement("canvas"); wrap.appendChild(padCanvas); pane.appendChild(wrap);
+
+    penB.onclick = function () { padTool = "pen"; penB.classList.add("on"); erB.classList.remove("on"); };
+    erB.onclick = function () { padTool = "eraser"; erB.classList.add("on"); penB.classList.remove("on"); };
+    col.oninput = function () { padColor = col.value; padTool = "pen"; penB.classList.add("on"); erB.classList.remove("on"); };
+    clr.onclick = function () { if (padCtx) padCtx.clearRect(0, 0, padCanvas.width, padCanvas.height); padImage = null; };
+    return pane;
+  }
+  function snapshotPad() { try { return padCanvas ? padCanvas.toDataURL("image/png") : padImage; } catch (e) { return padImage; } }
+  function setupPad() {
+    if (!padCanvas) return;
+    var wrap = padCanvas.parentElement, r = wrap.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    padCanvas.width = Math.max(240, r.width) * dpr; padCanvas.height = Math.max(200, r.height) * dpr;
+    padCtx = padCanvas.getContext("2d"); padCtx.scale(dpr, dpr); padCtx.lineCap = "round"; padCtx.lineJoin = "round";
+    if (padImage) { var img = new Image(); img.onload = function () { padCtx.drawImage(img, 0, 0, padCanvas.width / dpr, padCanvas.height / dpr); }; img.src = padImage; }
+    var drawing = false, last = null;
+    function pos(e) { var b = padCanvas.getBoundingClientRect(); return { x: e.clientX - b.left, y: e.clientY - b.top }; }
+    padCanvas.addEventListener("pointerdown", function (e) { drawing = true; last = pos(e); padCanvas.setPointerCapture(e.pointerId); e.preventDefault(); });
+    padCanvas.addEventListener("pointermove", function (e) {
+      if (!drawing) return; var p = pos(e);
+      padCtx.globalCompositeOperation = padTool === "eraser" ? "destination-out" : "source-over";
+      padCtx.strokeStyle = padColor; padCtx.lineWidth = padTool === "eraser" ? 16 : 2.4;
+      padCtx.beginPath(); padCtx.moveTo(last.x, last.y); padCtx.lineTo(p.x, p.y); padCtx.stroke(); last = p; e.preventDefault();
+    });
+    window.addEventListener("pointerup", function () { if (drawing) { drawing = false; padImage = snapshotPad(); } });
   }
 
   // ---------- scientific side ----------
@@ -283,8 +328,10 @@ window.Calculator = (function () {
   // ---------- window controls ----------
   function positionDefault() {
     dock.style.left = "auto"; dock.style.top = "auto"; dock.style.transform = "none";
-    dock.style.right = "24px"; dock.style.bottom = "24px";
-    dock.style.width = ""; dock.style.height = ""; maximized = false;
+    dock.style.right = "24px"; dock.style.bottom = "24px"; dock.style.height = "";
+    var w = 340 + (graphOn ? 420 : 0) + (notepadOn ? 340 : 0);
+    dock.style.width = w + "px";  // capped by max-width:96vw in CSS
+    maximized = false;
   }
   function toggleMax() {
     maximized = !maximized;
@@ -294,6 +341,7 @@ window.Calculator = (function () {
       dock.style.transform = "translate(-50%,-50%)";
     } else { dock.classList.remove("max"); dock.style.transform = "none"; positionDefault(); }
     if (graphOn) requestAnimationFrame(redraw);
+    if (notepadOn) { padImage = snapshotPad(); requestAnimationFrame(setupPad); }
   }
   function makeDraggable(node, handle) {
     var d = false, ox = 0, oy = 0;
@@ -314,7 +362,9 @@ window.Calculator = (function () {
   function open(mode) {
     dock = document.getElementById("calc-dock");
     if (mode === "graph") graphOn = true;
-    if (dock.hidden) build(); else dock.classList.remove("min");
+    if (mode === "notepad") notepadOn = true;
+    if (dock.hidden) build();
+    else { dock.classList.remove("min"); if (mode) build(); }
   }
   function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); }
 

@@ -161,21 +161,51 @@ window.App = (function () {
       "<div class='field'><label>Semester</label><select id='ac-sem'><option>Fall</option><option>Spring</option><option>Summer</option><option>Winter</option></select></div>" +
       "<div class='field'><label>Year</label><input id='ac-year' value='" + new Date().getFullYear() + "'></div>" +
       "</div>" +
-      "<div class='row2'>" +
       "<div class='field'><label>Syllabus <span style='font-weight:400;color:var(--ink-soft)'>(required to tailor lessons)</span></label><input id='ac-syl' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
-      "<div class='field'><label>Textbook <span style='font-weight:400;color:var(--ink-soft)'>(optional)</span></label><input id='ac-txt' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
-      "</div>" +
-      "<div class='notice' style='margin-bottom:16px'><strong>Static MVP.</strong>Files stay on your device (names remembered). Generating lessons from the syllabus/textbook happens in the AI stage.</div>" +
+      "<div class='field'><label>Textbooks <span style='font-weight:400;color:var(--ink-soft)'>(by name, or a photo of the cover — add as many as you use)</span></label>" +
+      "<div id='ac-books'></div>" +
+      "<div style='display:flex;gap:8px;margin-top:8px'>" +
+      "<button type='button' class='btn subtle' id='ac-addname'>+ By name</button>" +
+      "<button type='button' class='btn subtle' id='ac-addcover'>+ Cover photo</button></div></div>" +
+      "<div class='notice' style='margin-bottom:16px'><strong>How textbooks are used.</strong>The name (or cover) is handed to the AI stage so it can find the book online and align lessons to it — no need to upload a huge PDF. Files/names stay on your device for now.</div>" +
       "<div class='field'><label>Lessons to include</label>" + (opts || "<p class='modal-sub'>No lessons in data/index.json yet.</p>") + "</div>" +
       "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='ac-save'>Create class</button></div>"
     );
+
+    // dynamic textbook rows: each is {kind:"name"|"cover", value, el}
+    var books = [], booksHost = m.querySelector("#ac-books");
+    function drawBooks() {
+      booksHost.innerHTML = "";
+      books.forEach(function (b, i) {
+        var row = el("div", "eq-row"); row.style.marginBottom = "6px";
+        if (b.kind === "name") {
+          var inp = document.createElement("input"); inp.type = "text"; inp.className = "eq-input";
+          inp.placeholder = "e.g. University Physics Volume 2, OpenStax"; inp.value = b.value || "";
+          inp.oninput = function () { b.value = inp.value; };
+          row.appendChild(inp);
+        } else {
+          var lbl = el("label", "eq-input"); lbl.style.cursor = "pointer"; lbl.style.display = "flex"; lbl.style.alignItems = "center";
+          lbl.textContent = b.value || "Choose cover photo…";
+          var f = document.createElement("input"); f.type = "file"; f.accept = "image/*"; f.style.display = "none";
+          f.onchange = function () { if (f.files[0]) { b.value = f.files[0].name; drawBooks(); } };
+          lbl.appendChild(f); lbl.onclick = function () { f.click(); };
+          row.appendChild(lbl);
+        }
+        var rm = el("button", "eq-rm"); rm.type = "button"; rm.innerHTML = icon("trash");
+        rm.onclick = function () { books.splice(i, 1); drawBooks(); };
+        row.appendChild(rm); booksHost.appendChild(row);
+      });
+    }
+    m.querySelector("#ac-addname").onclick = function () { books.push({ kind: "name", value: "" }); drawBooks(); };
+    m.querySelector("#ac-addcover").onclick = function () { books.push({ kind: "cover", value: "" }); drawBooks(); };
+
     m.querySelector("#ac-save").onclick = function () {
       var name = m.querySelector("#ac-name").value.trim() || "Untitled Class";
       var chosen = Array.prototype.slice.call(m.querySelectorAll(".lz:checked")).map(function (x) { return x.value; });
       var cls = Store.addClass({ name: name, semester: m.querySelector("#ac-sem").value, year: m.querySelector("#ac-year").value, lessonIds: chosen });
-      var syl = m.querySelector("#ac-syl").files[0], txt = m.querySelector("#ac-txt").files[0];
+      var syl = m.querySelector("#ac-syl").files[0];
       if (syl) Store.setUpload(cls.id, "syllabus", syl.name);
-      if (txt) Store.setUpload(cls.id, "textbook", txt.name);
+      books.forEach(function (b) { if (b.value) Store.addTextbook(cls.id, b.kind, b.value); });
       closeModal(); renderDashboard();
     };
   }
@@ -222,11 +252,12 @@ window.App = (function () {
     page.appendChild(tb);
 
     var upl = Store.getUploads(id);
-    if (upl.syllabus || upl.textbook) {
+    if (upl.syllabus || (upl.textbooks && upl.textbooks.length)) {
+      var books = (upl.textbooks || []).map(function (b) { return esc(b.value) + (b.kind === "cover" ? " (cover)" : ""); }).join(", ");
       var info = el("div", "notice");
-      info.innerHTML = "<strong>Uploaded</strong>" +
+      info.innerHTML = "<strong>Course materials</strong>" +
         (upl.syllabus ? "Syllabus: " + esc(upl.syllabus) + ". " : "") +
-        (upl.textbook ? "Textbook: " + esc(upl.textbook) + ". " : "") +
+        (books ? "Textbooks: " + books + ". " : "") +
         "Auto-generating lessons from these needs the AI stage — for now lessons come from your data files.";
       page.appendChild(info);
     }
@@ -381,9 +412,9 @@ window.App = (function () {
 
       var tools = el("div", "q-tools");
       var hintBtn = ib("btn subtle", "bulb", "Hint");
-      var drawBtn = ib("btn subtle", "edit", "Scratch work");
+      var padBtn = ib("btn subtle", "edit", "Notepad");
       var calcBtn = ib("btn subtle", "calculator", "Calculator");
-      tools.append(hintBtn, drawBtn, calcBtn); inner.appendChild(tools);
+      tools.append(hintBtn, padBtn, calcBtn); inner.appendChild(tools);
 
       var hintPanel = el("div", "hint-panel"); hintPanel.hidden = true;
       hintPanel.appendChild(el("p", "panel-label", "Hint"));
@@ -398,7 +429,7 @@ window.App = (function () {
       inner.appendChild(steps);
 
       hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
-      drawBtn.onclick = function () { Drawing.open({ classId: cls.id, lessonId: lid, problemId: p.id, title: "Problem " + (idx + 1) }); };
+      padBtn.onclick = function () { Calculator.open("notepad"); };
       calcBtn.onclick = function () { Calculator.open(); };
       input.addEventListener("keydown", function (e) { if (e.key === "Enter") nextBtn.click(); });
 
@@ -579,13 +610,36 @@ window.App = (function () {
       "<div class='field'><label>Syllabus</label><div style='display:flex;gap:8px;align-items:center'>" +
       "<span style='flex:1;color:" + (u.syllabus ? "var(--ink)" : "var(--ink-soft)") + "'>" + esc(u.syllabus || "None attached") + "</span>" +
       "<button class='btn subtle' id='m-syl'>" + (u.syllabus ? "Replace" : "Add") + "</button></div></div>" +
-      "<div class='field'><label>Textbook</label><div style='display:flex;gap:8px;align-items:center'>" +
-      "<span style='flex:1;color:" + (u.textbook ? "var(--ink)" : "var(--ink-soft)") + "'>" + esc(u.textbook || "None attached") + "</span>" +
-      "<button class='btn subtle' id='m-txt'>" + (u.textbook ? "Replace" : "Add") + "</button></div></div>" +
+      "<div class='field'><label>Textbooks</label><div id='m-books'></div>" +
+      "<div style='display:flex;gap:8px;margin-top:8px'>" +
+      "<button type='button' class='btn subtle' id='m-addname'>+ By name</button>" +
+      "<button type='button' class='btn subtle' id='m-addcover'>+ Cover photo</button></div></div>" +
       "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>"
     );
+    var host = m.querySelector("#m-books");
+    function draw() {
+      var books = Store.getUploads(id).textbooks;
+      host.innerHTML = "";
+      if (!books.length) host.appendChild(el("p", "modal-sub", "None yet."));
+      books.forEach(function (b, i) {
+        var row = el("div", "eq-row"); row.style.marginBottom = "6px";
+        var span = el("span"); span.style.flex = "1"; span.textContent = b.value + (b.kind === "cover" ? "  (cover)" : "");
+        var rm = el("button", "eq-rm"); rm.innerHTML = icon("trash");
+        rm.onclick = function () { Store.removeTextbook(id, i); draw(); };
+        row.append(span, rm); host.appendChild(row);
+      });
+    }
+    draw();
     m.querySelector("#m-syl").onclick = function () { uploadDialog(id, "syllabus"); };
-    m.querySelector("#m-txt").onclick = function () { uploadDialog(id, "textbook"); };
+    m.querySelector("#m-addname").onclick = function () {
+      var name = prompt("Textbook name (title, author, edition):");
+      if (name && name.trim()) { Store.addTextbook(id, "name", name.trim()); draw(); }
+    };
+    m.querySelector("#m-addcover").onclick = function () {
+      var f = document.createElement("input"); f.type = "file"; f.accept = "image/*";
+      f.onchange = function () { if (f.files[0]) { Store.addTextbook(id, "cover", f.files[0].name); draw(); } };
+      f.click();
+    };
   }
 
   function homeworkMode(id) {
@@ -628,7 +682,17 @@ window.App = (function () {
     var c = document.getElementById("open-calc");
     c.innerHTML = icon("calculator") + "<span>Calculator</span>";
     c.onclick = function () { Calculator.open(); };
+    var fs = document.getElementById("open-fs");
+    fs.innerHTML = icon("maximize") + "<span>Full screen</span>";
+    fs.onclick = toggleFullscreen;
     document.getElementById("open-accent").onclick = openAccentPicker;
+    document.addEventListener("fullscreenchange", function () {
+      fs.querySelector("span").textContent = document.fullscreenElement ? "Exit full screen" : "Full screen";
+    });
+  }
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { if (document.exitFullscreen) document.exitFullscreen(); }
+    else { var d = document.documentElement; if (d.requestFullscreen) d.requestFullscreen().catch(function () {}); }
   }
   function openAccentPicker() {
     var presets = ["#EF8354", "#e64980", "#7048e8", "#1971c2", "#0ca678", "#f59f00", "#e03131", "#4F5D75"];
@@ -654,8 +718,15 @@ window.App = (function () {
 
   function seedIfEmpty() {
     if (Store.classes().length) return;
-    var lids = lessonIndex.map(function (l) { return l.id; });
-    if (lids.length) Store.addClass({ name: "Algebra I", semester: "Fall", year: String(new Date().getFullYear()), lessonIds: lids });
+    // Seed the PHYS 1442 class generated from the uploaded syllabus.
+    var physIds = lessonIndex.filter(function (l) { return l.id.indexOf("phys1442") === 0; }).map(function (l) { return l.id; });
+    if (physIds.length) {
+      var c = Store.addClass({ name: "PHYS 1442 — General Physics II", semester: "Fall", year: String(new Date().getFullYear()), lessonIds: physIds });
+      Store.setUpload(c.id, "syllabus", "PHYS1442.pdf");
+      Store.addTextbook(c.id, "name", "University Physics Volume 2, OpenStax");
+      Store.addTextbook(c.id, "name", "University Physics Volume 3, OpenStax");
+      Store.addTextbook(c.id, "name", "Giancoli, Physics for Scientists & Engineers Vol. II, 4th ed. (optional)");
+    }
   }
 
   function init() {

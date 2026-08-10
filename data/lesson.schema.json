@@ -73,8 +73,8 @@
     },
     "problems": {
       "type": "array",
-      "description": "Exactly 20 problems. Difficulty spread roughly 6 easy / 8 medium / 4 hard / 2 stretch. None should exceed the class's level.",
-      "minItems": 20,
+      "description": "Target 20 problems per lesson (spread roughly 6 easy / 8 medium / 4 hard / 2 stretch). A minimum of 8 is accepted so a full multi-lesson course can be authored and expanded over time. None should exceed the class's level.",
+      "minItems": 8,
       "maxItems": 20,
       "items": {
         "type": "object",

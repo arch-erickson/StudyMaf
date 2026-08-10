@@ -86,12 +86,25 @@ window.Store = (function () {
     getDrawing: function (cid, lid, pid) { return state.drawings[this._dkey(cid, lid, pid)]; },
     saveDrawing: function (cid, lid, pid, dataURL) { state.drawings[this._dkey(cid, lid, pid)] = dataURL; save(); },
 
-    // ----- uploads (syllabus / textbook / homework) -----
-    getUploads: function (cid) { return state.uploads[cid] || { syllabus: null, textbook: null, homework: [] }; },
+    // ----- uploads (syllabus / textbooks / homework) -----
+    // textbooks: array of { kind:"name"|"cover", value } — the AI stage looks each up online.
+    getUploads: function (cid) {
+      var u = state.uploads[cid] || {};
+      return { syllabus: u.syllabus || null, textbooks: u.textbooks || [], homework: u.homework || [] };
+    },
     setUpload: function (cid, kind, name) {
-      var u = state.uploads[cid] || { syllabus: null, textbook: null, homework: [] };
-      if (kind === "homework") u.homework.push(name); else u[kind] = name;
+      var u = state.uploads[cid] || {};
+      if (kind === "homework") { u.homework = u.homework || []; u.homework.push(name); }
+      else u[kind] = name; // syllabus
       state.uploads[cid] = u; save();
+    },
+    addTextbook: function (cid, kind, value) {
+      var u = state.uploads[cid] || {}; u.textbooks = u.textbooks || [];
+      u.textbooks.push({ kind: kind, value: value }); state.uploads[cid] = u; save();
+    },
+    removeTextbook: function (cid, i) {
+      var u = state.uploads[cid]; if (!u || !u.textbooks) return;
+      u.textbooks.splice(i, 1); save();
     },
 
     // ----- modes -----
