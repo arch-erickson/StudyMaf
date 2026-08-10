@@ -15,6 +15,20 @@
       "type": "string",
       "minLength": 1
     },
+    "figures": {
+      "type": "array",
+      "description": "Optional data-driven diagrams the page renders in a consistent house style. The CODE owns how each type is drawn; the data only supplies parameters. Supported types: 'coordinate-plane' (params: lines[] of {label, slope, intercept, color?}, xRange[min,max], yRange[min,max]), 'number-line' (params: min, max, points[] of {value, label?}).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "caption"],
+        "properties": {
+          "type": { "type": "string", "enum": ["coordinate-plane", "number-line"] },
+          "caption": { "type": "string", "minLength": 1 },
+          "params": { "type": "object" }
+        }
+      }
+    },
     "concept_sections": {
       "type": "array",
       "description": "Ordered simple-to-complex progression. Level 1 is the simplest, grounded starting point; complexity grows as level increases.",
