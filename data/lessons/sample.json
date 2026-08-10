@@ -1,0 +1,75 @@
+{
+  "title": "Linear Equations in One Variable",
+  "summary": "A linear equation says two expressions are equal, and somewhere inside is an unknown we call a variable (usually x). Solving means finding the single value of x that makes the statement true. We do it by keeping the equation balanced: whatever we do to one side, we do to the other.",
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "An equation is a balance",
+      "explanation": "Think of '=' as the center of a scale. The left side and the right side weigh the same. In 'x + 3 = 7', the left side is 'x + 3' and the right side is '7'. Our job is to figure out what x has to be so both sides truly balance. Here, x = 4, because 4 + 3 = 7. At this level you can often just ask: 'what number plus 3 gives 7?'"
+    },
+    {
+      "level": 2,
+      "heading": "Undo operations to isolate x",
+      "explanation": "Instead of guessing, we isolate x by undoing whatever is attached to it. Addition is undone by subtraction, and multiplication is undone by division. For 'x + 3 = 7', subtract 3 from BOTH sides: x + 3 - 3 = 7 - 3, which gives x = 4. The golden rule: whatever you do to one side, do to the other, so the balance is never broken."
+    },
+    {
+      "level": 3,
+      "heading": "Two-step equations",
+      "explanation": "Many equations attach two things to x, like '2x + 1 = 9'. Undo them in reverse order of operations: first undo the addition, then the multiplication. Subtract 1 from both sides to get 2x = 8, then divide both sides by 2 to get x = 4. The pattern is always: peel away the outer operation first, working your way in toward x."
+    },
+    {
+      "level": 4,
+      "heading": "Variables on both sides and distribution",
+      "explanation": "Sometimes x appears on both sides, or is wrapped in parentheses, like '3(x - 2) = x + 4'. First distribute: 3x - 6 = x + 4. Then gather the x-terms on one side by subtracting x from both: 2x - 6 = 4. Then solve the two-step equation: add 6 to get 2x = 10, divide by 2 to get x = 5. The strategy is: simplify each side, collect variables on one side and numbers on the other, then isolate."
+    },
+    {
+      "level": 5,
+      "heading": "Special cases: no solution and all solutions",
+      "explanation": "Not every linear equation has exactly one answer. If solving leads to a false statement like '5 = 8', there is NO solution — the two sides can never balance (e.g. 2x + 3 = 2x + 6). If it leads to an always-true statement like '4 = 4', then EVERY number works — it is an identity (e.g. 2(x + 1) = 2x + 2). Recognizing these tells you the variable has cancelled out, which is a feature, not a mistake."
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Splitting a restaurant bill",
+      "scenario": "You and 3 friends (4 people total) share a meal. The total bill is $52, which already includes a flat $8 delivery fee. You want to know what the food cost per person was before the fee.",
+      "how_the_math_applies": "Let x be the food cost per person. The equation is 4x + 8 = 52. Subtract 8 to get 4x = 44, then divide by 4 to get x = 11. Each person's food was $11. This is exactly a two-step linear equation."
+    },
+    {
+      "title": "Phone plan break-even",
+      "scenario": "Plan A charges a $20 monthly fee plus $0.10 per GB. Plan B charges a flat $35. You want to know how many GB make the two plans cost the same.",
+      "how_the_math_applies": "Let x be gigabytes. Set the costs equal: 20 + 0.10x = 35. Subtract 20 to get 0.10x = 15, divide by 0.10 to get x = 150 GB. Below 150 GB Plan A is cheaper; above it, Plan B wins. This is a variables-in-context linear equation."
+    },
+    {
+      "title": "Filling a road-trip gas tank",
+      "scenario": "Your tank already has 3 gallons. The pump adds 2 gallons every minute. Your tank holds 15 gallons. You want to know how long until it's full.",
+      "how_the_math_applies": "Let x be minutes pumping. The equation is 3 + 2x = 15. Subtract 3 to get 2x = 12, divide by 2 to get x = 6 minutes. The starting amount is the constant and the pump rate is the coefficient of x."
+    }
+  ],
+  "videos": {
+    "concept_query": "what is a linear equation explained for beginners",
+    "math_query": "solving two step linear equations step by step",
+    "combined_query": "linear equations in one variable real world word problems"
+  },
+  "problems": [
+    { "id": "p01", "difficulty": "easy", "prompt": "Solve for x: x + 5 = 12", "correct_answer": "x = 7", "solution_steps": ["Subtract 5 from both sides.", "x + 5 - 5 = 12 - 5", "x = 7"], "hint": "What number plus 5 gives 12? Undo the +5." },
+    { "id": "p02", "difficulty": "easy", "prompt": "Solve for x: x - 4 = 9", "correct_answer": "x = 13", "solution_steps": ["Add 4 to both sides.", "x - 4 + 4 = 9 + 4", "x = 13"], "hint": "Undo the subtraction by adding 4." },
+    { "id": "p03", "difficulty": "easy", "prompt": "Solve for x: 3x = 21", "correct_answer": "x = 7", "solution_steps": ["Divide both sides by 3.", "3x / 3 = 21 / 3", "x = 7"], "hint": "x is multiplied by 3, so divide by 3." },
+    { "id": "p04", "difficulty": "easy", "prompt": "Solve for x: x / 2 = 6", "correct_answer": "x = 12", "solution_steps": ["Multiply both sides by 2.", "(x / 2) * 2 = 6 * 2", "x = 12"], "hint": "x is divided by 2, so multiply by 2." },
+    { "id": "p05", "difficulty": "easy", "prompt": "Solve for x: x + 10 = 10", "correct_answer": "x = 0", "solution_steps": ["Subtract 10 from both sides.", "x = 10 - 10", "x = 0"], "hint": "Zero is a perfectly valid answer." },
+    { "id": "p06", "difficulty": "easy", "prompt": "Solve for x: 7 = x - 2", "correct_answer": "x = 9", "solution_steps": ["Add 2 to both sides.", "7 + 2 = x", "x = 9"], "hint": "The variable can sit on the right side too." },
+    { "id": "p07", "difficulty": "medium", "prompt": "Solve for x: 2x + 3 = 11", "correct_answer": "x = 4", "solution_steps": ["Subtract 3 from both sides: 2x = 8.", "Divide both sides by 2.", "x = 4"], "hint": "Undo the +3 first, then the times-2." },
+    { "id": "p08", "difficulty": "medium", "prompt": "Solve for x: 5x - 7 = 18", "correct_answer": "x = 5", "solution_steps": ["Add 7 to both sides: 5x = 25.", "Divide both sides by 5.", "x = 5"], "hint": "Move the number away from the x-term first." },
+    { "id": "p09", "difficulty": "medium", "prompt": "Solve for x: (x / 3) + 4 = 10", "correct_answer": "x = 18", "solution_steps": ["Subtract 4 from both sides: x / 3 = 6.", "Multiply both sides by 3.", "x = 18"], "hint": "Undo the +4, then undo the division." },
+    { "id": "p10", "difficulty": "medium", "prompt": "Solve for x: 4x + 2 = 2x + 10", "correct_answer": "x = 4", "solution_steps": ["Subtract 2x from both sides: 2x + 2 = 10.", "Subtract 2: 2x = 8.", "Divide by 2: x = 4"], "hint": "Get all the x-terms onto one side first." },
+    { "id": "p11", "difficulty": "medium", "prompt": "Solve for x: 3(x + 2) = 15", "correct_answer": "x = 3", "solution_steps": ["Distribute: 3x + 6 = 15.", "Subtract 6: 3x = 9.", "Divide by 3: x = 3"], "hint": "Multiply the 3 through the parentheses first." },
+    { "id": "p12", "difficulty": "medium", "prompt": "Solve for x: 6x - 4 = 20", "correct_answer": "x = 4", "solution_steps": ["Add 4 to both sides: 6x = 24.", "Divide by 6: x = 4"], "hint": "Two steps: undo the -4, then the times-6." },
+    { "id": "p13", "difficulty": "medium", "prompt": "Solve for x: 10 - 2x = 4", "correct_answer": "x = 3", "solution_steps": ["Subtract 10 from both sides: -2x = -6.", "Divide by -2: x = 3"], "hint": "Watch the negative sign when you divide." },
+    { "id": "p14", "difficulty": "medium", "prompt": "A tank holds 3 gallons and fills at 2 gallons per minute. Solve 3 + 2x = 15 for the minutes x.", "correct_answer": "x = 6", "solution_steps": ["Subtract 3: 2x = 12.", "Divide by 2: x = 6 minutes"], "hint": "The starting 3 gallons is the constant to remove first." },
+    { "id": "p15", "difficulty": "hard", "prompt": "Solve for x: 3(x - 2) = x + 4", "correct_answer": "x = 5", "solution_steps": ["Distribute: 3x - 6 = x + 4.", "Subtract x: 2x - 6 = 4.", "Add 6: 2x = 10.", "Divide by 2: x = 5"], "hint": "Distribute first, then collect x-terms on one side." },
+    { "id": "p16", "difficulty": "hard", "prompt": "Solve for x: 2(3x + 1) = 4(x + 3)", "correct_answer": "x = 5", "solution_steps": ["Distribute both sides: 6x + 2 = 4x + 12.", "Subtract 4x: 2x + 2 = 12.", "Subtract 2: 2x = 10.", "Divide by 2: x = 5"], "hint": "Distribute on both sides before combining." },
+    { "id": "p17", "difficulty": "hard", "prompt": "Solve for x: (x + 1)/2 = (x - 3)/4", "correct_answer": "x = -5", "solution_steps": ["Multiply both sides by 4: 2(x + 1) = x - 3.", "Distribute: 2x + 2 = x - 3.", "Subtract x: x + 2 = -3.", "Subtract 2: x = -5"], "hint": "Clear the fractions by multiplying by the common denominator 4." },
+    { "id": "p18", "difficulty": "hard", "prompt": "Solve for x: 5x + 8 = 3(x + 6)", "correct_answer": "x = 5", "solution_steps": ["Distribute the right: 5x + 8 = 3x + 18.", "Subtract 3x: 2x + 8 = 18.", "Subtract 8: 2x = 10.", "Divide by 2: x = 5"], "hint": "Expand the parentheses, then gather x-terms." },
+    { "id": "p19", "difficulty": "stretch", "prompt": "Solve for x, or state if there is no solution: 2x + 5 = 2x + 9", "correct_answer": "No solution", "solution_steps": ["Subtract 2x from both sides: 5 = 9.", "This is false, so no value of x can work.", "The equation has no solution."], "hint": "What happens to the x-terms when you subtract 2x from both sides?" },
+    { "id": "p20", "difficulty": "stretch", "prompt": "Solve for x, or state if all numbers work: 4(x + 2) = 4x + 8", "correct_answer": "All real numbers (identity)", "solution_steps": ["Distribute: 4x + 8 = 4x + 8.", "Subtract 4x: 8 = 8.", "This is always true, so every value of x is a solution."], "hint": "If both sides become identical, what does that tell you?" }
+  ]
+}

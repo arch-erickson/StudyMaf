@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://studymaf.com/data/lesson.schema.json",
+  "title": "StudyMAF Lesson",
+  "description": "Source-of-truth schema for a StudyMAF lesson. The code owns this structure; the AI fills in data. Lessons are JSON only, never inline HTML.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "summary", "concept_sections", "real_world_examples", "videos", "problems"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "concept_sections": {
+      "type": "array",
+      "description": "Ordered simple-to-complex progression. Level 1 is the simplest, grounded starting point; complexity grows as level increases.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["level", "heading", "explanation"],
+        "properties": {
+          "level": { "type": "integer", "minimum": 1 },
+          "heading": { "type": "string", "minLength": 1 },
+          "explanation": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "real_world_examples": {
+      "type": "array",
+      "description": "Exactly 3 grounded examples.",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "scenario", "how_the_math_applies"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "scenario": { "type": "string", "minLength": 1 },
+          "how_the_math_applies": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "videos": {
+      "type": "object",
+      "description": "YouTube SEARCH QUERIES, not URLs. Real links are pasted by hand in a later stage. Never fabricate links.",
+      "additionalProperties": false,
+      "required": ["concept_query", "math_query", "combined_query"],
+      "properties": {
+        "concept_query": { "type": "string", "minLength": 1 },
+        "math_query": { "type": "string", "minLength": 1 },
+        "combined_query": { "type": "string", "minLength": 1 }
+      }
+    },
+    "problems": {
+      "type": "array",
+      "description": "Exactly 20 problems. Difficulty spread roughly 6 easy / 8 medium / 4 hard / 2 stretch. None should exceed the class's level.",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "difficulty", "prompt", "correct_answer", "solution_steps", "hint"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "difficulty": { "type": "string", "enum": ["easy", "medium", "hard", "stretch"] },
+          "prompt": { "type": "string", "minLength": 1 },
+          "correct_answer": { "type": "string", "minLength": 1 },
+          "solution_steps": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "hint": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
