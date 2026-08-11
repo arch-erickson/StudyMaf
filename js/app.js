@@ -434,7 +434,11 @@ window.App = (function () {
     var gloss = lesson.glossary || null;
     var body = "<h2>" + esc(lesson.title) + "</h2>" +
       "<p class='modal-sub'>Concepts build from simple to complex. Reveal the next level when ready. " +
-      "<span class='kw-hint'>Outlined words are clickable definitions.</span></p><div id='cr-body'></div>";
+      "<span class='kw-hint'>Outlined words are clickable definitions.</span></p>" +
+      "<div class='sign-legend'><span class='sl'><span class='sl-dot pos'>+</span> positive</span>" +
+      "<span class='sl'><span class='sl-dot neg'>−</span> negative</span>" +
+      "<span class='sl'><span class='sl-line'></span> field / force</span></div>" +
+      "<div id='cr-body'></div>";
     var m = modal(body + "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>", { wide: true });
     var host = m.querySelector("#cr-body");
 

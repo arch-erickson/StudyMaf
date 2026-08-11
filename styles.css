@@ -446,3 +446,11 @@ body.nb-split .session { right: 50%; width: auto; }
 .nb-op svg { width: 16px; height: 16px; }
 .nb-op .nb-size { width: 72px; }
 .nb-tbtn.nb-curve-done { color: var(--accent); border-color: var(--accent); }
+
+/* Diagram sign legend (standard colors: + red, − blue) */
+.sign-legend { display: flex; gap: 16px; flex-wrap: wrap; margin: -6px 0 18px; padding: 8px 12px; background: var(--surface-2); border-radius: 10px; font-size: .8rem; color: var(--ink-soft); }
+.sign-legend .sl { display: inline-flex; align-items: center; gap: 6px; }
+.sign-legend .sl-dot { width: 18px; height: 18px; border-radius: 50%; color: #fff; font-weight: 800; display: grid; place-items: center; font-size: .8rem; }
+.sign-legend .sl-dot.pos { background: #E8553A; } .sign-legend .sl-dot.neg { background: #2F6DB5; }
+.sign-legend .sl-line { width: 22px; height: 0; border-top: 3px solid #2D3142; }
+.figure svg.is-animated { transition: none; }

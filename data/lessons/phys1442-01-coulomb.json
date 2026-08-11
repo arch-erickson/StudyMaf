@@ -14,52 +14,110 @@
   },
   "concept_sections": [
     { "level": 1, "heading": "Two kinds of charge", "explanation": "Matter contains positive charge (protons) and negative charge (electrons). Like charges repel; unlike charges attract. Charge is measured in coulombs. It is quantized: any charge is a whole-number multiple of the elementary charge $e = 1.6\\times10^{-19}$ C, and it is conserved — never created or destroyed, only transferred.",
-      "figure": { "type": "schematic", "caption": "Like charges repel; unlike charges attract.", "params": { "viewBox": [360, 150], "elements": [
-        { "kind": "charge", "x": 60, "y": 42, "sign": "+", "label": "q₁" },
-        { "kind": "charge", "x": 130, "y": 42, "sign": "+", "label": "q₂" },
-        { "kind": "vector", "x1": 42, "y1": 42, "x2": 16, "y2": 42, "color": "pos" },
-        { "kind": "vector", "x1": 148, "y1": 42, "x2": 174, "y2": 42, "color": "pos" },
-        { "kind": "label", "x": 230, "y": 42, "text": "like → repel", "anchor": "start" },
-        { "kind": "charge", "x": 60, "y": 112, "sign": "+" },
-        { "kind": "charge", "x": 130, "y": 112, "sign": "-" },
-        { "kind": "vector", "x1": 76, "y1": 112, "x2": 100, "y2": 112, "color": "neg" },
-        { "kind": "vector", "x1": 114, "y1": 112, "x2": 90, "y2": 112, "color": "neg" },
-        { "kind": "label", "x": 230, "y": 112, "text": "unlike → attract", "anchor": "start" }
+      "figure": { "type": "schematic", "caption": "Same signs push apart. Opposite signs pull together.", "params": { "viewBox": [360, 150], "frameMs": 950, "frames": [
+        [
+          { "kind": "charge", "x": 60, "y": 42, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 130, "y": 42, "sign": "+", "label": "q₂" },
+          { "kind": "vector", "x1": 44, "y1": 42, "x2": 32, "y2": 42, "color": "pos" },
+          { "kind": "vector", "x1": 146, "y1": 42, "x2": 158, "y2": 42, "color": "pos" },
+          { "kind": "label", "x": 232, "y": 42, "text": "same signs: repel", "anchor": "start", "color": "soft" },
+          { "kind": "charge", "x": 70, "y": 112, "sign": "+" },
+          { "kind": "charge", "x": 120, "y": 112, "sign": "-" },
+          { "kind": "vector", "x1": 84, "y1": 112, "x2": 96, "y2": 112, "color": "neg" },
+          { "kind": "vector", "x1": 106, "y1": 112, "x2": 94, "y2": 112, "color": "neg" },
+          { "kind": "label", "x": 232, "y": 112, "text": "opposite: attract", "anchor": "start", "color": "soft" }
+        ],
+        [
+          { "kind": "charge", "x": 54, "y": 42, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 136, "y": 42, "sign": "+", "label": "q₂" },
+          { "kind": "vector", "x1": 38, "y1": 42, "x2": 14, "y2": 42, "color": "pos" },
+          { "kind": "vector", "x1": 152, "y1": 42, "x2": 176, "y2": 42, "color": "pos" },
+          { "kind": "label", "x": 232, "y": 42, "text": "same signs: repel", "anchor": "start", "color": "soft" },
+          { "kind": "charge", "x": 80, "y": 112, "sign": "+" },
+          { "kind": "charge", "x": 110, "y": 112, "sign": "-" },
+          { "kind": "vector", "x1": 90, "y1": 112, "x2": 100, "y2": 112, "color": "neg" },
+          { "kind": "vector", "x1": 100, "y1": 112, "x2": 90, "y2": 112, "color": "neg" },
+          { "kind": "label", "x": 232, "y": 112, "text": "opposite: attract", "anchor": "start", "color": "soft" }
+        ]
       ] } } },
     { "level": 2, "heading": "Coulomb's law (magnitude)", "explanation": "The force between two point charges is $F = k\\dfrac{|q_1 q_2|}{r^2}$, where $k = 8.99\\times10^{9}\\ \\text{N·m}^2/\\text{C}^2$ and $r$ is the distance between them. The force grows with the product of the charges and falls off as the square of the distance — this inverse-square drop means doubling the distance cuts the force to one quarter.",
-      "figure": { "type": "schematic", "caption": "$F=k\\dfrac{|q_1q_2|}{r^2}$, along the line joining the charges.", "params": { "viewBox": [360, 160], "elements": [
-        { "kind": "charge", "x": 70, "y": 68, "sign": "+", "label": "q₁" },
-        { "kind": "charge", "x": 270, "y": 68, "sign": "+", "label": "q₂" },
-        { "kind": "line", "x1": 88, "y1": 68, "x2": 252, "y2": 68, "dash": true, "color": "soft" },
-        { "kind": "label", "x": 170, "y": 54, "text": "r" },
-        { "kind": "vector", "x1": 52, "y1": 68, "x2": 22, "y2": 68, "color": "pos" },
-        { "kind": "vector", "x1": 288, "y1": 68, "x2": 318, "y2": 68, "color": "pos" },
-        { "kind": "label", "x": 170, "y": 128, "text": "F = k·q₁q₂ / r²" }
+      "figure": { "type": "schematic", "caption": "The closer the charges, the stronger the force. $F=k\\dfrac{q_1 q_2}{r^2}$.", "params": { "viewBox": [360, 160], "frameMs": 1000, "frames": [
+        [
+          { "kind": "charge", "x": 90, "y": 68, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 250, "y": 68, "sign": "+", "label": "q₂" },
+          { "kind": "line", "x1": 108, "y1": 68, "x2": 232, "y2": 68, "dash": true, "color": "soft" },
+          { "kind": "label", "x": 170, "y": 54, "text": "r", "color": "soft" },
+          { "kind": "vector", "x1": 72, "y1": 68, "x2": 60, "y2": 68, "color": "pos" },
+          { "kind": "vector", "x1": 268, "y1": 68, "x2": 280, "y2": 68, "color": "pos" },
+          { "kind": "label", "x": 180, "y": 132, "text": "F = k·q₁q₂ / r²", "color": "ink" }
+        ],
+        [
+          { "kind": "charge", "x": 120, "y": 68, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 220, "y": 68, "sign": "+", "label": "q₂" },
+          { "kind": "line", "x1": 138, "y1": 68, "x2": 202, "y2": 68, "dash": true, "color": "soft" },
+          { "kind": "label", "x": 170, "y": 54, "text": "r", "color": "soft" },
+          { "kind": "vector", "x1": 102, "y1": 68, "x2": 68, "y2": 68, "color": "pos" },
+          { "kind": "vector", "x1": 238, "y1": 68, "x2": 272, "y2": 68, "color": "pos" },
+          { "kind": "label", "x": 180, "y": 132, "text": "F = k·q₁q₂ / r²", "color": "ink" }
+        ]
       ] } } },
     { "level": 3, "heading": "Direction and Newton's third law", "explanation": "The force points along the straight line connecting the two charges: outward (repulsive) for like charges, inward (attractive) for unlike charges. The two charges feel equal and opposite forces, obeying Newton's third law, regardless of which charge is larger.",
-      "figure": { "type": "schematic", "caption": "Equal in size, opposite in direction.", "params": { "viewBox": [340, 140], "elements": [
-        { "kind": "charge", "x": 100, "y": 66, "sign": "+", "label": "q₁" },
-        { "kind": "charge", "x": 250, "y": 66, "sign": "+", "label": "q₂" },
-        { "kind": "vector", "x1": 82, "y1": 66, "x2": 40, "y2": 66, "color": "ink", "label": "F₂₁" },
-        { "kind": "vector", "x1": 268, "y1": 66, "x2": 310, "y2": 66, "color": "ink", "label": "F₁₂" },
-        { "kind": "label", "x": 175, "y": 118, "text": "equal & opposite forces" }
+      "figure": { "type": "schematic", "caption": "Both charges feel the same size force, in opposite directions.", "params": { "viewBox": [340, 140], "frameMs": 850, "frames": [
+        [
+          { "kind": "charge", "x": 100, "y": 66, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 250, "y": 66, "sign": "+", "label": "q₂" },
+          { "kind": "vector", "x1": 82, "y1": 66, "x2": 62, "y2": 66, "color": "ink", "label": "F₂₁" },
+          { "kind": "vector", "x1": 268, "y1": 66, "x2": 288, "y2": 66, "color": "ink", "label": "F₁₂" },
+          { "kind": "label", "x": 175, "y": 120, "text": "equal size, opposite way", "color": "soft" }
+        ],
+        [
+          { "kind": "charge", "x": 100, "y": 66, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 250, "y": 66, "sign": "+", "label": "q₂" },
+          { "kind": "vector", "x1": 82, "y1": 66, "x2": 38, "y2": 66, "color": "ink", "label": "F₂₁" },
+          { "kind": "vector", "x1": 268, "y1": 66, "x2": 312, "y2": 66, "color": "ink", "label": "F₁₂" },
+          { "kind": "label", "x": 175, "y": 120, "text": "equal size, opposite way", "color": "soft" }
+        ]
       ] } } },
     { "level": 4, "heading": "Superposition", "explanation": "When several charges are present, the net force on any one charge is the vector sum of the individual Coulomb forces from every other charge, each computed as if the others were absent. For charges on a line, add the forces with signs for direction; off a line, break each force into components. This superposition principle is how every multi-charge problem is solved.",
-      "figure": { "type": "schematic", "caption": "Net force = vector sum of the separate forces.", "params": { "viewBox": [340, 200], "elements": [
-        { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
-        { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
-        { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
-        { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "ink", "label": "F₁" },
-        { "kind": "vector", "x1": 222, "y1": 110, "x2": 285, "y2": 132, "color": "ink", "label": "F₂" },
-        { "kind": "vector", "x1": 222, "y1": 105, "x2": 300, "y2": 105, "color": "accent", "label": "net" }
+      "figure": { "type": "schematic", "caption": "Add the separate forces as arrows to get the net force.", "params": { "viewBox": [340, 200], "frameMs": 950, "frames": [
+        [
+          { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
+          { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
+          { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "ink", "label": "F₁" }
+        ],
+        [
+          { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
+          { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
+          { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "ink", "label": "F₁" },
+          { "kind": "vector", "x1": 222, "y1": 110, "x2": 285, "y2": 132, "color": "ink", "label": "F₂" }
+        ],
+        [
+          { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
+          { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
+          { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
+          { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "soft", "label": "F₁" },
+          { "kind": "vector", "x1": 222, "y1": 110, "x2": 285, "y2": 132, "color": "soft", "label": "F₂" },
+          { "kind": "vector", "x1": 222, "y1": 105, "x2": 305, "y2": 105, "color": "accent", "label": "net" }
+        ]
       ] } } },
     { "level": 5, "heading": "How strong is it?", "explanation": "The electric force is astronomically stronger than gravity between the same particles — for an electron and proton it is about $10^{39}$ times larger. Yet bulk matter is nearly neutral, so gravity dominates on large scales. Coulomb's law has the same inverse-square form as Newton's gravitation, which is why the math looks familiar.",
-      "figure": { "type": "schematic", "caption": "Same two particles: the electric force dwarfs gravity.", "params": { "viewBox": [340, 150], "elements": [
-        { "kind": "charge", "x": 80, "y": 58, "sign": "-", "label": "e⁻" },
-        { "kind": "charge", "x": 260, "y": 58, "sign": "+", "label": "p⁺" },
-        { "kind": "vector", "x1": 98, "y1": 58, "x2": 172, "y2": 58, "color": "accent", "label": "electric" },
-        { "kind": "vector", "x1": 98, "y1": 95, "x2": 112, "y2": 95, "color": "ink", "label": "gravity" },
-        { "kind": "label", "x": 175, "y": 128, "text": "electric ≈ 10³⁹ × gravity" }
+      "figure": { "type": "schematic", "caption": "For the same two particles, the electric pull is far bigger than gravity.", "params": { "viewBox": [340, 150], "frameMs": 700, "frames": [
+        [
+          { "kind": "charge", "x": 80, "y": 55, "sign": "-", "label": "e⁻" },
+          { "kind": "charge", "x": 260, "y": 55, "sign": "+", "label": "p⁺" },
+          { "kind": "vector", "x1": 98, "y1": 55, "x2": 150, "y2": 55, "color": "accent", "label": "electric" },
+          { "kind": "vector", "x1": 98, "y1": 92, "x2": 110, "y2": 92, "color": "ink", "label": "gravity" },
+          { "kind": "label", "x": 175, "y": 128, "text": "electric ≈ 10³⁹ × gravity", "color": "soft" }
+        ],
+        [
+          { "kind": "charge", "x": 80, "y": 55, "sign": "-", "label": "e⁻" },
+          { "kind": "charge", "x": 260, "y": 55, "sign": "+", "label": "p⁺" },
+          { "kind": "vector", "x1": 98, "y1": 55, "x2": 178, "y2": 55, "color": "accent", "label": "electric" },
+          { "kind": "vector", "x1": 98, "y1": 92, "x2": 110, "y2": 92, "color": "ink", "label": "gravity" },
+          { "kind": "label", "x": 175, "y": 128, "text": "electric ≈ 10³⁹ × gravity", "color": "soft" }
+        ]
       ] } } }
   ],
   "real_world_examples": [
