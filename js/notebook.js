@@ -14,7 +14,8 @@ window.Notebook = (function () {
   var overlay, canvas, ctx, dpr = 1;
   var strokes = [], redoStack = [], cur = null;
   var tool = "pen", color = "#2D3142", size = 3, zoom = 1;
-  var ctxInfo = null, needsRender = false, rafPending = false;
+  var grid = { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 };
+  var ctxInfo = null;
 
   function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
   function ic(n) { return window.Icons ? Icons.get(n) : ""; }
@@ -23,6 +24,7 @@ window.Notebook = (function () {
   function openScratch(info) {
     ctxInfo = info || {};
     tool = "pen"; zoom = 1; redoStack = [];
+    grid = Store.getGrid();
     strokes = loadStrokes();
     overlay = document.getElementById("draw-overlay");
     overlay.innerHTML = ""; overlay.hidden = false; overlay.setAttribute("aria-hidden", "false");
@@ -66,6 +68,8 @@ window.Notebook = (function () {
     var redoB = el("button", "nb-tbtn"); redoB.innerHTML = ic("undo"); redoB.title = "Redo";
     redoB.querySelector("svg").style.transform = "scaleX(-1)"; redoB.onclick = redo;
     bar.append(undoB, redoB);
+    var gridB = el("button", "nb-tbtn"); gridB.innerHTML = ic("grid"); gridB.title = "Grid & guides"; gridB.onclick = function (e) { toggleGridPanel(gridB); e.stopPropagation(); };
+    bar.appendChild(gridB);
     var zoomOut = el("button", "nb-tbtn"); zoomOut.innerHTML = ic("zoomOut"); zoomOut.title = "Zoom out"; zoomOut.onclick = function () { setZoom(zoom / 1.25); };
     var zoomIn = el("button", "nb-tbtn"); zoomIn.innerHTML = ic("zoomIn"); zoomIn.title = "Zoom in"; zoomIn.onclick = function () { setZoom(zoom * 1.25); };
     var zLabel = el("span", "nb-zoom"); zLabel.id = "nb-zoom";
@@ -105,62 +109,165 @@ window.Notebook = (function () {
     canvas.style.height = (PAGE_H * zoom) + "px";
     var lab = document.getElementById("nb-zoom"); if (lab) lab.textContent = Math.round(zoom * 100) + "%";
   }
-  function scheduleRender() { needsRender = true; if (!rafPending) { rafPending = true; requestAnimationFrame(function () { rafPending = false; if (needsRender) { needsRender = false; render(); } }); } }
+  // full re-render (used on setup, zoom, undo/redo) — not on every move
   function render() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, PAGE_W, PAGE_H);
     ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, PAGE_W, PAGE_H);
-    // faint ruled lines for a notebook feel
-    ctx.strokeStyle = "#eef1f5"; ctx.lineWidth = 1;
-    for (var y = 60; y < PAGE_H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(PAGE_W, y); ctx.stroke(); }
+    drawGrid();
     strokes.forEach(drawStroke);
-    if (cur) drawStroke(cur);
+  }
+  function drawGrid() {
+    if (!grid || grid.type === "none") return;
+    var s = Math.max(8, grid.size || 40);
+    ctx.globalAlpha = grid.opacity != null ? grid.opacity : 0.7;
+    ctx.strokeStyle = grid.color || "#c3ccd9"; ctx.fillStyle = grid.color || "#c3ccd9"; ctx.lineWidth = 1;
+    var x, y;
+    if (grid.type === "ruled") {
+      for (y = s; y < PAGE_H; y += s) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(PAGE_W, y); ctx.stroke(); }
+    } else if (grid.type === "grid") {
+      for (y = s; y < PAGE_H; y += s) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(PAGE_W, y); ctx.stroke(); }
+      for (x = s; x < PAGE_W; x += s) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, PAGE_H); ctx.stroke(); }
+    } else if (grid.type === "dots") {
+      for (y = s; y < PAGE_H; y += s) for (x = s; x < PAGE_W; x += s) { ctx.beginPath(); ctx.arc(x, y, 1.4, 0, Math.PI * 2); ctx.fill(); }
+    }
+    ctx.globalAlpha = 1;
+  }
+  function styleFor(s) {
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.globalCompositeOperation = s.tool === "eraser" ? "destination-out" : "source-over";
+    ctx.globalAlpha = s.tool === "highlighter" ? 0.3 : 1;
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = s.tool === "highlighter" ? s.size * 5 : (s.tool === "eraser" ? s.size * 6 : s.size);
   }
   function drawStroke(s) {
     var pts = s.points; if (!pts.length) return;
-    ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.globalCompositeOperation = s.tool === "eraser" ? "destination-out" : "source-over";
-    ctx.globalAlpha = s.tool === "highlighter" ? 0.32 : 1;
-    ctx.strokeStyle = s.color;
-    ctx.lineWidth = s.tool === "highlighter" ? s.size * 5 : (s.tool === "eraser" ? s.size * 6 : s.size);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
     ctx.beginPath();
     if (pts.length < 3) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y); }
     else {
       ctx.moveTo(pts[0].x, pts[0].y);
-      for (var i = 1; i < pts.length - 1; i++) {
-        var mx = (pts[i].x + pts[i + 1].x) / 2, my = (pts[i].y + pts[i + 1].y) / 2;
-        ctx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my); // smooth through midpoints
-      }
+      for (var i = 1; i < pts.length - 1; i++) { ctx.quadraticCurveTo(pts[i].x, pts[i].y, (pts[i].x + pts[i + 1].x) / 2, (pts[i].y + pts[i + 1].y) / 2); }
       ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
     }
-    ctx.stroke();
-    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+    ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  }
+  // incremental: draw only the newest smoothed segment (keeps ink continuous & fast)
+  function drawLiveSegment(s) {
+    var pts = s.points, n = pts.length; if (n < 2) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
+    ctx.beginPath();
+    if (n === 2) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); }
+    else { var p0 = pts[n - 3], p1 = pts[n - 2], p2 = pts[n - 1];
+      ctx.moveTo((p0.x + p1.x) / 2, (p0.y + p1.y) / 2);
+      ctx.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2); }
+    ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
   }
 
-  // ---------------- input (pointer, coalesced for smoothness) ----------------
-  function toPage(e) { var r = canvas.getBoundingClientRect(); return { x: (e.clientX - r.left) / zoom, y: (e.clientY - r.top) / zoom }; }
+  // ---------------- input: pen/mouse draws, 1 finger pans, 2 fingers pinch-zoom ----------------
+  function toPage(cx, cy) { var r = canvas.getBoundingClientRect(); return { x: (cx - r.left) / zoom, y: (cy - r.top) / zoom }; }
   function setupInput() {
-    var drawing = false;
+    var pointers = {}, drawingId = null, gesture = null;
+    var scroller = canvas.parentElement;
+    function touches() { return Object.keys(pointers).filter(function (id) { return pointers[id].type === "touch"; }).map(function (id) { return pointers[id]; }); }
+
     canvas.addEventListener("pointerdown", function (e) {
-      if (e.pointerType === "touch" && e.isPrimary === false) return;
-      drawing = true; redoStack = [];
-      cur = { tool: tool, color: color, size: size, points: [toPage(e)] };
-      canvas.setPointerCapture(e.pointerId); e.preventDefault();
+      pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
+      if (e.pointerType === "pen" || e.pointerType === "mouse") {
+        drawingId = e.pointerId; redoStack = [];
+        cur = { tool: tool, color: color, size: size, points: [toPage(e.clientX, e.clientY)] };
+        try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
+        e.preventDefault();
+      } else { gesture = null; } // touch: gesture, handled on move
     });
+
     canvas.addEventListener("pointermove", function (e) {
-      if (!drawing || !cur) return;
-      var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
-      if (!evs.length) evs = [e];
-      evs.forEach(function (ev) { cur.points.push(toPage(ev)); });
-      scheduleRender(); e.preventDefault();
+      var pt = pointers[e.pointerId]; if (!pt) return;
+      pt.x = e.clientX; pt.y = e.clientY;
+      if (e.pointerId === drawingId && cur) {
+        var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; if (!evs.length) evs = [e];
+        evs.forEach(function (ev) { cur.points.push(toPage(ev.clientX, ev.clientY)); drawLiveSegment(cur); });
+        e.preventDefault(); return;
+      }
+      var ts = touches();
+      if (ts.length >= 2) {
+        var a = ts[0], b = ts[1], dist = Math.hypot(a.x - b.x, a.y - b.y), cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2;
+        if (gesture && gesture.dist) {
+          setZoom(zoom * (dist / gesture.dist));
+          scroller.scrollLeft -= (cx - gesture.cx); scroller.scrollTop -= (cy - gesture.cy);
+        }
+        gesture = { dist: dist, cx: cx, cy: cy }; e.preventDefault();
+      } else if (ts.length === 1) {
+        var p = ts[0];
+        if (gesture && gesture.single) { scroller.scrollLeft -= (p.x - gesture.sx); scroller.scrollTop -= (p.y - gesture.sy); }
+        gesture = { single: true, sx: p.x, sy: p.y }; e.preventDefault();
+      }
     }, { passive: false });
-    function end() { if (drawing && cur) { if (cur.points.length) strokes.push(cur); cur = null; scheduleRender(); } drawing = false; }
+
+    function end(e) {
+      if (e.pointerId === drawingId) { if (cur && cur.points.length) strokes.push(cur); cur = null; drawingId = null; }
+      delete pointers[e.pointerId];
+      if (touches().length < 2) gesture = null;
+    }
     canvas.addEventListener("pointerup", end);
     canvas.addEventListener("pointercancel", end);
-    canvas.addEventListener("pointerleave", function (e) { /* keep drawing while captured */ });
   }
-  function undo() { if (!strokes.length) return; redoStack.push(strokes.pop()); scheduleRender(); }
-  function redo() { if (!redoStack.length) return; strokes.push(redoStack.pop()); scheduleRender(); }
+  function undo() { if (!strokes.length) return; redoStack.push(strokes.pop()); render(); }
+  function redo() { if (!redoStack.length) return; strokes.push(redoStack.pop()); render(); }
+
+  // ---------------- grid & guides panel ----------------
+  var gridPanel = null;
+  function toggleGridPanel(anchor) {
+    if (gridPanel) { gridPanel.remove(); gridPanel = null; return; }
+    gridPanel = el("div", "nb-grid-panel");
+    var types = [["none", "None"], ["ruled", "Ruled"], ["grid", "Graph"], ["dots", "Dots"]];
+    var typeRow = el("div", "nb-gp-row");
+    typeRow.appendChild(el("span", "nb-gp-label", "Type"));
+    var seg = el("div", "nb-seg");
+    types.forEach(function (t) {
+      var b = el("button", "nb-seg-btn" + (grid.type === t[0] ? " on" : ""), t[1]);
+      b.onclick = function () { grid.type = t[0]; seg.querySelectorAll(".nb-seg-btn").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); applyGrid(); };
+      seg.appendChild(b);
+    });
+    typeRow.appendChild(seg); gridPanel.appendChild(typeRow);
+
+    gridPanel.appendChild(sliderRow("Scale", 12, 100, grid.size, function (v) { grid.size = v; applyGrid(); }, "px"));
+    gridPanel.appendChild(sliderRow("Opacity", 10, 100, Math.round(grid.opacity * 100), function (v) { grid.opacity = v / 100; applyGrid(); }, "%"));
+
+    var colorRow = el("div", "nb-gp-row");
+    colorRow.appendChild(el("span", "nb-gp-label", "Color"));
+    var swatches = ["#c3ccd9", "#9fb2cc", "#a7d3b6", "#e2b7a0", "#c9b8e0", "#2D3142"];
+    var sw = el("div", "nb-swatches");
+    swatches.forEach(function (c) {
+      var b = el("button", "nb-sw"); b.style.background = c;
+      b.onclick = function () { grid.color = c; applyGrid(); };
+      sw.appendChild(b);
+    });
+    var custom = document.createElement("input"); custom.type = "color"; custom.value = grid.color; custom.className = "nb-color";
+    custom.oninput = function () { grid.color = custom.value; applyGrid(); };
+    sw.appendChild(custom);
+    colorRow.appendChild(sw); gridPanel.appendChild(colorRow);
+
+    document.querySelector(".nb-shell").appendChild(gridPanel);
+    var r = anchor.getBoundingClientRect();
+    gridPanel.style.top = (r.bottom + 6) + "px";
+    gridPanel.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 280)) + "px";
+    setTimeout(function () { document.addEventListener("pointerdown", closeGridOnOutside, true); }, 0);
+  }
+  function sliderRow(label, min, max, val, oninput, unit) {
+    var row = el("div", "nb-gp-row");
+    row.appendChild(el("span", "nb-gp-label", label));
+    var rng = document.createElement("input"); rng.type = "range"; rng.min = min; rng.max = max; rng.value = val; rng.className = "nb-gp-slider";
+    var out = el("span", "nb-gp-val", val + (unit || ""));
+    rng.oninput = function () { out.textContent = rng.value + (unit || ""); oninput(+rng.value); };
+    row.append(rng, out); return row;
+  }
+  function applyGrid() { Store.setGrid(grid); render(); }
+  function closeGridOnOutside(e) {
+    if (gridPanel && !gridPanel.contains(e.target) && !e.target.closest(".nb-tbtn")) {
+      gridPanel.remove(); gridPanel = null; document.removeEventListener("pointerdown", closeGridOnOutside, true);
+    }
+  }
 
   // ---------------- persistence ----------------
   function loadStrokes() {

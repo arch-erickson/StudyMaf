@@ -202,7 +202,7 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 
 /* ---------- Calculator dock (scientific + Desmos-style graphing) ---------- */
 .calc-dock { position: fixed; right: 24px; bottom: 24px; width: 340px; background: var(--surface); border: 1px solid var(--line);
-  border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 70; overflow: hidden; display: flex; flex-direction: column; }
+  border-radius: var(--radius); box-shadow: var(--shadow-lg); z-index: 120; overflow: hidden; display: flex; flex-direction: column; }
 .calc-dock { max-width: 96vw; }
 .calc-dock.min .calc-main { display: none; }
 .calc-dock.max { width: min(1180px, 96vw) !important; height: min(780px, 92vh); }
@@ -279,7 +279,7 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 }
 
 /* ---------- Overlays / modals ---------- */
-.overlay { position: fixed; inset: 0; background: rgba(20,25,40,.5); z-index: 90; display: grid; place-items: center; padding: 20px; }
+.overlay { position: fixed; inset: 0; background: rgba(20,25,40,.5); z-index: 140; display: grid; place-items: center; padding: 20px; }
 .overlay[hidden] { display: none; }
 .modal { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; max-width: 460px; padding: 26px; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .modal.wide { max-width: 720px; }
@@ -339,7 +339,9 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .empty-hint { color: var(--ink-soft); text-align: center; padding: 40px 20px; }
 
 /* ---------- Notebook (scratch-work) overlay ---------- */
-.nb-overlay { position: fixed; inset: 0; z-index: 60; background: var(--bg); display: block; padding: 0; }
+/* Notebook sits ABOVE the problem/session (60); calculator (120) floats above it;
+   dialogs (modal-host .overlay = 140) and keyword popovers (150) sit above all. */
+.nb-overlay { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: block; padding: 0; }
 .nb-shell { position: absolute; inset: 0; display: flex; flex-direction: column; }
 .nb-top { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
 .nb-x { border: none; background: var(--surface-2); width: 38px; height: 38px; border-radius: 10px; cursor: pointer; color: var(--ink); display: grid; place-items: center; flex: none; }
@@ -355,7 +357,7 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .nb-color { width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 9px; background: none; cursor: pointer; }
 .nb-size { width: 110px; }
 .nb-zoom { font-size: .8rem; color: var(--ink-soft); min-width: 44px; font-weight: 600; }
-.nb-scroller { flex: 1; overflow: auto; background: #dfe3ea; -webkit-overflow-scrolling: touch; display: flex; justify-content: center; padding: 20px; }
+.nb-scroller { flex: 1; overflow: auto; background: #dfe3ea; -webkit-overflow-scrolling: touch; display: flex; justify-content: center; padding: 20px; touch-action: none; }
 .nb-canvas { background: #fff; box-shadow: var(--shadow-lg); border-radius: 4px; touch-action: none; align-self: flex-start; }
 
 /* Save As preview + share */
@@ -405,3 +407,18 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 /* figure sizing inside concepts/examples */
 .figure { margin-top: 12px; }
 .figure svg { display: block; width: 100%; height: auto; background: #fff; border-radius: 8px; }
+
+/* Notebook grid & guides panel */
+.nb-grid-panel { position: fixed; z-index: 110; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: var(--shadow-lg); padding: 14px; width: 270px; display: flex; flex-direction: column; gap: 12px; }
+.nb-gp-row { display: flex; align-items: center; gap: 10px; }
+.nb-gp-label { font-size: .8rem; font-weight: 600; color: var(--ink-soft); width: 52px; flex: none; }
+.nb-seg { display: flex; gap: 4px; flex: 1; }
+.nb-seg-btn { flex: 1; font: inherit; font-size: .76rem; font-weight: 600; padding: 6px 4px; border: 1px solid var(--line);
+  background: var(--surface); border-radius: 7px; cursor: pointer; color: var(--ink-soft); }
+.nb-seg-btn.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.nb-gp-slider { flex: 1; }
+.nb-gp-val { font-size: .74rem; color: var(--ink-soft); width: 40px; text-align: right; font-variant-numeric: tabular-nums; }
+.nb-swatches { display: flex; gap: 6px; flex: 1; align-items: center; flex-wrap: wrap; }
+.nb-sw { width: 24px; height: 24px; border-radius: 6px; border: 1px solid rgba(0,0,0,.15); cursor: pointer; }
+.nb-swatches .nb-color { width: 30px; height: 26px; }

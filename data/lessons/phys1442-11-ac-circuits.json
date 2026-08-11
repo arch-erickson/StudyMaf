@@ -1,0 +1,33 @@
+{
+  "title": "AC Circuits",
+  "summary": "Alternating current is described by rms values ($V_{rms}=V_0/\\sqrt2$). Inductors and capacitors oppose AC through reactance ($X_L=\\omega L$, $X_C=1/\\omega C$). A series RLC circuit has impedance $Z=\\sqrt{R^2+(X_L-X_C)^2}$ and resonates at $\\omega_0=1/\\sqrt{LC}$. (University Physics Vol. 2, Ch. 14–15.)",
+  "concept_sections": [
+    { "level": 1, "heading": "Inductance", "explanation": "An inductor resists changes in current by inducing a back-EMF $\\mathcal{E} = -L\\dfrac{\\Delta I}{\\Delta t}$. It stores energy in its magnetic field, $U = \\tfrac12 L I^2$. Inductance $L$ is measured in henries (H)." },
+    { "level": 2, "heading": "AC and rms values", "explanation": "Household current alternates sinusoidally. Because it swings positive and negative, we quote the root-mean-square value: $V_{rms} = V_0/\\sqrt{2}$ (and likewise for current). '120 V' outlets actually peak near 170 V. rms values let AC power formulas look like DC ones." },
+    { "level": 3, "heading": "Reactance", "explanation": "Inductors and capacitors oppose AC without dissipating energy, through reactance: $X_L = \\omega L$ (inductors block high frequencies) and $X_C = \\dfrac{1}{\\omega C}$ (capacitors block low frequencies), where $\\omega = 2\\pi f$. Both are measured in ohms." },
+    { "level": 4, "heading": "Impedance of a series RLC", "explanation": "Resistance and the two reactances combine into impedance $Z = \\sqrt{R^2 + (X_L - X_C)^2}$, and Ohm's law becomes $V_{rms} = I_{rms} Z$. The reactances partly cancel because inductor and capacitor voltages are out of phase." },
+    { "level": 5, "heading": "Resonance", "explanation": "When $X_L = X_C$ the reactances cancel, $Z$ is minimum ($=R$), and current peaks. This happens at the resonant frequency $\\omega_0 = \\dfrac{1}{\\sqrt{LC}}$ (or $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$) — how a radio selects one station." }
+  ],
+  "real_world_examples": [
+    { "title": "Tuning a radio", "scenario": "You turn a dial to pick one station.", "how_the_math_applies": "The dial changes $C$, shifting the resonant frequency $f_0 = 1/(2\\pi\\sqrt{LC})$ so the circuit responds strongly to just one broadcast frequency." },
+    { "title": "Phone charger / adapter", "scenario": "A charger converts wall AC to low-voltage DC.", "how_the_math_applies": "It uses rms voltages and a transformer, then rectifies and smooths with capacitors whose reactance $X_C$ filters the ripple." },
+    { "title": "Fluorescent light ballast", "scenario": "A tube light has a 'ballast' inside.", "how_the_math_applies": "An inductor's reactance $X_L = \\omega L$ limits the current through the tube, preventing it from drawing a destructive surge." }
+  ],
+  "videos": {
+    "concept_query": "AC circuits reactance impedance resonance explained",
+    "math_query": "RLC circuit impedance rms reactance resonance example problems",
+    "combined_query": "AC circuits calculus based physics worked examples inductor capacitor"
+  },
+  "problems": [
+    { "id": "p01", "difficulty": "easy", "prompt": "An AC source has peak voltage $V_0 = 170$ V. Find the rms voltage.", "correct_answer": "$\\approx 120$ V", "solution_steps": ["$V_{rms} = V_0/\\sqrt{2}$", "$V_{rms} = 170/1.414$", "$V_{rms} \\approx 120$ V"], "hint": "Divide the peak by $\\sqrt{2}$." },
+    { "id": "p02", "difficulty": "easy", "prompt": "An inductor $L = 2.0$ H carries $3.0$ A. Find the energy stored.", "correct_answer": "$9.0$ J", "solution_steps": ["$U = \\tfrac12 L I^2$", "$U = \\tfrac12(2.0)(3.0)^2$", "$U = 9.0$ J"], "hint": "Use $U = \\tfrac12 LI^2$." },
+    { "id": "p03", "difficulty": "easy", "prompt": "Find the inductive reactance of $L = 0.10$ H at $\\omega = 377$ rad/s.", "correct_answer": "$\\approx 37.7\\ \\Omega$", "solution_steps": ["$X_L = \\omega L$", "$X_L = (377)(0.10)$", "$X_L \\approx 37.7\\ \\Omega$"], "hint": "$X_L = \\omega L$." },
+    { "id": "p04", "difficulty": "medium", "prompt": "Find the capacitive reactance of $C = 10\\ \\mu\\text{F}$ at $\\omega = 377$ rad/s.", "correct_answer": "$\\approx 265\\ \\Omega$", "solution_steps": ["$X_C = \\dfrac{1}{\\omega C}$", "$X_C = \\dfrac{1}{(377)(10\\times10^{-6})}$", "$X_C \\approx 265\\ \\Omega$"], "hint": "$X_C = 1/(\\omega C)$." },
+    { "id": "p05", "difficulty": "medium", "prompt": "Find the resonant frequency of a circuit with $L = 1.0$ mH and $C = 1.0\\ \\mu\\text{F}$.", "correct_answer": "$\\approx 5.0\\times10^{3}$ Hz", "solution_steps": ["$f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$", "$\\sqrt{LC} = \\sqrt{(10^{-3})(10^{-6})} = 3.16\\times10^{-5}$", "$f_0 = \\dfrac{1}{2\\pi(3.16\\times10^{-5})} \\approx 5.0\\times10^{3}$ Hz"], "hint": "Use $f_0 = 1/(2\\pi\\sqrt{LC})$." },
+    { "id": "p06", "difficulty": "medium", "prompt": "A series circuit has $R = 30\\ \\Omega$, $X_L = 40\\ \\Omega$, $X_C = 0$. Find the impedance.", "correct_answer": "$50\\ \\Omega$", "solution_steps": ["$Z = \\sqrt{R^2 + (X_L - X_C)^2}$", "$Z = \\sqrt{30^2 + 40^2}$", "$Z = 50\\ \\Omega$"], "hint": "It's a 3-4-5 right triangle." },
+    { "id": "p07", "difficulty": "medium", "prompt": "An AC source $V_{rms} = 120$ V drives an impedance $Z = 60\\ \\Omega$. Find the rms current.", "correct_answer": "$2.0$ A", "solution_steps": ["$I_{rms} = V_{rms}/Z$", "$I_{rms} = 120/60$", "$I_{rms} = 2.0$ A"], "hint": "Ohm's law for AC uses impedance." },
+    { "id": "p08", "difficulty": "hard", "prompt": "A series RLC circuit has $R = 40\\ \\Omega$, $X_L = 60\\ \\Omega$, $X_C = 30\\ \\Omega$. Find the impedance.", "correct_answer": "$50\\ \\Omega$", "solution_steps": ["$X_L - X_C = 60 - 30 = 30\\ \\Omega$.", "$Z = \\sqrt{40^2 + 30^2}$", "$Z = 50\\ \\Omega$"], "hint": "Combine the reactances first, then use the impedance formula." },
+    { "id": "p09", "difficulty": "hard", "prompt": "In that circuit ($Z = 50\\ \\Omega$, $R = 40\\ \\Omega$) the rms current is $2.0$ A. Find the average power dissipated.", "correct_answer": "$160$ W", "solution_steps": ["Only the resistor dissipates power: $P = I_{rms}^2 R$.", "$P = (2.0)^2(40)$", "$P = 160$ W"], "hint": "Average power is dissipated only in $R$: $P = I_{rms}^2 R$." },
+    { "id": "p10", "difficulty": "stretch", "prompt": "A $1.0\\ \\mu\\text{F}$ capacitor charged to $100$ V is connected across a $1.0$ mH inductor (LC circuit). Find the peak current in the oscillation.", "correct_answer": "$\\approx 3.2$ A", "solution_steps": ["Energy conservation: $\\tfrac12 C V^2 = \\tfrac12 L I^2$, so $I = V\\sqrt{C/L}$.", "$I = 100\\sqrt{(1.0\\times10^{-6})/(1.0\\times10^{-3})} = 100\\sqrt{10^{-3}}$", "$I \\approx 100(0.0316) = 3.2$ A"], "hint": "All the capacitor's energy becomes the inductor's: $\\tfrac12 CV^2 = \\tfrac12 LI^2$." }
+  ]
+}

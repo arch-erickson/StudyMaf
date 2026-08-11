@@ -39,6 +39,10 @@ window.Store = (function () {
     flag: function (name) { return !!(state.flags && state.flags[name]); },
     setFlag: function (name) { state.flags = state.flags || {}; state.flags[name] = true; save(); },
 
+    // ----- notebook grid preference -----
+    getGrid: function () { return state.nbGrid || { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 }; },
+    setGrid: function (g) { state.nbGrid = g; save(); },
+
     // ----- accent -----
     getAccent: function () { return state.accent; },
     setAccent: function (hex) { state.accent = hex; save(); },
@@ -62,6 +66,9 @@ window.Store = (function () {
     removeClass: function (id) {
       state.classes = state.classes.filter(function (c) { return c.id !== id; });
       delete state.uploads[id]; delete state.modes[id]; save();
+    },
+    setClassLessons: function (id, lessonIds) {
+      var c = this.getClass(id); if (!c) return; c.lessonIds = lessonIds; save();
     },
 
     // ----- progress -----

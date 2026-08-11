@@ -57,7 +57,7 @@ window.App = (function () {
   function showKeyword(term, def) {
     if (!def) return;
     var layer = el("div", "overlay kw-layer");
-    layer.style.zIndex = "95";
+    layer.style.zIndex = "150";
     var m = el("div", "modal");
     m.innerHTML = "<div class='kw-modal'><h2>" + esc(term) + "</h2>" +
       "<div class='kw-block'><div class='kw-label plain'>In plain terms</div><p id='kw-plain'></p></div>" +
@@ -866,6 +866,19 @@ window.App = (function () {
     }
   }
 
+  // Keep the PHYS class in sync with all authored phys lessons (so lessons added
+  // to the index show up in the already-seeded class), preserving order.
+  function reconcilePhysLessons() {
+    var order = lessonIndex.filter(function (l) { return l.id.indexOf("phys1442") === 0; }).map(function (l) { return l.id; });
+    if (!order.length) return;
+    Store.classes().forEach(function (c) {
+      if (c.name.indexOf("PHYS 1442") !== 0) return;
+      var have = c.lessonIds || [];
+      var missing = order.some(function (id) { return have.indexOf(id) < 0; });
+      if (missing || have.length !== order.length) Store.setClassLessons(c.id, order);
+    });
+  }
+
   function init() {
     appEl = document.getElementById("app");
     applyAccent(Store.getAccent());
@@ -878,6 +891,7 @@ window.App = (function () {
       }));
     }).then(function () {
       seedIfEmpty();
+      reconcilePhysLessons();
       window.addEventListener("hashchange", route);
       route();
     }).catch(function (e) {

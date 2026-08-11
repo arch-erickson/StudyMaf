@@ -1,10 +1,19 @@
 {
   "lessons": [
-    { "id": "phys1442-01-coulomb",     "title": "Electric Charge & Coulomb's Law",   "file": "lessons/phys1442-01-coulomb.json" },
-    { "id": "phys1442-02-efield",      "title": "The Electric Field",                "file": "lessons/phys1442-02-efield.json" },
-    { "id": "phys1442-03-gauss",       "title": "Gauss's Law",                        "file": "lessons/phys1442-03-gauss.json" },
-    { "id": "phys1442-04-potential",   "title": "Electric Potential",                 "file": "lessons/phys1442-04-potential.json" },
-    { "id": "phys1442-05-capacitance", "title": "Capacitance & Capacitors",           "file": "lessons/phys1442-05-capacitance.json" },
-    { "id": "sample",                  "title": "Linear Equations in One Variable",   "file": "lessons/sample.json" }
+    { "id": "phys1442-01-coulomb",        "title": "Electric Charge & Coulomb's Law",              "file": "lessons/phys1442-01-coulomb.json" },
+    { "id": "phys1442-02-efield",         "title": "The Electric Field",                           "file": "lessons/phys1442-02-efield.json" },
+    { "id": "phys1442-03-gauss",          "title": "Gauss's Law",                                  "file": "lessons/phys1442-03-gauss.json" },
+    { "id": "phys1442-04-potential",      "title": "Electric Potential",                           "file": "lessons/phys1442-04-potential.json" },
+    { "id": "phys1442-05-capacitance",    "title": "Capacitance & Capacitors",                     "file": "lessons/phys1442-05-capacitance.json" },
+    { "id": "phys1442-06-current",        "title": "Electric Current & Resistance",                "file": "lessons/phys1442-06-current.json" },
+    { "id": "phys1442-07-dc-circuits",    "title": "DC Circuits & Kirchhoff's Rules",              "file": "lessons/phys1442-07-dc-circuits.json" },
+    { "id": "phys1442-08-magnetic-force", "title": "Magnetic Forces & Fields",                     "file": "lessons/phys1442-08-magnetic-force.json" },
+    { "id": "phys1442-09-magnetic-sources","title": "Sources of Magnetic Field",                   "file": "lessons/phys1442-09-magnetic-sources.json" },
+    { "id": "phys1442-10-induction",      "title": "Electromagnetic Induction & Faraday's Law",    "file": "lessons/phys1442-10-induction.json" },
+    { "id": "phys1442-11-ac-circuits",    "title": "AC Circuits",                                  "file": "lessons/phys1442-11-ac-circuits.json" },
+    { "id": "phys1442-12-em-waves",       "title": "Maxwell's Equations, EM Waves & Polarization", "file": "lessons/phys1442-12-em-waves.json" },
+    { "id": "phys1442-13-geometric-optics","title": "Geometric Optics",                            "file": "lessons/phys1442-13-geometric-optics.json" },
+    { "id": "phys1442-14-interference-diffraction","title": "Lenses, Interference & Diffraction",  "file": "lessons/phys1442-14-interference-diffraction.json" },
+    { "id": "sample",                     "title": "Linear Equations in One Variable",             "file": "lessons/sample.json" }
   ]
 }
