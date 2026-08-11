@@ -40,7 +40,11 @@ window.Icons = (function () {
     droplet: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
     check2: '<polyline points="20 6 9 17 4 12"/>',
     fullscreen: '<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>',
-    columns: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/>'
+    columns: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/>',
+    highlighter: '<path d="M9 11l-6 6v3h3l6-6"/><path d="M12 8l4 4"/><path d="M17 3l4 4-9 9-4-4z"/>',
+    shapes: '<rect x="3" y="12" width="8" height="8" rx="1"/><circle cx="17" cy="16" r="4"/><path d="M12 3l4 7H8z"/>',
+    cursor: '<path d="M4 3l7 17 2.5-6.5L20 11z"/>',
+    move: '<polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/>'
   };
   function get(name, opts) {
     var d = P[name]; if (!d) return "";

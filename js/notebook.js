@@ -11,10 +11,11 @@
 window.Notebook = (function () {
   "use strict";
   var PAGE_W = 1100, PAGE_H = 1500, MIN_ZOOM = 0.4, MAX_ZOOM = 2.5;
-  var overlay, canvas, ctx, dpr = 1;
+  var overlay, canvas, ctx, base, baseCtx, dpr = 1, active = {};
   var strokes = [], history = [], future = [], cur = null;
-  var tool = "brush", color = "#2D3142", size = 3, opacity = 1, zoom = 1, layout = "full";
+  var tool = "pencil", color = "#2D3142", size = 2.4, opacity = 1, zoom = 1, layout = "full";
   var curvePts = [], curveDoneBtn = null;  // Illustrator-style curvature tool: click to add anchor points
+  var shapeType = "rect", shapeFill = null, selected = null;  // shapes + select/move tools
   var grid = { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 };
   var ctxInfo = null;
 
@@ -24,7 +25,7 @@ window.Notebook = (function () {
   // ---------------- open ----------------
   function openScratch(info) {
     ctxInfo = info || {};
-    tool = "brush"; zoom = 1; history = []; future = [];
+    tool = "pencil"; zoom = 1; history = []; future = []; selected = null; curvePts = []; active = {};
     grid = Store.getGrid();
     strokes = loadStrokes();
     overlay = document.getElementById("draw-overlay");
@@ -53,9 +54,10 @@ window.Notebook = (function () {
     // tool bar
     var bar = el("div", "nb-tools");
     var tools = [
-      ["brush", "brush", "Brush — write freely"], ["pen", "pen", "Pen — tap points for straight lines"],
-      ["curve", "curve", "Curvature — tap points for a smooth curve"], ["highlighter", "edit", "Highlighter"],
-      ["eraser", "eraser", "Eraser"]
+      ["pencil", "pen", "Pencil — smooth handwriting"], ["brush", "brush", "Brush — pressure"],
+      ["highlighter", "highlighter", "Highlighter"], ["pen", "curve", "Pen — tap points for straight lines (tap the first point to close a shape)"],
+      ["curve", "curve", "Curvature — tap points for a smooth curve"], ["shapes", "shapes", "Shapes"],
+      ["select", "cursor", "Select & move"], ["eraser", "eraser", "Eraser"]
     ];
     var toolBtns = {};
     tools.forEach(function (t) {
@@ -109,16 +111,68 @@ window.Notebook = (function () {
     setupInput();
   }
 
+  var toolBtnsRef = null;
   function setTool(t, btns) {
-    tool = t;
-    Object.keys(btns).forEach(function (k) { btns[k].classList.toggle("on", k === t); });
+    tool = t; if (btns) toolBtnsRef = btns;
+    if (toolBtnsRef) Object.keys(toolBtnsRef).forEach(function (k) { toolBtnsRef[k].classList.toggle("on", k === t); });
+    closeShapesPicker();
+    if (t !== "select") { selected = null; closePropsPanel(); paint && ctx && paint(); }
+    if (t === "shapes" && toolBtnsRef && toolBtnsRef.shapes) openShapesPicker(toolBtnsRef.shapes);
   }
+
+  // ---- shapes picker ----
+  var shapesPicker = null;
+  var PRIMS = [["rect", "▭"], ["square", "◻"], ["ellipse", "◯"], ["circle", "●"], ["triangle", "△"], ["line", "／"], ["cylinder", "⌭"], ["pyramid", "△"]];
+  function openShapesPicker(anchor) {
+    closeShapesPicker();
+    shapesPicker = el("div", "nb-shapes-picker");
+    PRIMS.forEach(function (p) {
+      var b = el("button", "nb-prim" + (shapeType === p[0] ? " on" : ""), p[1]); b.title = p[0];
+      b.onclick = function () { shapeType = p[0]; shapesPicker.querySelectorAll(".nb-prim").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); };
+      shapesPicker.appendChild(b);
+    });
+    document.querySelector(".nb-shell").appendChild(shapesPicker);
+    var r = anchor.getBoundingClientRect();
+    shapesPicker.style.top = (r.bottom + 6) + "px"; shapesPicker.style.left = Math.max(8, r.left) + "px";
+  }
+  function closeShapesPicker() { if (shapesPicker) { shapesPicker.remove(); shapesPicker = null; } }
+
+  // ---- selection properties (stroke + fill editor) ----
+  var propsPanel = null;
+  function openPropsPanel() {
+    closePropsPanel(); if (selected == null || !strokes[selected]) return;
+    var s = strokes[selected];
+    propsPanel = el("div", "nb-props-panel");
+    var canFill = s.shape || s.closed;
+    var col = document.createElement("input"); col.type = "color"; col.value = s.color || "#2D3142"; col.className = "nb-color";
+    col.oninput = function () { s.color = col.value; render(); };
+    var strokeRow = el("div", "nb-gp-row"); strokeRow.appendChild(el("span", "nb-gp-label", "Stroke")); strokeRow.appendChild(col);
+    var wr = document.createElement("input"); wr.type = "range"; wr.min = "1"; wr.max = "20"; wr.value = String(s.size || 2); wr.className = "nb-gp-slider";
+    wr.oninput = function () { s.size = +wr.value; render(); }; strokeRow.appendChild(wr);
+    propsPanel.appendChild(strokeRow);
+    propsPanel.appendChild(sliderRow("Opacity", 10, 100, Math.round((s.opacity != null ? s.opacity : 1) * 100), function (v) { s.opacity = v / 100; render(); }, "%"));
+    if (canFill) {
+      var frow = el("div", "nb-gp-row"); frow.appendChild(el("span", "nb-gp-label", "Fill"));
+      var fc = document.createElement("input"); fc.type = "color"; fc.value = s.fill || "#EF8354"; fc.className = "nb-color";
+      fc.oninput = function () { s.fill = fc.value; if (s.fillOpacity == null) s.fillOpacity = 0.35; render(); }; frow.appendChild(fc);
+      var noFill = el("button", "nb-seg-btn", "none"); noFill.onclick = function () { s.fill = null; render(); }; frow.appendChild(noFill);
+      propsPanel.appendChild(frow);
+      propsPanel.appendChild(sliderRow("Fill α", 5, 100, Math.round((s.fillOpacity != null ? s.fillOpacity : 0.35) * 100), function (v) { s.fillOpacity = v / 100; render(); }, "%"));
+    }
+    var del = el("button", "btn subtle", "Delete"); del.style.width = "100%";
+    del.onclick = function () { pushHistory(); strokes.splice(selected, 1); selected = null; closePropsPanel(); render(); };
+    propsPanel.appendChild(del);
+    document.querySelector(".nb-shell").appendChild(propsPanel);
+  }
+  function closePropsPanel() { if (propsPanel) { propsPanel.remove(); propsPanel = null; } }
 
   // ---------------- canvas + render ----------------
   function setupCanvas() {
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = PAGE_W * dpr; canvas.height = PAGE_H * dpr;
     ctx = canvas.getContext("2d");
+    base = document.createElement("canvas"); base.width = canvas.width; base.height = canvas.height;
+    baseCtx = base.getContext("2d");
     render();
   }
   function setZoom(z) {
@@ -128,27 +182,56 @@ window.Notebook = (function () {
     curRect = null; // canvas resized, cached rect is stale
     var lab = document.getElementById("nb-zoom"); if (lab) lab.textContent = Math.round(zoom * 100) + "%";
   }
-  // full re-render (used on setup, zoom, undo/redo) — not on every move
-  function render() {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, PAGE_W, PAGE_H);
-    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, PAGE_W, PAGE_H);
-    drawGrid();
-    strokes.forEach(drawStroke);
-    drawCurvePreview();
+  // render() bakes the committed strokes onto an offscreen base, then paint() blits
+  // that base and draws in-progress strokes on top as ONE smooth path each. Drawing a
+  // stroke as a single path (instead of stacking incremental segments) keeps lines
+  // continuous AND keeps opacity/highlighter consistent between live and re-render.
+  function render() { rebuildBase(); paint(); }
+  function rebuildBase() {
+    baseCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    baseCtx.clearRect(0, 0, PAGE_W, PAGE_H);
+    baseCtx.fillStyle = "#ffffff"; baseCtx.fillRect(0, 0, PAGE_W, PAGE_H);
+    drawGridOn(baseCtx);
+    strokes.forEach(function (s) { drawStrokeOn(baseCtx, s); });
   }
-  // live preview of the curvature tool's anchor points + smooth curve
-  function drawCurvePreview() {
-    if (!curvePts.length) return;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (curvePts.length >= 2) {
-      ctx.globalAlpha = opacity; ctx.strokeStyle = color; ctx.lineWidth = size; ctx.lineCap = "round"; ctx.lineJoin = "round";
-      var d = tool === "pen" ? curvePts : catmullRom(curvePts); ctx.beginPath(); ctx.moveTo(d[0].x, d[0].y);
-      for (var i = 1; i < d.length; i++) ctx.lineTo(d[i].x, d[i].y);
-      ctx.stroke(); ctx.globalAlpha = 1;
+  function paint() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(base, 0, 0);
+    for (var id in active) { var st = active[id].stroke; if (st && (st.shape || (st.points && st.points.length))) drawStrokeOn(ctx, st); }
+    drawCurvePreviewOn(ctx);
+    if (selected != null && strokes[selected]) drawSelection(ctx, strokes[selected]);
+  }
+  function drawSelection(c, s) {
+    var bb = bboxOf(s); c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.strokeStyle = "#EF8354"; c.lineWidth = 1.5; c.globalAlpha = 1; c.setLineDash([6, 4]);
+    c.strokeRect(bb.x - 6, bb.y - 6, bb.w + 12, bb.h + 12); c.setLineDash([]);
+  }
+  function bboxOf(s) {
+    if (s.shape) { return { x: Math.min(s.x, s.x + s.w), y: Math.min(s.y, s.y + s.h), w: Math.abs(s.w), h: Math.abs(s.h) }; }
+    var minx = 1e9, miny = 1e9, maxx = -1e9, maxy = -1e9;
+    (s.points || []).forEach(function (p) { if (p.x < minx) minx = p.x; if (p.y < miny) miny = p.y; if (p.x > maxx) maxx = p.x; if (p.y > maxy) maxy = p.y; });
+    return { x: minx, y: miny, w: maxx - minx, h: maxy - miny };
+  }
+  function hitTest(p) {
+    for (var i = strokes.length - 1; i >= 0; i--) {
+      var s = strokes[i], bb = bboxOf(s);
+      if (s.shape || s.closed) { if (p.x >= bb.x - 8 && p.x <= bb.x + bb.w + 8 && p.y >= bb.y - 8 && p.y <= bb.y + bb.h + 8) return i; }
+      else if (s.points) { for (var j = 0; j < s.points.length; j++) { if (Math.hypot(s.points[j].x - p.x, s.points[j].y - p.y) <= (s.size || 3) + 9) return i; } }
     }
-    ctx.fillStyle = "#EF8354";
-    curvePts.forEach(function (p) { ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI * 2); ctx.fill(); });
+    return null;
+  }
+  function translateSelected(dx, dy) { var s = strokes[selected]; if (!s) return; if (s.shape) { s.x += dx; s.y += dy; } else (s.points || []).forEach(function (p) { p.x += dx; p.y += dy; }); }
+  function drawCurvePreviewOn(c) {
+    if (!curvePts.length) return;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (curvePts.length >= 2) {
+      c.globalAlpha = opacity; c.strokeStyle = color; c.lineWidth = size; c.lineCap = "round"; c.lineJoin = "round";
+      var d = tool === "pen" ? curvePts : catmullRom(curvePts); c.beginPath(); c.moveTo(d[0].x, d[0].y);
+      for (var i = 1; i < d.length; i++) c.lineTo(d[i].x, d[i].y);
+      c.stroke(); c.globalAlpha = 1;
+    }
+    c.fillStyle = "#EF8354";
+    curvePts.forEach(function (p) { c.beginPath(); c.arc(p.x, p.y, 5, 0, Math.PI * 2); c.fill(); });
   }
   // Catmull-Rom spline through the anchor points -> dense polyline
   function catmullRom(ps) {
@@ -166,78 +249,89 @@ window.Notebook = (function () {
     out.push(ps[ps.length - 1]);
     return out;
   }
-  function finishCurve() {
+  // ---- primitive shapes (drawn from a bounding box x,y,w,h) ----
+  function shapePath(c, s) {
+    var x = s.x, y = s.y, w = s.w, h = s.h; c.beginPath();
+    switch (s.shape) {
+      case "rect": c.rect(x, y, w, h); break;
+      case "square": { var m = Math.min(Math.abs(w), Math.abs(h)) * (w < 0 ? -1 : 1), m2 = Math.min(Math.abs(w), Math.abs(h)) * (h < 0 ? -1 : 1); c.rect(x, y, m, m2); break; }
+      case "ellipse": c.ellipse(x + w / 2, y + h / 2, Math.abs(w / 2), Math.abs(h / 2), 0, 0, Math.PI * 2); break;
+      case "circle": { var r = Math.min(Math.abs(w), Math.abs(h)) / 2; c.arc(x + (w < 0 ? -r : r), y + (h < 0 ? -r : r), r, 0, Math.PI * 2); break; }
+      case "triangle": c.moveTo(x + w / 2, y); c.lineTo(x + w, y + h); c.lineTo(x, y + h); c.closePath(); break;
+      case "line": c.moveTo(x, y); c.lineTo(x + w, y + h); break;
+      case "cylinder": { var ry = Math.abs(h) * 0.14; c.moveTo(x, y + ry); c.lineTo(x, y + h - ry); c.ellipse(x + w / 2, y + h - ry, Math.abs(w / 2), ry, 0, Math.PI, 0, true); c.moveTo(x + w, y + ry); c.lineTo(x + w, y + h - ry); c.moveTo(x, y + ry); c.ellipse(x + w / 2, y + ry, Math.abs(w / 2), ry, 0, 0, Math.PI * 2); break; }
+      case "pyramid": c.moveTo(x + w / 2, y); c.lineTo(x + w, y + h); c.lineTo(x, y + h); c.closePath(); c.moveTo(x + w / 2, y); c.lineTo(x + w * 0.62, y + h * 0.86); c.moveTo(x, y + h); c.lineTo(x + w * 0.62, y + h * 0.86); break;
+    }
+  }
+  function drawShapeOn(c, s) {
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.lineCap = "round"; c.lineJoin = "round"; c.globalCompositeOperation = "source-over";
+    shapePath(c, s);
+    if (s.fill) { c.globalAlpha = (s.fillOpacity != null ? s.fillOpacity : 1); c.fillStyle = s.fill; c.fill(); }
+    c.globalAlpha = (s.opacity != null ? s.opacity : 1); c.strokeStyle = s.color; c.lineWidth = s.size || 2; c.stroke();
+    c.globalAlpha = 1;
+  }
+
+  function finishCurve(closed) {
     if (curveDoneBtn) curveDoneBtn.style.display = "none";
     if (curvePts.length >= 2) {
       pushHistory();
-      if (tool === "pen") strokes.push({ tool: "pen", straight: true, color: color, size: size, opacity: opacity, points: curvePts.slice() });
+      if (tool === "pen") strokes.push({ tool: "pen", straight: true, closed: !!closed, fill: closed ? shapeFill : null, color: color, size: size, opacity: opacity, points: curvePts.slice() });
       else strokes.push({ tool: "pen", color: color, size: size, opacity: opacity, points: catmullRom(curvePts) });
     }
     curvePts = []; render();
   }
-  function drawGrid() {
+  function drawGridOn(c) {
     if (!grid || grid.type === "none") return;
     var s = Math.max(8, grid.size || 40);
-    ctx.globalAlpha = grid.opacity != null ? grid.opacity : 0.7;
-    ctx.strokeStyle = grid.color || "#c3ccd9"; ctx.fillStyle = grid.color || "#c3ccd9"; ctx.lineWidth = 1;
+    c.globalAlpha = grid.opacity != null ? grid.opacity : 0.7;
+    c.strokeStyle = grid.color || "#c3ccd9"; c.fillStyle = grid.color || "#c3ccd9"; c.lineWidth = 1;
     var x, y;
     if (grid.type === "ruled") {
-      for (y = s; y < PAGE_H; y += s) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(PAGE_W, y); ctx.stroke(); }
+      for (y = s; y < PAGE_H; y += s) { c.beginPath(); c.moveTo(0, y); c.lineTo(PAGE_W, y); c.stroke(); }
     } else if (grid.type === "grid") {
-      for (y = s; y < PAGE_H; y += s) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(PAGE_W, y); ctx.stroke(); }
-      for (x = s; x < PAGE_W; x += s) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, PAGE_H); ctx.stroke(); }
+      for (y = s; y < PAGE_H; y += s) { c.beginPath(); c.moveTo(0, y); c.lineTo(PAGE_W, y); c.stroke(); }
+      for (x = s; x < PAGE_W; x += s) { c.beginPath(); c.moveTo(x, 0); c.lineTo(x, PAGE_H); c.stroke(); }
     } else if (grid.type === "dots") {
-      for (y = s; y < PAGE_H; y += s) for (x = s; x < PAGE_W; x += s) { ctx.beginPath(); ctx.arc(x, y, 1.4, 0, Math.PI * 2); ctx.fill(); }
+      for (y = s; y < PAGE_H; y += s) for (x = s; x < PAGE_W; x += s) { c.beginPath(); c.arc(x, y, 1.4, 0, Math.PI * 2); c.fill(); }
     }
-    ctx.globalAlpha = 1;
+    c.globalAlpha = 1;
   }
-  function styleFor(s) {
-    ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.globalCompositeOperation = s.tool === "eraser" ? "destination-out" : "source-over";
-    ctx.globalAlpha = (s.tool === "highlighter" ? 0.3 : 1) * (s.opacity != null ? s.opacity : 1);
-    ctx.strokeStyle = s.color;
-    ctx.lineWidth = s.tool === "highlighter" ? s.size * 5 : (s.tool === "eraser" ? s.size * 6 : s.size);
+  function styleOn(c, s) {
+    c.lineCap = "round"; c.lineJoin = "round";
+    c.globalCompositeOperation = s.tool === "eraser" ? "destination-out" : "source-over";
+    c.globalAlpha = (s.tool === "highlighter" ? 0.32 : 1) * (s.opacity != null ? s.opacity : 1);
+    c.strokeStyle = s.color; c.fillStyle = s.color;
+    c.lineWidth = s.tool === "highlighter" ? s.size * 6 : (s.tool === "eraser" ? s.size * 6 : s.size);
   }
-  function brushWidth(s, p) { return s.size * (0.35 + 1.3 * (p != null ? p : 0.5)); }
-  function drawStroke(s) {
-    var pts = s.points; if (!pts.length) return;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
-    if (s.straight) { // pen tool: straight segments between anchor points
-      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
-      for (var k = 1; k < pts.length; k++) ctx.lineTo(pts[k].x, pts[k].y);
-      ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; return;
+  function brushWidth(s, p) { return s.size * (0.35 + 1.4 * (p != null ? p : 0.5)); }
+  function drawStrokeOn(c, s) {
+    if (s.shape) { drawShapeOn(c, s); return; }
+    var pts = s.points; if (!pts || !pts.length) return;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0); styleOn(c, s);
+    if (s.straight) { // pen tool: straight segments between anchor points (optionally closed)
+      c.beginPath(); c.moveTo(pts[0].x, pts[0].y);
+      for (var k = 1; k < pts.length; k++) c.lineTo(pts[k].x, pts[k].y);
+      if (s.closed) c.closePath();
+      if (s.closed && s.fill) { c.fillStyle = s.fill; c.globalAlpha = (s.fillOpacity != null ? s.fillOpacity : 1); c.fill(); c.globalAlpha = (s.opacity != null ? s.opacity : 1); }
+      c.stroke(); c.globalAlpha = 1; c.globalCompositeOperation = "source-over"; return;
     }
-    if (s.tool === "brush") { // variable width by pen pressure — draw pair by pair
+    if (s.tool === "brush") { // pressure-varying width, drawn as connected round segments
       for (var b = 1; b < pts.length; b++) {
-        ctx.lineWidth = brushWidth(s, (pts[b - 1].p + pts[b].p) / 2);
-        ctx.beginPath(); ctx.moveTo(pts[b - 1].x, pts[b - 1].y); ctx.lineTo(pts[b].x, pts[b].y); ctx.stroke();
+        c.lineWidth = brushWidth(s, (pts[b - 1].p + pts[b].p) / 2);
+        c.beginPath(); c.moveTo(pts[b - 1].x, pts[b - 1].y); c.lineTo(pts[b].x, pts[b].y); c.stroke();
       }
-      ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; return;
+      c.globalAlpha = 1; c.globalCompositeOperation = "source-over"; return;
     }
-    ctx.beginPath();
-    if (pts.length < 3) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y); }
+    // pencil / highlighter / finished curve: one smooth path through the points
+    c.beginPath();
+    if (pts.length < 3) { c.moveTo(pts[0].x, pts[0].y); c.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y); }
     else {
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (var i = 1; i < pts.length - 1; i++) { ctx.quadraticCurveTo(pts[i].x, pts[i].y, (pts[i].x + pts[i + 1].x) / 2, (pts[i].y + pts[i + 1].y) / 2); }
-      ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
+      c.moveTo(pts[0].x, pts[0].y);
+      for (var i = 1; i < pts.length - 1; i++) { c.quadraticCurveTo(pts[i].x, pts[i].y, (pts[i].x + pts[i + 1].x) / 2, (pts[i].y + pts[i + 1].y) / 2); }
+      c.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
     }
-    ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
-  }
-  // incremental: draw only the newest smoothed segment (keeps ink continuous & fast)
-  function drawLiveSegment(s) {
-    var pts = s.points, n = pts.length; if (n < 2) return;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
-    if (s.tool === "brush") {
-      ctx.lineWidth = brushWidth(s, (pts[n - 2].p + pts[n - 1].p) / 2);
-      ctx.beginPath(); ctx.moveTo(pts[n - 2].x, pts[n - 2].y); ctx.lineTo(pts[n - 1].x, pts[n - 1].y); ctx.stroke();
-      ctx.globalAlpha = 1; return;
-    }
-    ctx.beginPath();
-    if (n === 2) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); }
-    else { var p0 = pts[n - 3], p1 = pts[n - 2], p2 = pts[n - 1];
-      ctx.moveTo((p0.x + p1.x) / 2, (p0.y + p1.y) / 2);
-      ctx.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2); }
-    ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+    c.stroke(); c.globalAlpha = 1; c.globalCompositeOperation = "source-over";
   }
 
   // ---------------- input: pen/mouse draws, 1 finger pans, 2 fingers pinch-zoom ----------------
@@ -272,16 +366,30 @@ window.Notebook = (function () {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
       if (e.pointerType === "pen" || e.pointerType === "mouse") {
         curRect = canvas.getBoundingClientRect();
+        var pp = toPage(e.clientX, e.clientY);
+        if (tool === "select") { // click to select a shape/stroke, drag to move it
+          selected = hitTest(pp);
+          if (selected != null) { pushHistory(); active[e.pointerId] = { move: true, last: pp }; try { canvas.setPointerCapture(e.pointerId); } catch (x) {} openPropsPanel(); }
+          else { closePropsPanel(); }
+          paint(); e.preventDefault(); return;
+        }
+        if (tool === "shapes") { // drag out a primitive from its bounding box
+          pushHistory();
+          active[e.pointerId] = { shapeDraw: true, stroke: { shape: shapeType, x: pp.x, y: pp.y, w: 0, h: 0, color: color, size: size, opacity: opacity, fill: shapeFill } };
+          try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
+          e.preventDefault(); return;
+        }
         if (tool === "curve" || tool === "pen") { // tap to place anchor points (vector tools)
-          var cp = toPage(e.clientX, e.clientY), now = Date.now();
-          if (lastTapXY && now - lastTap < 400 && Math.hypot(cp.x - lastTapXY.x, cp.y - lastTapXY.y) < 16) { finishCurve(); lastTapXY = null; e.preventDefault(); return; }
-          curvePts.push(cp); lastTap = now; lastTapXY = cp;
+          var now = Date.now();
+          if (tool === "pen" && curvePts.length > 2 && Math.hypot(pp.x - curvePts[0].x, pp.y - curvePts[0].y) < 16) { finishCurve(true); e.preventDefault(); return; } // tap first point to close
+          if (lastTapXY && now - lastTap < 400 && Math.hypot(pp.x - lastTapXY.x, pp.y - lastTapXY.y) < 16) { finishCurve(); lastTapXY = null; e.preventDefault(); return; }
+          curvePts.push(pp); lastTap = now; lastTapXY = pp;
           if (curveDoneBtn) curveDoneBtn.style.display = curvePts.length ? "" : "none";
           render(); e.preventDefault(); return;
         }
         pushHistory();
-        if (tool === "eraser") { active[e.pointerId] = { erase: true }; eraseAt(toPage(e.clientX, e.clientY)); }
-        else { var p0 = toPage(e.clientX, e.clientY); if (tool === "brush") p0.p = e.pressure || 0.5; active[e.pointerId] = { stroke: { tool: tool, color: color, size: size, opacity: opacity, points: [p0] } }; }
+        if (tool === "eraser") { active[e.pointerId] = { erase: true }; eraseAt(pp); }
+        else { if (tool === "brush") pp.p = e.pressure || 0.5; active[e.pointerId] = { stroke: { tool: tool, color: color, size: size, opacity: opacity, points: [pp] } }; }
         try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
         e.preventDefault();
       } else { gesture = null; }
@@ -292,9 +400,20 @@ window.Notebook = (function () {
       pt.x = e.clientX; pt.y = e.clientY;
       var a = active[e.pointerId];
       if (a) {
+        if (a.shapeDraw) { var sp = toPage(e.clientX, e.clientY); a.stroke.w = sp.x - a.stroke.x; a.stroke.h = sp.y - a.stroke.y; paint(); e.preventDefault(); return; }
+        if (a.move && selected != null) { var mp = toPage(e.clientX, e.clientY); translateSelected(mp.x - a.last.x, mp.y - a.last.y); a.last = mp; paint(); e.preventDefault(); return; }
         var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; if (!evs.length) evs = [e];
         if (a.erase) { evs.forEach(function (ev) { eraseAt(toPage(ev.clientX, ev.clientY)); }); }
-        else { evs.forEach(function (ev) { var p = toPage(ev.clientX, ev.clientY); if (a.stroke.tool === "brush") p.p = ev.pressure || 0.5; a.stroke.points.push(p); drawLiveSegment(a.stroke); }); }
+        else {
+          evs.forEach(function (ev) {
+            var p = toPage(ev.clientX, ev.clientY);
+            if (a.stroke.tool === "brush") p.p = ev.pressure || 0.5;
+            var last = a.stroke.points[a.stroke.points.length - 1];
+            if (last && Math.abs(last.x - p.x) < 0.8 && Math.abs(last.y - p.y) < 0.8) return; // skip micro-jitter
+            a.stroke.points.push(p);
+          });
+          paint();
+        }
         e.preventDefault(); return;
       }
       var ts = touches();
@@ -312,9 +431,10 @@ window.Notebook = (function () {
     function end(e) {
       var a = active[e.pointerId];
       if (a) {
-        if (a.stroke && a.stroke.points.length > 0) strokes.push(a.stroke);
-        else history.pop();               // erase, or empty stroke: drop the snapshot we pushed
-        delete active[e.pointerId];
+        if (a.shapeDraw) { if (Math.abs(a.stroke.w) > 3 || Math.abs(a.stroke.h) > 3) { strokes.push(a.stroke); selected = strokes.length - 1; delete active[e.pointerId]; render(); openPropsPanel(); } else { history.pop(); delete active[e.pointerId]; paint(); } }
+        else if (a.move) { delete active[e.pointerId]; render(); }
+        else if (a.stroke && a.stroke.points.length > 0) { strokes.push(a.stroke); delete active[e.pointerId]; render(); }
+        else { history.pop(); delete active[e.pointerId]; }   // erase, or empty stroke: drop the snapshot
       }
       delete pointers[e.pointerId];
       if (touches().length < 2) gesture = null;
@@ -412,6 +532,7 @@ window.Notebook = (function () {
     if (overlay) { overlay.hidden = true; overlay.setAttribute("aria-hidden", "true"); overlay.innerHTML = ""; overlay.className = "nb-overlay"; }
     document.body.classList.remove("nb-split");
     if (gridPanel) { gridPanel.remove(); gridPanel = null; }
+    closePropsPanel(); closeShapesPicker(); selected = null;
     // never leave a blank page: if no problem session is open, re-render the current route
     if (!document.querySelector(".session") && window.App && App.rerender) App.rerender();
   }

@@ -498,3 +498,11 @@ body.ipad-mode, body.ipad-mode * { -webkit-user-select: none; user-select: none;
 body.ipad-mode input, body.ipad-mode textarea, body.ipad-mode [contenteditable] { -webkit-user-select: text; user-select: text; }
 /* Drawing surfaces never select text, even without iPad Mode */
 .nb-canvas, .nb-tools, .nb-top, .np-canvas-wrap { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+
+/* Notebook shapes picker + selection properties panel */
+.nb-shapes-picker { position: fixed; z-index: 110; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: var(--shadow-lg); padding: 8px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.nb-prim { width: 42px; height: 42px; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; cursor: pointer; font-size: 1.2rem; color: var(--ink); }
+.nb-prim.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.nb-props-panel { position: fixed; right: 16px; top: 120px; z-index: 110; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 12px; box-shadow: var(--shadow-lg); padding: 14px; width: 240px; display: flex; flex-direction: column; gap: 10px; }
