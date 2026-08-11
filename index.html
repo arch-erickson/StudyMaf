@@ -9,6 +9,8 @@
   <!-- Vendored locally — no external requests (self-contained for GitHub Pages). -->
   <link rel="stylesheet" href="vendor/fonts/inter.css" />
   <link rel="stylesheet" href="vendor/katex/katex.min.css" />
+  <link rel="stylesheet" href="vendor/mathlive/mathlive-static.css" />
+  <link rel="stylesheet" href="vendor/mathlive/mathlive-fonts.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -52,6 +54,18 @@
   <!-- Vendored KaTeX -->
   <script defer src="vendor/katex/katex.min.js"></script>
   <script defer src="vendor/katex/auto-render.min.js"></script>
+
+  <!-- Vendored MathLive (editable, click-to-position math field) -->
+  <script defer src="vendor/mathlive/mathlive.min.js"></script>
+  <script>
+    // point MathLive at the vendored fonts once its element is registered
+    window.addEventListener("DOMContentLoaded", function () {
+      if (window.MathfieldElement) {
+        window.MathfieldElement.fontsDirectory = "vendor/mathlive/fonts";
+        window.MathfieldElement.soundsDirectory = null;
+      }
+    });
+  </script>
 
   <!-- Soft access gate (NOT real security — see js/gate.js). Loads first. -->
   <script defer src="js/gate.js"></script>

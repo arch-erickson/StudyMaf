@@ -131,152 +131,108 @@ window.Calculator = (function () {
     window.addEventListener("pointerup", function () { if (drawing) { drawing = false; padImage = snapshotPad(); } });
   }
 
-  // ---------- scientific side (live math preview + cursor editing) ----------
+  // ---------- scientific side: MathLive editable, click-to-position math field ----------
+  var sciField, sciResult, activeMF = null, lastAns = "";
+  function makeField() {
+    var mf = document.createElement("math-field");
+    try { mf.mathVirtualKeyboardPolicy = "manual"; } catch (e) {}
+    mf.setAttribute("math-virtual-keyboard-policy", "manual");
+    try { mf.smartMode = false; } catch (e) {}
+    mf.addEventListener("focusin", function () { activeMF = mf; });
+    return mf;
+  }
+  function preventBlur(e) { e.preventDefault(); } // tapping a key must not blur the field
+  function mfCmd(cmd) { try { (activeMF || sciField).executeCommand(cmd); (activeMF || sciField).focus(); } catch (e) {} }
+  function insertMF(latex) { try { (activeMF || sciField).insert(latex, { focus: true }); } catch (e) {} onFieldInput(); }
+
   function buildSci() {
     var wrap = el("div", "calc-sci");
-    sciPreview = el("div", "calc-preview"); wrap.appendChild(sciPreview);
-    sciDisplay = el("div", "calc-display"); wrap.appendChild(sciDisplay);
+    var fieldRow = el("div", "calc-fieldrow");
+    sciField = makeField(); sciField.className = "calc-field"; activeMF = sciField;
+    sciField.addEventListener("input", function () { onFieldInput(); });
+    sciResult = el("div", "calc-result");
+    fieldRow.append(sciField, sciResult); wrap.appendChild(fieldRow);
 
     var secRow = el("div", "calc-second-row");
     var secBtn = el("button", "calc-key mod" + (second ? " on" : ""), second ? "2nd ●" : "2nd");
-    secBtn.onclick = function () { second = !second; build(); };
-    var leftBtn = el("button", "calc-key op", "◀"); leftBtn.title = "Move left"; leftBtn.onclick = function () { moveCursor(-1); };
-    var rightBtn = el("button", "calc-key op", "▶"); rightBtn.title = "Move right"; rightBtn.onclick = function () { moveCursor(1); };
-    secRow.append(secBtn, leftBtn, rightBtn);
-    if (graphOn) secRow.appendChild(el("span", "calc-mode-hint", "keys type into the focused equation"));
-    wrap.appendChild(secRow);
+    secBtn.onmousedown = preventBlur; secBtn.onclick = function () { second = !second; build(); };
+    var leftBtn = el("button", "calc-key op arrow", "◀"); leftBtn.onmousedown = preventBlur; leftBtn.onclick = function () { mfCmd("moveToPreviousChar"); };
+    var rightBtn = el("button", "calc-key op arrow", "▶"); rightBtn.onmousedown = preventBlur; rightBtn.onclick = function () { mfCmd("moveToNextChar"); };
+    secRow.append(secBtn, leftBtn, rightBtn); wrap.appendChild(secRow);
 
     var grid = el("div", "calc-grid");
     keypad().forEach(function (k) {
       var b = el("button", "calc-key" + (k.cls ? " " + k.cls : ""), k.label);
-      b.onclick = function () {
-        if (k.tpl && graphOn && activeInput) { insertAtCursor(activeInput, k.tpl[0]); triggerEq(activeInput); return; }
-        if (k.tpl) { insertTemplate(k.tpl[0], k.tpl[1]); return; }
-        press(k.ins != null ? k.ins : k.label, k.act);
-      };
+      b.onmousedown = preventBlur;
+      b.onclick = function () { pressKey(k); };
       grid.appendChild(b);
     });
     wrap.appendChild(grid);
-    renderSciDisplay();
+    setTimeout(function () { try { sciField.focus(); } catch (e) {} }, 40);
     return wrap;
   }
 
   function keypad() {
     var trig = second
-      ? [{ label: "sin⁻¹", ins: "asin(", cls: "fn" }, { label: "cos⁻¹", ins: "acos(", cls: "fn" }, { label: "tan⁻¹", ins: "atan(", cls: "fn" }]
-      : [{ label: "sin", ins: "sin(", cls: "fn" }, { label: "cos", ins: "cos(", cls: "fn" }, { label: "tan", ins: "tan(", cls: "fn" }];
+      ? [{ label: "sin⁻¹", ins: "\\sin^{-1}(#?)", cls: "fn" }, { label: "cos⁻¹", ins: "\\cos^{-1}(#?)", cls: "fn" }, { label: "tan⁻¹", ins: "\\tan^{-1}(#?)", cls: "fn" }]
+      : [{ label: "sin", ins: "\\sin(#?)", cls: "fn" }, { label: "cos", ins: "\\cos(#?)", cls: "fn" }, { label: "tan", ins: "\\tan(#?)", cls: "fn" }];
     var logs = second
-      ? [{ label: "sinh", ins: "sinh(", cls: "fn" }, { label: "cosh", ins: "cosh(", cls: "fn" }, { label: "eˣ", ins: "exp(", cls: "fn" }]
-      : [{ label: "ln", ins: "ln(", cls: "fn" }, { label: "log", ins: "log(", cls: "fn" }, { label: "log₂", ins: "log2(", cls: "fn" }];
+      ? [{ label: "sinh", ins: "\\sinh(#?)", cls: "fn" }, { label: "cosh", ins: "\\cosh(#?)", cls: "fn" }, { label: "eˣ", ins: "e^{#?}", cls: "fn" }]
+      : [{ label: "ln", ins: "\\ln(#?)", cls: "fn" }, { label: "log", ins: "\\log(#?)", cls: "fn" }, { label: "log₂", ins: "\\log_2(#?)", cls: "fn" }];
     var special = second
-      ? [{ label: "∛☐", tpl: ["cbrt()", 5], cls: "fn" }, { label: "☐ʸ", ins: "^", cls: "fn" }, { label: "|☐|", tpl: ["abs()", 4], cls: "fn" }]
-      : [{ label: "√☐", tpl: ["sqrt()", 5], cls: "fn" }, { label: "☐²", ins: "^2", cls: "fn" }, { label: "a/b", tpl: ["()/()", 1], cls: "fn" }];
+      ? [{ label: "∛☐", ins: "\\sqrt[3]{#?}", cls: "fn" }, { label: "☐ʸ", ins: "^{#?}", cls: "fn" }, { label: "|☐|", ins: "\\left|#?\\right|", cls: "fn" }]
+      : [{ label: "√☐", ins: "\\sqrt{#?}", cls: "fn" }, { label: "☐²", ins: "^{2}", cls: "fn" }, { label: "a/b", ins: "\\frac{#?}{#?}", cls: "fn" }];
     return [].concat(
       [{ label: second ? "2nd ●" : "2nd", cls: "mod" + (second ? " on" : ""), act: "second" }], trig,
-      [{ label: "(", cls: "fn" }, { label: ")", cls: "fn" }],
+      [{ label: "(", ins: "(" }, { label: ")", ins: ")" }],
       logs, special,
-      [{ label: "π", ins: "pi", cls: "fn" }, { label: "e", ins: "e", cls: "fn" }],
-      [{ label: "7" }, { label: "8" }, { label: "9" }, { label: "÷", ins: "/", cls: "op" }, { label: "⌫", cls: "op", act: "del" }, { label: "C", cls: "op", act: "clear" }],
-      [{ label: "4" }, { label: "5" }, { label: "6" }, { label: "×", ins: "*", cls: "op" }, { label: "%", ins: "%", cls: "op" }, { label: "x", ins: "x", cls: "var" }],
-      [{ label: "1" }, { label: "2" }, { label: "3" }, { label: "−", ins: "-", cls: "op" }, { label: "!", ins: "!", cls: "op" }, { label: "=", cls: "eq", act: "equals" }],
-      [{ label: "0", cls: "wide" }, { label: ".", }, { label: "+", ins: "+", cls: "op" }, { label: "Ans", cls: "op", act: "ans" }]
+      [{ label: "π", ins: "\\pi", cls: "fn" }, { label: "e", ins: "e", cls: "fn" }],
+      [{ label: "7", ins: "7" }, { label: "8", ins: "8" }, { label: "9", ins: "9" }, { label: "÷", ins: "/", cls: "op" }, { label: "⌫", cls: "op", act: "del" }, { label: "C", cls: "op", act: "clear" }],
+      [{ label: "4", ins: "4" }, { label: "5", ins: "5" }, { label: "6", ins: "6" }, { label: "×", ins: "\\cdot ", cls: "op" }, { label: "%", ins: "\\%", cls: "op" }, { label: "x", ins: "x", cls: "var" }],
+      [{ label: "1", ins: "1" }, { label: "2", ins: "2" }, { label: "3", ins: "3" }, { label: "−", ins: "-", cls: "op" }, { label: "!", ins: "!", cls: "op" }, { label: "=", cls: "eq", act: "equals" }],
+      [{ label: "0", ins: "0", cls: "wide" }, { label: ".", ins: "." }, { label: "+", ins: "+", cls: "op" }, { label: "Ans", cls: "op", act: "ans" }]
     );
   }
-
-  var lastAns = "";
-  function insertText(t) { sciExpr = sciExpr.slice(0, sciCur) + t + sciExpr.slice(sciCur); sciCur += t.length; }
-  function insertTemplate(tpl, caretOffset) {
-    if (sciExpr === "Error") { sciExpr = ""; sciCur = 0; }
-    sciExpr = sciExpr.slice(0, sciCur) + tpl + sciExpr.slice(sciCur);
-    sciCur += caretOffset; renderSciDisplay();
+  function pressKey(k) {
+    if (k.act === "second") { second = !second; build(); return; }
+    if (k.act === "clear") { if (activeMF) { activeMF.setValue(""); activeMF.focus(); } onFieldInput(); return; }
+    if (k.act === "del") { mfCmd("deleteBackward"); onFieldInput(); return; }
+    if (k.act === "ans") { insertMF(lastAns || "0"); return; }
+    if (k.act === "equals") { onFieldInput(true); return; }
+    insertMF(k.ins);
   }
-  function moveCursor(d) { sciCur = Math.max(0, Math.min(sciExpr.length, sciCur + d)); renderSciDisplay(); }
-  function press(token, act) {
-    if (graphOn && activeInput && !act) { insertAtCursor(activeInput, token); triggerEq(activeInput); return; }
-    if (act === "second") { second = !second; build(); return; }
-    if (act === "clear") { sciExpr = ""; sciCur = 0; }
-    else if (act === "del") { if (sciCur > 0) { sciExpr = sciExpr.slice(0, sciCur - 1) + sciExpr.slice(sciCur); sciCur--; } }
-    else if (act === "ans") { insertText(lastAns); }
-    else if (act === "equals") {
-      try { var v = round(compile(sciExpr)(0)); lastAns = String(v); sciExpr = String(v); sciCur = sciExpr.length; }
-      catch (e) { sciExpr = "Error"; sciCur = 0; }
-    } else { if (sciExpr === "Error") { sciExpr = ""; sciCur = 0; } insertText(token); }
-    renderSciDisplay();
+  function onFieldInput(commit) {
+    if (activeMF && activeMF !== sciField && activeMF._eq) { triggerEq(activeMF); return; } // a graph equation field
+    if (!sciField || !sciResult) return;
+    var latex = ""; try { latex = sciField.getValue("latex"); } catch (e) {}
+    if (!latex || !latex.trim() || /placeholder/.test(latex)) { sciResult.textContent = ""; return; }
+    try {
+      var v = round(compile(latexToExpr(latex))(0));
+      if (isFinite(v)) { sciResult.textContent = "= " + v; lastAns = String(v); }
+      else sciResult.textContent = "";
+    } catch (e) { sciResult.textContent = ""; }
   }
 
-  function renderSciDisplay() {
-    if (sciDisplay) {
-      sciDisplay.innerHTML = "";
-      if (!sciExpr) { sciDisplay.appendChild(el("span", "calc-caret")); sciDisplay.appendChild(document.createTextNode("")); }
-      else {
-        sciDisplay.appendChild(document.createTextNode(sciExpr.slice(0, sciCur)));
-        sciDisplay.appendChild(el("span", "calc-caret"));
-        sciDisplay.appendChild(document.createTextNode(sciExpr.slice(sciCur)));
-      }
+  // ---- MathLive LaTeX -> a string our compile() understands ----
+  function braceArg(s, i) { var d = 0, j = i; for (; j < s.length; j++) { if (s[j] === "{") d++; else if (s[j] === "}") { d--; if (!d) return [s.slice(i + 1, j), j + 1]; } } return [s.slice(i + 1), s.length]; }
+  // MathLive drops braces around single tokens (e.g. \sqrt9). arg() handles both.
+  function arg(s, i) { if (s[i] === "{") return braceArg(s, i); var m = s.slice(i).match(/^(\\[a-zA-Z]+|-?[0-9.]+|[a-zA-Z])/); if (m) return [m[1], i + m[1].length]; return [s[i] || "", i + 1]; }
+  function latexToExpr(t) {
+    t = t.replace(/\\left\|/g, "abs(").replace(/\\right\|/g, ")");
+    t = t.replace(/\\left|\\right/g, "").replace(/\\!|\\,|\\;|\\ /g, "").replace(/\\operatorname\{([a-zA-Z]+)\}/g, "$1");
+    var out = "", i = 0, fmap = { cdot: "*", times: "*", div: "/", pi: "pi", ln: "ln", log: "log", sin: "sin", cos: "cos", tan: "tan", sinh: "sinh", cosh: "cosh", tanh: "tanh", exp: "exp", abs: "abs", arcsin: "asin", arccos: "acos", arctan: "atan" };
+    while (i < t.length) {
+      if (t.substr(i, 5) === "\\frac") { var a = arg(t, i + 5), b = arg(t, a[1]); out += "((" + latexToExpr(a[0]) + ")/(" + latexToExpr(b[0]) + "))"; i = b[1]; continue; }
+      if (t.substr(i, 6) === "\\sqrt[") { var cl = t.indexOf("]", i), nn = t.slice(i + 6, cl), ar = arg(t, cl + 1); out += "((" + latexToExpr(ar[0]) + ")^(1/(" + latexToExpr(nn) + ")))"; i = ar[1]; continue; }
+      if (t.substr(i, 5) === "\\sqrt") { var ar2 = arg(t, i + 5); out += "sqrt(" + latexToExpr(ar2[0]) + ")"; i = ar2[1]; continue; }
+      if (t.substr(i, 5) === "\\log_") { var lb; if (t[i + 5] === "{") { var g = braceArg(t, i + 5); lb = g[0]; i = g[1]; } else { lb = t[i + 5]; i += 6; } out += (lb === "2" ? "log2" : lb === "10" ? "log10" : "log"); continue; }
+      if (t[i] === "^") { if (t[i + 1] === "{") { var e2 = braceArg(t, i + 1); out += "^(" + latexToExpr(e2[0]) + ")"; i = e2[1]; } else { out += "^(" + t[i + 1] + ")"; i += 2; } continue; }
+      var m = t.slice(i).match(/^\\([a-zA-Z]+)/);
+      if (m) { var nm = m[1]; out += (fmap[nm] !== undefined ? fmap[nm] : nm); i += 1 + nm.length; continue; }
+      if (t[i] === "{" || t[i] === "}") { i++; continue; }
+      out += t[i]; i++;
     }
-    if (sciPreview) {
-      if (!sciExpr) { sciPreview.textContent = ""; return; }
-      if (sciExpr === "Error") { sciPreview.textContent = "Error"; sciPreview.style.color = "#e03131"; return; }
-      sciPreview.style.color = "";
-      try { window.katex.render(toLatex(sciExpr), sciPreview, { throwOnError: false, displayMode: false }); }
-      catch (e) { sciPreview.textContent = sciExpr; }
-    }
-  }
-  function insertAtCursor(input, token) {
-    var s = input.selectionStart || input.value.length, en = input.selectionEnd || s;
-    input.value = input.value.slice(0, s) + token + input.value.slice(en);
-    var pos = s + token.length; input.setSelectionRange(pos, pos); input.focus();
-  }
-
-  // ---- expression -> LaTeX (best-effort live preview: fractions, powers, roots, functions) ----
-  function matchRight(s, i) { // i points at '('; return index just past matching ')'
-    var depth = 0; for (var j = i; j < s.length; j++) { if (s[j] === "(") depth++; else if (s[j] === ")") { depth--; if (!depth) return j + 1; } } return s.length;
-  }
-  function matchLeft(s, i) { // i points at ')'; return index of matching '('
-    var depth = 0; for (var j = i; j >= 0; j--) { if (s[j] === ")") depth++; else if (s[j] === "(") { depth--; if (!depth) return j; } } return 0;
-  }
-  function rightAtom(s, i) { // atom starting at i+1
-    var j = i + 1; if (s[j] === "(") return matchRight(s, j); while (j < s.length && /[\w.\\]/.test(s[j])) j++; return j;
-  }
-  function leftAtom(s, i) { // atom ending at i (exclusive)
-    var j = i - 1; if (s[j] === ")") return matchLeft(s, j); while (j >= 0 && /[\w.\\]/.test(s[j])) j--; return j + 1;
-  }
-  function replaceFn(s, name, cb) {
-    var idx, guard = 0;
-    while ((idx = s.indexOf(name + "(")) !== -1 && guard++ < 40) {
-      var open = idx + name.length, end = matchRight(s, open);
-      s = s.slice(0, idx) + cb(s.slice(open + 1, end - 1)) + s.slice(end);
-    }
-    return s;
-  }
-  function fracLatex(s) {
-    var guard = 0, i;
-    while ((i = s.indexOf("/")) !== -1 && guard++ < 40) {
-      var L = leftAtom(s, i), R = rightAtom(s, i);
-      s = s.slice(0, L) + "\\frac{" + s.slice(L, i) + "}{" + s.slice(i + 1, R) + "}" + s.slice(R);
-    }
-    return s;
-  }
-  function powLatex(s) {
-    var guard = 0, i;
-    while ((i = s.indexOf("^")) !== -1 && guard++ < 40) {
-      var R = rightAtom(s, i);
-      s = s.slice(0, i) + "^{" + s.slice(i + 1, R) + "}" + s.slice(R);
-    }
-    return s;
-  }
-  function toLatex(s) {
-    if (!s) return "";
-    s = s.replace(/\basin\(/g, "arcsin(").replace(/\bacos\(/g, "arccos(").replace(/\batan\(/g, "arctan(");
-    s = replaceFn(s, "sqrt", function (i) { return "\\sqrt{" + toLatex(i) + "}"; });
-    s = replaceFn(s, "cbrt", function (i) { return "\\sqrt[3]{" + toLatex(i) + "}"; });
-    s = replaceFn(s, "abs", function (i) { return "\\left|" + toLatex(i) + "\\right|"; });
-    s = fracLatex(s); s = powLatex(s);
-    s = s.replace(/\b(arcsin|arccos|arctan|sinh|cosh|tanh|sin|cos|tan|ln|log2|log10|log|exp)\b/g, function (m) {
-      return m === "log2" ? "\\log_2" : m === "log10" ? "\\log_{10}" : "\\" + m;
-    });
-    s = s.replace(/\bpi\b/g, "\\pi").replace(/\*/g, "\\cdot ");
-    return s;
+    return out;
   }
 
   // ---------- graphing pane ----------

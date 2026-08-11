@@ -565,11 +565,11 @@ window.Notebook = (function () {
 
   // ---------------- export image ----------------
   function exportImage(maxW) {
+    rebuildBase(); // base already holds white bg + grid + all committed strokes
     var scale = (maxW || PAGE_W) / PAGE_W;
     var c = document.createElement("canvas"); c.width = PAGE_W * scale; c.height = PAGE_H * scale;
-    var x = c.getContext("2d"); x.scale(scale, scale);
-    x.fillStyle = "#fff"; x.fillRect(0, 0, PAGE_W, PAGE_H);
-    var savedCtx = ctx; ctx = x; strokes.forEach(drawStroke); ctx = savedCtx;
+    var x = c.getContext("2d");
+    x.drawImage(base, 0, 0, c.width, c.height);
     return c.toDataURL("image/png");
   }
   function dataURLtoFile(dataURL, name) {
