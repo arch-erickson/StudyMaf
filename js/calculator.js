@@ -52,7 +52,7 @@ window.Calculator = (function () {
   function build() {
     dock.innerHTML = "";
     dock.hidden = false; dock.setAttribute("aria-hidden", "false");
-    dock.className = "calc-dock" + (graphOn ? " graph" : "") + (notepadOn ? " notepad" : "") + (maximized ? " max" : "");
+    dock.className = "calc-dock" + (graphOn ? " graph" : "") + (notepadOn ? " notepad" : "") + (maximized ? " max" : "") + (mobileMode ? " mobile" : "");
 
     var head = el("div", "calc-head");
     head.appendChild(el("span", "title", "Calculator"));
@@ -79,8 +79,9 @@ window.Calculator = (function () {
     bMax.onclick = toggleMax;
     bClose.onclick = close;
 
-    makeDraggable(dock, head);
-    if (!maximized) positionDefault();
+    if (!mobileMode) makeDraggable(dock, head);
+    if (mobileMode) { dock.style.cssText = ""; dock.hidden = false; }
+    else if (!maximized) positionDefault();
     if (graphOn) requestAnimationFrame(function () { if (!view) resetView(); redraw(); });
     if (notepadOn) requestAnimationFrame(setupPad);
   }
@@ -446,7 +447,13 @@ window.Calculator = (function () {
     if (dock.hidden) build();
     else { dock.classList.remove("min"); if (mode) build(); }
   }
-  function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); }
+  // Full-screen mobile calculator (dashboard feature): big keys, thumb-friendly.
+  function openMobile() {
+    dock = document.getElementById("calc-dock");
+    mobileMode = true; graphOn = false; notepadOn = false; maximized = false;
+    build();
+  }
+  function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); mobileMode = false; dock.className = "calc-dock"; }
 
-  return { open: open, close: close };
+  return { open: open, openMobile: openMobile, close: close };
 })();

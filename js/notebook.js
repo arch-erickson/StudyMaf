@@ -13,7 +13,7 @@ window.Notebook = (function () {
   var PAGE_W = 1100, PAGE_H = 1500, MIN_ZOOM = 0.4, MAX_ZOOM = 2.5;
   var overlay, canvas, ctx, dpr = 1;
   var strokes = [], history = [], future = [], cur = null;
-  var tool = "pen", color = "#2D3142", size = 3, opacity = 1, zoom = 1, layout = "full";
+  var tool = "brush", color = "#2D3142", size = 3, opacity = 1, zoom = 1, layout = "full";
   var curvePts = [], curveDoneBtn = null;  // Illustrator-style curvature tool: click to add anchor points
   var grid = { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 };
   var ctxInfo = null;
@@ -24,7 +24,7 @@ window.Notebook = (function () {
   // ---------------- open ----------------
   function openScratch(info) {
     ctxInfo = info || {};
-    tool = "pen"; zoom = 1; history = []; future = [];
+    tool = "brush"; zoom = 1; history = []; future = [];
     grid = Store.getGrid();
     strokes = loadStrokes();
     overlay = document.getElementById("draw-overlay");
@@ -53,8 +53,9 @@ window.Notebook = (function () {
     // tool bar
     var bar = el("div", "nb-tools");
     var tools = [
-      ["pen", "pen", "Pen"], ["brush", "brush", "Brush (pressure)"], ["highlighter", "edit", "Highlighter"],
-      ["curve", "curve", "Curvature (tap points)"], ["eraser", "eraser", "Eraser"]
+      ["brush", "brush", "Brush — write freely"], ["pen", "pen", "Pen — tap points for straight lines"],
+      ["curve", "curve", "Curvature — tap points for a smooth curve"], ["highlighter", "edit", "Highlighter"],
+      ["eraser", "eraser", "Eraser"]
     ];
     var toolBtns = {};
     tools.forEach(function (t) {
@@ -142,7 +143,7 @@ window.Notebook = (function () {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (curvePts.length >= 2) {
       ctx.globalAlpha = opacity; ctx.strokeStyle = color; ctx.lineWidth = size; ctx.lineCap = "round"; ctx.lineJoin = "round";
-      var d = catmullRom(curvePts); ctx.beginPath(); ctx.moveTo(d[0].x, d[0].y);
+      var d = tool === "pen" ? curvePts : catmullRom(curvePts); ctx.beginPath(); ctx.moveTo(d[0].x, d[0].y);
       for (var i = 1; i < d.length; i++) ctx.lineTo(d[i].x, d[i].y);
       ctx.stroke(); ctx.globalAlpha = 1;
     }
@@ -167,7 +168,11 @@ window.Notebook = (function () {
   }
   function finishCurve() {
     if (curveDoneBtn) curveDoneBtn.style.display = "none";
-    if (curvePts.length >= 2) { pushHistory(); strokes.push({ tool: "pen", color: color, size: size, opacity: opacity, points: catmullRom(curvePts) }); }
+    if (curvePts.length >= 2) {
+      pushHistory();
+      if (tool === "pen") strokes.push({ tool: "pen", straight: true, color: color, size: size, opacity: opacity, points: curvePts.slice() });
+      else strokes.push({ tool: "pen", color: color, size: size, opacity: opacity, points: catmullRom(curvePts) });
+    }
     curvePts = []; render();
   }
   function drawGrid() {
@@ -197,6 +202,11 @@ window.Notebook = (function () {
   function drawStroke(s) {
     var pts = s.points; if (!pts.length) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
+    if (s.straight) { // pen tool: straight segments between anchor points
+      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+      for (var k = 1; k < pts.length; k++) ctx.lineTo(pts[k].x, pts[k].y);
+      ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; return;
+    }
     if (s.tool === "brush") { // variable width by pen pressure — draw pair by pair
       for (var b = 1; b < pts.length; b++) {
         ctx.lineWidth = brushWidth(s, (pts[b - 1].p + pts[b].p) / 2);
@@ -249,7 +259,7 @@ window.Notebook = (function () {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
       if (e.pointerType === "pen" || e.pointerType === "mouse") {
         curRect = canvas.getBoundingClientRect(); // fresh rect once per stroke
-        if (tool === "curve") {
+        if (tool === "curve" || tool === "pen") { // tap to place anchor points (vector tools)
           var cp = toPage(e.clientX, e.clientY), now = Date.now();
           if (lastTapXY && now - lastTap < 400 && Math.hypot(cp.x - lastTapXY.x, cp.y - lastTapXY.y) < 16) { finishCurve(); lastTapXY = null; e.preventDefault(); return; }
           curvePts.push(cp); lastTap = now; lastTapXY = cp;

@@ -165,9 +165,14 @@ window.App = (function () {
     pinfo.appendChild(el("h1", null, "Your classes"));
     pinfo.appendChild(el("p", null, "Pick a class to study, or add a new one."));
     profile.appendChild(pinfo);
+    var ipadBtn = ib("btn " + (Store.getIpadMode() ? "primary" : "ghost"), "target", "iPad Mode" + (Store.getIpadMode() ? " · on" : ""));
+    ipadBtn.style.marginLeft = "auto";
+    ipadBtn.onclick = function () { Store.setIpadMode(!Store.getIpadMode()); applyIpadMode(); renderDashboard(); };
+    var mcBtn = ib("btn ghost", "calculator", "Mobile calculator");
+    mcBtn.onclick = function () { Calculator.openMobile(); };
     var nbBtn = ib("btn ghost", "bookOpen", "Notebook (" + Store.notebookEntries().length + ")");
-    nbBtn.style.marginLeft = "auto"; nbBtn.onclick = function () { location.hash = "#/notebook"; };
-    profile.appendChild(nbBtn);
+    nbBtn.onclick = function () { location.hash = "#/notebook"; };
+    profile.appendChild(ipadBtn); profile.appendChild(mcBtn); profile.appendChild(nbBtn);
     page.appendChild(profile);
 
     var head = el("div", "section-head");
@@ -1072,9 +1077,12 @@ window.App = (function () {
     });
   }
 
+  function applyIpadMode() { document.body.classList.toggle("ipad-mode", Store.getIpadMode()); }
+
   function init() {
     appEl = document.getElementById("app");
     applyAccent(Store.getAccent());
+    applyIpadMode();
     bindHeader();
     fetchJSON("data/index.json").then(function (index) {
       lessonIndex = (index.lessons || []);

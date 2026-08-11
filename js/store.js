@@ -43,6 +43,10 @@ window.Store = (function () {
     getGrid: function () { return state.nbGrid || { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 }; },
     setGrid: function (g) { state.nbGrid = g; save(); },
 
+    // ----- iPad mode (treat the web app like a native app: no text selection / callouts) -----
+    getIpadMode: function () { return !!state.ipadMode; },
+    setIpadMode: function (on) { state.ipadMode = !!on; save(); },
+
     // ----- accent -----
     getAccent: function () { return state.accent; },
     setAccent: function (hex) { state.accent = hex; save(); },

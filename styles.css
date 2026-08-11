@@ -341,8 +341,11 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 /* ---------- Notebook (scratch-work) overlay ---------- */
 /* Notebook sits ABOVE the problem/session (60); calculator (120) floats above it;
    dialogs (modal-host .overlay = 140) and keyword popovers (150) sit above all. */
-.nb-overlay { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: block; padding: 0; }
-.nb-shell { position: absolute; inset: 0; display: flex; flex-direction: column; }
+/* Scratch work is a POPUP over the (dimmed) question, so closing always returns to it. */
+.nb-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(20,25,40,.5); display: flex; align-items: center; justify-content: center; padding: 2vh 2vw; }
+.nb-shell { position: relative; width: min(1100px, 96vw); height: min(94vh, 900px); background: var(--bg); border-radius: 16px;
+  overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-lg);
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
 .nb-top { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
 .nb-x { border: none; background: var(--surface-2); width: 38px; height: 38px; border-radius: 10px; cursor: pointer; color: var(--ink); display: grid; place-items: center; flex: none; }
 .nb-title { flex: 1; font-weight: 700; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -424,9 +427,10 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .nb-swatches .nb-color { width: 30px; height: 26px; }
 
 /* Notebook side-by-side (split) mode — sits on the right half; problem stays on the left */
-.nb-overlay.split { left: auto; right: 0; width: 50%; border-left: 2px solid var(--line); box-shadow: -8px 0 30px rgba(20,30,50,.12); }
+.nb-overlay.split { justify-content: flex-end; padding: 0; background: rgba(20,25,40,.12); }
+.nb-overlay.split .nb-shell { width: min(600px, 52vw); height: 100vh; border-radius: 0; box-shadow: -8px 0 30px rgba(20,30,50,.18); }
 body.nb-split .session { right: 50%; width: auto; }
-@media (max-width: 640px){ .nb-overlay.split { width: 100%; border-left: none; } body.nb-split .session { right: 0; } }
+@media (max-width: 640px){ .nb-overlay.split .nb-shell { width: 100%; } body.nb-split .session { right: 0; } }
 
 /* ---------- Generative session: choices, multi-part ---------- */
 .choice-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
@@ -474,3 +478,22 @@ body.immersive main#app { min-height: 100vh; }
 .calc-caret { display: inline-block; width: 2px; height: 1.15em; background: var(--accent); margin: 0 1px; animation: calcblink 1s steps(1) infinite; vertical-align: middle; }
 @keyframes calcblink { 50% { opacity: 0; } }
 .calc-key.fn { font-size: .72rem; }
+
+/* ---------- Mobile calculator (full-screen dashboard feature) ---------- */
+.calc-dock.mobile { position: fixed !important; inset: 0 !important; left: 0 !important; top: 0 !important; right: 0 !important; bottom: 0 !important;
+  width: 100% !important; height: 100% !important; max-width: none; border-radius: 0; transform: none !important; z-index: 130; }
+.calc-dock.mobile .calc-head { padding: 14px 16px; }
+.calc-dock.mobile .calc-main { flex-direction: column; flex: 1; min-height: 0; }
+.calc-dock.mobile .calc-sci { width: 100%; flex: 1; display: flex; flex-direction: column; border-left: none; padding: 12px 12px calc(12px + env(safe-area-inset-bottom)); }
+.calc-dock.mobile .calc-preview { font-size: 1.9rem; min-height: 46px; }
+.calc-dock.mobile .calc-display { font-size: 1.7rem; min-height: 56px; }
+.calc-dock.mobile .calc-grid { flex: 1; grid-auto-rows: 1fr; gap: 7px; }
+.calc-dock.mobile .calc-key { padding: 0; font-size: 1.3rem; touch-action: manipulation; }
+.calc-dock.mobile .calc-key.fn { font-size: .95rem; }
+
+/* ---------- iPad Mode: behave like a native app (no text selection / callouts / tap highlight) ---------- */
+body.ipad-mode { -webkit-tap-highlight-color: transparent; touch-action: manipulation; overscroll-behavior: none; }
+body.ipad-mode, body.ipad-mode * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+body.ipad-mode input, body.ipad-mode textarea, body.ipad-mode [contenteditable] { -webkit-user-select: text; user-select: text; }
+/* Drawing surfaces never select text, even without iPad Mode */
+.nb-canvas, .nb-tools, .nb-top, .np-canvas-wrap { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
