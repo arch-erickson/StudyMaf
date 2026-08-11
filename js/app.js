@@ -555,7 +555,7 @@ window.App = (function () {
       inner.appendChild(steps);
 
       hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
-      padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: p.id, problemLabel: "Problem " + (idx + 1), prompt: p.prompt }); };
+      padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: p.id, problemLabel: "Problem " + (idx + 1), prompt: p.prompt, hasSession: true }); };
       calcBtn.onclick = function () { Calculator.open(); };
       input.addEventListener("keydown", function (e) { if (e.key === "Enter") nextBtn.click(); });
 
@@ -903,5 +903,5 @@ window.App = (function () {
   document.addEventListener("DOMContentLoaded", init);
 
   // public
-  return { toast: toast, modal: modal, reward: reward, closeModal: closeModal };
+  return { toast: toast, modal: modal, reward: reward, closeModal: closeModal, rerender: route };
 })();

@@ -12,8 +12,8 @@ window.Notebook = (function () {
   "use strict";
   var PAGE_W = 1100, PAGE_H = 1500, MIN_ZOOM = 0.4, MAX_ZOOM = 2.5;
   var overlay, canvas, ctx, dpr = 1;
-  var strokes = [], redoStack = [], cur = null;
-  var tool = "pen", color = "#2D3142", size = 3, zoom = 1;
+  var strokes = [], history = [], future = [], cur = null;
+  var tool = "pen", color = "#2D3142", size = 3, zoom = 1, layout = "full";
   var grid = { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 };
   var ctxInfo = null;
 
@@ -23,12 +23,13 @@ window.Notebook = (function () {
   // ---------------- open ----------------
   function openScratch(info) {
     ctxInfo = info || {};
-    tool = "pen"; zoom = 1; redoStack = [];
+    tool = "pen"; zoom = 1; history = []; future = [];
     grid = Store.getGrid();
     strokes = loadStrokes();
     overlay = document.getElementById("draw-overlay");
     overlay.innerHTML = ""; overlay.hidden = false; overlay.setAttribute("aria-hidden", "false");
-    overlay.className = "nb-overlay";
+    overlay.className = "nb-overlay" + (layout === "right" ? " split" : "");
+    if (layout === "right" && ctxInfo.hasSession) document.body.classList.add("nb-split");
 
     var shell = el("div", "nb-shell");
 
@@ -67,9 +68,16 @@ window.Notebook = (function () {
     var undoB = el("button", "nb-tbtn"); undoB.innerHTML = ic("undo"); undoB.title = "Undo"; undoB.onclick = undo;
     var redoB = el("button", "nb-tbtn"); redoB.innerHTML = ic("undo"); redoB.title = "Redo";
     redoB.querySelector("svg").style.transform = "scaleX(-1)"; redoB.onclick = redo;
-    bar.append(undoB, redoB);
+    var clearB = el("button", "nb-tbtn"); clearB.innerHTML = ic("trash"); clearB.title = "Delete all"; clearB.onclick = deleteAll;
+    bar.append(undoB, redoB, clearB);
     var gridB = el("button", "nb-tbtn"); gridB.innerHTML = ic("grid"); gridB.title = "Grid & guides"; gridB.onclick = function (e) { toggleGridPanel(gridB); e.stopPropagation(); };
     bar.appendChild(gridB);
+    if (ctxInfo.hasSession) {
+      var splitB = el("button", "nb-tbtn" + (layout === "right" ? " on" : "")); splitB.innerHTML = ic("columns");
+      splitB.title = "Side-by-side with the problem";
+      splitB.onclick = function () { setLayout(layout === "right" ? "full" : "right"); splitB.classList.toggle("on", layout === "right"); };
+      bar.appendChild(splitB);
+    }
     var zoomOut = el("button", "nb-tbtn"); zoomOut.innerHTML = ic("zoomOut"); zoomOut.title = "Zoom out"; zoomOut.onclick = function () { setZoom(zoom / 1.25); };
     var zoomIn = el("button", "nb-tbtn"); zoomIn.innerHTML = ic("zoomIn"); zoomIn.title = "Zoom in"; zoomIn.onclick = function () { setZoom(zoom * 1.25); };
     var zLabel = el("span", "nb-zoom"); zLabel.id = "nb-zoom";
@@ -167,26 +175,28 @@ window.Notebook = (function () {
   // ---------------- input: pen/mouse draws, 1 finger pans, 2 fingers pinch-zoom ----------------
   function toPage(cx, cy) { var r = canvas.getBoundingClientRect(); return { x: (cx - r.left) / zoom, y: (cy - r.top) / zoom }; }
   function setupInput() {
-    var pointers = {}, drawingId = null, gesture = null;
+    var pointers = {}, drawingId = null, gesture = null, erasing = false;
     var scroller = canvas.parentElement;
     function touches() { return Object.keys(pointers).filter(function (id) { return pointers[id].type === "touch"; }).map(function (id) { return pointers[id]; }); }
 
     canvas.addEventListener("pointerdown", function (e) {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
       if (e.pointerType === "pen" || e.pointerType === "mouse") {
-        drawingId = e.pointerId; redoStack = [];
-        cur = { tool: tool, color: color, size: size, points: [toPage(e.clientX, e.clientY)] };
+        drawingId = e.pointerId; pushHistory();
+        if (tool === "eraser") { erasing = true; eraseAt(toPage(e.clientX, e.clientY)); }
+        else { cur = { tool: tool, color: color, size: size, points: [toPage(e.clientX, e.clientY)] }; }
         try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
         e.preventDefault();
-      } else { gesture = null; } // touch: gesture, handled on move
+      } else { gesture = null; }
     });
 
     canvas.addEventListener("pointermove", function (e) {
       var pt = pointers[e.pointerId]; if (!pt) return;
       pt.x = e.clientX; pt.y = e.clientY;
-      if (e.pointerId === drawingId && cur) {
+      if (e.pointerId === drawingId) {
         var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; if (!evs.length) evs = [e];
-        evs.forEach(function (ev) { cur.points.push(toPage(ev.clientX, ev.clientY)); drawLiveSegment(cur); });
+        if (erasing) { evs.forEach(function (ev) { eraseAt(toPage(ev.clientX, ev.clientY)); }); }
+        else if (cur) { evs.forEach(function (ev) { cur.points.push(toPage(ev.clientX, ev.clientY)); drawLiveSegment(cur); }); }
         e.preventDefault(); return;
       }
       var ts = touches();
@@ -205,15 +215,38 @@ window.Notebook = (function () {
     }, { passive: false });
 
     function end(e) {
-      if (e.pointerId === drawingId) { if (cur && cur.points.length) strokes.push(cur); cur = null; drawingId = null; }
+      if (e.pointerId === drawingId) {
+        if (!erasing && cur && cur.points.length) strokes.push(cur);
+        else if (erasing || (cur && !cur.points.length)) { history.pop(); } // no-op erase/stroke: drop snapshot
+        cur = null; drawingId = null; erasing = false;
+      }
       delete pointers[e.pointerId];
       if (touches().length < 2) gesture = null;
     }
     canvas.addEventListener("pointerup", end);
     canvas.addEventListener("pointercancel", end);
   }
-  function undo() { if (!strokes.length) return; redoStack.push(strokes.pop()); render(); }
-  function redo() { if (!redoStack.length) return; strokes.push(redoStack.pop()); render(); }
+
+  // object eraser: removes whole strokes the eraser touches (keeps the grid intact)
+  function eraseAt(p) {
+    var r = Math.max(10, size * 4), before = strokes.length;
+    strokes = strokes.filter(function (s) { return !strokeNear(s, p, r); });
+    if (strokes.length !== before) render();
+  }
+  function strokeNear(s, p, r) {
+    var pts = s.points; for (var i = 0; i < pts.length; i++) { if (Math.abs(pts[i].x - p.x) <= r && Math.abs(pts[i].y - p.y) <= r) { if (Math.hypot(pts[i].x - p.x, pts[i].y - p.y) <= r) return true; } } return false;
+  }
+
+  function pushHistory() { history.push(strokes.slice()); if (history.length > 60) history.shift(); future = []; }
+  function undo() { if (!history.length) return; future.push(strokes.slice()); strokes = history.pop(); render(); }
+  function redo() { if (!future.length) return; history.push(strokes.slice()); strokes = future.pop(); render(); }
+  function deleteAll() { if (!strokes.length) return; pushHistory(); strokes = []; render(); }
+  function setLayout(mode) {
+    layout = mode;
+    overlay.classList.toggle("split", mode === "right");
+    document.body.classList.toggle("nb-split", mode === "right" && !!ctxInfo.hasSession);
+    requestAnimationFrame(setupCanvas);
+  }
 
   // ---------------- grid & guides panel ----------------
   var gridPanel = null;
@@ -278,7 +311,13 @@ window.Notebook = (function () {
     try { Store.saveScratch(ctxInfo.classId, ctxInfo.lessonId, ctxInfo.problemId, strokes.length ? JSON.stringify(strokes) : null); } catch (e) {}
   }
   function autoSaveAndClose() { persist(); close(); }
-  function close() { if (overlay) { overlay.hidden = true; overlay.setAttribute("aria-hidden", "true"); overlay.innerHTML = ""; } }
+  function close() {
+    if (overlay) { overlay.hidden = true; overlay.setAttribute("aria-hidden", "true"); overlay.innerHTML = ""; overlay.className = "nb-overlay"; }
+    document.body.classList.remove("nb-split");
+    if (gridPanel) { gridPanel.remove(); gridPanel = null; }
+    // never leave a blank page: if no problem session is open, re-render the current route
+    if (!document.querySelector(".session") && window.App && App.rerender) App.rerender();
+  }
 
   // ---------------- export image ----------------
   function exportImage(maxW) {

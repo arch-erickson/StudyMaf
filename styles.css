@@ -422,3 +422,8 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .nb-swatches { display: flex; gap: 6px; flex: 1; align-items: center; flex-wrap: wrap; }
 .nb-sw { width: 24px; height: 24px; border-radius: 6px; border: 1px solid rgba(0,0,0,.15); cursor: pointer; }
 .nb-swatches .nb-color { width: 30px; height: 26px; }
+
+/* Notebook side-by-side (split) mode — sits on the right half; problem stays on the left */
+.nb-overlay.split { left: auto; right: 0; width: 50%; border-left: 2px solid var(--line); box-shadow: -8px 0 30px rgba(20,30,50,.12); }
+body.nb-split .session { right: 50%; width: auto; }
+@media (max-width: 640px){ .nb-overlay.split { width: 100%; border-left: none; } body.nb-split .session { right: 0; } }
