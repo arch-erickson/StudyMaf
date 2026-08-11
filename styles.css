@@ -427,3 +427,16 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .nb-overlay.split { left: auto; right: 0; width: 50%; border-left: 2px solid var(--line); box-shadow: -8px 0 30px rgba(20,30,50,.12); }
 body.nb-split .session { right: 50%; width: auto; }
 @media (max-width: 640px){ .nb-overlay.split { width: 100%; border-left: none; } body.nb-split .session { right: 0; } }
+
+/* ---------- Generative session: choices, multi-part ---------- */
+.choice-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.choice { text-align: left; font: inherit; font-size: 1rem; padding: 14px 16px; border: 2px solid var(--line); background: var(--surface);
+  border-radius: 12px; cursor: pointer; transition: border-color .12s ease, background .12s ease; }
+.choice:hover { border-color: var(--accent); background: var(--accent-soft); }
+.choice.sel { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.answer-box { align-items: center; }
+.answer-unit { color: var(--ink-soft); font-weight: 600; font-size: .95rem; }
+.part-block { margin-bottom: 14px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.part-label { font-weight: 700; margin: 0 0 10px; }
+.part-block .answer-box, .part-block .choice-box { margin-bottom: 0; }
+.session-foot .btn.lg { flex: none; }

@@ -497,7 +497,14 @@ window.App = (function () {
   // ====================================================================
   // STUDY SESSION — one problem at a time, Duolingo-style rewards
   // ====================================================================
+  // Dispatcher: use the generation engine when the lesson has generators,
+  // otherwise fall back to the lesson's static problems.
   function startSession(cls, lid, lesson) {
+    if (window.Generators && Generators.has(lid)) return startGenSession(cls, lid, lesson);
+    return startStaticSession(cls, lid, lesson);
+  }
+
+  function startStaticSession(cls, lid, lesson) {
     var problems = lesson.problems || [];
     var idx = 0, streak = 0;
     var prog = Store.lessonProgress(cls.id, lid);
@@ -601,6 +608,162 @@ window.App = (function () {
       verdict.textContent = ""; nextBtn.style.display = "none";
     }
     render();
+  }
+
+  // ---------- generative session: 2 easy / 2 medium / 2 hard / 1 extreme,
+  //            stay on a slot (new numbers each try) until you get it right ----------
+  function startGenSession(cls, lid, lesson) {
+    var plan = [["easy", false], ["easy", false], ["medium", false], ["medium", false], ["hard", false], ["hard", false], ["extreme", true]];
+    var slot = 0, streak = 0, solved = 0, inst = null, checked = false, chosen = null;
+
+    var session = el("div", "session");
+    var top = el("div", "session-top");
+    var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
+    var track = el("div", "session-progress"); var fill = el("div", "fill"); track.appendChild(fill);
+    var streakEl = el("div", "session-streak"); function setStreak(n) { streakEl.innerHTML = icon("flame") + "<span>" + n + "</span>"; } setStreak(0);
+    top.append(closeX, track, streakEl); session.appendChild(top);
+
+    var body = el("div", "session-body"); var inner = el("div", "session-inner"); body.appendChild(inner); session.appendChild(body);
+    var foot = el("div", "session-foot"); var footInner = el("div", "session-foot-inner");
+    var verdict = el("div", "verdict"); var actionBtn = el("button", "btn primary lg", "Check"); var skipBtn = el("button", "btn subtle lg", "Skip");
+    footInner.append(verdict, skipBtn, actionBtn); foot.appendChild(footInner); session.appendChild(foot);
+    document.body.appendChild(session);
+
+    function loadSlot() {
+      if (slot >= plan.length) return finish();
+      var diff = plan[slot][0];
+      inst = Generators.make(lid, diff);
+      checked = false; chosen = null;
+      renderInstance(plan[slot][1]);
+    }
+
+    function renderInstance(skippable) {
+      fill.style.width = Math.round(solved / plan.length * 100) + "%"; setStreak(streak);
+      inner.innerHTML = "";
+      inner.appendChild(el("span", "q-badge " + inst.difficulty, inst.difficulty));
+      var count = el("p"); count.style.color = "var(--ink-soft)"; count.style.fontSize = ".85rem"; count.style.margin = "0 0 4px";
+      count.textContent = "Question " + (slot + 1) + " of " + plan.length + (skippable ? " · bonus" : "");
+      inner.appendChild(count);
+      var prompt = el("div", "q-prompt"); prompt.textContent = inst.prompt; inner.appendChild(prompt); StudyMath.render(prompt);
+
+      // answer area depends on type
+      var inputs = [];
+      if (inst.type === "numeric") { inputs.push(numericField(inner, inst)); }
+      else if (inst.type === "mc") { renderChoices(inner, inst, function (i) { chosen = i; }); }
+      else if (inst.type === "multi") { inst.parts.forEach(function (part, pi) { inputs.push(partField(inner, part, pi)); }); }
+
+      // tools
+      var tools = el("div", "q-tools");
+      var hintBtn = ib("btn subtle", "bulb", "Hint");
+      var padBtn = ib("btn subtle", "edit", "Scratch work");
+      var calcBtn = ib("btn subtle", "calculator", "Calculator");
+      tools.append(hintBtn, padBtn, calcBtn); inner.appendChild(tools);
+      var hintPanel = el("div", "hint-panel"); hintPanel.hidden = true;
+      hintPanel.appendChild(el("p", "panel-label", "Hint")); var ht = el("p"); richText(ht, inst.hint, null); hintPanel.appendChild(ht); inner.appendChild(hintPanel);
+      var steps = el("div", "steps-panel"); steps.hidden = true;
+      steps.appendChild(el("p", "panel-label", "Solution")); var ol = document.createElement("ol");
+      (inst.steps || []).forEach(function (s) { var li = el("li"); richText(li, s, null); ol.appendChild(li); });
+      steps.appendChild(ol); inner.appendChild(steps);
+
+      hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
+      padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: "slot" + slot, problemLabel: "Question " + (slot + 1), prompt: inst.prompt, hasSession: true }); };
+      calcBtn.onclick = function () { Calculator.open(); };
+
+      verdict.textContent = ""; verdict.className = "verdict"; checked = false;
+      actionBtn.textContent = "Check";
+      skipBtn.style.display = skippable ? "" : "none";
+
+      actionBtn.onclick = function () {
+        if (!checked) {
+          var ok = evaluate(inst, inputs);
+          checked = true; steps.hidden = false; StudyMath.render(steps);
+          if (ok) {
+            verdict.textContent = "Correct!"; verdict.className = "verdict right";
+            streak++; var xp = { easy: 8, medium: 12, hard: 18, extreme: 30 }[inst.difficulty] || 10;
+            Store.markProblemDone(cls.id, lid, "slot" + slot + "-" + Date.now(), xp);
+            reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
+            actionBtn.textContent = "Next →"; skipBtn.style.display = "none";
+          } else {
+            verdict.textContent = "Not quite. Read the solution, then try a fresh one."; verdict.className = "verdict wrong";
+            streak = 0; actionBtn.textContent = "Try another →";
+          }
+          setStreak(streak);
+        } else {
+          if (verdict.classList.contains("right")) { solved++; slot++; loadSlot(); }
+          else { loadSlot(); } // same difficulty, new numbers
+        }
+      };
+      skipBtn.onclick = function () { slot++; loadSlot(); };
+    }
+
+    function finish() {
+      fill.style.width = "100%"; inner.innerHTML = "";
+      var done = el("div"); done.style.textAlign = "center"; done.style.paddingTop = "40px";
+      var tro = el("div"); tro.innerHTML = icon("award"); tro.style.color = "var(--accent)";
+      var tsvg = tro.querySelector("svg"); if (tsvg) { tsvg.style.width = "3.5rem"; tsvg.style.height = "3.5rem"; }
+      done.appendChild(tro);
+      done.appendChild(el("h2", null, "Lesson complete!"));
+      done.appendChild(el("p", null, "You solved " + solved + " questions. Total XP: " + Store.lessonProgress(cls.id, lid).xp));
+      var back = el("button", "btn primary lg", "Back to class"); back.style.marginTop = "16px";
+      back.onclick = function () { session.remove(); renderClass(cls.id); };
+      done.appendChild(back); inner.appendChild(done);
+      verdict.textContent = ""; actionBtn.style.display = "none"; skipBtn.style.display = "none";
+    }
+
+    loadSlot();
+  }
+
+  // ---- generative-question field builders + checker ----
+  function numericField(container, inst) {
+    var ab = el("div", "answer-box");
+    var input = document.createElement("input"); input.type = "text"; input.inputMode = "text";
+    input.placeholder = "Your answer" + (inst.unit ? " (" + inst.unit + ")" : "") + "…";
+    ab.appendChild(input);
+    if (inst.unit) ab.appendChild(el("span", "answer-unit", inst.unit));
+    container.appendChild(ab);
+    setTimeout(function () { input.focus(); }, 30);
+    return { kind: "numeric", el: input, spec: inst };
+  }
+  function partField(container, part, pi) {
+    var wrap = el("div", "part-block");
+    wrap.appendChild(el("p", "part-label", String.fromCharCode(97 + pi) + ") " + part.label));
+    StudyMath.render(wrap);
+    if (part.type === "mc") {
+      var sel = { idx: null };
+      renderChoices(wrap, part, function (i) { sel.idx = i; });
+      container.appendChild(wrap); return { kind: "mc", sel: sel, spec: part };
+    }
+    var ab = el("div", "answer-box"); var input = document.createElement("input"); input.type = "text";
+    input.placeholder = "Answer…"; ab.appendChild(input); wrap.appendChild(ab); container.appendChild(wrap);
+    return { kind: "numeric", el: input, spec: part };
+  }
+  function renderChoices(container, spec, onpick) {
+    var box = el("div", "choice-box"); var picked = { i: null }; var btns = [];
+    (spec.choices || []).forEach(function (c, i) {
+      var b = el("button", "choice"); var t = el("span"); richText(t, c, null); b.appendChild(t);
+      b.onclick = function () { picked.i = i; onpick(i); btns.forEach(function (x) { x.classList.remove("sel"); }); b.classList.add("sel"); };
+      btns.push(b); box.appendChild(b);
+    });
+    container.appendChild(box); spec._picked = picked;
+    return picked;
+  }
+  function numMatch(user, value, tol) {
+    var u = parseFloat(String(user).replace(/,/g, "").replace(/×10\^?/gi, "e").replace(/\s/g, ""));
+    if (isNaN(u)) return false;
+    if (value === 0) return Math.abs(u) < 1e-9;
+    return Math.abs(u - value) / Math.abs(value) <= (tol || 0.03) + 1e-9;
+  }
+  function evaluate(inst, inputs) {
+    if (inst.type === "mc") { return inst._picked && inst._picked.i === inst.answerIndex; }
+    if (inst.type === "numeric") { return numMatch(inputs[0].el.value, inst.answerValue, inst.tol); }
+    if (inst.type === "multi") {
+      return inst.parts.every(function (part, i) {
+        var f = inputs[i];
+        if (part.type === "mc") return f.sel.idx === part.answerIndex;
+        return numMatch(f.el.value, part.answerValue, part.tol);
+      });
+    }
+    return false;
   }
 
   // ====================================================================

@@ -115,6 +115,7 @@ window.Notebook = (function () {
     zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, z));
     canvas.style.width = (PAGE_W * zoom) + "px";
     canvas.style.height = (PAGE_H * zoom) + "px";
+    curRect = null; // canvas resized, cached rect is stale
     var lab = document.getElementById("nb-zoom"); if (lab) lab.textContent = Math.round(zoom * 100) + "%";
   }
   // full re-render (used on setup, zoom, undo/redo) — not on every move
@@ -173,16 +174,24 @@ window.Notebook = (function () {
   }
 
   // ---------------- input: pen/mouse draws, 1 finger pans, 2 fingers pinch-zoom ----------------
-  function toPage(cx, cy) { var r = canvas.getBoundingClientRect(); return { x: (cx - r.left) / zoom, y: (cy - r.top) / zoom }; }
+  // Cache the canvas rect during a stroke. Calling getBoundingClientRect() on every
+  // pointer/coalesced event forces a layout reflow that janks fast writing on iPad.
+  var curRect = null;
+  function invalidateRect() { curRect = null; }
+  function toPage(cx, cy) { var r = curRect || (curRect = canvas.getBoundingClientRect()); return { x: (cx - r.left) / zoom, y: (cy - r.top) / zoom }; }
   function setupInput() {
     var pointers = {}, drawingId = null, gesture = null, erasing = false;
     var scroller = canvas.parentElement;
+    // any movement of the canvas invalidates the cached rect
+    scroller.addEventListener("scroll", invalidateRect, { passive: true });
+    window.addEventListener("resize", invalidateRect);
     function touches() { return Object.keys(pointers).filter(function (id) { return pointers[id].type === "touch"; }).map(function (id) { return pointers[id]; }); }
 
     canvas.addEventListener("pointerdown", function (e) {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
       if (e.pointerType === "pen" || e.pointerType === "mouse") {
         drawingId = e.pointerId; pushHistory();
+        curRect = canvas.getBoundingClientRect(); // fresh rect once per stroke
         if (tool === "eraser") { erasing = true; eraseAt(toPage(e.clientX, e.clientY)); }
         else { cur = { tool: tool, color: color, size: size, points: [toPage(e.clientX, e.clientY)] }; }
         try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
