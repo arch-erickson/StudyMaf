@@ -12,7 +12,7 @@
 window.Calculator = (function () {
   "use strict";
   var dock, sciDisplay, sciPreview, sciExpr = "", sciCur = 0, second = false, sciOn = true, graphOn = false, notepadOn = false, maximized = false;
-  var mobileMode = false, sciWidth = 340;
+  var mobileMode = false, sciWidth = 360, kbTab = "main", angleMode = "deg", shiftOn = false, calcHistory = [];
   var eqs = [], eqSeq = 0, activeInput = null, graphCanvas, view = null;
   var padCanvas, padCtx, padColor = "#2D3142", padTool = "pen", padImage = null;
   var EQ_COLORS = ["#EF8354", "#1971c2", "#0ca678", "#e64980", "#7048e8", "#f59f00", "#e03131", "#4F5D75"];
@@ -40,11 +40,12 @@ window.Calculator = (function () {
       .replace(/\babs\b/g, "Math.abs").replace(/\bfloor\b/g, "Math.floor").replace(/\bceil\b/g, "Math.ceil")
       .replace(/\bround\b/g, "Math.round").replace(/\bsign\b/g, "Math.sign").replace(/\bmin\b/g, "Math.min").replace(/\bmax\b/g, "Math.max")
       .replace(/\^/g, "**");
-    // whitelist check
-    var stripped = e.replace(/Math\.[a-zA-Z0-9]+/g, "").replace(/\*\*/g, "").replace(/[-+*/%(). ,0-9x]/g, "");
+    // whitelist check (allow the degree-trig helpers too)
+    var stripped = e.replace(/Math\.[a-zA-Z0-9]+/g, "").replace(/\b(sind|cosd|tand|asind|acosd|atand)\b/g, "").replace(/\*\*/g, "").replace(/[-+*/%(). ,0-9x]/g, "");
     if (stripped.length) throw new Error("bad token: " + stripped);
     /* eslint-disable no-new-func */
-    return new Function("x", "with(Math){return (" + e + ");}");
+    var helpers = "var _D=Math.PI/180;function sind(a){return Math.sin(a*_D)}function cosd(a){return Math.cos(a*_D)}function tand(a){return Math.tan(a*_D)}function asind(a){return Math.asin(a)/_D}function acosd(a){return Math.acos(a)/_D}function atand(a){return Math.atan(a)/_D}";
+    return new Function("x", helpers + "with(Math){return (" + e + ");}");
   }
   function round(n) { return Math.abs(n) < 1e-12 ? 0 : Math.round(n * 1e10) / 1e10; }
 
@@ -154,59 +155,121 @@ window.Calculator = (function () {
   function buildSci() {
     var wrap = el("div", "calc-sci");
     if (graphOn || notepadOn) wrap.style.width = sciWidth + "px";
+
+    // equation history (dropup: past entries sit above the input)
+    var hist = el("div", "calc-history");
+    calcHistory.forEach(function (h) {
+      var row = el("div", "calc-hrow");
+      var l = el("div", "calc-hlatex"); try { window.katex.render(h.latex, l, { throwOnError: false }); } catch (e) { l.textContent = h.latex; }
+      var r = el("div", "calc-hres", "= " + h.result);
+      row.append(l, r); row.onmousedown = preventBlur; row.onclick = function () { insertMF(h.latex); };
+      hist.appendChild(row);
+    });
+    wrap.appendChild(hist);
+
     var fieldRow = el("div", "calc-fieldrow");
     sciField = makeField(); sciField.className = "calc-field"; activeMF = sciField;
     sciField.addEventListener("input", function () { onFieldInput(); });
+    sciField.addEventListener("keydown", function (ev) { if (ev.key === "Enter") { ev.preventDefault(); commitEntry(); } });
     sciResult = el("div", "calc-result");
     fieldRow.append(sciField, sciResult); wrap.appendChild(fieldRow);
 
-    var secRow = el("div", "calc-second-row");
-    var secBtn = el("button", "calc-key mod" + (second ? " on" : ""), second ? "2nd ●" : "2nd");
-    secBtn.onmousedown = preventBlur; secBtn.onclick = function () { second = !second; build(); };
-    var leftBtn = el("button", "calc-key op arrow", "◀"); leftBtn.onmousedown = preventBlur; leftBtn.onclick = function () { mfCmd("moveToPreviousChar"); };
-    var rightBtn = el("button", "calc-key op arrow", "▶"); rightBtn.onmousedown = preventBlur; rightBtn.onclick = function () { mfCmd("moveToNextChar"); };
-    secRow.append(secBtn, leftBtn, rightBtn); wrap.appendChild(secRow);
-
-    var grid = el("div", "calc-grid");
-    keypad().forEach(function (k) {
-      var b = el("button", "calc-key" + (k.cls ? " " + k.cls : ""), k.label);
-      b.onmousedown = preventBlur;
-      b.onclick = function () { pressKey(k); };
-      grid.appendChild(b);
+    // toolbar: main / abc / func tabs, RAD·DEG, undo/redo, clear all
+    var tb = el("div", "calc-tabs2");
+    ["main", "abc", "func"].forEach(function (t) {
+      var b = el("button", "calc-tab" + (kbTab === t ? " on" : ""), t);
+      b.onmousedown = preventBlur; b.onclick = function () { kbTab = t; build(); };
+      tb.appendChild(b);
     });
-    wrap.appendChild(grid);
+    var ang = el("div", "calc-angle");
+    ["rad", "deg"].forEach(function (m) {
+      var b = el("button", "calc-ang" + (angleMode === m ? " on" : ""), m.toUpperCase());
+      b.onmousedown = preventBlur; b.onclick = function () { angleMode = m; onFieldInput(); build(); };
+      ang.appendChild(b);
+    });
+    tb.appendChild(ang);
+    var spacer = el("div", "calc-tbspacer"); tb.appendChild(spacer);
+    var undoB = el("button", "calc-tool"); undoB.innerHTML = ic("undo"); undoB.onmousedown = preventBlur; undoB.onclick = function () { mfCmd("undo"); onFieldInput(); };
+    var redoB = el("button", "calc-tool"); redoB.innerHTML = ic("undo"); var rs = redoB.querySelector("svg"); if (rs) rs.style.transform = "scaleX(-1)"; redoB.onmousedown = preventBlur; redoB.onclick = function () { mfCmd("redo"); onFieldInput(); };
+    var clr = el("button", "calc-tool clearall", "clear all"); clr.onmousedown = preventBlur; clr.onclick = function () { calcHistory = []; if (activeMF) activeMF.setValue(""); build(); };
+    tb.append(undoB, redoB, clr);
+    wrap.appendChild(tb);
+
+    wrap.appendChild(buildKeypad());
     setTimeout(function () { try { sciField.focus(); } catch (e) {} }, 40);
     return wrap;
   }
+  function commitEntry() {
+    if (!sciField) return;
+    var latex = ""; try { latex = sciField.getValue("latex"); } catch (e) {}
+    if (!latex || !latex.trim() || /placeholder/.test(latex)) return;
+    try { var v = round(compile(latexToExpr(latex))(0)); if (isFinite(v)) { calcHistory.push({ latex: latex, result: String(v) }); if (calcHistory.length > 30) calcHistory.shift(); lastAns = String(v); } } catch (e) { return; }
+    sciField.setValue(""); build();
+  }
 
-  function keypad() {
-    var trig = second
-      ? [{ label: "sin⁻¹", ins: "\\sin^{-1}(#?)", cls: "fn" }, { label: "cos⁻¹", ins: "\\cos^{-1}(#?)", cls: "fn" }, { label: "tan⁻¹", ins: "\\tan^{-1}(#?)", cls: "fn" }]
-      : [{ label: "sin", ins: "\\sin(#?)", cls: "fn" }, { label: "cos", ins: "\\cos(#?)", cls: "fn" }, { label: "tan", ins: "\\tan(#?)", cls: "fn" }];
-    var logs = second
-      ? [{ label: "sinh", ins: "\\sinh(#?)", cls: "fn" }, { label: "cosh", ins: "\\cosh(#?)", cls: "fn" }, { label: "eˣ", ins: "e^{#?}", cls: "fn" }]
-      : [{ label: "ln", ins: "\\ln(#?)", cls: "fn" }, { label: "log", ins: "\\log(#?)", cls: "fn" }, { label: "log₂", ins: "\\log_2(#?)", cls: "fn" }];
-    var special = second
-      ? [{ label: "∛☐", ins: "\\sqrt[3]{#?}", cls: "fn" }, { label: "☐ʸ", ins: "^{#?}", cls: "fn" }, { label: "|☐|", ins: "\\left|#?\\right|", cls: "fn" }]
-      : [{ label: "√☐", ins: "\\sqrt{#?}", cls: "fn" }, { label: "☐²", ins: "^{2}", cls: "fn" }, { label: "a/b", ins: "\\frac{#?}{#?}", cls: "fn" }];
-    return [].concat(
-      [{ label: second ? "2nd ●" : "2nd", cls: "mod" + (second ? " on" : ""), act: "second" }], trig,
-      [{ label: "(", ins: "(" }, { label: ")", ins: ")" }],
-      logs, special,
-      [{ label: "π", ins: "\\pi", cls: "fn" }, { label: "e", ins: "e", cls: "fn" }],
-      [{ label: "7", ins: "7" }, { label: "8", ins: "8" }, { label: "9", ins: "9" }, { label: "÷", ins: "/", cls: "op" }, { label: "⌫", cls: "op", act: "del" }, { label: "C", cls: "op", act: "clear" }],
-      [{ label: "4", ins: "4" }, { label: "5", ins: "5" }, { label: "6", ins: "6" }, { label: "×", ins: "\\cdot ", cls: "op" }, { label: "%", ins: "\\%", cls: "op" }, { label: "x", ins: "x", cls: "var" }],
-      [{ label: "1", ins: "1" }, { label: "2", ins: "2" }, { label: "3", ins: "3" }, { label: "−", ins: "-", cls: "op" }, { label: "!", ins: "!", cls: "op" }, { label: "=", cls: "eq", act: "equals" }],
-      [{ label: "0", ins: "0", cls: "wide" }, { label: ".", ins: "." }, { label: "+", ins: "+", cls: "op" }, { label: "Ans", cls: "op", act: "ans" }]
-    );
+  // ---- keypads: main / abc / func (Desmos layout, our theme) ----
+  function key(label, ins, cls, span) { return { label: label, ins: ins, cls: cls || "", span: span || 1 }; }
+  function actk(label, act, cls, span) { return { label: label, act: act, cls: cls || "", span: span || 1 }; }
+  function dig(n) { return { label: n, ins: n, cls: "num" }; }
+
+  function keypadLayout() {
+    if (kbTab === "abc") {
+      var L = "qwertyuiop|asdfghjkl|zxcvbnm".split("|");
+      return {
+        cols: 10, rows: [
+          L[0].split("").map(function (c) { return key(c, c, "abc"); }),
+          L[1].split("").map(function (c) { return key(c, c, "abc"); }).concat([actk("⌫", "del", "op")]),
+          [actk("=", "eq", "op")].concat(L[2].split("").map(function (c) { return key(c, c, "abc"); })).concat([key(",", ",", "abc")]),
+          [actk("⇧", "shift", "op" + (shiftOn ? " on" : "")), key("(", "(", "abc"), key(")", ")", "abc"), key("[", "[", "abc"), key("]", "]", "abc"), key("!", "!", "abc"), key("'", "'", "abc"), key("π", "\\pi", "abc"), actk("↵", "enter", "eq", 2)]
+        ]
+      };
+    }
+    if (kbTab === "func") {
+      return {
+        cols: 6, rows: [
+          [key("sin", "\\sin(#?)", "fn"), key("cos", "\\cos(#?)", "fn"), key("tan", "\\tan(#?)", "fn"), key("aᵇ", "^{#?}", "fn"), key("√", "\\sqrt{#?}", "fn"), key("ⁿ√", "\\sqrt[#?]{#?}", "fn")],
+          [key("sin⁻¹", "\\sin^{-1}(#?)", "fn"), key("cos⁻¹", "\\cos^{-1}(#?)", "fn"), key("tan⁻¹", "\\tan^{-1}(#?)", "fn"), key("eˣ", "e^{#?}", "fn"), key("abs", "\\left|#?\\right|", "fn"), key("round", "\\mathrm{round}(#?)", "fn")],
+          [key("mean", "\\mathrm{mean}(#?)", "fn"), key("stdev", "\\mathrm{stdev}(#?)", "fn"), key("stdevp", "\\mathrm{stdevp}(#?)", "fn"), key("ln", "\\ln(#?)", "fn"), key("log", "\\log(#?)", "fn"), actk("⌫", "del", "op")],
+          [key("nPr", "\\mathrm{nPr}", "fn"), key("nCr", "\\mathrm{nCr}", "fn"), key("!", "!", "fn"), key("e", "e", "fn"), key("π", "\\pi", "fn"), actk("↵", "enter", "eq")]
+        ]
+      };
+    }
+    // main
+    return {
+      cols: 9, rows: [
+        [key("a²", "^{2}", "fn"), key("aᵇ", "^{#?}", "fn"), key("|a|", "\\left|#?\\right|", "fn"), dig("7"), dig("8"), dig("9"), key("÷", "/", "op"), key("%", "\\%", "op"), key("a/b", "\\frac{#?}{#?}", "fn")],
+        [key("√", "\\sqrt{#?}", "fn"), key("ⁿ√", "\\sqrt[#?]{#?}", "fn"), key("π", "\\pi", "fn"), dig("4"), dig("5"), dig("6"), key("×", "\\cdot ", "op"), actk("←", "left", "op"), actk("→", "right", "op")],
+        [key("sin", "\\sin(#?)", "fn"), key("cos", "\\cos(#?)", "fn"), key("tan", "\\tan(#?)", "fn"), dig("1"), dig("2"), dig("3"), key("−", "-", "op"), actk("⌫", "del", "op", 2)],
+        [key("(", "(", "fn"), key(")", ")", "fn"), key(",", ",", "fn"), dig("0"), dig("."), actk("ans", "ans", "op"), key("+", "+", "op"), actk("↵", "enter", "eq", 2)]
+      ]
+    };
+  }
+  function buildKeypad() {
+    var lay = keypadLayout();
+    var grid = el("div", "calc-grid2"); grid.style.gridTemplateColumns = "repeat(" + lay.cols + ", 1fr)";
+    lay.rows.forEach(function (row) {
+      row.forEach(function (k) {
+        var b = el("button", "calc-key" + (k.cls ? " " + k.cls : ""), k.label);
+        if (k.span > 1) b.style.gridColumn = "span " + k.span;
+        b.onmousedown = preventBlur;
+        b.onclick = function () { pressKey(k); };
+        grid.appendChild(b);
+      });
+    });
+    return grid;
   }
   function pressKey(k) {
-    if (k.act === "second") { second = !second; build(); return; }
+    if (k.act === "shift") { shiftOn = !shiftOn; build(); return; }
     if (k.act === "clear") { if (activeMF) { activeMF.setValue(""); activeMF.focus(); } onFieldInput(); return; }
     if (k.act === "del") { mfCmd("deleteBackward"); onFieldInput(); return; }
+    if (k.act === "left") { mfCmd("moveToPreviousChar"); return; }
+    if (k.act === "right") { mfCmd("moveToNextChar"); return; }
     if (k.act === "ans") { insertMF(lastAns || "0"); return; }
-    if (k.act === "equals") { onFieldInput(true); return; }
-    insertMF(k.ins);
+    if (k.act === "eq") { if (kbTab === "abc") { insertMF("="); return; } commitEntry(); return; }
+    if (k.act === "enter") { commitEntry(); return; }
+    var ins = k.ins;
+    if (k.cls === "abc" && shiftOn && /^[a-z]$/.test(ins)) ins = ins.toUpperCase();
+    insertMF(ins);
   }
   function onFieldInput(commit) {
     if (activeMF && activeMF !== sciField && activeMF._eq) { triggerEq(activeMF); return; } // a graph equation field
@@ -225,9 +288,11 @@ window.Calculator = (function () {
   // MathLive drops braces around single tokens (e.g. \sqrt9). arg() handles both.
   function arg(s, i) { if (s[i] === "{") return braceArg(s, i); var m = s.slice(i).match(/^(\\[a-zA-Z]+|-?[0-9.]+|[a-zA-Z])/); if (m) return [m[1], i + m[1].length]; return [s[i] || "", i + 1]; }
   function latexToExpr(t) {
+    t = t.replace(/\\sin\^\{-1\}/g, "\\arcsin").replace(/\\cos\^\{-1\}/g, "\\arccos").replace(/\\tan\^\{-1\}/g, "\\arctan");
     t = t.replace(/\\left\|/g, "abs(").replace(/\\right\|/g, ")");
-    t = t.replace(/\\left|\\right/g, "").replace(/\\!|\\,|\\;|\\ /g, "").replace(/\\operatorname\{([a-zA-Z]+)\}/g, "$1");
-    var out = "", i = 0, fmap = { cdot: "*", times: "*", div: "/", pi: "pi", ln: "ln", log: "log", sin: "sin", cos: "cos", tan: "tan", sinh: "sinh", cosh: "cosh", tanh: "tanh", exp: "exp", abs: "abs", arcsin: "asin", arccos: "acos", arctan: "atan" };
+    t = t.replace(/\\left|\\right/g, "").replace(/\\!|\\,|\\;|\\ /g, "").replace(/\\(operatorname|mathrm)\{([a-zA-Z]+)\}/g, "$2");
+    var deg = angleMode === "deg";
+    var out = "", i = 0, fmap = { cdot: "*", times: "*", div: "/", pi: "pi", ln: "ln", log: "log", exp: "exp", abs: "abs", sinh: "sinh", cosh: "cosh", tanh: "tanh", sin: deg ? "sind" : "sin", cos: deg ? "cosd" : "cos", tan: deg ? "tand" : "tan", arcsin: deg ? "asind" : "asin", arccos: deg ? "acosd" : "acos", arctan: deg ? "atand" : "atan" };
     while (i < t.length) {
       if (t.substr(i, 5) === "\\frac") { var a = arg(t, i + 5), b = arg(t, a[1]); out += "((" + latexToExpr(a[0]) + ")/(" + latexToExpr(b[0]) + "))"; i = b[1]; continue; }
       if (t.substr(i, 6) === "\\sqrt[") { var cl = t.indexOf("]", i), nn = t.slice(i + 6, cl), ar = arg(t, cl + 1); out += "((" + latexToExpr(ar[0]) + ")^(1/(" + latexToExpr(nn) + ")))"; i = ar[1]; continue; }
@@ -429,6 +494,7 @@ window.Calculator = (function () {
     dock = document.getElementById("calc-dock");
     if (mode === "graph") graphOn = true;
     if (mode === "notepad") notepadOn = true;
+    if (!dock._ro && window.ResizeObserver) { dock._ro = new ResizeObserver(function () { if (graphOn && !dock.hidden) redraw(); }); dock._ro.observe(dock); }
     if (dock.hidden) build();
     else { dock.classList.remove("min"); if (mode) build(); }
   }

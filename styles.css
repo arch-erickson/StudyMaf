@@ -541,3 +541,39 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .calc-seam::after { content: ""; position: absolute; top: 50%; left: 2px; width: 4px; height: 30px; margin-top: -15px; border-radius: 3px; background: var(--gray); }
 .head-btn.sci-toggle[aria-pressed="true"] { background: var(--accent); }
 .calc-dock.graph .calc-graphpane { flex: 1; min-width: 260px; }
+
+/* ---------- Calculator: Desmos-style tabs, keypad, history ---------- */
+.calc-sci { display: flex; flex-direction: column; }
+.calc-history { flex: 1 1 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; }
+.calc-history:empty { display: none; }
+.calc-hrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 8px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.calc-hrow:hover { background: var(--surface-2); }
+.calc-hlatex { overflow-x: auto; } .calc-hres { color: var(--ink-soft); font-weight: 700; white-space: nowrap; }
+
+.calc-tabs2 { display: flex; align-items: center; gap: 6px; padding: 6px 0; flex-wrap: wrap; }
+.calc-tab { font: inherit; font-weight: 600; font-size: .85rem; padding: 5px 12px; border: none; background: transparent; color: var(--ink-soft);
+  cursor: pointer; border-bottom: 2px solid transparent; }
+.calc-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
+.calc-angle { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; margin-left: 4px; }
+.calc-ang { font: inherit; font-size: .75rem; font-weight: 700; padding: 4px 9px; border: none; background: var(--surface); color: var(--ink-soft); cursor: pointer; }
+.calc-ang.on { background: var(--accent); color: var(--accent-ink); }
+.calc-tbspacer { flex: 1; }
+.calc-tool { border: none; background: transparent; color: var(--ink-soft); cursor: pointer; padding: 4px 8px; border-radius: 7px; font: inherit; font-size: .8rem; display: inline-grid; place-items: center; }
+.calc-tool:hover { background: var(--surface-2); color: var(--ink); }
+.calc-tool svg { width: 18px; height: 18px; }
+.calc-tool.clearall { font-weight: 600; }
+
+.calc-grid2 { display: grid; gap: 5px; }
+.calc-grid2 .calc-key { padding: 12px 0; border: 1px solid var(--line); background: var(--surface); border-radius: 9px; font: inherit; font-weight: 600;
+  cursor: pointer; font-size: .95rem; transition: background .1s ease; }
+.calc-grid2 .calc-key:hover { background: var(--surface-2); }
+.calc-grid2 .calc-key:active { transform: translateY(1px); }
+.calc-grid2 .calc-key.num { background: var(--surface-2); }
+.calc-grid2 .calc-key.op { color: var(--accent); }
+.calc-grid2 .calc-key.fn { color: var(--slate); }
+.calc-grid2 .calc-key.abc { font-style: italic; }
+.calc-grid2 .calc-key.eq { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.calc-grid2 .calc-key.op.on { background: var(--accent); color: var(--accent-ink); }
+/* Resizable calculator dock (both directions) */
+.calc-dock { resize: both; min-width: 300px; min-height: 220px; }
+.calc-dock.min { resize: none; }
