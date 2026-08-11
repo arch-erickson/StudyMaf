@@ -11,8 +11,8 @@
  */
 window.Calculator = (function () {
   "use strict";
-  var dock, sciDisplay, sciPreview, sciExpr = "", sciCur = 0, second = false, graphOn = false, notepadOn = false, maximized = false;
-  var mobileMode = false;
+  var dock, sciDisplay, sciPreview, sciExpr = "", sciCur = 0, second = false, sciOn = true, graphOn = false, notepadOn = false, maximized = false;
+  var mobileMode = false, sciWidth = 340;
   var eqs = [], eqSeq = 0, activeInput = null, graphCanvas, view = null;
   var padCanvas, padCtx, padColor = "#2D3142", padTool = "pen", padImage = null;
   var EQ_COLORS = ["#EF8354", "#1971c2", "#0ca678", "#e64980", "#7048e8", "#f59f00", "#e03131", "#4F5D75"];
@@ -56,6 +56,8 @@ window.Calculator = (function () {
 
     var head = el("div", "calc-head");
     head.appendChild(el("span", "title", "Calculator"));
+    var sTog = el("button", "head-btn sci-toggle" + (sciOn ? " on" : "")); sTog.innerHTML = ic("calculator"); sTog.title = "Toggle scientific";
+    sTog.setAttribute("aria-pressed", String(sciOn));
     var nTog = el("button", "head-btn np-toggle"); nTog.innerHTML = ic("edit"); nTog.title = "Toggle notepad";
     nTog.setAttribute("aria-pressed", String(notepadOn));
     var gTog = el("button", "head-btn graph-toggle"); gTog.innerHTML = ic("graph"); gTog.title = "Toggle graphing";
@@ -63,16 +65,20 @@ window.Calculator = (function () {
     var bMin = el("button", "head-btn"); bMin.innerHTML = ic("minus"); bMin.title = "Minimize";
     var bMax = el("button", "head-btn"); bMax.innerHTML = ic("maximize"); bMax.title = "Enlarge";
     var bClose = el("button", "head-btn"); bClose.innerHTML = ic("x"); bClose.title = "Close";
-    head.append(nTog, gTog, bMin, bMax, bClose);
+    head.append(sTog, nTog, gTog, bMin, bMax, bClose);
     dock.appendChild(head);
 
     var main = el("div", "calc-main");
     dock.appendChild(main);
 
-    if (notepadOn) main.appendChild(buildNotepad());
-    if (graphOn) main.appendChild(buildGraphPane());
-    main.appendChild(buildSci());
+    var panels = 0;
+    if (notepadOn) { main.appendChild(buildNotepad()); panels++; }
+    if (graphOn) { main.appendChild(buildGraphPane()); panels++; }
+    if (sciOn) { if (panels > 0) main.appendChild(makeSeam()); main.appendChild(buildSci()); panels++; }
+    // all panels off -> collapse to the small title bar
+    if (panels === 0) dock.classList.add("min"); else dock.classList.remove("min");
 
+    sTog.onclick = function () { if (notepadOn) padImage = snapshotPad(); sciOn = !sciOn; build(); };
     nTog.onclick = function () { if (notepadOn) padImage = snapshotPad(); notepadOn = !notepadOn; build(); };
     gTog.onclick = function () { if (notepadOn) padImage = snapshotPad(); graphOn = !graphOn; build(); };
     bMin.onclick = function () { dock.classList.toggle("min"); };
@@ -147,6 +153,7 @@ window.Calculator = (function () {
 
   function buildSci() {
     var wrap = el("div", "calc-sci");
+    if (graphOn || notepadOn) wrap.style.width = sciWidth + "px";
     var fieldRow = el("div", "calc-fieldrow");
     sciField = makeField(); sciField.className = "calc-field"; activeMF = sciField;
     sciField.addEventListener("input", function () { onFieldInput(); });
@@ -372,9 +379,25 @@ window.Calculator = (function () {
   function positionDefault() {
     dock.style.left = "auto"; dock.style.top = "auto"; dock.style.transform = "none";
     dock.style.right = "24px"; dock.style.bottom = "24px"; dock.style.height = "";
-    var w = 340 + (graphOn ? 420 : 0) + (notepadOn ? 340 : 0);
-    dock.style.width = w + "px";  // capped by max-width:96vw in CSS
+    var w = (sciOn ? sciWidth : 0) + (graphOn ? 420 : 0) + (notepadOn ? 340 : 0) + ((sciOn && (graphOn || notepadOn)) ? 8 : 0);
+    dock.style.width = Math.max(280, w) + "px";  // capped by max-width:96vw in CSS
     maximized = false;
+  }
+  // draggable seam to resize the scientific pane vs the graph/notepad panes
+  function makeSeam() {
+    var seam = el("div", "calc-seam");
+    seam.addEventListener("pointerdown", function (e) {
+      var rect = dock.getBoundingClientRect();
+      function move(ev) {
+        sciWidth = Math.max(300, Math.min(rect.width - 280, rect.right - ev.clientX));
+        var sci = dock.querySelector(".calc-sci"); if (sci) sci.style.width = sciWidth + "px";
+        if (graphOn) redraw();
+      }
+      function up() { document.removeEventListener("pointermove", move); document.removeEventListener("pointerup", up); }
+      document.addEventListener("pointermove", move); document.addEventListener("pointerup", up);
+      e.preventDefault();
+    });
+    return seam;
   }
   function toggleMax() {
     maximized = !maximized;

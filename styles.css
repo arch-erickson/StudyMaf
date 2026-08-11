@@ -534,3 +534,10 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .calc-field::part(virtual-keyboard-toggle), .calc-field::part(menu-toggle) { display: none; }
 .calc-result { color: var(--ink-soft); font-weight: 700; font-size: 1.15rem; white-space: nowrap; max-width: 45%; overflow: hidden; text-overflow: ellipsis; }
 .calc-key.arrow { min-width: 52px; font-size: 1rem; }
+
+/* Calculator: resizable seam between panels + scientific toggle */
+.calc-seam { flex: none; width: 8px; cursor: col-resize; background: var(--line); position: relative; }
+.calc-seam:hover { background: var(--accent); }
+.calc-seam::after { content: ""; position: absolute; top: 50%; left: 2px; width: 4px; height: 30px; margin-top: -15px; border-radius: 3px; background: var(--gray); }
+.head-btn.sci-toggle[aria-pressed="true"] { background: var(--accent); }
+.calc-dock.graph .calc-graphpane { flex: 1; min-width: 260px; }
