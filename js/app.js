@@ -42,7 +42,7 @@ window.App = (function () {
         if (key && !used[key.toLowerCase()]) {
           used[key.toLowerCase()] = true;
           var b = el("button", "kw", matched);
-          b.onclick = (function (k) { return function () { showKeyword(k, glossary[k]); }; })(key);
+          b.onclick = (function (k) { return function () { openDefinition(k, glossary[k]); }; })(key);
           container.appendChild(b);
         } else { container.appendChild(document.createTextNode(matched)); }
         last = m.index + matched.length;
@@ -52,6 +52,10 @@ window.App = (function () {
     StudyMath.render(container);
     return container;
   }
+  // A definition either fills the concept reader's right-side dock (when the
+  // reader is open) or, elsewhere, opens as a small overlay.
+  var currentDefSink = null;
+  function openDefinition(term, def) { if (!def) return; if (currentDefSink) currentDefSink(term, def); else showKeyword(term, def); }
   // keyword definitions open in their OWN layer, above the concept reader (which
   // lives in modal-host), so the reader is never destroyed.
   function showKeyword(term, def) {
@@ -454,18 +458,49 @@ window.App = (function () {
   //            keyword definitions, expandable real-world examples) ----------
   function conceptReader(lesson) {
     var gloss = lesson.glossary || null;
-    var body = "<h2>" + esc(lesson.title) + "</h2>" +
-      "<p class='modal-sub'>Concepts build from simple to complex. Reveal the next level when ready. " +
-      "<span class='kw-hint'>Outlined words are clickable definitions.</span></p>" +
-      "<div class='sign-legend'><span class='sl'><span class='sl-dot pos'>+</span> positive</span>" +
+    // full-screen reader: concepts on the left, a dockable definition panel on
+    // the right, and its own X to close the whole thing.
+    var overlay = el("div", "reader-overlay");
+    var reader = el("div", "reader");
+    var head = el("div", "reader-head");
+    var htitle = el("div", "reader-title");
+    htitle.appendChild(el("h2", null, lesson.title));
+    htitle.appendChild(el("p", "reader-sub", "A guided lesson — reveal each level in turn. Underlined words are clickable definitions."));
+    var xBtn = el("button", "reader-x"); xBtn.innerHTML = icon("x"); xBtn.title = "Close";
+    head.append(htitle, xBtn); reader.appendChild(head);
+
+    var cols = el("div", "reader-cols");
+    var scroll = el("div", "reader-scroll");
+    var defPanel = el("div", "reader-def"); defPanel.hidden = true;
+    cols.append(scroll, defPanel); reader.appendChild(cols);
+    overlay.appendChild(reader); document.body.appendChild(overlay);
+
+    function closeReader() { currentDefSink = null; overlay.remove(); }
+    xBtn.onclick = closeReader;
+    overlay.addEventListener("keydown", function (e) { if (e.key === "Escape") closeReader(); });
+
+    // clicking a keyword fills (or replaces) the right-side definition dock
+    currentDefSink = function (term, def) {
+      defPanel.hidden = false; defPanel.innerHTML = "";
+      var dh = el("div", "rdef-head");
+      dh.appendChild(el("h3", null, term));
+      var dx = el("button", "rdef-x"); dx.innerHTML = icon("x"); dx.title = "Close definition";
+      dx.onclick = function () { defPanel.hidden = true; defPanel.innerHTML = ""; };
+      dh.appendChild(dx); defPanel.appendChild(dh);
+      var b1 = el("div", "rdef-block"); b1.appendChild(el("span", "rdef-label", "In plain terms"));
+      var p1 = el("p"); richText(p1, def.plain, null); b1.appendChild(p1);
+      var b2 = el("div", "rdef-block inclass"); b2.appendChild(el("span", "rdef-label", "In this class"));
+      var p2 = el("p"); richText(p2, def.in_class, null); b2.appendChild(p2);
+      defPanel.append(b1, b2);
+      defPanel.scrollTop = 0;
+    };
+
+    scroll.appendChild(mkEl("div", "sign-legend", "<span class='sl'><span class='sl-dot pos'>+</span> positive</span>" +
       "<span class='sl'><span class='sl-dot neg'>−</span> negative</span>" +
-      "<span class='sl'><span class='sl-line'></span> field / force</span></div>" +
-      "<div id='cr-body'></div>";
-    var m = modal(body + "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>", { wide: true });
-    var host = m.querySelector("#cr-body");
+      "<span class='sl'><span class='sl-line'></span> field / force</span>"));
 
     var sections = (lesson.concept_sections || []).slice().sort(function (a, b) { return a.level - b.level; });
-    var listWrap = el("div", "concept-list"); host.appendChild(listWrap);
+    var listWrap = el("div", "concept-list"); scroll.appendChild(listWrap);
     var shown = 0, revealBtn = null;
     function showNext() {
       if (shown >= sections.length) return;
@@ -475,6 +510,14 @@ window.App = (function () {
       c.appendChild(el("h3", null, s.heading));
       var p = el("p"); c.appendChild(p); richText(p, s.explanation, gloss);
       if (s.figure) c.appendChild(Figures.element(s.figure));
+      // step-by-step in relation to the math — makes the level feel like a lesson
+      if (s.math_steps && s.math_steps.length) {
+        var mb = el("div", "concept-math");
+        mb.appendChild(el("span", "cm-label", "Step by step"));
+        var ol = document.createElement("ol"); ol.className = "cm-steps";
+        s.math_steps.forEach(function (st) { var li = el("li"); richText(li, st, gloss); ol.appendChild(li); });
+        mb.appendChild(ol); c.appendChild(mb);
+      }
       listWrap.appendChild(c);
       shown++; renderReveal();
     }
@@ -487,19 +530,19 @@ window.App = (function () {
     }
     showNext();
 
-    // real-world examples — horizontal cards that expand to detail + diagram
+    // real-world examples — cards that expand to detail + diagram
     if ((lesson.real_world_examples || []).length) {
-      host.appendChild(el("h3", "step-block", "Real-world examples"));
+      scroll.appendChild(el("h3", "step-block", "Real-world examples"));
       var list = el("div", "example-list");
       lesson.real_world_examples.forEach(function (ex) {
         var card = el("div", "ex-card"); card.setAttribute("aria-expanded", "false");
-        var head = el("button", "ex-head");
+        var ehead = el("button", "ex-head");
         var htext = el("div", "ex-head-text");
         htext.appendChild(el("h4", null, ex.title));
         var sc = el("p", "ex-scenario"); richText(sc, ex.scenario, gloss); htext.appendChild(sc);
-        head.appendChild(htext);
-        var car = el("span", "ex-caret"); car.innerHTML = icon("chevronRight"); head.appendChild(car);
-        card.appendChild(head);
+        ehead.appendChild(htext);
+        var car = el("span", "ex-caret"); car.innerHTML = icon("chevronRight"); ehead.appendChild(car);
+        card.appendChild(ehead);
 
         var panel = el("div", "ex-panel"); panel.hidden = true;
         var ap = el("div", "ex-applies");
@@ -510,15 +553,17 @@ window.App = (function () {
         if (ex.figure) panel.appendChild(Figures.element(ex.figure));
         card.appendChild(panel);
 
-        head.onclick = function () {
+        ehead.onclick = function () {
           var open = card.getAttribute("aria-expanded") === "true";
           card.setAttribute("aria-expanded", String(!open)); panel.hidden = open;
         };
         list.appendChild(card);
       });
-      host.appendChild(list);
+      scroll.appendChild(list);
     }
   }
+  // small helper: element with raw innerHTML
+  function mkEl(tag, cls, html) { var n = el(tag, cls); n.innerHTML = html; return n; }
 
   // ====================================================================
   // STUDY SESSION — one problem at a time, Duolingo-style rewards
