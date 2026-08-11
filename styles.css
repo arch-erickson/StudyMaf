@@ -211,6 +211,9 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .session-inner { max-width: 720px; margin: 0 auto; padding: 30px 22px 140px; }
 .q-badge { display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #fff; padding: 4px 11px; border-radius: 999px; margin-bottom: 14px; }
 .q-badge.easy{background:var(--easy)} .q-badge.medium{background:var(--medium)} .q-badge.hard{background:var(--hard)} .q-badge.stretch{background:var(--stretch)} .q-badge.extreme{background:var(--stretch)}
+.q-badge-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.q-badge-row .q-badge { margin-bottom: 0; }
+.q-source { font-size: .72rem; font-weight: 700; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 999px; }
 .q-prompt { font-size: 1.35rem; line-height: 1.5; margin: 0 0 24px; }
 .answer-box { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .answer-box input { flex: 1 1 240px; font: inherit; font-size: 1.05rem; padding: 14px 16px; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); }

@@ -445,7 +445,7 @@ window.App = (function () {
           panel.appendChild(diffRow);
 
           var acts = el("div", "lp-actions");
-          var startLbl = doneN > 0 && doneN < total ? "Continue" : (doneN >= total ? "Practice again" : "Start lesson");
+          var startLbl = grade.solved > 0 && grade.solved < grade.target ? "Continue" : (grade.target && grade.solved >= grade.target ? "Practice again" : "Start lesson");
           var start = ib("btn primary", "play", startLbl);
           start.onclick = function () { startSession(cls, lid, lesson, chosenDiff); };
           var concepts = ib("btn ghost", "bookOpen", "Read concepts");
@@ -751,7 +751,10 @@ window.App = (function () {
     function renderInstance(skippable) {
       fill.style.width = Math.round(solved / plan.length * 100) + "%"; setStreak(streak);
       inner.innerHTML = "";
-      inner.appendChild(el("span", "q-badge " + inst.difficulty, inst.difficulty));
+      var badgeRow = el("div", "q-badge-row");
+      badgeRow.appendChild(el("span", "q-badge " + inst.difficulty, inst.difficulty));
+      if (inst.source) badgeRow.appendChild(el("span", "q-source", inst.source));
+      inner.appendChild(badgeRow);
       var count = el("p"); count.style.color = "var(--ink-soft)"; count.style.fontSize = ".85rem"; count.style.margin = "0 0 4px";
       count.textContent = "Question " + (slot + 1) + " of " + plan.length + (skippable ? " · bonus" : "");
       inner.appendChild(count);
