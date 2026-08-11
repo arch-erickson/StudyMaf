@@ -609,7 +609,7 @@ window.Calculator = (function () {
     tab.onclick = function () { if (moved) { moved = false; return; } unsnap(); };
   }
   function unsnap() {
-    var tab = document.getElementById("calc-snap"); if (tab) tab.hidden = true;
+    var tab = document.getElementById("calc-snap"); if (tab) { tab.hidden = true; tab.onpointerdown = tab.onpointermove = tab.onpointerup = tab.onclick = null; }
     dock.hidden = false; dock.setAttribute("aria-hidden", "false");
     var w = dock.offsetWidth, h = dock.offsetHeight;
     var top = snapRestore ? snapRestore.top : 80;
@@ -629,6 +629,8 @@ window.Calculator = (function () {
     if (mode === "graph") graphOn = true;
     if (mode === "notepad") notepadOn = true;
     if (!dock._ro && window.ResizeObserver) { dock._ro = new ResizeObserver(function () { if (graphOn && !dock.hidden) redraw(); }); dock._ro.observe(dock); }
+    // if it's collapsed to an edge tab, expand it back instead of leaving an orphan tab
+    if (snappedSide) { unsnap(); if (mode) build(); return; }
     if (dock.hidden) build();
     else { dock.classList.remove("min"); if (mode) build(); }
   }

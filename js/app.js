@@ -439,14 +439,11 @@ window.App = (function () {
           var startLbl = doneN > 0 && doneN < total ? "Continue" : (doneN >= total ? "Practice again" : "Start lesson");
           var start = ib("btn primary", "play", startLbl);
           start.onclick = function () { startSession(cls, lid, lesson, chosenDiff); };
-          var tut = ib("btn ghost", "bulb", "Tutorial");
-          tut.title = "A worked example, step by step";
-          tut.onclick = function () { startTutorial(cls, lid, lesson, chosenDiff === "mixed" ? (diffs[0] || "medium") : chosenDiff); };
           var concepts = ib("btn ghost", "bookOpen", "Read concepts");
           concepts.onclick = function () { conceptReader(lesson); };
           var test = ib("btn ghost", "target", "Practice test");
           test.onclick = function () { startTest(cls, lid, lesson); };
-          acts.append(start, tut, concepts, test);
+          acts.append(start, concepts, test);
           panel.appendChild(acts);
         }).catch(function (e) { panel.innerHTML = "<p class='lp-summary'>Couldn't load lesson: " + esc(e.message) + "</p>"; });
       }
@@ -634,9 +631,12 @@ window.App = (function () {
 
       var tools = el("div", "q-tools");
       var hintBtn = ib("btn subtle", "bulb", "Hint");
+      var tutBtn = ib("btn subtle", "bookOpen", "Tutorial");
+      tutBtn.title = "Walk through a worked example like this one";
       var padBtn = ib("btn subtle", "edit", "Scratch work");
       var calcBtn = ib("btn subtle", "calculator", "Calculator");
-      tools.append(hintBtn, padBtn, calcBtn); inner.appendChild(tools);
+      tools.append(hintBtn, tutBtn, padBtn, calcBtn); inner.appendChild(tools);
+      tutBtn.onclick = function () { startTutorial(cls, lid, lesson, p.difficulty); };
 
       var hintPanel = el("div", "hint-panel"); hintPanel.hidden = true;
       hintPanel.appendChild(el("p", "panel-label", "Hint"));
@@ -757,9 +757,12 @@ window.App = (function () {
       // tools
       var tools = el("div", "q-tools");
       var hintBtn = ib("btn subtle", "bulb", "Hint");
+      var tutBtn = ib("btn subtle", "bookOpen", "Tutorial");
+      tutBtn.title = "Walk through a worked example like this one";
       var padBtn = ib("btn subtle", "edit", "Scratch work");
       var calcBtn = ib("btn subtle", "calculator", "Calculator");
-      tools.append(hintBtn, padBtn, calcBtn); inner.appendChild(tools);
+      tools.append(hintBtn, tutBtn, padBtn, calcBtn); inner.appendChild(tools);
+      tutBtn.onclick = function () { startTutorial(cls, lid, lesson, inst.difficulty); };
       var hintPanel = el("div", "hint-panel"); hintPanel.hidden = true;
       hintPanel.appendChild(el("p", "panel-label", "Hint")); var ht = el("p"); richText(ht, inst.hint, null); hintPanel.appendChild(ht); inner.appendChild(hintPanel);
       var steps = el("div", "steps-panel"); steps.hidden = true;
@@ -1194,7 +1197,7 @@ window.App = (function () {
   }
   function ensureExitBtn() {
     if (fsExitBtn) return;
-    fsExitBtn = el("button", "fs-exit"); fsExitBtn.innerHTML = icon("x") + "<span>Exit full screen</span>";
+    fsExitBtn = el("button", "fs-exit"); fsExitBtn.innerHTML = icon("collapse"); fsExitBtn.title = "Exit full screen"; fsExitBtn.setAttribute("aria-label", "Exit full screen");
     fsExitBtn.onclick = exitImmersive; document.body.appendChild(fsExitBtn);
   }
   function onImmersiveScroll() { if (fsExitBtn) { fsExitBtn.classList.add("visible"); clearTimeout(fsHideTimer); } }

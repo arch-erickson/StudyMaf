@@ -42,6 +42,7 @@ window.Icons = (function () {
     droplet: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
     check2: '<polyline points="20 6 9 17 4 12"/>',
     fullscreen: '<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>',
+    collapse: '<path d="M4 8h3a1 1 0 0 0 1-1V4M16 4v3a1 1 0 0 0 1 1h3M20 16h-3a1 1 0 0 0-1 1v3M8 20v-3a1 1 0 0 0-1-1H4"/>',
     columns: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/>',
     highlighter: '<path d="M9 11l-6 6v3h3l6-6"/><path d="M12 8l4 4"/><path d="M17 3l4 4-9 9-4-4z"/>',
     shapes: '<rect x="3" y="12" width="8" height="8" rx="1"/><circle cx="17" cy="16" r="4"/><path d="M12 3l4 7H8z"/>',
