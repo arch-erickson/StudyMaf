@@ -466,3 +466,11 @@ body.immersive main#app { min-height: 100vh; }
 .fs-exit.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .fs-exit svg { width: 16px; height: 16px; }
 .fs-exit:hover { background: var(--navy); }
+
+/* ---------- Calculator: live math preview + caret ---------- */
+.calc-preview { min-height: 28px; text-align: right; padding: 4px 14px 0; font-size: 1.35rem; color: var(--ink); overflow-x: auto; white-space: nowrap; }
+.calc-preview .katex { font-size: 1.25em; }
+.calc-display { display: flex; align-items: center; justify-content: flex-end; }
+.calc-caret { display: inline-block; width: 2px; height: 1.15em; background: var(--accent); margin: 0 1px; animation: calcblink 1s steps(1) infinite; vertical-align: middle; }
+@keyframes calcblink { 50% { opacity: 0; } }
+.calc-key.fn { font-size: .72rem; }
