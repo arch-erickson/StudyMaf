@@ -252,6 +252,16 @@ window.Notebook = (function () {
     // any movement of the canvas invalidates the cached rect
     scroller.addEventListener("scroll", invalidateRect, { passive: true });
     window.addEventListener("resize", invalidateRect);
+    // CRITICAL for iPad: swallow the raw touch/gesture events on the canvas so Safari
+    // never runs its double-tap / pinch / Scribble recognizer here. Without this it
+    // CANCELS the quick second pen-down while it "waits to see" if you're gesturing,
+    // which is why the stroke right after the first one gets dropped. Pointer events
+    // still fire, so drawing/panning keep working.
+    var stop = function (e) { e.preventDefault(); };
+    ["touchstart", "touchmove", "touchend", "touchcancel", "gesturestart", "gesturechange", "gestureend"].forEach(function (ev) {
+      canvas.addEventListener(ev, stop, { passive: false });
+    });
+    canvas.style.touchAction = "none"; canvas.style.webkitUserSelect = "none"; canvas.style.webkitTouchCallout = "none";
     function touches() { return Object.keys(pointers).filter(function (id) { return pointers[id].type === "touch"; }).map(function (id) { return pointers[id]; }); }
 
     var lastTap = 0, lastTapXY = null;

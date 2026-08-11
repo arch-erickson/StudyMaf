@@ -114,6 +114,12 @@ window.Calculator = (function () {
     padCtx = padCanvas.getContext("2d"); padCtx.scale(dpr, dpr); padCtx.lineCap = "round"; padCtx.lineJoin = "round";
     if (padImage) { var img = new Image(); img.onload = function () { padCtx.drawImage(img, 0, 0, padCanvas.width / dpr, padCanvas.height / dpr); }; img.src = padImage; }
     var drawing = false, last = null;
+    // iPad: swallow raw touch/gesture events so Safari doesn't cancel quick strokes.
+    var stopPad = function (e) { e.preventDefault(); };
+    ["touchstart", "touchmove", "touchend", "touchcancel", "gesturestart", "gesturechange", "gestureend"].forEach(function (ev) {
+      padCanvas.addEventListener(ev, stopPad, { passive: false });
+    });
+    padCanvas.style.touchAction = "none"; padCanvas.style.webkitUserSelect = "none"; padCanvas.style.webkitTouchCallout = "none";
     function pos(e) { var b = padCanvas.getBoundingClientRect(); return { x: e.clientX - b.left, y: e.clientY - b.top }; }
     padCanvas.addEventListener("pointerdown", function (e) { drawing = true; last = pos(e); padCanvas.setPointerCapture(e.pointerId); e.preventDefault(); });
     padCanvas.addEventListener("pointermove", function (e) {
