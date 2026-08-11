@@ -7,7 +7,23 @@
 window.App = (function () {
   "use strict";
 
-  var appEl, lessonIndex = [], lessonCache = {};
+  var appEl, lessonIndex = [], lessonCache = {}, catalog = { classes: [] };
+  // ---- class catalog (join codes + syllabus grade targets) ----
+  function catalogClassByCode(code) {
+    var c = String(code || "").trim().toUpperCase();
+    return (catalog.classes || []).filter(function (k) { return String(k.code || "").toUpperCase() === c; })[0];
+  }
+  function catalogMeta(cat) {
+    var targets = {}, chapters = {}, ids = [];
+    (cat.lessons || []).forEach(function (l) { ids.push(l.id); targets[l.id] = (l.problems || []).length; chapters[l.id] = l.chapter || ""; });
+    return { lessonIds: ids, lessonTargets: targets, chapters: chapters };
+  }
+  // grade targets for a class: prefer stored catalog targets, else fall back to authored problem counts
+  function lessonTargetsFor(cls) {
+    if (cls.lessonTargets && Object.keys(cls.lessonTargets).length) return cls.lessonTargets;
+    var m = {}; (cls.lessonIds || []).forEach(function (lid) { var e = lessonIndex.filter(function (x) { return x.id === lid; })[0]; m[lid] = e ? (e.problemCount || 0) : 0; });
+    return m;
+  }
   var TUTOR_URL = "REPLACE_WITH_YOUR_TUTOR_URL"; // <-- paste your Custom GPT / Claude Project URL
 
   // ---------- helpers ----------
@@ -181,12 +197,11 @@ window.App = (function () {
 
     var head = el("div", "section-head");
     head.appendChild(el("h2", null, "Classes"));
-    var addBtn = el("button", "btn primary", "+ Add class"); addBtn.onclick = openAddClass;
+    var addBtn = el("button", "btn primary", "+ Add class"); addBtn.onclick = openJoinClass;
     head.appendChild(addBtn);
     page.appendChild(head);
 
     var grid = el("div", "class-grid");
-    var counts = {}; lessonIndex.forEach(function (l) { counts[l.id] = l.problemCount || 20; });
 
     Store.classes().forEach(function (c) {
       var card = el("button", "class-card");
@@ -197,83 +212,63 @@ window.App = (function () {
       body.appendChild(el("h3", null, c.name));
       var meta = [c.semester, c.year].filter(Boolean).join(" · ") || c.date;
       body.appendChild(el("p", "class-meta", meta));
-      var pct = Store.classProgressPct(c, counts);
+      var pct = Store.classCompletion(c, lessonTargetsFor(c)).pct;
       var row = el("div", "progress-row");
       var track = el("div", "progress-track"); var fill = el("div", "progress-fill"); fill.style.width = pct + "%"; track.appendChild(fill);
       row.appendChild(track); row.appendChild(el("span", "progress-pct", pct + "%"));
-      body.appendChild(row); card.appendChild(body);
+      body.appendChild(row);
+      body.appendChild(el("p", "class-xp", Store.classExp(c).toLocaleString() + " XP"));
+      card.appendChild(body);
       card.onclick = function () { location.hash = "#/class/" + c.id; };
       grid.appendChild(card);
     });
 
     var add = el("button", "add-card");
-    add.appendChild(el("span", "plus", "+")); add.appendChild(el("span", null, "Add a class"));
-    add.onclick = openAddClass;
+    add.appendChild(el("span", "plus", "+")); add.appendChild(el("span", null, "Enter a class code"));
+    add.onclick = openJoinClass;
     grid.appendChild(add);
 
     page.appendChild(grid);
     appEl.appendChild(page);
   }
 
-  function openAddClass() {
-    var opts = lessonIndex.map(function (l) {
-      return "<label style='display:flex;gap:8px;align-items:center;margin-bottom:6px'>" +
-        "<input type='checkbox' class='lz' value='" + esc(l.id) + "' checked> " + esc(l.title) + "</label>";
-    }).join("");
+  // Students join a class with a code their professor gives them. (The professor
+  // dashboard that publishes classes + materials comes in a later stage.)
+  function openJoinClass() {
     var m = modal(
-      "<h2>Add a class</h2><p class='modal-sub'>Fill in the basics and attach your course materials up front. Lessons load from your data files.</p>" +
-      "<div class='field'><label>Class name</label><input id='ac-name' placeholder='e.g. Algebra I'></div>" +
-      "<div class='row2'>" +
-      "<div class='field'><label>Semester</label><select id='ac-sem'><option>Fall</option><option>Spring</option><option>Summer</option><option>Winter</option></select></div>" +
-      "<div class='field'><label>Year</label><input id='ac-year' value='" + new Date().getFullYear() + "'></div>" +
-      "</div>" +
-      "<div class='field'><label>Syllabus <span style='font-weight:400;color:var(--ink-soft)'>(required to tailor lessons)</span></label><input id='ac-syl' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
-      "<div class='field'><label>Textbooks <span style='font-weight:400;color:var(--ink-soft)'>(by name, or a photo of the cover — add as many as you use)</span></label>" +
-      "<div id='ac-books'></div>" +
-      "<div style='display:flex;gap:8px;margin-top:8px'>" +
-      "<button type='button' class='btn subtle' id='ac-addname'>+ By name</button>" +
-      "<button type='button' class='btn subtle' id='ac-addcover'>+ Cover photo</button></div></div>" +
-      "<div class='notice' style='margin-bottom:16px'><strong>How textbooks are used.</strong>The name (or cover) is handed to the AI stage so it can find the book online and align lessons to it — no need to upload a huge PDF. Files/names stay on your device for now.</div>" +
-      "<div class='field'><label>Lessons to include</label>" + (opts || "<p class='modal-sub'>No lessons in data/index.json yet.</p>") + "</div>" +
-      "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='ac-save'>Create class</button></div>"
+      "<h2>Add a class</h2><p class='modal-sub'>Enter the class code your professor gave you. It loads the right lessons, textbook, and assignments.</p>" +
+      "<div class='field'><label>Class code</label><input id='jc-code' placeholder='e.g. PHYS1442' autocapitalize='characters' autocomplete='off' style='text-transform:uppercase;letter-spacing:.08em;font-weight:700'></div>" +
+      "<div id='jc-err' class='join-err' hidden></div>" +
+      "<div id='jc-preview' class='join-preview' hidden></div>" +
+      "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='jc-join'>Join class</button></div>"
     );
-
-    // dynamic textbook rows: each is {kind:"name"|"cover", value, el}
-    var books = [], booksHost = m.querySelector("#ac-books");
-    function drawBooks() {
-      booksHost.innerHTML = "";
-      books.forEach(function (b, i) {
-        var row = el("div", "eq-row"); row.style.marginBottom = "6px";
-        if (b.kind === "name") {
-          var inp = document.createElement("input"); inp.type = "text"; inp.className = "eq-input";
-          inp.placeholder = "e.g. University Physics Volume 2, OpenStax"; inp.value = b.value || "";
-          inp.oninput = function () { b.value = inp.value; };
-          row.appendChild(inp);
-        } else {
-          var lbl = el("label", "eq-input"); lbl.style.cursor = "pointer"; lbl.style.display = "flex"; lbl.style.alignItems = "center";
-          lbl.textContent = b.value || "Choose cover photo…";
-          var f = document.createElement("input"); f.type = "file"; f.accept = "image/*"; f.style.display = "none";
-          f.onchange = function () { if (f.files[0]) { b.value = f.files[0].name; drawBooks(); } };
-          lbl.appendChild(f); lbl.onclick = function () { f.click(); };
-          row.appendChild(lbl);
-        }
-        var rm = el("button", "eq-rm"); rm.type = "button"; rm.innerHTML = icon("trash");
-        rm.onclick = function () { books.splice(i, 1); drawBooks(); };
-        row.appendChild(rm); booksHost.appendChild(row);
-      });
+    var input = m.querySelector("#jc-code"), errEl = m.querySelector("#jc-err"), prev = m.querySelector("#jc-preview");
+    setTimeout(function () { try { input.focus(); } catch (e) {} }, 40);
+    function showErr(msg) { errEl.textContent = msg; errEl.hidden = false; prev.hidden = true; }
+    function preview() {
+      var cat = catalogClassByCode(input.value); errEl.hidden = true;
+      if (!cat) { prev.hidden = true; return; }
+      prev.hidden = false;
+      prev.innerHTML = "<strong>" + esc(cat.name) + "</strong>" +
+        "<span>" + [cat.institution, [cat.semester, cat.year].filter(Boolean).join(" ")].filter(Boolean).join(" · ") + "</span>" +
+        "<span>" + (cat.lessons || []).length + " lessons · " + (cat.textbooks || []).length + " textbook(s)</span>";
     }
-    m.querySelector("#ac-addname").onclick = function () { books.push({ kind: "name", value: "" }); drawBooks(); };
-    m.querySelector("#ac-addcover").onclick = function () { books.push({ kind: "cover", value: "" }); drawBooks(); };
-
-    m.querySelector("#ac-save").onclick = function () {
-      var name = m.querySelector("#ac-name").value.trim() || "Untitled Class";
-      var chosen = Array.prototype.slice.call(m.querySelectorAll(".lz:checked")).map(function (x) { return x.value; });
-      var cls = Store.addClass({ name: name, semester: m.querySelector("#ac-sem").value, year: m.querySelector("#ac-year").value, lessonIds: chosen });
-      var syl = m.querySelector("#ac-syl").files[0];
-      if (syl) Store.setUpload(cls.id, "syllabus", syl.name);
-      books.forEach(function (b) { if (b.value) Store.addTextbook(cls.id, b.kind, b.value); });
+    input.addEventListener("input", preview);
+    function join() {
+      var code = input.value.trim();
+      if (!code) return showErr("Enter a class code.");
+      var cat = catalogClassByCode(code);
+      if (!cat) return showErr("No class found for code “" + code.toUpperCase() + "”. Check with your professor.");
+      if (Store.classes().some(function (c) { return String(c.code || "").toUpperCase() === String(cat.code).toUpperCase(); }))
+        return showErr("You've already added this class.");
+      var meta = catalogMeta(cat);
+      var cls = Store.addClass({ name: cat.name, semester: cat.semester, year: cat.year, lessonIds: meta.lessonIds, code: cat.code, lessonTargets: meta.lessonTargets, chapters: meta.chapters });
+      Store.setUpload(cls.id, "syllabus", "PHYS1442.pdf");
+      (cat.textbooks || []).forEach(function (t) { Store.addTextbook(cls.id, "name", t); });
       closeModal(); renderDashboard();
-    };
+    }
+    m.querySelector("#jc-join").onclick = join;
+    input.addEventListener("keydown", function (e) { if (e.key === "Enter") join(); });
   }
 
   // ====================================================================
@@ -346,6 +341,17 @@ window.App = (function () {
     hero.appendChild(del);
     page.appendChild(hero);
 
+    // class-wide stats: total EXP + overall completion vs syllabus
+    var targets = lessonTargetsFor(cls);
+    var comp = Store.classCompletion(cls, targets), totXp = Store.classExp(cls);
+    var stats = el("div", "class-stats");
+    function stat(label, value, sub) { var s = el("div", "cstat"); s.appendChild(el("div", "cstat-val", value)); s.appendChild(el("div", "cstat-label", label)); if (sub) s.appendChild(el("div", "cstat-sub", sub)); return s; }
+    stats.appendChild(stat("Total XP", totXp.toLocaleString(), "grows with every question — no cap"));
+    var compStat = stat("Course completion", comp.pct + "%", comp.done + " / " + comp.total + " problems");
+    var barWrap = el("div", "cstat-bar"); var barFill = el("div", "cstat-bar-fill"); barFill.style.width = comp.pct + "%"; barWrap.appendChild(barFill); compStat.appendChild(barWrap);
+    stats.appendChild(compStat);
+    page.appendChild(stats);
+
     // toolbar
     var mode = Store.getMode(id);
     var tb = el("div", "toolbar");
@@ -391,9 +397,9 @@ window.App = (function () {
   function buildLessonRow(cls, lid, i) {
     var entry = lessonIndex.filter(function (l) { return l.id === lid; })[0] || { title: lid, problemCount: 20 };
     var prog = Store.lessonProgress(cls.id, lid);
-    var total = entry.problemCount || 20;
-    var doneN = Object.keys(prog.done).length;
-    var pct = total ? Math.round(doneN / total * 100) : 0;
+    var target = lessonTargetsFor(cls)[lid] || entry.problemCount || 0;
+    var grade = Store.lessonGrade(cls.id, lid, target);
+    var chapter = (cls.chapters && cls.chapters[lid]) || "";
 
     var row = el("div", "lesson"); row.setAttribute("aria-expanded", "false");
     var btn = el("button", "lesson-btn");
@@ -401,8 +407,11 @@ window.App = (function () {
     var main = el("div", "lesson-main");
     main.appendChild(el("p", "name", "Lesson " + (i + 1) + ": " + entry.title));
     var mp = el("div", "mini-progress");
-    var track = el("div", "progress-track"); var fill = el("div", "progress-fill"); fill.style.width = pct + "%"; track.appendChild(fill);
-    mp.appendChild(track); mp.appendChild(el("span", "progress-pct", pct + "%"));
+    var track = el("div", "progress-track"); var fill = el("div", "progress-fill"); fill.style.width = grade.pct + "%"; track.appendChild(fill);
+    mp.appendChild(track);
+    mp.appendChild(el("span", "progress-pct", "Grade " + grade.earned + "/" + grade.target));
+    mp.appendChild(el("span", "lesson-xp", (prog.xp || 0).toLocaleString() + " XP"));
+    if (chapter) mp.appendChild(el("span", "lesson-chapter", chapter));
     main.appendChild(mp); btn.appendChild(main);
     var caret = el("span", "lesson-caret"); caret.innerHTML = icon("chevronRight"); btn.appendChild(caret);
     row.appendChild(btn);
@@ -1239,13 +1248,13 @@ window.App = (function () {
     });
 
     var already = Store.classes().some(function (c) { return c.name.indexOf("PHYS 1442") === 0; });
+    var cat = catalogClassByCode("PHYS1442");
     var physIds = lessonIndex.filter(function (l) { return l.id.indexOf("phys1442") === 0; }).map(function (l) { return l.id; });
-    if (!already && physIds.length) {
-      var c = Store.addClass({ name: "PHYS 1442 — General Physics II", semester: "Fall", year: String(new Date().getFullYear()), lessonIds: physIds });
+    if (!already && (cat || physIds.length)) {
+      var meta = cat ? catalogMeta(cat) : { lessonIds: physIds, lessonTargets: {}, chapters: {} };
+      var c = Store.addClass({ name: (cat && cat.name) || "PHYS 1442 — General Physics II", semester: "Fall", year: String(new Date().getFullYear()), lessonIds: meta.lessonIds, code: cat ? cat.code : "", lessonTargets: meta.lessonTargets, chapters: meta.chapters });
       Store.setUpload(c.id, "syllabus", "PHYS1442.pdf");
-      Store.addTextbook(c.id, "name", "University Physics Volume 2, OpenStax");
-      Store.addTextbook(c.id, "name", "University Physics Volume 3, OpenStax");
-      Store.addTextbook(c.id, "name", "Giancoli, Physics for Scientists & Engineers Vol. II, 4th ed. (optional)");
+      ((cat && cat.textbooks) || ["University Physics Volume 2, OpenStax", "University Physics Volume 3, OpenStax"]).forEach(function (t) { Store.addTextbook(c.id, "name", t); });
     }
   }
 
@@ -1254,11 +1263,16 @@ window.App = (function () {
   function reconcilePhysLessons() {
     var order = lessonIndex.filter(function (l) { return l.id.indexOf("phys1442") === 0; }).map(function (l) { return l.id; });
     if (!order.length) return;
+    var cat = catalogClassByCode("PHYS1442"), meta = cat ? catalogMeta(cat) : null;
     Store.classes().forEach(function (c) {
       if (c.name.indexOf("PHYS 1442") !== 0) return;
       var have = c.lessonIds || [];
       var missing = order.some(function (id) { return have.indexOf(id) < 0; });
       if (missing || have.length !== order.length) Store.setClassLessons(c.id, order);
+      // backfill catalog metadata (grade targets, chapters, code) for pre-existing installs
+      if (meta && (!c.lessonTargets || !Object.keys(c.lessonTargets).length)) {
+        Store.setClassCatalog(c.id, { code: cat.code, lessonTargets: meta.lessonTargets, chapters: meta.chapters });
+      }
     });
   }
 
@@ -1269,8 +1283,12 @@ window.App = (function () {
     applyAccent(Store.getAccent());
     applyIpadMode();
     bindHeader();
-    fetchJSON("data/index.json").then(function (index) {
-      lessonIndex = (index.lessons || []);
+    Promise.all([
+      fetchJSON("data/index.json"),
+      fetchJSON("data/classes.json").catch(function () { return { classes: [] }; })
+    ]).then(function (res) {
+      lessonIndex = (res[0].lessons || []);
+      catalog = res[1] || { classes: [] };
       // learn problem counts for progress math
       return Promise.all(lessonIndex.map(function (l) {
         return loadLesson(l.id).then(function (js) { l.problemCount = (js.problems || []).length; }).catch(function () { l.problemCount = 20; });

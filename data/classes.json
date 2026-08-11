@@ -1,0 +1,32 @@
+{
+  "_comment": "Catalog of joinable classes. A professor (later: professor dashboard) publishes a class here with a join CODE; students add it by entering the code. Each lesson lists its syllabus chapter reference and the exact problem numbers assigned that week — the length of `problems` is the lesson's grade target (how many the syllabus expects).",
+  "classes": [
+    {
+      "code": "PHYS1442",
+      "name": "PHYS 1442 — General Physics II",
+      "institution": "NYC College of Technology (CUNY)",
+      "semester": "Fall",
+      "year": "2026",
+      "textbooks": [
+        "University Physics Volume 2 — OpenStax",
+        "University Physics Volume 3 — OpenStax"
+      ],
+      "lessons": [
+        { "id": "phys1442-01-coulomb",              "chapter": "Vol. 2, Ch. 5",     "problems": [40, 43, 51, 53, 56, 62] },
+        { "id": "phys1442-02-efield",               "chapter": "Vol. 2, Ch. 5",     "problems": [69, 77, 80, 81, 84, 94, 100, 106] },
+        { "id": "phys1442-03-gauss",                "chapter": "Vol. 2, Ch. 6",     "problems": [22, 23, 27, 31, 37, 42, 43, 44, 69] },
+        { "id": "phys1442-04-potential",            "chapter": "Vol. 2, Ch. 7",     "problems": [31, 32, 34, 39, 43, 46, 52, 56, 70] },
+        { "id": "phys1442-05-capacitance",          "chapter": "Vol. 2, Ch. 8",     "problems": [19, 21, 25, 29, 32, 33, 36, 41, 51] },
+        { "id": "phys1442-06-current",              "chapter": "Vol. 2, Ch. 9",     "problems": [23, 25, 29, 34, 40, 50, 52, 59, 62] },
+        { "id": "phys1442-07-dc-circuits",          "chapter": "Vol. 2, Ch. 10",    "problems": [23, 25, 26, 35, 36, 38, 42, 53, 63] },
+        { "id": "phys1442-08-magnetic-force",       "chapter": "Vol. 2, Ch. 11",    "problems": [15, 17, 19, 23, 25, 33, 34, 35, 38, 40, 52] },
+        { "id": "phys1442-09-magnetic-sources",     "chapter": "Vol. 2, Ch. 12",    "problems": [20, 23, 31, 33, 37, 42, 43, 46, 49, 57, 61] },
+        { "id": "phys1442-10-induction",            "chapter": "Vol. 2, Ch. 13",    "problems": [24, 26, 28, 31, 34, 36, 40, 43, 45, 56] },
+        { "id": "phys1442-11-ac-circuits",          "chapter": "Vol. 2, Ch. 14-15", "problems": [1429, 1435, 1439, 1451, 1452, 1470, 1515, 1517, 1525, 1529, 1533, 1537, 1547] },
+        { "id": "phys1442-12-em-waves",             "chapter": "Vol. 2, Ch. 16",    "problems": [39, 42, 45, 46, 50, 58, 59, 65, 81] },
+        { "id": "phys1442-13-geometric-optics",     "chapter": "Vol. 3, Ch. 1-2",   "problems": [126, 135, 139, 144, 152, 161, 163, 236] },
+        { "id": "phys1442-14-interference-diffraction", "chapter": "Vol. 3, Ch. 2-4", "problems": [261, 263, 264, 289, 2107, 317, 319, 337, 431, 441, 445] }
+      ]
+    }
+  ]
+}

@@ -63,9 +63,21 @@ window.Store = (function () {
         date: new Date().toISOString().slice(0, 10),
         thumbSeed: Math.floor(Math.random() * 360),
         lessonIds: data.lessonIds || [],
+        code: data.code || "",                    // join code this class came from
+        lessonTargets: data.lessonTargets || {},  // lessonId -> # of syllabus problems (grade target)
+        chapters: data.chapters || {},            // lessonId -> textbook chapter reference
         createdAt: Date.now()
       };
       state.classes.push(c); save(); return c;
+    },
+    // attach/update catalog metadata (code, grade targets, chapters) on an existing class
+    setClassCatalog: function (id, meta) {
+      var c = this.getClass(id); if (!c) return;
+      if (meta.code) c.code = meta.code;
+      if (meta.lessonIds) c.lessonIds = meta.lessonIds;
+      if (meta.lessonTargets) c.lessonTargets = meta.lessonTargets;
+      if (meta.chapters) c.chapters = meta.chapters;
+      save();
     },
     removeClass: function (id) {
       state.classes = state.classes.filter(function (c) { return c.id !== id; });
@@ -87,20 +99,36 @@ window.Store = (function () {
 
     markProblemDone: function (cid, lid, pid, xp) {
       var k = this._pkey(cid, lid);
-      var p = state.progress[k] || { done: {}, xp: 0 };
-      if (!p.done[pid]) { p.done[pid] = true; p.xp += (xp || 0); }
+      var p = state.progress[k] || { done: {}, xp: 0, solved: 0 };
+      if (!p.done[pid]) { p.done[pid] = true; p.xp += (xp || 0); p.solved = (p.solved || 0) + 1; }
       state.progress[k] = p; save(); return p;
     },
-    classProgressPct: function (cls, lessonProblemCounts) {
-      // lessonProblemCounts: { lessonId: total }
-      var total = 0, done = 0, self = this;
+    // total distinct correct answers in a lesson (grade counts these; EXP is unbounded)
+    lessonSolved: function (cid, lid) {
+      var p = this.lessonProgress(cid, lid);
+      return p.solved != null ? p.solved : Object.keys(p.done || {}).length;
+    },
+    // grade out of the syllabus target: capped at target, but EXP keeps growing past it
+    lessonGrade: function (cid, lid, target) {
+      var s = this.lessonSolved(cid, lid), t = target || 0;
+      return { solved: s, target: t, earned: Math.min(s, t), pct: t ? Math.round(Math.min(s, t) / t * 100) : 0 };
+    },
+    classExp: function (cls) {
+      var self = this, x = 0;
+      (cls.lessonIds || []).forEach(function (lid) { x += self.lessonProgress(cls.id, lid).xp || 0; });
+      return x;
+    },
+    // overall completion across the class using per-lesson grade targets
+    classCompletion: function (cls, targets) {
+      var self = this, done = 0, total = 0;
       (cls.lessonIds || []).forEach(function (lid) {
-        var t = lessonProblemCounts[lid] || 0;
-        total += t;
-        var p = self.lessonProgress(cls.id, lid);
-        done += Math.min(Object.keys(p.done).length, t);
+        var t = (targets && targets[lid]) || 0; total += t;
+        done += Math.min(self.lessonSolved(cls.id, lid), t);
       });
-      return total ? Math.round((done / total) * 100) : 0;
+      return { done: done, total: total, pct: total ? Math.round(done / total * 100) : 0 };
+    },
+    classProgressPct: function (cls, lessonProblemCounts) {
+      return this.classCompletion(cls, lessonProblemCounts).pct;
     },
 
     // ----- drawings -----
