@@ -623,7 +623,9 @@ window.App = (function () {
   //            stay on a slot (new numbers each try) until you get it right ----------
   function startGenSession(cls, lid, lesson) {
     var plan = [["easy", false], ["easy", false], ["medium", false], ["medium", false], ["hard", false], ["hard", false], ["extreme", true]];
-    var slot = 0, streak = 0, solved = 0, inst = null, checked = false, chosen = null;
+    // resume where you left off (don't reset progress)
+    var slot = Store.getGenSlot(cls.id, lid) || 0; if (slot >= plan.length) slot = 0;
+    var streak = 0, solved = slot, inst = null, checked = false, chosen = null, seen = {};
 
     var session = el("div", "session");
     var top = el("div", "session-top");
@@ -639,9 +641,12 @@ window.App = (function () {
     document.body.appendChild(session);
 
     function loadSlot() {
-      if (slot >= plan.length) return finish();
+      if (slot >= plan.length) { Store.setGenSlot(cls.id, lid, plan.length); return finish(); }
       var diff = plan[slot][0];
-      inst = Generators.make(lid, diff);
+      // don't repeat a question you've already been shown this session
+      inst = null;
+      for (var t = 0; t < 14; t++) { var cand = Generators.make(lid, diff); if (cand && !seen[cand.prompt]) { inst = cand; break; } inst = cand; }
+      if (inst) seen[inst.prompt] = true;
       checked = false; chosen = null;
       renderInstance(plan[slot][1]);
     }
@@ -698,11 +703,11 @@ window.App = (function () {
           }
           setStreak(streak);
         } else {
-          if (verdict.classList.contains("right")) { solved++; slot++; loadSlot(); }
+          if (verdict.classList.contains("right")) { solved++; slot++; Store.setGenSlot(cls.id, lid, slot); loadSlot(); }
           else { loadSlot(); } // same difficulty, new numbers
         }
       };
-      skipBtn.onclick = function () { slot++; loadSlot(); };
+      skipBtn.onclick = function () { slot++; Store.setGenSlot(cls.id, lid, slot); loadSlot(); };
     }
 
     function finish() {

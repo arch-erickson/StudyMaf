@@ -506,3 +506,22 @@ body.ipad-mode input, body.ipad-mode textarea, body.ipad-mode [contenteditable] 
 .nb-prim.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 .nb-props-panel { position: fixed; right: 16px; top: 120px; z-index: 110; background: var(--surface); border: 1px solid var(--line);
   border-radius: 12px; box-shadow: var(--shadow-lg); padding: 14px; width: 240px; display: flex; flex-direction: column; gap: 10px; }
+
+/* Notebook: horizontal drawing tools + vertical settings bar on the right */
+.nb-area { flex: 1; display: flex; min-height: 0; }
+.nb-side { display: flex; flex-direction: column; gap: 6px; padding: 8px; border-left: 1px solid var(--line); background: var(--surface); align-items: center; }
+.nb-side .nb-tbtn { width: 40px; height: 40px; }
+.nb-slider { display: inline-flex; align-items: center; gap: 5px; }
+.nb-slider-lbl { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--ink-soft); }
+.nb-slider .nb-size { width: 66px; }
+
+/* Calculator: X actually closes (class display:flex was beating the hidden attribute); minimize = small bar */
+.calc-dock[hidden] { display: none !important; }
+.calc-dock.min { width: 280px !important; height: auto !important; }
+.calc-dock.min .calc-main { display: none; }
+/* Bigger cursor arrows in the calculator */
+.calc-second-row .calc-key.op { min-width: 48px; }
+
+/* Immersive lock: kill page-level scroll so the browser toolbar can't reappear on scroll */
+body.immersive { position: fixed; inset: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; }
+body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }

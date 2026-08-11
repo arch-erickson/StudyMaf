@@ -13,7 +13,7 @@ window.Notebook = (function () {
   var PAGE_W = 1100, PAGE_H = 1500, MIN_ZOOM = 0.4, MAX_ZOOM = 2.5;
   var overlay, canvas, ctx, base, baseCtx, dpr = 1, active = {};
   var strokes = [], history = [], future = [], cur = null;
-  var tool = "pencil", color = "#2D3142", size = 2.4, opacity = 1, zoom = 1, layout = "full";
+  var tool = "pencil", color = "#2D3142", size = 2.4, opacity = 1, smoothing = 0.35, zoom = 1, layout = "full";
   var curvePts = [], curveDoneBtn = null;  // Illustrator-style curvature tool: click to add anchor points
   var shapeType = "rect", shapeFill = null, selected = null;  // shapes + select/move tools
   var grid = { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 };
@@ -21,6 +21,11 @@ window.Notebook = (function () {
 
   function el(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
   function ic(n) { return window.Icons ? Icons.get(n) : ""; }
+  function labeledSlider(label, min, max, val, oninput) {
+    var wrap = el("span", "nb-slider"); wrap.appendChild(el("span", "nb-slider-lbl", label));
+    var r = document.createElement("input"); r.type = "range"; r.min = min; r.max = max; r.value = val; r.className = "nb-size";
+    r.oninput = function () { oninput(+r.value); }; wrap.appendChild(r); return wrap;
+  }
 
   // ---------------- open ----------------
   function openScratch(info) {
@@ -54,8 +59,8 @@ window.Notebook = (function () {
     // tool bar
     var bar = el("div", "nb-tools");
     var tools = [
-      ["pencil", "pen", "Pencil — smooth handwriting"], ["brush", "brush", "Brush — pressure"],
-      ["highlighter", "highlighter", "Highlighter"], ["pen", "curve", "Pen — tap points for straight lines (tap the first point to close a shape)"],
+      ["pencil", "pencil", "Pencil — smooth handwriting"], ["brush", "brush", "Brush — pressure"],
+      ["highlighter", "highlighter", "Highlighter"], ["pen", "polyline", "Pen — tap points for straight lines (tap the first point to close a shape)"],
       ["curve", "curve", "Curvature — tap points for a smooth curve"], ["shapes", "shapes", "Shapes"],
       ["select", "cursor", "Select & move"], ["eraser", "eraser", "Eraser"]
     ];
@@ -67,39 +72,38 @@ window.Notebook = (function () {
     var col = document.createElement("input"); col.type = "color"; col.value = color; col.className = "nb-color"; col.title = "Color";
     col.oninput = function () { color = col.value; if (tool === "eraser") setTool("pen", toolBtns); };
     bar.appendChild(col);
-    var range = document.createElement("input"); range.type = "range"; range.min = "1"; range.max = "20"; range.value = String(size);
-    range.className = "nb-size"; range.title = "Stroke width"; range.oninput = function () { size = +range.value; };
-    bar.appendChild(range);
-    var opWrap = el("span", "nb-op"); opWrap.title = "Opacity"; opWrap.innerHTML = ic("droplet");
-    var opRange = document.createElement("input"); opRange.type = "range"; opRange.min = "10"; opRange.max = "100"; opRange.value = String(Math.round(opacity * 100));
-    opRange.className = "nb-size"; opRange.oninput = function () { opacity = +opRange.value / 100; };
-    opWrap.appendChild(opRange); bar.appendChild(opWrap);
+    bar.appendChild(labeledSlider("Size", 1, 20, size, function (v) { size = v; }));
+    bar.appendChild(labeledSlider("Opacity", 10, 100, Math.round(opacity * 100), function (v) { opacity = v / 100; }));
+    bar.appendChild(labeledSlider("Smooth", 0, 90, Math.round(smoothing * 100), function (v) { smoothing = v / 100; }));
     var doneCurveB = el("button", "nb-tbtn nb-curve-done"); doneCurveB.innerHTML = ic("check2"); doneCurveB.title = "Finish curve"; doneCurveB.style.display = "none";
     doneCurveB.onclick = finishCurve; bar.appendChild(doneCurveB);
     curveDoneBtn = doneCurveB;
+    shell.appendChild(bar);
+
+    // canvas area = scroller + a VERTICAL settings toolbar on the right
+    var area = el("div", "nb-area");
+    var scroller = el("div", "nb-scroller");
+    canvas = document.createElement("canvas"); canvas.className = "nb-canvas";
+    scroller.appendChild(canvas); area.appendChild(scroller);
+
+    var side = el("div", "nb-side");
     var undoB = el("button", "nb-tbtn"); undoB.innerHTML = ic("undo"); undoB.title = "Undo"; undoB.onclick = undo;
     var redoB = el("button", "nb-tbtn"); redoB.innerHTML = ic("undo"); redoB.title = "Redo";
     redoB.querySelector("svg").style.transform = "scaleX(-1)"; redoB.onclick = redo;
     var clearB = el("button", "nb-tbtn"); clearB.innerHTML = ic("trash"); clearB.title = "Delete all"; clearB.onclick = deleteAll;
-    bar.append(undoB, redoB, clearB);
     var gridB = el("button", "nb-tbtn"); gridB.innerHTML = ic("grid"); gridB.title = "Grid & guides"; gridB.onclick = function (e) { toggleGridPanel(gridB); e.stopPropagation(); };
-    bar.appendChild(gridB);
+    side.append(undoB, redoB, clearB, gridB);
     if (ctxInfo.hasSession) {
       var splitB = el("button", "nb-tbtn" + (layout === "right" ? " on" : "")); splitB.innerHTML = ic("columns");
       splitB.title = "Side-by-side with the problem";
       splitB.onclick = function () { setLayout(layout === "right" ? "full" : "right"); splitB.classList.toggle("on", layout === "right"); };
-      bar.appendChild(splitB);
+      side.appendChild(splitB);
     }
-    var zoomOut = el("button", "nb-tbtn"); zoomOut.innerHTML = ic("zoomOut"); zoomOut.title = "Zoom out"; zoomOut.onclick = function () { setZoom(zoom / 1.25); };
     var zoomIn = el("button", "nb-tbtn"); zoomIn.innerHTML = ic("zoomIn"); zoomIn.title = "Zoom in"; zoomIn.onclick = function () { setZoom(zoom * 1.25); };
+    var zoomOut = el("button", "nb-tbtn"); zoomOut.innerHTML = ic("zoomOut"); zoomOut.title = "Zoom out"; zoomOut.onclick = function () { setZoom(zoom / 1.25); };
     var zLabel = el("span", "nb-zoom"); zLabel.id = "nb-zoom";
-    bar.append(zoomOut, zoomIn, zLabel);
-    shell.appendChild(bar);
-
-    // scroll + canvas
-    var scroller = el("div", "nb-scroller");
-    canvas = document.createElement("canvas"); canvas.className = "nb-canvas";
-    scroller.appendChild(canvas); shell.appendChild(scroller);
+    side.append(zoomIn, zoomOut, zLabel);
+    area.appendChild(side); shell.appendChild(area);
     overlay.appendChild(shell);
 
     calcBtn.onclick = function () { Calculator.open(); };
@@ -187,6 +191,23 @@ window.Notebook = (function () {
   // stroke as a single path (instead of stacking incremental segments) keeps lines
   // continuous AND keeps opacity/highlighter consistent between live and re-render.
   function render() { rebuildBase(); paint(); }
+  // draw only the newest segment of the active stroke directly on the main canvas —
+  // no full re-blit, so contact is instant while writing (committed strokes stay on
+  // the base layer and are re-rendered correctly on commit).
+  function drawLiveSegment(s) {
+    var pts = s.points, n = pts.length; if (n < 2) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleOn(ctx, s);
+    if (s.tool === "brush") {
+      ctx.lineWidth = brushWidth(s, (pts[n - 2].p + pts[n - 1].p) / 2);
+      ctx.beginPath(); ctx.moveTo(pts[n - 2].x, pts[n - 2].y); ctx.lineTo(pts[n - 1].x, pts[n - 1].y); ctx.stroke();
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; return;
+    }
+    ctx.beginPath();
+    if (n === 2) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); }
+    else { var p0 = pts[n - 3], p1 = pts[n - 2], p2 = pts[n - 1];
+      ctx.moveTo((p0.x + p1.x) / 2, (p0.y + p1.y) / 2); ctx.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2); }
+    ctx.stroke(); ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  }
   function rebuildBase() {
     baseCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     baseCtx.clearRect(0, 0, PAGE_W, PAGE_H);
@@ -409,10 +430,15 @@ window.Notebook = (function () {
             var p = toPage(ev.clientX, ev.clientY);
             if (a.stroke.tool === "brush") p.p = ev.pressure || 0.5;
             var last = a.stroke.points[a.stroke.points.length - 1];
-            if (last && Math.abs(last.x - p.x) < 0.8 && Math.abs(last.y - p.y) < 0.8) return; // skip micro-jitter
+            if (last) {
+              if (Math.abs(last.x - p.x) < 0.7 && Math.abs(last.y - p.y) < 0.7) return; // skip micro-jitter
+              // real-time smoothing: ease the new point toward the last one
+              var k = (a.stroke.tool === "pencil" || a.stroke.tool === "brush") ? smoothing : 0;
+              p.x = last.x * k + p.x * (1 - k); p.y = last.y * k + p.y * (1 - k);
+            }
             a.stroke.points.push(p);
+            drawLiveSegment(a.stroke);   // instant incremental draw (no full re-blit)
           });
-          paint();
         }
         e.preventDefault(); return;
       }

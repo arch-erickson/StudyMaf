@@ -76,10 +76,12 @@ window.Generators = (function () {
           "The zero point sits closer to the smaller charge. Set the force sizes equal.", "m"); }
     ],
     extreme: [
-      function () { var qa = rpick([4, 6, 8]), qb = rpick([2, 4]), r = rpick([0.10, 0.20]); var avg = (qa - qb) / 2; var F = K * avg * 1e-6 * avg * 1e-6 / (r * r);
-        return num("Two identical metal spheres carry $+" + qa + "\\ \\mu\\text{C}$ and $-" + qb + "\\ \\mu\\text{C}$. They touch, then move $" + r + "$ m apart. What force acts between them?", F, sig(F), 0.03,
-          ["Touching lets identical spheres share charge evenly: each gets $\\dfrac{" + qa + " + (-" + qb + ")}{2} = " + avg + "\\ \\mu$C.", "$F = k\\dfrac{(" + avg + "\\times10^{-6})^2}{(" + r + ")^2}$", "$F \\approx " + sig(F) + "$ N, and they repel since both are now positive."],
-          "When identical conductors touch, they split the total charge evenly.", "N"); }
+      function () { var qa = rpick([4, 6, 8]), qb = rpick([2, 4]), r = rpick([0.10, 0.20]); var each = (qa - qb) / 2; var F = K * each * 1e-6 * each * 1e-6 / (r * r);
+        return multi("Two identical metal spheres carry $+" + qa + "\\ \\mu\\text{C}$ and $-" + qb + "\\ \\mu\\text{C}$. They are touched together, then moved $" + r + "$ m apart.",
+          [ { label: "Charge on each sphere after touching (in $\\mu$C)", type: "numeric", answerValue: each, answerText: sig(each), tol: 0.02 },
+            { label: "Force between them afterward (in N)", type: "numeric", answerValue: F, answerText: sig(F), tol: 0.03 } ],
+          ["Touching lets identical spheres share the total charge evenly: each gets $\\dfrac{" + qa + " + (-" + qb + ")}{2} = " + each + "\\ \\mu$C.", "Then $F = k\\dfrac{(" + each + "\\times10^{-6})^2}{(" + r + ")^2} \\approx " + sig(F) + "$ N, repulsive since both are now positive."],
+          "First split the total charge evenly, then use Coulomb's law with the new charges."); }
     ]
   });
 
@@ -124,9 +126,11 @@ window.Generators = (function () {
     ],
     extreme: [
       function () { var nEl = rpick([5, 10, 20]); var q = nEl * E; var Efield = rpick([1e4, 2e4]); var m = q * Efield / 9.8;
-        return num("A charged oil drop hangs still in a field of $" + Efield.toExponential(0) + "$ N/C. It carries $" + nEl + "$ extra electrons. What is its mass, in kg?", m, m.toExponential(2), 0.04,
-          ["For it to hang still, the electric force balances gravity: $qE = mg$.", "Its charge is $q = " + nEl + "e = " + q.toExponential(2) + "$ C.", "$m = qE/g = " + m.toExponential(2) + "$ kg"],
-          "Balance the electric force against gravity, then solve for the mass.", "kg"); }
+        return multi("A charged oil drop hangs perfectly still in an upward field of $" + Efield.toExponential(0) + "$ N/C. It carries $" + nEl + "$ extra electrons.",
+          [ { label: "Its charge $q$ (in C)", type: "numeric", answerValue: q, answerText: q.toExponential(2), tol: 0.03 },
+            { label: "Its mass (in kg)", type: "numeric", answerValue: m, answerText: m.toExponential(2), tol: 0.04 } ],
+          ["Charge is $q = " + nEl + "e = " + q.toExponential(2) + "$ C.", "Hanging still means the electric force balances gravity: $qE = mg$, so $m = qE/g = " + m.toExponential(2) + "$ kg."],
+          "The charge is $n\\times e$; for it to hang, the electric force must balance gravity."); }
     ]
   });
 

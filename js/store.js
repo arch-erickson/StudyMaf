@@ -81,6 +81,10 @@ window.Store = (function () {
       var k = this._pkey(cid, lid);
       return state.progress[k] || { done: {}, xp: 0 };
     },
+    // resume point for the generative session (which of the 7 slots you're on)
+    getGenSlot: function (cid, lid) { var p = this.lessonProgress(cid, lid); return p.genSlot || 0; },
+    setGenSlot: function (cid, lid, n) { var k = this._pkey(cid, lid); var p = state.progress[k] || { done: {}, xp: 0 }; p.genSlot = n; state.progress[k] = p; save(); },
+
     markProblemDone: function (cid, lid, pid, xp) {
       var k = this._pkey(cid, lid);
       var p = state.progress[k] || { done: {}, xp: 0 };

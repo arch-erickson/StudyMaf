@@ -37,6 +37,8 @@ window.Icons = (function () {
     grid: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>',
     brush: '<path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/>',
     curve: '<path d="M4 17 C 8 5, 16 5, 20 17"/><circle cx="4" cy="17" r="2" fill="currentColor" stroke="none"/><circle cx="20" cy="17" r="2" fill="currentColor" stroke="none"/>',
+    polyline: '<polyline points="4 18 10 8 15 14 20 5"/><circle cx="4" cy="18" r="2" fill="currentColor" stroke="none"/><circle cx="10" cy="8" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="2" fill="currentColor" stroke="none"/><circle cx="20" cy="5" r="2" fill="currentColor" stroke="none"/>',
+    pencil: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>',
     droplet: '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
     check2: '<polyline points="20 6 9 17 4 12"/>',
     fullscreen: '<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>',
