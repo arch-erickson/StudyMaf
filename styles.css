@@ -158,6 +158,24 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .lesson-panel[hidden] { display: none; }
 .lesson-panel .lp-summary { color: var(--ink-soft); margin: 14px 0 16px; }
 .lesson-panel .lp-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+/* difficulty chooser */
+.lp-diff { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.lp-diff-label { font-size: .75rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-right: 2px; }
+.lp-pill { font: inherit; font-size: .82rem; font-weight: 700; padding: 6px 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft); border-radius: 999px; cursor: pointer; }
+.lp-pill:hover { border-color: var(--accent); color: var(--ink); }
+.lp-pill.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+/* tutorial mode */
+.tut-tag { display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin-bottom: 6px; }
+.tut-block { margin: 6px 0 14px; }
+.tut-hintline { background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; margin: 0 0 16px; }
+.tut-hintline p { margin: 0; }
+.tut-steps { display: flex; flex-direction: column; gap: 12px; }
+.tut-step { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.tut-step-n { display: inline-block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-bottom: 6px; }
+.tut-step p { margin: 0; }
+.tut-answer { border: 1px solid var(--accent); background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; }
+.tut-answer .final-answer { margin: 0; font-weight: 800; }
+.tut-tip { color: var(--ink-soft); font-size: .9rem; margin: 6px 2px 0; }
 
 /* ---------- Study session (one problem at a time) ---------- */
 .session { position: fixed; inset: 0; background: var(--bg); z-index: 60; display: flex; flex-direction: column; }
@@ -171,7 +189,7 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .session-body { flex: 1; overflow-y: auto; }
 .session-inner { max-width: 720px; margin: 0 auto; padding: 30px 22px 140px; }
 .q-badge { display: inline-block; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #fff; padding: 4px 11px; border-radius: 999px; margin-bottom: 14px; }
-.q-badge.easy{background:var(--easy)} .q-badge.medium{background:var(--medium)} .q-badge.hard{background:var(--hard)} .q-badge.stretch{background:var(--stretch)}
+.q-badge.easy{background:var(--easy)} .q-badge.medium{background:var(--medium)} .q-badge.hard{background:var(--hard)} .q-badge.stretch{background:var(--stretch)} .q-badge.extreme{background:var(--stretch)}
 .q-prompt { font-size: 1.35rem; line-height: 1.5; margin: 0 0 24px; }
 .answer-box { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .answer-box input { flex: 1 1 240px; font: inherit; font-size: 1.05rem; padding: 14px 16px; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); }

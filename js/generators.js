@@ -25,6 +25,10 @@ window.Generators = (function () {
 
   function register(lessonId, sets) { reg[lessonId] = sets; }
   function has(lessonId) { return !!reg[lessonId]; }
+  function difficulties(lessonId) {
+    var set = reg[lessonId]; if (!set) return [];
+    return ["easy", "medium", "hard", "extreme"].filter(function (d) { return set[d] && set[d].length; });
+  }
   function make(lessonId, difficulty) {
     var set = reg[lessonId]; if (!set) return null;
     var fns = set[difficulty] || set.medium || []; if (!fns.length) return null;
@@ -134,5 +138,5 @@ window.Generators = (function () {
     ]
   });
 
-  return { register: register, has: has, make: make };
+  return { register: register, has: has, make: make, difficulties: difficulties };
 })();

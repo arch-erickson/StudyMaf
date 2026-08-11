@@ -417,15 +417,32 @@ window.App = (function () {
         loadLesson(lid).then(function (lesson) {
           panel.innerHTML = "";
           var sum = el("p", "lp-summary", lesson.summary); panel.appendChild(sum); StudyMath.render(sum);
+          // difficulty chooser — pick the level of problems you want to practice
+          var diffs = lessonDifficulties(lid, lesson);
+          var chosenDiff = "mixed";
+          var diffRow = el("div", "lp-diff");
+          diffRow.appendChild(el("span", "lp-diff-label", "Difficulty"));
+          var pills = [];
+          function setDiff(v) { chosenDiff = v; pills.forEach(function (p) { p.classList.toggle("on", p.getAttribute("data-v") === v); }); }
+          [{ v: "mixed", l: "Mixed" }].concat(diffs.map(function (d) { return { v: d, l: diffLabel(d) }; })).forEach(function (o) {
+            var pill = el("button", "lp-pill", o.l); pill.setAttribute("data-v", o.v);
+            pill.onclick = function () { setDiff(o.v); }; pills.push(pill); diffRow.appendChild(pill);
+          });
+          setDiff("mixed");
+          panel.appendChild(diffRow);
+
           var acts = el("div", "lp-actions");
           var startLbl = doneN > 0 && doneN < total ? "Continue" : (doneN >= total ? "Practice again" : "Start lesson");
           var start = ib("btn primary", "play", startLbl);
-          start.onclick = function () { startSession(cls, lid, lesson); };
+          start.onclick = function () { startSession(cls, lid, lesson, chosenDiff); };
+          var tut = ib("btn ghost", "bulb", "Tutorial");
+          tut.title = "A worked example, step by step";
+          tut.onclick = function () { startTutorial(cls, lid, lesson, chosenDiff === "mixed" ? (diffs[0] || "medium") : chosenDiff); };
           var concepts = ib("btn ghost", "bookOpen", "Read concepts");
           concepts.onclick = function () { conceptReader(lesson); };
           var test = ib("btn ghost", "target", "Practice test");
           test.onclick = function () { startTest(cls, lid, lesson); };
-          acts.append(start, concepts, test);
+          acts.append(start, tut, concepts, test);
           panel.appendChild(acts);
         }).catch(function (e) { panel.innerHTML = "<p class='lp-summary'>Couldn't load lesson: " + esc(e.message) + "</p>"; });
       }
@@ -508,13 +525,31 @@ window.App = (function () {
   // ====================================================================
   // Dispatcher: use the generation engine when the lesson has generators,
   // otherwise fall back to the lesson's static problems.
-  function startSession(cls, lid, lesson) {
-    if (window.Generators && Generators.has(lid)) return startGenSession(cls, lid, lesson);
-    return startStaticSession(cls, lid, lesson);
+  function startSession(cls, lid, lesson, difficulty) {
+    if (window.Generators && Generators.has(lid)) return startGenSession(cls, lid, lesson, difficulty);
+    return startStaticSession(cls, lid, lesson, difficulty);
   }
 
-  function startStaticSession(cls, lid, lesson) {
+  // Which difficulty levels this lesson can offer (generative or static).
+  function diffLabel(d) { return d === "stretch" ? "Stretch" : d.charAt(0).toUpperCase() + d.slice(1); }
+  function lessonDifficulties(lid, lesson) {
+    if (window.Generators && Generators.has(lid)) {
+      var d = Generators.difficulties ? Generators.difficulties(lid) : [];
+      return d.length ? d : ["easy", "medium", "hard", "extreme"];
+    }
+    var order = ["easy", "medium", "hard", "stretch"], have = {};
+    (lesson.problems || []).forEach(function (p) { have[p.difficulty] = true; });
+    var out = order.filter(function (k) { return have[k]; });
+    return out.length ? out : ["medium"];
+  }
+
+  function startStaticSession(cls, lid, lesson, difficulty) {
     var problems = lesson.problems || [];
+    if (difficulty && difficulty !== "mixed") {
+      var want = difficulty === "extreme" ? "stretch" : difficulty;
+      var filtered = problems.filter(function (p) { return p.difficulty === want; });
+      if (filtered.length) problems = filtered;
+    }
     var idx = 0, streak = 0;
     var prog = Store.lessonProgress(cls.id, lid);
     // resume at first not-done
@@ -621,10 +656,18 @@ window.App = (function () {
 
   // ---------- generative session: 2 easy / 2 medium / 2 hard / 1 extreme,
   //            stay on a slot (new numbers each try) until you get it right ----------
-  function startGenSession(cls, lid, lesson) {
-    var plan = [["easy", false], ["easy", false], ["medium", false], ["medium", false], ["hard", false], ["hard", false], ["extreme", true]];
-    // resume where you left off (don't reset progress)
-    var slot = Store.getGenSlot(cls.id, lid) || 0; if (slot >= plan.length) slot = 0;
+  function startGenSession(cls, lid, lesson, difficulty) {
+    var single = difficulty && difficulty !== "mixed";
+    var plan;
+    if (single) {
+      var n = difficulty === "extreme" ? 3 : 6; plan = [];
+      for (var pi = 0; pi < n; pi++) plan.push([difficulty, difficulty === "extreme"]);
+    } else {
+      plan = [["easy", false], ["easy", false], ["medium", false], ["medium", false], ["hard", false], ["hard", false], ["extreme", true]];
+    }
+    // resume where you left off in the full (mixed) lesson; single-difficulty runs start fresh
+    function saveSlot(s) { if (!single) Store.setGenSlot(cls.id, lid, s); }
+    var slot = single ? 0 : (Store.getGenSlot(cls.id, lid) || 0); if (slot >= plan.length) slot = 0;
     var streak = 0, solved = slot, inst = null, checked = false, chosen = null, seen = {};
 
     var session = el("div", "session");
@@ -641,7 +684,7 @@ window.App = (function () {
     document.body.appendChild(session);
 
     function loadSlot() {
-      if (slot >= plan.length) { Store.setGenSlot(cls.id, lid, plan.length); return finish(); }
+      if (slot >= plan.length) { saveSlot(plan.length); return finish(); }
       var diff = plan[slot][0];
       // don't repeat a question you've already been shown this session
       inst = null;
@@ -703,11 +746,11 @@ window.App = (function () {
           }
           setStreak(streak);
         } else {
-          if (verdict.classList.contains("right")) { solved++; slot++; Store.setGenSlot(cls.id, lid, slot); loadSlot(); }
+          if (verdict.classList.contains("right")) { solved++; slot++; saveSlot(slot); loadSlot(); }
           else { loadSlot(); } // same difficulty, new numbers
         }
       };
-      skipBtn.onclick = function () { slot++; Store.setGenSlot(cls.id, lid, slot); loadSlot(); };
+      skipBtn.onclick = function () { slot++; saveSlot(slot); loadSlot(); };
     }
 
     function finish() {
@@ -725,6 +768,95 @@ window.App = (function () {
     }
 
     loadSlot();
+  }
+
+  // ====================================================================
+  // TUTORIAL MODE — a fully worked example with sample numbers, revealed
+  // one step at a time so the student sees what each part means and why.
+  // ====================================================================
+  function tutorialAnswer(inst) {
+    function one(o) {
+      if (o.type === "mc") return o.choices ? o.choices[o.answerIndex] : "";
+      var t = (o.answerText != null && o.answerText !== "") ? o.answerText : o.answerValue;
+      return t + (o.unit ? (" " + o.unit) : "");
+    }
+    if (inst.type === "multi") {
+      return (inst.parts || []).map(function (pt, i) { return String.fromCharCode(97 + i) + ") " + one(pt); }).join("    ");
+    }
+    return one(inst);
+  }
+  function tutorialInstance(lid, lesson, difficulty) {
+    if (window.Generators && Generators.has(lid)) {
+      var inst = Generators.make(lid, difficulty) || Generators.make(lid, "medium");
+      if (!inst) return null;
+      inst.answerText = tutorialAnswer(inst);
+      return inst;
+    }
+    var want = difficulty === "extreme" ? "stretch" : difficulty;
+    var probs = lesson.problems || [];
+    var pool = probs.filter(function (p) { return p.difficulty === want; });
+    if (!pool.length) pool = probs;
+    if (!pool.length) return null;
+    var p = pool[Math.floor(Math.random() * pool.length)];
+    return { difficulty: p.difficulty, prompt: p.prompt, steps: p.solution_steps || [], answerText: p.correct_answer, hint: p.hint };
+  }
+  function startTutorial(cls, lid, lesson, difficulty) {
+    var inst = tutorialInstance(lid, lesson, difficulty);
+    if (!inst) { toast("No example available for this lesson yet."); return; }
+    var body = "<h2>Tutorial · " + esc(lesson.title) + "</h2>" +
+      "<p class='modal-sub'>A worked example with real sample numbers. We go one step at a time and explain what each piece means and why — then you'll be ready to try your own.</p>" +
+      "<div id='tut-body'></div>";
+    var m = modal(body + "<div class='modal-actions'><button class='btn ghost' id='tut-new'>New example</button><button class='btn primary' data-close>Done</button></div>", { wide: true });
+    var host = m.querySelector("#tut-body");
+    renderTutorial(host, inst, lesson);
+    m.querySelector("#tut-new").onclick = function () {
+      var ni = tutorialInstance(lid, lesson, difficulty); if (ni) renderTutorial(host, ni, lesson);
+    };
+  }
+  function renderTutorial(host, inst, lesson) {
+    var gloss = lesson.glossary || null;
+    host.innerHTML = "";
+    host.appendChild(el("span", "q-badge " + inst.difficulty, inst.difficulty));
+    var qtag = el("div", "tut-block");
+    qtag.appendChild(el("span", "tut-tag", "The question"));
+    var qp = el("div", "q-prompt"); qp.textContent = inst.prompt; qtag.appendChild(qp);
+    host.appendChild(qtag); StudyMath.render(qp);
+
+    if (inst.hint) {
+      var hb = el("div", "tut-hintline");
+      hb.appendChild(el("span", "tut-tag", "Where to start"));
+      var hp = el("p"); richText(hp, inst.hint, gloss); hb.appendChild(hp);
+      host.appendChild(hb); StudyMath.render(hb);
+    }
+
+    var stepsWrap = el("div", "tut-steps"); host.appendChild(stepsWrap);
+    var steps = inst.steps || [];
+    var shown = 0, moreBtn = null, answered = false;
+    function renderMore() {
+      if (moreBtn) moreBtn.remove();
+      moreBtn = el("button", "reveal-more", shown < steps.length ? ("Next step (" + (steps.length - shown) + " left) →") : "Show the answer →");
+      moreBtn.onclick = advance; stepsWrap.appendChild(moreBtn);
+    }
+    function advance() {
+      if (shown < steps.length) {
+        var row = el("div", "tut-step");
+        row.appendChild(el("span", "tut-step-n", "Step " + (shown + 1)));
+        var pp = el("p"); richText(pp, steps[shown], gloss); row.appendChild(pp);
+        stepsWrap.appendChild(row); StudyMath.render(row);
+        shown++; renderMore();
+      } else { revealAnswer(); }
+    }
+    function revealAnswer() {
+      if (answered) return; answered = true;
+      if (moreBtn) moreBtn.remove();
+      var fa = el("div", "tut-answer");
+      fa.appendChild(el("span", "tut-tag", "Answer"));
+      var fp = el("p", "final-answer"); fp.textContent = inst.answerText; fa.appendChild(fp);
+      stepsWrap.appendChild(fa); StudyMath.render(fa);
+      var tip = el("p", "tut-tip", "The numbers change from problem to problem, but these steps stay the same. Try one yourself now.");
+      stepsWrap.appendChild(tip);
+    }
+    if (steps.length) renderMore(); else revealAnswer();
   }
 
   // ---- generative-question field builders + checker ----
