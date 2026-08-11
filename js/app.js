@@ -978,16 +978,42 @@ window.App = (function () {
     c.innerHTML = icon("calculator") + "<span>Calculator</span>";
     c.onclick = function () { Calculator.open(); };
     var fs = document.getElementById("open-fs");
-    fs.innerHTML = icon("maximize") + "<span>Full screen</span>";
+    fs.innerHTML = icon("fullscreen") + "<span>Full screen</span>";
     fs.onclick = toggleFullscreen;
     document.getElementById("open-accent").onclick = openAccentPicker;
-    document.addEventListener("fullscreenchange", function () {
-      fs.querySelector("span").textContent = document.fullscreenElement ? "Exit full screen" : "Full screen";
-    });
   }
+
+  // In-app immersive mode. iOS Safari has no reliable element fullscreen, and the
+  // browser chrome comes back on scroll — so we hide our own header/footer and fill
+  // the screen. It NEVER exits on scroll; only the floating top-right button exits.
+  var fsExitBtn = null, fsHideTimer = null;
   function toggleFullscreen() {
-    if (document.fullscreenElement) { if (document.exitFullscreen) document.exitFullscreen(); }
-    else { var d = document.documentElement; if (d.requestFullscreen) d.requestFullscreen().catch(function () {}); }
+    if (document.body.classList.contains("immersive")) exitImmersive(); else enterImmersive();
+  }
+  function enterImmersive() {
+    document.body.classList.add("immersive");
+    var d = document.documentElement; if (d.requestFullscreen) d.requestFullscreen().catch(function () {}); // desktop bonus
+    ensureExitBtn();
+    flashExitBtn();                       // show briefly on enter so exit is discoverable
+    window.addEventListener("scroll", onImmersiveScroll, { passive: true });
+    document.addEventListener("scroll", onImmersiveScroll, { passive: true, capture: true }); // inner scrollers too
+  }
+  function exitImmersive() {
+    document.body.classList.remove("immersive");
+    if (fsExitBtn) fsExitBtn.classList.remove("visible");
+    window.removeEventListener("scroll", onImmersiveScroll, { passive: true });
+    document.removeEventListener("scroll", onImmersiveScroll, { passive: true, capture: true });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
+  }
+  function ensureExitBtn() {
+    if (fsExitBtn) return;
+    fsExitBtn = el("button", "fs-exit"); fsExitBtn.innerHTML = icon("x") + "<span>Exit full screen</span>";
+    fsExitBtn.onclick = exitImmersive; document.body.appendChild(fsExitBtn);
+  }
+  function onImmersiveScroll() { if (fsExitBtn) { fsExitBtn.classList.add("visible"); clearTimeout(fsHideTimer); } }
+  function flashExitBtn() {
+    if (!fsExitBtn) return; fsExitBtn.classList.add("visible");
+    clearTimeout(fsHideTimer); fsHideTimer = setTimeout(function () { fsExitBtn.classList.remove("visible"); }, 3500);
   }
   function openAccentPicker() {
     var presets = ["#EF8354", "#e64980", "#7048e8", "#1971c2", "#0ca678", "#f59f00", "#e03131", "#4F5D75"];

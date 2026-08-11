@@ -454,3 +454,15 @@ body.nb-split .session { right: 50%; width: auto; }
 .sign-legend .sl-dot.pos { background: #E8553A; } .sign-legend .sl-dot.neg { background: #2F6DB5; }
 .sign-legend .sl-line { width: 22px; height: 0; border-top: 3px solid #2D3142; }
 .figure svg.is-animated { transition: none; }
+
+/* ---------- Immersive / full-screen mode ---------- */
+body.immersive .site-header, body.immersive .site-footer { display: none; }
+body.immersive { --imm: 1; }
+body.immersive main#app { min-height: 100vh; }
+.fs-exit { position: fixed; top: 14px; right: 14px; z-index: 200; display: inline-flex; align-items: center; gap: 8px;
+  font: inherit; font-weight: 600; font-size: .85rem; padding: 9px 14px; border: none; border-radius: 999px;
+  background: rgba(45,49,66,.92); color: #fff; cursor: pointer; box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s ease, transform .25s ease; }
+.fs-exit.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.fs-exit svg { width: 16px; height: 16px; }
+.fs-exit:hover { background: var(--navy); }
