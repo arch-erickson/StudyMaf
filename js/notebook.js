@@ -13,7 +13,8 @@ window.Notebook = (function () {
   var PAGE_W = 1100, PAGE_H = 1500, MIN_ZOOM = 0.4, MAX_ZOOM = 2.5;
   var overlay, canvas, ctx, dpr = 1;
   var strokes = [], history = [], future = [], cur = null;
-  var tool = "pen", color = "#2D3142", size = 3, zoom = 1, layout = "full";
+  var tool = "pen", color = "#2D3142", size = 3, opacity = 1, zoom = 1, layout = "full";
+  var curvePts = [], curveDoneBtn = null;  // Illustrator-style curvature tool: click to add anchor points
   var grid = { type: "ruled", size: 40, color: "#c3ccd9", opacity: 0.7 };
   var ctxInfo = null;
 
@@ -52,19 +53,27 @@ window.Notebook = (function () {
     // tool bar
     var bar = el("div", "nb-tools");
     var tools = [
-      ["pen", "pen", "Pen"], ["highlighter", "edit", "Highlighter"], ["eraser", "eraser", "Eraser"]
+      ["pen", "pen", "Pen"], ["brush", "brush", "Brush (pressure)"], ["highlighter", "edit", "Highlighter"],
+      ["curve", "curve", "Curvature (tap points)"], ["eraser", "eraser", "Eraser"]
     ];
     var toolBtns = {};
     tools.forEach(function (t) {
       var b = el("button", "nb-tbtn" + (tool === t[0] ? " on" : "")); b.innerHTML = ic(t[1]); b.title = t[2];
-      b.onclick = function () { setTool(t[0], toolBtns); }; toolBtns[t[0]] = b; bar.appendChild(b);
+      b.onclick = function () { finishCurve(); setTool(t[0], toolBtns); }; toolBtns[t[0]] = b; bar.appendChild(b);
     });
     var col = document.createElement("input"); col.type = "color"; col.value = color; col.className = "nb-color"; col.title = "Color";
     col.oninput = function () { color = col.value; if (tool === "eraser") setTool("pen", toolBtns); };
     bar.appendChild(col);
-    var range = document.createElement("input"); range.type = "range"; range.min = "1"; range.max = "14"; range.value = String(size);
-    range.className = "nb-size"; range.title = "Thickness"; range.oninput = function () { size = +range.value; };
+    var range = document.createElement("input"); range.type = "range"; range.min = "1"; range.max = "20"; range.value = String(size);
+    range.className = "nb-size"; range.title = "Stroke width"; range.oninput = function () { size = +range.value; };
     bar.appendChild(range);
+    var opWrap = el("span", "nb-op"); opWrap.title = "Opacity"; opWrap.innerHTML = ic("droplet");
+    var opRange = document.createElement("input"); opRange.type = "range"; opRange.min = "10"; opRange.max = "100"; opRange.value = String(Math.round(opacity * 100));
+    opRange.className = "nb-size"; opRange.oninput = function () { opacity = +opRange.value / 100; };
+    opWrap.appendChild(opRange); bar.appendChild(opWrap);
+    var doneCurveB = el("button", "nb-tbtn nb-curve-done"); doneCurveB.innerHTML = ic("check2"); doneCurveB.title = "Finish curve"; doneCurveB.style.display = "none";
+    doneCurveB.onclick = finishCurve; bar.appendChild(doneCurveB);
+    curveDoneBtn = doneCurveB;
     var undoB = el("button", "nb-tbtn"); undoB.innerHTML = ic("undo"); undoB.title = "Undo"; undoB.onclick = undo;
     var redoB = el("button", "nb-tbtn"); redoB.innerHTML = ic("undo"); redoB.title = "Redo";
     redoB.querySelector("svg").style.transform = "scaleX(-1)"; redoB.onclick = redo;
@@ -125,6 +134,41 @@ window.Notebook = (function () {
     ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, PAGE_W, PAGE_H);
     drawGrid();
     strokes.forEach(drawStroke);
+    drawCurvePreview();
+  }
+  // live preview of the curvature tool's anchor points + smooth curve
+  function drawCurvePreview() {
+    if (!curvePts.length) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (curvePts.length >= 2) {
+      ctx.globalAlpha = opacity; ctx.strokeStyle = color; ctx.lineWidth = size; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      var d = catmullRom(curvePts); ctx.beginPath(); ctx.moveTo(d[0].x, d[0].y);
+      for (var i = 1; i < d.length; i++) ctx.lineTo(d[i].x, d[i].y);
+      ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    ctx.fillStyle = "#EF8354";
+    curvePts.forEach(function (p) { ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, Math.PI * 2); ctx.fill(); });
+  }
+  // Catmull-Rom spline through the anchor points -> dense polyline
+  function catmullRom(ps) {
+    if (ps.length < 3) return ps.slice();
+    var out = [], p;
+    for (var i = 0; i < ps.length - 1; i++) {
+      var p0 = ps[i - 1] || ps[i], p1 = ps[i], p2 = ps[i + 1], p3 = ps[i + 2] || ps[i + 1];
+      for (var t = 0; t < 1; t += 0.1) {
+        var t2 = t * t, t3 = t2 * t;
+        p = { x: 0.5 * ((2 * p1.x) + (-p0.x + p2.x) * t + (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 + (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3),
+              y: 0.5 * ((2 * p1.y) + (-p0.y + p2.y) * t + (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 + (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3) };
+        out.push(p);
+      }
+    }
+    out.push(ps[ps.length - 1]);
+    return out;
+  }
+  function finishCurve() {
+    if (curveDoneBtn) curveDoneBtn.style.display = "none";
+    if (curvePts.length >= 2) { pushHistory(); strokes.push({ tool: "pen", color: color, size: size, opacity: opacity, points: catmullRom(curvePts) }); }
+    curvePts = []; render();
   }
   function drawGrid() {
     if (!grid || grid.type === "none") return;
@@ -145,13 +189,21 @@ window.Notebook = (function () {
   function styleFor(s) {
     ctx.lineCap = "round"; ctx.lineJoin = "round";
     ctx.globalCompositeOperation = s.tool === "eraser" ? "destination-out" : "source-over";
-    ctx.globalAlpha = s.tool === "highlighter" ? 0.3 : 1;
+    ctx.globalAlpha = (s.tool === "highlighter" ? 0.3 : 1) * (s.opacity != null ? s.opacity : 1);
     ctx.strokeStyle = s.color;
     ctx.lineWidth = s.tool === "highlighter" ? s.size * 5 : (s.tool === "eraser" ? s.size * 6 : s.size);
   }
+  function brushWidth(s, p) { return s.size * (0.35 + 1.3 * (p != null ? p : 0.5)); }
   function drawStroke(s) {
     var pts = s.points; if (!pts.length) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
+    if (s.tool === "brush") { // variable width by pen pressure — draw pair by pair
+      for (var b = 1; b < pts.length; b++) {
+        ctx.lineWidth = brushWidth(s, (pts[b - 1].p + pts[b].p) / 2);
+        ctx.beginPath(); ctx.moveTo(pts[b - 1].x, pts[b - 1].y); ctx.lineTo(pts[b].x, pts[b].y); ctx.stroke();
+      }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; return;
+    }
     ctx.beginPath();
     if (pts.length < 3) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y); }
     else {
@@ -165,6 +217,11 @@ window.Notebook = (function () {
   function drawLiveSegment(s) {
     var pts = s.points, n = pts.length; if (n < 2) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); styleFor(s);
+    if (s.tool === "brush") {
+      ctx.lineWidth = brushWidth(s, (pts[n - 2].p + pts[n - 1].p) / 2);
+      ctx.beginPath(); ctx.moveTo(pts[n - 2].x, pts[n - 2].y); ctx.lineTo(pts[n - 1].x, pts[n - 1].y); ctx.stroke();
+      ctx.globalAlpha = 1; return;
+    }
     ctx.beginPath();
     if (n === 2) { ctx.moveTo(pts[0].x, pts[0].y); ctx.lineTo(pts[1].x, pts[1].y); }
     else { var p0 = pts[n - 3], p1 = pts[n - 2], p2 = pts[n - 1];
@@ -187,13 +244,21 @@ window.Notebook = (function () {
     window.addEventListener("resize", invalidateRect);
     function touches() { return Object.keys(pointers).filter(function (id) { return pointers[id].type === "touch"; }).map(function (id) { return pointers[id]; }); }
 
+    var lastTap = 0, lastTapXY = null;
     canvas.addEventListener("pointerdown", function (e) {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
       if (e.pointerType === "pen" || e.pointerType === "mouse") {
-        drawingId = e.pointerId; pushHistory();
         curRect = canvas.getBoundingClientRect(); // fresh rect once per stroke
+        if (tool === "curve") {
+          var cp = toPage(e.clientX, e.clientY), now = Date.now();
+          if (lastTapXY && now - lastTap < 400 && Math.hypot(cp.x - lastTapXY.x, cp.y - lastTapXY.y) < 16) { finishCurve(); lastTapXY = null; e.preventDefault(); return; }
+          curvePts.push(cp); lastTap = now; lastTapXY = cp;
+          if (curveDoneBtn) curveDoneBtn.style.display = curvePts.length ? "" : "none";
+          render(); e.preventDefault(); return;
+        }
+        drawingId = e.pointerId; pushHistory();
         if (tool === "eraser") { erasing = true; eraseAt(toPage(e.clientX, e.clientY)); }
-        else { cur = { tool: tool, color: color, size: size, points: [toPage(e.clientX, e.clientY)] }; }
+        else { var p0 = toPage(e.clientX, e.clientY); if (tool === "brush") p0.p = e.pressure || 0.5; cur = { tool: tool, color: color, size: size, opacity: opacity, points: [p0] }; }
         try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
         e.preventDefault();
       } else { gesture = null; }
@@ -205,7 +270,7 @@ window.Notebook = (function () {
       if (e.pointerId === drawingId) {
         var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; if (!evs.length) evs = [e];
         if (erasing) { evs.forEach(function (ev) { eraseAt(toPage(ev.clientX, ev.clientY)); }); }
-        else if (cur) { evs.forEach(function (ev) { cur.points.push(toPage(ev.clientX, ev.clientY)); drawLiveSegment(cur); }); }
+        else if (cur) { evs.forEach(function (ev) { var p = toPage(ev.clientX, ev.clientY); if (cur.tool === "brush") p.p = ev.pressure || 0.5; cur.points.push(p); drawLiveSegment(cur); }); }
         e.preventDefault(); return;
       }
       var ts = touches();

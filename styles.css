@@ -440,3 +440,9 @@ body.nb-split .session { right: 50%; width: auto; }
 .part-label { font-weight: 700; margin: 0 0 10px; }
 .part-block .answer-box, .part-block .choice-box { margin-bottom: 0; }
 .session-foot .btn.lg { flex: none; }
+
+/* Notebook opacity control + tool extras */
+.nb-op { display: inline-flex; align-items: center; gap: 4px; color: var(--ink-soft); }
+.nb-op svg { width: 16px; height: 16px; }
+.nb-op .nb-size { width: 72px; }
+.nb-tbtn.nb-curve-done { color: var(--accent); border-color: var(--accent); }
