@@ -517,6 +517,20 @@ body.ipad-mode input, body.ipad-mode textarea, body.ipad-mode [contenteditable] 
 
 /* Calculator: X actually closes (class display:flex was beating the hidden attribute); minimize = small bar */
 .calc-dock[hidden] { display: none !important; }
+.calc-dock .calc-head { cursor: grab; touch-action: none; user-select: none; }
+.calc-dock.dragging { cursor: grabbing; transition: none !important; user-select: none; will-change: left, top; }
+.calc-dock.dragging * { pointer-events: none; }
+/* PiP-style edge tab when the calculator is flung mostly off-screen */
+.calc-snap { position: fixed; z-index: 121; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  box-shadow: var(--shadow-lg); cursor: pointer; }
+.calc-snap[hidden] { display: none !important; }
+.calc-snap svg { width: 18px; height: 18px; }
+.calc-snap .cs-label { font: inherit; font-size: .62rem; font-weight: 700; letter-spacing: .04em; writing-mode: vertical-rl; text-transform: uppercase; }
+.calc-snap.left { left: 0; border-left: none; border-radius: 0 12px 12px 0; }
+.calc-snap.right { right: 0; border-right: none; border-radius: 12px 0 0 12px; }
+.calc-snap.bottom { bottom: 0; flex-direction: row; padding: 6px 12px; border-bottom: none; border-radius: 12px 12px 0 0; }
+.calc-snap.bottom .cs-label { writing-mode: horizontal-tb; }
 .calc-dock.min { width: 280px !important; height: auto !important; }
 .calc-dock.min .calc-main { display: none; }
 /* Bigger cursor arrows in the calculator */
@@ -559,6 +573,10 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .calc-angle { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; margin-left: 4px; }
 .calc-ang { font: inherit; font-size: .75rem; font-weight: 700; padding: 4px 9px; border: none; background: var(--surface); color: var(--ink-soft); cursor: pointer; }
 .calc-ang.on { background: var(--accent); color: var(--accent-ink); }
+.calc-target { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; padding: 3px 9px; border: 1px solid var(--line);
+  border-radius: 999px; background: var(--surface); color: var(--ink-soft); font: inherit; font-size: .72rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.calc-target svg { width: 14px; height: 14px; }
+.calc-target.on { border-color: transparent; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
 .calc-tbspacer { flex: 1; }
 .calc-tool { border: none; background: transparent; color: var(--ink-soft); cursor: pointer; padding: 4px 8px; border-radius: 7px; font: inherit; font-size: .8rem; display: inline-grid; place-items: center; }
 .calc-tool:hover { background: var(--surface-2); color: var(--ink); }

@@ -139,13 +139,14 @@ window.Calculator = (function () {
   }
 
   // ---------- scientific side: MathLive editable, click-to-position math field ----------
-  var sciField, sciResult, activeMF = null, lastAns = "";
+  var sciField, sciResult, activeMF = null, lastAns = "", sciLatex = "", targetBtn = null;
+  var snappedSide = null, snapRestore = null;
   function makeField() {
     var mf = document.createElement("math-field");
     try { mf.mathVirtualKeyboardPolicy = "manual"; } catch (e) {}
     mf.setAttribute("math-virtual-keyboard-policy", "manual");
     try { mf.smartMode = false; } catch (e) {}
-    mf.addEventListener("focusin", function () { activeMF = mf; });
+    mf.addEventListener("focusin", function () { activeMF = mf; updateTargetIndicator(); });
     return mf;
   }
   function preventBlur(e) { e.preventDefault(); } // tapping a key must not blur the field
@@ -169,6 +170,7 @@ window.Calculator = (function () {
 
     var fieldRow = el("div", "calc-fieldrow");
     sciField = makeField(); sciField.className = "calc-field"; activeMF = sciField;
+    if (sciLatex) { try { sciField.setValue(sciLatex); } catch (e) {} }
     sciField.addEventListener("input", function () { onFieldInput(); });
     sciField.addEventListener("keydown", function (ev) { if (ev.key === "Enter") { ev.preventDefault(); commitEntry(); } });
     sciResult = el("div", "calc-result");
@@ -188,14 +190,19 @@ window.Calculator = (function () {
       ang.appendChild(b);
     });
     tb.appendChild(ang);
+    var tgt = el("button", "calc-target"); targetBtn = tgt;
+    tgt.title = "Where the keypad types. Click to switch between the scientific field and the graph.";
+    tgt.onmousedown = preventBlur; tgt.onclick = function () { toggleTarget(); };
+    tb.appendChild(tgt);
     var spacer = el("div", "calc-tbspacer"); tb.appendChild(spacer);
     var undoB = el("button", "calc-tool"); undoB.innerHTML = ic("undo"); undoB.onmousedown = preventBlur; undoB.onclick = function () { mfCmd("undo"); onFieldInput(); };
     var redoB = el("button", "calc-tool"); redoB.innerHTML = ic("undo"); var rs = redoB.querySelector("svg"); if (rs) rs.style.transform = "scaleX(-1)"; redoB.onmousedown = preventBlur; redoB.onclick = function () { mfCmd("redo"); onFieldInput(); };
-    var clr = el("button", "calc-tool clearall", "clear all"); clr.onmousedown = preventBlur; clr.onclick = function () { calcHistory = []; if (activeMF) activeMF.setValue(""); build(); };
+    var clr = el("button", "calc-tool clearall", "clear all"); clr.onmousedown = preventBlur; clr.onclick = function () { calcHistory = []; if (activeMF) activeMF.setValue(""); if (activeMF === sciField || !activeMF) sciLatex = ""; build(); };
     tb.append(undoB, redoB, clr);
     wrap.appendChild(tb);
 
     wrap.appendChild(buildKeypad());
+    updateTargetIndicator();
     setTimeout(function () { try { sciField.focus(); } catch (e) {} }, 40);
     return wrap;
   }
@@ -204,7 +211,28 @@ window.Calculator = (function () {
     var latex = ""; try { latex = sciField.getValue("latex"); } catch (e) {}
     if (!latex || !latex.trim() || /placeholder/.test(latex)) return;
     try { var v = round(compile(latexToExpr(latex))(0)); if (isFinite(v)) { calcHistory.push({ latex: latex, result: String(v) }); if (calcHistory.length > 30) calcHistory.shift(); lastAns = String(v); } } catch (e) { return; }
-    sciField.setValue(""); build();
+    sciField.setValue(""); sciLatex = ""; build();
+  }
+
+  // ---- keypad target indicator (scientific field vs a graph equation row) ----
+  function firstGraphField() { return graphOn ? document.querySelector(".eq-mf") : null; }
+  function toggleTarget() {
+    if (activeMF && activeMF._eq) { try { sciField.focus(); } catch (e) {} activeMF = sciField; }
+    else { var g = firstGraphField(); if (g) { try { g.focus(); } catch (e) {} } }
+    updateTargetIndicator();
+  }
+  function updateTargetIndicator() {
+    if (!targetBtn) return;
+    var g = !!(activeMF && activeMF._eq);
+    targetBtn.classList.toggle("on", g);
+    if (g) {
+      var col = (activeMF._eq && activeMF._eq.color) || "#1971c2";
+      targetBtn.style.background = col; targetBtn.style.borderColor = col; targetBtn.style.color = "#fff";
+      targetBtn.innerHTML = ic("graph") + "<span>Graphing</span>";
+    } else {
+      targetBtn.style.background = ""; targetBtn.style.borderColor = ""; targetBtn.style.color = "";
+      targetBtn.innerHTML = ic("calculator") + "<span>Scientific</span>";
+    }
   }
 
   // ---- keypads: main / abc / func (Desmos layout, our theme) ----
@@ -275,6 +303,7 @@ window.Calculator = (function () {
     if (activeMF && activeMF !== sciField && activeMF._eq) { triggerEq(activeMF); return; } // a graph equation field
     if (!sciField || !sciResult) return;
     var latex = ""; try { latex = sciField.getValue("latex"); } catch (e) {}
+    sciLatex = latex;
     if (!latex || !latex.trim() || /placeholder/.test(latex)) { sciResult.textContent = ""; return; }
     try {
       var v = round(compile(latexToExpr(latex))(0));
@@ -492,19 +521,80 @@ window.Calculator = (function () {
     if (notepadOn) { padImage = snapshotPad(); requestAnimationFrame(setupPad); }
   }
   function makeDraggable(node, handle) {
-    var d = false, ox = 0, oy = 0;
+    var d = false, ox = 0, oy = 0, moved = false;
+    function place(x, y) {
+      var w = node.offsetWidth, h = node.offsetHeight;
+      // allow dragging well past the edges so the "more than halfway off" snap can trigger
+      x = Math.max(-w + 44, Math.min(window.innerWidth - 44, x));
+      y = Math.max(0, Math.min(window.innerHeight - 36, y));
+      node.style.left = x + "px"; node.style.top = y + "px";
+    }
+    function move(e) {
+      if (!d) return; moved = true;
+      place(e.clientX - ox, e.clientY - oy);
+    }
+    function up() {
+      if (!d) return; d = false;
+      node.classList.remove("dragging");
+      document.removeEventListener("pointermove", move);
+      document.removeEventListener("pointerup", up);
+      if (moved) maybeSnap();
+    }
     handle.addEventListener("pointerdown", function (e) {
       if (maximized || e.target.closest(".head-btn")) return;
-      d = true; var r = node.getBoundingClientRect();
+      d = true; moved = false;
+      var r = node.getBoundingClientRect();
       node.style.left = r.left + "px"; node.style.top = r.top + "px"; node.style.right = "auto"; node.style.bottom = "auto"; node.style.transform = "none";
-      ox = e.clientX - r.left; oy = e.clientY - r.top; handle.setPointerCapture(e.pointerId);
+      ox = e.clientX - r.left; oy = e.clientY - r.top;
+      node.classList.add("dragging");
+      document.addEventListener("pointermove", move);
+      document.addEventListener("pointerup", up);
+      e.preventDefault();
     });
-    handle.addEventListener("pointermove", function (e) {
-      if (!d) return;
-      node.style.left = Math.max(0, Math.min(window.innerWidth - 120, e.clientX - ox)) + "px";
-      node.style.top = Math.max(0, Math.min(window.innerHeight - 40, e.clientY - oy)) + "px";
-    });
-    handle.addEventListener("pointerup", function () { d = false; });
+  }
+  // Snap to an edge (PiP-style) when the dock is dragged more than halfway off-screen.
+  function maybeSnap() {
+    var r = dock.getBoundingClientRect();
+    var offLeft = -r.left, offRight = r.right - window.innerWidth;
+    var offBottom = r.bottom - window.innerHeight;
+    // collapse to the edge as soon as ~10% of the dock is pushed off-screen
+    var thX = r.width * 0.1, thY = r.height * 0.1, side = null;
+    if (offLeft > thX) side = "left";
+    else if (offRight > thX) side = "right";
+    else if (offBottom > thY) side = "bottom";
+    if (side) snapTo(side, r);
+  }
+  function snapTo(side, r) {
+    snappedSide = side;
+    snapRestore = { top: Math.max(12, Math.min(window.innerHeight - 140, r.top)), left: Math.max(12, Math.min(window.innerWidth - 140, r.left)) };
+    dock.hidden = true; dock.setAttribute("aria-hidden", "true");
+    var tab = document.getElementById("calc-snap");
+    if (!tab) { tab = document.createElement("button"); tab.id = "calc-snap"; document.body.appendChild(tab); }
+    tab.className = "calc-snap " + side;
+    // arrow points back toward the screen (expand direction)
+    var arrow = side === "left" ? ic("chevronRight") : side === "right" ? ic("chevronRight") : ic("chevronRight");
+    tab.innerHTML = '<span class="cs-arrow">' + arrow + '</span><span class="cs-label">Calc</span>';
+    if (side === "right") { var svg = tab.querySelector(".cs-arrow svg"); if (svg) svg.style.transform = "rotate(180deg)"; }
+    if (side === "bottom") { var svg2 = tab.querySelector(".cs-arrow svg"); if (svg2) svg2.style.transform = "rotate(-90deg)"; }
+    if (side === "bottom") { tab.style.left = snapRestore.left + "px"; tab.style.top = ""; }
+    else { tab.style.top = snapRestore.top + "px"; tab.style.left = ""; }
+    tab.hidden = false;
+    tab.onclick = unsnap;
+  }
+  function unsnap() {
+    var tab = document.getElementById("calc-snap"); if (tab) tab.hidden = true;
+    dock.hidden = false; dock.setAttribute("aria-hidden", "false");
+    var w = dock.offsetWidth, h = dock.offsetHeight;
+    var top = snapRestore ? snapRestore.top : 80;
+    var left = snappedSide === "right" ? (window.innerWidth - w - 16)
+      : snappedSide === "left" ? 16
+      : (snapRestore ? snapRestore.left : 16);
+    if (snappedSide === "bottom") top = window.innerHeight - h - 16;
+    dock.style.left = Math.max(8, Math.min(window.innerWidth - w, left)) + "px";
+    dock.style.top = Math.max(8, Math.min(window.innerHeight - 36, top)) + "px";
+    dock.style.right = "auto"; dock.style.bottom = "auto"; dock.style.transform = "none";
+    snappedSide = null;
+    if (graphOn) requestAnimationFrame(redraw);
   }
 
   function open(mode) {
@@ -521,7 +611,7 @@ window.Calculator = (function () {
     mobileMode = true; graphOn = false; notepadOn = false; maximized = false;
     build();
   }
-  function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); mobileMode = false; dock.className = "calc-dock"; }
+  function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); mobileMode = false; dock.className = "calc-dock"; var tab = document.getElementById("calc-snap"); if (tab) tab.hidden = true; snappedSide = null; }
 
   return { open: open, openMobile: openMobile, close: close };
 })();
