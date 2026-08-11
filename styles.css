@@ -230,8 +230,8 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .head-btn.graph-toggle[aria-pressed="true"] { background: var(--accent); }
 
 .calc-main { display: flex; align-items: stretch; }
-.calc-sci { padding: 12px; width: 340px; flex: none; box-sizing: border-box; }
-.calc-dock.graph .calc-sci { border-left: 1px solid var(--line); }
+.calc-sci { padding: 12px; flex: 1 1 auto; min-width: 300px; box-sizing: border-box; }
+.calc-dock.graph .calc-sci, .calc-dock.notepad .calc-sci { flex: none; border-left: 1px solid var(--line); }
 .calc-graphpane { flex: 1; min-width: 0; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 
 .calc-display { width: 100%; text-align: right; font-family: "Inter", ui-monospace, monospace; font-size: 1.4rem; font-weight: 600;
@@ -543,9 +543,11 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .calc-dock.graph .calc-graphpane { flex: 1; min-width: 260px; }
 
 /* ---------- Calculator: Desmos-style tabs, keypad, history ---------- */
-.calc-sci { display: flex; flex-direction: column; }
+.calc-sci { display: flex; flex-direction: column; min-height: 0; }
+/* history grows to fill vertical space (blank above the input, Desmos-style); keypad stays anchored at the bottom */
 .calc-history { flex: 1 1 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; }
-.calc-history:empty { display: none; }
+.calc-grid2 { flex: 0 0 auto; }
+.calc-fieldrow, .calc-tabs2 { flex: 0 0 auto; }
 .calc-hrow { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 8px; border-bottom: 1px solid var(--line); cursor: pointer; }
 .calc-hrow:hover { background: var(--surface-2); }
 .calc-hlatex { overflow-x: auto; } .calc-hres { color: var(--ink-soft); font-weight: 700; white-space: nowrap; }
@@ -591,3 +593,10 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .eq-ftitle { flex: 1; min-width: 0; font: inherit; font-weight: 700; font-size: .9rem; border: none; background: transparent; color: var(--ink); }
 .eq-addbar { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 .eq-addbar .eq-add { font-size: .78rem; }
+
+/* Maximize: let the keypad grow so buttons enlarge and all groups stay visible */
+.calc-dock.max .calc-history { flex: 1 1 40%; }
+.calc-dock.max .calc-grid2 { flex: 1 1 auto; grid-auto-rows: minmax(46px, 1fr); }
+.calc-dock.max .calc-sci { flex: 1; min-height: 0; }
+/* Narrow docks: stack panels and keep keypad usable */
+@media (max-width: 560px) { .calc-grid2 .calc-key { padding: 10px 0; font-size: .85rem; } }
