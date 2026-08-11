@@ -247,7 +247,7 @@ window.Notebook = (function () {
   function invalidateRect() { curRect = null; }
   function toPage(cx, cy) { var r = curRect || (curRect = canvas.getBoundingClientRect()); return { x: (cx - r.left) / zoom, y: (cy - r.top) / zoom }; }
   function setupInput() {
-    var pointers = {}, drawingId = null, gesture = null, erasing = false;
+    var pointers = {}, gesture = null;
     var scroller = canvas.parentElement;
     // any movement of the canvas invalidates the cached rect
     scroller.addEventListener("scroll", invalidateRect, { passive: true });
@@ -264,11 +264,14 @@ window.Notebook = (function () {
     canvas.style.touchAction = "none"; canvas.style.webkitUserSelect = "none"; canvas.style.webkitTouchCallout = "none";
     function touches() { return Object.keys(pointers).filter(function (id) { return pointers[id].type === "touch"; }).map(function (id) { return pointers[id]; }); }
 
-    var lastTap = 0, lastTapXY = null;
+    // Each pen/mouse pointer gets its OWN in-progress stroke, so a fast second
+    // pen-down can never overwrite the first stroke's buffer (the cause of dropped
+    // strokes when writing quickly). `active[id]` = { stroke } or { erase:true }.
+    var active = {}, lastTap = 0, lastTapXY = null;
     canvas.addEventListener("pointerdown", function (e) {
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY, type: e.pointerType };
       if (e.pointerType === "pen" || e.pointerType === "mouse") {
-        curRect = canvas.getBoundingClientRect(); // fresh rect once per stroke
+        curRect = canvas.getBoundingClientRect();
         if (tool === "curve" || tool === "pen") { // tap to place anchor points (vector tools)
           var cp = toPage(e.clientX, e.clientY), now = Date.now();
           if (lastTapXY && now - lastTap < 400 && Math.hypot(cp.x - lastTapXY.x, cp.y - lastTapXY.y) < 16) { finishCurve(); lastTapXY = null; e.preventDefault(); return; }
@@ -276,9 +279,9 @@ window.Notebook = (function () {
           if (curveDoneBtn) curveDoneBtn.style.display = curvePts.length ? "" : "none";
           render(); e.preventDefault(); return;
         }
-        drawingId = e.pointerId; pushHistory();
-        if (tool === "eraser") { erasing = true; eraseAt(toPage(e.clientX, e.clientY)); }
-        else { var p0 = toPage(e.clientX, e.clientY); if (tool === "brush") p0.p = e.pressure || 0.5; cur = { tool: tool, color: color, size: size, opacity: opacity, points: [p0] }; }
+        pushHistory();
+        if (tool === "eraser") { active[e.pointerId] = { erase: true }; eraseAt(toPage(e.clientX, e.clientY)); }
+        else { var p0 = toPage(e.clientX, e.clientY); if (tool === "brush") p0.p = e.pressure || 0.5; active[e.pointerId] = { stroke: { tool: tool, color: color, size: size, opacity: opacity, points: [p0] } }; }
         try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
         e.preventDefault();
       } else { gesture = null; }
@@ -287,19 +290,17 @@ window.Notebook = (function () {
     canvas.addEventListener("pointermove", function (e) {
       var pt = pointers[e.pointerId]; if (!pt) return;
       pt.x = e.clientX; pt.y = e.clientY;
-      if (e.pointerId === drawingId) {
+      var a = active[e.pointerId];
+      if (a) {
         var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; if (!evs.length) evs = [e];
-        if (erasing) { evs.forEach(function (ev) { eraseAt(toPage(ev.clientX, ev.clientY)); }); }
-        else if (cur) { evs.forEach(function (ev) { var p = toPage(ev.clientX, ev.clientY); if (cur.tool === "brush") p.p = ev.pressure || 0.5; cur.points.push(p); drawLiveSegment(cur); }); }
+        if (a.erase) { evs.forEach(function (ev) { eraseAt(toPage(ev.clientX, ev.clientY)); }); }
+        else { evs.forEach(function (ev) { var p = toPage(ev.clientX, ev.clientY); if (a.stroke.tool === "brush") p.p = ev.pressure || 0.5; a.stroke.points.push(p); drawLiveSegment(a.stroke); }); }
         e.preventDefault(); return;
       }
       var ts = touches();
       if (ts.length >= 2) {
-        var a = ts[0], b = ts[1], dist = Math.hypot(a.x - b.x, a.y - b.y), cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2;
-        if (gesture && gesture.dist) {
-          setZoom(zoom * (dist / gesture.dist));
-          scroller.scrollLeft -= (cx - gesture.cx); scroller.scrollTop -= (cy - gesture.cy);
-        }
+        var t0 = ts[0], t1 = ts[1], dist = Math.hypot(t0.x - t1.x, t0.y - t1.y), cx = (t0.x + t1.x) / 2, cy = (t0.y + t1.y) / 2;
+        if (gesture && gesture.dist) { setZoom(zoom * (dist / gesture.dist)); scroller.scrollLeft -= (cx - gesture.cx); scroller.scrollTop -= (cy - gesture.cy); }
         gesture = { dist: dist, cx: cx, cy: cy }; e.preventDefault();
       } else if (ts.length === 1) {
         var p = ts[0];
@@ -309,16 +310,18 @@ window.Notebook = (function () {
     }, { passive: false });
 
     function end(e) {
-      if (e.pointerId === drawingId) {
-        if (!erasing && cur && cur.points.length) strokes.push(cur);
-        else if (erasing || (cur && !cur.points.length)) { history.pop(); } // no-op erase/stroke: drop snapshot
-        cur = null; drawingId = null; erasing = false;
+      var a = active[e.pointerId];
+      if (a) {
+        if (a.stroke && a.stroke.points.length > 0) strokes.push(a.stroke);
+        else history.pop();               // erase, or empty stroke: drop the snapshot we pushed
+        delete active[e.pointerId];
       }
       delete pointers[e.pointerId];
       if (touches().length < 2) gesture = null;
     }
     canvas.addEventListener("pointerup", end);
     canvas.addEventListener("pointercancel", end);
+    window.addEventListener("pointerup", end);   // safety net if a pointerup misses the canvas
   }
 
   // object eraser: removes whole strokes the eraser touches (keeps the grid intact)
