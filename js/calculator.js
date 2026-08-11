@@ -579,7 +579,34 @@ window.Calculator = (function () {
     if (side === "bottom") { tab.style.left = snapRestore.left + "px"; tab.style.top = ""; }
     else { tab.style.top = snapRestore.top + "px"; tab.style.left = ""; }
     tab.hidden = false;
-    tab.onclick = unsnap;
+    makeSnapDraggable(tab, side);
+  }
+  // The collapsed tab slides along its edge when dragged; a clean click expands it.
+  function makeSnapDraggable(tab, side) {
+    var d = false, off = 0, dist = 0, startPos = 0, moved = false;
+    tab.onpointerdown = function (e) {
+      d = true; dist = 0; moved = false;
+      var r = tab.getBoundingClientRect();
+      off = side === "bottom" ? (e.clientX - r.left) : (e.clientY - r.top);
+      startPos = side === "bottom" ? e.clientX : e.clientY;
+      try { tab.setPointerCapture(e.pointerId); } catch (er) {}
+      e.preventDefault();
+    };
+    tab.onpointermove = function (e) {
+      if (!d) return;
+      var cur = side === "bottom" ? e.clientX : e.clientY;
+      dist = Math.max(dist, Math.abs(cur - startPos));
+      if (dist > 4) moved = true;
+      if (side === "bottom") {
+        var x = Math.max(0, Math.min(window.innerWidth - tab.offsetWidth, e.clientX - off));
+        tab.style.left = x + "px"; snapRestore.left = x;
+      } else {
+        var y = Math.max(0, Math.min(window.innerHeight - tab.offsetHeight, e.clientY - off));
+        tab.style.top = y + "px"; snapRestore.top = y;
+      }
+    };
+    tab.onpointerup = function (e) { if (!d) return; d = false; try { tab.releasePointerCapture(e.pointerId); } catch (er) {} };
+    tab.onclick = function () { if (moved) { moved = false; return; } unsnap(); };
   }
   function unsnap() {
     var tab = document.getElementById("calc-snap"); if (tab) tab.hidden = true;
