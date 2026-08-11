@@ -265,8 +265,8 @@ window.Calculator = (function () {
     if (k.act === "left") { mfCmd("moveToPreviousChar"); return; }
     if (k.act === "right") { mfCmd("moveToNextChar"); return; }
     if (k.act === "ans") { insertMF(lastAns || "0"); return; }
-    if (k.act === "eq") { if (kbTab === "abc") { insertMF("="); return; } commitEntry(); return; }
-    if (k.act === "enter") { commitEntry(); return; }
+    if (k.act === "eq") { if (kbTab === "abc") { insertMF("="); return; } if (activeMF && activeMF._eq) { addRow("expr", ""); build(); return; } commitEntry(); return; }
+    if (k.act === "enter") { if (activeMF && activeMF._eq) { addRow("expr", ""); build(); return; } commitEntry(); return; }
     var ins = k.ins;
     if (k.cls === "abc" && shiftOn && /^[a-z]$/.test(ins)) ins = ins.toUpperCase();
     insertMF(ins);
@@ -310,53 +310,67 @@ window.Calculator = (function () {
   // ---------- graphing pane ----------
   function buildGraphPane() {
     var pane = el("div", "calc-graphpane");
-
     var list = el("div", "eq-list"); pane.appendChild(list);
-    if (!eqs.length) addEq("2x + 1");
-    eqs.forEach(function (q) { list.appendChild(eqRow(q)); });
-    var addBtn = el("button", "eq-add"); addBtn.innerHTML = ic("plus") + "<span>Add equation</span>";
-    addBtn.onclick = function () { addEq(""); build(); };
-    pane.appendChild(addBtn);
+    if (!eqs.length) addRow("expr", "");
+    var collapsed = false;
+    eqs.forEach(function (q) {
+      if (q.type === "folder") { list.appendChild(folderRow(q)); collapsed = !!q.collapsed; return; }
+      if (collapsed) return;
+      list.appendChild(rowEl(q));
+    });
+    var addBar = el("div", "eq-addbar");
+    var addExpr = el("button", "eq-add"); addExpr.innerHTML = ic("plus") + "<span>Expression</span>"; addExpr.onclick = function () { addRow("expr", ""); build(); };
+    var addNote = el("button", "eq-add"); addNote.innerHTML = "<span>+ Note</span>"; addNote.onclick = function () { addRow("note", ""); build(); };
+    var addFolder = el("button", "eq-add"); addFolder.innerHTML = "<span>+ Folder</span>"; addFolder.onclick = function () { addRow("folder", "New folder"); build(); };
+    addBar.append(addExpr, addNote, addFolder); pane.appendChild(addBar);
 
     var canvasWrap = el("div", "graph-canvas-wrap");
-    graphCanvas = document.createElement("canvas");
-    canvasWrap.appendChild(graphCanvas); pane.appendChild(canvasWrap);
-
+    graphCanvas = document.createElement("canvas"); canvasWrap.appendChild(graphCanvas); pane.appendChild(canvasWrap);
     var bar = el("div", "graph-toolbar");
     var zi = el("button", "gt-btn"); zi.innerHTML = ic("zoomIn"); zi.title = "Zoom in";
     var zo = el("button", "gt-btn"); zo.innerHTML = ic("zoomOut"); zo.title = "Zoom out";
     var rs = el("button", "gt-btn"); rs.innerHTML = ic("refresh"); rs.title = "Reset view";
     zi.onclick = function () { zoom(0.8); }; zo.onclick = function () { zoom(1.25); }; rs.onclick = function () { resetView(); redraw(); };
     var readout = el("span", "graph-readout"); readout.id = "graph-readout";
-    bar.append(zi, zo, rs, readout);
-    pane.appendChild(bar);
-
+    bar.append(zi, zo, rs, readout); pane.appendChild(bar);
     setupGraphInteractions(canvasWrap);
     return pane;
   }
-
-  function addEq(expr) { eqs.push({ id: ++eqSeq, expr: expr, color: EQ_COLORS[eqs.length % EQ_COLORS.length], visible: true }); }
-  function eqRow(q) {
+  function addRow(type, val) {
+    var item = { id: ++eqSeq, type: type, visible: true, collapsed: false };
+    if (type === "expr") { item.color = EQ_COLORS[eqs.filter(function (e) { return e.type === "expr"; }).length % EQ_COLORS.length]; item.latex = ""; item.expr = val || ""; }
+    else if (type === "note") { item.text = val || ""; }
+    else if (type === "folder") { item.title = val || "Folder"; }
+    eqs.push(item);
+  }
+  function folderRow(q) {
+    var row = el("div", "eq-folder");
+    var car = el("button", "eq-fcaret"); car.innerHTML = ic("chevronRight"); var cs = car.querySelector("svg"); if (cs && !q.collapsed) cs.style.transform = "rotate(90deg)";
+    car.onclick = function () { q.collapsed = !q.collapsed; build(); };
+    var t = document.createElement("input"); t.type = "text"; t.className = "eq-ftitle"; t.value = q.title || ""; t.oninput = function () { q.title = t.value; };
+    var rm = el("button", "eq-rm"); rm.innerHTML = ic("trash"); rm.onclick = function () { eqs = eqs.filter(function (z) { return z.id !== q.id; }); build(); };
+    row.append(car, t, rm); return row;
+  }
+  function rowEl(q) {
+    if (q.type === "note") {
+      var nrow = el("div", "eq-row note");
+      var nt = document.createElement("input"); nt.type = "text"; nt.className = "eq-note"; nt.placeholder = "Note…"; nt.value = q.text || ""; nt.oninput = function () { q.text = nt.value; };
+      var nrm = el("button", "eq-rm"); nrm.innerHTML = ic("trash"); nrm.onclick = function () { eqs = eqs.filter(function (z) { return z.id !== q.id; }); build(); };
+      nrow.append(nt, nrm); return nrow;
+    }
     var row = el("div", "eq-row");
-    var dot = el("button", "eq-dot"); dot.style.background = q.color; dot.title = q.visible ? "Hide" : "Show";
+    var dot = el("button", "eq-dot"); dot.style.background = q.visible ? q.color : "transparent"; dot.style.borderColor = q.color; dot.title = q.visible ? "Hide" : "Show";
     dot.innerHTML = q.visible ? "" : ic("eyeOff");
-    dot.onclick = function () { q.visible = !q.visible; dot.innerHTML = q.visible ? "" : ic("eyeOff"); redraw(); };
-    var inp = document.createElement("input"); inp.type = "text"; inp.className = "eq-input";
-    inp.value = q.expr; inp.placeholder = "y = …  (use x)"; inp.spellcheck = false;
-    inp.addEventListener("focus", function () { activeInput = inp; });
-    inp.addEventListener("input", function () { q.expr = inp.value; markValidity(inp, q.expr); redraw(); });
-    inp._eq = q;
-    var rm = el("button", "eq-rm"); rm.innerHTML = ic("trash"); rm.title = "Remove";
-    rm.onclick = function () { eqs = eqs.filter(function (z) { return z.id !== q.id; }); if (activeInput === inp) activeInput = null; build(); };
-    row.append(dot, inp, rm);
-    markValidity(inp, q.expr);
+    dot.onclick = function () { q.visible = !q.visible; dot.style.background = q.visible ? q.color : "transparent"; dot.innerHTML = q.visible ? "" : ic("eyeOff"); redraw(); };
+    var mf = makeField(); mf.className = "eq-mf"; try { mf.value = q.latex || ""; } catch (e) {}
+    mf._eq = q;
+    mf.addEventListener("focusin", function () { activeMF = mf; });
+    mf.addEventListener("input", function () { triggerEq(mf); });
+    var rm = el("button", "eq-rm"); rm.innerHTML = ic("trash"); rm.onclick = function () { eqs = eqs.filter(function (z) { return z.id !== q.id; }); if (activeMF === mf) activeMF = sciField; build(); };
+    row.append(dot, mf, rm);
     return row;
   }
-  function markValidity(inp, expr) {
-    if (!expr.trim()) { inp.classList.remove("bad"); return; }
-    try { compile(expr); inp.classList.remove("bad"); } catch (e) { inp.classList.add("bad"); }
-  }
-  function triggerEq(inp) { if (inp._eq) { inp._eq.expr = inp.value; markValidity(inp, inp.value); redraw(); } }
+  function triggerEq(mf) { if (mf._eq) { var q = mf._eq; try { q.latex = mf.getValue("latex"); } catch (e) {} var prev = angleMode; angleMode = "rad"; q.expr = latexToExpr(q.latex || ""); angleMode = prev; redraw(); } }
 
   // ---------- view + drawing ----------
   function resetView() { view = { xmin: -10, xmax: 10, ymin: -10, ymax: 10 }; }
@@ -403,9 +417,12 @@ window.Calculator = (function () {
     ctx.beginPath(); ctx.moveTo(0, Y(0)); ctx.lineTo(W, Y(0)); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(X(0), 0); ctx.lineTo(X(0), H); ctx.stroke();
 
-    // curves
+    // curves (skip notes/folders, hidden rows, and members of collapsed folders)
+    var collapsed = false;
     eqs.forEach(function (q) {
-      if (!q.visible || !q.expr.trim()) return;
+      if (q.type === "folder") { collapsed = !!q.collapsed; return; }
+      if (collapsed) return;
+      if (q.type !== "expr" || !q.visible || !q.expr || !q.expr.trim()) return;
       var f; try { f = compile(q.expr); } catch (e) { return; }
       ctx.strokeStyle = q.color; ctx.lineWidth = 2.2; ctx.beginPath();
       var started = false, prevY = null;

@@ -577,3 +577,17 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 /* Resizable calculator dock (both directions) */
 .calc-dock { resize: both; min-width: 300px; min-height: 220px; }
 .calc-dock.min { resize: none; }
+
+/* ---------- Calculator graph: math-field rows, notes, folders ---------- */
+.eq-mf { flex: 1; min-width: 0; font-size: 1rem; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface);
+  --caret-color: var(--accent); }
+.eq-mf:focus-within { border-color: var(--accent); }
+.eq-row.note { }
+.eq-note { flex: 1; min-width: 0; font: inherit; font-size: .9rem; font-style: italic; color: var(--ink-soft); border: 1px dashed var(--line);
+  border-radius: 8px; padding: 7px 9px; background: var(--surface); }
+.eq-folder { display: flex; align-items: center; gap: 6px; padding: 4px 2px; border-bottom: 1px solid var(--line); margin-bottom: 2px; }
+.eq-fcaret { background: none; border: none; cursor: pointer; color: var(--ink-soft); display: inline-flex; padding: 2px; }
+.eq-fcaret svg { width: 16px; height: 16px; transition: transform .15s ease; }
+.eq-ftitle { flex: 1; min-width: 0; font: inherit; font-weight: 700; font-size: .9rem; border: none; background: transparent; color: var(--ink); }
+.eq-addbar { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.eq-addbar .eq-add { font-size: .78rem; }
