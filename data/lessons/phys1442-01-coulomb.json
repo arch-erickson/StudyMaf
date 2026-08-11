@@ -2,154 +2,906 @@
   "title": "Electric Charge & Coulomb's Law",
   "summary": "Electric charge comes in two signs, is quantized in units of the elementary charge $e$, and is conserved. Two point charges exert a force on each other given by Coulomb's law, $F = k\\dfrac{|q_1 q_2|}{r^2}$, directed along the line joining them. (University Physics Vol. 2, Ch. 5.)",
   "glossary": {
-    "Coulomb's law": { "plain": "A rule for how strongly two electric charges push or pull on each other, and which way.", "in_class": "You'll use $F=k\\dfrac{|q_1q_2|}{r^2}$ with $k=8.99\\times10^9$ to find the force between point charges, and combine several with superposition." },
-    "elementary charge": { "plain": "The smallest unit of electric charge, the amount carried by one proton (+) or one electron (−).", "in_class": "We call it $e = 1.6\\times10^{-19}$ C. Every charge you meet is a whole-number multiple of $e$." },
-    "coulomb": { "plain": "The SI unit of electric charge, written C — like the meter is for length.", "in_class": "One coulomb is enormous (about $6.25\\times10^{18}$ elementary charges), so real charges are usually µC ($10^{-6}$) or nC ($10^{-9}$)." },
-    "quantized": { "plain": "Coming only in whole-number multiples of a basic amount, never in-between values.", "in_class": "Charge is quantized in units of $e$: you can have $2e$ or $3e$, never $2.5e$." },
-    "conserved": { "plain": "Never created or destroyed — the total amount stays the same.", "in_class": "Charge is conserved: rubbing or touching only moves charge around, so the total before equals the total after." },
-    "point charge": { "plain": "A charged object small enough to treat as if all its charge sits at one single point.", "in_class": "Most Chapter 5 problems model charges as point charges so Coulomb's law applies directly." },
-    "superposition": { "plain": "Finding a total effect by adding up each separate effect one at a time.", "in_class": "The net force on a charge is the vector sum of the Coulomb forces from every other charge." },
-    "inverse-square": { "plain": "Getting weaker with the square of the distance — twice as far means one-quarter as strong.", "in_class": "Coulomb's law is inverse-square in $r$, the same distance-dependence as gravity." },
-    "conductor": { "plain": "A material such as metal in which charges can move around freely.", "in_class": "When two identical conductors touch, their total charge splits equally between them — the key to the sphere problems." }
+    "Coulomb's law": {
+      "plain": "A rule for how strongly two electric charges push or pull on each other, and which way.",
+      "in_class": "You'll use $F=k\\dfrac{|q_1q_2|}{r^2}$ with $k=8.99\\times10^9$ to find the force between point charges, and combine several with superposition."
+    },
+    "elementary charge": {
+      "plain": "The smallest unit of electric charge, the amount carried by one proton (+) or one electron (−).",
+      "in_class": "We call it $e = 1.6\\times10^{-19}$ C. Every charge you meet is a whole-number multiple of $e$."
+    },
+    "coulomb": {
+      "plain": "The SI unit of electric charge, written C — like the meter is for length.",
+      "in_class": "One coulomb is enormous (about $6.25\\times10^{18}$ elementary charges), so real charges are usually µC ($10^{-6}$) or nC ($10^{-9}$)."
+    },
+    "quantized": {
+      "plain": "Coming only in whole-number multiples of a basic amount, never in-between values.",
+      "in_class": "Charge is quantized in units of $e$: you can have $2e$ or $3e$, never $2.5e$."
+    },
+    "conserved": {
+      "plain": "Never created or destroyed — the total amount stays the same.",
+      "in_class": "Charge is conserved: rubbing or touching only moves charge around, so the total before equals the total after."
+    },
+    "point charge": {
+      "plain": "A charged object small enough to treat as if all its charge sits at one single point.",
+      "in_class": "Most Chapter 5 problems model charges as point charges so Coulomb's law applies directly."
+    },
+    "superposition": {
+      "plain": "Finding a total effect by adding up each separate effect one at a time.",
+      "in_class": "The net force on a charge is the vector sum of the Coulomb forces from every other charge."
+    },
+    "inverse-square": {
+      "plain": "Getting weaker with the square of the distance — twice as far means one-quarter as strong.",
+      "in_class": "Coulomb's law is inverse-square in $r$, the same distance-dependence as gravity."
+    },
+    "conductor": {
+      "plain": "A material such as metal in which charges can move around freely.",
+      "in_class": "When two identical conductors touch, their total charge splits equally between them — the key to the sphere problems."
+    }
   },
   "concept_sections": [
-    { "level": 1, "heading": "Two kinds of charge", "explanation": "Matter contains positive charge (protons) and negative charge (electrons). Like charges repel; unlike charges attract. Charge is measured in coulombs. It is quantized: any charge is a whole-number multiple of the elementary charge $e = 1.6\\times10^{-19}$ C, and it is conserved — never created or destroyed, only transferred.",
-      "figure": { "type": "schematic", "caption": "Same signs push apart. Opposite signs pull together.", "params": { "viewBox": [360, 150], "frameMs": 950, "frames": [
-        [
-          { "kind": "charge", "x": 60, "y": 42, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 130, "y": 42, "sign": "+", "label": "q₂" },
-          { "kind": "vector", "x1": 44, "y1": 42, "x2": 32, "y2": 42, "color": "pos" },
-          { "kind": "vector", "x1": 146, "y1": 42, "x2": 158, "y2": 42, "color": "pos" },
-          { "kind": "label", "x": 232, "y": 42, "text": "same signs: repel", "anchor": "start", "color": "soft" },
-          { "kind": "charge", "x": 70, "y": 112, "sign": "+" },
-          { "kind": "charge", "x": 120, "y": 112, "sign": "-" },
-          { "kind": "vector", "x1": 84, "y1": 112, "x2": 96, "y2": 112, "color": "neg" },
-          { "kind": "vector", "x1": 106, "y1": 112, "x2": 94, "y2": 112, "color": "neg" },
-          { "kind": "label", "x": 232, "y": 112, "text": "opposite: attract", "anchor": "start", "color": "soft" }
-        ],
-        [
-          { "kind": "charge", "x": 54, "y": 42, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 136, "y": 42, "sign": "+", "label": "q₂" },
-          { "kind": "vector", "x1": 38, "y1": 42, "x2": 14, "y2": 42, "color": "pos" },
-          { "kind": "vector", "x1": 152, "y1": 42, "x2": 176, "y2": 42, "color": "pos" },
-          { "kind": "label", "x": 232, "y": 42, "text": "same signs: repel", "anchor": "start", "color": "soft" },
-          { "kind": "charge", "x": 80, "y": 112, "sign": "+" },
-          { "kind": "charge", "x": 110, "y": 112, "sign": "-" },
-          { "kind": "vector", "x1": 90, "y1": 112, "x2": 100, "y2": 112, "color": "neg" },
-          { "kind": "vector", "x1": 100, "y1": 112, "x2": 90, "y2": 112, "color": "neg" },
-          { "kind": "label", "x": 232, "y": 112, "text": "opposite: attract", "anchor": "start", "color": "soft" }
-        ]
-      ] } } },
-    { "level": 2, "heading": "Coulomb's law (magnitude)", "explanation": "The force between two point charges is $F = k\\dfrac{|q_1 q_2|}{r^2}$, where $k = 8.99\\times10^{9}\\ \\text{N·m}^2/\\text{C}^2$ and $r$ is the distance between them. The force grows with the product of the charges and falls off as the square of the distance — this inverse-square drop means doubling the distance cuts the force to one quarter.",
-      "figure": { "type": "schematic", "caption": "The closer the charges, the stronger the force. $F=k\\dfrac{q_1 q_2}{r^2}$.", "params": { "viewBox": [360, 160], "frameMs": 1000, "frames": [
-        [
-          { "kind": "charge", "x": 90, "y": 68, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 250, "y": 68, "sign": "+", "label": "q₂" },
-          { "kind": "line", "x1": 108, "y1": 68, "x2": 232, "y2": 68, "dash": true, "color": "soft" },
-          { "kind": "label", "x": 170, "y": 54, "text": "r", "color": "soft" },
-          { "kind": "vector", "x1": 72, "y1": 68, "x2": 60, "y2": 68, "color": "pos" },
-          { "kind": "vector", "x1": 268, "y1": 68, "x2": 280, "y2": 68, "color": "pos" },
-          { "kind": "label", "x": 180, "y": 132, "text": "F = k·q₁q₂ / r²", "color": "ink" }
-        ],
-        [
-          { "kind": "charge", "x": 120, "y": 68, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 220, "y": 68, "sign": "+", "label": "q₂" },
-          { "kind": "line", "x1": 138, "y1": 68, "x2": 202, "y2": 68, "dash": true, "color": "soft" },
-          { "kind": "label", "x": 170, "y": 54, "text": "r", "color": "soft" },
-          { "kind": "vector", "x1": 102, "y1": 68, "x2": 68, "y2": 68, "color": "pos" },
-          { "kind": "vector", "x1": 238, "y1": 68, "x2": 272, "y2": 68, "color": "pos" },
-          { "kind": "label", "x": 180, "y": 132, "text": "F = k·q₁q₂ / r²", "color": "ink" }
-        ]
-      ] } } },
-    { "level": 3, "heading": "Direction and Newton's third law", "explanation": "The force points along the straight line connecting the two charges: outward (repulsive) for like charges, inward (attractive) for unlike charges. The two charges feel equal and opposite forces, obeying Newton's third law, regardless of which charge is larger.",
-      "figure": { "type": "schematic", "caption": "Both charges feel the same size force, in opposite directions.", "params": { "viewBox": [340, 140], "frameMs": 850, "frames": [
-        [
-          { "kind": "charge", "x": 100, "y": 66, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 250, "y": 66, "sign": "+", "label": "q₂" },
-          { "kind": "vector", "x1": 82, "y1": 66, "x2": 62, "y2": 66, "color": "ink", "label": "F₂₁" },
-          { "kind": "vector", "x1": 268, "y1": 66, "x2": 288, "y2": 66, "color": "ink", "label": "F₁₂" },
-          { "kind": "label", "x": 175, "y": 120, "text": "equal size, opposite way", "color": "soft" }
-        ],
-        [
-          { "kind": "charge", "x": 100, "y": 66, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 250, "y": 66, "sign": "+", "label": "q₂" },
-          { "kind": "vector", "x1": 82, "y1": 66, "x2": 38, "y2": 66, "color": "ink", "label": "F₂₁" },
-          { "kind": "vector", "x1": 268, "y1": 66, "x2": 312, "y2": 66, "color": "ink", "label": "F₁₂" },
-          { "kind": "label", "x": 175, "y": 120, "text": "equal size, opposite way", "color": "soft" }
-        ]
-      ] } } },
-    { "level": 4, "heading": "Superposition", "explanation": "When several charges are present, the net force on any one charge is the vector sum of the individual Coulomb forces from every other charge, each computed as if the others were absent. For charges on a line, add the forces with signs for direction; off a line, break each force into components. This superposition principle is how every multi-charge problem is solved.",
-      "figure": { "type": "schematic", "caption": "Add the separate forces as arrows to get the net force.", "params": { "viewBox": [340, 200], "frameMs": 950, "frames": [
-        [
-          { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
-          { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
-          { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "ink", "label": "F₁" }
-        ],
-        [
-          { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
-          { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
-          { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "ink", "label": "F₁" },
-          { "kind": "vector", "x1": 222, "y1": 110, "x2": 285, "y2": 132, "color": "ink", "label": "F₂" }
-        ],
-        [
-          { "kind": "charge", "x": 70, "y": 60, "sign": "+", "label": "q₁" },
-          { "kind": "charge", "x": 70, "y": 150, "sign": "+", "label": "q₂" },
-          { "kind": "charge", "x": 205, "y": 105, "sign": "+", "label": "q₃" },
-          { "kind": "vector", "x1": 222, "y1": 100, "x2": 285, "y2": 78, "color": "soft", "label": "F₁" },
-          { "kind": "vector", "x1": 222, "y1": 110, "x2": 285, "y2": 132, "color": "soft", "label": "F₂" },
-          { "kind": "vector", "x1": 222, "y1": 105, "x2": 305, "y2": 105, "color": "accent", "label": "net" }
-        ]
-      ] } } },
-    { "level": 5, "heading": "How strong is it?", "explanation": "The electric force is astronomically stronger than gravity between the same particles — for an electron and proton it is about $10^{39}$ times larger. Yet bulk matter is nearly neutral, so gravity dominates on large scales. Coulomb's law has the same inverse-square form as Newton's gravitation, which is why the math looks familiar.",
-      "figure": { "type": "schematic", "caption": "For the same two particles, the electric pull is far bigger than gravity.", "params": { "viewBox": [340, 150], "frameMs": 700, "frames": [
-        [
-          { "kind": "charge", "x": 80, "y": 55, "sign": "-", "label": "e⁻" },
-          { "kind": "charge", "x": 260, "y": 55, "sign": "+", "label": "p⁺" },
-          { "kind": "vector", "x1": 98, "y1": 55, "x2": 150, "y2": 55, "color": "accent", "label": "electric" },
-          { "kind": "vector", "x1": 98, "y1": 92, "x2": 110, "y2": 92, "color": "ink", "label": "gravity" },
-          { "kind": "label", "x": 175, "y": 128, "text": "electric ≈ 10³⁹ × gravity", "color": "soft" }
-        ],
-        [
-          { "kind": "charge", "x": 80, "y": 55, "sign": "-", "label": "e⁻" },
-          { "kind": "charge", "x": 260, "y": 55, "sign": "+", "label": "p⁺" },
-          { "kind": "vector", "x1": 98, "y1": 55, "x2": 178, "y2": 55, "color": "accent", "label": "electric" },
-          { "kind": "vector", "x1": 98, "y1": 92, "x2": 110, "y2": 92, "color": "ink", "label": "gravity" },
-          { "kind": "label", "x": 175, "y": 128, "text": "electric ≈ 10³⁹ × gravity", "color": "soft" }
-        ]
-      ] } } }
+    {
+      "level": 1,
+      "heading": "Two kinds of charge",
+      "explanation": "Matter contains positive charge (protons) and negative charge (electrons). Like charges repel; unlike charges attract. Charge is measured in coulombs. It is quantized: any charge is a whole-number multiple of the elementary charge $e = 1.6\\times10^{-19}$ C, and it is conserved — never created or destroyed, only transferred.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Same signs push apart. Opposite signs pull together.",
+        "params": {
+          "viewBox": [
+            360,
+            150
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "charge",
+                "x": 60,
+                "y": 42,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 130,
+                "y": 42,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "vector",
+                "x1": 44,
+                "y1": 42,
+                "x2": 32,
+                "y2": 42,
+                "color": "pos"
+              },
+              {
+                "kind": "vector",
+                "x1": 146,
+                "y1": 42,
+                "x2": 158,
+                "y2": 42,
+                "color": "pos"
+              },
+              {
+                "kind": "label",
+                "x": 232,
+                "y": 42,
+                "text": "same signs: repel",
+                "anchor": "start",
+                "color": "soft"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 112,
+                "sign": "+"
+              },
+              {
+                "kind": "charge",
+                "x": 120,
+                "y": 112,
+                "sign": "-"
+              },
+              {
+                "kind": "vector",
+                "x1": 84,
+                "y1": 112,
+                "x2": 96,
+                "y2": 112,
+                "color": "neg"
+              },
+              {
+                "kind": "vector",
+                "x1": 106,
+                "y1": 112,
+                "x2": 94,
+                "y2": 112,
+                "color": "neg"
+              },
+              {
+                "kind": "label",
+                "x": 232,
+                "y": 112,
+                "text": "opposite: attract",
+                "anchor": "start",
+                "color": "soft"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 54,
+                "y": 42,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 136,
+                "y": 42,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "vector",
+                "x1": 38,
+                "y1": 42,
+                "x2": 14,
+                "y2": 42,
+                "color": "pos"
+              },
+              {
+                "kind": "vector",
+                "x1": 152,
+                "y1": 42,
+                "x2": 176,
+                "y2": 42,
+                "color": "pos"
+              },
+              {
+                "kind": "label",
+                "x": 232,
+                "y": 42,
+                "text": "same signs: repel",
+                "anchor": "start",
+                "color": "soft"
+              },
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 112,
+                "sign": "+"
+              },
+              {
+                "kind": "charge",
+                "x": 110,
+                "y": 112,
+                "sign": "-"
+              },
+              {
+                "kind": "vector",
+                "x1": 90,
+                "y1": 112,
+                "x2": 100,
+                "y2": 112,
+                "color": "neg"
+              },
+              {
+                "kind": "vector",
+                "x1": 100,
+                "y1": 112,
+                "x2": 90,
+                "y2": 112,
+                "color": "neg"
+              },
+              {
+                "kind": "label",
+                "x": 232,
+                "y": 112,
+                "text": "opposite: attract",
+                "anchor": "start",
+                "color": "soft"
+              }
+            ]
+          ]
+        }
+      },
+      "math_steps": [
+        "Charge comes in two kinds, written with a sign: positive $(+)$ and negative $(-)$.",
+        "Like signs repel, opposite signs attract — the sign is what decides the direction of the force.",
+        "Charge is measured in coulombs (C). One electron carries $-e=-1.6\\times10^{-19}$ C."
+      ]
+    },
+    {
+      "level": 2,
+      "heading": "Coulomb's law (magnitude)",
+      "explanation": "The force between two point charges is $F = k\\dfrac{|q_1 q_2|}{r^2}$, where $k = 8.99\\times10^{9}\\ \\text{N·m}^2/\\text{C}^2$ and $r$ is the distance between them. The force grows with the product of the charges and falls off as the square of the distance — this inverse-square drop means doubling the distance cuts the force to one quarter.",
+      "figure": {
+        "type": "schematic",
+        "caption": "The closer the charges, the stronger the force. $F=k\\dfrac{q_1 q_2}{r^2}$.",
+        "params": {
+          "viewBox": [
+            360,
+            160
+          ],
+          "frameMs": 1000,
+          "frames": [
+            [
+              {
+                "kind": "charge",
+                "x": 90,
+                "y": 68,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 250,
+                "y": 68,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "line",
+                "x1": 108,
+                "y1": 68,
+                "x2": 232,
+                "y2": 68,
+                "dash": true,
+                "color": "soft"
+              },
+              {
+                "kind": "label",
+                "x": 170,
+                "y": 54,
+                "text": "r",
+                "color": "soft"
+              },
+              {
+                "kind": "vector",
+                "x1": 72,
+                "y1": 68,
+                "x2": 60,
+                "y2": 68,
+                "color": "pos"
+              },
+              {
+                "kind": "vector",
+                "x1": 268,
+                "y1": 68,
+                "x2": 280,
+                "y2": 68,
+                "color": "pos"
+              },
+              {
+                "kind": "label",
+                "x": 180,
+                "y": 132,
+                "text": "F = k·q₁q₂ / r²",
+                "color": "ink"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 120,
+                "y": 68,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 220,
+                "y": 68,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "line",
+                "x1": 138,
+                "y1": 68,
+                "x2": 202,
+                "y2": 68,
+                "dash": true,
+                "color": "soft"
+              },
+              {
+                "kind": "label",
+                "x": 170,
+                "y": 54,
+                "text": "r",
+                "color": "soft"
+              },
+              {
+                "kind": "vector",
+                "x1": 102,
+                "y1": 68,
+                "x2": 68,
+                "y2": 68,
+                "color": "pos"
+              },
+              {
+                "kind": "vector",
+                "x1": 238,
+                "y1": 68,
+                "x2": 272,
+                "y2": 68,
+                "color": "pos"
+              },
+              {
+                "kind": "label",
+                "x": 180,
+                "y": 132,
+                "text": "F = k·q₁q₂ / r²",
+                "color": "ink"
+              }
+            ]
+          ]
+        }
+      },
+      "math_steps": [
+        "Write Coulomb's law: $F = k\\dfrac{|q_1||q_2|}{r^2}$ with $k = 8.99\\times10^{9}\\ \\text{N·m}^2/\\text{C}^2$.",
+        "Put both charges in coulombs and the separation $r$ in meters.",
+        "Because of the $r^2$ in the denominator, doubling $r$ makes the force $4\\times$ weaker (inverse-square).",
+        "The result $F$ is the magnitude of the force each charge feels."
+      ]
+    },
+    {
+      "level": 3,
+      "heading": "Direction and Newton's third law",
+      "explanation": "The force points along the straight line connecting the two charges: outward (repulsive) for like charges, inward (attractive) for unlike charges. The two charges feel equal and opposite forces, obeying Newton's third law, regardless of which charge is larger.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Both charges feel the same size force, in opposite directions.",
+        "params": {
+          "viewBox": [
+            340,
+            140
+          ],
+          "frameMs": 850,
+          "frames": [
+            [
+              {
+                "kind": "charge",
+                "x": 100,
+                "y": 66,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 250,
+                "y": 66,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "vector",
+                "x1": 82,
+                "y1": 66,
+                "x2": 62,
+                "y2": 66,
+                "color": "ink",
+                "label": "F₂₁"
+              },
+              {
+                "kind": "vector",
+                "x1": 268,
+                "y1": 66,
+                "x2": 288,
+                "y2": 66,
+                "color": "ink",
+                "label": "F₁₂"
+              },
+              {
+                "kind": "label",
+                "x": 175,
+                "y": 120,
+                "text": "equal size, opposite way",
+                "color": "soft"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 100,
+                "y": 66,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 250,
+                "y": 66,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "vector",
+                "x1": 82,
+                "y1": 66,
+                "x2": 38,
+                "y2": 66,
+                "color": "ink",
+                "label": "F₂₁"
+              },
+              {
+                "kind": "vector",
+                "x1": 268,
+                "y1": 66,
+                "x2": 312,
+                "y2": 66,
+                "color": "ink",
+                "label": "F₁₂"
+              },
+              {
+                "kind": "label",
+                "x": 175,
+                "y": 120,
+                "text": "equal size, opposite way",
+                "color": "soft"
+              }
+            ]
+          ]
+        }
+      },
+      "math_steps": [
+        "The force points along the line joining the two charges.",
+        "Same signs $\\Rightarrow$ push apart; opposite signs $\\Rightarrow$ pull together.",
+        "By Newton's third law the two forces are equal in size and opposite in direction: $\\vec{F}_{12} = -\\vec{F}_{21}$."
+      ]
+    },
+    {
+      "level": 4,
+      "heading": "Superposition",
+      "explanation": "When several charges are present, the net force on any one charge is the vector sum of the individual Coulomb forces from every other charge, each computed as if the others were absent. For charges on a line, add the forces with signs for direction; off a line, break each force into components. This superposition principle is how every multi-charge problem is solved.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Add the separate forces as arrows to get the net force.",
+        "params": {
+          "viewBox": [
+            340,
+            200
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 60,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 150,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "charge",
+                "x": 205,
+                "y": 105,
+                "sign": "+",
+                "label": "q₃"
+              },
+              {
+                "kind": "vector",
+                "x1": 222,
+                "y1": 100,
+                "x2": 285,
+                "y2": 78,
+                "color": "ink",
+                "label": "F₁"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 60,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 150,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "charge",
+                "x": 205,
+                "y": 105,
+                "sign": "+",
+                "label": "q₃"
+              },
+              {
+                "kind": "vector",
+                "x1": 222,
+                "y1": 100,
+                "x2": 285,
+                "y2": 78,
+                "color": "ink",
+                "label": "F₁"
+              },
+              {
+                "kind": "vector",
+                "x1": 222,
+                "y1": 110,
+                "x2": 285,
+                "y2": 132,
+                "color": "ink",
+                "label": "F₂"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 60,
+                "sign": "+",
+                "label": "q₁"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 150,
+                "sign": "+",
+                "label": "q₂"
+              },
+              {
+                "kind": "charge",
+                "x": 205,
+                "y": 105,
+                "sign": "+",
+                "label": "q₃"
+              },
+              {
+                "kind": "vector",
+                "x1": 222,
+                "y1": 100,
+                "x2": 285,
+                "y2": 78,
+                "color": "soft",
+                "label": "F₁"
+              },
+              {
+                "kind": "vector",
+                "x1": 222,
+                "y1": 110,
+                "x2": 285,
+                "y2": 132,
+                "color": "soft",
+                "label": "F₂"
+              },
+              {
+                "kind": "vector",
+                "x1": 222,
+                "y1": 105,
+                "x2": 305,
+                "y2": 105,
+                "color": "accent",
+                "label": "net"
+              }
+            ]
+          ]
+        }
+      },
+      "math_steps": [
+        "With more than two charges, find the force from each source charge separately.",
+        "Each force is a vector — keep its direction, break it into $x$ and $y$ components.",
+        "Add the components: $\\vec{F}_{net} = \\vec{F}_1 + \\vec{F}_2 + \\cdots$ (superposition).",
+        "Recombine the summed components into one magnitude and direction."
+      ]
+    },
+    {
+      "level": 5,
+      "heading": "How strong is it?",
+      "explanation": "The electric force is astronomically stronger than gravity between the same particles — for an electron and proton it is about $10^{39}$ times larger. Yet bulk matter is nearly neutral, so gravity dominates on large scales. Coulomb's law has the same inverse-square form as Newton's gravitation, which is why the math looks familiar.",
+      "figure": {
+        "type": "schematic",
+        "caption": "For the same two particles, the electric pull is far bigger than gravity.",
+        "params": {
+          "viewBox": [
+            340,
+            150
+          ],
+          "frameMs": 700,
+          "frames": [
+            [
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 55,
+                "sign": "-",
+                "label": "e⁻"
+              },
+              {
+                "kind": "charge",
+                "x": 260,
+                "y": 55,
+                "sign": "+",
+                "label": "p⁺"
+              },
+              {
+                "kind": "vector",
+                "x1": 98,
+                "y1": 55,
+                "x2": 150,
+                "y2": 55,
+                "color": "accent",
+                "label": "electric"
+              },
+              {
+                "kind": "vector",
+                "x1": 98,
+                "y1": 92,
+                "x2": 110,
+                "y2": 92,
+                "color": "ink",
+                "label": "gravity"
+              },
+              {
+                "kind": "label",
+                "x": 175,
+                "y": 128,
+                "text": "electric ≈ 10³⁹ × gravity",
+                "color": "soft"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 55,
+                "sign": "-",
+                "label": "e⁻"
+              },
+              {
+                "kind": "charge",
+                "x": 260,
+                "y": 55,
+                "sign": "+",
+                "label": "p⁺"
+              },
+              {
+                "kind": "vector",
+                "x1": 98,
+                "y1": 55,
+                "x2": 178,
+                "y2": 55,
+                "color": "accent",
+                "label": "electric"
+              },
+              {
+                "kind": "vector",
+                "x1": 98,
+                "y1": 92,
+                "x2": 110,
+                "y2": 92,
+                "color": "ink",
+                "label": "gravity"
+              },
+              {
+                "kind": "label",
+                "x": 175,
+                "y": 128,
+                "text": "electric ≈ 10³⁹ × gravity",
+                "color": "soft"
+              }
+            ]
+          ]
+        }
+      },
+      "math_steps": [
+        "Compare $k = 8.99\\times10^{9}$ with the gravitational constant $G = 6.67\\times10^{-11}$.",
+        "For an electron and proton, the electric attraction is about $10^{39}$ times the gravitational one.",
+        "So on the scale of atoms, the electric force is what holds matter together; gravity is negligible."
+      ]
+    }
   ],
   "real_world_examples": [
-    { "title": "A balloon sticking to the wall", "scenario": "Rub a balloon on your hair and it clings to a wall.", "how_the_math_applies": "Rubbing transfers electrons (charge is conserved), leaving the balloon negatively charged. The charged balloon polarizes the wall — pulling its positive charge slightly closer — and the attractive Coulomb force $F = k|q_1q_2|/r^2$ holds it up against gravity.",
+    {
+      "title": "A balloon sticking to the wall",
+      "scenario": "Rub a balloon on your hair and it clings to a wall.",
+      "how_the_math_applies": "Rubbing transfers electrons (charge is conserved), leaving the balloon negatively charged. The charged balloon polarizes the wall — pulling its positive charge slightly closer — and the attractive Coulomb force $F = k|q_1q_2|/r^2$ holds it up against gravity.",
       "detail": "No charge is created: electrons simply move from your hair to the balloon, so your hair is left positive and the balloon negative. Near the wall (an insulator), the balloon's field nudges each molecule's charge — positive a hair's-breadth closer, negative slightly away. That tiny separation puts unlike charge nearest the balloon, so the net Coulomb force is attractive and easily beats the balloon's small weight.",
-      "figure": { "type": "schematic", "caption": "The negative balloon polarizes the wall; unlike charges attract.", "params": { "viewBox": [340, 180], "elements": [
-        { "kind": "line", "x1": 255, "y1": 20, "x2": 255, "y2": 160, "color": "soft", "width": 6 },
-        { "kind": "label", "x": 285, "y": 30, "text": "wall", "color": "soft", "size": 12 },
-        { "kind": "circle", "x": 120, "y": 90, "r": 46, "color": "neg" },
-        { "kind": "label", "x": 120, "y": 90, "text": "– – –", "color": "neg", "size": 15 },
-        { "kind": "label", "x": 242, "y": 90, "text": "+", "color": "pos", "size": 16, "anchor": "end" },
-        { "kind": "vector", "x1": 172, "y1": 90, "x2": 236, "y2": 90, "color": "accent", "label": "attraction" }
-      ] } } },
-    { "title": "Laser printer toner", "scenario": "A laser printer places toner powder exactly where the image should be.", "how_the_math_applies": "A charged drum attracts oppositely-charged toner particles by the Coulomb force. Controlling the charge pattern controls where the attractive force is strong enough to pick up toner.",
+      "figure": {
+        "type": "schematic",
+        "caption": "The negative balloon polarizes the wall; unlike charges attract.",
+        "params": {
+          "viewBox": [
+            340,
+            180
+          ],
+          "elements": [
+            {
+              "kind": "line",
+              "x1": 255,
+              "y1": 20,
+              "x2": 255,
+              "y2": 160,
+              "color": "soft",
+              "width": 6
+            },
+            {
+              "kind": "label",
+              "x": 285,
+              "y": 30,
+              "text": "wall",
+              "color": "soft",
+              "size": 12
+            },
+            {
+              "kind": "circle",
+              "x": 120,
+              "y": 90,
+              "r": 46,
+              "color": "neg"
+            },
+            {
+              "kind": "label",
+              "x": 120,
+              "y": 90,
+              "text": "– – –",
+              "color": "neg",
+              "size": 15
+            },
+            {
+              "kind": "label",
+              "x": 242,
+              "y": 90,
+              "text": "+",
+              "color": "pos",
+              "size": 16,
+              "anchor": "end"
+            },
+            {
+              "kind": "vector",
+              "x1": 172,
+              "y1": 90,
+              "x2": 236,
+              "y2": 90,
+              "color": "accent",
+              "label": "attraction"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Laser printer toner",
+      "scenario": "A laser printer places toner powder exactly where the image should be.",
+      "how_the_math_applies": "A charged drum attracts oppositely-charged toner particles by the Coulomb force. Controlling the charge pattern controls where the attractive force is strong enough to pick up toner.",
       "detail": "A laser writes the page image onto a rotating drum by knocking charge off the spots that should stay blank, leaving a hidden charge pattern. Fine toner particles are given the opposite sign, so wherever the drum is charged the Coulomb force pulls toner on and everywhere else it doesn't stick. The pattern is then pressed and heated onto paper. Precise control of charge means precise control of force, and therefore of the printed image.",
-      "figure": { "type": "schematic", "caption": "Oppositely-charged toner is pulled onto the charged drum.", "params": { "viewBox": [340, 170], "elements": [
-        { "kind": "circle", "x": 95, "y": 85, "r": 55, "color": "soft" },
-        { "kind": "label", "x": 95, "y": 85, "text": "drum", "color": "soft" },
-        { "kind": "charge", "x": 255, "y": 85, "sign": "+", "label": "toner" },
-        { "kind": "vector", "x1": 237, "y1": 85, "x2": 158, "y2": 85, "color": "accent", "label": "pulled in" }
-      ] } } },
-    { "title": "Handling sensitive electronics", "scenario": "Technicians wear grounding straps when installing computer chips.", "how_the_math_applies": "A tiny static charge on your body can create a large Coulomb force and voltage across a chip's microscopic gaps, destroying it. Grounding drains the charge so no damaging force builds up.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Oppositely-charged toner is pulled onto the charged drum.",
+        "params": {
+          "viewBox": [
+            340,
+            170
+          ],
+          "elements": [
+            {
+              "kind": "circle",
+              "x": 95,
+              "y": 85,
+              "r": 55,
+              "color": "soft"
+            },
+            {
+              "kind": "label",
+              "x": 95,
+              "y": 85,
+              "text": "drum",
+              "color": "soft"
+            },
+            {
+              "kind": "charge",
+              "x": 255,
+              "y": 85,
+              "sign": "+",
+              "label": "toner"
+            },
+            {
+              "kind": "vector",
+              "x1": 237,
+              "y1": 85,
+              "x2": 158,
+              "y2": 85,
+              "color": "accent",
+              "label": "pulled in"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Handling sensitive electronics",
+      "scenario": "Technicians wear grounding straps when installing computer chips.",
+      "how_the_math_applies": "A tiny static charge on your body can create a large Coulomb force and voltage across a chip's microscopic gaps, destroying it. Grounding drains the charge so no damaging force builds up.",
       "detail": "Because Coulomb's law is inverse-square, the force across the nanometer-scale gaps inside a chip can be huge even for a small charge — enough to punch through insulating layers. A grounding strap gives that charge an easy conducting path to ground, so it never accumulates on you in the first place. Same physics as the balloon, but here we want to prevent the force, not use it.",
-      "figure": { "type": "schematic", "caption": "A conductor drains static charge safely to ground.", "params": { "viewBox": [340, 165], "elements": [
-        { "kind": "plate", "x": 70, "y": 58, "w": 130, "h": 46, "label": "chip" },
-        { "kind": "label", "x": 135, "y": 82, "text": "static charge", "color": "ink", "size": 11 },
-        { "kind": "line", "x1": 135, "y1": 104, "x2": 135, "y2": 140, "color": "ink", "width": 2 },
-        { "kind": "line", "x1": 113, "y1": 140, "x2": 157, "y2": 140, "color": "ink", "width": 3 },
-        { "kind": "line", "x1": 120, "y1": 147, "x2": 150, "y2": 147, "color": "ink", "width": 2 },
-        { "kind": "line", "x1": 126, "y1": 153, "x2": 144, "y2": 153, "color": "ink", "width": 2 },
-        { "kind": "label", "x": 205, "y": 135, "text": "drains to ground", "anchor": "start", "size": 11 }
-      ] } } }
+      "figure": {
+        "type": "schematic",
+        "caption": "A conductor drains static charge safely to ground.",
+        "params": {
+          "viewBox": [
+            340,
+            165
+          ],
+          "elements": [
+            {
+              "kind": "plate",
+              "x": 70,
+              "y": 58,
+              "w": 130,
+              "h": 46,
+              "label": "chip"
+            },
+            {
+              "kind": "label",
+              "x": 135,
+              "y": 82,
+              "text": "static charge",
+              "color": "ink",
+              "size": 11
+            },
+            {
+              "kind": "line",
+              "x1": 135,
+              "y1": 104,
+              "x2": 135,
+              "y2": 140,
+              "color": "ink",
+              "width": 2
+            },
+            {
+              "kind": "line",
+              "x1": 113,
+              "y1": 140,
+              "x2": 157,
+              "y2": 140,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 120,
+              "y1": 147,
+              "x2": 150,
+              "y2": 147,
+              "color": "ink",
+              "width": 2
+            },
+            {
+              "kind": "line",
+              "x1": 126,
+              "y1": 153,
+              "x2": 144,
+              "y2": 153,
+              "color": "ink",
+              "width": 2
+            },
+            {
+              "kind": "label",
+              "x": 205,
+              "y": 135,
+              "text": "drains to ground",
+              "anchor": "start",
+              "size": 11
+            }
+          ]
+        }
+      }
+    }
   ],
   "videos": {
     "concept_query": "electric charge and Coulomb's law explained introduction",
@@ -157,15 +909,124 @@
     "combined_query": "Coulomb's law calculus based physics electric charge worked examples"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "How many excess electrons make up a charge of $-1.0\\ \\mu\\text{C}$?", "correct_answer": "$6.25\\times10^{12}$ electrons", "solution_steps": ["Charge is quantized: $n = |Q|/e$.", "$n = \\dfrac{1.0\\times10^{-6}}{1.6\\times10^{-19}}$", "$n = 6.25\\times10^{12}$ electrons"], "hint": "Divide the total charge by the elementary charge $e = 1.6\\times10^{-19}$ C." },
-    { "id": "p02", "difficulty": "easy", "prompt": "Two charges $q_1 = +2.0\\ \\mu\\text{C}$ and $q_2 = +3.0\\ \\mu\\text{C}$ are $0.10$ m apart. Find the force between them.", "correct_answer": "$\\approx 5.4$ N (repulsive)", "solution_steps": ["$F = k\\dfrac{|q_1 q_2|}{r^2}$", "$F = (8.99\\times10^9)\\dfrac{(2.0\\times10^{-6})(3.0\\times10^{-6})}{(0.10)^2}$", "$F \\approx 5.4$ N, repulsive since both are positive"], "hint": "Plug directly into Coulomb's law; both positive means repulsion." },
-    { "id": "p03", "difficulty": "easy", "prompt": "A charge $q_1 = +5\\ \\mu\\text{C}$ is near $q_2 = -5\\ \\mu\\text{C}$. Is the force attractive or repulsive?", "correct_answer": "Attractive", "solution_steps": ["Opposite signs attract.", "The force pulls the charges toward each other along the line joining them."], "hint": "Compare the signs of the two charges." },
-    { "id": "p04", "difficulty": "medium", "prompt": "Two charges feel a force of $8.0$ N. If the distance between them is doubled, what is the new force?", "correct_answer": "$2.0$ N", "solution_steps": ["$F \\propto 1/r^2$.", "Doubling $r$ multiplies the force by $1/2^2 = 1/4$.", "$F' = 8.0/4 = 2.0$ N"], "hint": "Coulomb's law is inverse-square in distance." },
-    { "id": "p05", "difficulty": "medium", "prompt": "Two equal point charges $q$ separated by $0.50$ m repel with a force of $1.0$ N. Find $q$.", "correct_answer": "$\\approx 5.3\\ \\mu\\text{C}$", "solution_steps": ["$F = k\\dfrac{q^2}{r^2} \\Rightarrow q = \\sqrt{\\dfrac{F r^2}{k}}$", "$q = \\sqrt{\\dfrac{(1.0)(0.50)^2}{8.99\\times10^9}}$", "$q = \\sqrt{2.78\\times10^{-11}} \\approx 5.3\\times10^{-6}$ C"], "hint": "Set $q_1=q_2=q$ and solve Coulomb's law for $q$." },
-    { "id": "p06", "difficulty": "medium", "prompt": "Find the Coulomb force between the electron and proton in hydrogen, separated by $r = 5.3\\times10^{-11}$ m.", "correct_answer": "$\\approx 8.2\\times10^{-8}$ N", "solution_steps": ["$F = k\\dfrac{e^2}{r^2}$", "$F = (8.99\\times10^9)\\dfrac{(1.6\\times10^{-19})^2}{(5.3\\times10^{-11})^2}$", "$F \\approx 8.2\\times10^{-8}$ N (attractive)"], "hint": "Both particles carry charge magnitude $e$." },
-    { "id": "p07", "difficulty": "medium", "prompt": "Charges $+4\\ \\mu\\text{C}$ and $+4\\ \\mu\\text{C}$ sit $2.0$ m apart. What net force acts on a $+1\\ \\mu\\text{C}$ charge placed exactly midway?", "correct_answer": "$0$ N", "solution_steps": ["Each outer charge is $1.0$ m from the middle charge.", "The two forces are equal in size but point in opposite directions.", "They cancel: net force $= 0$."], "hint": "Use symmetry — compare the two forces' directions." },
-    { "id": "p08", "difficulty": "hard", "prompt": "On the x-axis: $q_1 = +3\\ \\mu\\text{C}$ at $x=0$, $q_2 = -2\\ \\mu\\text{C}$ at $x=0.20$ m. Find the net force on $q_3 = +1\\ \\mu\\text{C}$ at $x=0.40$ m.", "correct_answer": "$\\approx 0.28$ N toward $q_2$ (in $-x$)", "solution_steps": ["Force from $q_1$ ($r=0.40$ m): $F_{13}=k\\dfrac{(3\\times10^{-6})(1\\times10^{-6})}{0.40^2}\\approx 0.169$ N in $+x$ (repulsion).", "Force from $q_2$ ($r=0.20$ m): $F_{23}=k\\dfrac{(2\\times10^{-6})(1\\times10^{-6})}{0.20^2}\\approx 0.449$ N in $-x$ (attraction).", "Net $= 0.169 - 0.449 = -0.28$ N, i.e. $0.28$ N in $-x$."], "hint": "Compute each force separately, assign $+x$/$-x$ by attraction vs repulsion, then add." },
-    { "id": "p09", "difficulty": "hard", "prompt": "Charge $+q$ is at $x=0$ and $+4q$ is at $x=0.30$ m. Where on the line between them is the net force on a test charge zero?", "correct_answer": "$x = 0.10$ m from the $+q$ charge", "solution_steps": ["Set magnitudes equal: $k\\dfrac{q}{x^2} = k\\dfrac{4q}{(0.30-x)^2}$.", "$(0.30-x)^2 = 4x^2 \\Rightarrow 0.30 - x = 2x$.", "$x = 0.10$ m from $+q$."], "hint": "The zero point is closer to the smaller charge; set the two force magnitudes equal." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "Two identical conducting spheres carry $+8\\ \\mu\\text{C}$ and $-2\\ \\mu\\text{C}$. They are touched together, then separated to $0.10$ m. Find the force between them.", "correct_answer": "$\\approx 8.1$ N (repulsive)", "solution_steps": ["Touching shares charge equally: $q = \\dfrac{+8 + (-2)}{2} = +3\\ \\mu\\text{C}$ each.", "$F = k\\dfrac{(3\\times10^{-6})^2}{(0.10)^2}$", "$F \\approx 8.1$ N, repulsive (both now positive)."], "hint": "Identical conductors share their total charge equally when touched." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "How many excess electrons make up a charge of $-1.0\\ \\mu\\text{C}$?",
+      "correct_answer": "$6.25\\times10^{12}$ electrons",
+      "solution_steps": [
+        "Charge is quantized: $n = |Q|/e$.",
+        "$n = \\dfrac{1.0\\times10^{-6}}{1.6\\times10^{-19}}$",
+        "$n = 6.25\\times10^{12}$ electrons"
+      ],
+      "hint": "Divide the total charge by the elementary charge $e = 1.6\\times10^{-19}$ C."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Two charges $q_1 = +2.0\\ \\mu\\text{C}$ and $q_2 = +3.0\\ \\mu\\text{C}$ are $0.10$ m apart. Find the force between them.",
+      "correct_answer": "$\\approx 5.4$ N (repulsive)",
+      "solution_steps": [
+        "$F = k\\dfrac{|q_1 q_2|}{r^2}$",
+        "$F = (8.99\\times10^9)\\dfrac{(2.0\\times10^{-6})(3.0\\times10^{-6})}{(0.10)^2}$",
+        "$F \\approx 5.4$ N, repulsive since both are positive"
+      ],
+      "hint": "Plug directly into Coulomb's law; both positive means repulsion."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "A charge $q_1 = +5\\ \\mu\\text{C}$ is near $q_2 = -5\\ \\mu\\text{C}$. Is the force attractive or repulsive?",
+      "correct_answer": "Attractive",
+      "solution_steps": [
+        "Opposite signs attract.",
+        "The force pulls the charges toward each other along the line joining them."
+      ],
+      "hint": "Compare the signs of the two charges."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Two charges feel a force of $8.0$ N. If the distance between them is doubled, what is the new force?",
+      "correct_answer": "$2.0$ N",
+      "solution_steps": [
+        "$F \\propto 1/r^2$.",
+        "Doubling $r$ multiplies the force by $1/2^2 = 1/4$.",
+        "$F' = 8.0/4 = 2.0$ N"
+      ],
+      "hint": "Coulomb's law is inverse-square in distance."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Two equal point charges $q$ separated by $0.50$ m repel with a force of $1.0$ N. Find $q$.",
+      "correct_answer": "$\\approx 5.3\\ \\mu\\text{C}$",
+      "solution_steps": [
+        "$F = k\\dfrac{q^2}{r^2} \\Rightarrow q = \\sqrt{\\dfrac{F r^2}{k}}$",
+        "$q = \\sqrt{\\dfrac{(1.0)(0.50)^2}{8.99\\times10^9}}$",
+        "$q = \\sqrt{2.78\\times10^{-11}} \\approx 5.3\\times10^{-6}$ C"
+      ],
+      "hint": "Set $q_1=q_2=q$ and solve Coulomb's law for $q$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find the Coulomb force between the electron and proton in hydrogen, separated by $r = 5.3\\times10^{-11}$ m.",
+      "correct_answer": "$\\approx 8.2\\times10^{-8}$ N",
+      "solution_steps": [
+        "$F = k\\dfrac{e^2}{r^2}$",
+        "$F = (8.99\\times10^9)\\dfrac{(1.6\\times10^{-19})^2}{(5.3\\times10^{-11})^2}$",
+        "$F \\approx 8.2\\times10^{-8}$ N (attractive)"
+      ],
+      "hint": "Both particles carry charge magnitude $e$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "Charges $+4\\ \\mu\\text{C}$ and $+4\\ \\mu\\text{C}$ sit $2.0$ m apart. What net force acts on a $+1\\ \\mu\\text{C}$ charge placed exactly midway?",
+      "correct_answer": "$0$ N",
+      "solution_steps": [
+        "Each outer charge is $1.0$ m from the middle charge.",
+        "The two forces are equal in size but point in opposite directions.",
+        "They cancel: net force $= 0$."
+      ],
+      "hint": "Use symmetry — compare the two forces' directions."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "On the x-axis: $q_1 = +3\\ \\mu\\text{C}$ at $x=0$, $q_2 = -2\\ \\mu\\text{C}$ at $x=0.20$ m. Find the net force on $q_3 = +1\\ \\mu\\text{C}$ at $x=0.40$ m.",
+      "correct_answer": "$\\approx 0.28$ N toward $q_2$ (in $-x$)",
+      "solution_steps": [
+        "Force from $q_1$ ($r=0.40$ m): $F_{13}=k\\dfrac{(3\\times10^{-6})(1\\times10^{-6})}{0.40^2}\\approx 0.169$ N in $+x$ (repulsion).",
+        "Force from $q_2$ ($r=0.20$ m): $F_{23}=k\\dfrac{(2\\times10^{-6})(1\\times10^{-6})}{0.20^2}\\approx 0.449$ N in $-x$ (attraction).",
+        "Net $= 0.169 - 0.449 = -0.28$ N, i.e. $0.28$ N in $-x$."
+      ],
+      "hint": "Compute each force separately, assign $+x$/$-x$ by attraction vs repulsion, then add."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "Charge $+q$ is at $x=0$ and $+4q$ is at $x=0.30$ m. Where on the line between them is the net force on a test charge zero?",
+      "correct_answer": "$x = 0.10$ m from the $+q$ charge",
+      "solution_steps": [
+        "Set magnitudes equal: $k\\dfrac{q}{x^2} = k\\dfrac{4q}{(0.30-x)^2}$.",
+        "$(0.30-x)^2 = 4x^2 \\Rightarrow 0.30 - x = 2x$.",
+        "$x = 0.10$ m from $+q$."
+      ],
+      "hint": "The zero point is closer to the smaller charge; set the two force magnitudes equal."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "Two identical conducting spheres carry $+8\\ \\mu\\text{C}$ and $-2\\ \\mu\\text{C}$. They are touched together, then separated to $0.10$ m. Find the force between them.",
+      "correct_answer": "$\\approx 8.1$ N (repulsive)",
+      "solution_steps": [
+        "Touching shares charge equally: $q = \\dfrac{+8 + (-2)}{2} = +3\\ \\mu\\text{C}$ each.",
+        "$F = k\\dfrac{(3\\times10^{-6})^2}{(0.10)^2}$",
+        "$F \\approx 8.1$ N, repulsive (both now positive)."
+      ],
+      "hint": "Identical conductors share their total charge equally when touched."
+    }
   ]
 }

@@ -45,6 +45,11 @@
           "level": { "type": "integer", "minimum": 1 },
           "heading": { "type": "string", "minLength": 1 },
           "explanation": { "type": "string", "minLength": 1 },
+          "math_steps": {
+            "type": "array",
+            "description": "Optional step-by-step walkthrough tying this level to the math, so the reader feels like a lesson. Each item is one short step (LaTeX in $...$ allowed).",
+            "items": { "type": "string", "minLength": 1 }
+          },
           "figure": { "$ref": "#/$defs/figure" }
         }
       }

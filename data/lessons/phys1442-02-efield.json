@@ -2,16 +2,1772 @@
   "title": "The Electric Field",
   "summary": "A charge fills the space around it with an electric field $\\vec{E}$. Any other charge placed there feels a force $\\vec{F} = q\\vec{E}$. For a point charge, $E = k\\dfrac{|q|}{r^2}$, pointing away from positive and toward negative charge. Fields add as vectors. (University Physics Vol. 2, Ch. 5.)",
   "concept_sections": [
-    { "level": 1, "heading": "What a field is", "explanation": "Instead of charges reaching across empty space, we say a charge creates an electric field everywhere around it. The field $\\vec{E}$ at a point is the force per unit charge a small positive test charge would feel there: $\\vec{E} = \\vec{F}/q_0$, measured in newtons per coulomb (N/C). Field is a property of the point in space, not of the test charge." },
-    { "level": 2, "heading": "Field of a point charge", "explanation": "A point charge $q$ produces a field of magnitude $E = k\\dfrac{|q|}{r^2}$ at distance $r$. It points radially outward from a positive charge and radially inward toward a negative charge. Notice the same inverse-square distance dependence as Coulomb's law — because $E = F/q_0$." },
-    { "level": 3, "heading": "Force from a field", "explanation": "Once you know the field, the force on any charge $q$ placed there is $\\vec{F} = q\\vec{E}$. A positive charge is pushed along $\\vec{E}$; a negative charge is pushed opposite to $\\vec{E}$. This lets you separate 'what makes the field' from 'what responds to it.'" },
-    { "level": 4, "heading": "Superposition of fields", "explanation": "The total field from several charges is the vector sum of each charge's field: $\\vec{E}_{net} = \\vec{E}_1 + \\vec{E}_2 + \\cdots$. Compute each contribution's magnitude and direction, then add components. Fields, like forces, obey superposition." },
-    { "level": 5, "heading": "Field lines and uniform fields", "explanation": "Field lines are a picture of the field: they start on positive charge, end on negative charge, and never cross. Where lines are dense, the field is strong. Between two large parallel charged plates the field is uniform, with magnitude $E = V/d$ (voltage divided by plate separation) — the basis of capacitors and deflection plates." }
+    {
+      "level": 1,
+      "heading": "What a field is",
+      "explanation": "Instead of charges reaching across empty space, we say a charge creates an electric field everywhere around it. The field $\\vec{E}$ at a point is the force per unit charge a small positive test charge would feel there: $\\vec{E} = \\vec{F}/q_0$, measured in newtons per coulomb (N/C). Field is a property of the point in space, not of the test charge.",
+      "math_steps": [
+        "Place a small positive test charge $q_0$ at a point and measure the force $\\vec{F}$ on it.",
+        "Divide out the test charge: $\\vec{E} = \\vec{F}/q_0$.",
+        "The result has units of newtons per coulomb (N/C) and belongs to the point, not to $q_0$."
+      ],
+      "figure": {
+        "type": "schematic",
+        "caption": "The field points away from the source and weakens with distance. $\\vec{E}=\\vec{F}/q_0$.",
+        "params": {
+          "viewBox": [
+            340,
+            190
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 95,
+                "sign": "+",
+                "label": "source $q$"
+              },
+              {
+                "kind": "point",
+                "x": 150,
+                "y": 95,
+                "color": "positive",
+                "label": "test $q_0$"
+              },
+              {
+                "kind": "vector",
+                "x1": 150,
+                "y1": 95,
+                "x2": 170,
+                "y2": 95,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 95,
+                "sign": "+",
+                "label": "source $q$"
+              },
+              {
+                "kind": "point",
+                "x": 200,
+                "y": 95,
+                "color": "positive",
+                "label": "test $q_0$"
+              },
+              {
+                "kind": "vector",
+                "x1": 200,
+                "y1": 95,
+                "x2": 212.30769230769232,
+                "y2": 95,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 95,
+                "sign": "+",
+                "label": "source $q$"
+              },
+              {
+                "kind": "point",
+                "x": 250,
+                "y": 60,
+                "color": "positive",
+                "label": "test $q_0$"
+              },
+              {
+                "kind": "vector",
+                "x1": 250,
+                "y1": 60,
+                "x2": 258.5650557620818,
+                "y2": 58.33457249070632,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 95,
+                "sign": "+",
+                "label": "source $q$"
+              },
+              {
+                "kind": "point",
+                "x": 250,
+                "y": 130,
+                "color": "positive",
+                "label": "test $q_0$"
+              },
+              {
+                "kind": "vector",
+                "x1": 250,
+                "y1": 130,
+                "x2": 258.5650557620818,
+                "y2": 131.6654275092937,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              }
+            ],
+            [
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 95,
+                "sign": "+",
+                "label": "source $q$"
+              },
+              {
+                "kind": "point",
+                "x": 200,
+                "y": 140,
+                "color": "positive",
+                "label": "test $q_0$"
+              },
+              {
+                "kind": "vector",
+                "x1": 200,
+                "y1": 140,
+                "x2": 210.99075297225892,
+                "y2": 143.80449141347424,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Field of a point charge",
+      "explanation": "A point charge $q$ produces a field of magnitude $E = k\\dfrac{|q|}{r^2}$ at distance $r$. It points radially outward from a positive charge and radially inward toward a negative charge. Notice the same inverse-square distance dependence as Coulomb's law — because $E = F/q_0$.",
+      "math_steps": [
+        "For a point charge: $E = k\\dfrac{|q|}{r^2}$ — same inverse-square shape as Coulomb's law.",
+        "Direction: radially outward from $+q$, radially inward toward $-q$.",
+        "It follows from $E=F/q_0$ divided into Coulomb's law, so the test charge cancels out."
+      ],
+      "figure": {
+        "type": "schematic",
+        "caption": "Field points out of positive charge, into negative charge.",
+        "params": {
+          "viewBox": [
+            360,
+            200
+          ],
+          "elements": [
+            {
+              "kind": "charge",
+              "x": 95,
+              "y": 100,
+              "sign": "+",
+              "label": "$+q$"
+            },
+            {
+              "kind": "vector",
+              "x1": 115,
+              "y1": 100,
+              "x2": 155,
+              "y2": 100,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 109.14213562373095,
+              "y1": 114.14213562373095,
+              "x2": 137.42640687119285,
+              "y2": 142.42640687119285,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 95,
+              "y1": 120,
+              "x2": 95,
+              "y2": 160,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 80.85786437626905,
+              "y1": 114.14213562373095,
+              "x2": 52.573593128807154,
+              "y2": 142.42640687119285,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 75,
+              "y1": 100,
+              "x2": 35,
+              "y2": 100.00000000000001,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 80.85786437626905,
+              "y1": 85.85786437626905,
+              "x2": 52.57359312880714,
+              "y2": 57.573593128807154,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 95,
+              "y1": 80,
+              "x2": 94.99999999999999,
+              "y2": 40,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 109.14213562373095,
+              "y1": 85.85786437626905,
+              "x2": 137.42640687119285,
+              "y2": 57.57359312880714,
+              "color": "field"
+            },
+            {
+              "kind": "charge",
+              "x": 265,
+              "y": 100,
+              "sign": "-",
+              "label": "$-q$"
+            },
+            {
+              "kind": "vector",
+              "x1": 285,
+              "y1": 100,
+              "x2": 325,
+              "y2": 100,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 279.14213562373095,
+              "y1": 114.14213562373095,
+              "x2": 307.42640687119285,
+              "y2": 142.42640687119285,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 265,
+              "y1": 120,
+              "x2": 265,
+              "y2": 160,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 250.85786437626905,
+              "y1": 114.14213562373095,
+              "x2": 222.57359312880715,
+              "y2": 142.42640687119285,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 245,
+              "y1": 100,
+              "x2": 205,
+              "y2": 100.00000000000001,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 250.85786437626905,
+              "y1": 85.85786437626905,
+              "x2": 222.57359312880715,
+              "y2": 57.573593128807154,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 265,
+              "y1": 80,
+              "x2": 265,
+              "y2": 40,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 279.14213562373095,
+              "y1": 85.85786437626905,
+              "x2": 307.42640687119285,
+              "y2": 57.57359312880714,
+              "color": "field"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Force from a field",
+      "explanation": "Once you know the field, the force on any charge $q$ placed there is $\\vec{F} = q\\vec{E}$. A positive charge is pushed along $\\vec{E}$; a negative charge is pushed opposite to $\\vec{E}$. This lets you separate 'what makes the field' from 'what responds to it.'",
+      "math_steps": [
+        "Given the field $\\vec{E}$ at a point, the force on a charge placed there is $\\vec{F}=q\\vec{E}$.",
+        "If $q>0$: force is along $\\vec{E}$. If $q<0$: force is opposite $\\vec{E}$.",
+        "This separates 'what makes the field' from 'what responds to it.'"
+      ],
+      "figure": {
+        "type": "schematic",
+        "caption": "Positive charge drifts along $\\vec{E}$; negative charge drifts opposite.",
+        "params": {
+          "viewBox": [
+            340,
+            200
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 60,
+                "x2": 310,
+                "y2": 60,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 100,
+                "x2": 310,
+                "y2": 100,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 140,
+                "x2": 310,
+                "y2": 140,
+                "color": "field"
+              },
+              {
+                "kind": "point",
+                "x": 40,
+                "y": 100,
+                "color": "positive",
+                "label": "$+q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 40,
+                "y1": 100,
+                "x2": 74,
+                "y2": 100,
+                "color": "force",
+                "label": "$\\vec{F}=q\\vec{E}$"
+              },
+              {
+                "kind": "point",
+                "x": 320,
+                "y": 160,
+                "color": "negative",
+                "label": "$-q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 320,
+                "y1": 160,
+                "x2": 286,
+                "y2": 160,
+                "color": "force"
+              }
+            ],
+            [
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 60,
+                "x2": 310,
+                "y2": 60,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 100,
+                "x2": 310,
+                "y2": 100,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 140,
+                "x2": 310,
+                "y2": 140,
+                "color": "field"
+              },
+              {
+                "kind": "point",
+                "x": 90,
+                "y": 100,
+                "color": "positive",
+                "label": "$+q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 90,
+                "y1": 100,
+                "x2": 124,
+                "y2": 100,
+                "color": "force",
+                "label": null
+              },
+              {
+                "kind": "point",
+                "x": 270,
+                "y": 160,
+                "color": "negative",
+                "label": "$-q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 270,
+                "y1": 160,
+                "x2": 236,
+                "y2": 160,
+                "color": "force"
+              }
+            ],
+            [
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 60,
+                "x2": 310,
+                "y2": 60,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 100,
+                "x2": 310,
+                "y2": 100,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 140,
+                "x2": 310,
+                "y2": 140,
+                "color": "field"
+              },
+              {
+                "kind": "point",
+                "x": 140,
+                "y": 100,
+                "color": "positive",
+                "label": "$+q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 140,
+                "y1": 100,
+                "x2": 174,
+                "y2": 100,
+                "color": "force",
+                "label": null
+              },
+              {
+                "kind": "point",
+                "x": 220,
+                "y": 160,
+                "color": "negative",
+                "label": "$-q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 220,
+                "y1": 160,
+                "x2": 186,
+                "y2": 160,
+                "color": "force"
+              }
+            ],
+            [
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 60,
+                "x2": 310,
+                "y2": 60,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 100,
+                "x2": 310,
+                "y2": 100,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 140,
+                "x2": 310,
+                "y2": 140,
+                "color": "field"
+              },
+              {
+                "kind": "point",
+                "x": 190,
+                "y": 100,
+                "color": "positive",
+                "label": "$+q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 190,
+                "y1": 100,
+                "x2": 224,
+                "y2": 100,
+                "color": "force",
+                "label": null
+              },
+              {
+                "kind": "point",
+                "x": 170,
+                "y": 160,
+                "color": "negative",
+                "label": "$-q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 170,
+                "y1": 160,
+                "x2": 136,
+                "y2": 160,
+                "color": "force"
+              }
+            ],
+            [
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 60,
+                "x2": 310,
+                "y2": 60,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 100,
+                "x2": 310,
+                "y2": 100,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 30,
+                "y1": 140,
+                "x2": 310,
+                "y2": 140,
+                "color": "field"
+              },
+              {
+                "kind": "point",
+                "x": 240,
+                "y": 100,
+                "color": "positive",
+                "label": "$+q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 240,
+                "y1": 100,
+                "x2": 274,
+                "y2": 100,
+                "color": "force",
+                "label": null
+              },
+              {
+                "kind": "point",
+                "x": 120,
+                "y": 160,
+                "color": "negative",
+                "label": "$-q$"
+              },
+              {
+                "kind": "vector",
+                "x1": 120,
+                "y1": 160,
+                "x2": 86,
+                "y2": 160,
+                "color": "force"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Superposition of fields",
+      "explanation": "The total field from several charges is the vector sum of each charge's field: $\\vec{E}_{net} = \\vec{E}_1 + \\vec{E}_2 + \\cdots$. Compute each contribution's magnitude and direction, then add components. Fields, like forces, obey superposition.",
+      "math_steps": [
+        "Each source makes its own field at the point: $\\vec{E}_1$, $\\vec{E}_2$, …",
+        "Draw each as a vector with its own magnitude $k|q|/r^2$ and direction.",
+        "Add them by components: $\\vec{E}_{net}=\\vec{E}_1+\\vec{E}_2$ (superposition).",
+        "Recombine into a single magnitude and direction."
+      ],
+      "figure": {
+        "type": "schematic",
+        "caption": "Two field vectors at P add to a resultant $\\vec{E}_{net}$.",
+        "params": {
+          "viewBox": [
+            340,
+            210
+          ],
+          "elements": [
+            {
+              "kind": "charge",
+              "x": 70,
+              "y": 70,
+              "sign": "+",
+              "label": "$q_1$"
+            },
+            {
+              "kind": "charge",
+              "x": 70,
+              "y": 170,
+              "sign": "+",
+              "label": "$q_2$"
+            },
+            {
+              "kind": "point",
+              "x": 230,
+              "y": 120,
+              "color": "ink",
+              "label": "P"
+            },
+            {
+              "kind": "vector",
+              "x1": 230,
+              "y1": 120,
+              "x2": 300,
+              "y2": 96,
+              "color": "field",
+              "label": "$\\vec{E}_1$"
+            },
+            {
+              "kind": "vector",
+              "x1": 230,
+              "y1": 120,
+              "x2": 300,
+              "y2": 150,
+              "color": "field",
+              "label": "$\\vec{E}_2$"
+            },
+            {
+              "kind": "vector",
+              "x1": 230,
+              "y1": 120,
+              "x2": 312,
+              "y2": 122,
+              "color": "accent",
+              "label": "$\\vec{E}_{net}$",
+              "solid": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Field lines and uniform fields",
+      "explanation": "Field lines are a picture of the field: they start on positive charge, end on negative charge, and never cross. Where lines are dense, the field is strong. Between two large parallel charged plates the field is uniform, with magnitude $E = V/d$ (voltage divided by plate separation) — the basis of capacitors and deflection plates.",
+      "math_steps": [
+        "Field lines start on $+$, end on $-$, and never cross.",
+        "Between two large parallel plates the lines are straight and evenly spaced — a uniform field.",
+        "Its strength is $E=V/d$: voltage across the plates divided by their separation $d$."
+      ],
+      "figure": {
+        "type": "schematic",
+        "caption": "Between parallel plates the field is uniform: $E=V/d$.",
+        "params": {
+          "viewBox": [
+            340,
+            200
+          ],
+          "elements": [
+            {
+              "kind": "plate",
+              "x": 56,
+              "y": 45,
+              "w": 12,
+              "h": 110,
+              "charge": "+",
+              "label": "$+$"
+            },
+            {
+              "kind": "plate",
+              "x": 272,
+              "y": 45,
+              "w": 12,
+              "h": 110,
+              "charge": "-",
+              "label": "$-$"
+            },
+            {
+              "kind": "vector",
+              "x1": 74,
+              "y1": 60,
+              "x2": 272,
+              "y2": 60,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 74,
+              "y1": 90,
+              "x2": 272,
+              "y2": 90,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 74,
+              "y1": 120,
+              "x2": 272,
+              "y2": 120,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 74,
+              "y1": 150,
+              "x2": 272,
+              "y2": 150,
+              "color": "field"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 178,
+              "text": "$E = V/d$",
+              "color": "field",
+              "size": 13
+            }
+          ]
+        }
+      }
+    }
   ],
   "real_world_examples": [
-    { "title": "Hair standing up on a Van de Graaff", "scenario": "Touch a charged dome and your hair rises and spreads apart.", "how_the_math_applies": "The dome's field $\\vec{E}$ exerts $\\vec{F}=q\\vec{E}$ on charge that spreads onto each hair; like-charged hairs repel and follow the field lines outward." },
-    { "title": "Inkjet printing", "scenario": "An inkjet printer steers charged ink droplets onto paper.", "how_the_math_applies": "Droplets pass through a uniform field between deflection plates ($E=V/d$). The force $F=qE$ bends their path by a controlled amount to place each drop precisely." },
-    { "title": "Copier / laser toner transfer", "scenario": "A photocopier moves toner from drum to paper.", "how_the_math_applies": "A field behind the paper exerts $F=qE$ on charged toner, pulling it off the drum and onto the page exactly where the field is applied." }
+    {
+      "title": "Hair standing up on a Van de Graaff",
+      "scenario": "Touch a charged dome and your hair rises and spreads apart.",
+      "how_the_math_applies": "The dome's field $\\vec{E}$ exerts $\\vec{F}=q\\vec{E}$ on charge that spreads onto each hair; like-charged hairs repel and follow the field lines outward.",
+      "detail": "The generator piles like charge onto the dome and onto you. Each hair carries the same sign, so neighboring hairs repel and push apart, lining up along the field $\\vec{E}$ that points away from your head.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Like charge spreads onto each hair; hairs repel and follow $\\vec{E}$ outward.",
+        "params": {
+          "viewBox": [
+            320,
+            220
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "component",
+                "name": "dome",
+                "x": 90,
+                "y": 150,
+                "scale": 1.1,
+                "color": null,
+                "label": "dome"
+              },
+              {
+                "kind": "component",
+                "name": "person",
+                "x": 235,
+                "y": 120,
+                "scale": 1.15,
+                "color": null,
+                "label": null,
+                "hair": "up"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "vector",
+                "x1": 230.932633569242,
+                "y1": 96,
+                "x2": 223.6113739938776,
+                "y2": 79.55618176243318,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 232.92088309182242,
+                "y1": 96,
+                "x2": 229.17847265710273,
+                "y2": 78.3933431867915,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 235,
+                "y1": 96,
+                "x2": 235,
+                "y2": 78,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 237.07911690817758,
+                "y1": 96,
+                "x2": 240.82152734289727,
+                "y2": 78.3933431867915,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 239.067366430758,
+                "y1": 96,
+                "x2": 246.3886260061224,
+                "y2": 79.55618176243318,
+                "color": "field"
+              }
+            ],
+            [
+              {
+                "kind": "component",
+                "name": "dome",
+                "x": 90,
+                "y": 150,
+                "scale": 1.1,
+                "color": null,
+                "label": "dome"
+              },
+              {
+                "kind": "component",
+                "name": "person",
+                "x": 235,
+                "y": 120,
+                "scale": 1.15,
+                "color": null,
+                "label": null,
+                "hair": "up"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 136,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "vector",
+                "x1": 230.932633569242,
+                "y1": 96,
+                "x2": 221.9844274215744,
+                "y2": 75.90199993186278,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 232.92088309182242,
+                "y1": 96,
+                "x2": 228.3468258938317,
+                "y2": 74.48075278385627,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 235,
+                "y1": 96,
+                "x2": 235,
+                "y2": 74,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 237.07911690817758,
+                "y1": 96,
+                "x2": 241.6531741061683,
+                "y2": 74.48075278385627,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 239.067366430758,
+                "y1": 96,
+                "x2": 248.0155725784256,
+                "y2": 75.90199993186278,
+                "color": "field"
+              }
+            ],
+            [
+              {
+                "kind": "component",
+                "name": "dome",
+                "x": 90,
+                "y": 150,
+                "scale": 1.1,
+                "color": null,
+                "label": "dome"
+              },
+              {
+                "kind": "component",
+                "name": "person",
+                "x": 235,
+                "y": 120,
+                "scale": 1.15,
+                "color": null,
+                "label": null,
+                "hair": "up"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 136,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 90,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "vector",
+                "x1": 230.932633569242,
+                "y1": 96,
+                "x2": 220.35748084927118,
+                "y2": 72.24781810129238,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 232.92088309182242,
+                "y1": 96,
+                "x2": 227.51517913056065,
+                "y2": 70.56816238092105,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 235,
+                "y1": 96,
+                "x2": 235,
+                "y2": 70,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 237.07911690817758,
+                "y1": 96,
+                "x2": 242.48482086943935,
+                "y2": 70.56816238092105,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 239.067366430758,
+                "y1": 96,
+                "x2": 249.64251915072882,
+                "y2": 72.24781810129238,
+                "color": "field"
+              }
+            ],
+            [
+              {
+                "kind": "component",
+                "name": "dome",
+                "x": 90,
+                "y": 150,
+                "scale": 1.1,
+                "color": null,
+                "label": "dome"
+              },
+              {
+                "kind": "component",
+                "name": "person",
+                "x": 235,
+                "y": 120,
+                "scale": 1.15,
+                "color": null,
+                "label": null,
+                "hair": "up"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 136,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 90,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 100,
+                "y": 136,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "vector",
+                "x1": 230.932633569242,
+                "y1": 96,
+                "x2": 218.730534276968,
+                "y2": 68.59363627072197,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 232.92088309182242,
+                "y1": 96,
+                "x2": 226.68353236728962,
+                "y2": 66.65557197798583,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 235,
+                "y1": 96,
+                "x2": 235,
+                "y2": 66,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 237.07911690817758,
+                "y1": 96,
+                "x2": 243.31646763271038,
+                "y2": 66.65557197798583,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 239.067366430758,
+                "y1": 96,
+                "x2": 251.269465723032,
+                "y2": 68.59363627072197,
+                "color": "field"
+              }
+            ],
+            [
+              {
+                "kind": "component",
+                "name": "dome",
+                "x": 90,
+                "y": 150,
+                "scale": 1.1,
+                "color": null,
+                "label": "dome"
+              },
+              {
+                "kind": "component",
+                "name": "person",
+                "x": 235,
+                "y": 120,
+                "scale": 1.15,
+                "color": null,
+                "label": null,
+                "hair": "up"
+              },
+              {
+                "kind": "charge",
+                "x": 70,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 80,
+                "y": 136,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 90,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 100,
+                "y": 136,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "charge",
+                "x": 110,
+                "y": 128,
+                "sign": "+",
+                "label": null,
+                "r": 6
+              },
+              {
+                "kind": "vector",
+                "x1": 230.932633569242,
+                "y1": 96,
+                "x2": 217.1035877046648,
+                "y2": 64.93945444015156,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 232.92088309182242,
+                "y1": 96,
+                "x2": 225.8518856040186,
+                "y2": 62.74298157505061,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 235,
+                "y1": 96,
+                "x2": 235,
+                "y2": 62,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 237.07911690817758,
+                "y1": 96,
+                "x2": 244.1481143959814,
+                "y2": 62.74298157505061,
+                "color": "field"
+              },
+              {
+                "kind": "vector",
+                "x1": 239.067366430758,
+                "y1": 96,
+                "x2": 252.8964122953352,
+                "y2": 64.93945444015156,
+                "color": "field"
+              }
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "title": "Inkjet printing",
+      "scenario": "An inkjet printer steers charged ink droplets onto paper.",
+      "how_the_math_applies": "Droplets pass through a uniform field between deflection plates ($E=V/d$). The force $F=qE$ bends their path by a controlled amount to place each drop precisely.",
+      "detail": "A charged droplet enters the gap between two deflection plates. Inside, a uniform field $E=V/d$ pushes it with force $F=qE$, curving its path so it lands at the right spot on the paper.",
+      "figure": {
+        "type": "schematic",
+        "caption": "The uniform field deflects the charged drop by $F=qE$ onto the paper.",
+        "params": {
+          "viewBox": [
+            340,
+            210
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 40,
+                "w": 10,
+                "h": 60,
+                "charge": "+",
+                "label": "$+$"
+              },
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 120,
+                "w": 10,
+                "h": 60,
+                "charge": "-",
+                "label": "$-$"
+              },
+              {
+                "kind": "vector",
+                "x1": 96,
+                "y1": 70,
+                "x2": 96,
+                "y2": 150,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 300,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 40,
+                "y": 80,
+                "scale": 0.7,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "label",
+                "x": 40,
+                "y": 64,
+                "text": "in",
+                "color": "soft",
+                "size": 10
+              }
+            ],
+            [
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 40,
+                "w": 10,
+                "h": 60,
+                "charge": "+",
+                "label": "$+$"
+              },
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 120,
+                "w": 10,
+                "h": 60,
+                "charge": "-",
+                "label": "$-$"
+              },
+              {
+                "kind": "vector",
+                "x1": 96,
+                "y1": 70,
+                "x2": 96,
+                "y2": 150,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 300,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 95,
+                "y": 83.75,
+                "scale": 0.7,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 95,
+                "y1": 83.75,
+                "x2": 95,
+                "y2": 105.75,
+                "color": "force",
+                "label": "$F=qE$"
+              }
+            ],
+            [
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 40,
+                "w": 10,
+                "h": 60,
+                "charge": "+",
+                "label": "$+$"
+              },
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 120,
+                "w": 10,
+                "h": 60,
+                "charge": "-",
+                "label": "$-$"
+              },
+              {
+                "kind": "vector",
+                "x1": 96,
+                "y1": 70,
+                "x2": 96,
+                "y2": 150,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 300,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 150,
+                "y": 95,
+                "scale": 0.7,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 150,
+                "y1": 95,
+                "x2": 150,
+                "y2": 117,
+                "color": "force",
+                "label": null
+              }
+            ],
+            [
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 40,
+                "w": 10,
+                "h": 60,
+                "charge": "+",
+                "label": "$+$"
+              },
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 120,
+                "w": 10,
+                "h": 60,
+                "charge": "-",
+                "label": "$-$"
+              },
+              {
+                "kind": "vector",
+                "x1": 96,
+                "y1": 70,
+                "x2": 96,
+                "y2": 150,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 300,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 205,
+                "y": 113.75,
+                "scale": 0.7,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 205,
+                "y1": 113.75,
+                "x2": 205,
+                "y2": 135.75,
+                "color": "force",
+                "label": null
+              }
+            ],
+            [
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 40,
+                "w": 10,
+                "h": 60,
+                "charge": "+",
+                "label": "$+$"
+              },
+              {
+                "kind": "plate",
+                "x": 70,
+                "y": 120,
+                "w": 10,
+                "h": 60,
+                "charge": "-",
+                "label": "$-$"
+              },
+              {
+                "kind": "vector",
+                "x1": 96,
+                "y1": 70,
+                "x2": 96,
+                "y2": 150,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 300,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 255,
+                "y": 140,
+                "scale": 0.7,
+                "color": "field",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 255,
+                "y1": 140,
+                "x2": 255,
+                "y2": 162,
+                "color": "force",
+                "label": null
+              }
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "title": "Copier / laser toner transfer",
+      "scenario": "A photocopier moves toner from drum to paper.",
+      "how_the_math_applies": "A field behind the paper exerts $F=qE$ on charged toner, pulling it off the drum and onto the page exactly where the field is applied.",
+      "detail": "Charged toner sits on the drum. A field applied behind the paper exerts $F=qE$ on the toner, lifting it off the drum onto the page exactly where the field is switched on.",
+      "figure": {
+        "type": "schematic",
+        "caption": "The field drags charged toner from drum to paper: $F=qE$.",
+        "params": {
+          "viewBox": [
+            340,
+            210
+          ],
+          "frameMs": 950,
+          "frames": [
+            [
+              {
+                "kind": "circle",
+                "x": 70,
+                "y": 105,
+                "r": 42,
+                "color": "ink",
+                "dash": false,
+                "label": "drum"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 285,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "vector",
+                "x1": 120,
+                "y1": 105,
+                "x2": 262,
+                "y2": 105,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 110,
+                "y": 109,
+                "scale": 0.5,
+                "color": "negative",
+                "label": null
+              }
+            ],
+            [
+              {
+                "kind": "circle",
+                "x": 70,
+                "y": 105,
+                "r": 42,
+                "color": "ink",
+                "dash": false,
+                "label": "drum"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 285,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "vector",
+                "x1": 120,
+                "y1": 105,
+                "x2": 262,
+                "y2": 105,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 150,
+                "y": 107,
+                "scale": 0.5,
+                "color": "negative",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 126,
+                "y1": 105,
+                "x2": 146,
+                "y2": 105,
+                "color": "force",
+                "label": "$F=qE$"
+              }
+            ],
+            [
+              {
+                "kind": "circle",
+                "x": 70,
+                "y": 105,
+                "r": 42,
+                "color": "ink",
+                "dash": false,
+                "label": "drum"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 285,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "vector",
+                "x1": 120,
+                "y1": 105,
+                "x2": 262,
+                "y2": 105,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 195,
+                "y": 105,
+                "scale": 0.5,
+                "color": "negative",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 171,
+                "y1": 105,
+                "x2": 191,
+                "y2": 105,
+                "color": "force",
+                "label": null
+              }
+            ],
+            [
+              {
+                "kind": "circle",
+                "x": 70,
+                "y": 105,
+                "r": 42,
+                "color": "ink",
+                "dash": false,
+                "label": "drum"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 285,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "vector",
+                "x1": 120,
+                "y1": 105,
+                "x2": 262,
+                "y2": 105,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 235,
+                "y": 103,
+                "scale": 0.5,
+                "color": "negative",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 211,
+                "y1": 105,
+                "x2": 231,
+                "y2": 105,
+                "color": "force",
+                "label": null
+              }
+            ],
+            [
+              {
+                "kind": "circle",
+                "x": 70,
+                "y": 105,
+                "r": 42,
+                "color": "ink",
+                "dash": false,
+                "label": "drum"
+              },
+              {
+                "kind": "component",
+                "name": "paper",
+                "x": 285,
+                "y": 105,
+                "scale": 1,
+                "color": null,
+                "label": "paper"
+              },
+              {
+                "kind": "vector",
+                "x1": 120,
+                "y1": 105,
+                "x2": 262,
+                "y2": 105,
+                "color": "field",
+                "label": "$\\vec{E}$"
+              },
+              {
+                "kind": "component",
+                "name": "droplet",
+                "x": 262,
+                "y": 101,
+                "scale": 0.5,
+                "color": "negative",
+                "label": null
+              },
+              {
+                "kind": "vector",
+                "x1": 238,
+                "y1": 105,
+                "x2": 258,
+                "y2": 105,
+                "color": "force",
+                "label": null
+              }
+            ]
+          ]
+        }
+      }
+    }
   ],
   "videos": {
     "concept_query": "electric field definition and field lines explained",
@@ -19,15 +1775,146 @@
     "combined_query": "electric field calculus based physics worked examples E equals F over q"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "A charge of $2.0\\ \\mu\\text{C}$ feels a force of $0.10$ N at a point. What is the electric field there?", "correct_answer": "$5.0\\times10^{4}$ N/C", "solution_steps": ["$E = F/q$", "$E = \\dfrac{0.10}{2.0\\times10^{-6}}$", "$E = 5.0\\times10^{4}$ N/C"], "hint": "Field is force per unit charge." },
-    { "id": "p02", "difficulty": "easy", "prompt": "Find the electric field $0.30$ m from a $+5.0\\ \\mu\\text{C}$ point charge.", "correct_answer": "$\\approx 5.0\\times10^{5}$ N/C, pointing away", "solution_steps": ["$E = k\\dfrac{|q|}{r^2}$", "$E = (8.99\\times10^9)\\dfrac{5.0\\times10^{-6}}{(0.30)^2}$", "$E \\approx 5.0\\times10^{5}$ N/C, radially outward"], "hint": "Use the point-charge field formula; positive charge points outward." },
-    { "id": "p03", "difficulty": "easy", "prompt": "At a point the field $\\vec{E}$ points in the $+x$ direction. Which way is the force on an electron placed there?", "correct_answer": "In the $-x$ direction", "solution_steps": ["$\\vec{F} = q\\vec{E}$ and the electron's charge is negative.", "A negative charge feels a force opposite to $\\vec{E}$.", "So the force is in $-x$."], "hint": "Negative charges are pushed opposite the field." },
-    { "id": "p04", "difficulty": "medium", "prompt": "A charge $q = -3.0\\ \\mu\\text{C}$ sits in a field $E = 2000$ N/C (pointing $+x$). Find the force on it.", "correct_answer": "$6.0\\times10^{-3}$ N in $-x$", "solution_steps": ["$F = |q|E = (3.0\\times10^{-6})(2000) = 6.0\\times10^{-3}$ N", "The charge is negative, so the force is opposite $\\vec{E}$: in $-x$."], "hint": "Magnitude is $|q|E$; direction flips for a negative charge." },
-    { "id": "p05", "difficulty": "medium", "prompt": "At what distance from a $+1.0\\ \\mu\\text{C}$ charge is the field $1.0\\times10^{5}$ N/C?", "correct_answer": "$0.30$ m", "solution_steps": ["$E = k\\dfrac{q}{r^2} \\Rightarrow r = \\sqrt{\\dfrac{kq}{E}}$", "$r = \\sqrt{\\dfrac{(8.99\\times10^9)(1.0\\times10^{-6})}{1.0\\times10^{5}}}$", "$r = \\sqrt{89.9} \\approx 0.30$ m"], "hint": "Solve the point-charge field formula for $r$." },
-    { "id": "p06", "difficulty": "medium", "prompt": "On the x-axis, $+4.0\\ \\mu\\text{C}$ is at $x=0$ and $-4.0\\ \\mu\\text{C}$ is at $x=0.40$ m. Find the net field at the midpoint $x=0.20$ m.", "correct_answer": "$\\approx 1.8\\times10^{6}$ N/C in $+x$", "solution_steps": ["Each charge is $0.20$ m from the midpoint: $E_1=E_2=k\\dfrac{4.0\\times10^{-6}}{0.20^2}\\approx 9.0\\times10^5$ N/C.", "From $+4\\ \\mu$C the field points $+x$; toward $-4\\ \\mu$C also points $+x$.", "They add: $E_{net}\\approx 1.8\\times10^{6}$ N/C in $+x$."], "hint": "Between a + and a − charge the two fields point the same way, so they add." },
-    { "id": "p07", "difficulty": "medium", "prompt": "Two large parallel plates are $2.0$ mm apart with $100$ V across them. Find the field between them.", "correct_answer": "$5.0\\times10^{4}$ N/C", "solution_steps": ["Uniform field: $E = V/d$.", "$E = \\dfrac{100}{2.0\\times10^{-3}}$", "$E = 5.0\\times10^{4}$ N/C"], "hint": "For parallel plates the field is voltage over separation." },
-    { "id": "p08", "difficulty": "hard", "prompt": "$+9.0\\ \\mu\\text{C}$ is at $x=0$ and $+4.0\\ \\mu\\text{C}$ is at $x=0.50$ m. Where between them is the net field zero?", "correct_answer": "$x = 0.30$ m from the $+9\\ \\mu\\text{C}$ charge", "solution_steps": ["Set magnitudes equal: $k\\dfrac{9}{x^2}=k\\dfrac{4}{(0.50-x)^2}$.", "$\\dfrac{0.50-x}{x}=\\sqrt{4/9}=\\dfrac{2}{3}$.", "$3(0.50-x)=2x \\Rightarrow x=0.30$ m."], "hint": "The null point sits nearer the smaller charge; equate the two field magnitudes." },
-    { "id": "p09", "difficulty": "hard", "prompt": "An electron is released in a uniform field $E = 1.0\\times10^{4}$ N/C. Find its acceleration.", "correct_answer": "$\\approx 1.8\\times10^{15}$ m/s$^2$", "solution_steps": ["$F = eE = (1.6\\times10^{-19})(1.0\\times10^{4}) = 1.6\\times10^{-15}$ N.", "$a = F/m_e = \\dfrac{1.6\\times10^{-15}}{9.11\\times10^{-31}}$", "$a \\approx 1.8\\times10^{15}$ m/s$^2$ (opposite $\\vec{E}$)."], "hint": "Find the force $eE$, then use $a=F/m$ with the electron mass." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "A charged oil drop of mass $3.3\\times10^{-15}$ kg hangs motionless in a vertical field $E = 2.0\\times10^{4}$ N/C. How many excess electrons does it carry?", "correct_answer": "$10$ electrons", "solution_steps": ["Balance: $qE = mg \\Rightarrow q = mg/E$.", "$q = \\dfrac{(3.3\\times10^{-15})(9.8)}{2.0\\times10^{4}} = 1.6\\times10^{-18}$ C.", "$n = q/e = \\dfrac{1.6\\times10^{-18}}{1.6\\times10^{-19}} = 10$ electrons."], "hint": "The electric force balances gravity; then divide the charge by $e$ (Millikan's method)." }
-  ]
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A charge of $2.0\\ \\mu\\text{C}$ feels a force of $0.10$ N at a point. What is the electric field there?",
+      "correct_answer": "$5.0\\times10^{4}$ N/C",
+      "solution_steps": [
+        "$E = F/q$",
+        "$E = \\dfrac{0.10}{2.0\\times10^{-6}}$",
+        "$E = 5.0\\times10^{4}$ N/C"
+      ],
+      "hint": "Field is force per unit charge."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the electric field $0.30$ m from a $+5.0\\ \\mu\\text{C}$ point charge.",
+      "correct_answer": "$\\approx 5.0\\times10^{5}$ N/C, pointing away",
+      "solution_steps": [
+        "$E = k\\dfrac{|q|}{r^2}$",
+        "$E = (8.99\\times10^9)\\dfrac{5.0\\times10^{-6}}{(0.30)^2}$",
+        "$E \\approx 5.0\\times10^{5}$ N/C, radially outward"
+      ],
+      "hint": "Use the point-charge field formula; positive charge points outward."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "At a point the field $\\vec{E}$ points in the $+x$ direction. Which way is the force on an electron placed there?",
+      "correct_answer": "In the $-x$ direction",
+      "solution_steps": [
+        "$\\vec{F} = q\\vec{E}$ and the electron's charge is negative.",
+        "A negative charge feels a force opposite to $\\vec{E}$.",
+        "So the force is in $-x$."
+      ],
+      "hint": "Negative charges are pushed opposite the field."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A charge $q = -3.0\\ \\mu\\text{C}$ sits in a field $E = 2000$ N/C (pointing $+x$). Find the force on it.",
+      "correct_answer": "$6.0\\times10^{-3}$ N in $-x$",
+      "solution_steps": [
+        "$F = |q|E = (3.0\\times10^{-6})(2000) = 6.0\\times10^{-3}$ N",
+        "The charge is negative, so the force is opposite $\\vec{E}$: in $-x$."
+      ],
+      "hint": "Magnitude is $|q|E$; direction flips for a negative charge."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "At what distance from a $+1.0\\ \\mu\\text{C}$ charge is the field $1.0\\times10^{5}$ N/C?",
+      "correct_answer": "$0.30$ m",
+      "solution_steps": [
+        "$E = k\\dfrac{q}{r^2} \\Rightarrow r = \\sqrt{\\dfrac{kq}{E}}$",
+        "$r = \\sqrt{\\dfrac{(8.99\\times10^9)(1.0\\times10^{-6})}{1.0\\times10^{5}}}$",
+        "$r = \\sqrt{89.9} \\approx 0.30$ m"
+      ],
+      "hint": "Solve the point-charge field formula for $r$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "On the x-axis, $+4.0\\ \\mu\\text{C}$ is at $x=0$ and $-4.0\\ \\mu\\text{C}$ is at $x=0.40$ m. Find the net field at the midpoint $x=0.20$ m.",
+      "correct_answer": "$\\approx 1.8\\times10^{6}$ N/C in $+x$",
+      "solution_steps": [
+        "Each charge is $0.20$ m from the midpoint: $E_1=E_2=k\\dfrac{4.0\\times10^{-6}}{0.20^2}\\approx 9.0\\times10^5$ N/C.",
+        "From $+4\\ \\mu$C the field points $+x$; toward $-4\\ \\mu$C also points $+x$.",
+        "They add: $E_{net}\\approx 1.8\\times10^{6}$ N/C in $+x$."
+      ],
+      "hint": "Between a + and a − charge the two fields point the same way, so they add."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "Two large parallel plates are $2.0$ mm apart with $100$ V across them. Find the field between them.",
+      "correct_answer": "$5.0\\times10^{4}$ N/C",
+      "solution_steps": [
+        "Uniform field: $E = V/d$.",
+        "$E = \\dfrac{100}{2.0\\times10^{-3}}$",
+        "$E = 5.0\\times10^{4}$ N/C"
+      ],
+      "hint": "For parallel plates the field is voltage over separation."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "$+9.0\\ \\mu\\text{C}$ is at $x=0$ and $+4.0\\ \\mu\\text{C}$ is at $x=0.50$ m. Where between them is the net field zero?",
+      "correct_answer": "$x = 0.30$ m from the $+9\\ \\mu\\text{C}$ charge",
+      "solution_steps": [
+        "Set magnitudes equal: $k\\dfrac{9}{x^2}=k\\dfrac{4}{(0.50-x)^2}$.",
+        "$\\dfrac{0.50-x}{x}=\\sqrt{4/9}=\\dfrac{2}{3}$.",
+        "$3(0.50-x)=2x \\Rightarrow x=0.30$ m."
+      ],
+      "hint": "The null point sits nearer the smaller charge; equate the two field magnitudes."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "An electron is released in a uniform field $E = 1.0\\times10^{4}$ N/C. Find its acceleration.",
+      "correct_answer": "$\\approx 1.8\\times10^{15}$ m/s$^2$",
+      "solution_steps": [
+        "$F = eE = (1.6\\times10^{-19})(1.0\\times10^{4}) = 1.6\\times10^{-15}$ N.",
+        "$a = F/m_e = \\dfrac{1.6\\times10^{-15}}{9.11\\times10^{-31}}$",
+        "$a \\approx 1.8\\times10^{15}$ m/s$^2$ (opposite $\\vec{E}$)."
+      ],
+      "hint": "Find the force $eE$, then use $a=F/m$ with the electron mass."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "A charged oil drop of mass $3.3\\times10^{-15}$ kg hangs motionless in a vertical field $E = 2.0\\times10^{4}$ N/C. How many excess electrons does it carry?",
+      "correct_answer": "$10$ electrons",
+      "solution_steps": [
+        "Balance: $qE = mg \\Rightarrow q = mg/E$.",
+        "$q = \\dfrac{(3.3\\times10^{-15})(9.8)}{2.0\\times10^{4}} = 1.6\\times10^{-18}$ C.",
+        "$n = q/e = \\dfrac{1.6\\times10^{-18}}{1.6\\times10^{-19}} = 10$ electrons."
+      ],
+      "hint": "The electric force balances gravity; then divide the charge by $e$ (Millikan's method)."
+    }
+  ],
+  "glossary": {
+    "electric field": {
+      "plain": "An invisible influence a charge spreads through the space around it. Anywhere in that space, another charge will feel a push or pull.",
+      "in_class": "The force per unit charge, $\\vec{E}=\\vec{F}/q_0$, measured in N/C. It is a vector at every point in space."
+    },
+    "test charge": {
+      "plain": "A tiny imaginary positive charge you place at a point just to see which way and how hard it gets pushed.",
+      "in_class": "A small positive $q_0$ used to define the field: $\\vec{E}=\\vec{F}/q_0$. 'Small' so it doesn't disturb the charges making the field."
+    },
+    "field lines": {
+      "plain": "Arrows-turned-into-lines that map which way the field points, like drawing the wind with streamlines.",
+      "in_class": "Lines that start on $+$ charge and end on $-$ charge, never cross, and are denser where the field is stronger."
+    },
+    "uniform field": {
+      "plain": "A region where the field is the same strength and direction everywhere — like a perfectly steady wind.",
+      "in_class": "The field between two large parallel charged plates, with magnitude $E=V/d$."
+    },
+    "superposition": {
+      "plain": "When several effects add up: the total is just each one added together.",
+      "in_class": "The net field is the vector sum of each charge's field: $\\vec{E}_{net}=\\vec{E}_1+\\vec{E}_2+\\cdots$."
+    }
+  }
 }
