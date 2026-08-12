@@ -233,5 +233,135 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 4: Electric Potential (Vol.2 Ch.7) =================
+  // Modeled on syllabus problems: 32, 46 (easy), 31, 34, 52 (medium),
+  // 39, 43 (hard), 56, 70 (extreme).
+  register("phys1442-04-potential", {
+    easy: [
+      // #32 — average power output: P = Energy / time
+      function () { var En = rpick([200, 300, 400]), tms = rpick([5, 10, 15]); var P = En / (tms * 1e-3);
+        return S(num("A heart defibrillator dissipates $" + En + "$ J of energy in $" + tms + "$ ms. What is its average power output?", P, P.toExponential(2), 0.02,
+          ["Power is energy per unit time: $P = E/t$.", "$P = \\dfrac{" + En + "}{" + tms + "\\times10^{-3}}$", "$P \\approx " + P.toExponential(2) + "$ W"],
+          "Use $P = E/t$ with the time in seconds.", "W"), "Vol. 2, Ch. 7 · Problem 32"); },
+      // #46 — how far from a point charge is the potential V? r = kq/V
+      function () { var qn = rpick([2, 5, 8]), V = rpick([100, 200, 500]); var r = K * qn * 1e-9 / V;
+        return S(num("How far from a $+" + qn + "$ nC point charge is the electric potential equal to $" + V + "$ V?", r, sig(r), 0.03,
+          ["The potential of a point charge is $V = kq/r$, so $r = kq/V$.", "$r = \\dfrac{(8.99\\times10^9)(" + qn + "\\times10^{-9})}{" + V + "}$", "$r \\approx " + sig(r) + "$ m"],
+          "Solve $V = kq/r$ for $r$.", "m"), "Vol. 2, Ch. 7 · Problem 46"); }
+    ],
+    medium: [
+      // #31 — energy of a proton-electron pair a distance d apart (magnitude)
+      function () { var d = rpick([0.5, 1.0, 2.0]); var dm = d * 1e-10; var U = K * E * E / dm;
+        return S(num("An electron is brought from far away to $" + d + "\\times10^{-10}$ m from a proton. What is the magnitude of the electric potential energy of the pair?", U, U.toExponential(2), 0.03,
+          ["Two point charges have $U = k\\dfrac{q_1 q_2}{r}$; here $|q_1 q_2| = e^2$.", "$|U| = (8.99\\times10^9)\\dfrac{(1.6\\times10^{-19})^2}{" + d + "\\times10^{-10}}$", "$|U| \\approx " + U.toExponential(2) + "$ J (the actual value is negative — the charges attract)"],
+          "Use $U = ke^2/r$; the pair attracts, so the energy is negative.", "J"), "Vol. 2, Ch. 7 · Problem 31"); },
+      // #34 — electron accelerated through a voltage; final (non-relativistic) speed
+      function () { var kV = rpick([20, 30, 40]); var v = Math.sqrt(2 * E * kV * 1e3 / ME);
+        return S(num("An X-ray tube accelerates electrons from rest through $" + kV + "$ kV. Non-relativistically, what is their maximum speed?", v, v.toExponential(2), 0.03,
+          ["All the electrical energy becomes kinetic: $eV = \\tfrac12 m v^2$.", "$v = \\sqrt{\\dfrac{2eV}{m}} = \\sqrt{\\dfrac{2(1.6\\times10^{-19})(" + kV + "\\times10^{3})}{9.11\\times10^{-31}}}$", "$v \\approx " + v.toExponential(2) + "$ m/s"],
+          "Set $eV = \\tfrac12 m v^2$ and solve for $v$.", "m/s"), "Vol. 2, Ch. 7 · Problem 34"); },
+      // #52 — potential at a point from two charges (scalar sum)
+      function () { var q1 = rpick([2, 3, 5]), q2 = rpick([2, 4, 6]), r1cm = rpick([3, 4]), r2cm = rpick([4, 5]); var r1 = r1cm / 100, r2 = r2cm / 100;
+        var V = K * (q1 * 1e-6 / r1 - q2 * 1e-6 / r2);
+        return S(num("A charge $+" + q1 + "\\ \\mu\\text{C}$ is $" + r1cm + "$ cm from point $P$, and a charge $-" + q2 + "\\ \\mu\\text{C}$ is $" + r2cm + "$ cm from $P$. What is the electric potential at $P$?", V, sig(V), 0.03,
+          ["Potential is a scalar sum (keep signs): $V = k\\left(\\dfrac{q_1}{r_1} + \\dfrac{q_2}{r_2}\\right)$.", "$V = (8.99\\times10^9)\\left(\\dfrac{" + q1 + "\\times10^{-6}}{" + r1 + "} - \\dfrac{" + q2 + "\\times10^{-6}}{" + r2 + "}\\right)$", "$V \\approx " + sig(V) + "$ V"],
+          "Add each charge's $kq/r$ with its sign — no vectors, potential is a scalar.", "V"), "Vol. 2, Ch. 7 · Problem 52"); }
+    ],
+    hard: [
+      // #39 — parallel plates: field from a known potential at a point, and plate voltage
+      function () { var d1cm = rpick([8, 6, 5]), Vp = rpick([300, 450, 600]), D = 0.10; var d1 = d1cm / 100; var Ef = Vp / d1; var Vplates = Ef * D;
+        return S(multi("Two parallel plates are $10.0$ cm apart, and one is at $0$ V. The potential $" + d1cm + "$ cm from the zero-volt plate is $" + Vp + "$ V.",
+          [ { label: "Electric field strength between the plates (V/m)", type: "numeric", answerValue: Ef, answerText: sig(Ef), tol: 0.03 },
+            { label: "Voltage between the plates (V)", type: "numeric", answerValue: Vplates, answerText: sig(Vplates), tol: 0.03 } ],
+          ["The field is uniform, so $E = V/d = " + Vp + "/" + d1 + " \\approx " + sig(Ef) + "$ V/m.", "Across the full gap: $V = E\\,d = (" + sig(Ef) + ")(0.10) \\approx " + sig(Vplates) + "$ V."],
+          "Uniform field: $E=V/d$. Use the known point to get $E$, then multiply by the full gap."), "Vol. 2, Ch. 7 · Problem 39"); },
+      // #43 — potential difference from a radial field E = a/s (line integral)
+      function () { var a = rpick([100, 200, 500]), s1 = rpick([2, 5]), s2 = rpick([10, 20]); var dV = a * Math.log(s2 / s1);
+        return S(num("Near a long axis the field points radially outward with magnitude $E(s) = " + a + "/s$ (SI units). What is the potential difference $V(s_1) - V(s_2)$ between $s_1 = " + s1 + "$ cm and $s_2 = " + s2 + "$ cm?", dV, sig(dV), 0.03,
+          ["Potential difference is a line integral: $V(s_1) - V(s_2) = \\displaystyle\\int_{s_1}^{s_2} E\\,ds$.", "$= \\displaystyle\\int_{s_1}^{s_2}\\dfrac{" + a + "}{s}\\,ds = " + a + "\\ln\\dfrac{s_2}{s_1}$.", "$= " + a + "\\ln(" + (s2 / s1) + ") \\approx " + sig(dV) + "$ V"],
+          "Integrate $E\\,ds$; $\\int ds/s = \\ln s$, so the answer is $a\\ln(s_2/s_1)$.", "V"), "Vol. 2, Ch. 7 · Problem 43"); }
+    ],
+    extreme: [
+      // #56 — electric field from a given potential (gradient)
+      function () { var a = rpick([2, 3, 5]), b = rpick([4, 6]), x0 = rpick([1, 2]); var Ex = -2 * a * x0, Ey = -b;
+        return S(multi("In a region the electric potential is $V(x,y) = " + a + "x^2 + " + b + "y$ (volts, with $x,y$ in metres). Find the electric field at the point $x = " + x0 + "$ m.",
+          [ { label: "$E_x$ (V/m, include the sign)", type: "numeric", answerValue: Ex, answerText: String(Ex), tol: 0.02 },
+            { label: "$E_y$ (V/m, include the sign)", type: "numeric", answerValue: Ey, answerText: String(Ey), tol: 0.02 } ],
+          ["The field is minus the gradient: $E_x = -\\dfrac{\\partial V}{\\partial x}$, $E_y = -\\dfrac{\\partial V}{\\partial y}$.", "$\\dfrac{\\partial V}{\\partial x} = 2(" + a + ")x$, so $E_x = -2(" + a + ")(" + x0 + ") = " + Ex + "$ V/m.", "$\\dfrac{\\partial V}{\\partial y} = " + b + "$, so $E_y = " + Ey + "$ V/m."],
+          "Take $E = -\\nabla V$: differentiate $V$ with respect to $x$ and $y$, then negate."), "Vol. 2, Ch. 7 · Problem 56"); },
+      // #70 — electron accelerated across plates: kinetic energy and final speed
+      function () { var V = rpick([100, 200, 500]); var KE = E * V; var v = Math.sqrt(2 * KE / ME);
+        return S(multi("An electron starts from rest and is accelerated across a uniform field between two plates with a potential difference of $" + V + "$ V.",
+          [ { label: "Kinetic energy gained (J)", type: "numeric", answerValue: KE, answerText: KE.toExponential(2), tol: 0.03 },
+            { label: "Final speed (m/s)", type: "numeric", answerValue: v, answerText: v.toExponential(2), tol: 0.03 } ],
+          ["Energy from the field: $KE = eV = (1.6\\times10^{-19})(" + V + ") \\approx " + KE.toExponential(2) + "$ J.", "Then $\\tfrac12 m v^2 = KE$, so $v = \\sqrt{2\\,KE/m} \\approx " + v.toExponential(2) + "$ m/s."],
+          "The work $eV$ becomes kinetic energy; then solve $\\tfrac12 mv^2 = eV$ for $v$."), "Vol. 2, Ch. 7 · Problem 70"); }
+    ]
+  });
+
+  // ================= Lesson 5: Capacitance & Capacitors (Vol.2 Ch.8) =================
+  // Modeled on syllabus problems: 19, 21 (easy), 25, 32, 41 (medium),
+  // 29, 33, 36 (hard), 51 (extreme).
+  register("phys1442-05-capacitance", {
+    easy: [
+      // #19 — charge stored: Q = CV
+      function () { var C = rpick([10, 20, 50]), V = rpick([100, 120, 200]); var Q = C * 1e-12 * V;
+        return S(num("What charge is stored in a $" + C + "$ pF capacitor when $" + V + ".0$ V is applied to it?", Q, Q.toExponential(2), 0.02,
+          ["Capacitance relates charge and voltage: $Q = CV$.", "$Q = (" + C + "\\times10^{-12})(" + V + ")$", "$Q \\approx " + Q.toExponential(2) + "$ C"],
+          "Use $Q = CV$ (capacitance in farads, voltage in volts).", "C"), "Vol. 2, Ch. 8 · Problem 19"); },
+      // #21 — voltage from charge: V = Q/C
+      function () { var C = rpick([2, 5, 10]), Q = rpick([20, 50, 100]); var V = Q / C;
+        return S(num("Calculate the voltage applied to a $" + C + ".0\\ \\mu\\text{F}$ capacitor when it holds $" + Q + "\\ \\mu\\text{C}$ of charge.", V, sig(V), 0.02,
+          ["Rearrange $Q = CV$ to $V = Q/C$.", "$V = \\dfrac{" + Q + "\\ \\mu\\text{C}}{" + C + "\\ \\mu\\text{F}} = \\dfrac{" + Q + "}{" + C + "}$", "$V = " + sig(V) + "$ V"],
+          "The micro-units cancel: $V = Q/C$.", "V"), "Vol. 2, Ch. 8 · Problem 21"); }
+    ],
+    medium: [
+      // #25 — plate area of a parallel-plate capacitor: A = Cd/eps0
+      function () { var C = rpick([5, 10, 20]), dmm = rpick([1.0, 2.0]); var d = dmm / 1000; var A = C * 1e-12 * d / EPS0;
+        return S(num("The plates of an empty parallel-plate capacitor of capacitance $" + C + ".0$ pF are $" + dmm + "$ mm apart. What is the area of each plate?", A, A.toExponential(2), 0.03,
+          ["Parallel-plate capacitance: $C = \\dfrac{\\varepsilon_0 A}{d}$, so $A = \\dfrac{Cd}{\\varepsilon_0}$.", "$A = \\dfrac{(" + C + "\\times10^{-12})(" + d + ")}{8.85\\times10^{-12}}$", "$A \\approx " + A.toExponential(2) + "$ m²"],
+          "Solve $C=\\varepsilon_0 A/d$ for $A$.", "m²"), "Vol. 2, Ch. 8 · Problem 25"); },
+      // #32 — three capacitors in parallel: equivalent C and total charge
+      function () { var c1 = rpick([2, 3]), c2 = rpick([4, 5]), c3 = rpick([6, 8]), V = 500; var Ceq = c1 + c2 + c3; var Q = Ceq * 1e-6 * V;
+        return S(multi("Three capacitors of $" + c1 + "\\ \\mu\\text{F}$, $" + c2 + "\\ \\mu\\text{F}$, and $" + c3 + "\\ \\mu\\text{F}$ are connected in parallel across a $" + V + "$-V source.",
+          [ { label: "Equivalent capacitance (μF)", type: "numeric", answerValue: Ceq, answerText: sig(Ceq), tol: 0.02 },
+            { label: "Total charge stored (C)", type: "numeric", answerValue: Q, answerText: Q.toExponential(2), tol: 0.03 } ],
+          ["In parallel, capacitances add: $C_{eq} = " + c1 + "+" + c2 + "+" + c3 + " = " + Ceq + "\\ \\mu$F.", "Every capacitor has the full $" + V + "$ V across it.", "Total charge $Q = C_{eq}V = (" + Ceq + "\\times10^{-6})(" + V + ") \\approx " + Q.toExponential(2) + "$ C."],
+          "Parallel capacitors add; each sees the full voltage, and $Q=C_{eq}V$."), "Vol. 2, Ch. 8 · Problem 32"); },
+      // #41 — energy stored in a capacitor: U = 1/2 C V^2
+      function () { var C = rpick([2, 5, 10]), V = rpick([6, 12, 50]); var U = 0.5 * C * 1e-6 * V * V;
+        return S(num("How much energy is stored in a $" + C + ".0\\ \\mu\\text{F}$ capacitor connected to a $" + V + ".0$-V battery?", U, U.toExponential(2), 0.03,
+          ["Energy stored: $U = \\tfrac12 C V^2$.", "$U = \\tfrac12 (" + C + "\\times10^{-6})(" + V + ")^2$", "$U \\approx " + U.toExponential(2) + "$ J"],
+          "Use $U = \\tfrac12 CV^2$.", "J"), "Vol. 2, Ch. 8 · Problem 41"); }
+    ],
+    hard: [
+      // #29 — cylindrical capacitor: radius ratio from capacitance per unit length
+      function () { var cpl = rpick([15, 20, 30]); var ratio = Math.exp(2 * Math.PI * EPS0 / (cpl * 1e-12));
+        return S(num("A cylindrical capacitor has a capacitance per unit length of $" + cpl + "$ pF/m. What is the ratio $b/a$ of the outer to inner radius?", ratio, sig(ratio), 0.04,
+          ["For a cylindrical capacitor $\\dfrac{C}{L} = \\dfrac{2\\pi\\varepsilon_0}{\\ln(b/a)}$.", "So $\\ln(b/a) = \\dfrac{2\\pi\\varepsilon_0}{C/L} = \\dfrac{2\\pi(8.85\\times10^{-12})}{" + cpl + "\\times10^{-12}}$.", "$b/a = e^{" + sig(2 * Math.PI * EPS0 / (cpl * 1e-12)) + "} \\approx " + sig(ratio) + "$"],
+          "Invert $C/L = 2\\pi\\varepsilon_0/\\ln(b/a)$, then exponentiate.", ""), "Vol. 2, Ch. 8 · Problem 29"); },
+      // #33 — network: two in parallel, then in series with a third
+      function () { var c1 = rpick([2, 3]), c2 = rpick([3, 4]), c3 = rpick([3, 6]); var par = c1 + c2; var Ceq = par * c3 / (par + c3);
+        return S(num("Capacitors $" + c1 + "\\ \\mu\\text{F}$ and $" + c2 + "\\ \\mu\\text{F}$ are wired in parallel, and that pair is in series with a $" + c3 + "\\ \\mu\\text{F}$ capacitor. What is the total capacitance?", Ceq, sig(Ceq), 0.03,
+          ["First the parallel pair adds: $" + c1 + "+" + c2 + " = " + par + "\\ \\mu$F.", "Then in series with $" + c3 + "\\ \\mu$F: $\\dfrac{1}{C_{eq}} = \\dfrac{1}{" + par + "} + \\dfrac{1}{" + c3 + "}$.", "$C_{eq} = \\dfrac{(" + par + ")(" + c3 + ")}{" + par + "+" + c3 + "} \\approx " + sig(Ceq) + "\\ \\mu$F"],
+          "Combine the parallel pair first (add), then series with the third (reciprocals).", "μF"), "Vol. 2, Ch. 8 · Problem 33"); },
+      // #36 — network: two in series, in parallel with a third
+      function () { var c1 = rpick([6, 4]), c2 = rpick([3, 2]), c3 = rpick([4, 5]); var ser = c1 * c2 / (c1 + c2); var Ceq = ser + c3;
+        return S(num("Capacitors $" + c1 + "\\ \\mu\\text{F}$ and $" + c2 + "\\ \\mu\\text{F}$ are wired in series, and that combination is in parallel with a $" + c3 + "\\ \\mu\\text{F}$ capacitor. Find the equivalent capacitance.", Ceq, sig(Ceq), 0.03,
+          ["The series pair: $\\dfrac{(" + c1 + ")(" + c2 + ")}{" + c1 + "+" + c2 + "} = " + sig(ser) + "\\ \\mu$F.", "Then in parallel with $" + c3 + "\\ \\mu$F, capacitances add.", "$C_{eq} = " + sig(ser) + " + " + c3 + " \\approx " + sig(Ceq) + "\\ \\mu$F"],
+          "Series pair uses reciprocals; then add the parallel capacitor.", "μF"), "Vol. 2, Ch. 8 · Problem 36"); }
+    ],
+    extreme: [
+      // #51 — parallel-plate capacitor: capacitance with air and with a dielectric
+      function () { var Acm = rpick([100, 200]), dmm = rpick([1.0, 2.0]), kap = rpick([4.0, 6.0]); var A = Acm * 1e-4, d = dmm / 1000;
+        var C0 = EPS0 * A / d; var Cd = kap * C0;
+        return S(multi("An air-filled parallel-plate capacitor has plates of area $" + Acm + "\\ \\text{cm}^2$ separated by $" + dmm + "$ mm.",
+          [ { label: "Capacitance with air (F)", type: "numeric", answerValue: C0, answerText: C0.toExponential(2), tol: 0.03 },
+            { label: "Capacitance after filling with a dielectric of constant $" + kap + "$ (F)", type: "numeric", answerValue: Cd, answerText: Cd.toExponential(2), tol: 0.03 } ],
+          ["Air capacitance: $C_0 = \\dfrac{\\varepsilon_0 A}{d} = \\dfrac{(8.85\\times10^{-12})(" + A + ")}{" + d + "} \\approx " + C0.toExponential(2) + "$ F.", "A dielectric multiplies the capacitance by $\\kappa$: $C = \\kappa C_0 = " + kap + "\\times " + C0.toExponential(2) + " \\approx " + Cd.toExponential(2) + "$ F."],
+          "First $C_0=\\varepsilon_0 A/d$ (convert cm² and mm to SI); then multiply by $\\kappa$."), "Vol. 2, Ch. 8 · Problem 51"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
