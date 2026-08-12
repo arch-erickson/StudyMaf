@@ -1348,7 +1348,7 @@ window.App = (function () {
   function buildTutorDock() {
     var dock = document.getElementById("ai-tutor-dock"), launcher = document.getElementById("open-ai-fab");
     if (window.__studymafTutor) return window.__studymafTutor;
-    var state = { image: "", maximized: false, minimized: false, context: tutorContext, history: [], talkMode: false, listening: false, waiting: false, speaking: false, recognition: null, restartTimer: 0 };
+    var state = { image: "", maximized: false, minimized: false, context: tutorContext, history: [], talkMode: false, listening: false, waiting: false, speaking: false, recognition: null, restartTimer: 0, speechQueue: [], speechPlaying: false, speechDone: null, voiceWarmAttempted: false };
     dock.innerHTML = "";
     var head = el("div", "tutor-head"), identity = el("div", "tutor-identity"), avatar = el("span", "tutor-avatar"); avatar.appendChild(tutorAvatar()); identity.appendChild(avatar);
     var copy = el("div"); copy.appendChild(el("strong", null, "Rho (ρ), your study tutor")); copy.appendChild(el("span", "tutor-context", "Ready to help")); identity.appendChild(copy);
@@ -1376,6 +1376,7 @@ window.App = (function () {
       talk.setAttribute("aria-pressed", String(state.talkMode));
     }
     function stopSpeech() {
+      state.speechQueue = []; state.speechDone = null; state.speechPlaying = false;
       if (window.RhoVoice) window.RhoVoice.stop();
       if ("speechSynthesis" in window) window.speechSynthesis.cancel();
       state.speaking = false;
@@ -1386,14 +1387,29 @@ window.App = (function () {
       utterance.onend = done; utterance.onerror = done;
       window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance);
     }
-    function speakRho(text, done) {
-      var words = rhoSpeechText(text); state.speaking = true; setVoiceStatus("Rho is speaking...");
+    function speakSegment(words, done) {
+      state.speaking = true; setVoiceStatus("Rho is speaking...");
       function complete() { state.speaking = false; if (!state.talkMode) setVoiceStatus("Ready to help"); if (done) done(); }
       if (window.RhoVoice) {
         window.RhoVoice.speak(words, { onStatus: setVoiceStatus }).then(complete).catch(function () {
           setVoiceStatus("Using your device voice for this reply."); fallbackSpeak(words, complete);
         });
       } else fallbackSpeak(words, complete);
+    }
+    function playQueuedSpeech() {
+      if (state.speechPlaying) return;
+      var next = state.speechQueue.shift();
+      if (!next) { var onDone = state.speechDone; state.speechDone = null; if (onDone) onDone(); return; }
+      state.speechPlaying = true;
+      speakSegment(next, function () { state.speechPlaying = false; playQueuedSpeech(); });
+    }
+    function queueRhoSpeech(text) {
+      var words = rhoSpeechText(text); if (!words) return;
+      state.speechQueue.push(words); playQueuedSpeech();
+    }
+    function finishQueuedSpeech(done) { state.speechDone = done; playQueuedSpeech(); }
+    function speakRho(text, done) {
+      stopSpeech(); speakSegment(rhoSpeechText(text), done);
     }
     function add(role, text, imageData, references) {
       var row = el("div", "tutor-message " + role); if (role === "assistant") row.appendChild(tutorAvatar());
@@ -1405,12 +1421,29 @@ window.App = (function () {
       if (role === "assistant" && (window.RhoVoice || "speechSynthesis" in window)) { var speak = el("button", "tutor-speak"); speak.innerHTML = icon("volume"); speak.title = "Read this answer aloud"; speak.onclick = function () { speakRho(text); }; row.appendChild(speak); }
       messages.appendChild(row); messages.scrollTop = messages.scrollHeight;
     }
+    function beginStreamingAnswer() {
+      var row = el("div", "tutor-message assistant"), bubble = el("div", "tutor-bubble", "Rho is thinking...");
+      row.appendChild(tutorAvatar()); row.appendChild(bubble); messages.appendChild(row); messages.scrollTop = messages.scrollHeight;
+      return { row: row, bubble: bubble };
+    }
+    function finishStreamingAnswer(live, text, references) {
+      live.bubble.innerHTML = ""; renderRhoResponse(live.bubble, text);
+      if (references) { var related = tutorReferences(references); if (related) live.row.appendChild(related); }
+      if (window.RhoVoice || "speechSynthesis" in window) { var speak = el("button", "tutor-speak"); speak.innerHTML = icon("volume"); speak.title = "Read this answer aloud"; speak.onclick = function () { speakRho(text); }; live.row.appendChild(speak); }
+      messages.scrollTop = messages.scrollHeight;
+    }
+    function splitSpeech(buffer, final) {
+      var pieces = [], match;
+      while ((match = buffer.match(/^([\s\S]*?[.!?])(?:\s+|$)/))) { pieces.push(match[1]); buffer = buffer.slice(match[0].length); }
+      if (final && buffer.trim()) { pieces.push(buffer); buffer = ""; }
+      return { pieces: pieces, rest: buffer };
+    }
     function autosize() { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 118) + "px"; }
     function clearImage() { state.image = ""; preview.hidden = true; preview.innerHTML = ""; file.value = ""; }
     function showImage(data) { state.image = data; preview.hidden = false; preview.innerHTML = ""; var img = document.createElement("img"); img.src = data; img.alt = "Photo ready to send"; var remove = el("button", "tutor-photo-remove", "Remove photo"); remove.onclick = clearImage; preview.append(img, remove); }
     function remember(role, content) {
-      state.history.push({ role: role, content: String(content || "").slice(0, 1800) });
-      if (state.history.length > 10) state.history = state.history.slice(-10);
+      state.history.push({ role: role, content: String(content || "").slice(0, 650) });
+      if (state.history.length > 6) state.history = state.history.slice(-6);
     }
     function resumeTalk() {
       if (!state.talkMode || state.waiting || state.speaking) return;
@@ -1422,15 +1455,53 @@ window.App = (function () {
       state.waiting = false; send.disabled = false; send.classList.remove("thinking");
       if (state.talkMode) speakRho(answer, resumeTalk); else { setVoiceStatus("Ready to help"); input.focus(); }
     }
+    function streamAnswer(question, sentImage, history) {
+      var live = beginStreamingAnswer(), answer = "", speechBuffer = "", started = false;
+      fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: question, context: state.context, image_data: sentImage, history: history, stream: true }) })
+        .then(function (response) {
+          if (!response.ok) return response.json().then(function (body) { throw new Error(body.error || "Tutor unavailable."); });
+          if (!response.body) throw new Error("Streaming is not supported in this browser.");
+          var reader = response.body.getReader(), decoder = new TextDecoder(), buffer = "";
+          function read() {
+            return reader.read().then(function (part) {
+              if (part.done) return;
+              buffer += decoder.decode(part.value, { stream: true }).replace(/\r/g, "");
+              var frames = buffer.split("\n\n"); buffer = frames.pop();
+              frames.forEach(function (frame) {
+                var event = (frame.match(/^event:\s*(.+)$/m) || [])[1], raw = (frame.match(/^data:\s*(.+)$/m) || [])[1];
+                if (!raw || event === "done") return;
+                try {
+                  var data = JSON.parse(raw); if (event !== "delta" || !data.text) return;
+                  answer += data.text; live.bubble.textContent = answer.replace(/^ANSWER:\s*/i, ""); messages.scrollTop = messages.scrollHeight;
+                  if (!started) { started = true; setVoiceStatus("Rho is writing an answer..."); }
+                  if (state.talkMode) { speechBuffer += data.text; var split = splitSpeech(speechBuffer, false); speechBuffer = split.rest; split.pieces.forEach(queueRhoSpeech); }
+                } catch (error) {}
+              });
+              return read();
+            });
+          }
+          return read();
+        })
+        .then(function () {
+          if (!answer.trim()) throw new Error("The tutor did not return an answer.");
+          if (state.talkMode) { var split = splitSpeech(speechBuffer, true); split.pieces.forEach(queueRhoSpeech); }
+          remember("user", question); remember("assistant", answer); finishStreamingAnswer(live, answer, state.context);
+          state.waiting = false; send.disabled = false; send.classList.remove("thinking");
+          if (state.talkMode) finishQueuedSpeech(resumeTalk); else { setVoiceStatus("Ready to help"); input.focus(); }
+        })
+        .catch(function (error) {
+          var message = "I could not reach the tutor right now. " + error.message;
+          finishStreamingAnswer(live, message, state.context); remember("user", question); remember("assistant", message);
+          state.waiting = false; send.disabled = false; send.classList.remove("thinking");
+          if (state.talkMode) { queueRhoSpeech(message); finishQueuedSpeech(resumeTalk); } else { setVoiceStatus("Ready to help"); input.focus(); }
+        });
+    }
     function submit() {
       var question = input.value.trim(); if (!question && !state.image) return; if (!question) question = "Please look at this photo and help me with the problem.";
-      var sentImage = state.image, history = state.history.slice(-8); add("student", question, sentImage); input.value = ""; autosize(); clearImage(); state.waiting = true; send.disabled = true; send.classList.add("thinking");
+      var sentImage = state.image, history = state.history.slice(-4); add("student", question, sentImage); input.value = ""; autosize(); clearImage(); state.waiting = true; send.disabled = true; send.classList.add("thinking"); setVoiceStatus("Rho is thinking...");
       var expression = sentImage ? "" : calculatorExpression(question), calculated = expression ? calculatorReply(expression) : "";
       if (calculated) { completeAnswer(question, calculated); return; }
-      fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: question, context: state.context, image_data: sentImage, history: history }) })
-        .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Tutor unavailable."); return j; }); })
-        .then(function (j) { completeAnswer(question, j.answer || "I could not make an answer. Please try again."); })
-        .catch(function (e) { completeAnswer(question, "I could not reach the tutor right now. " + e.message); });
+      streamAnswer(question, sentImage, history);
     }
     function stopListening() {
       window.clearTimeout(state.restartTimer); state.listening = false;
@@ -1488,7 +1559,12 @@ window.App = (function () {
     head.addEventListener("pointerdown", function (event) { if (event.target.closest("button, a")) return; var box = dock.getBoundingClientRect(), sx = event.clientX, sy = event.clientY, left = box.left, top = box.top; dock.classList.add("dragging"); dock.setPointerCapture(event.pointerId);
       function move(e) { dock.style.left = Math.max(8, Math.min(window.innerWidth - dock.offsetWidth - 8, left + e.clientX - sx)) + "px"; dock.style.top = Math.max(8, Math.min(window.innerHeight - dock.offsetHeight - 8, top + e.clientY - sy)) + "px"; dock.style.right = "auto"; dock.style.bottom = "auto"; }
       function up() { dock.classList.remove("dragging"); dock.removeEventListener("pointermove", move); dock.removeEventListener("pointerup", up); } dock.addEventListener("pointermove", move); dock.addEventListener("pointerup", up); });
-    return window.__studymafTutor = { open: function () { dock.hidden = false; dock.setAttribute("aria-hidden", "false"); launcher.hidden = true; requestAnimationFrame(function () { input.focus(); }); }, updateContext: function (ctx) { var oldKey = state.context.lesson_id + ":" + state.context.question_id, newKey = ctx.lesson_id + ":" + ctx.question_id; state.context = ctx; if (oldKey !== newKey) state.history = []; copy.querySelector(".tutor-context").textContent = label(ctx); } };
+    function warmVoice() {
+      if (state.voiceWarmAttempted || !window.RhoVoice) return;
+      state.voiceWarmAttempted = true; setVoiceStatus("Preparing Rho's voice in the background...");
+      window.RhoVoice.prepare(setVoiceStatus).then(function () { if (!state.talkMode && !state.waiting) setVoiceStatus("Rho's voice is ready."); }).catch(function () { if (!state.talkMode) setVoiceStatus("Your device voice will be used if needed."); });
+    }
+    return window.__studymafTutor = { open: function () { dock.hidden = false; dock.setAttribute("aria-hidden", "false"); launcher.hidden = true; warmVoice(); requestAnimationFrame(function () { input.focus(); }); }, updateContext: function (ctx) { var oldKey = state.context.lesson_id + ":" + state.context.question_id, newKey = ctx.lesson_id + ":" + ctx.question_id; state.context = ctx; if (oldKey !== newKey) state.history = []; copy.querySelector(".tutor-context").textContent = label(ctx); } };
   }
   function openStudymafAI() { buildTutorDock().open(); }
 

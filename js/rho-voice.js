@@ -1,7 +1,7 @@
 /*
  * Rho's local voice. Kokoro is an Apache-2.0 open-weight TTS model that runs
- * in the learner's browser. The model is fetched only after they start Talk,
- * then the browser cache keeps it for later visits.
+ * in the learner's browser. The model is fetched in the background when Rho
+ * opens, then the browser cache keeps it for later visits.
  */
 const KOKORO_MODULE = "https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm";
 const KOKORO_MODEL = "onnx-community/Kokoro-82M-v1.0-ONNX";

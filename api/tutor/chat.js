@@ -23,17 +23,17 @@ function cleanContext(raw) {
   raw = raw && typeof raw === 'object' ? raw : {};
   return {
     page: text(raw.page, 120), learner_id: text(raw.learner_id, 100), class_id: text(raw.class_id, 100), class_name: text(raw.class_name, 160), lesson_id: text(raw.lesson_id, 100),
-    lesson_title: text(raw.lesson_title, 200), lesson_summary: text(raw.lesson_summary, 1200), chapter: text(raw.chapter, 120),
-    textbook: text(raw.textbook, 350), question_id: text(raw.question_id, 160), question_prompt: text(raw.question_prompt, 2400),
-    hint: text(raw.hint, 800), difficulty: text(raw.difficulty, 40), source: text(raw.source, 160)
+    lesson_title: text(raw.lesson_title, 160), lesson_summary: text(raw.lesson_summary, 600), chapter: text(raw.chapter, 100),
+    textbook: text(raw.textbook, 220), question_id: text(raw.question_id, 160), question_prompt: text(raw.question_prompt, 1200),
+    hint: text(raw.hint, 400), difficulty: text(raw.difficulty, 40), source: text(raw.source, 120)
   };
 }
 function cleanHistory(raw) {
   if (!Array.isArray(raw)) return [];
-  return raw.slice(-8).map(function (turn) {
+  return raw.slice(-4).map(function (turn) {
     turn = turn && typeof turn === 'object' ? turn : {};
     var role = turn.role === 'assistant' ? 'assistant' : (turn.role === 'user' ? 'user' : '');
-    var content = text(turn.content, 1800);
+    var content = text(turn.content, 650);
     return role && content ? { role: role, content: content } : null;
   }).filter(Boolean);
 }
@@ -50,6 +50,16 @@ async function problemMemory(context) {
 function leakedReasoning(answer) {
   return /thinking process|analyze user input|identify role\/constraints|determine current state|formulate response|let'?s craft/i.test(answer || '');
 }
+function streamEvent(res, event, data) {
+  res.write('event: ' + event + '\n' + 'data: ' + JSON.stringify(data) + '\n\n');
+}
+function deltaText(payload) {
+  var delta = payload && payload.choices && payload.choices[0] && payload.choices[0].delta;
+  if (!delta) return '';
+  if (typeof delta.content === 'string') return delta.content;
+  if (Array.isArray(delta.content)) return delta.content.map(function (part) { return part && typeof part.text === 'string' ? part.text : ''; }).join('');
+  return '';
+}
 
 module.exports = async function (req, res) {
   if (req.method === 'OPTIONS') { cors(req, res); return res.status(204).end(); }
@@ -57,7 +67,7 @@ module.exports = async function (req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Use POST.' });
   if (!rateOk(req)) return res.status(429).json({ error: 'Please wait a moment, then try again.' });
 
-  var body = req.body || {}, question = text(body.question, 2400), context = cleanContext(body.context), history = cleanHistory(body.history);
+  var body = req.body || {}, question = text(body.question, 2400), context = cleanContext(body.context), history = cleanHistory(body.history), wantsStream = body.stream === true;
   if (!context.lesson_id) context.lesson_id = text(body.lesson_id, 100);
   if (!context.page) context.page = text(body.page, 160);
   var image = text(body.image_data, 1800000);
@@ -93,10 +103,34 @@ module.exports = async function (req, res) {
     var response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://studymaf.com', 'X-OpenRouter-Title': 'StudyMAF Tutor' },
-      body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: messages, max_tokens: 360 })
+      body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, stream: wantsStream, messages: messages, max_tokens: 180 })
     });
+    if (!response.ok) {
+      var failure = await response.json();
+      throw new Error(failure.error && failure.error.message ? failure.error.message : (image ? 'A free vision model is busy. Try again in a moment.' : 'The free model is busy.'));
+    }
+    if (wantsStream) {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-cache, no-transform');
+      res.setHeader('Connection', 'keep-alive');
+      res.setHeader('X-Accel-Buffering', 'no');
+      if (res.flushHeaders) res.flushHeaders();
+      var buffer = '', decoder = new TextDecoder();
+      for await (var chunk of response.body) {
+        buffer += decoder.decode(chunk, { stream: true }).replace(/\r/g, '');
+        var frames = buffer.split('\n\n'); buffer = frames.pop();
+        frames.forEach(function (frame) {
+          var line = frame.split('\n').filter(function (value) { return value.indexOf('data:') === 0; })[0];
+          if (!line) return;
+          var raw = line.slice(5).trim(); if (!raw || raw === '[DONE]') return;
+          try { var content = deltaText(JSON.parse(raw)); if (content) streamEvent(res, 'delta', { text: content }); } catch (error) {}
+        });
+      }
+      streamEvent(res, 'done', {});
+      return res.end();
+    }
     var data = await response.json();
-    if (!response.ok) throw new Error(data.error && data.error.message ? data.error.message : (image ? 'A free vision model is busy. Try again in a moment.' : 'The free model is busy.'));
     var answer = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
     if (!answer) throw new Error('The tutor did not return an answer.');
     // Free routing can select a reasoning model. Do not ever send its private
@@ -105,7 +139,7 @@ module.exports = async function (req, res) {
       var retry = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://studymaf.com', 'X-OpenRouter-Title': 'StudyMAF Tutor' },
-        body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions + '\nThis is a strict retry. Output only the final answer for the student.' }].concat(history).concat([{ role: 'user', content: userContent }]), max_tokens: 260 })
+        body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions + '\nThis is a strict retry. Output only the final answer for the student.' }].concat(history).concat([{ role: 'user', content: userContent }]), max_tokens: 160 })
       });
       var retryData = await retry.json();
       var retryAnswer = retryData.choices && retryData.choices[0] && retryData.choices[0].message && retryData.choices[0].message.content;
