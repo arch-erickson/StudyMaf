@@ -25,6 +25,7 @@ window.App = (function () {
     return m;
   }
   var TUTOR_URL = "REPLACE_WITH_YOUR_TUTOR_URL"; // <-- paste your Custom GPT / Claude Project URL
+  var TUTOR_API_URL = "https://studymaf-tutor.vercel.app/api/tutor/chat";
 
   // ---------- helpers ----------
   function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
@@ -1176,6 +1177,9 @@ window.App = (function () {
   }
 
   function bindHeader() {
+    var ai = document.getElementById("open-ai");
+    ai.innerHTML = icon("chat") + "<span>Ask AI</span>";
+    ai.onclick = openStudymafAI;
     var c = document.getElementById("open-calc");
     c.innerHTML = icon("calculator") + "<span>Calculator</span>";
     c.onclick = function () { Calculator.open(); };
@@ -1183,6 +1187,36 @@ window.App = (function () {
     fs.innerHTML = icon("fullscreen") + "<span>Full screen</span>";
     fs.onclick = toggleFullscreen;
     document.getElementById("open-accent").onclick = openAccentPicker;
+  }
+
+  // The OpenRouter key lives only in the Vercel function. This page sends lesson
+  // context plus the student's question; it never receives or stores that key.
+  function openStudymafAI() {
+    var configuredGPT = TUTOR_URL && TUTOR_URL.indexOf("REPLACE_WITH") !== 0;
+    var m = modal(
+      "<h2>Ask StudyMAF AI</h2>" +
+      "<p class='modal-sub'>Ask about the lesson you are studying. It gives short, clear help and starts with a hint.</p>" +
+      "<div class='ai-chat-log' id='ai-log'><div class='ai-msg assistant'>What are you working on?</div></div>" +
+      "<label class='field'><span>Your question</span><textarea id='ai-question' rows='3' placeholder='I do not understand why the electric field points away from a positive charge.'></textarea></label>" +
+      "<p class='modal-sub ai-note'>Free test model. It can be unavailable or slower at busy times.</p>" +
+      "<div class='modal-actions'><button class='btn subtle' data-close>Close</button>" +
+      (configuredGPT ? "<a class='btn ghost' href='" + esc(TUTOR_URL) + "' target='_blank' rel='noopener'>Open my Custom GPT ↗</a>" : "") +
+      "<button class='btn primary' id='ai-send'>Send</button></div>", { wide: true });
+    var input = m.querySelector("#ai-question"), log = m.querySelector("#ai-log"), send = m.querySelector("#ai-send");
+    function add(role, text) { var row = el("div", "ai-msg " + role); row.textContent = text; log.appendChild(row); log.scrollTop = log.scrollHeight; }
+    function submit() {
+      var question = input.value.trim(); if (!question) return;
+      add("student", question); input.value = ""; send.disabled = true; send.textContent = "Thinking…";
+      var hash = String(location.hash || ""), lessonId = (hash.match(/lesson=([^&/]+)/) || [])[1] || "";
+      fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: question, lesson_id: lessonId, page: hash }) })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Tutor unavailable."); return j; }); })
+        .then(function (j) { add("assistant", j.answer || "I could not make an answer. Please try again."); })
+        .catch(function (e) { add("assistant", "I could not reach the tutor right now. " + e.message); })
+        .finally(function () { send.disabled = false; send.textContent = "Send"; input.focus(); });
+    }
+    send.onclick = submit;
+    input.onkeydown = function (e) { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") submit(); };
+    setTimeout(function () { input.focus(); }, 0);
   }
 
   // In-app immersive mode. iOS Safari has no reliable element fullscreen, and the

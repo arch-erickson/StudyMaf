@@ -697,3 +697,10 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .calc-dock.max .calc-sci { flex: 1; min-height: 0; }
 /* Narrow docks: stack panels and keep keypad usable */
 @media (max-width: 560px) { .calc-grid2 .calc-key { padding: 10px 0; font-size: .85rem; } }
+
+/* ---------- StudyMAF AI tutor ---------- */
+.ai-chat-log { min-height: 180px; max-height: 42vh; overflow: auto; padding: 12px; margin: 14px 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-soft, #f7f8fa); }
+.ai-msg { width: fit-content; max-width: 88%; padding: 9px 11px; margin: 0 0 9px; border-radius: 10px; white-space: pre-wrap; line-height: 1.45; }
+.ai-msg.assistant { background: #fff; border: 1px solid var(--line); color: var(--ink); }
+.ai-msg.student { margin-left: auto; background: var(--accent); color: var(--accent-ink); }
+.ai-note { margin: 8px 0 0; font-size: .82rem; }

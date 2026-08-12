@@ -1,0 +1,47 @@
+openapi: 3.1.0
+info:
+  title: StudyMAF Tutor Memory
+  version: 1.0.0
+  description: Private memory for the StudyMAF tutor. Use it only to improve tutoring for the current student.
+servers:
+  - url: https://studymaf-tutor-erickson-and-i.vercel.app
+paths:
+  /api/tutor/history:
+    get:
+      operationId: getProblemMemory
+      summary: Get previous difficulty for one StudyMAF problem.
+      parameters:
+        - name: problem_key
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Saved memory, or null if the problem is new.
+  /api/tutor/attempts:
+    post:
+      operationId: recordProblemAttempt
+      summary: Record a wrong or correct attempt after helping the student.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [problem_key, lesson_id, outcome]
+              properties:
+                problem_key: { type: string, description: 'Stable lesson/problem identifier, for example phys1442-01-coulomb:source-40.' }
+                lesson_id: { type: string }
+                outcome: { type: string, enum: [wrong, correct] }
+                misconception: { type: string, maxLength: 500, description: 'Short plain-language description of the mistake.' }
+      responses:
+        '200':
+          description: Updated mistake count and help level.
+components:
+  securitySchemes:
+    TutorActionKey:
+      type: http
+      scheme: bearer
+      bearerFormat: API key
+security:
+  - TutorActionKey: []
