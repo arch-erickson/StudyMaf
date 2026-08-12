@@ -21,7 +21,8 @@ class Library {
   // Search. Ranks exact-id > tag/word hits, optionally filtered by subject/source/color.
   find(query, opts) {
     opts = opts || {};
-    const words = String(query || "").toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    const qexact = String(query || "").toLowerCase().trim();
+    const words = qexact.split(/[^a-z0-9]+/).filter(Boolean);
     const wantColored = opts.colored;      // true = only colored, false = only mono, undefined = any
     const subject = opts.subject, source = opts.source;
     const scored = [];
@@ -33,6 +34,7 @@ class Library {
       if (wantColored === false && isColored) continue;
       let score = 0;
       const hay = (a.id + " " + (a.tags || []).join(" ")).toLowerCase();
+      if (a.id.toLowerCase() === qexact) score += 500;   // exact whole-id match wins outright
       for (const w of words) {
         if (a.id.toLowerCase() === w) score += 100;
         else if (a.id.toLowerCase().includes(w)) score += 20;
@@ -61,8 +63,16 @@ class Library {
       const w = svg.match(/\bwidth\s*=\s*"([\d.]+)/), h = svg.match(/\bheight\s*=\s*"([\d.]+)/);
       if (w && h) vb = { x: 0, y: 0, w: +w[1], h: +h[1] };
     }
+    // preserve the root <svg>'s presentation defaults (fill/stroke/…) — otherwise a
+    // stripped <g> loses "fill=none stroke=currentColor" and line art fills black.
+    const open = (svg.match(/<svg[^>]*>/i) || ["<svg>"])[0];
+    const root = {};
+    for (const k of ["fill", "stroke", "stroke-width", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit"]) {
+      const m = open.match(new RegExp(k + '\\s*=\\s*"([^"]*)"', "i"));
+      if (m) root[k] = m[1];
+    }
     const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/i, "").replace(/<\/svg>\s*$/i, "").trim();
-    return { vb, inner };
+    return { vb, inner, root };
   }
 }
 

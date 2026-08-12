@@ -25,23 +25,27 @@ function textBox(text, x, y, size, anchor) {
 function placeNear(anchor, w, h, obstacles, canvas, gap) {
   gap = gap == null ? 6 : gap;
   const [cx, cy] = center(anchor);
-  const cand = [
-    [anchor.x + anchor.w + gap, cy - h / 2],                 // right
-    [anchor.x - w - gap, cy - h / 2],                        // left
-    [cx - w / 2, anchor.y - h - gap],                        // above
-    [cx - w / 2, anchor.y + anchor.h + gap],                 // below
-    [anchor.x + anchor.w + gap, anchor.y - h - gap],         // up-right
-    [anchor.x - w - gap, anchor.y - h - gap],                // up-left
-    [anchor.x + anchor.w + gap, anchor.y + anchor.h + gap],  // down-right
-    [anchor.x - w - gap, anchor.y + anchor.h + gap]          // down-left
-  ];
   let best = null, bestScore = Infinity;
-  for (const [x, y] of cand) {
-    const b = box(x, y, w, h);
-    let s = obstacles.reduce((acc, o) => acc + overlapArea(b, o), 0);
-    if (!contains(canvas, b)) s += 1e6;               // heavy penalty for off-canvas
-    if (s === 0) return b;                            // clean spot — take it
-    if (s < bestScore) { bestScore = s; best = b; }
+  // widen the search ring until a clean (non-overlapping) spot is found
+  for (const g of [gap, gap + 14, gap + 30, gap + 50]) {
+    const cand = [
+      [anchor.x + anchor.w + g, cy - h / 2],                 // right
+      [anchor.x - w - g, cy - h / 2],                        // left
+      [cx - w / 2, anchor.y - h - g],                        // above
+      [cx - w / 2, anchor.y + anchor.h + g],                 // below
+      [anchor.x + anchor.w + g, anchor.y - h - g],           // up-right
+      [anchor.x - w - g, anchor.y - h - g],                  // up-left
+      [anchor.x + anchor.w + g, anchor.y + anchor.h + g],    // down-right
+      [anchor.x - w - g, anchor.y + anchor.h + g]            // down-left
+    ];
+    for (const [x, y] of cand) {
+      const b = box(x, y, w, h);
+      let s = obstacles.reduce((acc, o) => acc + overlapArea(b, o), 0);
+      if (!contains(canvas, b)) s += 1e6;             // heavy penalty for off-canvas
+      if (s === 0) return b;                          // clean spot — take it
+      if (s < bestScore) { bestScore = s; best = b; }
+    }
+    if (bestScore === 0) break;
   }
   return best;
 }

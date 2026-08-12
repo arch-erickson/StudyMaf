@@ -48,7 +48,7 @@ class Diagram {
     const lib = library();
     let asset = opts.id ? lib.get(opts.id) : lib.one(query, { subject: opts.subject, source: opts.source, colored: opts.colored });
     if (!asset) return null;
-    const { vb, inner } = lib.parse(lib.raw(asset));
+    const { vb, inner, root } = lib.parse(lib.raw(asset));
     const colored = lib.isColored(asset);
     const size = opts.size || Math.max(opts.width || 0, opts.height || 0) || 64;
     const scale = opts.width ? opts.width / vb.w : opts.height ? opts.height / vb.h : size / Math.max(vb.w, vb.h);
@@ -58,11 +58,12 @@ class Diagram {
     const left = cx - w / 2, top = cy - h / 2;
     const sx = opts.flip ? -scale : scale;
     // color: explicit, or role, or a palette fill for mono; colored assets keep themselves
-    const color = colored ? null : (opts.color || (opts.role && ANNOT[opts.role]) || this._nextInk(opts.tone));
+    const color = colored ? null : (opts.color || (opts.role && ANNOT[opts.role]) || (opts.tone === "cycle" ? this._nextInk() : this.palette.accent));
     const body = color ? tintMono(inner, color) : inner;
     const tf = `translate(${num(cx)} ${num(cy)}) scale(${num(sx)} ${num(scale)}) translate(${num(-vb.x - vb.w / 2)} ${num(-vb.y - vb.h / 2)})`;
     const op = opts.opacity != null ? ` opacity="${opts.opacity}"` : "";
-    this.content.push(`<g transform="${tf}"${op}${color ? ` color="${color}"` : ""}>${body}</g>`);
+    const rootAttr = Object.keys(root || {}).map(k => ` ${k}="${root[k]}"`).join(""); // carry fill=none/stroke defaults
+    this.content.push(`<g transform="${tf}"${op}${color ? ` color="${color}"` : ""}${rootAttr}>${body}</g>`);
     const bbox = G.box(left, top, w, h);
     this.boxes.push(bbox);
     if (opts.label) this.text(opts.label, cx, top - 4, { anchor: "middle", avoid: true, role: "label" });
@@ -73,11 +74,19 @@ class Diagram {
     const f = this.palette.fills; return f[(this._pi++) % f.length];
   }
 
+  // consistent title across diagrams: centered, standard weight/size, reserves a top band
+  title(text, opts) {
+    opts = opts || {};
+    this.text(text, this.w / 2, opts.y || 26, { anchor: "middle", weight: 700, size: 16, color: this.palette.ink });
+    if (opts.subtitle) this.text(opts.subtitle, this.w / 2, (opts.y || 26) + 17, { anchor: "middle", size: 12, color: ANNOT.leader });
+    this.boxes.push(G.box(0, 0, this.w, (opts.subtitle ? 46 : 36)));   // keep other labels clear of the header
+  }
+
   // ---- 2. annotations, symbols, text ----
   arrow(from, to, opts) {
     opts = opts || {};
     const color = opts.color || (opts.role && ANNOT[opts.role]) || ANNOT.arrow;
-    const solid = !!opts.solid, op = solid ? 1 : 0.5, sw = opts.width || 2.4;
+    const solid = !!opts.solid, op = solid ? 1 : 0.55, sw = opts.width || 2;
     this.arrowColors.add(color);
     const dbl = opts.double ? ` marker-start="url(#ah-${idColor(color)})"` : "";
     this.annot.push(`<line x1="${num(from[0])}" y1="${num(from[1])}" x2="${num(to[0])}" y2="${num(to[1])}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" opacity="${op}" marker-end="url(#ah-${idColor(color)})"${dbl}${opts.dashed ? ' stroke-dasharray="5 4"' : ""}/>`);
@@ -91,18 +100,22 @@ class Diagram {
     this.annot.push(`<line x1="${num(from[0])}" y1="${num(from[1])}" x2="${num(to[0])}" y2="${num(to[1])}" stroke="${color}" stroke-width="${opts.width || 1.6}" stroke-linecap="round"${(opts.dashed || opts.guide) ? ' stroke-dasharray="4 4"' : ""}/>`);
   }
   symbol(kind, x, y, opts) {
-    opts = opts || {}; const s = opts.size || 9, sw = opts.width || 2.4;
-    const put = (color, d) => this.content.push(`<g stroke="${color}" stroke-width="${sw}" stroke-linecap="round" fill="none">${d}</g>`);
+    opts = opts || {}; const s = opts.size || 9, sw = opts.width || 2;
+    // reasoned defaults: a bare +/− is a neutral operator (ink); a CIRCLED sign is
+    // a charge, so it uses the physics convention (+ red, − blue). Override via color/role.
+    const circled = kind === "plus-circle" || kind === "minus-circle";
+    const col = opts.color || (opts.role && ANNOT[opts.role]) || (circled ? (kind[0] === "p" ? ANNOT.positive : ANNOT.negative) : ANNOT.label);
+    const put = (d) => this.content.push(`<g stroke="${col}" stroke-width="${sw}" stroke-linecap="round" fill="none">${d}</g>`);
     const H = `<line x1="${x - s}" y1="${y}" x2="${x + s}" y2="${y}"/>`, V = `<line x1="${x}" y1="${y - s}" x2="${x}" y2="${y + s}"/>`;
-    if (kind === "plus") put(ANNOT.plus, H + V);
-    else if (kind === "minus") put(ANNOT.minus, H);
-    else if (kind === "times") put(ANNOT.times, `<line x1="${x - s}" y1="${y - s}" x2="${x + s}" y2="${y + s}"/><line x1="${x + s}" y1="${y - s}" x2="${x - s}" y2="${y + s}"/>`);
-    else if (kind === "equals") put(ANNOT.equals, `<line x1="${x - s}" y1="${y - s / 2.5}" x2="${x + s}" y2="${y - s / 2.5}"/><line x1="${x - s}" y1="${y + s / 2.5}" x2="${x + s}" y2="${y + s / 2.5}"/>`);
-    else if (kind === "plus-circle" || kind === "minus-circle") { const c = kind[0] === "p" ? ANNOT.plus : ANNOT.minus; put(c, `<circle cx="${x}" cy="${y}" r="${s + 3}" fill="none"/>` + H + (kind[0] === "p" ? V : "")); }
+    if (kind === "plus") put(H + V);
+    else if (kind === "minus") put(H);
+    else if (kind === "times") put(`<line x1="${x - s}" y1="${y - s}" x2="${x + s}" y2="${y + s}"/><line x1="${x + s}" y1="${y - s}" x2="${x - s}" y2="${y + s}"/>`);
+    else if (kind === "equals") put(`<line x1="${x - s}" y1="${y - s / 2.5}" x2="${x + s}" y2="${y - s / 2.5}"/><line x1="${x - s}" y1="${y + s / 2.5}" x2="${x + s}" y2="${y + s / 2.5}"/>`);
+    else if (circled) put(`<circle cx="${x}" cy="${y}" r="${s + 3}" fill="none"/>` + H + (kind[0] === "p" ? V : ""));
     this.boxes.push(G.box(x - s - 2, y - s - 2, 2 * s + 4, 2 * s + 4));
   }
   text(str, x, y, opts) {
-    opts = opts || {}; const size = opts.size || 13, anchor = opts.anchor || "start", color = opts.color || ANNOT.label;
+    opts = opts || {}; const size = Math.max(12, opts.size || 13), anchor = opts.anchor || "start", color = opts.color || ANNOT.label;
     let bx = x, by = y;
     if (opts.avoid) {
       const tb = G.textBox(str, x, y, size, anchor);
