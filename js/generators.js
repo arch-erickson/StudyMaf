@@ -500,5 +500,88 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 8: Magnetic Forces & Fields (Vol.2 Ch.11) =================
+  // Modeled on syllabus problems 15,17,19,33,34,35 (right-hand-rule directions, easy),
+  // 23,25,38 (medium), 40 (hard), 52 (extreme). Target = 11 problems.
+  var L8 = (function () {
+    var D = { "to the right": [1, 0, 0], "to the left": [-1, 0, 0], "upward": [0, 1, 0], "downward": [0, -1, 0], "out of the page": [0, 0, 1], "into the page": [0, 0, -1] };
+    var NAMES = Object.keys(D);
+    function cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+    function name(v) { for (var i = 0; i < NAMES.length; i++) { var d = D[NAMES[i]]; if (d[0] === v[0] && d[1] === v[1] && d[2] === v[2]) return NAMES[i]; } return null; }
+    function perpPair() { var a, b; do { a = rpick(NAMES); b = rpick(NAMES); } while (D[a][0] * D[b][0] + D[a][1] * D[b][1] + D[a][2] * D[b][2] !== 0); return [D[a], D[b], a, b]; }
+    return { NAMES: NAMES, cross: cross, name: name, perpPair: perpPair };
+  })();
+  function l8mc(prompt, answerName, steps, hint, src) {
+    return S(mc(prompt, L8.NAMES.slice(), L8.NAMES.indexOf(answerName), steps, hint), src);
+  }
+  register("phys1442-08-magnetic-force", {
+    easy: [
+      // #15 — force on a positive charge:  F = q v x B
+      function () { var p = L8.perpPair(); var F = L8.name(L8.cross(p[0], p[1]));
+        return l8mc("A positive charge moves " + p[2] + " in a magnetic field pointing " + p[3] + ". What is the direction of the magnetic force on it?",
+          F, ["Use the right-hand rule for $\\vec{F} = q\\vec{v}\\times\\vec{B}$ (positive charge).", "Point fingers along $\\vec{v}$ (" + p[2] + "), curl toward $\\vec{B}$ (" + p[3] + "); the thumb gives $\\vec{F}$: " + F + "."],
+          "Right-hand rule: fingers along $\\vec{v}$, curl to $\\vec{B}$, thumb is $\\vec{F}$ (flip for negative charge).", "Vol. 2, Ch. 11 · Problem 15"); },
+      // #17 — velocity of a NEGATIVE charge given the force it feels
+      function () { var p = L8.perpPair(); var v = p[0], B = p[1]; var F = L8.name(L8.cross(v, B).map(function (x) { return -x; })); // negative charge
+        return l8mc("A negative charge in a field pointing " + p[3] + " feels a magnetic force " + F + ". In what direction is the charge moving?",
+          L8.name(v), ["For a negative charge $\\vec{F} = -q|\\,|\\vec{v}\\times\\vec{B}$, so the force is opposite $\\vec{v}\\times\\vec{B}$.", "Working the right-hand rule backward (and flipping for the negative sign) gives $\\vec{v}$: " + L8.name(v) + "."],
+          "Apply the right-hand rule, then flip the result because the charge is negative.", "Vol. 2, Ch. 11 · Problem 17"); },
+      // #19 — field that produces a given force on a positive charge
+      function () { var p = L8.perpPair(); var v = p[0]; var B = p[1]; var F = L8.name(L8.cross(v, B));
+        return l8mc("A positive charge moving " + p[2] + " feels a magnetic force " + F + ". Assuming $\\vec{B}\\perp\\vec{v}$, in what direction does the magnetic field point?",
+          p[3], ["From $\\vec{F} = q\\vec{v}\\times\\vec{B}$, the field must be perpendicular to both $\\vec{v}$ and $\\vec{F}$.", "The right-hand rule that makes $\\vec{v}\\times\\vec{B}$ point " + F + " requires $\\vec{B}$ " + p[3] + "."],
+          "$\\vec{B}$ is perpendicular to both $\\vec{v}$ and $\\vec{F}$; pick the one that reproduces $\\vec{F}$.", "Vol. 2, Ch. 11 · Problem 19"); },
+      // #33 — force on a current-carrying wire:  F = I L x B
+      function () { var p = L8.perpPair(); var F = L8.name(L8.cross(p[0], p[1]));
+        return l8mc("A wire carries current " + p[2] + " through a field pointing " + p[3] + ". What is the direction of the magnetic force on the wire?",
+          F, ["Use the right-hand rule for $\\vec{F} = I\\vec{L}\\times\\vec{B}$.", "Fingers along the current (" + p[2] + "), curl to $\\vec{B}$ (" + p[3] + "); thumb gives $\\vec{F}$: " + F + "."],
+          "Same rule as for a moving charge, using the current direction for $\\vec{L}$.", "Vol. 2, Ch. 11 · Problem 33"); },
+      // #34 — current direction that feels a given force
+      function () { var p = L8.perpPair(); var I = p[0], B = p[1]; var F = L8.name(L8.cross(I, B));
+        return l8mc("A wire in a field pointing " + p[3] + " feels a magnetic force " + F + ". In what direction does the current flow?",
+          L8.name(I), ["From $\\vec{F} = I\\vec{L}\\times\\vec{B}$, work the right-hand rule backward.", "The current direction that gives a force " + F + " is " + L8.name(I) + "."],
+          "Reverse the right-hand rule: find the current that produces the shown force.", "Vol. 2, Ch. 11 · Problem 34"); },
+      // #35 — field that produces a given force on a current
+      function () { var p = L8.perpPair(); var I = p[0]; var F = L8.name(L8.cross(I, p[1]));
+        return l8mc("A wire carrying current " + p[2] + " feels a magnetic force " + F + ". Assuming $\\vec{B}\\perp I$, in what direction does the field point?",
+          p[3], ["$\\vec{B}$ is perpendicular to both the current and the force.", "The field that makes $I\\vec{L}\\times\\vec{B}$ point " + F + " is " + p[3] + "."],
+          "$\\vec{B}\\perp$ both $\\vec{I}$ and $\\vec{F}$; choose the one that reproduces $\\vec{F}$.", "Vol. 2, Ch. 11 · Problem 35"); }
+    ],
+    medium: [
+      // #23 — angle between v and B from the magnetic force
+      function () { var vE = rpick([2, 3, 5]), B = 1.25, deg = rpick([30, 45, 60]); var v = vE * 1e6; var F = E * v * B * Math.sin(deg * Math.PI / 180);
+        return S(num("An electron moving at $" + vE + ".0\\times10^{6}$ m/s in a $" + B + "$-T field feels a magnetic force of $" + F.toExponential(2) + "$ N. What acute angle does its velocity make with the field?", deg, String(deg), 0.03,
+          ["Magnetic force: $F = qvB\\sin\\theta$, so $\\sin\\theta = \\dfrac{F}{qvB}$.", "$\\sin\\theta = \\dfrac{" + F.toExponential(2) + "}{(1.6\\times10^{-19})(" + v.toExponential(1) + ")(" + B + ")}$", "$\\theta \\approx " + deg + "^\\circ$ (the other answer is $" + (180 - deg) + "^\\circ$)."],
+          "Solve $F = qvB\\sin\\theta$ for $\\theta$; there are two angles.", "°"), "Vol. 2, Ch. 11 · Problem 23"); },
+      // #25 — radius of circular motion:  r = mv/(qB)
+      function () { var vE = rpick([3, 5, 8]), Bu = rpick([1.0, 2.0, 5.0]); var v = vE * 1e6, B = Bu * 1e-6; var r = ME * v / (E * B);
+        return S(num("A cosmic-ray electron moves at $" + vE + ".0\\times10^{6}$ m/s perpendicular to Earth's field, where the strength is $" + Bu + "\\times10^{-6}$ T. What is the radius of its circular path?", r, sig(r), 0.03,
+          ["The magnetic force supplies the centripetal force: $qvB = \\dfrac{mv^2}{r}$, so $r = \\dfrac{mv}{qB}$.", "$r = \\dfrac{(9.11\\times10^{-31})(" + v.toExponential(1) + ")}{(1.6\\times10^{-19})(" + B.toExponential(1) + ")}$", "$r \\approx " + sig(r) + "$ m"],
+          "Set the magnetic force equal to $mv^2/r$ and solve: $r=mv/(qB)$.", "m"), "Vol. 2, Ch. 11 · Problem 25"); },
+      // #38 — field strength from the force on a current-carrying wire
+      function () { var I = rpick([20, 30, 40]), F = rpick([1.5, 2.16, 3.0]), Lcm = rpick([4, 5]); var L = Lcm / 100; var B = F / (I * L);
+        return S(num("A wire carrying $" + I + ".0$ A passes through a magnet and feels a $" + F + "$-N force on the $" + Lcm + ".00$ cm of wire in the field (field perpendicular to the wire). What is the field strength?", B, sig(B), 0.03,
+          ["For a wire perpendicular to the field, $F = BIL$, so $B = \\dfrac{F}{IL}$.", "$B = \\dfrac{" + F + "}{(" + I + ")(" + L + ")}$", "$B \\approx " + sig(B) + "$ T"],
+          "Use $F = BIL$ and solve for $B$ (length in metres).", "T"), "Vol. 2, Ch. 11 · Problem 38"); }
+    ],
+    hard: [
+      // #40 — maximum torque on a multi-turn loop and torque at an angle
+      function () { var N = rpick([100, 150, 200]), sidecm = rpick([15, 18, 20]), I = rpick([25, 50]), B = rpick([1.2, 1.6]), deg = rpick([10.9, 30, 45]);
+        var A = (sidecm / 100) * (sidecm / 100); var tmax = N * I * A * B; var t = tmax * Math.sin(deg * Math.PI / 180);
+        return S(multi("A $" + N + "$-turn square loop $" + sidecm + ".0$ cm on a side carries $" + I + ".0$ A in a $" + B + "$-T field.",
+          [ { label: "Maximum torque (N·m)", type: "numeric", answerValue: tmax, answerText: sig(tmax), tol: 0.03 },
+            { label: "Torque when the field makes " + deg + "° with the loop's plane-normal offset (N·m)", type: "numeric", answerValue: t, answerText: sig(t), tol: 0.04 } ],
+          ["Loop area $A = (" + sidecm / 100 + ")^2 = " + sig(A) + "$ m². Maximum torque $\\tau_{max} = NIAB = " + sig(tmax) + "$ N·m.", "At an angle: $\\tau = NIAB\\sin\\theta = \\tau_{max}\\sin " + deg + "^\\circ \\approx " + sig(t) + "$ N·m."],
+          "Maximum torque is $NIAB$; at an angle multiply by $\\sin\\theta$."), "Vol. 2, Ch. 11 · Problem 40"); }
+    ],
+    extreme: [
+      // #52 — Hall probe: the Hall voltage scales as I*B, so B2 = (V2/V1)(I1/I2) B1
+      function () { var V1 = rpick([40, 60]), V2 = rpick([50, 80]), I1 = 2.0, B1 = 1.0, I2 = 1.7; var B2 = (V2 / V1) * (I1 / I2) * B1;
+        return S(num("A Hall probe reads $" + V1 + "$ mV for a current of $" + I1 + "$ A in a $" + B1 + "$-T field. What field gives a reading of $" + V2 + "$ mV at $" + I2 + "$ A?", B2, sig(B2), 0.03,
+          ["The Hall voltage is $V_H = \\dfrac{IB}{nqt}$, so $V_H \\propto IB$ and $\\dfrac{V_H}{IB}$ is constant.", "$B_2 = \\dfrac{V_2}{V_1}\\cdot\\dfrac{I_1}{I_2}\\cdot B_1 = \\dfrac{" + V2 + "}{" + V1 + "}\\cdot\\dfrac{" + I1 + "}{" + I2 + "}\\cdot " + B1 + "$", "$B_2 \\approx " + sig(B2) + "$ T"],
+          "Since $V_H\\propto IB$, scale $B$ by the voltage ratio and inverse current ratio.", "T"), "Vol. 2, Ch. 11 · Problem 52"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
