@@ -73,18 +73,21 @@
   </script>
 
   <!-- Soft access gate (NOT real security — see js/gate.js). Loads first. -->
-  <script defer src="js/gate.js"></script>
+  <script defer src="js/gate.js?v=2"></script>
 
-  <!-- App modules (order matters) -->
-  <script defer src="js/icons.js"></script>
-  <script defer src="js/store.js"></script>
-  <script defer src="js/math.js"></script>
-  <script defer src="js/figures.js"></script>
-  <script defer src="js/calculator.js"></script>
-  <script defer src="js/notebook.js"></script>
-  <script defer src="js/generators.js"></script>
+  <!-- App modules (order matters). The ?v= query busts the browser/CDN cache when a
+       module changes — without it, an updated js/*.js can be served stale (e.g. a
+       diagram's math rendering as raw $…$ because an old figures.js is cached). Bump
+       the number whenever these change. -->
+  <script defer src="js/icons.js?v=2"></script>
+  <script defer src="js/store.js?v=2"></script>
+  <script defer src="js/math.js?v=2"></script>
+  <script defer src="js/figures.js?v=2"></script>
+  <script defer src="js/calculator.js?v=2"></script>
+  <script defer src="js/notebook.js?v=2"></script>
+  <script defer src="js/generators.js?v=2"></script>
   <!-- Rho Talk loads its open-source voice only when a learner starts a voice chat. -->
-  <script type="module" src="js/rho-voice.js"></script>
-  <script defer src="js/app.js"></script>
+  <script type="module" src="js/rho-voice.js?v=2"></script>
+  <script defer src="js/app.js?v=2"></script>
 </body>
 </html>

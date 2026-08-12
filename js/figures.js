@@ -129,8 +129,7 @@ window.Figures = (function () {
     div.style.cssText = "display:inline-block;white-space:nowrap;line-height:1.1;font-size:" + size + "px;color:" + fill + ";font-family:Inter,sans-serif";
     div.textContent = s;
     fo.appendChild(div);
-    function place() {
-      if (window.StudyMath) StudyMath.render(div);
+    function measure() {
       var w = div.offsetWidth || div.getBoundingClientRect().width || 10;
       var h = div.offsetHeight || size * 1.3;
       fo.setAttribute("width", Math.ceil(w) + 2);
@@ -138,8 +137,16 @@ window.Figures = (function () {
       fo.setAttribute("x", anchor === "end" ? x - w : anchor === "start" ? x : x - w / 2);
       fo.setAttribute("y", y - h / 2);
     }
-    // measure once mounted; if KaTeX isn't ready yet, retry on the next frame
-    requestAnimationFrame(function () { place(); if (!div.querySelector(".katex")) requestAnimationFrame(place); });
+    // Render + re-anchor once the node is mounted AND KaTeX has finished. Both are
+    // async (KaTeX scripts load `defer`; the figure mounts after element() returns),
+    // so poll briefly instead of assuming either is ready — this guarantees the math
+    // renders rather than leaving raw "$…$" if KaTeX is a beat late.
+    var tries = 0;
+    (function attempt() {
+      var ready = typeof window.renderMathInElement === "function";
+      if (ready && fo.isConnected) { StudyMath.render(div); measure(); if (div.querySelector(".katex")) return; }
+      if (tries++ < 40) setTimeout(attempt, 50); else measure();
+    })();
     return fo;
   }
   function lbl(x, y, s, fill, size, anchor) { return isMath(s) ? mathText(x, y, s, fill, size, anchor) : txt(x, y, s, fill, size, anchor); }
