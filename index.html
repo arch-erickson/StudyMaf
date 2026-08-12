@@ -39,13 +39,16 @@
   <!-- Floating calculator dock (scientific + graphing). Hidden until opened. -->
   <div id="calc-dock" class="calc-dock" hidden aria-hidden="true"></div>
 
+  <!-- Floating AI tutor dock. It is built by js/app.js and never blocks the lesson. -->
+  <div id="ai-tutor-dock" class="tutor-dock" hidden aria-hidden="true"></div>
+
   <!-- Drawing board overlay. Hidden until opened. -->
   <div id="draw-overlay" class="overlay" hidden aria-hidden="true"></div>
 
   <!-- Generic modal host + toast/XP layer -->
   <div id="modal-host" class="overlay" hidden aria-hidden="true"></div>
   <div id="fx-layer" class="fx-layer" aria-live="polite"></div>
-  <button id="open-ai-fab" class="ai-fab" type="button" aria-label="Ask StudyMAF AI" title="Ask StudyMAF AI">AI<span>?</span></button>
+  <button id="open-ai-fab" class="tutor-launcher" type="button" aria-label="Open StudyMAF tutor" title="Open StudyMAF tutor">Tutor</button>
 
   <footer class="site-footer">
     <div class="wrap">

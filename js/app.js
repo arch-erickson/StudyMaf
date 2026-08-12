@@ -26,6 +26,26 @@ window.App = (function () {
   }
   var TUTOR_URL = "REPLACE_WITH_YOUR_TUTOR_URL"; // <-- paste your Custom GPT / Claude Project URL
   var TUTOR_API_URL = "https://studymaf-tutor.vercel.app/api/tutor/chat";
+  // This is updated as a student moves through StudyMAF. The API receives the
+  // exact lesson/problem text; the tutor does not have to guess from the URL.
+  var tutorContext = { page: "dashboard", lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" };
+  function tutorLearnerId() {
+    var key = "studymaf-tutor-learner", id = localStorage.getItem(key);
+    if (!id) { id = "learner-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10); localStorage.setItem(key, id); }
+    return id;
+  }
+  function setTutorContext(next) {
+    tutorContext = Object.assign({ page: String(location.hash || "#/"), learner_id: tutorLearnerId(), lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" }, next || {});
+    if (window.__studymafTutor && window.__studymafTutor.updateContext) window.__studymafTutor.updateContext(tutorContext);
+  }
+  function classTextbooks(cls) {
+    var books = (Store.getUploads(cls.id).textbooks || []).map(function (b) { return b.value; });
+    return books.join("; ");
+  }
+  function recordTutorAttempt(outcome) {
+    if (!tutorContext.lesson_id || !tutorContext.question_id) return;
+    fetch(TUTOR_API_URL.replace(/\/chat$/, "/track"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ context: tutorContext, outcome: outcome }) }).catch(function () {});
+  }
 
   // ---------- helpers ----------
   function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
@@ -327,6 +347,7 @@ window.App = (function () {
   function renderClass(id) {
     var cls = Store.getClass(id);
     if (!cls) { location.hash = "#/"; return; }
+    setTutorContext({ page: "class", class_name: cls.name, textbook: classTextbooks(cls) });
     appEl.innerHTML = "";
     var page = el("div", "page wrap");
 
@@ -429,6 +450,7 @@ window.App = (function () {
         loaded = true;
         panel.appendChild(el("p", "lp-summary", "Loading…"));
         loadLesson(lid).then(function (lesson) {
+          setTutorContext({ page: "lesson", class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: chapter, textbook: classTextbooks(cls) });
           panel.innerHTML = "";
           var sum = el("p", "lp-summary", lesson.summary); panel.appendChild(sum); StudyMath.render(sum);
           // difficulty chooser — pick the level of problems you want to practice
@@ -464,6 +486,7 @@ window.App = (function () {
   // ---------- concept reader (sequential reveal + per-concept diagrams,
   //            keyword definitions, expandable real-world examples) ----------
   function conceptReader(lesson) {
+    setTutorContext(Object.assign({}, tutorContext, { page: "concept reader", lesson_title: lesson.title, lesson_summary: lesson.summary }));
     var gloss = lesson.glossary || null;
     // full-screen reader: concepts on the left, a dockable definition panel on
     // the right, and its own X to close the whole thing.
@@ -628,6 +651,7 @@ window.App = (function () {
       fill.style.width = Math.round(idx / problems.length * 100) + "%";
       setStreak(streak);
       var p = problems[idx];
+      setTutorContext({ page: "practice problem", class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: (cls.chapters && cls.chapters[lid]) || "", textbook: classTextbooks(cls), question_id: p.id, question_prompt: p.prompt, hint: p.hint || "", difficulty: p.difficulty || "" });
       inner.innerHTML = "";
       inner.appendChild(el("span", "q-badge " + p.difficulty, p.difficulty));
       var count = el("p"); count.style.color = "var(--ink-soft)"; count.style.fontSize = ".85rem"; count.style.margin = "0 0 4px";
@@ -675,11 +699,13 @@ window.App = (function () {
           state.checked = true; steps.hidden = false; StudyMath.render(steps);
           if (ok) {
             verdict.textContent = "Correct!"; verdict.className = "verdict right";
+            recordTutorAttempt("correct");
             streak++; var xp = 10 + (p.difficulty === "hard" ? 5 : 0) + (p.difficulty === "stretch" ? 10 : 0);
             Store.markProblemDone(cls.id, lid, p.id, xp);
             reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
           } else {
             verdict.textContent = "Not quite — check the solution."; verdict.className = "verdict wrong";
+            recordTutorAttempt("wrong");
             streak = 0;
             Store.markProblemDone(cls.id, lid, p.id, 2); // small XP for the attempt
           }
@@ -750,6 +776,7 @@ window.App = (function () {
     }
 
     function renderInstance(skippable) {
+      setTutorContext({ page: "generated practice problem", class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: (cls.chapters && cls.chapters[lid]) || "", textbook: classTextbooks(cls), question_id: lid + ":slot-" + slot, question_prompt: inst.prompt, hint: inst.hint || "", difficulty: inst.difficulty || "", source: inst.source || "" });
       fill.style.width = Math.round(solved / plan.length * 100) + "%"; setStreak(streak);
       inner.innerHTML = "";
       var badgeRow = el("div", "q-badge-row");
@@ -797,12 +824,14 @@ window.App = (function () {
           checked = true; steps.hidden = false; StudyMath.render(steps);
           if (ok) {
             verdict.textContent = "Correct!"; verdict.className = "verdict right";
+            recordTutorAttempt("correct");
             streak++; var xp = { easy: 8, medium: 12, hard: 18, extreme: 30 }[inst.difficulty] || 10;
             Store.markProblemDone(cls.id, lid, "slot" + slot + "-" + Date.now(), xp);
             reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
             actionBtn.textContent = "Next →"; skipBtn.style.display = "none";
           } else {
             verdict.textContent = "Not quite. Read the solution, then try a fresh one."; verdict.className = "verdict wrong";
+            recordTutorAttempt("wrong");
             streak = 0; actionBtn.textContent = "Try another →";
           }
           setStreak(streak);
@@ -1192,7 +1221,7 @@ window.App = (function () {
 
   // The OpenRouter key lives only in the Vercel function. This page sends lesson
   // context plus the student's question; it never receives or stores that key.
-  function openStudymafAI() {
+  function openLegacyStudymafAI() {
     var configuredGPT = TUTOR_URL && TUTOR_URL.indexOf("REPLACE_WITH") !== 0;
     var m = modal(
       "<h2>Ask StudyMAF AI</h2>" +
@@ -1219,6 +1248,85 @@ window.App = (function () {
     input.onkeydown = function (e) { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") submit(); };
     setTimeout(function () { input.focus(); }, 0);
   }
+
+  // The floating tutor stays beside the work, rather than taking over the screen.
+  function tutorAvatar() {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "-32 -34 64 78"); svg.setAttribute("aria-hidden", "true");
+    var group = document.createElementNS("http://www.w3.org/2000/svg", "g"); svg.appendChild(group);
+    if (window.Figures && Figures.LIB && Figures.LIB.person) Figures.LIB.person(group, { color: "accent", hair: "up" });
+    return svg;
+  }
+  function compressTutorImage(file) {
+    return new Promise(function (resolve, reject) {
+      if (!file || !/^image\/(png|jpe?g|webp|gif)$/.test(file.type)) return reject(new Error("Choose a PNG, JPG, WEBP, or GIF image."));
+      if (file.size > 8 * 1024 * 1024) return reject(new Error("Choose an image smaller than 8 MB."));
+      var reader = new FileReader(); reader.onerror = function () { reject(new Error("Could not read that image.")); };
+      reader.onload = function () { var image = new Image(); image.onerror = function () { reject(new Error("Could not open that image.")); };
+        image.onload = function () { var scale = Math.min(1, 1440 / Math.max(image.width, image.height)); var canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(image.width * scale)); canvas.height = Math.max(1, Math.round(image.height * scale));
+          canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height); resolve(canvas.toDataURL("image/jpeg", .82)); };
+        image.src = String(reader.result); };
+      reader.readAsDataURL(file);
+    });
+  }
+  function buildTutorDock() {
+    var dock = document.getElementById("ai-tutor-dock"), launcher = document.getElementById("open-ai-fab");
+    if (window.__studymafTutor) return window.__studymafTutor;
+    var state = { image: "", maximized: false, minimized: false, context: tutorContext };
+    dock.innerHTML = "";
+    var head = el("div", "tutor-head"), identity = el("div", "tutor-identity"), avatar = el("span", "tutor-avatar"); avatar.appendChild(tutorAvatar()); identity.appendChild(avatar);
+    var copy = el("div"); copy.appendChild(el("strong", null, "Maf, your study tutor")); copy.appendChild(el("span", "tutor-context", "Ready to help")); identity.appendChild(copy);
+    var controls = el("div", "tutor-controls"), min = el("button", "tutor-icon"), max = el("button", "tutor-icon"), close = el("button", "tutor-icon");
+    min.innerHTML = icon("minus"); min.title = "Minimize"; max.innerHTML = icon("maximize"); max.title = "Maximize"; close.innerHTML = icon("x"); close.title = "Close";
+    controls.append(min, max, close); head.append(identity, controls); dock.appendChild(head);
+    var body = el("div", "tutor-body"), messages = el("div", "tutor-messages"), welcome = el("div", "tutor-message assistant");
+    welcome.appendChild(tutorAvatar()); welcome.appendChild(el("div", "tutor-bubble", "Hi, I’m Maf. I know the lesson or problem you are on. What should we work through?")); messages.appendChild(welcome); body.appendChild(messages);
+    var preview = el("div", "tutor-photo-preview"); preview.hidden = true; body.appendChild(preview);
+    var composer = el("div", "tutor-composer"), file = document.createElement("input"); file.type = "file"; file.accept = "image/png,image/jpeg,image/webp,image/gif"; file.hidden = true;
+    var photo = el("button", "tutor-compose-action"), input = document.createElement("textarea"), voice = el("button", "tutor-compose-action"), send = el("button", "tutor-send");
+    photo.innerHTML = icon("image"); photo.title = "Add a photo of your work"; input.className = "tutor-input"; input.rows = 1; input.placeholder = "Ask about this problem…";
+    voice.innerHTML = icon("mic"); voice.title = "Speak your question"; send.innerHTML = icon("send"); send.title = "Send";
+    composer.append(file, photo, input, voice, send); body.appendChild(composer); body.appendChild(el("p", "tutor-note", "Free tutor test. It may be slow when free models are busy."));
+    if (TUTOR_URL && TUTOR_URL.indexOf("REPLACE_WITH") !== 0) { var premium = document.createElement("a"); premium.className = "tutor-premium-link"; premium.href = TUTOR_URL; premium.target = "_blank"; premium.rel = "noopener"; premium.textContent = "Open my Custom GPT ↗"; body.appendChild(premium); }
+    dock.appendChild(body);
+    function label(ctx) { return ctx.question_id ? "Problem " + ctx.question_id + (ctx.lesson_title ? " · " + ctx.lesson_title : "") : (ctx.lesson_title ? ctx.lesson_title + (ctx.chapter ? " · " + ctx.chapter : "") : "Ready to help"); }
+    function add(role, text, imageData) {
+      var row = el("div", "tutor-message " + role); if (role === "assistant") row.appendChild(tutorAvatar());
+      row.appendChild(el("div", "tutor-bubble", text));
+      if (imageData) { var thumb = document.createElement("img"); thumb.className = "tutor-image-message"; thumb.src = imageData; thumb.alt = "Uploaded work"; row.appendChild(thumb); }
+      if (role === "assistant" && "speechSynthesis" in window) { var speak = el("button", "tutor-speak"); speak.innerHTML = icon("volume"); speak.title = "Read this answer aloud"; speak.onclick = function () { var utterance = new SpeechSynthesisUtterance(text); utterance.rate = .95; window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance); }; row.appendChild(speak); }
+      messages.appendChild(row); messages.scrollTop = messages.scrollHeight;
+    }
+    function autosize() { input.style.height = "auto"; input.style.height = Math.min(input.scrollHeight, 118) + "px"; }
+    function clearImage() { state.image = ""; preview.hidden = true; preview.innerHTML = ""; file.value = ""; }
+    function showImage(data) { state.image = data; preview.hidden = false; preview.innerHTML = ""; var img = document.createElement("img"); img.src = data; img.alt = "Photo ready to send"; var remove = el("button", "tutor-photo-remove", "Remove photo"); remove.onclick = clearImage; preview.append(img, remove); }
+    function submit() {
+      var question = input.value.trim(); if (!question && !state.image) return; if (!question) question = "Please look at this photo and help me with the problem.";
+      var sentImage = state.image; add("student", question, sentImage); input.value = ""; autosize(); clearImage(); send.disabled = true; send.classList.add("thinking");
+      fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: question, context: state.context, image_data: sentImage }) })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Tutor unavailable."); return j; }); })
+        .then(function (j) { add("assistant", j.answer || "I could not make an answer. Please try again."); })
+        .catch(function (e) { add("assistant", "I could not reach the tutor right now. " + e.message); })
+        .finally(function () { send.disabled = false; send.classList.remove("thinking"); input.focus(); });
+    }
+    photo.onclick = function () { file.click(); };
+    file.onchange = function () { var chosen = file.files && file.files[0]; if (chosen) compressTutorImage(chosen).then(showImage).catch(function (error) { add("assistant", error.message); }); };
+    input.oninput = autosize; input.onkeydown = function (event) { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); submit(); } }; send.onclick = submit;
+    voice.onclick = function () { var Recognition = window.SpeechRecognition || window.webkitSpeechRecognition; if (!Recognition) { add("assistant", "Voice typing is not available in this browser yet. You can still type or add a photo."); return; }
+      var recognition = new Recognition(); recognition.lang = navigator.language || "en-US"; recognition.interimResults = true; recognition.continuous = false; voice.classList.add("listening");
+      recognition.onresult = function (event) { var words = ""; for (var i = event.resultIndex; i < event.results.length; i++) words += event.results[i][0].transcript; input.value = words; autosize(); };
+      recognition.onerror = function () { add("assistant", "I could not hear that. Please try again or type your question."); }; recognition.onend = function () { voice.classList.remove("listening"); }; recognition.start(); };
+    min.onclick = function () { state.minimized = !state.minimized; dock.classList.toggle("min", state.minimized); min.innerHTML = icon(state.minimized ? "maximize" : "minus"); };
+    max.onclick = function () { state.maximized = !state.maximized; dock.classList.toggle("max", state.maximized); if (state.maximized) dock.style.left = ""; };
+    close.onclick = function () { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); launcher.hidden = false; };
+    launcher.innerHTML = icon("chat") + "<span>Ask Maf</span>";
+    head.addEventListener("pointerdown", function (event) { if (event.target.closest("button, a")) return; var box = dock.getBoundingClientRect(), sx = event.clientX, sy = event.clientY, left = box.left, top = box.top; dock.classList.add("dragging"); dock.setPointerCapture(event.pointerId);
+      function move(e) { dock.style.left = Math.max(8, Math.min(window.innerWidth - dock.offsetWidth - 8, left + e.clientX - sx)) + "px"; dock.style.top = Math.max(8, Math.min(window.innerHeight - dock.offsetHeight - 8, top + e.clientY - sy)) + "px"; dock.style.right = "auto"; dock.style.bottom = "auto"; }
+      function up() { dock.classList.remove("dragging"); dock.removeEventListener("pointermove", move); dock.removeEventListener("pointerup", up); } dock.addEventListener("pointermove", move); dock.addEventListener("pointerup", up); });
+    return window.__studymafTutor = { open: function () { dock.hidden = false; dock.setAttribute("aria-hidden", "false"); launcher.hidden = true; requestAnimationFrame(function () { input.focus(); }); }, updateContext: function (ctx) { state.context = ctx; copy.querySelector(".tutor-context").textContent = label(ctx); } };
+  }
+  function openStudymafAI() { buildTutorDock().open(); }
 
   // In-app immersive mode. iOS Safari has no reliable element fullscreen, and the
   // browser chrome comes back on scroll — so we hide our own header/footer and fill
