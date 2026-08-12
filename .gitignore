@@ -1,3 +1,7 @@
 
 # Local class source material (syllabus + textbooks) — read locally by the AI, not served
 Classes/
+
+# Local visual asset library (icons + STEM SVGs) — a backend/authoring resource,
+# searched only when generating a class's diagrams. Reproducible via tools/build-visual-library.js.
+studymaf-visual-library/
