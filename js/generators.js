@@ -728,5 +728,162 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 11: AC Circuits (Vol.2 Ch.14 Inductance + Ch.15 AC) =================
+  // Ch.14: 29,35,39,51,52,70 ; Ch.15: 15,17,25,29,33,37,47.  Target = 13.
+  register("phys1442-11-ac-circuits", {
+    easy: [
+      // Ch15 #15 — capacitive reactance  Xc = 1/(2*pi*f*C)
+      function () { var Cu = rpick([1, 2, 5]), f = rpick([60, 600]); var C = Cu * 1e-6; var X = 1 / (2 * Math.PI * f * C);
+        return S(num("Calculate the reactance of a $" + Cu + ".0\\ \\mu\\text{F}$ capacitor at $" + f + "$ Hz.", X, sig(X), 0.03,
+          ["Capacitive reactance: $X_C = \\dfrac{1}{2\\pi f C}$.", "$X_C = \\dfrac{1}{2\\pi(" + f + ")(" + C.toExponential(1) + ")}$", "$X_C \\approx " + sig(X) + "\\ \\Omega$"],
+          "Use $X_C = 1/(2\\pi f C)$.", "Ω"), "Vol. 2, Ch. 15 · Problem 15"); },
+      // Ch15 #17 — inductive reactance  XL = 2*pi*f*L
+      function () { var Lm = rpick([5, 10, 20]), f = rpick([60, 600]); var L = Lm * 1e-3; var X = 2 * Math.PI * f * L;
+        return S(num("Calculate the reactance of a $" + Lm + ".0$ mH inductor at $" + f + "$ Hz.", X, sig(X), 0.03,
+          ["Inductive reactance: $X_L = 2\\pi f L$.", "$X_L = 2\\pi(" + f + ")(" + L + ")$", "$X_L \\approx " + sig(X) + "\\ \\Omega$"],
+          "Use $X_L = 2\\pi f L$.", "Ω"), "Vol. 2, Ch. 15 · Problem 17"); },
+      // Ch14 #39 — energy stored in an inductor  U = 1/2 L I^2
+      function () { var L = rpick([2, 3], 0), I = rpick([0.5, 1.0, 2.0]); var U = 0.5 * L * I * I;
+        return S(num("A coil with a self-inductance of $" + L + ".0$ H carries a current of $" + I + "$ A. How much energy is stored in its magnetic field?", U, sig(U), 0.03,
+          ["Energy in an inductor: $U = \\tfrac12 L I^2$.", "$U = \\tfrac12(" + L + ")(" + I + ")^2$", "$U \\approx " + sig(U) + "$ J"],
+          "Use $U = \\tfrac12 L I^2$.", "J"), "Vol. 2, Ch. 14 · Problem 39"); }
+    ],
+    medium: [
+      // Ch14 #35 — self-inductance from the induced emf and dI/dt
+      function () { var emf = rpick([0.30, 0.40, 0.60]), dI = rpick([0.40, 0.50]), dt = rpick([0.20, 0.30]); var L = emf * dt / dI;
+        return S(num("An emf of $" + emf + "$ V is induced across a coil when the current through it changes uniformly by $" + dI + "$ A in $" + dt + "$ s. What is the self-inductance?", L, sig(L), 0.03,
+          ["Self-inductance: $\\varepsilon = L\\dfrac{dI}{dt}$, so $L = \\dfrac{\\varepsilon}{dI/dt} = \\dfrac{\\varepsilon\\,\\Delta t}{\\Delta I}$.", "$L = \\dfrac{(" + emf + ")(" + dt + ")}{" + dI + "}$", "$L \\approx " + sig(L) + "$ H"],
+          "Use $L = \\varepsilon/(dI/dt)$.", "H"), "Vol. 2, Ch. 14 · Problem 35"); },
+      // Ch14 #29 — mutual inductance from the induced emf and dI/dt of the other coil
+      function () { var emf = rpick([1.5, 3.0, 4.5]), dI = rpick([2.7, 5.0]); var M = emf / dI;
+        return S(num("An emf of $" + emf + "$ V is induced in a coil while the current in a nearby coil decreases at $" + dI + "$ A/s. What is the mutual inductance?", M, sig(M), 0.03,
+          ["Mutual inductance: $\\varepsilon = M\\dfrac{dI}{dt}$, so $M = \\dfrac{\\varepsilon}{dI/dt}$.", "$M = \\dfrac{" + emf + "}{" + dI + "}$", "$M \\approx " + sig(M) + "$ H"],
+          "Use $M = \\varepsilon/(dI/dt)$.", "H"), "Vol. 2, Ch. 14 · Problem 29"); },
+      // Ch15 #25 — RC series AC impedance  Z = sqrt(R^2 + Xc^2)
+      function () { var R = rpick([100, 200]), Cu = rpick([2, 5]), f = rpick([60, 120]); var C = Cu * 1e-6; var Xc = 1 / (2 * Math.PI * f * C); var Z = Math.sqrt(R * R + Xc * Xc);
+        return S(num("A $" + R + "\\ \\Omega$ resistor and a $" + Cu + ".0\\ \\mu\\text{F}$ capacitor are connected in series across a $" + f + "$-Hz source. What is the impedance of the circuit?", Z, sig(Z), 0.03,
+          ["Capacitive reactance: $X_C = 1/(2\\pi f C) = " + sig(Xc) + "\\ \\Omega$.", "Series RC impedance: $Z = \\sqrt{R^2 + X_C^2} = \\sqrt{" + R + "^2 + " + sig(Xc) + "^2}$.", "$Z \\approx " + sig(Z) + "\\ \\Omega$"],
+          "Find $X_C$, then $Z = \\sqrt{R^2 + X_C^2}$.", "Ω"), "Vol. 2, Ch. 15 · Problem 25"); },
+      // Ch15 #47 — step-down transformer: secondary turns and primary current
+      function () { var Vp = 110, Vs = rpick([9, 12]), Np = rpick([500, 1000]), Is_mA = 500; var Ns = Np * Vs / Vp; var Ip = (Is_mA * 1e-3) * Vs / Vp;
+        return S(multi("A transformer steps $" + Vp + "$ V from a wall socket down to $" + Vs + ".0$ V for a small device. The primary has $" + Np + "$ turns.",
+          [ { label: "Number of turns on the secondary", type: "numeric", answerValue: Ns, answerText: sig(Ns), tol: 0.03 },
+            { label: "Primary current when the device draws " + Is_mA + " mA (A)", type: "numeric", answerValue: Ip, answerText: sig(Ip), tol: 0.03 } ],
+          ["Turns ratio equals voltage ratio: $N_s = N_p\\dfrac{V_s}{V_p} = " + Np + "\\cdot\\dfrac{" + Vs + "}{" + Vp + "} \\approx " + sig(Ns) + "$.", "Power is conserved ($V_pI_p=V_sI_s$): $I_p = I_s\\dfrac{V_s}{V_p} = (" + (Is_mA / 1000) + ")\\dfrac{" + Vs + "}{" + Vp + "} \\approx " + sig(Ip) + "$ A."],
+          "$N_s/N_p=V_s/V_p$; and $V_pI_p=V_sI_s$ for the currents."), "Vol. 2, Ch. 15 · Problem 47"); }
+    ],
+    hard: [
+      // Ch14 #52 — RL circuit: time constant and final current
+      function () { var Lm = rpick([100, 200]), R = rpick([10, 50]), V = rpick([12, 24]); var L = Lm * 1e-3; var tau = L / R; var If = V / R;
+        return S(multi("An RL circuit has an inductance of $" + Lm + "$ mH and a resistance of $" + R + "\\ \\Omega$, driven by a $" + V + "$-V source.",
+          [ { label: "Time constant (s)", type: "numeric", answerValue: tau, answerText: sig(tau), tol: 0.03 },
+            { label: "Final (steady-state) current (A)", type: "numeric", answerValue: If, answerText: sig(If), tol: 0.03 } ],
+          ["RL time constant: $\\tau = L/R = " + L + "/" + R + " = " + sig(tau) + "$ s.", "After a long time the inductor acts like a wire: $I_{final} = V/R = " + sig(If) + "$ A."],
+          "$\\tau = L/R$; the steady-state current is just $V/R$."), "Vol. 2, Ch. 14 · Problem 52"); },
+      // Ch15 #37 — capacitance needed for a given resonant frequency
+      function () { var f0 = rpick([1000, 5000]), Lm = rpick([5, 10]); var L = Lm * 1e-3; var C = 1 / (Math.pow(2 * Math.PI * f0, 2) * L);
+        return S(num("An RLC series circuit resonates at $" + f0 + "$ Hz. If the inductance is $" + Lm + ".0$ mH, what capacitance is required?", C, C.toExponential(2), 0.04,
+          ["Resonance: $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$, so $C = \\dfrac{1}{(2\\pi f_0)^2 L}$.", "$C = \\dfrac{1}{(2\\pi\\cdot" + f0 + ")^2(" + L + ")}$", "$C \\approx " + C.toExponential(2) + "$ F"],
+          "Invert $f_0 = 1/(2\\pi\\sqrt{LC})$ to solve for $C$.", "F"), "Vol. 2, Ch. 15 · Problem 37"); },
+      // Ch15 #29 — RLC series: impedance and phase angle
+      function () { var R = rpick([50, 100]), Lm = rpick([50, 100]), Cu = rpick([5, 10]), f = rpick([100, 200]); var L = Lm * 1e-3, C = Cu * 1e-6;
+        var XL = 2 * Math.PI * f * L, Xc = 1 / (2 * Math.PI * f * C); var Z = Math.sqrt(R * R + (XL - Xc) * (XL - Xc)); var phi = Math.atan2(XL - Xc, R) * 180 / Math.PI;
+        return S(multi("An RLC series circuit has $R = " + R + "\\ \\Omega$, $L = " + Lm + "$ mH, and $C = " + Cu + ".0\\ \\mu\\text{F}$, driven at $" + f + "$ Hz.",
+          [ { label: "Total impedance (Ω)", type: "numeric", answerValue: Z, answerText: sig(Z), tol: 0.04 },
+            { label: "Phase angle between current and emf (degrees)", type: "numeric", answerValue: phi, answerText: sig(phi), tol: 0.06 } ],
+          ["Reactances: $X_L = 2\\pi f L = " + sig(XL) + "\\ \\Omega$, $X_C = 1/(2\\pi f C) = " + sig(Xc) + "\\ \\Omega$.", "Impedance: $Z = \\sqrt{R^2 + (X_L - X_C)^2} \\approx " + sig(Z) + "\\ \\Omega$.", "Phase: $\\phi = \\tan^{-1}\\dfrac{X_L - X_C}{R} \\approx " + sig(phi) + "^\\circ$."],
+          "Compute $X_L$ and $X_C$; then $Z=\\sqrt{R^2+(X_L-X_C)^2}$ and $\\phi=\\tan^{-1}((X_L-X_C)/R)$."), "Vol. 2, Ch. 15 · Problem 29"); },
+      // Ch15 #33 — current amplitude in an RLC series circuit
+      function () { var V0 = rpick([10, 20]), R = rpick([40, 80]), Lm = rpick([40, 80]), Cu = rpick([8, 20]), f = rpick([120, 200]); var L = Lm * 1e-3, C = Cu * 1e-6;
+        var XL = 2 * Math.PI * f * L, Xc = 1 / (2 * Math.PI * f * C); var Z = Math.sqrt(R * R + (XL - Xc) * (XL - Xc)); var I0 = V0 / Z;
+        return S(num("An RLC series circuit ($R = " + R + "\\ \\Omega$, $L = " + Lm + "$ mH, $C = " + Cu + ".0\\ \\mu\\text{F}$) is driven at $" + f + "$ Hz by a source of voltage amplitude $" + V0 + "$ V. What is the current amplitude?", I0, sig(I0), 0.04,
+          ["Impedance: $Z = \\sqrt{R^2 + (X_L - X_C)^2}$ with $X_L = " + sig(XL) + "$, $X_C = " + sig(Xc) + "\\ \\Omega$, giving $Z \\approx " + sig(Z) + "\\ \\Omega$.", "Current amplitude: $I_0 = V_0/Z = " + V0 + "/" + sig(Z) + "$.", "$I_0 \\approx " + sig(I0) + "$ A"],
+          "Find $Z$ from the reactances, then $I_0 = V_0/Z$.", "A"), "Vol. 2, Ch. 15 · Problem 33"); }
+    ],
+    extreme: [
+      // Ch14 #51 — magnetic energy stored in a length of coaxial cable
+      function () { var I = rpick([1.2, 2.0]), l = rpick([2.0, 3.0]), ratio = 5; var U = (MU0 * I * I * l / (4 * Math.PI)) * Math.log(ratio);
+        return S(num("A current of $" + I + "$ A flows in a coaxial cable whose outer radius is $" + ratio + "$ times its inner radius. How much magnetic energy is stored in a $" + l + ".0$-m length?", U, U.toExponential(2), 0.04,
+          ["Energy density integrated between the conductors gives $U = \\dfrac{\\mu_0 I^2 l}{4\\pi}\\ln\\dfrac{b}{a}$.", "$U = \\dfrac{(4\\pi\\times10^{-7})(" + I + ")^2(" + l + ")}{4\\pi}\\ln " + ratio + "$", "$U \\approx " + U.toExponential(2) + "$ J"],
+          "Use $U = \\dfrac{\\mu_0 I^2 l}{4\\pi}\\ln(b/a)$ with $b/a = " + ratio + "$.", "J"), "Vol. 2, Ch. 14 · Problem 51"); },
+      // Ch14 #70 — LC oscillation: angular frequency and peak current from the peak charge
+      function () { var Lm = rpick([10, 40]), Cu = rpick([5, 20]), Q0u = rpick([2, 5]); var L = Lm * 1e-3, C = Cu * 1e-6, Q0 = Q0u * 1e-6;
+        var w = 1 / Math.sqrt(L * C); var Imax = Q0 * w;
+        return S(multi("An LC circuit oscillates with $L = " + Lm + "$ mH and $C = " + Cu + ".0\\ \\mu\\text{F}$. The maximum charge on the capacitor is $" + Q0u + ".0\\ \\mu\\text{C}$.",
+          [ { label: "Angular frequency of oscillation (rad/s)", type: "numeric", answerValue: w, answerText: sig(w), tol: 0.03 },
+            { label: "Maximum current (A)", type: "numeric", answerValue: Imax, answerText: sig(Imax), tol: 0.03 } ],
+          ["Oscillation: $\\omega = \\dfrac{1}{\\sqrt{LC}} = \\dfrac{1}{\\sqrt{(" + L + ")(" + C.toExponential(1) + ")}} \\approx " + sig(w) + "$ rad/s.", "The charge oscillates as $Q_0\\cos\\omega t$, so the peak current is $I_{max} = \\omega Q_0 = " + sig(Imax) + "$ A."],
+          "$\\omega = 1/\\sqrt{LC}$; peak current is $\\omega Q_0$."), "Vol. 2, Ch. 14 · Problem 70"); }
+    ]
+  });
+
+  // ================= Lesson 12: Maxwell's Equations & EM Waves (Vol.2 Ch.16) =================
+  // Modeled on syllabus problems: 42, 81 (easy), 46, 59, 50 (medium),
+  // 45, 58 (hard), 39, 65 (extreme). Target = 9.  (c = 3e8 m/s)
+  var CLIGHT = 3.0e8;
+  register("phys1442-12-em-waves", {
+    easy: [
+      // #42 — maximum E field from maximum B field:  E = cB
+      function () { var Bu = rpick([2, 5, 8]); var B = Bu * 1e-4; var Ef = CLIGHT * B;
+        return S(num("An electromagnetic wave has a maximum magnetic field strength of $" + Bu + ".0\\times10^{-4}$ T. What is its maximum electric field strength?", Ef, Ef.toExponential(2), 0.02,
+          ["In an EM wave the fields are linked by $E = cB$.", "$E = (3.0\\times10^{8})(" + Bu + "\\times10^{-4})$", "$E \\approx " + Ef.toExponential(2) + "$ V/m"],
+          "Use $E = cB$.", "V/m"), "Vol. 2, Ch. 16 · Problem 42"); },
+      // #81 — wavelength from frequency:  lambda = c/f
+      function () { var fp = rpick([5.0, 6.0, 8.0]), fe = rpick([14, 15]); var f = fp * Math.pow(10, fe); var lam = CLIGHT / f;
+        return S(num("What is the wavelength of an electromagnetic wave of frequency $" + fp + "\\times10^{" + fe + "}$ Hz?", lam, lam.toExponential(2), 0.02,
+          ["All EM waves travel at $c$, so $\\lambda = c/f$.", "$\\lambda = \\dfrac{3.0\\times10^{8}}{" + fp + "\\times10^{" + fe + "}}$", "$\\lambda \\approx " + lam.toExponential(2) + "$ m"],
+          "Use $\\lambda = c/f$.", "m"), "Vol. 2, Ch. 16 · Problem 81"); }
+    ],
+    medium: [
+      // #46 — plane wave: wavelength from frequency and the peak B from peak E
+      function () { var fG = rpick([10, 20, 30]), E0 = rpick([100, 200, 300]); var f = fG * 1e9; var lam = CLIGHT / f; var B0 = E0 / CLIGHT;
+        return S(multi("A plane electromagnetic wave of frequency $" + fG + "$ GHz has a peak electric field of $" + E0 + "$ V/m.",
+          [ { label: "Wavelength (m)", type: "numeric", answerValue: lam, answerText: lam.toExponential(2), tol: 0.03 },
+            { label: "Peak magnetic field (T)", type: "numeric", answerValue: B0, answerText: B0.toExponential(2), tol: 0.03 } ],
+          ["Wavelength: $\\lambda = c/f = (3.0\\times10^{8})/(" + fG + "\\times10^{9}) \\approx " + lam.toExponential(2) + "$ m.", "Peak B from peak E: $B_0 = E_0/c = " + E0 + "/(3.0\\times10^{8}) \\approx " + B0.toExponential(2) + "$ T."],
+          "$\\lambda = c/f$ and $B_0 = E_0/c$."), "Vol. 2, Ch. 16 · Problem 46"); },
+      // #59 — intensity from the peak electric field:  I = (1/2) c eps0 E0^2
+      function () { var E0 = rpick([100, 125, 200]); var I = 0.5 * CLIGHT * EPS0 * E0 * E0;
+        return S(num("What is the intensity of an electromagnetic wave with a peak electric field strength of $" + E0 + "$ V/m?", I, sig(I), 0.03,
+          ["Intensity from the peak field: $I = \\tfrac12 c\\varepsilon_0 E_0^2$.", "$I = \\tfrac12(3.0\\times10^{8})(8.85\\times10^{-12})(" + E0 + ")^2$", "$I \\approx " + sig(I) + "$ W/m²"],
+          "Use $I = \\tfrac12 c\\varepsilon_0 E_0^2$.", "W/m²"), "Vol. 2, Ch. 16 · Problem 59"); },
+      // #50 — from the E field, get the peak B and the average Poynting flux (intensity)
+      function () { var E0 = rpick([50, 120, 200]); var B0 = E0 / CLIGHT; var S0 = 0.5 * CLIGHT * EPS0 * E0 * E0;
+        return S(multi("An electromagnetic wave has a peak electric field of $" + E0 + "$ V/m.",
+          [ { label: "Peak magnetic field (T)", type: "numeric", answerValue: B0, answerText: B0.toExponential(2), tol: 0.03 },
+            { label: "Average Poynting flux, i.e. intensity (W/m²)", type: "numeric", answerValue: S0, answerText: sig(S0), tol: 0.03 } ],
+          ["Peak B: $B_0 = E_0/c = " + B0.toExponential(2) + "$ T.", "Average Poynting flux: $\\langle S\\rangle = \\dfrac{E_0 B_0}{2\\mu_0} = \\tfrac12 c\\varepsilon_0 E_0^2 \\approx " + sig(S0) + "$ W/m²."],
+          "$B_0=E_0/c$; the average of the Poynting vector is $\\tfrac12 c\\varepsilon_0 E_0^2$."), "Vol. 2, Ch. 16 · Problem 50"); }
+    ],
+    hard: [
+      // #45 — read frequency and wavelength off a wave's angular frequency, plus peak B
+      function () { var wp = rpick([2.0, 4.0, 6.0]), we = rpick([10, 11]), E0 = rpick([100, 200]); var w = wp * Math.pow(10, we); var f = w / (2 * Math.PI); var lam = CLIGHT / f; var B0 = E0 / CLIGHT;
+        return S(multi("An EM wave in vacuum has the form $E = E_0\\sin(kx - \\omega t)$ with $\\omega = " + wp + "\\times10^{" + we + "}$ rad/s and $E_0 = " + E0 + "$ V/m.",
+          [ { label: "Wavelength (m)", type: "numeric", answerValue: lam, answerText: lam.toExponential(2), tol: 0.03 },
+            { label: "Peak magnetic field (T)", type: "numeric", answerValue: B0, answerText: B0.toExponential(2), tol: 0.03 } ],
+          ["Frequency: $f = \\omega/2\\pi = " + f.toExponential(2) + "$ Hz. Wavelength: $\\lambda = c/f = " + lam.toExponential(2) + "$ m (equivalently $\\lambda = 2\\pi c/\\omega$).", "Peak B: $B_0 = E_0/c = " + B0.toExponential(2) + "$ T."],
+          "Get $f=\\omega/2\\pi$, then $\\lambda=c/f$; and $B_0=E_0/c$."), "Vol. 2, Ch. 16 · Problem 45"); },
+      // #58 — from the peak B field: peak E and the intensity
+      function () { var Bp = rpick([2, 5, 8]); var B0 = Bp * 1e-8; var E0 = CLIGHT * B0; var I = 0.5 * CLIGHT * EPS0 * E0 * E0;
+        return S(multi("The magnetic field of a plane EM wave has a peak value of $" + Bp + ".0\\times10^{-8}$ T.",
+          [ { label: "Peak electric field (V/m)", type: "numeric", answerValue: E0, answerText: sig(E0), tol: 0.03 },
+            { label: "Intensity of the wave (W/m²)", type: "numeric", answerValue: I, answerText: sig(I), tol: 0.04 } ],
+          ["Peak E: $E_0 = cB_0 = (3.0\\times10^{8})(" + Bp + "\\times10^{-8}) = " + sig(E0) + "$ V/m.", "Intensity: $I = \\tfrac12 c\\varepsilon_0 E_0^2 \\approx " + sig(I) + "$ W/m²."],
+          "$E_0=cB_0$; then $I=\\tfrac12 c\\varepsilon_0 E_0^2$."), "Vol. 2, Ch. 16 · Problem 58"); }
+    ],
+    extreme: [
+      // #39 — displacement current in a parallel-plate capacitor with sinusoidal voltage
+      function () { var Acm = rpick([50, 100]), dmm = rpick([1.0, 2.0]), V0 = rpick([100, 200]), f = rpick([1000, 5000]); var A = Acm * 1e-4, d = dmm / 1000; var C = EPS0 * A / d; var Id = C * V0 * 2 * Math.PI * f;
+        return S(num("The voltage across a parallel-plate capacitor (plate area $" + Acm + "\\ \\text{cm}^2$, separation $" + dmm + "$ mm) varies as $V = " + V0 + "\\sin(2\\pi f t)$ with $f = " + f + "$ Hz. What is the maximum displacement current between the plates?", Id, Id.toExponential(2), 0.05,
+          ["Displacement current equals the capacitor's charging current: $I_d = C\\dfrac{dV}{dt}$, with $C = \\varepsilon_0 A/d$.", "$C = \\dfrac{(8.85\\times10^{-12})(" + A + ")}{" + d + "} = " + C.toExponential(2) + "$ F. Its peak $dV/dt = V_0(2\\pi f)$.", "$I_{d,max} = C V_0 (2\\pi f) \\approx " + Id.toExponential(2) + "$ A"],
+          "$I_d = C\\,dV/dt$; the peak of $dV/dt$ is $V_0\\cdot 2\\pi f$.", "A"), "Vol. 2, Ch. 16 · Problem 39"); },
+      // #65 — radiation pressure on an absorbing sphere around a bulb
+      function () { var W = rpick([100, 150]), frac = 0.05, r = rpick([5, 10]); var Prad = frac * W; var I = Prad / (4 * Math.PI * r * r); var pressure = I / CLIGHT;
+        return S(num("A $" + W + "$-W light bulb emits $" + (frac * 100) + "\\%$ of its power as electromagnetic radiation. What is the radiation pressure on a fully absorbing sphere of radius $" + r + "$ m surrounding the bulb?", pressure, pressure.toExponential(2), 0.04,
+          ["Radiated power $= " + frac + "\\times" + W + " = " + Prad + "$ W, spread over the sphere: $I = \\dfrac{P}{4\\pi r^2} = " + I.toExponential(2) + "$ W/m².", "For a fully absorbing surface, radiation pressure is $p = I/c$.", "$p = \\dfrac{" + I.toExponential(2) + "}{3.0\\times10^{8}} \\approx " + pressure.toExponential(2) + "$ Pa"],
+          "Intensity $= P/(4\\pi r^2)$; absorbing-surface pressure is $p = I/c$.", "Pa"), "Vol. 2, Ch. 16 · Problem 65"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
