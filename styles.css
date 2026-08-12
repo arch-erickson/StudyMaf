@@ -725,6 +725,13 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .tutor-bubble { width: fit-content; max-width: 100%; padding: 10px 12px; border-radius: 15px; white-space: pre-wrap; line-height: 1.45; font-size: .92rem; }
 .tutor-message.assistant .tutor-bubble { color: var(--ink); background: var(--surface-2); border-bottom-left-radius: 4px; }
 .tutor-message.student .tutor-bubble { color: var(--accent-ink); background: var(--accent); border-bottom-right-radius: 4px; }
+.tutor-answer-text + .tutor-steps, .tutor-answer-text + .tutor-final-answer { margin-top: 9px; }
+.tutor-steps { border-top: 1px solid var(--line); padding-top: 8px; color: var(--ink-soft); }
+.tutor-steps summary { color: var(--accent); cursor: pointer; font-size: .78rem; font-weight: 800; user-select: none; }
+.tutor-steps ol { margin: 8px 0 0 18px; padding: 0; color: var(--ink); font-size: .86rem; }
+.tutor-steps li + li { margin-top: 5px; }
+.tutor-final-answer { padding: 9px 10px; border: 1px solid var(--accent); border-radius: 10px; background: var(--accent-soft); color: var(--ink); font-weight: 700; }
+.tutor-final-label { display: block; margin-bottom: 3px; color: var(--accent); font-size: .66rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
 .tutor-image-message { width: min(190px, 100%); border-radius: 12px; border: 1px solid var(--line); }
 .tutor-references { width: calc(100% - 36px); margin-left: 36px; display: flex; flex-wrap: wrap; gap: 5px; }
 .tutor-reference { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 4px 7px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--accent); cursor: pointer; font: 700 .7rem/1.2 Inter, sans-serif; }

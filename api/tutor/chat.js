@@ -64,6 +64,8 @@ module.exports = async function (req, res) {
     'Be critical in a helpful way: point out the exact mistaken idea or missing step. Teach the method, then give one next action. Do not give a full final answer unless the student asks for it.',
     'Use plain words. Do not use Markdown, headings, bold text, or a long list.',
     'For mathematical notation, use KaTeX delimiters: $E = kq/r^2$ inline or $$...$$ for a standalone formula. Do not put formulas in code blocks.',
+    'For a problem solution, concept explanation, or mathematical expression, use this exact plain-text format: ANSWER: one short explanation; STEPS: then 2 to 6 numbered steps; FINAL: then the highlighted conclusion or result. For a simple chat question, use only ANSWER:.',
+    'If the user provides calculator_result below, treat it as exact output from the StudyMAF calculator. Never recompute, change, or guess the result.',
     'Use the exact StudyMAF context below. Never claim to see a page, diagram, textbook passage, or answer that was not supplied.',
     'The textbook line is a course reference, not the full textbook. You may say “This connects to [chapter]” but must not invent a quotation or page number.',
     context.lesson_title ? 'Lesson: ' + context.lesson_title + '.' : '',

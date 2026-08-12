@@ -1264,6 +1264,44 @@ window.App = (function () {
     bubble.textContent = text;
     StudyMath.render(bubble);
   }
+  function parseRhoResponse(text) {
+    var source = String(text || "").trim(), answer = source, steps = [], finalAnswer = "";
+    var stepsAt = source.search(/(?:^|\n)STEPS:\s*/i), finalAt = source.search(/(?:^|\n)FINAL:\s*/i);
+    if (stepsAt >= 0) answer = source.slice(0, stepsAt).replace(/^ANSWER:\s*/i, "").trim();
+    else if (finalAt >= 0) answer = source.slice(0, finalAt).replace(/^ANSWER:\s*/i, "").trim();
+    else answer = answer.replace(/^ANSWER:\s*/i, "").trim();
+    if (stepsAt >= 0) {
+      var end = finalAt > stepsAt ? finalAt : source.length;
+      steps = source.slice(stepsAt, end).replace(/^\s*STEPS:\s*/i, "").split(/\n+/).map(function (line) { return line.replace(/^\s*(?:\d+[.)]|[-•])\s*/, "").trim(); }).filter(Boolean);
+    }
+    if (finalAt >= 0) finalAnswer = source.slice(finalAt).replace(/^\s*FINAL:\s*/i, "").trim();
+    return { answer: answer, steps: steps.slice(0, 8), finalAnswer: finalAnswer };
+  }
+  function renderRhoResponse(bubble, text) {
+    var parsed = parseRhoResponse(text), main = el("div", "tutor-answer-text"); renderTutorText(main, parsed.answer); bubble.appendChild(main);
+    if (parsed.steps.length) {
+      var details = document.createElement("details"); details.className = "tutor-steps";
+      var summary = document.createElement("summary"); summary.textContent = "Show steps"; details.appendChild(summary);
+      var list = document.createElement("ol"); parsed.steps.forEach(function (step) { var item = document.createElement("li"); renderTutorText(item, step); list.appendChild(item); }); details.appendChild(list); bubble.appendChild(details);
+    }
+    if (parsed.finalAnswer) { var finalBox = el("div", "tutor-final-answer"); finalBox.appendChild(el("span", "tutor-final-label", "Final answer")); var finalText = el("div"); renderTutorText(finalText, parsed.finalAnswer); finalBox.appendChild(finalText); bubble.appendChild(finalBox); }
+  }
+  function calculatorExpression(question) {
+    var raw = String(question || "").trim().replace(/[?=]+$/, "");
+    raw = raw.replace(/^(?:what\s+is|calculate|evaluate|compute|solve)\s+/i, "").trim();
+    // Send only a standalone expression to the calculator, never a sentence.
+    if (!raw || raw.length > 140 || !/^[0-9+\-*/^().,%\sπ\\a-zA-Z{}]+$/.test(raw)) return "";
+    if (!/[0-9π]/.test(raw)) return "";
+    var words = raw.match(/[a-zA-Z]+/g) || [];
+    var allowed = /^(pi|sqrt|cbrt|sin|cos|tan|asin|acos|atan|sinh|cosh|tanh|ln|log|log2|log10|abs|floor|ceil|round|exp|e)$/i;
+    return words.every(function (word) { return allowed.test(word); }) ? raw : "";
+  }
+  function calculatorReply(expression) {
+    try {
+      var calculation = Calculator.evaluate(expression);
+      return "ANSWER: I used the StudyMAF calculator for this exact expression.\nSTEPS:\n1. Enter $" + calculation.expression + "$ into the calculator.\n2. Evaluate the expression.\nFINAL: $$" + calculation.expression + " = " + calculation.result + "$$";
+    } catch (error) { return ""; }
+  }
   function openTutorLesson(ctx) {
     if (!ctx.class_id || !ctx.lesson_id) return;
     location.hash = "#/class/" + encodeURIComponent(ctx.class_id) + "?lesson=" + encodeURIComponent(ctx.lesson_id);
@@ -1324,7 +1362,9 @@ window.App = (function () {
     function label(ctx) { return ctx.question_id ? "Problem " + ctx.question_id + (ctx.lesson_title ? " · " + ctx.lesson_title : "") : (ctx.lesson_title ? ctx.lesson_title + (ctx.chapter ? " · " + ctx.chapter : "") : "Ready to help"); }
     function add(role, text, imageData, references) {
       var row = el("div", "tutor-message " + role); if (role === "assistant") row.appendChild(tutorAvatar());
-      var bubble = el("div", "tutor-bubble"); renderTutorText(bubble, text); row.appendChild(bubble);
+      var bubble = el("div", "tutor-bubble");
+      if (role === "assistant") renderRhoResponse(bubble, text); else renderTutorText(bubble, text);
+      row.appendChild(bubble);
       if (imageData) { var thumb = document.createElement("img"); thumb.className = "tutor-image-message"; thumb.src = imageData; thumb.alt = "Uploaded work"; row.appendChild(thumb); }
       if (role === "assistant" && references) { var related = tutorReferences(references); if (related) row.appendChild(related); }
       if (role === "assistant" && "speechSynthesis" in window) { var speak = el("button", "tutor-speak"); speak.innerHTML = icon("volume"); speak.title = "Read this answer aloud"; speak.onclick = function () { var utterance = new SpeechSynthesisUtterance(text); utterance.rate = .95; window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance); }; row.appendChild(speak); }
@@ -1336,6 +1376,8 @@ window.App = (function () {
     function submit() {
       var question = input.value.trim(); if (!question && !state.image) return; if (!question) question = "Please look at this photo and help me with the problem.";
       var sentImage = state.image; add("student", question, sentImage); input.value = ""; autosize(); clearImage(); send.disabled = true; send.classList.add("thinking");
+      var expression = sentImage ? "" : calculatorExpression(question), calculated = expression ? calculatorReply(expression) : "";
+      if (calculated) { add("assistant", calculated, "", state.context); send.disabled = false; send.classList.remove("thinking"); input.focus(); return; }
       fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: question, context: state.context, image_data: sentImage }) })
         .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Tutor unavailable."); return j; }); })
         .then(function (j) { add("assistant", j.answer || "I could not make an answer. Please try again.", "", state.context); })

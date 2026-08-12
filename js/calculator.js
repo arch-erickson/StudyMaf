@@ -642,5 +642,15 @@ window.Calculator = (function () {
   }
   function close() { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); mobileMode = false; dock.className = "calc-dock"; var tab = document.getElementById("calc-snap"); if (tab) tab.hidden = true; snappedSide = null; }
 
-  return { open: open, openMobile: openMobile, close: close };
+  // Public, side-effect-free entry point for Rho. It intentionally uses the
+  // same compiler, angle mode, and rounding as the visible Calculator dock.
+  function evaluate(raw) {
+    var source = String(raw || "").trim();
+    if (!source) throw new Error("Enter an expression.");
+    var value = round(compile(latexToExpr(source))(0));
+    if (!isFinite(value)) throw new Error("That expression does not have a finite result.");
+    return { expression: source, result: String(value) };
+  }
+
+  return { open: open, openMobile: openMobile, close: close, evaluate: evaluate };
 })();
