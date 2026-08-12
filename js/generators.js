@@ -885,5 +885,144 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 13: Geometric Optics (Vol.3 Ch.1 + Ch.2) =================
+  // Ch.1: 26,35,39,44,52,61,63 ; Ch.2: 36.  Target = 8.
+  function dsin(d) { return Math.sin(d * Math.PI / 180); }
+  function asind2(x) { return Math.asin(x) * 180 / Math.PI; }
+  register("phys1442-13-geometric-optics", {
+    easy: [
+      // Ch1 #26 — speed of light in a medium:  v = c/n
+      function () { var med = rpick([["water", 1.33], ["glycerine", 1.47], ["crown glass", 1.52]]); var v = CLIGHT / med[1];
+        return S(num("What is the speed of light in " + med[0] + " (index of refraction $n = " + med[1] + "$)?", v, v.toExponential(2), 0.02,
+          ["Light slows in a medium: $v = c/n$.", "$v = \\dfrac{3.0\\times10^{8}}{" + med[1] + "}$", "$v \\approx " + v.toExponential(2) + "$ m/s"],
+          "Use $v = c/n$.", "m/s"), "Vol. 3, Ch. 1 · Problem 26"); },
+      // Ch1 #35 — reflection off two perpendicular mirrors (corner reflector)
+      function () {
+        return S(mc("A light ray reflects off two flat mirrors that meet at a right angle (a corner reflector). How does the outgoing ray travel relative to the incoming ray?",
+          ["Exactly antiparallel (reversed back the way it came)", "Parallel, in the same direction", "Perpendicular to the incoming ray", "At 45° to the incoming ray"], 0,
+          ["Each reflection obeys angle in = angle out. Two reflections off perpendicular mirrors reverse both velocity components.", "So the outgoing ray heads back exactly opposite the incoming ray — the basis of retroreflectors."],
+          "Apply the law of reflection at each mirror; perpendicular mirrors send the ray straight back."), "Vol. 3, Ch. 1 · Problem 35"); }
+    ],
+    medium: [
+      // Ch1 #39 — reflection and refraction at an air-water surface
+      function () { var th = rpick([30, 45, 60]), n = 1.33; var refl = th; var refr = asind2(dsin(th) / n);
+        return S(multi("A light beam in air strikes the flat surface of a pond ($n = 1.33$) at $" + th + "^\\circ$ from the normal.",
+          [ { label: "Angle of reflection (degrees)", type: "numeric", answerValue: refl, answerText: String(refl), tol: 0.02 },
+            { label: "Angle of refraction in the water (degrees)", type: "numeric", answerValue: refr, answerText: sig(refr), tol: 0.03 } ],
+          ["Law of reflection: the reflected ray leaves at the same angle, $" + th + "^\\circ$.", "Snell's law: $\\sin\\theta_1 = n\\sin\\theta_2$, so $\\theta_2 = \\sin^{-1}\\dfrac{\\sin " + th + "^\\circ}{1.33} \\approx " + sig(refr) + "^\\circ$."],
+          "Reflection angle equals the incidence angle; refraction from $\\sin\\theta_1=n\\sin\\theta_2$."), "Vol. 3, Ch. 1 · Problem 39"); },
+      // Ch1 #63 — Malus's law: fraction transmitted through a second polarizer
+      function () { var th = rpick([20, 30, 45, 60]); var frac = Math.pow(Math.cos(th * Math.PI / 180), 2);
+        return S(num("The transmission axes of two polarizing filters differ by $" + th + "^\\circ$. What fraction of the (already-polarized) light reaching the second filter passes through it?", frac, sig(frac), 0.03,
+          ["Malus's law: $I = I_0\\cos^2\\theta$, so the transmitted fraction is $\\cos^2\\theta$.", "$\\cos^2(" + th + "^\\circ) \\approx " + sig(frac) + "$"],
+          "Use Malus's law: fraction $= \\cos^2\\theta$.", ""), "Vol. 3, Ch. 1 · Problem 63"); },
+      // Ch1 #44 — Snell's law for a ray leaving water into air
+      function () { var th = rpick([20, 30, 40]), n = 1.33; var refr = asind2(n * dsin(th));
+        return S(num("A ray travels up from water ($n = 1.33$) and hits the surface at $" + th + "^\\circ$ from the normal. At what angle does it emerge into the air?", refr, sig(refr), 0.03,
+          ["Snell's law: $n_{water}\\sin\\theta_1 = n_{air}\\sin\\theta_2$ with $n_{air}=1$.", "$\\theta_2 = \\sin^{-1}(1.33\\sin " + th + "^\\circ) \\approx " + sig(refr) + "^\\circ$."],
+          "Use $n_1\\sin\\theta_1 = \\sin\\theta_2$ (air $n=1$).", "°"), "Vol. 3, Ch. 1 · Problem 44"); }
+    ],
+    hard: [
+      // Ch1 #52 — index of refraction from the critical angle (total internal reflection)
+      function () { var thc = rpick([42, 45, 48]); var n = 1 / dsin(thc);
+        return S(num("Light inside an unknown liquid (air above) undergoes total internal reflection at a critical angle of $" + thc + "^\\circ$. What is the liquid's index of refraction?", n, sig(n), 0.03,
+          ["At the critical angle $\\sin\\theta_c = n_2/n_1 = 1/n$ (with air outside).", "$n = \\dfrac{1}{\\sin\\theta_c} = \\dfrac{1}{\\sin " + thc + "^\\circ}$", "$n \\approx " + sig(n) + "$"],
+          "Total internal reflection: $\\sin\\theta_c = 1/n$, so $n = 1/\\sin\\theta_c$.", ""), "Vol. 3, Ch. 1 · Problem 52"); },
+      // Ch2 #36 — image in a convex mirror: image distance and magnification
+      function () { var doo = rpick([2, 3]), fabs = rpick([0.5, 1.0]); var f = -fabs; var di = 1 / (1 / f - 1 / doo); var m = -di / doo;
+        return S(multi("A shopper stands $" + doo + ".00$ m in front of a convex security mirror of focal length $" + fabs + "$ m (convex, so $f = -" + fabs + "$ m).",
+          [ { label: "Image distance (m, sign included)", type: "numeric", answerValue: di, answerText: sig(di), tol: 0.04 },
+            { label: "Magnification", type: "numeric", answerValue: m, answerText: sig(m), tol: 0.04 } ],
+          ["Mirror equation: $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$, so $d_i = \\left(\\dfrac{1}{f} - \\dfrac{1}{d_o}\\right)^{-1} = \\left(\\dfrac{1}{" + f + "} - \\dfrac{1}{" + doo + "}\\right)^{-1} \\approx " + sig(di) + "$ m (virtual, behind the mirror).", "Magnification: $m = -d_i/d_o \\approx " + sig(m) + "$ (upright and reduced)."],
+          "Use $1/f = 1/d_o + 1/d_i$ with $f<0$ for a convex mirror; then $m=-d_i/d_o$."), "Vol. 3, Ch. 2 · Problem 36"); }
+    ],
+    extreme: [
+      // Ch1 #61 — prism dispersion: different colors refract at different angles
+      function () { var th = rpick([40, 45, 50]), nr = 1.51, nv = 1.53; var rr = asind2(dsin(th) / nr), rv = asind2(dsin(th) / nv);
+        return S(multi("A narrow beam of white light enters a crown-glass prism at $" + th + "^\\circ$ from the normal. Red light sees $n = " + nr + "$ and violet light sees $n = " + nv + "$.",
+          [ { label: "Refraction angle of the red light (degrees)", type: "numeric", answerValue: rr, answerText: sig(rr), tol: 0.03 },
+            { label: "Refraction angle of the violet light (degrees)", type: "numeric", answerValue: rv, answerText: sig(rv), tol: 0.03 } ],
+          ["Apply Snell's law to each color: $\\sin\\theta_1 = n\\sin\\theta_2$.", "Red: $\\theta = \\sin^{-1}\\dfrac{\\sin " + th + "^\\circ}{" + nr + "} \\approx " + sig(rr) + "^\\circ$.", "Violet: $\\theta = \\sin^{-1}\\dfrac{\\sin " + th + "^\\circ}{" + nv + "} \\approx " + sig(rv) + "^\\circ$. Violet bends more — that's dispersion."],
+          "Snell's law with a different $n$ for each color; the larger $n$ (violet) bends more."), "Vol. 3, Ch. 1 · Problem 61"); }
+    ]
+  });
+
+  // ================= Lesson 14: Lenses, Interference & Diffraction (Vol.3 Ch.2/3/4) =================
+  // Ch.2: 61,63,64,89,107 ; Ch.3: 17,19,37 ; Ch.4: 31,41,45.  Target = 11.
+  register("phys1442-14-interference-diffraction", {
+    easy: [
+      // Ch2 #89 — angular magnification of a simple magnifier:  M = 25 cm / f
+      function () { var fcm = rpick([5, 8, 10]); var M = 25 / fcm;
+        return S(num("A simple magnifying glass has a focal length of $" + fcm + ".0$ cm. What is its angular magnification (relaxed eye, near point 25 cm)?", M, sig(M), 0.02,
+          ["For a simple magnifier, $M = \\dfrac{25\\ \\text{cm}}{f}$.", "$M = \\dfrac{25}{" + fcm + "}$", "$M \\approx " + sig(M) + "$"],
+          "Use $M = 25\\,\\text{cm}/f$ (both in cm).", "×"), "Vol. 3, Ch. 2 · Problem 89"); },
+      // Ch2 #107 — ray tracing through a converging lens
+      function () {
+        return S(mc("A ray travels parallel to the optical axis and passes through a thin converging lens. Which way does it go after the lens?",
+          ["Through the far focal point", "Straight through, undeviated", "Back parallel to itself", "Through the center of the lens"], 0,
+          ["The three principal rays: a parallel ray bends to pass through the far focal point; a ray through the center goes straight; a ray through the near focus emerges parallel.", "A parallel incoming ray therefore exits through the focal point on the far side."],
+          "A ray parallel to the axis is bent through the focal point by a converging lens."), "Vol. 3, Ch. 2 · Problem 107"); }
+    ],
+    medium: [
+      // Ch2 #61 — thin lens: object inside the focal length (virtual, magnified image)
+      function () { var docm = rpick([5, 8]), fcm = rpick([10, 15]); var di = 1 / (1 / fcm - 1 / docm); var m = -di / docm;
+        return S(multi("A $3.0$-cm-tall object is placed $" + docm + ".0$ cm in front of a converging lens of focal length $" + fcm + "$ cm.",
+          [ { label: "Image distance (cm, sign included)", type: "numeric", answerValue: di, answerText: sig(di), tol: 0.04 },
+            { label: "Magnification", type: "numeric", answerValue: m, answerText: sig(m), tol: 0.04 } ],
+          ["Thin-lens equation: $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$, so $d_i = \\left(\\dfrac{1}{" + fcm + "} - \\dfrac{1}{" + docm + "}\\right)^{-1} \\approx " + sig(di) + "$ cm (negative ⇒ virtual).", "Magnification: $m = -d_i/d_o \\approx " + sig(m) + "$ (upright, enlarged)."],
+          "Use $1/f = 1/d_o + 1/d_i$; then $m = -d_i/d_o$."), "Vol. 3, Ch. 2 · Problem 61"); },
+      // Ch2 #63 — thin lens: object outside the focal length (real, inverted image)
+      function () { var docm = 25, fcm = rpick([10, 20]); var di = 1 / (1 / fcm - 1 / docm); var m = -di / docm;
+        return S(multi("A $3.0$-cm-tall object is placed $" + docm + "$ cm in front of a converging lens of focal length $" + fcm + "$ cm.",
+          [ { label: "Image distance (cm)", type: "numeric", answerValue: di, answerText: sig(di), tol: 0.04 },
+            { label: "Magnification", type: "numeric", answerValue: m, answerText: sig(m), tol: 0.04 } ],
+          ["$d_i = \\left(\\dfrac{1}{" + fcm + "} - \\dfrac{1}{" + docm + "}\\right)^{-1} \\approx " + sig(di) + "$ cm (positive ⇒ real image).", "Magnification: $m = -d_i/d_o \\approx " + sig(m) + "$ (inverted, reduced)."],
+          "Thin-lens equation for $d_i$, then $m=-d_i/d_o$."), "Vol. 3, Ch. 2 · Problem 63"); },
+      // Ch4 #45 — wavelength from a single-slit first minimum:  lambda = a sin(theta)
+      function () { var aum = rpick([2, 4, 6]), th = rpick([8, 12, 15]); var a = aum * 1e-6; var lam = a * dsin(th);
+        return S(num("Light passing through a single slit of width $" + aum + ".0\\ \\mu\\text{m}$ has its first dark fringe (minimum) at $" + th + "^\\circ$. What is the wavelength of the light?", lam, lam.toExponential(2), 0.03,
+          ["First single-slit minimum: $a\\sin\\theta = \\lambda$ (order $m=1$).", "$\\lambda = (" + a.toExponential(1) + ")\\sin " + th + "^\\circ$", "$\\lambda \\approx " + lam.toExponential(2) + "$ m"],
+          "Use $a\\sin\\theta = m\\lambda$ with $m=1$.", "m"), "Vol. 3, Ch. 4 · Problem 45"); },
+      // Ch3 #17 — angle of the third-order maximum for a double slit
+      function () { var dum = rpick([6, 8, 10]), lamn = rpick([500, 600]), m = 3; var d = dum * 1e-6, lam = lamn * 1e-9; var th = asind2(m * lam / d);
+        return S(num("Two slits are separated by $" + dum + ".0\\ \\mu\\text{m}$ and illuminated with $" + lamn + "$-nm light. At what angle is the third-order bright fringe?", th, sig(th), 0.03,
+          ["Bright fringes: $d\\sin\\theta = m\\lambda$, here $m=3$.", "$\\theta = \\sin^{-1}\\dfrac{3\\lambda}{d} = \\sin^{-1}\\dfrac{3(" + lam.toExponential(1) + ")}{" + d.toExponential(1) + "}$", "$\\theta \\approx " + sig(th) + "^\\circ$"],
+          "Use $d\\sin\\theta = m\\lambda$ with $m=3$.", "°"), "Vol. 3, Ch. 3 · Problem 17"); }
+    ],
+    hard: [
+      // Ch4 #31 — angle of the first single-slit minimum
+      function () { var amm = 0.1, lamn = rpick([500, 600, 650]); var a = amm / 1000, lam = lamn * 1e-9; var th = asind2(lam / a);
+        return S(num("A single slit of width $0.10$ mm is illuminated by $" + lamn + "$-nm light. At what angle is the first diffraction minimum?", th, sig(th), 0.03,
+          ["Single-slit minima: $a\\sin\\theta = m\\lambda$; the first is $m=1$.", "$\\theta = \\sin^{-1}\\dfrac{\\lambda}{a} = \\sin^{-1}\\dfrac{" + lam.toExponential(1) + "}{" + a.toExponential(1) + "}$", "$\\theta \\approx " + sig(th) + "^\\circ$"],
+          "Use $a\\sin\\theta = \\lambda$ for the first minimum.", "°"), "Vol. 3, Ch. 4 · Problem 31"); },
+      // Ch3 #19 — slit separation needed to place an order at a given angle
+      function () { var lamn = rpick([500, 600]), m = rpick([1, 2]), th = rpick([10, 20, 30]); var lam = lamn * 1e-9; var d = m * lam / dsin(th);
+        return S(num("With $" + lamn + "$-nm light, what slit separation puts the order-$" + m + "$ bright fringe at $" + th + "^\\circ$?", d, d.toExponential(2), 0.03,
+          ["From $d\\sin\\theta = m\\lambda$: $d = \\dfrac{m\\lambda}{\\sin\\theta}$.", "$d = \\dfrac{" + m + "(" + lam.toExponential(1) + ")}{\\sin " + th + "^\\circ}$", "$d \\approx " + d.toExponential(2) + "$ m"],
+          "Solve $d\\sin\\theta = m\\lambda$ for $d$.", "m"), "Vol. 3, Ch. 3 · Problem 19"); },
+      // Ch4 #41 — diffraction grating: angle of an order from the line density
+      function () { var lines = rpick([2000, 5000]), lamn = rpick([500, 600]), m = rpick([1, 2]); var d = 0.01 / lines, lam = lamn * 1e-9; var th = asind2(m * lam / d);
+        return S(num("A diffraction grating has $" + lines + "$ lines per centimeter. At what angle is the order-$" + m + "$ maximum for $" + lamn + "$-nm light?", th, sig(th), 0.03,
+          ["Slit spacing: $d = \\dfrac{1\\ \\text{cm}}{" + lines + "} = " + d.toExponential(2) + "$ m.", "Grating equation: $d\\sin\\theta = m\\lambda$, so $\\theta = \\sin^{-1}\\dfrac{m\\lambda}{d}$.", "$\\theta \\approx " + sig(th) + "^\\circ$"],
+          "Get $d = (1\\,\\text{cm})/\\text{lines}$, then $d\\sin\\theta = m\\lambda$.", "°"), "Vol. 3, Ch. 4 · Problem 41"); }
+    ],
+    extreme: [
+      // Ch2 #64 — two-lens system: image of lens 1 is the object for lens 2
+      function () { var do1 = rpick([30, 40]), f1 = 20, f2 = rpick([15, 20]), L = rpick([70, 90]); var di1 = 1 / (1 / f1 - 1 / do1); var do2 = L - di1; var di2 = 1 / (1 / f2 - 1 / do2);
+        return S(multi("Two converging lenses are $" + L + "$ cm apart. An object sits $" + do1 + "$ cm in front of the first lens ($f_1 = " + f1 + "$ cm); the second lens has $f_2 = " + f2 + "$ cm.",
+          [ { label: "Image distance from the first lens (cm)", type: "numeric", answerValue: di1, answerText: sig(di1), tol: 0.04 },
+            { label: "Final image distance from the second lens (cm)", type: "numeric", answerValue: di2, answerText: sig(di2), tol: 0.05 } ],
+          ["First lens: $d_{i1} = \\left(\\dfrac{1}{" + f1 + "} - \\dfrac{1}{" + do1 + "}\\right)^{-1} \\approx " + sig(di1) + "$ cm.", "That image is the object for lens 2: $d_{o2} = L - d_{i1} = " + sig(do2) + "$ cm.", "Second lens: $d_{i2} = \\left(\\dfrac{1}{" + f2 + "} - \\dfrac{1}{" + sig(do2) + "}\\right)^{-1} \\approx " + sig(di2) + "$ cm."],
+          "Solve lens 1, use its image as lens 2's object ($d_{o2}=L-d_{i1}$), then solve lens 2."), "Vol. 3, Ch. 2 · Problem 64"); },
+      // Ch3 #37 — three-slit pattern: angles of the first two principal maxima
+      function () { var dum = rpick([5, 8]), lamn = rpick([500, 600]); var d = dum * 1e-6, lam = lamn * 1e-9; var t1 = asind2(lam / d), t2 = asind2(2 * lam / d);
+        return S(multi("A three-slit grating has slit spacing $" + dum + ".0\\ \\mu\\text{m}$ and is lit with $" + lamn + "$-nm light. (Principal maxima occur where all slits are in phase.)",
+          [ { label: "Angle of the first principal maximum (degrees)", type: "numeric", answerValue: t1, answerText: sig(t1), tol: 0.03 },
+            { label: "Angle of the second principal maximum (degrees)", type: "numeric", answerValue: t2, answerText: sig(t2), tol: 0.03 } ],
+          ["Principal maxima obey the same condition as any grating: $d\\sin\\theta = m\\lambda$.", "First ($m=1$): $\\theta = \\sin^{-1}\\dfrac{\\lambda}{d} \\approx " + sig(t1) + "^\\circ$.", "Second ($m=2$): $\\theta = \\sin^{-1}\\dfrac{2\\lambda}{d} \\approx " + sig(t2) + "^\\circ$."],
+          "Principal maxima follow $d\\sin\\theta = m\\lambda$ for $m=1,2,\\dots$"), "Vol. 3, Ch. 3 · Problem 37"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
