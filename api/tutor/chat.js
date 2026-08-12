@@ -28,6 +28,15 @@ function cleanContext(raw) {
     hint: text(raw.hint, 800), difficulty: text(raw.difficulty, 40), source: text(raw.source, 160)
   };
 }
+function cleanHistory(raw) {
+  if (!Array.isArray(raw)) return [];
+  return raw.slice(-8).map(function (turn) {
+    turn = turn && typeof turn === 'object' ? turn : {};
+    var role = turn.role === 'assistant' ? 'assistant' : (turn.role === 'user' ? 'user' : '');
+    var content = text(turn.content, 1800);
+    return role && content ? { role: role, content: content } : null;
+  }).filter(Boolean);
+}
 
 async function problemMemory(context) {
   if (!context.question_id || !process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
@@ -48,7 +57,7 @@ module.exports = async function (req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Use POST.' });
   if (!rateOk(req)) return res.status(429).json({ error: 'Please wait a moment, then try again.' });
 
-  var body = req.body || {}, question = text(body.question, 2400), context = cleanContext(body.context);
+  var body = req.body || {}, question = text(body.question, 2400), context = cleanContext(body.context), history = cleanHistory(body.history);
   if (!context.lesson_id) context.lesson_id = text(body.lesson_id, 100);
   if (!context.page) context.page = text(body.page, 160);
   var image = text(body.image_data, 1800000);
@@ -67,6 +76,7 @@ module.exports = async function (req, res) {
     'For a problem solution, concept explanation, or mathematical expression, use this exact plain-text format: ANSWER: one short explanation; STEPS: then 2 to 6 numbered steps; FINAL: then the highlighted conclusion or result. For a simple chat question, use only ANSWER:.',
     'If the user provides calculator_result below, treat it as exact output from the StudyMAF calculator. Never recompute, change, or guess the result.',
     'Use the exact StudyMAF context below. Never claim to see a page, diagram, textbook passage, or answer that was not supplied.',
+    history.length ? 'The short conversation transcript is supplied as earlier user and assistant turns. Use it only to continue the conversation; the current StudyMAF page context takes priority.' : '',
     'The textbook line is a course reference, not the full textbook. You may say “This connects to [chapter]” but must not invent a quotation or page number.',
     context.lesson_title ? 'Lesson: ' + context.lesson_title + '.' : '',
     context.lesson_summary ? 'Lesson summary: ' + context.lesson_summary : '',
@@ -78,11 +88,12 @@ module.exports = async function (req, res) {
     image ? 'The student attached a photo. Inspect it carefully. State what you can read, then point to the first useful next step.' : ''
   ].filter(Boolean).join('\n');
   var userContent = image ? [{ type: 'text', text: question }, { type: 'image_url', image_url: { url: image } }] : question;
+  var messages = [{ role: 'system', content: instructions }].concat(history).concat([{ role: 'user', content: userContent }]);
   try {
     var response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://studymaf.com', 'X-OpenRouter-Title': 'StudyMAF Tutor' },
-      body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions }, { role: 'user', content: userContent }], max_tokens: 360 })
+      body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: messages, max_tokens: 360 })
     });
     var data = await response.json();
     if (!response.ok) throw new Error(data.error && data.error.message ? data.error.message : (image ? 'A free vision model is busy. Try again in a moment.' : 'The free model is busy.'));
@@ -94,7 +105,7 @@ module.exports = async function (req, res) {
       var retry = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://studymaf.com', 'X-OpenRouter-Title': 'StudyMAF Tutor' },
-        body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions + '\nThis is a strict retry. Output only the final answer for the student.' }, { role: 'user', content: userContent }], max_tokens: 260 })
+        body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions + '\nThis is a strict retry. Output only the final answer for the student.' }].concat(history).concat([{ role: 'user', content: userContent }]), max_tokens: 260 })
       });
       var retryData = await retry.json();
       var retryAnswer = retryData.choices && retryData.choices[0] && retryData.choices[0].message && retryData.choices[0].message.content;

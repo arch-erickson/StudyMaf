@@ -740,6 +740,12 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .tutor-photo-preview { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 11px; background: var(--surface-2); }
 .tutor-photo-preview img { width: 48px; height: 38px; object-fit: cover; border-radius: 7px; }
 .tutor-photo-remove { margin-left: auto; border: 0; background: transparent; color: var(--ink-soft); font: inherit; font-size: .78rem; cursor: pointer; }
+.tutor-talkbar { display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 12px; background: linear-gradient(120deg, var(--accent-soft), var(--surface)); }
+.tutor-talk { display: inline-flex; align-items: center; gap: 6px; min-height: 29px; padding: 5px 8px; border: 0; border-radius: 8px; background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(45,49,66,.08); cursor: pointer; font: 800 .73rem/1 Inter, sans-serif; }
+.tutor-talk svg { width: 15px; height: 15px; }
+.tutor-talk.on { color: var(--accent-ink); background: var(--accent); }
+.tutor-talk.listening { animation: tutor-pulse 1s infinite; }
+.tutor-voice-status { overflow: hidden; color: var(--ink-soft); text-overflow: ellipsis; white-space: nowrap; font-size: .7rem; line-height: 1.2; }
 .tutor-composer { display: flex; align-items: flex-end; gap: 5px; padding: 6px 7px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 3px 10px rgba(45,49,66,.06); }
 .tutor-composer:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .tutor-compose-action { width: 33px; height: 33px; flex: 0 0 33px; }
