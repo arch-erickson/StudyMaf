@@ -1276,12 +1276,12 @@ window.App = (function () {
     var state = { image: "", maximized: false, minimized: false, context: tutorContext };
     dock.innerHTML = "";
     var head = el("div", "tutor-head"), identity = el("div", "tutor-identity"), avatar = el("span", "tutor-avatar"); avatar.appendChild(tutorAvatar()); identity.appendChild(avatar);
-    var copy = el("div"); copy.appendChild(el("strong", null, "Maf, your study tutor")); copy.appendChild(el("span", "tutor-context", "Ready to help")); identity.appendChild(copy);
+    var copy = el("div"); copy.appendChild(el("strong", null, "Rho (ρ), your study tutor")); copy.appendChild(el("span", "tutor-context", "Ready to help")); identity.appendChild(copy);
     var controls = el("div", "tutor-controls"), min = el("button", "tutor-icon"), max = el("button", "tutor-icon"), close = el("button", "tutor-icon");
     min.innerHTML = icon("minus"); min.title = "Minimize"; max.innerHTML = icon("maximize"); max.title = "Maximize"; close.innerHTML = icon("x"); close.title = "Close";
     controls.append(min, max, close); head.append(identity, controls); dock.appendChild(head);
     var body = el("div", "tutor-body"), messages = el("div", "tutor-messages"), welcome = el("div", "tutor-message assistant");
-    welcome.appendChild(tutorAvatar()); welcome.appendChild(el("div", "tutor-bubble", "Hi, I’m Maf. I know the lesson or problem you are on. What should we work through?")); messages.appendChild(welcome); body.appendChild(messages);
+    welcome.appendChild(tutorAvatar()); welcome.appendChild(el("div", "tutor-bubble", "Hi, I’m Rho. I know the lesson or problem you are on. What should we work through?")); messages.appendChild(welcome); body.appendChild(messages);
     var preview = el("div", "tutor-photo-preview"); preview.hidden = true; body.appendChild(preview);
     var composer = el("div", "tutor-composer"), file = document.createElement("input"); file.type = "file"; file.accept = "image/png,image/jpeg,image/webp,image/gif"; file.hidden = true;
     var photo = el("button", "tutor-compose-action"), input = document.createElement("textarea"), voice = el("button", "tutor-compose-action"), send = el("button", "tutor-send");
@@ -1320,7 +1320,7 @@ window.App = (function () {
     min.onclick = function () { state.minimized = !state.minimized; dock.classList.toggle("min", state.minimized); min.innerHTML = icon(state.minimized ? "maximize" : "minus"); };
     max.onclick = function () { state.maximized = !state.maximized; dock.classList.toggle("max", state.maximized); if (state.maximized) dock.style.left = ""; };
     close.onclick = function () { dock.hidden = true; dock.setAttribute("aria-hidden", "true"); launcher.hidden = false; };
-    launcher.innerHTML = icon("chat") + "<span>Ask Maf</span>";
+    launcher.innerHTML = icon("chat") + "<span>Ask Rho</span>";
     head.addEventListener("pointerdown", function (event) { if (event.target.closest("button, a")) return; var box = dock.getBoundingClientRect(), sx = event.clientX, sy = event.clientY, left = box.left, top = box.top; dock.classList.add("dragging"); dock.setPointerCapture(event.pointerId);
       function move(e) { dock.style.left = Math.max(8, Math.min(window.innerWidth - dock.offsetWidth - 8, left + e.clientX - sx)) + "px"; dock.style.top = Math.max(8, Math.min(window.innerHeight - dock.offsetHeight - 8, top + e.clientY - sy)) + "px"; dock.style.right = "auto"; dock.style.bottom = "auto"; }
       function up() { dock.classList.remove("dragging"); dock.removeEventListener("pointermove", move); dock.removeEventListener("pointerup", up); } dock.addEventListener("pointermove", move); dock.addEventListener("pointerup", up); });
