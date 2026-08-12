@@ -583,5 +583,150 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 9: Sources of Magnetic Field (Vol.2 Ch.12) =================
+  // Modeled on syllabus problems: 23, 49 (easy), 37, 43, 42, 61 (medium),
+  // 31, 20, 57 (hard), 33, 46 (extreme). Target = 11. (mu0 = 4*pi*1e-7)
+  var MU0 = 4 * Math.PI * 1e-7;
+  register("phys1442-09-magnetic-sources", {
+    easy: [
+      // #23 — current in a long wire from the field at a distance:  I = 2*pi*r*B/mu0
+      function () { var Bu = rpick([2, 4, 8]), rcm = 50; var B = Bu * 1e-6, r = rcm / 100; var I = 2 * Math.PI * r * B / MU0;
+        return S(num("The magnetic field $" + rcm + "$ cm from a long, straight wire is $" + Bu + ".0\\ \\mu\\text{T}$. What current flows in the wire?", I, sig(I), 0.03,
+          ["Field of a long wire: $B = \\dfrac{\\mu_0 I}{2\\pi r}$, so $I = \\dfrac{2\\pi r B}{\\mu_0}$.", "$I = \\dfrac{2\\pi(" + r + ")(" + B.toExponential(1) + ")}{4\\pi\\times10^{-7}}$", "$I \\approx " + sig(I) + "$ A"],
+          "Solve $B = \\mu_0 I/(2\\pi r)$ for $I$.", "A"), "Vol. 2, Ch. 12 · Problem 23"); },
+      // #49 — field inside a solenoid:  B = mu0 n I
+      function () { var n = rpick([1500, 2000, 3000]), I = rpick([3.0, 5.2, 8.0]); var B = MU0 * n * I;
+        return S(num("A solenoid is wound with $" + n + "$ turns per meter. When the current is $" + I + "$ A, what is the magnetic field inside it?", B, sig(B), 0.03,
+          ["Inside a long solenoid the field is $B = \\mu_0 n I$.", "$B = (4\\pi\\times10^{-7})(" + n + ")(" + I + ")$", "$B \\approx " + sig(B) + "$ T"],
+          "Use $B = \\mu_0 n I$ with $n$ in turns per metre.", "T"), "Vol. 2, Ch. 12 · Problem 49"); }
+    ],
+    medium: [
+      // #37 — field at the center of a flat multi-turn circular loop:  B = mu0 N I /(2R)
+      function () { var N = rpick([10, 20, 50]), Rcm = rpick([5, 10]), I = rpick([0.5, 1.0, 2.0]); var R = Rcm / 100; var B = MU0 * N * I / (2 * R);
+        return S(num("A flat circular loop has $" + N + "$ turns of radius $" + Rcm + ".0$ cm and carries $" + I + "$ A. What is the magnetic field at the center of the loop?", B, sig(B), 0.03,
+          ["At the center of a circular coil, $B = \\dfrac{\\mu_0 N I}{2R}$.", "$B = \\dfrac{(4\\pi\\times10^{-7})(" + N + ")(" + I + ")}{2(" + R + ")}$", "$B \\approx " + sig(B) + "$ T"],
+          "Use the loop-center formula $B = \\mu_0 N I/(2R)$.", "T"), "Vol. 2, Ch. 12 · Problem 37"); },
+      // #43 — solenoid field from turn count and length:  B = mu0 (N/l) I
+      function () { var N = rpick([200, 500], 0), lcm = rpick([20, 40]), I = rpick([2.0, 5.0]); var l = lcm / 100; var B = MU0 * (N / l) * I;
+        return S(num("A solenoid has $" + N + "$ evenly spaced turns over a length of $" + lcm + ".0$ cm and carries $" + I + "$ A. What is the field inside?", B, sig(B), 0.03,
+          ["The turn density is $n = N/l$, and $B = \\mu_0 n I = \\mu_0 \\dfrac{N}{l} I$.", "$B = (4\\pi\\times10^{-7})\\dfrac{" + N + "}{" + l + "}(" + I + ")$", "$B \\approx " + sig(B) + "$ T"],
+          "Get $n = N/l$ first, then $B = \\mu_0 n I$.", "T"), "Vol. 2, Ch. 12 · Problem 43"); },
+      // #42 — Ampere's law: line integral of B equals mu0 times enclosed current
+      function () { var I1 = rpick([3, 5, 8]), I2 = rpick([1, 2, 4]); var Ienc = I1 - I2; var val = MU0 * Ienc;
+        return S(num("An Amperian loop encloses a $" + I1 + ".0$-A current and a $" + I2 + ".0$-A current flowing the opposite way. Evaluate $\\oint \\vec{B}\\cdot d\\vec{l}$ around the loop.", val, val.toExponential(2), 0.03,
+          ["Ampère's law: $\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 I_{enc}$.", "Net enclosed current (opposite directions subtract): $I_{enc} = " + I1 + " - " + I2 + " = " + Ienc + "$ A.", "$\\oint \\vec{B}\\cdot d\\vec{l} = (4\\pi\\times10^{-7})(" + Ienc + ") \\approx " + val.toExponential(2) + "$ T·m"],
+          "Only enclosed current counts, with sign; multiply the net by $\\mu_0$.", "T·m"), "Vol. 2, Ch. 12 · Problem 42"); },
+      // #61 — total dipole moment of a domain: N atoms times the atomic moment
+      function () { var muA = 1.8e-23, Np = rpick([1, 5]), Ne = rpick([17, 18]); var N = Np * Math.pow(10, Ne); var tot = N * muA;
+        return S(num("An iron atom has a magnetic dipole moment of about $1.8\\times10^{-23}\\ \\text{A·m}^2$. What is the maximum dipole moment of a domain containing $" + Np + "\\times10^{" + Ne + "}$ atoms (all aligned)?", tot, tot.toExponential(2), 0.03,
+          ["Fully aligned, the moments simply add: $\\mu_{tot} = N\\,\\mu_{atom}$.", "$\\mu_{tot} = (" + Np + "\\times10^{" + Ne + "})(1.8\\times10^{-23})$", "$\\mu_{tot} \\approx " + tot.toExponential(2) + "$ A·m²"],
+          "Multiply the number of aligned atoms by the per-atom moment.", "A·m²"), "Vol. 2, Ch. 12 · Problem 61"); }
+    ],
+    hard: [
+      // #31 — force per length between two parallel currents
+      function () { var I1 = rpick([2, 3]), I2 = rpick([4, 5]), dcm = rpick([5, 10]); var d = dcm / 100; var fL = MU0 * I1 * I2 / (2 * Math.PI * d);
+        return S(multi("Two long parallel wires are $" + dcm + ".0$ cm apart. One carries $" + I1 + ".0$ A, the other $" + I2 + ".0$ A, in opposite directions.",
+          [ { label: "Force per unit length (N/m)", type: "numeric", answerValue: fL, answerText: fL.toExponential(2), tol: 0.03 },
+            { label: "Do the wires attract or repel?", type: "mc", choices: ["Repel", "Attract"], answerIndex: 0 } ],
+          ["Force per length: $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi d} = \\dfrac{(4\\pi\\times10^{-7})(" + I1 + ")(" + I2 + ")}{2\\pi(" + d + ")} \\approx " + fL.toExponential(2) + "$ N/m.", "Opposite currents repel (parallel currents would attract)."],
+          "Use $F/L = \\mu_0 I_1 I_2/(2\\pi d)$; opposite currents repel."), "Vol. 2, Ch. 12 · Problem 31"); },
+      // #20 — field at the center of a rectangular loop
+      function () { var acm = rpick([10, 20]), bcm = rpick([20, 30]), I = rpick([5, 10]); var a = acm / 100, b = bcm / 100; var B = (2 * MU0 * I / Math.PI) * Math.sqrt(a * a + b * b) / (a * b);
+        return S(num("A rectangular loop of wire with sides $" + acm + "$ cm and $" + bcm + "$ cm carries a current of $" + I + ".0$ A. What is the magnetic field at the center of the loop?", B, B.toExponential(2), 0.04,
+          ["Add the field of all four finite straight sides at the center; the result is $B = \\dfrac{2\\mu_0 I}{\\pi}\\dfrac{\\sqrt{a^2+b^2}}{ab}$.", "$B = \\dfrac{2(4\\pi\\times10^{-7})(" + I + ")}{\\pi}\\dfrac{\\sqrt{" + a + "^2+" + b + "^2}}{(" + a + ")(" + b + ")}$", "$B \\approx " + B.toExponential(2) + "$ T"],
+          "Each side is a finite wire; the combined center field is $\\frac{2\\mu_0 I}{\\pi}\\frac{\\sqrt{a^2+b^2}}{ab}$.", "T"), "Vol. 2, Ch. 12 · Problem 20"); },
+      // #57 — field inside a toroid:  B = mu0 N I /(2*pi*r)
+      function () { var N = rpick([400, 500]), I = rpick([1.5, 2.0]), innercm = rpick([20, 25]), sidecm = 3; var r = innercm / 100 + (sidecm / 100) / 2; var B = MU0 * N * I / (2 * Math.PI * r);
+        return S(num("A toroid with a $" + sidecm + ".0$ cm × $" + sidecm + ".0$ cm square cross-section has an inner radius of $" + innercm + ".0$ cm, $" + N + "$ turns, and carries $" + I + "$ A. What is the field at the center of the cross-section?", B, sig(B), 0.03,
+          ["Inside a toroid, $B = \\dfrac{\\mu_0 N I}{2\\pi r}$ with $r$ the distance from the axis.", "Center of the cross-section: $r = " + innercm / 100 + " + " + (sidecm / 100) / 2 + " = " + r + "$ m.", "$B = \\dfrac{(4\\pi\\times10^{-7})(" + N + ")(" + I + ")}{2\\pi(" + r + ")} \\approx " + sig(B) + "$ T"],
+          "Toroid field is $\\mu_0 N I/(2\\pi r)$; use $r$ to the middle of the cross-section.", "T"), "Vol. 2, Ch. 12 · Problem 57"); }
+    ],
+    extreme: [
+      // #33 — two long antiparallel wires: field at a point between them adds
+      function () { var I = rpick([5, 10]), acm = rpick([2, 4]), bcm = rpick([6, 8]); var a = acm / 100, b = bcm / 100; var B = MU0 * I / (2 * Math.PI) * (1 / a + 1 / b);
+        return S(num("Two long parallel wire sections carry the same current $" + I + ".0$ A in opposite directions. A point $P$ lies $" + acm + "$ cm from one wire and $" + bcm + "$ cm from the other (between them). What is the magnetic field at $P$?", B, sig(B), 0.03,
+          ["Each wire gives $B = \\mu_0 I/(2\\pi r)$. Between antiparallel currents the two fields point the same way, so they add.", "$B = \\dfrac{\\mu_0 I}{2\\pi}\\left(\\dfrac{1}{a} + \\dfrac{1}{b}\\right) = \\dfrac{(4\\pi\\times10^{-7})(" + I + ")}{2\\pi}\\left(\\dfrac{1}{" + a + "} + \\dfrac{1}{" + b + "}\\right)$", "$B \\approx " + sig(B) + "$ T"],
+          "Add each wire's $\\mu_0 I/(2\\pi r)$; between opposite currents the fields reinforce.", "T"), "Vol. 2, Ch. 12 · Problem 33"); },
+      // #46 — hollow cylindrical conductor: field in the cavity and outside
+      function () { var I = rpick([10, 20]), routcm = rpick([5, 8]); var rout = routcm / 100; var Bout = MU0 * I / (2 * Math.PI * rout);
+        return S(multi("A long hollow cylindrical conductor (inner radius $2$ cm, outer radius $4$ cm) carries a total current of $" + I + ".0$ A spread over its shell.",
+          [ { label: "Field in the hollow cavity, $r < 2$ cm (T)", type: "mc", choices: ["Zero", "$\\mu_0 I/2\\pi r$", "$\\mu_0 I/2\\pi R$"], answerIndex: 0 },
+            { label: "Field outside at $r = " + routcm + "$ cm (T)", type: "numeric", answerValue: Bout, answerText: Bout.toExponential(2), tol: 0.03 } ],
+          ["An Amperian loop inside the cavity encloses no current, so $B = 0$ there.", "Outside, all the current is enclosed: $B = \\dfrac{\\mu_0 I}{2\\pi r} = \\dfrac{(4\\pi\\times10^{-7})(" + I + ")}{2\\pi(" + rout + ")} \\approx " + Bout.toExponential(2) + "$ T."],
+          "Cavity encloses no current ($B=0$); outside behaves like a straight wire $\\mu_0 I/(2\\pi r)$."), "Vol. 2, Ch. 12 · Problem 46"); }
+    ]
+  });
+
+  // ================= Lesson 10: Electromagnetic Induction & Faraday's Law (Vol.2 Ch.13) =================
+  // Modeled on syllabus problems: 24, 36 (easy), 40, 43, 28 (medium),
+  // 26, 31, 34 (hard), 45, 56 (extreme). Target = 10.
+  register("phys1442-10-induction", {
+    easy: [
+      // #24 — emf from a uniform field collapsing to zero:  emf = N A (dB/dt)
+      function () { var N = rpick([50, 100]), diamcm = rpick([10, 15]), B = rpick([0.50, 0.80]), dt = rpick([0.10, 0.20]); var A = Math.PI * Math.pow(diamcm / 200, 2); var emf = N * A * B / dt;
+        return S(num("A $" + N + "$-turn coil of diameter $" + diamcm + "$ cm sits perpendicular to a $" + B + "$-T field. Find the emf induced if the field is reduced to zero uniformly in $" + dt + "$ s.", emf, sig(emf), 0.03,
+          ["Faraday's law: $\\varepsilon = N\\dfrac{\\Delta\\Phi}{\\Delta t} = NA\\dfrac{\\Delta B}{\\Delta t}$, with $A = \\pi r^2$.", "$A = \\pi(" + (diamcm / 200) + ")^2 = " + sig(A) + "$ m². $\\varepsilon = (" + N + ")(" + sig(A) + ")\\dfrac{" + B + "}{" + dt + "}$", "$\\varepsilon \\approx " + sig(emf) + "$ V"],
+          "Use $\\varepsilon = NA\\,\\Delta B/\\Delta t$ (area of the circular coil is $\\pi r^2$).", "V"), "Vol. 2, Ch. 13 · Problem 24"); },
+      // #36 — Lenz's law: direction of the induced current
+      function () { var rising = rpick([true, false]); var ans = rising ? "Clockwise" : "Counterclockwise";
+        return S(mc("The upward magnetic flux through a horizontal loop is " + (rising ? "increasing" : "decreasing") + ". Viewed from above, which way does the induced current flow?",
+          ["Clockwise", "Counterclockwise", "No current is induced", "It reverses every instant"], rising ? 0 : 1,
+          ["Lenz's law: the induced current opposes the change in flux.", (rising ? "To oppose the increasing upward flux, the current makes downward flux inside the loop — clockwise seen from above." : "To oppose the decreasing upward flux, the current makes upward flux inside the loop — counterclockwise seen from above.")],
+          "Lenz's law: the induced current fights the change. Rising upward flux ⇒ clockwise from above."), "Vol. 2, Ch. 13 · Problem 36"); }
+    ],
+    medium: [
+      // #40 — average emf from rotating a coil out of a field
+      function () { var N = rpick([500, 1000]), A = rpick([0.010, 0.020]), B = rpick([0.50, 1.0]), dt = 0.010; var emf = N * B * A / dt;
+        return S(num("A coil of $" + N + "$ turns enclosing an area of $" + A + "\\ \\text{m}^2$ is rotated in $" + dt + "$ s from a position where its plane is perpendicular to a $" + B + "$-T field to where its plane is parallel to the field. What is the average emf?", emf, sig(emf), 0.03,
+          ["The flux goes from $BA$ (perpendicular) to $0$ (parallel), so $\\Delta\\Phi = BA$.", "$\\varepsilon = N\\dfrac{\\Delta\\Phi}{\\Delta t} = \\dfrac{(" + N + ")(" + B + ")(" + A + ")}{" + dt + "}$", "$\\varepsilon \\approx " + sig(emf) + "$ V"],
+          "Flux drops from $BA$ to $0$; use $\\varepsilon = N\\,\\Delta\\Phi/\\Delta t$.", "V"), "Vol. 2, Ch. 13 · Problem 40"); },
+      // #43 — motional emf on a moving rod, plus the force on an electron in it
+      function () { var Lcm = rpick([25, 30]), v = rpick([5.0, 8.0]), B = rpick([0.25, 0.40]); var L = Lcm / 100; var Fe = E * v * B; var emf = B * L * v;
+        return S(multi("A $" + Lcm + "$-cm rod moves at $" + v + "$ m/s perpendicular to a $" + B + "$-T magnetic field (rod, velocity, and field all mutually perpendicular).",
+          [ { label: "Magnetic force on an electron in the rod (N)", type: "numeric", answerValue: Fe, answerText: Fe.toExponential(2), tol: 0.03 },
+            { label: "Motional emf along the rod (V)", type: "numeric", answerValue: emf, answerText: sig(emf), tol: 0.03 } ],
+          ["Force on each electron: $F = evB = (1.6\\times10^{-19})(" + v + ")(" + B + ") \\approx " + Fe.toExponential(2) + "$ N.", "Motional emf: $\\varepsilon = BLv = (" + B + ")(" + L + ")(" + v + ") \\approx " + sig(emf) + "$ V."],
+          "Force on a charge is $evB$; the motional emf is $BLv$."), "Vol. 2, Ch. 13 · Problem 43"); },
+      // #28 — induced current from a changing field, given the coil resistance
+      function () { var Acm = rpick([100, 200]), R = rpick([2.0, 5.0]), dBdt = rpick([0.20, 0.50]); var A = Acm * 1e-4; var emf = A * dBdt; var I = emf / R;
+        return S(num("A single-turn coil of area $" + Acm + "\\ \\text{cm}^2$ and resistance $" + R + "\\ \\Omega$ sits perpendicular to a field changing at $" + dBdt + "$ T/s. What current is induced?", I, sig(I), 0.03,
+          ["Induced emf: $\\varepsilon = A\\dfrac{dB}{dt} = (" + A + ")(" + dBdt + ") = " + sig(emf) + "$ V.", "Then Ohm's law: $I = \\varepsilon/R = " + sig(emf) + "/" + R + "$.", "$I \\approx " + sig(I) + "$ A"],
+          "First $\\varepsilon = A\\,dB/dt$, then $I = \\varepsilon/R$.", "A"), "Vol. 2, Ch. 13 · Problem 28"); }
+    ],
+    hard: [
+      // #26 — induced current in a square copper loop (compute the wire resistance)
+      function () { var scm = rpick([5, 6, 8]), dBdt_m = rpick([5, 10]), rwmm = rpick([0.5, 1.0]); var s = scm / 100, dBdt = dBdt_m * 1e-3, rw = rwmm / 1000, rho = 1.68e-8;
+        var emf = s * s * dBdt; var R = rho * (4 * s) / (Math.PI * rw * rw); var I = emf / R;
+        return S(num("A square loop $" + scm + ".0$ cm on a side is made of copper wire of radius $" + rwmm + "$ mm. A perpendicular field changes at $" + dBdt_m + ".0$ mT/s. What current flows in the loop? ($\\rho_{Cu} = 1.68\\times10^{-8}\\ \\Omega\\cdot$m)", I, I.toExponential(2), 0.05,
+          ["Induced emf: $\\varepsilon = A\\dfrac{dB}{dt} = (" + s + ")^2(" + dBdt + ") = " + emf.toExponential(2) + "$ V.", "Wire resistance: $R = \\dfrac{\\rho\\,(4s)}{\\pi r_w^2} = " + R.toExponential(2) + "\\ \\Omega$.", "$I = \\varepsilon/R \\approx " + I.toExponential(2) + "$ A"],
+          "Get $\\varepsilon = A\\,dB/dt$ and the wire resistance $R=\\rho L/(\\pi r_w^2)$ with $L=4s$; then $I=\\varepsilon/R$.", "A"), "Vol. 2, Ch. 13 · Problem 26"); },
+      // #31 — emf from a linearly time-varying field over a rectangular loop
+      function () { var acm = rpick([10, 20]), bcm = rpick([15, 25]), alpha = rpick([2.0, 5.0]); var a = acm / 100, b = bcm / 100; var emf = a * b * alpha;
+        return S(num("A rectangular loop $" + acm + "$ cm by $" + bcm + "$ cm lies in a magnetic field (perpendicular to the loop) that grows as $B(t) = " + alpha + "t$ T. What is the magnitude of the induced emf?", emf, sig(emf), 0.03,
+          ["$\\varepsilon = -\\dfrac{d\\Phi}{dt} = -A\\dfrac{dB}{dt}$, and $\\dfrac{dB}{dt} = " + alpha + "$ T/s.", "$|\\varepsilon| = A\\,(" + alpha + ") = (" + a + ")(" + b + ")(" + alpha + ")$", "$|\\varepsilon| \\approx " + sig(emf) + "$ V"],
+          "$dB/dt$ is the constant slope; $|\\varepsilon| = A\\,dB/dt$.", "V"), "Vol. 2, Ch. 13 · Problem 31"); },
+      // #34 — emf from a time-dependent flux through an N-turn loop (derivative)
+      function () { var N = rpick([20, 40]), a = rpick([2, 3]), b = rpick([4, 5]), t = rpick([1, 2]); var emf = N * (2 * a * t + b);
+        return S(num("The magnetic flux through a $" + N + "$-turn loop varies as $\\Phi(t) = " + a + "t^2 + " + b + "t$ (Wb). What is the magnitude of the induced emf at $t = " + t + ".0$ s?", emf, sig(emf), 0.02,
+          ["Faraday's law: $\\varepsilon = -N\\dfrac{d\\Phi}{dt}$.", "$\\dfrac{d\\Phi}{dt} = 2(" + a + ")t + " + b + "$; at $t = " + t + "$ this is $" + (2 * a * t + b) + "$ Wb/s.", "$|\\varepsilon| = N(2at+b) = " + N + "\\times " + (2 * a * t + b) + " = " + sig(emf) + "$ V"],
+          "Differentiate the flux, plug in $t$, then multiply by $N$.", "V"), "Vol. 2, Ch. 13 · Problem 34"); }
+    ],
+    extreme: [
+      // #45 — rod on rails: emf, current, and dissipated power
+      function () { var B = rpick([0.30, 0.50]), Lcm = rpick([20, 40]), v = rpick([4.0, 6.0]), R = rpick([2.0, 5.0]); var L = Lcm / 100; var emf = B * L * v; var I = emf / R; var P = I * I * R;
+        return S(multi("A rod of length $" + Lcm + "$ cm slides at $" + v + "$ m/s on frictionless, zero-resistance rails in a $" + B + "$-T field. The circuit's only resistance is a $" + R + "\\ \\Omega$ resistor.",
+          [ { label: "Induced emf (V)", type: "numeric", answerValue: emf, answerText: sig(emf), tol: 0.03 },
+            { label: "Current in the circuit (A)", type: "numeric", answerValue: I, answerText: sig(I), tol: 0.03 },
+            { label: "Power dissipated (W)", type: "numeric", answerValue: P, answerText: sig(P), tol: 0.04 } ],
+          ["Motional emf: $\\varepsilon = BLv = (" + B + ")(" + L + ")(" + v + ") = " + sig(emf) + "$ V.", "Current: $I = \\varepsilon/R = " + sig(I) + "$ A.", "Power: $P = I^2 R = " + sig(P) + "$ W."],
+          "$\\varepsilon=BLv$, then $I=\\varepsilon/R$, then $P=I^2R$."), "Vol. 2, Ch. 13 · Problem 45"); },
+      // #56 — angular velocity of a rotating coil from its maximum emf
+      function () { var N = rpick([20, 50]), sidecm = rpick([12, 15]), B = rpick([0.050, 0.080]), emfmax_mV = rpick([30, 50]); var A = Math.pow(sidecm / 100, 2); var w = emfmax_mV * 1e-3 / (N * B * A);
+        return S(num("A flat square coil of $" + N + "$ turns, $" + sidecm + ".0$ cm on a side, rotates in a $" + B + "$-T field. The maximum emf produced is $" + emfmax_mV + ".0$ mV. What is its angular velocity?", w, sig(w), 0.03,
+          ["A rotating coil gives $\\varepsilon_{max} = N B A \\omega$, so $\\omega = \\dfrac{\\varepsilon_{max}}{N B A}$.", "$A = (" + sidecm / 100 + ")^2 = " + sig(A) + "$ m². $\\omega = \\dfrac{" + emfmax_mV + "\\times10^{-3}}{(" + N + ")(" + B + ")(" + sig(A) + ")}$", "$\\omega \\approx " + sig(w) + "$ rad/s"],
+          "Peak emf is $NBA\\omega$; solve for $\\omega$.", "rad/s"), "Vol. 2, Ch. 13 · Problem 56"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
