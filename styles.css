@@ -704,3 +704,10 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .ai-msg.assistant { background: #fff; border: 1px solid var(--line); color: var(--ink); }
 .ai-msg.student { margin-left: auto; background: var(--accent); color: var(--accent-ink); }
 .ai-note { margin: 8px 0 0; font-size: .82rem; }
+.ai-fab { position: fixed; z-index: 45; right: 22px; bottom: 22px; width: 62px; height: 62px; border: 0; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 24px rgba(45,49,66,.25); cursor: pointer; font: 800 16px/1 Inter, sans-serif;
+  transition: transform .16s ease, box-shadow .16s ease; }
+.ai-fab span { display: inline-block; margin-left: 2px; font-size: 22px; vertical-align: -1px; }
+.ai-fab:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 12px 28px rgba(45,49,66,.3); }
+.ai-fab:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 640px) { .ai-fab { right: 16px; bottom: 16px; width: 56px; height: 56px; } }

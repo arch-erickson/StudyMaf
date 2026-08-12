@@ -1180,6 +1180,7 @@ window.App = (function () {
     var ai = document.getElementById("open-ai");
     ai.innerHTML = icon("chat") + "<span>Ask AI</span>";
     ai.onclick = openStudymafAI;
+    document.getElementById("open-ai-fab").onclick = openStudymafAI;
     var c = document.getElementById("open-calc");
     c.innerHTML = icon("calculator") + "<span>Calculator</span>";
     c.onclick = function () { Calculator.open(); };
