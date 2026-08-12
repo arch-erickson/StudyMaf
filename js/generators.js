@@ -363,5 +363,142 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 6: Electric Current & Resistance (Vol.2 Ch.9) =================
+  // Modeled on syllabus problems: 23, 34 (easy), 29, 50, 52 (medium),
+  // 25, 40, 59 (hard), 62 (extreme).
+  register("phys1442-06-current", {
+    easy: [
+      // #23 — number of electrons past a point: N = It/e
+      function () { var I = rpick([2, 4, 6]), t = 3; var N = I * t / E;
+        return S(num("A constant current of $" + I + ".0$ A flows in a wire. How many electrons pass a point in $" + t + ".00$ s?", N, N.toExponential(2), 0.03,
+          ["Charge that flows: $q = It$. Number of electrons: $N = q/e = It/e$.", "$N = \\dfrac{(" + I + ")(" + t + ")}{1.6\\times10^{-19}}$", "$N \\approx " + N.toExponential(2) + "$ electrons"],
+          "Total charge is $It$; divide by $e$ for the electron count.", "electrons"), "Vol. 2, Ch. 9 · Problem 23"); },
+      // #34 — current through a bulb: I = V/R (Ohm's law)
+      function () { var R = rpick([2, 5, 10]), V = 3; var I = V / R;
+        return S(num("What current flows through the bulb of a $" + V + ".00$-V flashlight when its hot resistance is $" + R + ".00\\ \\Omega$?", I, sig(I), 0.02,
+          ["Ohm's law: $I = V/R$.", "$I = \\dfrac{" + V + "}{" + R + "}$", "$I = " + sig(I) + "$ A"],
+          "Use Ohm's law $I = V/R$.", "A"), "Vol. 2, Ch. 9 · Problem 34"); }
+    ],
+    medium: [
+      // #29 — current density of a beam: J = I / (pi r^2)
+      function () { var Ima = rpick([2, 5, 8]), rmm = 1.0; var r = rmm / 1000; var J = Ima * 1e-3 / (Math.PI * r * r);
+        return S(num("An electron beam carries a current of $" + Ima + ".0$ mA within a radius of $" + rmm + ".00$ mm. What is the magnitude of the current density?", J, sig(J), 0.03,
+          ["Current density is current per area: $J = I/A = I/(\\pi r^2)$.", "$J = \\dfrac{" + Ima + "\\times10^{-3}}{\\pi(" + r + ")^2}$", "$J \\approx " + sig(J) + "$ A/m²"],
+          "Divide the current by the cross-sectional area $\\pi r^2$.", "A/m²"), "Vol. 2, Ch. 9 · Problem 29"); },
+      // #50 — current through a resistor across a D cell: I = V/R
+      function () { var R = rpick([10, 20, 50]), V = 1.5; var I = V / R;
+        return S(num("A $" + R + ".0\\ \\Omega$ resistor is connected across a D-cell battery ($" + V + "$ V). What is the current through the resistor?", I, sig(I), 0.02,
+          ["Ohm's law: $I = V/R$.", "$I = \\dfrac{" + V + "}{" + R + "}$", "$I = " + sig(I) + "$ A"],
+          "Use $I = V/R$.", "A"), "Vol. 2, Ch. 9 · Problem 50"); },
+      // #52 — resistance from voltage and measured current: R = V/I
+      function () { var I = rpick([0.25, 0.50, 0.80]), V = 20; var R = V / I;
+        return S(num("A resistor is connected across a $" + V + ".00$-V supply and the measured current is $" + I + "$ A. What is its resistance?", R, sig(R), 0.02,
+          ["Rearrange Ohm's law: $R = V/I$.", "$R = \\dfrac{" + V + "}{" + I + "}$", "$R = " + sig(R) + "\\ \\Omega$"],
+          "Use $R = V/I$.", "Ω"), "Vol. 2, Ch. 9 · Problem 52"); }
+    ],
+    hard: [
+      // #25 — current as the time-derivative of charge: I = dq/dt
+      function () { var a = rpick([2, 3]), b = rpick([4, 5]), t = rpick([2, 3]); var I = 2 * a * t + b;
+        return S(num("The charge passing through a conductor is modeled as $q(t) = " + a + "t^2 + " + b + "t$ (coulombs, $t$ in seconds). What is the current at $t = " + t + ".0$ s?", I, sig(I), 0.02,
+          ["Current is the rate of change of charge: $I = \\dfrac{dq}{dt}$.", "$\\dfrac{dq}{dt} = 2(" + a + ")t + " + b + "$.", "At $t = " + t + "$: $I = 2(" + a + ")(" + t + ") + " + b + " = " + sig(I) + "$ A."],
+          "Differentiate $q(t)$ with respect to time, then plug in $t$.", "A"), "Vol. 2, Ch. 9 · Problem 25"); },
+      // #40 — radius of a rod from its resistance: R = rho L / (pi r^2)
+      function () { var Rm = rpick([1, 2, 5]), Lcm = 30; var R = Rm * 1e-3, L = Lcm / 100, rho = 2.2e-7; var r = Math.sqrt(rho * L / (Math.PI * R));
+        return S(num("A lead rod ($\\rho = 2.2\\times10^{-7}\\ \\Omega\\cdot$m) is $" + Lcm + ".0$ cm long and has a resistance of $" + Rm + ".0$ m$\\Omega$. What is the radius of the rod?", r, sig(r), 0.04,
+          ["Resistance is $R = \\dfrac{\\rho L}{A} = \\dfrac{\\rho L}{\\pi r^2}$, so $r = \\sqrt{\\dfrac{\\rho L}{\\pi R}}$.", "$r = \\sqrt{\\dfrac{(2.2\\times10^{-7})(" + L + ")}{\\pi(" + R + ")}}$", "$r \\approx " + sig(r) + "$ m"],
+          "Solve $R = \\rho L/(\\pi r^2)$ for $r$.", "m"), "Vol. 2, Ch. 9 · Problem 40"); },
+      // #59 — current and voltage from power and resistance
+      function () { var P = rpick([2, 8, 18]), R = rpick([2, 8]); var I = Math.sqrt(P / R); var V = I * R;
+        return S(multi("A resistor of resistance $" + R + ".0\\ \\Omega$ dissipates $" + P + ".0$ W of power.",
+          [ { label: "Current through the resistor (A)", type: "numeric", answerValue: I, answerText: sig(I), tol: 0.03 },
+            { label: "Voltage drop across it (V)", type: "numeric", answerValue: V, answerText: sig(V), tol: 0.03 } ],
+          ["Power and resistance: $P = I^2 R$, so $I = \\sqrt{P/R} = \\sqrt{" + P + "/" + R + "} \\approx " + sig(I) + "$ A.", "Then Ohm's law: $V = IR = (" + sig(I) + ")(" + R + ") \\approx " + sig(V) + "$ V."],
+          "From $P=I^2R$ get $I=\\sqrt{P/R}$; then $V=IR$."), "Vol. 2, Ch. 9 · Problem 59"); }
+    ],
+    extreme: [
+      // #62 — max current from a power rating, and the power at half that current
+      function () { var Pw = rpick([0.25, 0.50, 1.0]), R = rpick([100, 200, 500]); var Imax = Math.sqrt(Pw / R); var Phalf = Pw / 4;
+        return S(multi("A $" + Pw + "$-W resistor of resistance $" + R + "\\ \\Omega$ carries the maximum current it can handle without damage.",
+          [ { label: "Maximum safe current (A)", type: "numeric", answerValue: Imax, answerText: Imax.toExponential(2), tol: 0.03 },
+            { label: "Power dissipated if the current is cut in half (W)", type: "numeric", answerValue: Phalf, answerText: sig(Phalf), tol: 0.03 } ],
+          ["Maximum power sets the current: $P = I^2R$, so $I_{max} = \\sqrt{P/R} = \\sqrt{" + Pw + "/" + R + "} \\approx " + Imax.toExponential(2) + "$ A.", "Power goes as $I^2$, so halving the current gives one-quarter the power: $P' = P/4 = " + sig(Phalf) + "$ W."],
+          "$I_{max}=\\sqrt{P/R}$; since $P\\propto I^2$, half the current means a quarter of the power."), "Vol. 2, Ch. 9 · Problem 62"); }
+    ]
+  });
+
+  // ================= Lesson 7: DC Circuits & Kirchhoff's Rules (Vol.2 Ch.10) =================
+  // Modeled on syllabus problems: 26, 63 (easy), 23, 25 (medium),
+  // 35, 36, 38 (hard), 42, 53 (extreme). Figure-based circuits are modeled with
+  // solvable networks in the same style.
+  register("phys1442-07-dc-circuits", {
+    easy: [
+      // #26 — three resistors in series, then in parallel
+      function () { var a = rpick([2, 4]), b = rpick([3, 6]), c = rpick([6, 12]); var ser = a + b + c; var par = 1 / (1 / a + 1 / b + 1 / c);
+        return S(multi("Three resistors of $" + a + "\\ \\Omega$, $" + b + "\\ \\Omega$, and $" + c + "\\ \\Omega$ are available.",
+          [ { label: "Their resistance in series (Ω)", type: "numeric", answerValue: ser, answerText: sig(ser), tol: 0.02 },
+            { label: "Their resistance in parallel (Ω)", type: "numeric", answerValue: par, answerText: sig(par), tol: 0.03 } ],
+          ["In series, resistances add: $" + a + "+" + b + "+" + c + " = " + ser + "\\ \\Omega$.", "In parallel, reciprocals add: $\\dfrac{1}{R} = \\dfrac{1}{" + a + "}+\\dfrac{1}{" + b + "}+\\dfrac{1}{" + c + "}$, so $R \\approx " + sig(par) + "\\ \\Omega$."],
+          "Series: add them. Parallel: add the reciprocals, then invert."), "Vol. 2, Ch. 10 · Problem 26"); },
+      // #63 — smallest dangerous voltage across a known resistance: V = IR
+      function () { var Ima = rpick([0.30, 0.50, 1.00]), R = rpick([300, 500, 1000]); var V = Ima * 1e-3 * R;
+        return S(num("A current as small as $" + Ima + "$ mA through the heart can be dangerous. If the resistance of the exposed heart is $" + R + "\\ \\Omega$, what is the smallest voltage that poses this danger?", V, sig(V), 0.02,
+          ["Ohm's law relates them: $V = IR$.", "$V = (" + Ima + "\\times10^{-3})(" + R + ")$", "$V = " + sig(V) + "$ V"],
+          "Use $V = IR$ with the current in amps.", "V"), "Vol. 2, Ch. 10 · Problem 63"); }
+    ],
+    medium: [
+      // #23 — internal resistance from the terminal-voltage drop: r = dV/dI
+      function () { var dV = rpick([1.5, 2.0, 3.0]), dI = rpick([4.0, 5.0]); var r = dV / dI;
+        return S(num("A voltage source's terminal voltage drops by $" + dV + "$ V when the current it supplies increases by $" + dI + "$ A. What is its internal resistance?", r, sig(r), 0.02,
+          ["Terminal voltage is $V = \\varepsilon - Ir$, so a change gives $\\Delta V = -r\\,\\Delta I$.", "$r = \\dfrac{\\Delta V}{\\Delta I} = \\dfrac{" + dV + "}{" + dI + "}$", "$r = " + sig(r) + "\\ \\Omega$"],
+          "The terminal voltage sags by $r\\,\\Delta I$, so $r = \\Delta V/\\Delta I$.", "Ω"), "Vol. 2, Ch. 10 · Problem 23"); },
+      // #25 — charging battery: internal resistance and power dissipated inside
+      function () { var emf = 12, Vt = rpick([15, 16, 18]), I = rpick([8, 10]); var r = (Vt - emf) / I; var P = I * I * r;
+        return S(multi("A $" + emf + ".0$-V battery shows a terminal voltage of $" + Vt + ".0$ V while being charged by a current of $" + I + ".0$ A.",
+          [ { label: "Internal resistance (Ω)", type: "numeric", answerValue: r, answerText: sig(r), tol: 0.03 },
+            { label: "Power dissipated inside the battery (W)", type: "numeric", answerValue: P, answerText: sig(P), tol: 0.03 } ],
+          ["While charging, the terminal voltage exceeds the emf: $V = \\varepsilon + Ir$, so $r = \\dfrac{V-\\varepsilon}{I} = \\dfrac{" + (Vt - emf) + "}{" + I + "} \\approx " + sig(r) + "\\ \\Omega$.", "Internal heating: $P = I^2 r = (" + I + ")^2(" + sig(r) + ") \\approx " + sig(P) + "$ W."],
+          "Charging: $V=\\varepsilon+Ir$ ⇒ $r=(V-\\varepsilon)/I$; then $P=I^2r$."), "Vol. 2, Ch. 10 · Problem 25"); }
+    ],
+    hard: [
+      // #35 — battery with R1 in series with (R2 parallel R3): equivalent R and total current
+      function () { var V = rpick([12, 24]), R1 = rpick([2, 4]), R2 = rpick([6, 12]), R3 = rpick([6, 12]); var par = R2 * R3 / (R2 + R3); var Req = R1 + par; var I = V / Req;
+        return S(multi("A $" + V + "$-V battery drives $R_1 = " + R1 + "\\ \\Omega$ in series with a parallel pair $R_2 = " + R2 + "\\ \\Omega$ and $R_3 = " + R3 + "\\ \\Omega$.",
+          [ { label: "Equivalent resistance of the circuit (Ω)", type: "numeric", answerValue: Req, answerText: sig(Req), tol: 0.03 },
+            { label: "Total current from the battery (A)", type: "numeric", answerValue: I, answerText: sig(I), tol: 0.03 } ],
+          ["Parallel pair: $\\dfrac{R_2 R_3}{R_2+R_3} = " + sig(par) + "\\ \\Omega$.", "Add the series resistor: $R_{eq} = " + R1 + " + " + sig(par) + " = " + sig(Req) + "\\ \\Omega$.", "Total current: $I = V/R_{eq} = " + V + "/" + sig(Req) + " \\approx " + sig(I) + "$ A."],
+          "Collapse the parallel pair first, add the series resistor, then $I=V/R_{eq}$."), "Vol. 2, Ch. 10 · Problem 35"); },
+      // #36 — single-loop circuit: current and total power
+      function () { var V = rpick([9, 12, 18]), R1 = rpick([2, 3]), R2 = rpick([4, 6]); var Req = R1 + R2; var I = V / Req; var P = V * I;
+        return S(multi("A $" + V + "$-V battery is connected to $" + R1 + "\\ \\Omega$ and $" + R2 + "\\ \\Omega$ in series.",
+          [ { label: "Current in the loop (A)", type: "numeric", answerValue: I, answerText: sig(I), tol: 0.03 },
+            { label: "Total power supplied by the battery (W)", type: "numeric", answerValue: P, answerText: sig(P), tol: 0.03 } ],
+          ["Series resistance: $R = " + R1 + "+" + R2 + " = " + Req + "\\ \\Omega$; current $I = V/R = " + sig(I) + "$ A.", "Power supplied: $P = VI = (" + V + ")(" + sig(I) + ") \\approx " + sig(P) + "$ W."],
+          "Add series resistors, get $I=V/R$, then $P=VI$."), "Vol. 2, Ch. 10 · Problem 36"); },
+      // #38 — Kirchhoff loop with two opposing emfs in one series loop
+      function () { var V1 = rpick([12, 18]), V2 = rpick([6, 9]), R1 = rpick([2, 3]), R2 = rpick([3, 4]); var I = (V1 - V2) / (R1 + R2);
+        return S(num("In a single loop, a $" + V1 + "$-V battery and a $" + V2 + "$-V battery oppose each other, in series with resistors $" + R1 + "\\ \\Omega$ and $" + R2 + "\\ \\Omega$. Using the loop rule, what current flows?", I, sig(I), 0.03,
+          ["Kirchhoff's loop rule: $V_1 - V_2 - I R_1 - I R_2 = 0$.", "$I = \\dfrac{V_1 - V_2}{R_1 + R_2} = \\dfrac{" + V1 + " - " + V2 + "}{" + R1 + " + " + R2 + "}$", "$I = " + sig(I) + "$ A"],
+          "Opposing emfs subtract; divide the net emf by the total resistance.", "A"), "Vol. 2, Ch. 10 · Problem 38"); }
+    ],
+    extreme: [
+      // #42 — two-loop network with two emfs: solve for the branch currents
+      function () { var V1 = rpick([12, 18]), V2 = rpick([6, 9]), R1 = rpick([2, 4]), R2 = rpick([3, 6]), R3 = rpick([4, 6]);
+        var det = (R1 + R3) * (R2 + R3) - R3 * R3;
+        var I1 = (V1 * (R2 + R3) - V2 * R3) / det, I2 = (V2 * (R1 + R3) - V1 * R3) / det;
+        return S(multi("Two loops share a middle branch. The left loop has a $" + V1 + "$-V battery with $R_1 = " + R1 + "\\ \\Omega$; the right loop a $" + V2 + "$-V battery with $R_2 = " + R2 + "\\ \\Omega$; the shared middle branch is $R_3 = " + R3 + "\\ \\Omega$. Find the branch currents $I_1$ and $I_2$.",
+          [ { label: "Current $I_1$ in the left branch (A)", type: "numeric", answerValue: I1, answerText: sig(I1), tol: 0.05 },
+            { label: "Current $I_2$ in the right branch (A)", type: "numeric", answerValue: I2, answerText: sig(I2), tol: 0.05 } ],
+          ["Junction: $I_3 = I_1 + I_2$. Loop rules: $V_1 = I_1 R_1 + I_3 R_3$ and $V_2 = I_2 R_2 + I_3 R_3$.", "Substitute $I_3$ and solve the 2×2 system.", "$I_1 \\approx " + sig(I1) + "$ A, $I_2 \\approx " + sig(I2) + "$ A (with $I_3 = I_1 + I_2$)."],
+          "Write the junction rule and both loop rules, substitute $I_3=I_1+I_2$, and solve the two equations."), "Vol. 2, Ch. 10 · Problem 42"); },
+      // #53 — RC charging: time constant and capacitor voltage after one time constant
+      function () { var Rk = rpick([1, 2, 5]), Cu = rpick([10, 20, 50]), V = rpick([6, 12]); var R = Rk * 1e3, C = Cu * 1e-6; var tau = R * C; var Vc = V * (1 - Math.exp(-1));
+        return S(multi("A $" + V + ".0$-V emf charges a $" + Cu + "\\ \\mu\\text{F}$ capacitor through a $" + Rk + ".0$ k$\\Omega$ resistor.",
+          [ { label: "RC time constant (s)", type: "numeric", answerValue: tau, answerText: sig(tau), tol: 0.03 },
+            { label: "Capacitor voltage after one time constant (V)", type: "numeric", answerValue: Vc, answerText: sig(Vc), tol: 0.03 } ],
+          ["Time constant: $\\tau = RC = (" + R + ")(" + C + ") = " + sig(tau) + "$ s.", "Charging: $V_C(t) = V(1 - e^{-t/\\tau})$. After one time constant $t=\\tau$: $V_C = V(1 - e^{-1}) \\approx 0.632\\,V = " + sig(Vc) + "$ V."],
+          "$\\tau=RC$; after one $\\tau$ the capacitor reaches $63\\%$ of the emf."), "Vol. 2, Ch. 10 · Problem 53"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
