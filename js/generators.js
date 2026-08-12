@@ -165,5 +165,73 @@ window.Generators = (function () {
     ]
   });
 
+  // ================= Lesson 3: Gauss's Law (Vol.2 Ch.6) =================
+  // Modeled on syllabus problems: 22, 37 (flux basics), 27, 31, 43 (flux/Gauss),
+  // 23, 69 (charge density from flux / conducting pipe), 44, 42 (spheres).
+  register("phys1442-03-gauss", {
+    easy: [
+      // #22 — flux through an area at an angle: Phi = E A cos(theta)
+      function () { var Ef = rpick([20, 30, 50]), A = rpick([0.5, 1.0, 2.0]), th = rpick([0, 30, 60]); var Phi = Ef * A * Math.cos(th * Math.PI / 180);
+        return S(num("A uniform electric field of $" + Ef + "$ N/C passes through a flat area of $" + A + "\\ \\text{m}^2$. The normal to the area makes a $" + th + "^\\circ$ angle with the field. What is the electric flux?", Phi, sig(Phi), 0.03,
+          ["Flux counts only the perpendicular part: $\\Phi = EA\\cos\\theta$.", "$\\Phi = (" + Ef + ")(" + A + ")\\cos " + th + "^\\circ$", "$\\Phi \\approx " + sig(Phi) + "$ N·m²/C"],
+          "Use $\\Phi = EA\\cos\\theta$ with the angle from the normal.", "N·m²/C"), "Vol. 2, Ch. 6 · Problem 22"); },
+      // #37 — net charge enclosed from the flux through a closed surface
+      function () { var Phi = rpick([1, 2, 5, 8]) * 1e5; var Q = EPS0 * Phi;
+        return S(num("The electric flux through a closed spherical surface is $" + (Phi / 1e5) + "\\times10^{5}$ N·m²/C. What is the net charge enclosed?", Q, Q.toExponential(2), 0.03,
+          ["Gauss's law: $\\Phi = Q_{enc}/\\varepsilon_0$, so $Q_{enc} = \\varepsilon_0\\Phi$.", "$Q_{enc} = (8.85\\times10^{-12})(" + (Phi / 1e5) + "\\times10^{5})$", "$Q_{enc} \\approx " + Q.toExponential(2) + "$ C"],
+          "Rearrange Gauss's law: $Q = \\varepsilon_0\\Phi$.", "C"), "Vol. 2, Ch. 6 · Problem 37"); }
+    ],
+    medium: [
+      // #27 — flux of a given field vector through a circle in the xy-plane (only E_z counts)
+      function () { var Ex = rpick([20, 40, 60]), Ez = rpick([50, 100, 150]), r = rpick([1.0, 2.0, 3.0]); var A = Math.PI * r * r; var Phi = Ez * A;
+        return S(num("A uniform field $\\vec{E} = " + Ex + "\\,\\hat{x} + " + Ez + "\\,\\hat{z}$ N/C passes through a circular area of radius $" + r + "$ m lying in the $xy$-plane. What is the electric flux through it?", Phi, sig(Phi), 0.03,
+          ["The area's normal is $\\hat{z}$, so only the $z$-component of $\\vec{E}$ makes flux.", "$\\Phi = E_z\\,(\\pi r^2) = " + Ez + "\\,\\pi(" + r + ")^2$", "$\\Phi \\approx " + sig(Phi) + "$ N·m²/C"],
+          "Only the field component along the area's normal ($\\hat{z}$ here) contributes.", "N·m²/C"), "Vol. 2, Ch. 6 · Problem 27"); },
+      // #31 — net flux through a closed surface enclosing several charges
+      function () { var a = rpick([2, 3, 4]), b = rpick([1, 2]), c = rpick([3, 5]); var Qenc = (a - b + c) * 1e-6; var Phi = Qenc / EPS0;
+        return S(num("A closed surface encloses three point charges: $+" + a + "\\ \\mu\\text{C}$, $-" + b + "\\ \\mu\\text{C}$, and $+" + c + "\\ \\mu\\text{C}$. What is the net electric flux through the surface?", Phi, Phi.toExponential(2), 0.03,
+          ["Only enclosed charge matters: $Q_{enc} = (" + a + " - " + b + " + " + c + ")\\ \\mu\\text{C} = " + (a - b + c) + "\\ \\mu\\text{C}$.", "$\\Phi = Q_{enc}/\\varepsilon_0 = \\dfrac{" + (a - b + c) + "\\times10^{-6}}{8.85\\times10^{-12}}$", "$\\Phi \\approx " + Phi.toExponential(2) + "$ N·m²/C"],
+          "Add the enclosed charges (with signs), then divide by $\\varepsilon_0$.", "N·m²/C"), "Vol. 2, Ch. 6 · Problem 31"); },
+      // #43 — field a distance r from a very long, thin charged wire
+      function () { var lam = rpick([2, 3, 5]), rcm = rpick([2.0, 4.0, 5.0]); var r = rcm / 100; var Ef = 2 * K * lam * 1e-6 / r;
+        return S(num("A very long, thin wire has a uniform linear charge density $\\lambda = " + lam + "\\ \\mu\\text{C/m}$. What is the electric field $" + rcm + "$ cm from the wire?", Ef, Ef.toExponential(2), 0.03,
+          ["A cylindrical Gaussian surface gives $E = \\dfrac{\\lambda}{2\\pi\\varepsilon_0 r} = \\dfrac{2k\\lambda}{r}$.", "$E = \\dfrac{2(8.99\\times10^9)(" + lam + "\\times10^{-6})}{" + r + "}$", "$E \\approx " + Ef.toExponential(2) + "$ N/C"],
+          "Use the line-charge result $E = 2k\\lambda/r$.", "N/C"), "Vol. 2, Ch. 6 · Problem 43"); }
+    ],
+    hard: [
+      // #23 — charge density on a large sheet, from the flux through a parallel area
+      function () { var scm = 5.0, s = scm / 100, A = s * s; var Ef = rpick([200, 400, 800]); var Phi = Ef * A; var sigma = 2 * EPS0 * Ef;
+        return S(num("Close to a large charged sheet, the flux through a square of side $" + scm + "$ cm held parallel to the sheet is $" + sig(Phi) + "$ N·m²/C. What is the surface charge density on the sheet?", sigma, sigma.toExponential(2), 0.04,
+          ["The field is perpendicular to the area, so $E = \\Phi/A = " + sig(Phi) + "/(" + s + ")^2 \\approx " + sig(Ef) + "$ N/C.", "A large sheet gives $E = \\sigma/(2\\varepsilon_0)$, so $\\sigma = 2\\varepsilon_0 E$.", "$\\sigma = 2(8.85\\times10^{-12})(" + sig(Ef) + ") \\approx " + sigma.toExponential(2) + "$ C/m²"],
+          "Get $E$ from $\\Phi=EA$, then use the sheet field $E=\\sigma/2\\varepsilon_0$.", "C/m²"), "Vol. 2, Ch. 6 · Problem 23"); },
+      // #69 — conducting pipe with surface charge density: field inside and outside
+      function () { var sig_uC = rpick([1, 2, 4]), acm = rpick([2, 3]), rcm = rpick([5, 8]); var a = acm / 100, r = rcm / 100;
+        var Eout = sig_uC * 1e-6 * a / (EPS0 * r);
+        return S(multi("A long straight metal pipe of radius $" + acm + "$ cm carries a surface charge density $\\sigma = " + sig_uC + "\\ \\mu\\text{C/m}^2$.",
+          [ { label: "Electric field inside the hollow pipe (N/C)", type: "mc", choices: ["Zero", "$\\sigma/\\varepsilon_0$", "$\\sigma/2\\varepsilon_0$"], answerIndex: 0 },
+            { label: "Electric field $" + rcm + "$ cm from the axis (outside) (N/C)", type: "numeric", answerValue: Eout, answerText: Eout.toExponential(2), tol: 0.04 } ],
+          ["Inside a conductor / hollow charged pipe a Gaussian surface encloses no charge, so $E = 0$.", "Outside, the enclosed charge per length is $\\lambda = \\sigma(2\\pi a)$, giving $E = \\dfrac{\\lambda}{2\\pi\\varepsilon_0 r} = \\dfrac{\\sigma a}{\\varepsilon_0 r}$.", "$E = \\dfrac{(" + sig_uC + "\\times10^{-6})(" + a + ")}{(8.85\\times10^{-12})(" + r + ")} \\approx " + Eout.toExponential(2) + "$ N/C"],
+          "Inside a hollow conductor $E=0$; outside, treat it as a line with $\\lambda=\\sigma\\,2\\pi a$."), "Vol. 2, Ch. 6 · Problem 69"); }
+    ],
+    extreme: [
+      // #44 — uniformly charged solid sphere: field at an inside point and an outside point
+      function () { var Qu = rpick([3, 5, 8]), Rcm = 10, rin = rpick([2, 5]), rout = 20; var Q = Qu * 1e-6, R = Rcm / 100;
+        var Ein = K * Q * (rin / 100) / (R * R * R); var Eout = K * Q / ((rout / 100) * (rout / 100));
+        return S(multi("A charge of $" + Qu + "\\ \\mu\\text{C}$ is spread uniformly through a solid sphere of radius $" + Rcm + "$ cm.",
+          [ { label: "Field at $" + rin + "$ cm from the center (inside) (N/C)", type: "numeric", answerValue: Ein, answerText: Ein.toExponential(2), tol: 0.05 },
+            { label: "Field at $" + rout + "$ cm from the center (outside) (N/C)", type: "numeric", answerValue: Eout, answerText: Eout.toExponential(2), tol: 0.05 } ],
+          ["Inside a uniform sphere only the charge within radius $r$ counts: $E = \\dfrac{kQr}{R^3} \\approx " + Ein.toExponential(2) + "$ N/C.", "Outside it acts like a point charge: $E = \\dfrac{kQ}{r^2} \\approx " + Eout.toExponential(2) + "$ N/C.", "Note the field grows with $r$ inside, then falls as $1/r^2$ outside."],
+          "Inside: $E=kQr/R^3$. Outside: $E=kQ/r^2$ (like a point charge)."), "Vol. 2, Ch. 6 · Problem 44"); },
+      // #42 — spherical charge from a volume density: total charge and the surface field
+      function () { var rho_m = rpick([1.0, 2.0, 4.0]), Rcm = rpick([8, 10]); var rho = rho_m * 1e-3, R = Rcm / 100;
+        var Q = rho * (4 / 3) * Math.PI * R * R * R; var Es = K * Q / (R * R);
+        return S(multi("A sphere of radius $" + Rcm + "$ cm carries a uniform volume charge density $\\rho = " + rho_m + "\\times10^{-3}$ C/m³.",
+          [ { label: "Total charge $Q$ (C)", type: "numeric", answerValue: Q, answerText: Q.toExponential(2), tol: 0.04 },
+            { label: "Field magnitude at the surface (N/C)", type: "numeric", answerValue: Es, answerText: Es.toExponential(2), tol: 0.05 } ],
+          ["Total charge $= $ density $\\times$ volume: $Q = \\rho\\,\\tfrac{4}{3}\\pi R^3 \\approx " + Q.toExponential(2) + "$ C.", "At the surface it acts like a point charge: $E = kQ/R^2 \\approx " + Es.toExponential(2) + "$ N/C.", "This is the largest the field gets; inside it is smaller, outside it falls off."],
+          "Get $Q=\\rho\\cdot\\tfrac43\\pi R^3$, then $E=kQ/R^2$ at the surface."), "Vol. 2, Ch. 6 · Problem 42"); }
+    ]
+  });
+
   return { register: register, has: has, make: make, difficulties: difficulties };
 })();
