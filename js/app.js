@@ -35,7 +35,7 @@ window.App = (function () {
     return id;
   }
   function setTutorContext(next) {
-    tutorContext = Object.assign({ page: String(location.hash || "#/"), learner_id: tutorLearnerId(), lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" }, next || {});
+    tutorContext = Object.assign({ page: String(location.hash || "#/"), learner_id: tutorLearnerId(), class_id: "", lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" }, next || {});
     if (window.__studymafTutor && window.__studymafTutor.updateContext) window.__studymafTutor.updateContext(tutorContext);
   }
   function classTextbooks(cls) {
@@ -344,10 +344,10 @@ window.App = (function () {
   // ====================================================================
   // CLASS PAGE
   // ====================================================================
-  function renderClass(id) {
+  function renderClass(id, focusLesson) {
     var cls = Store.getClass(id);
     if (!cls) { location.hash = "#/"; return; }
-    setTutorContext({ page: "class", class_name: cls.name, textbook: classTextbooks(cls) });
+    setTutorContext({ page: "class", class_id: cls.id, class_name: cls.name, textbook: classTextbooks(cls) });
     appEl.innerHTML = "";
     var page = el("div", "page wrap");
 
@@ -414,6 +414,10 @@ window.App = (function () {
     });
     page.appendChild(list);
     appEl.appendChild(page);
+    if (focusLesson) {
+      var focus = list.querySelector("[data-lesson-id='" + String(focusLesson).replace(/'/g, "\\'") + "'] .lesson-btn");
+      if (focus) setTimeout(function () { focus.click(); focus.scrollIntoView({ behavior: "smooth", block: "center" }); }, 20);
+    }
   }
 
   function buildLessonRow(cls, lid, i) {
@@ -423,7 +427,7 @@ window.App = (function () {
     var grade = Store.lessonGrade(cls.id, lid, target);
     var chapter = (cls.chapters && cls.chapters[lid]) || "";
 
-    var row = el("div", "lesson"); row.setAttribute("aria-expanded", "false");
+    var row = el("div", "lesson"); row.setAttribute("aria-expanded", "false"); row.setAttribute("data-lesson-id", lid);
     var btn = el("button", "lesson-btn");
     btn.appendChild(el("span", "lesson-idx", String(i + 1)));
     var main = el("div", "lesson-main");
@@ -450,7 +454,7 @@ window.App = (function () {
         loaded = true;
         panel.appendChild(el("p", "lp-summary", "Loading…"));
         loadLesson(lid).then(function (lesson) {
-          setTutorContext({ page: "lesson", class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: chapter, textbook: classTextbooks(cls) });
+          setTutorContext({ page: "lesson", class_id: cls.id, class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: chapter, textbook: classTextbooks(cls) });
           panel.innerHTML = "";
           var sum = el("p", "lp-summary", lesson.summary); panel.appendChild(sum); StudyMath.render(sum);
           // difficulty chooser — pick the level of problems you want to practice
@@ -600,9 +604,9 @@ window.App = (function () {
   // ====================================================================
   // Dispatcher: use the generation engine when the lesson has generators,
   // otherwise fall back to the lesson's static problems.
-  function startSession(cls, lid, lesson, difficulty) {
+  function startSession(cls, lid, lesson, difficulty, problemId) {
     if (window.Generators && Generators.has(lid)) return startGenSession(cls, lid, lesson, difficulty);
-    return startStaticSession(cls, lid, lesson, difficulty);
+    return startStaticSession(cls, lid, lesson, difficulty, problemId);
   }
 
   // Which difficulty levels this lesson can offer (generative or static).
@@ -618,7 +622,7 @@ window.App = (function () {
     return out.length ? out : ["medium"];
   }
 
-  function startStaticSession(cls, lid, lesson, difficulty) {
+  function startStaticSession(cls, lid, lesson, difficulty, problemId) {
     var problems = lesson.problems || [];
     if (difficulty && difficulty !== "mixed") {
       var want = difficulty === "extreme" ? "stretch" : difficulty;
@@ -629,6 +633,10 @@ window.App = (function () {
     var prog = Store.lessonProgress(cls.id, lid);
     // resume at first not-done
     for (var k = 0; k < problems.length; k++) { if (!prog.done[problems[k].id]) { idx = k; break; } }
+    if (problemId) {
+      var specific = problems.map(function (p) { return p.id; }).indexOf(problemId);
+      if (specific >= 0) idx = specific;
+    }
 
     var session = el("div", "session");
     var top = el("div", "session-top");
@@ -651,7 +659,7 @@ window.App = (function () {
       fill.style.width = Math.round(idx / problems.length * 100) + "%";
       setStreak(streak);
       var p = problems[idx];
-      setTutorContext({ page: "practice problem", class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: (cls.chapters && cls.chapters[lid]) || "", textbook: classTextbooks(cls), question_id: p.id, question_prompt: p.prompt, hint: p.hint || "", difficulty: p.difficulty || "" });
+      setTutorContext({ page: "practice problem", class_id: cls.id, class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: (cls.chapters && cls.chapters[lid]) || "", textbook: classTextbooks(cls), question_id: p.id, question_prompt: p.prompt, hint: p.hint || "", difficulty: p.difficulty || "" });
       inner.innerHTML = "";
       inner.appendChild(el("span", "q-badge " + p.difficulty, p.difficulty));
       var count = el("p"); count.style.color = "var(--ink-soft)"; count.style.fontSize = ".85rem"; count.style.margin = "0 0 4px";
@@ -776,7 +784,7 @@ window.App = (function () {
     }
 
     function renderInstance(skippable) {
-      setTutorContext({ page: "generated practice problem", class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: (cls.chapters && cls.chapters[lid]) || "", textbook: classTextbooks(cls), question_id: lid + ":slot-" + slot, question_prompt: inst.prompt, hint: inst.hint || "", difficulty: inst.difficulty || "", source: inst.source || "" });
+      setTutorContext({ page: "generated practice problem", class_id: cls.id, class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: (cls.chapters && cls.chapters[lid]) || "", textbook: classTextbooks(cls), question_id: lid + ":slot-" + slot, question_prompt: inst.prompt, hint: inst.hint || "", difficulty: inst.difficulty || "", source: inst.source || "" });
       fill.style.width = Math.round(solved / plan.length * 100) + "%"; setStreak(streak);
       inner.innerHTML = "";
       var badgeRow = el("div", "q-badge-row");
@@ -1199,8 +1207,8 @@ window.App = (function () {
   // ====================================================================
   function route() {
     var hash = location.hash || "#/";
-    var m = hash.match(/^#\/class\/(.+)$/);
-    if (m) renderClass(m[1]);
+    var m = hash.match(/^#\/class\/([^?]+)(?:\?lesson=([^&]+))?$/);
+    if (m) renderClass(m[1], m[2] ? decodeURIComponent(m[2]) : "");
     else if (hash === "#/notebook") renderNotebook();
     else renderDashboard();
   }
@@ -1250,6 +1258,29 @@ window.App = (function () {
   }
 
   // The floating tutor stays beside the work, rather than taking over the screen.
+  function renderTutorText(bubble, text) {
+    // Rho returns plain language plus $...$ / $$...$$ formulas. Setting textContent
+    // first keeps model output safe; StudyMath then uses our vendored KaTeX renderer.
+    bubble.textContent = text;
+    StudyMath.render(bubble);
+  }
+  function openTutorLesson(ctx) {
+    if (!ctx.class_id || !ctx.lesson_id) return;
+    location.hash = "#/class/" + encodeURIComponent(ctx.class_id) + "?lesson=" + encodeURIComponent(ctx.lesson_id);
+  }
+  function openTutorProblem(ctx) {
+    if (!ctx.class_id || !ctx.lesson_id || !ctx.question_id || /:slot-/.test(ctx.question_id)) return openTutorLesson(ctx);
+    var cls = Store.getClass(ctx.class_id); if (!cls) return;
+    loadLesson(ctx.lesson_id).then(function (lesson) { startStaticSession(cls, ctx.lesson_id, lesson, "mixed", ctx.question_id); }).catch(function () { openTutorLesson(ctx); });
+  }
+  function tutorReferences(ctx) {
+    var refs = el("div", "tutor-references");
+    function chip(label, action) { var b = el("button", "tutor-reference", label); b.onclick = action; refs.appendChild(b); }
+    if (ctx.lesson_id) chip("Lesson: " + (ctx.lesson_title || ctx.lesson_id), function () { openTutorLesson(ctx); });
+    if (ctx.chapter) chip("Chapter: " + ctx.chapter, function () { openTutorLesson(ctx); });
+    if (ctx.question_id) chip("Problem: " + ctx.question_id, function () { openTutorProblem(ctx); });
+    return refs.childNodes.length ? refs : null;
+  }
   function tutorAvatar() {
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "-32 -34 64 78"); svg.setAttribute("aria-hidden", "true");
@@ -1291,10 +1322,11 @@ window.App = (function () {
     if (TUTOR_URL && TUTOR_URL.indexOf("REPLACE_WITH") !== 0) { var premium = document.createElement("a"); premium.className = "tutor-premium-link"; premium.href = TUTOR_URL; premium.target = "_blank"; premium.rel = "noopener"; premium.textContent = "Open my Custom GPT ↗"; body.appendChild(premium); }
     dock.appendChild(body);
     function label(ctx) { return ctx.question_id ? "Problem " + ctx.question_id + (ctx.lesson_title ? " · " + ctx.lesson_title : "") : (ctx.lesson_title ? ctx.lesson_title + (ctx.chapter ? " · " + ctx.chapter : "") : "Ready to help"); }
-    function add(role, text, imageData) {
+    function add(role, text, imageData, references) {
       var row = el("div", "tutor-message " + role); if (role === "assistant") row.appendChild(tutorAvatar());
-      row.appendChild(el("div", "tutor-bubble", text));
+      var bubble = el("div", "tutor-bubble"); renderTutorText(bubble, text); row.appendChild(bubble);
       if (imageData) { var thumb = document.createElement("img"); thumb.className = "tutor-image-message"; thumb.src = imageData; thumb.alt = "Uploaded work"; row.appendChild(thumb); }
+      if (role === "assistant" && references) { var related = tutorReferences(references); if (related) row.appendChild(related); }
       if (role === "assistant" && "speechSynthesis" in window) { var speak = el("button", "tutor-speak"); speak.innerHTML = icon("volume"); speak.title = "Read this answer aloud"; speak.onclick = function () { var utterance = new SpeechSynthesisUtterance(text); utterance.rate = .95; window.speechSynthesis.cancel(); window.speechSynthesis.speak(utterance); }; row.appendChild(speak); }
       messages.appendChild(row); messages.scrollTop = messages.scrollHeight;
     }
@@ -1306,7 +1338,7 @@ window.App = (function () {
       var sentImage = state.image; add("student", question, sentImage); input.value = ""; autosize(); clearImage(); send.disabled = true; send.classList.add("thinking");
       fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: question, context: state.context, image_data: sentImage }) })
         .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Tutor unavailable."); return j; }); })
-        .then(function (j) { add("assistant", j.answer || "I could not make an answer. Please try again."); })
+        .then(function (j) { add("assistant", j.answer || "I could not make an answer. Please try again.", "", state.context); })
         .catch(function (e) { add("assistant", "I could not reach the tutor right now. " + e.message); })
         .finally(function () { send.disabled = false; send.classList.remove("thinking"); input.focus(); });
     }

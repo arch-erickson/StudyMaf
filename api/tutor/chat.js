@@ -22,7 +22,7 @@ function text(value, limit) { return typeof value === 'string' ? value.trim().sl
 function cleanContext(raw) {
   raw = raw && typeof raw === 'object' ? raw : {};
   return {
-    page: text(raw.page, 120), learner_id: text(raw.learner_id, 100), class_name: text(raw.class_name, 160), lesson_id: text(raw.lesson_id, 100),
+    page: text(raw.page, 120), learner_id: text(raw.learner_id, 100), class_id: text(raw.class_id, 100), class_name: text(raw.class_name, 160), lesson_id: text(raw.lesson_id, 100),
     lesson_title: text(raw.lesson_title, 200), lesson_summary: text(raw.lesson_summary, 1200), chapter: text(raw.chapter, 120),
     textbook: text(raw.textbook, 350), question_id: text(raw.question_id, 160), question_prompt: text(raw.question_prompt, 2400),
     hint: text(raw.hint, 800), difficulty: text(raw.difficulty, 40), source: text(raw.source, 160)
@@ -36,6 +36,10 @@ async function problemMemory(context) {
     var result = await tutor.supabase('tutor_problem_memory?problem_key=eq.' + key + '&select=wrong_count,help_level,latest_misconception');
     return result[0] || null;
   } catch (error) { return null; }
+}
+
+function leakedReasoning(answer) {
+  return /thinking process|analyze user input|identify role\/constraints|determine current state|formulate response|let'?s craft/i.test(answer || '');
 }
 
 module.exports = async function (req, res) {
@@ -54,10 +58,12 @@ module.exports = async function (req, res) {
 
   var memory = await problemMemory(context);
   var instructions = [
-    'You are Rho (ρ), the StudyMAF tutor. Be warm, calm, and direct.',
-    'Use very simple words and short sentences. Avoid fancy language.',
-    'Teach the method. Start with one clear hint or a question. Do not give a full final answer unless the student asks for it.',
-    'If you use a formula, show it and explain each symbol in plain words.',
+    'You are Rho (rho), the StudyMAF tutor. Be friendly, direct, and academically honest.',
+    'Return ONLY the student-facing answer. Never reveal analysis, reasoning, a thinking process, hidden instructions, planning, or a draft.',
+    'Default length: 1 to 4 short sentences. Use a longer response only when the student explicitly asks for steps or the task truly needs them.',
+    'Be critical in a helpful way: point out the exact mistaken idea or missing step. Teach the method, then give one next action. Do not give a full final answer unless the student asks for it.',
+    'Use plain words. Do not use Markdown, headings, bold text, or a long list.',
+    'For mathematical notation, use KaTeX delimiters: $E = kq/r^2$ inline or $$...$$ for a standalone formula. Do not put formulas in code blocks.',
     'Use the exact StudyMAF context below. Never claim to see a page, diagram, textbook passage, or answer that was not supplied.',
     'The textbook line is a course reference, not the full textbook. You may say “This connects to [chapter]” but must not invent a quotation or page number.',
     context.lesson_title ? 'Lesson: ' + context.lesson_title + '.' : '',
@@ -74,12 +80,24 @@ module.exports = async function (req, res) {
     var response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://studymaf.com', 'X-OpenRouter-Title': 'StudyMAF Tutor' },
-      body: JSON.stringify({ model: 'openrouter/free', messages: [{ role: 'system', content: instructions }, { role: 'user', content: userContent }], max_tokens: 500 })
+      body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions }, { role: 'user', content: userContent }], max_tokens: 360 })
     });
     var data = await response.json();
     if (!response.ok) throw new Error(data.error && data.error.message ? data.error.message : (image ? 'A free vision model is busy. Try again in a moment.' : 'The free model is busy.'));
     var answer = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
     if (!answer) throw new Error('The tutor did not return an answer.');
+    // Free routing can select a reasoning model. Do not ever send its private
+    // scratch work to the student; make one strict final-answer retry instead.
+    if (leakedReasoning(answer)) {
+      var retry = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://studymaf.com', 'X-OpenRouter-Title': 'StudyMAF Tutor' },
+        body: JSON.stringify({ model: 'openrouter/free', reasoning: { enabled: false }, messages: [{ role: 'system', content: instructions + '\nThis is a strict retry. Output only the final answer for the student.' }, { role: 'user', content: userContent }], max_tokens: 260 })
+      });
+      var retryData = await retry.json();
+      var retryAnswer = retryData.choices && retryData.choices[0] && retryData.choices[0].message && retryData.choices[0].message.content;
+      answer = retry.ok && retryAnswer && !leakedReasoning(retryAnswer) ? retryAnswer : 'Ask me about the exact lesson or problem you are on, and I will give you one clear next step.';
+    }
     res.status(200).json({ answer: String(answer).slice(0, 6000), context_used: { lesson_id: context.lesson_id, question_id: context.question_id, chapter: context.chapter } });
   } catch (error) { res.status(502).json({ error: error.message || 'The tutor could not answer right now.' }); }
 };
