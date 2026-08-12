@@ -117,6 +117,33 @@ window.Figures = (function () {
   function sv(tag, attrs) { var e = document.createElementNS(SVGNS, tag); for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]); return e; }
   function txt(x, y, s, fill, size, anchor) { var t = sv("text", { x: x, y: y, fill: fill || C.ink, "font-size": size || 13, "font-family": "Inter, sans-serif", "font-weight": 600, "text-anchor": anchor || "middle", "dominant-baseline": "middle" }); t.textContent = s; return t; }
 
+  // A label whose text contains $…$ is rendered as real math (KaTeX) inside a
+  // <foreignObject>, so diagram equations use proper notation like the rest of the
+  // app. Everything else stays a plain <text>. Math is measured after it mounts and
+  // re-anchored so "middle"/"end"/"start" position exactly like <text> does.
+  function isMath(s) { return typeof s === "string" && s.indexOf("$") >= 0; }
+  function mathText(x, y, s, fill, size, anchor) {
+    size = size || 13; anchor = anchor || "middle"; fill = fill || C.ink;
+    var fo = sv("foreignObject", { x: x, y: y - size, width: 260, height: size * 3, overflow: "visible" });
+    var div = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+    div.style.cssText = "display:inline-block;white-space:nowrap;line-height:1.1;font-size:" + size + "px;color:" + fill + ";font-family:Inter,sans-serif";
+    div.textContent = s;
+    fo.appendChild(div);
+    function place() {
+      if (window.StudyMath) StudyMath.render(div);
+      var w = div.offsetWidth || div.getBoundingClientRect().width || 10;
+      var h = div.offsetHeight || size * 1.3;
+      fo.setAttribute("width", Math.ceil(w) + 2);
+      fo.setAttribute("height", Math.ceil(h) + 2);
+      fo.setAttribute("x", anchor === "end" ? x - w : anchor === "start" ? x : x - w / 2);
+      fo.setAttribute("y", y - h / 2);
+    }
+    // measure once mounted; if KaTeX isn't ready yet, retry on the next frame
+    requestAnimationFrame(function () { place(); if (!div.querySelector(".katex")) requestAnimationFrame(place); });
+    return fo;
+  }
+  function lbl(x, y, s, fill, size, anchor) { return isMath(s) ? mathText(x, y, s, fill, size, anchor) : txt(x, y, s, fill, size, anchor); }
+
   // ---- reusable component library (see DIAGRAM_RULES.md §5) ----
   // Each component draws detailed primitives around a local origin (~±40).
   // Reference from JSON with {kind:"component", name, x, y, scale, color, label}.
@@ -216,7 +243,7 @@ window.Figures = (function () {
           // the objects underneath (override with "solid": true in rare cases).
           var aop = e.solid ? 1 : 0.5;
           container.appendChild(sv("line", { x1: e.x1, y1: e.y1, x2: e.x2, y2: e.y2, stroke: col(cc), "stroke-width": e.width || 2.4, "stroke-linecap": "round", "marker-end": "url(#" + mk + ")", opacity: aop }));
-          if (e.label) { var lb = txt((e.x1 + e.x2) / 2 + (e.dx || 0), (e.y1 + e.y2) / 2 + (e.dy || -8), e.label, col(cc), 12); lb.setAttribute("opacity", aop); container.appendChild(lb); }
+          if (e.label) { var lb = lbl((e.x1 + e.x2) / 2 + (e.dx || 0), (e.y1 + e.y2) / 2 + (e.dy || -8), e.label, col(cc), 12); lb.setAttribute("opacity", aop); container.appendChild(lb); }
           break;
         }
         case "component": {
@@ -229,12 +256,12 @@ window.Figures = (function () {
             gc.appendChild(txt(0, 0, "?" + (e.name || ""), C.soft, 10));
           }
           container.appendChild(gc);
-          if (e.label) container.appendChild(txt(e.x, e.y + (e.labelDy || 48), e.label, col(e.color || "ink"), e.labelSize || 12));
+          if (e.label) container.appendChild(lbl(e.x, e.y + (e.labelDy || 48), e.label, col(e.color || "ink"), e.labelSize || 12));
           break;
         }
         case "circle":
           container.appendChild(sv("circle", { cx: e.x, cy: e.y, r: e.r || 40, fill: "none", stroke: col(e.color || "soft"), "stroke-width": e.width || 1.8, "stroke-dasharray": e.dash ? "6 5" : null }));
-          if (e.label) container.appendChild(txt(e.x, e.y - (e.r || 40) - 8, e.label, col(e.color || "soft"), 12));
+          if (e.label) container.appendChild(lbl(e.x, e.y - (e.r || 40) - 8, e.label, col(e.color || "soft"), 12));
           break;
         case "charge": {
           var r = e.r || 15, cl = e.sign === "-" ? C.neg : C.pos;
@@ -242,19 +269,27 @@ window.Figures = (function () {
           g.appendChild(sv("circle", { cx: e.x, cy: e.y, r: r, fill: cl }));
           g.appendChild(sv("line", { x1: e.x - r * 0.5, y1: e.y, x2: e.x + r * 0.5, y2: e.y, stroke: "#fff", "stroke-width": 2.4, "stroke-linecap": "round" }));
           if (e.sign !== "-") g.appendChild(sv("line", { x1: e.x, y1: e.y - r * 0.5, x2: e.x, y2: e.y + r * 0.5, stroke: "#fff", "stroke-width": 2.4, "stroke-linecap": "round" }));
-          if (e.label) g.appendChild(txt(e.x, e.y + r + 13, e.label, C.ink, 12));
+          if (e.label) g.appendChild(lbl(e.x, e.y + r + 13, e.label, C.ink, 12));
           container.appendChild(g);
+          break;
+        }
+        case "region": {
+          // a translucent material zone (dielectric, medium, region of interest) —
+          // light enough that symbols/labels placed inside stay legible.
+          var rw = e.w || 100, rh = e.h || 60;
+          container.appendChild(sv("rect", { x: e.x, y: e.y, width: rw, height: rh, rx: e.rx != null ? e.rx : 4, fill: e.fill || "rgba(139,147,161,.14)", stroke: col(e.color || "soft"), "stroke-width": e.width || 1.5, "stroke-dasharray": e.dash ? "5 4" : null }));
+          if (e.label) container.appendChild(lbl(e.x + rw / 2, e.y - 10, e.label, col(e.color || "soft"), 12));
           break;
         }
         case "plate": {
           var w = e.w || 12, h = e.h || 90;
           container.appendChild(sv("rect", { x: e.x, y: e.y, width: w, height: h, rx: 2, fill: e.charge === "-" ? C.neg : (e.charge === "+" ? C.pos : C.soft) }));
-          if (e.label) container.appendChild(txt(e.x + w / 2, e.y - 10, e.label, C.ink, 12));
+          if (e.label) container.appendChild(lbl(e.x + w / 2, e.y - 10, e.label, C.ink, 12));
           break;
         }
         case "point":
           container.appendChild(sv("circle", { cx: e.x, cy: e.y, r: e.r || 4, fill: col(e.color || "ink") }));
-          if (e.label) container.appendChild(txt(e.x, e.y - 12, e.label, col(e.color || "ink"), 12));
+          if (e.label) container.appendChild(lbl(e.x, e.y - 12, e.label, col(e.color || "ink"), 12));
           break;
         case "lens": {
           var lh = e.h || 90, cx = e.x, cy = e.y;
@@ -264,7 +299,7 @@ window.Figures = (function () {
           break;
         }
         case "label":
-          container.appendChild(txt(e.x, e.y, e.text, col(e.color), e.size || 13, e.anchor));
+          container.appendChild(lbl(e.x, e.y, e.text, col(e.color), e.size || 13, e.anchor));
           break;
       }
     });

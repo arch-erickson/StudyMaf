@@ -5,3 +5,7 @@ Classes/
 # Local visual asset library (icons + STEM SVGs) — a backend/authoring resource,
 # searched only when generating a class's diagrams. Reproducible via tools/build-visual-library.js.
 studymaf-visual-library/
+
+# Node tooling deps (KaTeX for DGE math rendering, etc.) — declared in package.json,
+# restored with `npm install`. The served site vendors its own copies under /vendor/.
+node_modules/

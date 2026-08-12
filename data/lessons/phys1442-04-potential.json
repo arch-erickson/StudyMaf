@@ -2,16 +2,184 @@
   "title": "Electric Potential",
   "summary": "Electric potential $V$ is potential energy per unit charge, measured in volts. For a point charge $V = k\\dfrac{q}{r}$ (a scalar — no direction). Moving a charge through a potential difference does work $W = q\\,\\Delta V$, and in a uniform field $V = Ed$. (University Physics Vol. 2, Ch. 7.)",
   "concept_sections": [
-    { "level": 1, "heading": "Potential = energy per charge", "explanation": "Electric potential at a point is the potential energy a charge would have there, per coulomb: $V = U/q$. Its unit is the volt (1 V = 1 J/C). Potential difference $\\Delta V$ between two points is what a battery or power supply provides. Unlike field, potential is a scalar — just a number, no direction." },
-    { "level": 2, "heading": "Potential of a point charge", "explanation": "A point charge sets up a potential $V = k\\dfrac{q}{r}$ around it, taking $V = 0$ at infinity. It is positive near positive charge and negative near negative charge. Because it is a scalar, the potential from several charges is a simple sum $V = \\sum k\\dfrac{q_i}{r_i}$ — no components needed." },
-    { "level": 3, "heading": "Work and energy", "explanation": "Moving a charge $q$ through a potential difference $\\Delta V$ takes work $W = q\\,\\Delta V$, and its potential energy changes by $\\Delta U = q\\,\\Delta V$. If only the electric force acts, energy is conserved: a charge speeds up as it moves to lower potential energy, $q\\,\\Delta V = \\tfrac{1}{2}mv^2$." },
-    { "level": 4, "heading": "Field and potential together", "explanation": "Field points 'downhill' in potential: $E = -\\dfrac{dV}{dx}$. In a uniform field the relationship is simply $V = Ed$, where $d$ is the distance along the field. So field (N/C) and potential-per-distance (V/m) are the same unit." },
-    { "level": 5, "heading": "Equipotentials and the electron-volt", "explanation": "An equipotential is a surface of constant $V$; no work is done moving along it, and field lines cross it at right angles. Every point of a conductor in equilibrium is at the same potential. A handy energy unit is the electron-volt: $1\\ \\text{eV} = 1.6\\times10^{-19}$ J, the energy an electron gains crossing 1 volt." }
+    {
+      "level": 1,
+      "heading": "Potential = energy per charge",
+      "explanation": "Electric potential at a point is the potential energy a charge would have there, per coulomb: $V = U/q$. Its unit is the volt (1 V = 1 J/C). Potential difference $\\Delta V$ between two points is what a battery or power supply provides. Unlike field, potential is a scalar — just a number, no direction.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Potential is like height: the energy each coulomb carries, $V = U/q$ (1 V = 1 J/C).",
+        "params": {
+          "viewBox": [340, 200],
+          "elements": [
+            { "kind": "line", "x1": 55, "y1": 55, "x2": 285, "y2": 150, "color": "ink", "width": 3 },
+            { "kind": "charge", "x": 62, "y": 48, "sign": "+" },
+            { "kind": "vector", "x1": 98, "y1": 74, "x2": 225, "y2": 124, "color": "velocity" },
+            { "kind": "label", "x": 62, "y": 26, "text": "high $V$", "color": "ink" },
+            { "kind": "label", "x": 270, "y": 138, "text": "low $V$", "color": "soft" },
+            { "kind": "label", "x": 170, "y": 190, "text": "$V = U/q$", "color": "ink" }
+          ]
+        }
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Potential of a point charge",
+      "explanation": "A point charge sets up a potential $V = k\\dfrac{q}{r}$ around it, taking $V = 0$ at infinity. It is positive near positive charge and negative near negative charge. Because it is a scalar, the potential from several charges is a simple sum $V = \\sum k\\dfrac{q_i}{r_i}$ — no components needed.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Concentric equipotentials around a point charge; $V$ falls off as $1/r$ (V → 0 at ∞).",
+        "params": {
+          "viewBox": [340, 205],
+          "elements": [
+            { "kind": "circle", "x": 130, "y": 92, "r": 32, "color": "soft", "dash": true },
+            { "kind": "circle", "x": 130, "y": 92, "r": 60, "color": "soft", "dash": true },
+            { "kind": "circle", "x": 130, "y": 92, "r": 88, "color": "soft", "dash": true },
+            { "kind": "line", "x1": 130, "y1": 92, "x2": 218, "y2": 92, "color": "measure", "dash": true },
+            { "kind": "label", "x": 176, "y": 84, "text": "$r$", "color": "measure" },
+            { "kind": "charge", "x": 130, "y": 92, "sign": "+", "label": "$q$" },
+            { "kind": "label", "x": 170, "y": 196, "text": "$V = kq/r$", "color": "ink" }
+          ]
+        }
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Work and energy",
+      "explanation": "Moving a charge $q$ through a potential difference $\\Delta V$ takes work $W = q\\,\\Delta V$, and its potential energy changes by $\\Delta U = q\\,\\Delta V$. If only the electric force acts, energy is conserved: a charge speeds up as it moves to lower potential energy, $q\\,\\Delta V = \\tfrac{1}{2}mv^2$.",
+      "figure": {
+        "type": "schematic",
+        "caption": "A charge accelerated across a potential difference gains kinetic energy: $W = q\\,\\Delta V = \\tfrac12 mv^2$.",
+        "params": {
+          "viewBox": [340, 185],
+          "elements": [
+            { "kind": "plate", "x": 55, "y": 45, "w": 12, "h": 105, "charge": "+", "label": "high $V$" },
+            { "kind": "plate", "x": 273, "y": 45, "w": 12, "h": 105, "charge": "-", "label": "low $V$" },
+            { "kind": "charge", "x": 130, "y": 98, "sign": "+", "label": "$q$" },
+            { "kind": "vector", "x1": 150, "y1": 98, "x2": 248, "y2": 98, "color": "velocity", "label": "$v$" },
+            { "kind": "label", "x": 170, "y": 176, "text": "$W = q\\,\\Delta V = \\tfrac12 mv^2$", "color": "ink" }
+          ]
+        }
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Field and potential together",
+      "explanation": "Field points 'downhill' in potential: $E = -\\dfrac{dV}{dx}$. In a uniform field the relationship is simply $V = Ed$, where $d$ is the distance along the field. So field (N/C) and potential-per-distance (V/m) are the same unit.",
+      "figure": {
+        "type": "schematic",
+        "caption": "In a uniform field, equipotentials (dashed) are perpendicular to $\\vec E$, and $V = Ed$.",
+        "params": {
+          "viewBox": [340, 196],
+          "elements": [
+            { "kind": "plate", "x": 55, "y": 40, "w": 12, "h": 110, "charge": "+" },
+            { "kind": "plate", "x": 273, "y": 40, "w": 12, "h": 110, "charge": "-" },
+            { "kind": "line", "x1": 125, "y1": 48, "x2": 125, "y2": 138, "color": "soft", "dash": true },
+            { "kind": "line", "x1": 170, "y1": 48, "x2": 170, "y2": 138, "color": "soft", "dash": true },
+            { "kind": "line", "x1": 215, "y1": 48, "x2": 215, "y2": 138, "color": "soft", "dash": true },
+            { "kind": "vector", "x1": 80, "y1": 63, "x2": 260, "y2": 63, "color": "field" },
+            { "kind": "vector", "x1": 80, "y1": 95, "x2": 260, "y2": 95, "color": "field" },
+            { "kind": "vector", "x1": 80, "y1": 127, "x2": 260, "y2": 127, "color": "field" },
+            { "kind": "label", "x": 104, "y": 54, "text": "$\\vec E$", "color": "field" },
+            { "kind": "line", "x1": 67, "y1": 156, "x2": 273, "y2": 156, "color": "measure" },
+            { "kind": "label", "x": 170, "y": 147, "text": "$d$", "color": "measure" },
+            { "kind": "label", "x": 170, "y": 183, "text": "$V = Ed$", "color": "ink" }
+          ]
+        }
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Equipotentials and the electron-volt",
+      "explanation": "An equipotential is a surface of constant $V$; no work is done moving along it, and field lines cross it at right angles. Every point of a conductor in equilibrium is at the same potential. A handy energy unit is the electron-volt: $1\\ \\text{eV} = 1.6\\times10^{-19}$ J, the energy an electron gains crossing 1 volt.",
+      "figure": {
+        "type": "schematic",
+        "caption": "Field lines cross equipotential surfaces (dashed) at right angles.",
+        "params": {
+          "viewBox": [340, 205],
+          "elements": [
+            { "kind": "circle", "x": 170, "y": 90, "r": 40, "color": "soft", "dash": true },
+            { "kind": "circle", "x": 170, "y": 90, "r": 72, "color": "soft", "dash": true },
+            { "kind": "vector", "x1": 170, "y1": 76, "x2": 170, "y2": 8, "color": "field" },
+            { "kind": "vector", "x1": 170, "y1": 104, "x2": 170, "y2": 172, "color": "field" },
+            { "kind": "vector", "x1": 156, "y1": 90, "x2": 80, "y2": 90, "color": "field" },
+            { "kind": "vector", "x1": 184, "y1": 90, "x2": 260, "y2": 90, "color": "field", "label": "$\\vec E$" },
+            { "kind": "charge", "x": 170, "y": 90, "sign": "+" },
+            { "kind": "label", "x": 170, "y": 196, "text": "$1\\ \\text{eV} = 1.6\\times10^{-19}\\ \\text{J}$", "color": "soft" }
+          ]
+        }
+      }
+    }
   ],
   "real_world_examples": [
-    { "title": "A 12-volt car battery", "scenario": "A battery is labeled 12 V.", "how_the_math_applies": "It maintains a potential difference $\\Delta V = 12$ V; each coulomb of charge it pushes around the circuit gains $W = q\\,\\Delta V$ of energy to run lights and motors." },
-    { "title": "Defibrillator", "scenario": "Paddles deliver a controlled shock to the heart.", "how_the_math_applies": "A capacitor charged to a high potential dumps energy $U=qV$ through the chest, timed to reset the heart's rhythm." },
-    { "title": "Old TV / oscilloscope tube", "scenario": "Electrons are accelerated toward a screen.", "how_the_math_applies": "A potential difference does work $qV = \\tfrac12 mv^2$, giving electrons a precise speed before they strike the phosphor." }
+    {
+      "title": "A 12-volt car battery",
+      "scenario": "A battery is labeled 12 V.",
+      "how_the_math_applies": "It maintains a potential difference $\\Delta V = 12$ V; each coulomb of charge it pushes around the circuit gains $W = q\\,\\Delta V$ of energy to run lights and motors.",
+      "figure": {
+        "type": "schematic",
+        "caption": "The battery holds a 12 V difference; each coulomb gains $W = q\\,\\Delta V$ driving the lamp.",
+        "params": {
+          "viewBox": [340, 180],
+          "elements": [
+            { "kind": "line", "x1": 70, "y1": 45, "x2": 270, "y2": 45, "color": "ink" },
+            { "kind": "line", "x1": 270, "y1": 45, "x2": 270, "y2": 78, "color": "ink" },
+            { "kind": "line", "x1": 270, "y1": 106, "x2": 270, "y2": 140, "color": "ink" },
+            { "kind": "line", "x1": 70, "y1": 140, "x2": 270, "y2": 140, "color": "ink" },
+            { "kind": "line", "x1": 70, "y1": 45, "x2": 70, "y2": 80, "color": "ink" },
+            { "kind": "line", "x1": 70, "y1": 96, "x2": 70, "y2": 140, "color": "ink" },
+            { "kind": "line", "x1": 56, "y1": 80, "x2": 84, "y2": 80, "color": "ink", "width": 2 },
+            { "kind": "line", "x1": 62, "y1": 96, "x2": 78, "y2": 96, "color": "ink", "width": 5 },
+            { "kind": "label", "x": 48, "y": 88, "text": "$12\\ \\text{V}$", "color": "ink", "anchor": "end" },
+            { "kind": "circle", "x": 270, "y": 92, "r": 14, "color": "velocity" },
+            { "kind": "vector", "x1": 120, "y1": 45, "x2": 178, "y2": 45, "color": "current", "label": "$I$" },
+            { "kind": "label", "x": 170, "y": 168, "text": "each coulomb gains $W = q\\,\\Delta V$", "color": "soft" }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Defibrillator",
+      "scenario": "Paddles deliver a controlled shock to the heart.",
+      "how_the_math_applies": "A capacitor charged to a high potential dumps energy $U=qV$ through the chest, timed to reset the heart's rhythm.",
+      "figure": {
+        "type": "schematic",
+        "caption": "A charged capacitor releases energy $U = qV$ through the chest to reset the heartbeat.",
+        "params": {
+          "viewBox": [340, 175],
+          "elements": [
+            { "kind": "plate", "x": 45, "y": 65, "w": 16, "h": 60, "label": "paddle" },
+            { "kind": "plate", "x": 279, "y": 65, "w": 16, "h": 60, "label": "paddle" },
+            { "kind": "circle", "x": 170, "y": 95, "r": 24, "color": "pos", "label": "heart" },
+            { "kind": "vector", "x1": 63, "y1": 95, "x2": 142, "y2": 95, "color": "current", "label": "shock" },
+            { "kind": "vector", "x1": 277, "y1": 95, "x2": 198, "y2": 95, "color": "current" },
+            { "kind": "label", "x": 170, "y": 162, "text": "capacitor dumps $U = qV$", "color": "ink" }
+          ]
+        }
+      }
+    },
+    {
+      "title": "Old TV / oscilloscope tube",
+      "scenario": "Electrons are accelerated toward a screen.",
+      "how_the_math_applies": "A potential difference does work $qV = \\tfrac12 mv^2$, giving electrons a precise speed before they strike the phosphor.",
+      "figure": {
+        "type": "schematic",
+        "caption": "A potential difference does work $qV = \\tfrac12 mv^2$, setting the electron's speed before it hits the screen.",
+        "params": {
+          "viewBox": [340, 180],
+          "elements": [
+            { "kind": "plate", "x": 40, "y": 55, "w": 10, "h": 70, "charge": "-", "label": "cathode" },
+            { "kind": "plate", "x": 150, "y": 55, "w": 10, "h": 70, "charge": "+", "label": "anode" },
+            { "kind": "charge", "x": 95, "y": 90, "sign": "-", "label": "$e^-$" },
+            { "kind": "vector", "x1": 115, "y1": 90, "x2": 268, "y2": 90, "color": "velocity", "label": "$v$" },
+            { "kind": "line", "x1": 300, "y1": 45, "x2": 300, "y2": 150, "color": "soft", "width": 5 },
+            { "kind": "label", "x": 300, "y": 36, "text": "screen", "color": "soft" },
+            { "kind": "point", "x": 300, "y": 90, "r": 5, "color": "accent" },
+            { "kind": "label", "x": 150, "y": 168, "text": "$qV = \\tfrac12 mv^2$", "color": "ink" }
+          ]
+        }
+      }
+    }
   ],
   "videos": {
     "concept_query": "electric potential and voltage explained difference from field",

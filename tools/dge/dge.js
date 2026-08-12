@@ -26,6 +26,19 @@ const esc = (s) => String(s == null ? "" : s).replace(/[&<>]/g, c => ({ "&": "&a
 const idColor = (c) => "c" + String(c).replace(/[^a-z0-9]/gi, "");
 const num = (n) => (Math.round(n * 100) / 100);
 
+// Equations/formulas render as real math via KaTeX → MathML, which is native to
+// the browser and needs no external CSS or fonts, so the composed SVG stays fully
+// self-contained. If KaTeX isn't installed we fall back to italic-serif text.
+let _katex = null; try { _katex = require("katex"); } catch (e) { /* optional */ }
+function mathML(latex) {
+  if (!_katex) return null;
+  let html; try { html = _katex.renderToString(String(latex), { output: "mathml", throwOnError: false }); } catch (e) { return null; }
+  const m = html.match(/<math[\s\S]*?<\/math>/);
+  return m ? m[0] : null;
+}
+// rough width of a LaTeX string once typeset (control words count as one glyph)
+function mathWidth(latex, size) { return Math.max(size, String(latex).replace(/\\[a-zA-Z]+/g, "x").replace(/[{}$^_]/g, "").length * size * 0.6); }
+
 class Diagram {
   constructor(opts) {
     opts = opts || {};
@@ -116,14 +129,25 @@ class Diagram {
   }
   text(str, x, y, opts) {
     opts = opts || {}; const size = Math.max(12, opts.size || 13), anchor = opts.anchor || "start", color = opts.color || ANNOT.label;
+    // real math (KaTeX → MathML) when requested and available
+    const mm = opts.math ? mathML(str) : null;
     let bx = x, by = y;
+    const boxOf = () => mm
+      ? G.box(anchor === "middle" ? x - mathWidth(str, size) / 2 : anchor === "end" ? x - mathWidth(str, size) : x, y - size, mathWidth(str, size), size * 1.3)
+      : G.textBox(str, x, y, size, anchor);
     if (opts.avoid) {
-      const tb = G.textBox(str, x, y, size, anchor);
+      const tb = boxOf();
       const spot = G.placeNear(tb, tb.w, tb.h, this.boxes, this.canvas, 5);
       if (spot) { bx = anchor === "middle" ? spot.x + spot.w / 2 : anchor === "end" ? spot.x + spot.w : spot.x; by = spot.y + spot.h * 0.78; this.boxes.push(G.inflate(spot, 1)); }
-    } else this.boxes.push(G.textBox(str, x, y, size, anchor));
-    const style = opts.math ? ' font-family="Georgia, serif" font-style="italic"' : ' font-family="Inter, system-ui, sans-serif"';
-    this.labels.push(`<text x="${num(bx)}" y="${num(by)}" fill="${color}" font-size="${size}"${style}${opts.weight ? ` font-weight="${opts.weight}"` : ""} text-anchor="${anchor}">${esc(str)}</text>`);
+    } else this.boxes.push(boxOf());
+    if (mm) {
+      const w = mathWidth(str, size);
+      const fx = anchor === "middle" ? bx - w / 2 : anchor === "end" ? bx - w : bx;
+      this.labels.push(`<foreignObject x="${num(fx)}" y="${num(by - size)}" width="${num(w + 6)}" height="${num(size * 1.8)}" overflow="visible"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:${size}px;color:${color};line-height:1.1;white-space:nowrap">${mm}</div></foreignObject>`);
+    } else {
+      const style = opts.math ? ' font-family="Georgia, serif" font-style="italic"' : ' font-family="Inter, system-ui, sans-serif"';
+      this.labels.push(`<text x="${num(bx)}" y="${num(by)}" fill="${color}" font-size="${size}"${style}${opts.weight ? ` font-weight="${opts.weight}"` : ""} text-anchor="${anchor}">${esc(str)}</text>`);
+    }
   }
   dimension(from, to, opts) {
     opts = opts || {}; const c = ANNOT.dimension, off = opts.offset || 0;

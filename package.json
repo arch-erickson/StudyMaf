@@ -1,0 +1,14 @@
+{
+  "name": "studymaf-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend/authoring tooling for StudyMAF (corpus builder, visual library, Diagram Generation Engine). Not part of the served static site.",
+  "scripts": {
+    "build:corpus": "node tools/build-class-corpus.js",
+    "build:visual-library": "node tools/build-visual-library.js",
+    "build:dge-examples": "node tools/build-dge-examples.js"
+  },
+  "dependencies": {
+    "katex": "^0.16.11"
+  }
+}
