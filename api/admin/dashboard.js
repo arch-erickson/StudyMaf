@@ -42,12 +42,46 @@ function summarize(events, progressRows) {
   return users;
 }
 
+function hourlySeries(events) {
+  var rows = {};
+  (events || []).forEach(function (event) {
+    var stamp = new Date(event.occurred_at || Date.now());
+    if (isNaN(stamp.getTime())) return;
+    var hour = new Date(Date.UTC(stamp.getUTCFullYear(), stamp.getUTCMonth(), stamp.getUTCDate(), stamp.getUTCHours())).toISOString();
+    if (!rows[hour]) rows[hour] = { at: hour, study_seconds: 0, calculator_uses: 0, modes: { learn: 0, practice: 0, test: 0, study: 0 }, delivery: { online: 0, offline: 0 } };
+    var row = rows[hour], seconds = number(event.duration_seconds), mode = event.study_mode || 'study', delivery = event.delivery_mode || 'offline';
+    if (event.event_type === 'calculator_use') { row.calculator_uses++; return; }
+    row.study_seconds += seconds;
+    row.modes[mode] = number(row.modes[mode]) + seconds;
+    row.delivery[delivery] = number(row.delivery[delivery]) + seconds;
+  });
+  return Object.keys(rows).sort().map(function (key) { return rows[key]; });
+}
+
 module.exports = async function handler(req, res) {
   if (!auth.cors(req, res)) return;
-  if (req.method !== 'GET') return auth.json(res, 405, { error: 'Method not allowed.' });
   try {
     var account = await auth.requireRole(req, res, ['admin']);
     if (!account) return;
+    if (req.method === 'DELETE') {
+      var userId = auth.text((req.body || {}).user_id, 80);
+      if (!userId) return auth.json(res, 400, { error: 'Choose an account to remove.' });
+      if (userId === account.user.id) return auth.json(res, 400, { error: 'You cannot remove the administrator account you are using.' });
+      var found = await auth.db('profiles?id=eq.' + encodeURIComponent(userId) + '&select=id,email');
+      if (!found || !found[0]) return auth.json(res, 404, { error: 'This account no longer exists.' });
+      var owned = await auth.db('class_sections?professor_id=eq.' + encodeURIComponent(userId) + '&select=id&limit=1');
+      if (owned && owned.length) return auth.json(res, 409, { error: 'Move or remove this professor’s classes before removing their account.' });
+      var targetRoles = await auth.db('user_roles?user_id=eq.' + encodeURIComponent(userId) + '&select=role');
+      if (targetRoles && targetRoles[0] && targetRoles[0].role === 'admin') {
+        var admins = await auth.db('user_roles?role=eq.admin&select=user_id');
+        if (!admins || admins.length < 2) return auth.json(res, 409, { error: 'StudyMAF must keep at least one administrator account.' });
+      }
+      await auth.db('class_enrollments?student_id=eq.' + encodeURIComponent(userId), { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+      await auth.db('account_role_invites?email=eq.' + encodeURIComponent(found[0].email), { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+      await auth.deleteAuthUser(userId);
+      return auth.json(res, 200, { removed: { id: userId, email: found[0].email } });
+    }
+    if (req.method !== 'GET') return auth.json(res, 405, { error: 'Method not allowed.' });
     var results = await Promise.all([
       auth.db('profiles?select=id,email,display_name,last_seen_at,created_at&order=created_at.desc&limit=500'),
       auth.db('user_roles?select=user_id,role,assigned_at'),
@@ -58,6 +92,6 @@ module.exports = async function handler(req, res) {
       auth.db('account_activity_events?select=user_id,class_section_id,class_key,class_name,course_code,lesson_id,event_type,study_mode,delivery_mode,duration_seconds,occurred_at&order=occurred_at.desc&limit=20000'),
       auth.db('account_progress?select=user_id,state,updated_at')
     ]);
-    auth.json(res, 200, { users: results[0] || [], roles: results[1] || [], courses: results[2] || [], classes: results[3] || [], enrollments: results[4] || [], professor_invites: results[5] || [], analytics: { generated_at: new Date().toISOString(), users: summarize(results[6], results[7]) } });
+    auth.json(res, 200, { users: results[0] || [], roles: results[1] || [], courses: results[2] || [], classes: results[3] || [], enrollments: results[4] || [], professor_invites: results[5] || [], analytics: { generated_at: new Date().toISOString(), users: summarize(results[6], results[7]), hourly: hourlySeries(results[6]) } });
   } catch (error) { auth.json(res, 500, { error: error.message || 'Could not load the admin dashboard.' }); }
 };

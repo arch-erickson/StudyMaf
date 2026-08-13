@@ -46,6 +46,18 @@ async function db(path, options) {
   return data;
 }
 
+async function deleteAuthUser(userId) {
+  var c = config();
+  var response = await fetch(c.url + '/auth/v1/admin/users/' + encodeURIComponent(userId), {
+    method: 'DELETE',
+    headers: { apikey: c.key, Authorization: 'Bearer ' + c.key }
+  });
+  var raw = await response.text(), data = null;
+  try { data = raw ? JSON.parse(raw) : null; } catch (error) {}
+  if (!response.ok) throw new Error(data && (data.msg || data.message) || 'Could not remove this account.');
+  return data;
+}
+
 async function ensureProfile(user) {
   var name = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
   var body = { id: user.id, email: String(user.email || '').toLowerCase(), last_seen_at: new Date().toISOString() };
@@ -83,4 +95,4 @@ async function ownedSection(sectionId, professorId) {
   return rows && rows[0] || null;
 }
 
-module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, authenticated: authenticated, requireRole: requireRole, ownedSection: ownedSection };
+module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, authenticated: authenticated, requireRole: requireRole, ownedSection: ownedSection };
