@@ -1,11 +1,12 @@
 var recent = new Map();
 var tutor = require('../_lib/tutor');
+var auth = require('../_lib/studymaf-auth');
 
 function allowed(req, res) {
   var origin = req.headers.origin || '';
   var ok = /^https:\/\/(www\.)?studymaf\.com$/.test(origin) || /^https:\/\/localhost(?::\d+)?$/.test(origin);
   if (ok) res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Vary', 'Origin'); res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Vary', 'Origin'); res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   return !origin || ok;
 }
 function safe(value, length) { return typeof value === 'string' ? value.trim().slice(0, length) : ''; }
@@ -20,7 +21,9 @@ module.exports = async function (req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Use POST.' });
   if (!rateOk(req)) return res.status(429).json({ error: 'Please wait a moment.' });
   try {
-    var body = req.body || {}, context = body.context || {}, learner = safe(context.learner_id, 100), lesson = safe(context.lesson_id, 100), question = safe(context.question_id, 160);
+    var account = await auth.authenticated(req, res);
+    if (!account) return;
+    var body = req.body || {}, context = body.context || {}, learner = account.user.id, lesson = safe(context.lesson_id, 100), question = safe(context.question_id, 160);
     var outcome = body.outcome === 'correct' ? 'correct' : body.outcome === 'wrong' ? 'wrong' : '';
     if (!learner || !lesson || !question || !outcome) return res.status(400).json({ error: 'Missing attempt context.' });
     var problemKey = learner + ':' + lesson + ':' + question;

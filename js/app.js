@@ -30,6 +30,8 @@ window.App = (function () {
   // exact lesson/problem text; the tutor does not have to guess from the URL.
   var tutorContext = { page: "dashboard", lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" };
   function tutorLearnerId() {
+    var signedIn = window.StudyMAFAccount;
+    if (signedIn && signedIn.user && signedIn.user.id) return signedIn.user.id;
     var key = "studymaf-tutor-learner", id = localStorage.getItem(key);
     if (!id) { id = "learner-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10); localStorage.setItem(key, id); }
     return id;
@@ -44,7 +46,9 @@ window.App = (function () {
   }
   function recordTutorAttempt(outcome) {
     if (!tutorContext.lesson_id || !tutorContext.question_id) return;
-    fetch(TUTOR_API_URL.replace(/\/chat$/, "/track"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ context: tutorContext, outcome: outcome }) }).catch(function () {});
+    var session = window.StudyMAFSession;
+    if (!session || !session.access_token) return;
+    fetch(TUTOR_API_URL.replace(/\/chat$/, "/track"), { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + session.access_token }, body: JSON.stringify({ context: tutorContext, outcome: outcome }) }).catch(function () {});
   }
 
   // ---------- helpers ----------
@@ -2177,7 +2181,7 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=3").then(function (mod) {
+    import("./account-ui.js?v=5").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();

@@ -8,9 +8,9 @@ let account = null;
 const listeners = [];
 
 function configured() { return /^https:\/\//.test(config.supabaseUrl || '') && /^sb_publishable_/.test(config.publishableKey || ''); }
-function notify() { listeners.slice().forEach(function (fn) { try { fn(account); } catch (e) {} }); }
-function save(next) { session = next || null; try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch (e) {} }
-function clear() { session = null; account = null; try { localStorage.removeItem(SESSION_KEY); } catch (e) {} notify(); }
+function notify() { window.StudyMAFAccount = account; window.StudyMAFSession = session; listeners.slice().forEach(function (fn) { try { fn(account); } catch (e) {} }); }
+function save(next) { session = next || null; window.StudyMAFSession = session; try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch (e) {} }
+function clear() { session = null; account = null; window.StudyMAFAccount = null; window.StudyMAFSession = null; try { localStorage.removeItem(SESSION_KEY); } catch (e) {} notify(); }
 function stored() { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch (e) { return null; } }
 
 async function request(path, options) {

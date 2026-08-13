@@ -47,7 +47,10 @@ async function db(path, options) {
 }
 
 async function ensureProfile(user) {
-  var body = { id: user.id, email: String(user.email || '').toLowerCase(), display_name: (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || null, last_seen_at: new Date().toISOString() };
+  var name = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
+  var body = { id: user.id, email: String(user.email || '').toLowerCase(), last_seen_at: new Date().toISOString() };
+  // Do not overwrite a name chosen in StudyMAF settings with an empty OAuth/OTP profile.
+  if (name) body.display_name = name;
   await db('profiles?on_conflict=id', { method: 'POST', headers: { Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify(body) });
   var roles = await db('user_roles?user_id=eq.' + encodeURIComponent(user.id) + '&select=role');
   if (!roles || !roles.length) {
