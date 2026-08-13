@@ -1,6 +1,40 @@
 {
   "title": "Capacitance & Capacitors",
   "summary": "A capacitor stores charge and energy in an electric field. Its capacitance is $C = Q/V$ (farads). For parallel plates $C = \\dfrac{\\varepsilon_0 A}{d}$, energy stored is $U = \\tfrac12 C V^2$, a dielectric multiplies $C$ by $\\kappa$, and capacitors combine in series and parallel. (University Physics Vol. 2, Ch. 8.)",
+  "glossary": {
+    "capacitor": {
+      "plain": "A device that stores charge and energy using two conductors separated by an insulator.",
+      "in_class": "Holds $\\pm Q$ on its plates; store energy $U = \\tfrac12 CV^2$."
+    },
+    "capacitance": {
+      "plain": "How much charge a capacitor holds for each volt applied.",
+      "in_class": "$C = Q/V$, measured in farads. Set by geometry, not by how much charge you add."
+    },
+    "farad": {
+      "plain": "The unit of capacitance — one coulomb of charge per volt.",
+      "in_class": "$1\\text{ F} = 1\\text{ C/V}$. A farad is huge, so real capacitors are µF, nF, or pF."
+    },
+    "dielectric": {
+      "plain": "An insulating material placed between a capacitor's plates.",
+      "in_class": "Its molecules partly cancel the field, raising capacitance to $C = \\kappa\\varepsilon_0 A/d$."
+    },
+    "dielectric constant": {
+      "plain": "A number saying how much a material boosts capacitance.",
+      "in_class": "$\\kappa$: paper $\\approx 3$, water $\\approx 80$. It multiplies the vacuum capacitance."
+    },
+    "parallel-plate": {
+      "plain": "The simplest capacitor: two flat plates facing each other.",
+      "in_class": "$C = \\dfrac{\\varepsilon_0 A}{d}$ — bigger area or smaller gap stores more per volt."
+    },
+    "series": {
+      "plain": "Components connected end-to-end so the same charge flows through each.",
+      "in_class": "Capacitors in series: $\\dfrac{1}{C_{eq}} = \\sum \\dfrac{1}{C_i}$ (total is smaller than any one)."
+    },
+    "parallel": {
+      "plain": "Components connected side-by-side across the same two points.",
+      "in_class": "Capacitors in parallel share the voltage and add: $C_{eq} = \\sum C_i$."
+    }
+  },
   "concept_sections": [
     {
       "level": 1,
@@ -10,15 +44,68 @@
         "type": "schematic",
         "caption": "Two conductors hold $\\pm Q$; capacitance is the charge stored per volt, $C = Q/V$.",
         "params": {
-          "viewBox": [340, 185],
+          "viewBox": [
+            340,
+            185
+          ],
           "elements": [
-            { "kind": "label", "x": 170, "y": 30, "text": "voltage $V$ across plates", "color": "soft" },
-            { "kind": "plate", "x": 115, "y": 48, "w": 12, "h": 105, "charge": "+", "label": "$+Q$" },
-            { "kind": "plate", "x": 225, "y": 48, "w": 12, "h": 105, "charge": "-", "label": "$-Q$" },
-            { "kind": "vector", "x1": 132, "y1": 72, "x2": 222, "y2": 72, "color": "field" },
-            { "kind": "vector", "x1": 132, "y1": 100, "x2": 222, "y2": 100, "color": "field", "label": "$\\vec E$" },
-            { "kind": "vector", "x1": 132, "y1": 128, "x2": 222, "y2": 128, "color": "field" },
-            { "kind": "label", "x": 170, "y": 176, "text": "$C = Q/V$", "color": "ink" }
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 30,
+              "text": "voltage $V$ across plates",
+              "color": "soft"
+            },
+            {
+              "kind": "plate",
+              "x": 115,
+              "y": 48,
+              "w": 12,
+              "h": 105,
+              "charge": "+",
+              "label": "$+Q$"
+            },
+            {
+              "kind": "plate",
+              "x": 225,
+              "y": 48,
+              "w": 12,
+              "h": 105,
+              "charge": "-",
+              "label": "$-Q$"
+            },
+            {
+              "kind": "vector",
+              "x1": 132,
+              "y1": 72,
+              "x2": 222,
+              "y2": 72,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 132,
+              "y1": 100,
+              "x2": 222,
+              "y2": 100,
+              "color": "field",
+              "label": "$\\vec E$"
+            },
+            {
+              "kind": "vector",
+              "x1": 132,
+              "y1": 128,
+              "x2": 222,
+              "y2": 128,
+              "color": "field"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 176,
+              "text": "$C = Q/V$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -31,15 +118,65 @@
         "type": "schematic",
         "caption": "Capacitance grows with plate area $A$ and shrinks with gap $d$: $C = \\varepsilon_0 A/d$.",
         "params": {
-          "viewBox": [340, 185],
+          "viewBox": [
+            340,
+            185
+          ],
           "elements": [
-            { "kind": "plate", "x": 105, "y": 40, "w": 12, "h": 110, "label": "$A$" },
-            { "kind": "plate", "x": 225, "y": 40, "w": 12, "h": 110 },
-            { "kind": "line", "x1": 117, "y1": 95, "x2": 225, "y2": 95, "color": "measure", "dash": true },
-            { "kind": "label", "x": 171, "y": 86, "text": "$d$", "color": "measure" },
-            { "kind": "vector", "x1": 122, "y1": 62, "x2": 220, "y2": 62, "color": "field" },
-            { "kind": "vector", "x1": 122, "y1": 128, "x2": 220, "y2": 128, "color": "field" },
-            { "kind": "label", "x": 170, "y": 176, "text": "$C = \\varepsilon_0 A/d$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 105,
+              "y": 40,
+              "w": 12,
+              "h": 110,
+              "label": "$A$"
+            },
+            {
+              "kind": "plate",
+              "x": 225,
+              "y": 40,
+              "w": 12,
+              "h": 110
+            },
+            {
+              "kind": "line",
+              "x1": 117,
+              "y1": 95,
+              "x2": 225,
+              "y2": 95,
+              "color": "measure",
+              "dash": true
+            },
+            {
+              "kind": "label",
+              "x": 171,
+              "y": 86,
+              "text": "$d$",
+              "color": "measure"
+            },
+            {
+              "kind": "vector",
+              "x1": 122,
+              "y1": 62,
+              "x2": 220,
+              "y2": 62,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 122,
+              "y1": 128,
+              "x2": 220,
+              "y2": 128,
+              "color": "field"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 176,
+              "text": "$C = \\varepsilon_0 A/d$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -52,15 +189,68 @@
         "type": "schematic",
         "caption": "Charging stores energy in the field between the plates: $U = \\tfrac12 CV^2 = \\tfrac12 QV = Q^2/2C$.",
         "params": {
-          "viewBox": [340, 185],
+          "viewBox": [
+            340,
+            185
+          ],
           "elements": [
-            { "kind": "plate", "x": 80, "y": 45, "w": 12, "h": 100, "charge": "+" },
-            { "kind": "plate", "x": 180, "y": 45, "w": 12, "h": 100, "charge": "-" },
-            { "kind": "vector", "x1": 97, "y1": 70, "x2": 177, "y2": 70, "color": "field" },
-            { "kind": "vector", "x1": 97, "y1": 95, "x2": 177, "y2": 95, "color": "field", "label": "$\\vec E$" },
-            { "kind": "vector", "x1": 97, "y1": 120, "x2": 177, "y2": 120, "color": "field" },
-            { "kind": "component", "name": "lightning", "x": 255, "y": 92, "scale": 1.2, "color": "velocity", "label": "release" },
-            { "kind": "label", "x": 150, "y": 176, "text": "$U = \\tfrac12 CV^2$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 80,
+              "y": 45,
+              "w": 12,
+              "h": 100,
+              "charge": "+"
+            },
+            {
+              "kind": "plate",
+              "x": 180,
+              "y": 45,
+              "w": 12,
+              "h": 100,
+              "charge": "-"
+            },
+            {
+              "kind": "vector",
+              "x1": 97,
+              "y1": 70,
+              "x2": 177,
+              "y2": 70,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 97,
+              "y1": 95,
+              "x2": 177,
+              "y2": 95,
+              "color": "field",
+              "label": "$\\vec E$"
+            },
+            {
+              "kind": "vector",
+              "x1": 97,
+              "y1": 120,
+              "x2": 177,
+              "y2": 120,
+              "color": "field"
+            },
+            {
+              "kind": "component",
+              "name": "lightning",
+              "x": 255,
+              "y": 92,
+              "scale": 1.2,
+              "color": "velocity",
+              "label": "release"
+            },
+            {
+              "kind": "label",
+              "x": 150,
+              "y": 176,
+              "text": "$U = \\tfrac12 CV^2$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -73,14 +263,59 @@
         "type": "schematic",
         "caption": "A dielectric's aligned molecules partly cancel the field, raising capacitance to $C = \\kappa\\varepsilon_0 A/d$.",
         "params": {
-          "viewBox": [340, 185],
+          "viewBox": [
+            340,
+            185
+          ],
           "elements": [
-            { "kind": "plate", "x": 78, "y": 45, "w": 12, "h": 105, "charge": "+" },
-            { "kind": "plate", "x": 250, "y": 45, "w": 12, "h": 105, "charge": "-" },
-            { "kind": "region", "x": 108, "y": 52, "w": 130, "h": 91, "color": "field", "label": "dielectric $\\kappa$" },
-            { "kind": "label", "x": 145, "y": 100, "text": "$-\\ +$", "color": "ink", "size": 12 },
-            { "kind": "label", "x": 200, "y": 100, "text": "$-\\ +$", "color": "ink", "size": 12 },
-            { "kind": "label", "x": 170, "y": 176, "text": "$C = \\kappa\\varepsilon_0 A/d$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 78,
+              "y": 45,
+              "w": 12,
+              "h": 105,
+              "charge": "+"
+            },
+            {
+              "kind": "plate",
+              "x": 250,
+              "y": 45,
+              "w": 12,
+              "h": 105,
+              "charge": "-"
+            },
+            {
+              "kind": "region",
+              "x": 108,
+              "y": 52,
+              "w": 130,
+              "h": 91,
+              "color": "field",
+              "label": "dielectric $\\kappa$"
+            },
+            {
+              "kind": "label",
+              "x": 145,
+              "y": 100,
+              "text": "$-\\ +$",
+              "color": "ink",
+              "size": 12
+            },
+            {
+              "kind": "label",
+              "x": 200,
+              "y": 100,
+              "text": "$-\\ +$",
+              "color": "ink",
+              "size": 12
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 176,
+              "text": "$C = \\kappa\\varepsilon_0 A/d$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -93,30 +328,192 @@
         "type": "schematic",
         "caption": "Parallel capacitances add; in series the reciprocals add (the total is smaller).",
         "params": {
-          "viewBox": [340, 200],
+          "viewBox": [
+            340,
+            200
+          ],
           "elements": [
-            { "kind": "label", "x": 95, "y": 32, "text": "parallel", "color": "ink" },
-            { "kind": "line", "x1": 40, "y1": 52, "x2": 150, "y2": 52, "color": "ink" },
-            { "kind": "line", "x1": 40, "y1": 150, "x2": 150, "y2": 150, "color": "ink" },
-            { "kind": "line", "x1": 70, "y1": 52, "x2": 70, "y2": 88, "color": "ink" },
-            { "kind": "line", "x1": 56, "y1": 88, "x2": 84, "y2": 88, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 56, "y1": 98, "x2": 84, "y2": 98, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 70, "y1": 98, "x2": 70, "y2": 150, "color": "ink" },
-            { "kind": "line", "x1": 120, "y1": 52, "x2": 120, "y2": 88, "color": "ink" },
-            { "kind": "line", "x1": 106, "y1": 88, "x2": 134, "y2": 88, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 106, "y1": 98, "x2": 134, "y2": 98, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 120, "y1": 98, "x2": 120, "y2": 150, "color": "ink" },
-            { "kind": "label", "x": 95, "y": 182, "text": "$C = C_1 + C_2$", "color": "soft" },
-            { "kind": "line", "x1": 185, "y1": 46, "x2": 185, "y2": 156, "color": "line", "dash": true },
-            { "kind": "label", "x": 255, "y": 32, "text": "series", "color": "ink" },
-            { "kind": "line", "x1": 255, "y1": 52, "x2": 255, "y2": 80, "color": "ink" },
-            { "kind": "line", "x1": 241, "y1": 80, "x2": 269, "y2": 80, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 241, "y1": 90, "x2": 269, "y2": 90, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 255, "y1": 90, "x2": 255, "y2": 112, "color": "ink" },
-            { "kind": "line", "x1": 241, "y1": 112, "x2": 269, "y2": 112, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 241, "y1": 122, "x2": 269, "y2": 122, "color": "ink", "width": 3 },
-            { "kind": "line", "x1": 255, "y1": 122, "x2": 255, "y2": 150, "color": "ink" },
-            { "kind": "label", "x": 255, "y": 182, "text": "$\\tfrac{1}{C} = \\tfrac{1}{C_1} + \\tfrac{1}{C_2}$", "color": "soft" }
+            {
+              "kind": "label",
+              "x": 95,
+              "y": 32,
+              "text": "parallel",
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 40,
+              "y1": 52,
+              "x2": 150,
+              "y2": 52,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 40,
+              "y1": 150,
+              "x2": 150,
+              "y2": 150,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 70,
+              "y1": 52,
+              "x2": 70,
+              "y2": 88,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 56,
+              "y1": 88,
+              "x2": 84,
+              "y2": 88,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 56,
+              "y1": 98,
+              "x2": 84,
+              "y2": 98,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 70,
+              "y1": 98,
+              "x2": 70,
+              "y2": 150,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 120,
+              "y1": 52,
+              "x2": 120,
+              "y2": 88,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 106,
+              "y1": 88,
+              "x2": 134,
+              "y2": 88,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 106,
+              "y1": 98,
+              "x2": 134,
+              "y2": 98,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 120,
+              "y1": 98,
+              "x2": 120,
+              "y2": 150,
+              "color": "ink"
+            },
+            {
+              "kind": "label",
+              "x": 95,
+              "y": 182,
+              "text": "$C = C_1 + C_2$",
+              "color": "soft"
+            },
+            {
+              "kind": "line",
+              "x1": 185,
+              "y1": 46,
+              "x2": 185,
+              "y2": 156,
+              "color": "line",
+              "dash": true
+            },
+            {
+              "kind": "label",
+              "x": 255,
+              "y": 32,
+              "text": "series",
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 255,
+              "y1": 52,
+              "x2": 255,
+              "y2": 80,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 241,
+              "y1": 80,
+              "x2": 269,
+              "y2": 80,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 241,
+              "y1": 90,
+              "x2": 269,
+              "y2": 90,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 255,
+              "y1": 90,
+              "x2": 255,
+              "y2": 112,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 241,
+              "y1": 112,
+              "x2": 269,
+              "y2": 112,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 241,
+              "y1": 122,
+              "x2": 269,
+              "y2": 122,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "line",
+              "x1": 255,
+              "y1": 122,
+              "x2": 255,
+              "y2": 150,
+              "color": "ink"
+            },
+            {
+              "kind": "label",
+              "x": 255,
+              "y": 182,
+              "text": "$\\tfrac{1}{C} = \\tfrac{1}{C_1} + \\tfrac{1}{C_2}$",
+              "color": "soft"
+            }
           ]
         }
       }
@@ -131,19 +528,98 @@
         "type": "schematic",
         "caption": "The capacitor stores $U = \\tfrac12 CV^2$ slowly, then releases it to the flash tube in milliseconds.",
         "params": {
-          "viewBox": [340, 175],
+          "viewBox": [
+            340,
+            175
+          ],
           "elements": [
-            { "kind": "vector", "x1": 28, "y1": 90, "x2": 52, "y2": 90, "color": "current", "label": "charge" },
-            { "kind": "plate", "x": 60, "y": 55, "w": 12, "h": 70, "charge": "+" },
-            { "kind": "plate", "x": 95, "y": 55, "w": 12, "h": 70, "charge": "-" },
-            { "kind": "line", "x1": 107, "y1": 90, "x2": 205, "y2": 90, "color": "ink" },
-            { "kind": "circle", "x": 225, "y": 90, "r": 18, "color": "velocity" },
-            { "kind": "ray", "x1": 245, "y1": 90, "x2": 285, "y2": 90, "color": "accent" },
-            { "kind": "ray", "x1": 225, "y1": 70, "x2": 225, "y2": 38, "color": "accent" },
-            { "kind": "ray", "x1": 239, "y1": 76, "x2": 272, "y2": 54, "color": "accent" },
-            { "kind": "ray", "x1": 239, "y1": 104, "x2": 272, "y2": 126, "color": "accent" },
-            { "kind": "ray", "x1": 225, "y1": 110, "x2": 225, "y2": 142, "color": "accent" },
-            { "kind": "label", "x": 150, "y": 162, "text": "stores $U = \\tfrac12 CV^2$, dumps in ms", "color": "ink" }
+            {
+              "kind": "vector",
+              "x1": 28,
+              "y1": 90,
+              "x2": 52,
+              "y2": 90,
+              "color": "current",
+              "label": "charge"
+            },
+            {
+              "kind": "plate",
+              "x": 60,
+              "y": 55,
+              "w": 12,
+              "h": 70,
+              "charge": "+"
+            },
+            {
+              "kind": "plate",
+              "x": 95,
+              "y": 55,
+              "w": 12,
+              "h": 70,
+              "charge": "-"
+            },
+            {
+              "kind": "line",
+              "x1": 107,
+              "y1": 90,
+              "x2": 205,
+              "y2": 90,
+              "color": "ink"
+            },
+            {
+              "kind": "circle",
+              "x": 225,
+              "y": 90,
+              "r": 18,
+              "color": "velocity"
+            },
+            {
+              "kind": "ray",
+              "x1": 245,
+              "y1": 90,
+              "x2": 285,
+              "y2": 90,
+              "color": "accent"
+            },
+            {
+              "kind": "ray",
+              "x1": 225,
+              "y1": 70,
+              "x2": 225,
+              "y2": 38,
+              "color": "accent"
+            },
+            {
+              "kind": "ray",
+              "x1": 239,
+              "y1": 76,
+              "x2": 272,
+              "y2": 54,
+              "color": "accent"
+            },
+            {
+              "kind": "ray",
+              "x1": 239,
+              "y1": 104,
+              "x2": 272,
+              "y2": 126,
+              "color": "accent"
+            },
+            {
+              "kind": "ray",
+              "x1": 225,
+              "y1": 110,
+              "x2": 225,
+              "y2": 142,
+              "color": "accent"
+            },
+            {
+              "kind": "label",
+              "x": 150,
+              "y": 162,
+              "text": "stores $U = \\tfrac12 CV^2$, dumps in ms",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -156,16 +632,71 @@
         "type": "schematic",
         "caption": "Each DRAM bit is a tiny capacitor: charged ($Q=CV$) is 1, empty is 0 — it leaks and must be refreshed.",
         "params": {
-          "viewBox": [340, 170],
+          "viewBox": [
+            340,
+            170
+          ],
           "elements": [
-            { "kind": "plate", "x": 65, "y": 45, "w": 10, "h": 55, "charge": "+" },
-            { "kind": "plate", "x": 93, "y": 45, "w": 10, "h": 55, "charge": "-" },
-            { "kind": "label", "x": 84, "y": 120, "text": "1 = charged", "color": "ink" },
-            { "kind": "plate", "x": 235, "y": 45, "w": 10, "h": 55 },
-            { "kind": "plate", "x": 263, "y": 45, "w": 10, "h": 55 },
-            { "kind": "label", "x": 254, "y": 120, "text": "0 = empty", "color": "soft" },
-            { "kind": "vector", "x1": 118, "y1": 72, "x2": 218, "y2": 72, "color": "velocity", "label": "leaks → refresh" },
-            { "kind": "label", "x": 170, "y": 155, "text": "$Q = CV$", "color": "soft" }
+            {
+              "kind": "plate",
+              "x": 65,
+              "y": 45,
+              "w": 10,
+              "h": 55,
+              "charge": "+"
+            },
+            {
+              "kind": "plate",
+              "x": 93,
+              "y": 45,
+              "w": 10,
+              "h": 55,
+              "charge": "-"
+            },
+            {
+              "kind": "label",
+              "x": 84,
+              "y": 120,
+              "text": "1 = charged",
+              "color": "ink"
+            },
+            {
+              "kind": "plate",
+              "x": 235,
+              "y": 45,
+              "w": 10,
+              "h": 55
+            },
+            {
+              "kind": "plate",
+              "x": 263,
+              "y": 45,
+              "w": 10,
+              "h": 55
+            },
+            {
+              "kind": "label",
+              "x": 254,
+              "y": 120,
+              "text": "0 = empty",
+              "color": "soft"
+            },
+            {
+              "kind": "vector",
+              "x1": 118,
+              "y1": 72,
+              "x2": 218,
+              "y2": 72,
+              "color": "velocity",
+              "label": "leaks → refresh"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 155,
+              "text": "$Q = CV$",
+              "color": "soft"
+            }
           ]
         }
       }
@@ -178,12 +709,43 @@
         "type": "schematic",
         "caption": "A fingertip alters the local capacitance $C=\\kappa\\varepsilon_0 A/d$ of the screen grid, locating the touch.",
         "params": {
-          "viewBox": [340, 195],
+          "viewBox": [
+            340,
+            195
+          ],
           "elements": [
-            { "kind": "component", "name": "mesh", "x": 170, "y": 140, "scale": 1.2 },
-            { "kind": "component", "name": "hand", "x": 170, "y": 50, "scale": 1.2 },
-            { "kind": "vector", "x1": 170, "y1": 80, "x2": 170, "y2": 100, "color": "field", "label": "$\\Delta C$", "dx": 18, "dy": 0 },
-            { "kind": "label", "x": 170, "y": 186, "text": "finger changes $C = \\kappa\\varepsilon_0 A/d$", "color": "ink" }
+            {
+              "kind": "component",
+              "name": "mesh",
+              "x": 170,
+              "y": 140,
+              "scale": 1.2
+            },
+            {
+              "kind": "component",
+              "name": "hand",
+              "x": 170,
+              "y": 50,
+              "scale": 1.2
+            },
+            {
+              "kind": "vector",
+              "x1": 170,
+              "y1": 80,
+              "x2": 170,
+              "y2": 100,
+              "color": "field",
+              "label": "$\\Delta C$",
+              "dx": 18,
+              "dy": 0
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 186,
+              "text": "finger changes $C = \\kappa\\varepsilon_0 A/d$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -195,15 +757,124 @@
     "combined_query": "capacitance calculus based physics worked examples parallel plate"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "A capacitor holds $6.0\\ \\mu\\text{C}$ at $12$ V. Find its capacitance.", "correct_answer": "$0.50\\ \\mu\\text{F}$", "solution_steps": ["$C = Q/V$", "$C = \\dfrac{6.0\\times10^{-6}}{12}$", "$C = 5.0\\times10^{-7}$ F $= 0.50\\ \\mu$F"], "hint": "Capacitance is charge over voltage." },
-    { "id": "p02", "difficulty": "easy", "prompt": "A $10\\ \\mu\\text{F}$ capacitor is connected to $9.0$ V. How much charge does it store?", "correct_answer": "$90\\ \\mu\\text{C}$", "solution_steps": ["$Q = CV$", "$Q = (10\\times10^{-6})(9.0)$", "$Q = 9.0\\times10^{-5}$ C $= 90\\ \\mu$C"], "hint": "Rearrange $C = Q/V$ to get $Q$." },
-    { "id": "p03", "difficulty": "easy", "prompt": "Find the energy stored in a $100\\ \\mu\\text{F}$ capacitor charged to $50$ V.", "correct_answer": "$0.125$ J", "solution_steps": ["$U = \\tfrac12 C V^2$", "$U = \\tfrac12(100\\times10^{-6})(50)^2$", "$U = 0.125$ J"], "hint": "Use $U = \\tfrac12 CV^2$." },
-    { "id": "p04", "difficulty": "medium", "prompt": "Parallel plates have area $A = 0.020\\ \\text{m}^2$ and gap $d = 1.0$ mm (vacuum). Find $C$.", "correct_answer": "$\\approx 1.8\\times10^{-10}$ F (177 pF)", "solution_steps": ["$C = \\dfrac{\\varepsilon_0 A}{d}$", "$C = \\dfrac{(8.85\\times10^{-12})(0.020)}{1.0\\times10^{-3}}$", "$C \\approx 1.8\\times10^{-10}$ F"], "hint": "Use the parallel-plate formula with $\\varepsilon_0$." },
-    { "id": "p05", "difficulty": "medium", "prompt": "A $2.0\\ \\mu\\text{F}$ vacuum capacitor is filled with a dielectric of $\\kappa = 3.0$. Find the new capacitance.", "correct_answer": "$6.0\\ \\mu\\text{F}$", "solution_steps": ["$C = \\kappa C_0$", "$C = 3.0 \\times 2.0\\ \\mu\\text{F}$", "$C = 6.0\\ \\mu$F"], "hint": "A dielectric multiplies capacitance by $\\kappa$." },
-    { "id": "p06", "difficulty": "medium", "prompt": "Capacitors of $2$, $4$, and $6\\ \\mu\\text{F}$ are connected in parallel. Find the equivalent capacitance.", "correct_answer": "$12\\ \\mu\\text{F}$", "solution_steps": ["Parallel: $C_{eq} = C_1 + C_2 + C_3$", "$C_{eq} = 2 + 4 + 6$", "$C_{eq} = 12\\ \\mu$F"], "hint": "In parallel, capacitances simply add." },
-    { "id": "p07", "difficulty": "medium", "prompt": "A $6.0\\ \\mu\\text{F}$ and a $3.0\\ \\mu\\text{F}$ capacitor are in series. Find the equivalent capacitance.", "correct_answer": "$2.0\\ \\mu\\text{F}$", "solution_steps": ["$\\dfrac{1}{C_{eq}} = \\dfrac{1}{6} + \\dfrac{1}{3} = \\dfrac{1}{2}$", "$C_{eq} = 2.0\\ \\mu$F"], "hint": "In series, add reciprocals; the total is smaller than either." },
-    { "id": "p08", "difficulty": "hard", "prompt": "A $20\\ \\mu\\text{F}$ capacitor is charged to $200$ V. Find the charge and the energy stored.", "correct_answer": "$Q = 4.0\\times10^{-3}$ C, $U = 0.40$ J", "solution_steps": ["$Q = CV = (20\\times10^{-6})(200) = 4.0\\times10^{-3}$ C.", "$U = \\tfrac12 CV^2 = \\tfrac12(20\\times10^{-6})(200)^2$", "$U = 0.40$ J"], "hint": "First find $Q = CV$, then $U = \\tfrac12 CV^2$." },
-    { "id": "p09", "difficulty": "hard", "prompt": "A $3.0\\ \\mu\\text{F}$ capacitor is in parallel with a series pair of two $6.0\\ \\mu\\text{F}$ capacitors. Find the total capacitance.", "correct_answer": "$6.0\\ \\mu\\text{F}$", "solution_steps": ["Series pair: $\\dfrac{1}{C_s} = \\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{1}{3} \\Rightarrow C_s = 3.0\\ \\mu$F.", "Now parallel with $3.0\\ \\mu$F: $C_{eq} = 3.0 + 3.0$", "$C_{eq} = 6.0\\ \\mu$F"], "hint": "Reduce the series pair first, then add the parallel capacitor." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "A $5.0\\ \\mu\\text{F}$ capacitor is charged to $100$ V and then disconnected from the battery. A dielectric with $\\kappa = 2.0$ is inserted. Find the new voltage and stored energy.", "correct_answer": "$V = 50$ V, $U = 0.0125$ J", "solution_steps": ["Disconnected means $Q$ is fixed: $Q = CV = (5.0\\times10^{-6})(100) = 5.0\\times10^{-4}$ C.", "New capacitance $C' = \\kappa C = 10\\ \\mu$F, so $V' = Q/C' = \\dfrac{5.0\\times10^{-4}}{10\\times10^{-6}} = 50$ V.", "$U' = \\tfrac12 C' V'^2 = \\tfrac12(10\\times10^{-6})(50)^2 = 0.0125$ J."], "hint": "With the battery removed the charge stays constant while $C$ doubles." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A capacitor holds $6.0\\ \\mu\\text{C}$ at $12$ V. Find its capacitance.",
+      "correct_answer": "$0.50\\ \\mu\\text{F}$",
+      "solution_steps": [
+        "$C = Q/V$",
+        "$C = \\dfrac{6.0\\times10^{-6}}{12}$",
+        "$C = 5.0\\times10^{-7}$ F $= 0.50\\ \\mu$F"
+      ],
+      "hint": "Capacitance is charge over voltage."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $10\\ \\mu\\text{F}$ capacitor is connected to $9.0$ V. How much charge does it store?",
+      "correct_answer": "$90\\ \\mu\\text{C}$",
+      "solution_steps": [
+        "$Q = CV$",
+        "$Q = (10\\times10^{-6})(9.0)$",
+        "$Q = 9.0\\times10^{-5}$ C $= 90\\ \\mu$C"
+      ],
+      "hint": "Rearrange $C = Q/V$ to get $Q$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Find the energy stored in a $100\\ \\mu\\text{F}$ capacitor charged to $50$ V.",
+      "correct_answer": "$0.125$ J",
+      "solution_steps": [
+        "$U = \\tfrac12 C V^2$",
+        "$U = \\tfrac12(100\\times10^{-6})(50)^2$",
+        "$U = 0.125$ J"
+      ],
+      "hint": "Use $U = \\tfrac12 CV^2$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Parallel plates have area $A = 0.020\\ \\text{m}^2$ and gap $d = 1.0$ mm (vacuum). Find $C$.",
+      "correct_answer": "$\\approx 1.8\\times10^{-10}$ F (177 pF)",
+      "solution_steps": [
+        "$C = \\dfrac{\\varepsilon_0 A}{d}$",
+        "$C = \\dfrac{(8.85\\times10^{-12})(0.020)}{1.0\\times10^{-3}}$",
+        "$C \\approx 1.8\\times10^{-10}$ F"
+      ],
+      "hint": "Use the parallel-plate formula with $\\varepsilon_0$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $2.0\\ \\mu\\text{F}$ vacuum capacitor is filled with a dielectric of $\\kappa = 3.0$. Find the new capacitance.",
+      "correct_answer": "$6.0\\ \\mu\\text{F}$",
+      "solution_steps": [
+        "$C = \\kappa C_0$",
+        "$C = 3.0 \\times 2.0\\ \\mu\\text{F}$",
+        "$C = 6.0\\ \\mu$F"
+      ],
+      "hint": "A dielectric multiplies capacitance by $\\kappa$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Capacitors of $2$, $4$, and $6\\ \\mu\\text{F}$ are connected in parallel. Find the equivalent capacitance.",
+      "correct_answer": "$12\\ \\mu\\text{F}$",
+      "solution_steps": [
+        "Parallel: $C_{eq} = C_1 + C_2 + C_3$",
+        "$C_{eq} = 2 + 4 + 6$",
+        "$C_{eq} = 12\\ \\mu$F"
+      ],
+      "hint": "In parallel, capacitances simply add."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "A $6.0\\ \\mu\\text{F}$ and a $3.0\\ \\mu\\text{F}$ capacitor are in series. Find the equivalent capacitance.",
+      "correct_answer": "$2.0\\ \\mu\\text{F}$",
+      "solution_steps": [
+        "$\\dfrac{1}{C_{eq}} = \\dfrac{1}{6} + \\dfrac{1}{3} = \\dfrac{1}{2}$",
+        "$C_{eq} = 2.0\\ \\mu$F"
+      ],
+      "hint": "In series, add reciprocals; the total is smaller than either."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "A $20\\ \\mu\\text{F}$ capacitor is charged to $200$ V. Find the charge and the energy stored.",
+      "correct_answer": "$Q = 4.0\\times10^{-3}$ C, $U = 0.40$ J",
+      "solution_steps": [
+        "$Q = CV = (20\\times10^{-6})(200) = 4.0\\times10^{-3}$ C.",
+        "$U = \\tfrac12 CV^2 = \\tfrac12(20\\times10^{-6})(200)^2$",
+        "$U = 0.40$ J"
+      ],
+      "hint": "First find $Q = CV$, then $U = \\tfrac12 CV^2$."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "A $3.0\\ \\mu\\text{F}$ capacitor is in parallel with a series pair of two $6.0\\ \\mu\\text{F}$ capacitors. Find the total capacitance.",
+      "correct_answer": "$6.0\\ \\mu\\text{F}$",
+      "solution_steps": [
+        "Series pair: $\\dfrac{1}{C_s} = \\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{1}{3} \\Rightarrow C_s = 3.0\\ \\mu$F.",
+        "Now parallel with $3.0\\ \\mu$F: $C_{eq} = 3.0 + 3.0$",
+        "$C_{eq} = 6.0\\ \\mu$F"
+      ],
+      "hint": "Reduce the series pair first, then add the parallel capacitor."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "A $5.0\\ \\mu\\text{F}$ capacitor is charged to $100$ V and then disconnected from the battery. A dielectric with $\\kappa = 2.0$ is inserted. Find the new voltage and stored energy.",
+      "correct_answer": "$V = 50$ V, $U = 0.0125$ J",
+      "solution_steps": [
+        "Disconnected means $Q$ is fixed: $Q = CV = (5.0\\times10^{-6})(100) = 5.0\\times10^{-4}$ C.",
+        "New capacitance $C' = \\kappa C = 10\\ \\mu$F, so $V' = Q/C' = \\dfrac{5.0\\times10^{-4}}{10\\times10^{-6}} = 50$ V.",
+        "$U' = \\tfrac12 C' V'^2 = \\tfrac12(10\\times10^{-6})(50)^2 = 0.0125$ J."
+      ],
+      "hint": "With the battery removed the charge stays constant while $C$ doubles."
+    }
   ]
 }

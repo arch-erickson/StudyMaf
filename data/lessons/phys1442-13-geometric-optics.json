@@ -1,17 +1,87 @@
 {
   "title": "Geometric Optics",
   "summary": "Light reflects ($\\theta_i = \\theta_r$) and refracts (Snell's law $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$). The index of refraction is $n = c/v$. Mirrors and lenses form images obeying $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$ with magnification $m = -\\dfrac{d_i}{d_o}$. (University Physics Vol. 3, Ch. 1–2.)",
+  "glossary": {
+    "reflection": {
+      "plain": "Light bouncing off a surface.",
+      "in_class": "Angle of incidence equals angle of reflection, measured from the normal."
+    },
+    "refraction": {
+      "plain": "Light bending as it passes from one material into another.",
+      "in_class": "Governed by Snell's law; bending is toward the slower medium."
+    },
+    "index of refraction": {
+      "plain": "How much a material slows down light.",
+      "in_class": "$n = c/v$; bigger $n$ bends light more. Vacuum is $n=1$."
+    },
+    "Snell's law": {
+      "plain": "The rule for how much light bends when it refracts.",
+      "in_class": "$n_1\\sin\\theta_1 = n_2\\sin\\theta_2$."
+    },
+    "total internal reflection": {
+      "plain": "Light trapped inside a material, reflecting completely instead of exiting.",
+      "in_class": "Happens past the critical angle $\\sin\\theta_c = n_2/n_1$ (fiber optics)."
+    },
+    "focal length": {
+      "plain": "How far from a lens or mirror parallel light comes to a focus.",
+      "in_class": "$f$; used in the thin-lens/mirror equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$."
+    },
+    "real image": {
+      "plain": "An image formed where light actually converges — it can land on a screen.",
+      "in_class": "Positive image distance $d_i$; formed by converging lenses/mirrors."
+    },
+    "virtual image": {
+      "plain": "An image light only appears to come from — it can't be projected.",
+      "in_class": "Negative $d_i$; what you see in a flat mirror or through a magnifier."
+    },
+    "magnification": {
+      "plain": "How much bigger or smaller an image is than the object.",
+      "in_class": "$m = -\\dfrac{d_i}{d_o}$; a negative sign means inverted."
+    }
+  },
   "concept_sections": [
-    { "level": 1, "heading": "Reflection and refraction", "explanation": "Light bounces off surfaces with the angle of reflection equal to the angle of incidence ($\\theta_i = \\theta_r$, both measured from the normal). Passing into a new medium it bends, following Snell's law $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ — toward the normal when entering a denser medium." },
-    { "level": 2, "heading": "Index of refraction", "explanation": "Light slows in matter: $n = \\dfrac{c}{v}$, so $n = 1$ in vacuum, $1.33$ in water, $1.5$ in glass. A bigger $n$ means slower light and more bending. When light tries to leave a dense medium at a steep angle it can't escape — total internal reflection past the critical angle $\\sin\\theta_c = n_2/n_1$." },
-    { "level": 3, "heading": "Mirrors", "explanation": "A curved mirror of radius $R$ has focal length $f = R/2$. Object and image distances obey the mirror equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. A positive $d_i$ means a real image (in front); negative means a virtual image (behind)." },
-    { "level": 4, "heading": "Magnification", "explanation": "The image size relative to the object is $m = -\\dfrac{d_i}{d_o}$. A negative $m$ means an inverted image; $|m| > 1$ means enlarged. The same relation applies to mirrors and lenses." },
-    { "level": 5, "heading": "Thin lenses", "explanation": "Lenses obey the same thin-lens equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. Converging (convex) lenses have positive $f$; diverging (concave) lenses negative. An object inside the focal length gives an upright, magnified virtual image — a magnifying glass." }
+    {
+      "level": 1,
+      "heading": "Reflection and refraction",
+      "explanation": "Light bounces off surfaces with the angle of reflection equal to the angle of incidence ($\\theta_i = \\theta_r$, both measured from the normal). Passing into a new medium it bends, following Snell's law $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ — toward the normal when entering a denser medium."
+    },
+    {
+      "level": 2,
+      "heading": "Index of refraction",
+      "explanation": "Light slows in matter: $n = \\dfrac{c}{v}$, so $n = 1$ in vacuum, $1.33$ in water, $1.5$ in glass. A bigger $n$ means slower light and more bending. When light tries to leave a dense medium at a steep angle it can't escape — total internal reflection past the critical angle $\\sin\\theta_c = n_2/n_1$."
+    },
+    {
+      "level": 3,
+      "heading": "Mirrors",
+      "explanation": "A curved mirror of radius $R$ has focal length $f = R/2$. Object and image distances obey the mirror equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. A positive $d_i$ means a real image (in front); negative means a virtual image (behind)."
+    },
+    {
+      "level": 4,
+      "heading": "Magnification",
+      "explanation": "The image size relative to the object is $m = -\\dfrac{d_i}{d_o}$. A negative $m$ means an inverted image; $|m| > 1$ means enlarged. The same relation applies to mirrors and lenses."
+    },
+    {
+      "level": 5,
+      "heading": "Thin lenses",
+      "explanation": "Lenses obey the same thin-lens equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. Converging (convex) lenses have positive $f$; diverging (concave) lenses negative. An object inside the focal length gives an upright, magnified virtual image — a magnifying glass."
+    }
   ],
   "real_world_examples": [
-    { "title": "Eyeglasses", "scenario": "Lenses correct near- or far-sightedness.", "how_the_math_applies": "The lens's focal length shifts where images form on the retina; the thin-lens equation $1/f = 1/d_o + 1/d_i$ sets the prescription." },
-    { "title": "Fiber-optic internet", "scenario": "Data travels as light down thin glass fibers.", "how_the_math_applies": "Light hits the fiber wall past the critical angle and totally internally reflects, so it stays trapped and travels for kilometers with little loss." },
-    { "title": "Car passenger mirror", "scenario": "'Objects are closer than they appear.'", "how_the_math_applies": "A convex mirror gives a reduced, upright virtual image ($m < 1$), widening the view but making things look farther away." }
+    {
+      "title": "Eyeglasses",
+      "scenario": "Lenses correct near- or far-sightedness.",
+      "how_the_math_applies": "The lens's focal length shifts where images form on the retina; the thin-lens equation $1/f = 1/d_o + 1/d_i$ sets the prescription."
+    },
+    {
+      "title": "Fiber-optic internet",
+      "scenario": "Data travels as light down thin glass fibers.",
+      "how_the_math_applies": "Light hits the fiber wall past the critical angle and totally internally reflects, so it stays trapped and travels for kilometers with little loss."
+    },
+    {
+      "title": "Car passenger mirror",
+      "scenario": "'Objects are closer than they appear.'",
+      "how_the_math_applies": "A convex mirror gives a reduced, upright virtual image ($m < 1$), widening the view but making things look farther away."
+    }
   ],
   "videos": {
     "concept_query": "reflection refraction Snell's law index of refraction explained",
@@ -19,14 +89,111 @@
     "combined_query": "geometric optics calculus based physics worked examples lenses mirrors"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "Light in air ($n=1$) hits water ($n=1.33$) at $30^\\circ$ from the normal. Find the refraction angle.", "correct_answer": "$\\approx 22^\\circ$", "solution_steps": ["$n_1\\sin\\theta_1 = n_2\\sin\\theta_2$", "$\\sin\\theta_2 = \\dfrac{(1)\\sin 30^\\circ}{1.33} = 0.376$", "$\\theta_2 \\approx 22^\\circ$"], "hint": "Apply Snell's law and solve for $\\theta_2$." },
-    { "id": "p02", "difficulty": "easy", "prompt": "Find the speed of light in glass with $n = 1.5$.", "correct_answer": "$2.0\\times10^8$ m/s", "solution_steps": ["$n = c/v \\Rightarrow v = c/n$", "$v = \\dfrac{3.0\\times10^8}{1.5}$", "$v = 2.0\\times10^8$ m/s"], "hint": "$v = c/n$." },
-    { "id": "p03", "difficulty": "easy", "prompt": "A concave mirror has radius of curvature $R = 20$ cm. Find its focal length.", "correct_answer": "$10$ cm", "solution_steps": ["$f = R/2$", "$f = 20/2$", "$f = 10$ cm"], "hint": "Focal length is half the radius." },
-    { "id": "p04", "difficulty": "medium", "prompt": "An object is $30$ cm from a concave mirror of focal length $10$ cm. Find the image distance.", "correct_answer": "$15$ cm (real)", "solution_steps": ["$\\dfrac{1}{d_i} = \\dfrac{1}{f} - \\dfrac{1}{d_o} = \\dfrac{1}{10} - \\dfrac{1}{30} = \\dfrac{1}{15}$", "$d_i = 15$ cm (positive → real image)"], "hint": "Use the mirror equation and solve for $d_i$." },
-    { "id": "p05", "difficulty": "medium", "prompt": "For that mirror ($d_o = 30$ cm, $d_i = 15$ cm), find the magnification.", "correct_answer": "$m = -0.5$ (inverted, half size)", "solution_steps": ["$m = -d_i/d_o$", "$m = -15/30$", "$m = -0.5$"], "hint": "$m = -d_i/d_o$; the sign gives orientation." },
-    { "id": "p06", "difficulty": "medium", "prompt": "Find the critical angle for glass ($n = 1.5$) to air.", "correct_answer": "$\\approx 41.8^\\circ$", "solution_steps": ["$\\sin\\theta_c = n_2/n_1 = 1/1.5 = 0.667$", "$\\theta_c = \\arcsin(0.667)$", "$\\theta_c \\approx 41.8^\\circ$"], "hint": "$\\sin\\theta_c = n_{air}/n_{glass}$." },
-    { "id": "p07", "difficulty": "medium", "prompt": "An object is $50$ cm from a converging lens of focal length $20$ cm. Find the image distance.", "correct_answer": "$\\approx 33.3$ cm", "solution_steps": ["$\\dfrac{1}{d_i} = \\dfrac{1}{f} - \\dfrac{1}{d_o} = \\dfrac{1}{20} - \\dfrac{1}{50} = \\dfrac{3}{100}$", "$d_i = 100/3 \\approx 33.3$ cm"], "hint": "Same thin-lens equation." },
-    { "id": "p08", "difficulty": "hard", "prompt": "An object is $10$ cm from a converging lens of focal length $20$ cm (inside the focal point). Find the image distance and magnification.", "correct_answer": "$d_i = -20$ cm (virtual), $m = +2$", "solution_steps": ["$\\dfrac{1}{d_i} = \\dfrac{1}{20} - \\dfrac{1}{10} = -\\dfrac{1}{20}$, so $d_i = -20$ cm (virtual).", "$m = -d_i/d_o = -(-20)/10 = +2$", "Upright and twice as large — a magnifying glass."], "hint": "A negative $d_i$ means a virtual, upright image." },
-    { "id": "p09", "difficulty": "stretch", "prompt": "A coin lies at the bottom of a pool $2.0$ m deep ($n = 1.33$). How deep does it appear from straight above?", "correct_answer": "$\\approx 1.5$ m", "solution_steps": ["Apparent depth $= $ real depth $/\\,n$.", "$= 2.0/1.33$", "$\\approx 1.5$ m"], "hint": "Refraction makes submerged objects look shallower by a factor $n$." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Light in air ($n=1$) hits water ($n=1.33$) at $30^\\circ$ from the normal. Find the refraction angle.",
+      "correct_answer": "$\\approx 22^\\circ$",
+      "solution_steps": [
+        "$n_1\\sin\\theta_1 = n_2\\sin\\theta_2$",
+        "$\\sin\\theta_2 = \\dfrac{(1)\\sin 30^\\circ}{1.33} = 0.376$",
+        "$\\theta_2 \\approx 22^\\circ$"
+      ],
+      "hint": "Apply Snell's law and solve for $\\theta_2$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the speed of light in glass with $n = 1.5$.",
+      "correct_answer": "$2.0\\times10^8$ m/s",
+      "solution_steps": [
+        "$n = c/v \\Rightarrow v = c/n$",
+        "$v = \\dfrac{3.0\\times10^8}{1.5}$",
+        "$v = 2.0\\times10^8$ m/s"
+      ],
+      "hint": "$v = c/n$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "A concave mirror has radius of curvature $R = 20$ cm. Find its focal length.",
+      "correct_answer": "$10$ cm",
+      "solution_steps": [
+        "$f = R/2$",
+        "$f = 20/2$",
+        "$f = 10$ cm"
+      ],
+      "hint": "Focal length is half the radius."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "An object is $30$ cm from a concave mirror of focal length $10$ cm. Find the image distance.",
+      "correct_answer": "$15$ cm (real)",
+      "solution_steps": [
+        "$\\dfrac{1}{d_i} = \\dfrac{1}{f} - \\dfrac{1}{d_o} = \\dfrac{1}{10} - \\dfrac{1}{30} = \\dfrac{1}{15}$",
+        "$d_i = 15$ cm (positive → real image)"
+      ],
+      "hint": "Use the mirror equation and solve for $d_i$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "For that mirror ($d_o = 30$ cm, $d_i = 15$ cm), find the magnification.",
+      "correct_answer": "$m = -0.5$ (inverted, half size)",
+      "solution_steps": [
+        "$m = -d_i/d_o$",
+        "$m = -15/30$",
+        "$m = -0.5$"
+      ],
+      "hint": "$m = -d_i/d_o$; the sign gives orientation."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find the critical angle for glass ($n = 1.5$) to air.",
+      "correct_answer": "$\\approx 41.8^\\circ$",
+      "solution_steps": [
+        "$\\sin\\theta_c = n_2/n_1 = 1/1.5 = 0.667$",
+        "$\\theta_c = \\arcsin(0.667)$",
+        "$\\theta_c \\approx 41.8^\\circ$"
+      ],
+      "hint": "$\\sin\\theta_c = n_{air}/n_{glass}$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "An object is $50$ cm from a converging lens of focal length $20$ cm. Find the image distance.",
+      "correct_answer": "$\\approx 33.3$ cm",
+      "solution_steps": [
+        "$\\dfrac{1}{d_i} = \\dfrac{1}{f} - \\dfrac{1}{d_o} = \\dfrac{1}{20} - \\dfrac{1}{50} = \\dfrac{3}{100}$",
+        "$d_i = 100/3 \\approx 33.3$ cm"
+      ],
+      "hint": "Same thin-lens equation."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "An object is $10$ cm from a converging lens of focal length $20$ cm (inside the focal point). Find the image distance and magnification.",
+      "correct_answer": "$d_i = -20$ cm (virtual), $m = +2$",
+      "solution_steps": [
+        "$\\dfrac{1}{d_i} = \\dfrac{1}{20} - \\dfrac{1}{10} = -\\dfrac{1}{20}$, so $d_i = -20$ cm (virtual).",
+        "$m = -d_i/d_o = -(-20)/10 = +2$",
+        "Upright and twice as large — a magnifying glass."
+      ],
+      "hint": "A negative $d_i$ means a virtual, upright image."
+    },
+    {
+      "id": "p09",
+      "difficulty": "stretch",
+      "prompt": "A coin lies at the bottom of a pool $2.0$ m deep ($n = 1.33$). How deep does it appear from straight above?",
+      "correct_answer": "$\\approx 1.5$ m",
+      "solution_steps": [
+        "Apparent depth $= $ real depth $/\\,n$.",
+        "$= 2.0/1.33$",
+        "$\\approx 1.5$ m"
+      ],
+      "hint": "Refraction makes submerged objects look shallower by a factor $n$."
+    }
   ]
 }

@@ -1,6 +1,40 @@
 {
   "title": "Electric Potential",
   "summary": "Electric potential $V$ is potential energy per unit charge, measured in volts. For a point charge $V = k\\dfrac{q}{r}$ (a scalar — no direction). Moving a charge through a potential difference does work $W = q\\,\\Delta V$, and in a uniform field $V = Ed$. (University Physics Vol. 2, Ch. 7.)",
+  "glossary": {
+    "electric potential": {
+      "plain": "How much electric energy each unit of charge would have at a spot — like height on a hill for charges.",
+      "in_class": "$V = U/q$, measured in volts. For a point charge $V = k\\dfrac{q}{r}$."
+    },
+    "potential": {
+      "plain": "The electric energy per unit charge at a point in space.",
+      "in_class": "A scalar you add up from each charge: $V = \\sum k\\dfrac{q_i}{r_i}$ — no components needed."
+    },
+    "volt": {
+      "plain": "The unit of electric potential — one joule of energy per coulomb of charge.",
+      "in_class": "$1\\text{ V} = 1\\text{ J/C}$. A battery's rating is the potential difference it maintains."
+    },
+    "potential difference": {
+      "plain": "The difference in potential between two points — what pushes charge through a circuit.",
+      "in_class": "$\\Delta V$; moving a charge through it does work $W = q\\,\\Delta V$."
+    },
+    "scalar": {
+      "plain": "A quantity with size but no direction — just a number.",
+      "in_class": "Potential is a scalar, so you add contributions without breaking them into $x$/$y$."
+    },
+    "equipotential": {
+      "plain": "A surface where the potential is the same everywhere on it.",
+      "in_class": "No work is done moving along it, and field lines cross it at right angles."
+    },
+    "electron-volt": {
+      "plain": "A tiny energy unit: the energy one electron gains crossing one volt.",
+      "in_class": "$1\\text{ eV} = 1.6\\times10^{-19}\\text{ J}$ — handy for atomic-scale energies."
+    },
+    "work": {
+      "plain": "Energy transferred when a force moves something.",
+      "in_class": "For a charge in a field, $W = q\\,\\Delta V$; if only the electric force acts, it becomes kinetic energy."
+    }
+  },
   "concept_sections": [
     {
       "level": 1,
@@ -10,14 +44,55 @@
         "type": "schematic",
         "caption": "Potential is like height: the energy each coulomb carries, $V = U/q$ (1 V = 1 J/C).",
         "params": {
-          "viewBox": [340, 200],
+          "viewBox": [
+            340,
+            200
+          ],
           "elements": [
-            { "kind": "line", "x1": 55, "y1": 55, "x2": 285, "y2": 150, "color": "ink", "width": 3 },
-            { "kind": "charge", "x": 62, "y": 48, "sign": "+" },
-            { "kind": "vector", "x1": 98, "y1": 74, "x2": 225, "y2": 124, "color": "velocity" },
-            { "kind": "label", "x": 62, "y": 26, "text": "high $V$", "color": "ink" },
-            { "kind": "label", "x": 270, "y": 138, "text": "low $V$", "color": "soft" },
-            { "kind": "label", "x": 170, "y": 190, "text": "$V = U/q$", "color": "ink" }
+            {
+              "kind": "line",
+              "x1": 55,
+              "y1": 55,
+              "x2": 285,
+              "y2": 150,
+              "color": "ink",
+              "width": 3
+            },
+            {
+              "kind": "charge",
+              "x": 62,
+              "y": 48,
+              "sign": "+"
+            },
+            {
+              "kind": "vector",
+              "x1": 98,
+              "y1": 74,
+              "x2": 225,
+              "y2": 124,
+              "color": "velocity"
+            },
+            {
+              "kind": "label",
+              "x": 62,
+              "y": 26,
+              "text": "high $V$",
+              "color": "ink"
+            },
+            {
+              "kind": "label",
+              "x": 270,
+              "y": 138,
+              "text": "low $V$",
+              "color": "soft"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 190,
+              "text": "$V = U/q$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -30,15 +105,65 @@
         "type": "schematic",
         "caption": "Concentric equipotentials around a point charge; $V$ falls off as $1/r$ (V → 0 at ∞).",
         "params": {
-          "viewBox": [340, 205],
+          "viewBox": [
+            340,
+            205
+          ],
           "elements": [
-            { "kind": "circle", "x": 130, "y": 92, "r": 32, "color": "soft", "dash": true },
-            { "kind": "circle", "x": 130, "y": 92, "r": 60, "color": "soft", "dash": true },
-            { "kind": "circle", "x": 130, "y": 92, "r": 88, "color": "soft", "dash": true },
-            { "kind": "line", "x1": 130, "y1": 92, "x2": 218, "y2": 92, "color": "measure", "dash": true },
-            { "kind": "label", "x": 176, "y": 84, "text": "$r$", "color": "measure" },
-            { "kind": "charge", "x": 130, "y": 92, "sign": "+", "label": "$q$" },
-            { "kind": "label", "x": 170, "y": 196, "text": "$V = kq/r$", "color": "ink" }
+            {
+              "kind": "circle",
+              "x": 130,
+              "y": 92,
+              "r": 32,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "circle",
+              "x": 130,
+              "y": 92,
+              "r": 60,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "circle",
+              "x": 130,
+              "y": 92,
+              "r": 88,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "line",
+              "x1": 130,
+              "y1": 92,
+              "x2": 218,
+              "y2": 92,
+              "color": "measure",
+              "dash": true
+            },
+            {
+              "kind": "label",
+              "x": 176,
+              "y": 84,
+              "text": "$r$",
+              "color": "measure"
+            },
+            {
+              "kind": "charge",
+              "x": 130,
+              "y": 92,
+              "sign": "+",
+              "label": "$q$"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 196,
+              "text": "$V = kq/r$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -51,13 +176,52 @@
         "type": "schematic",
         "caption": "A charge accelerated across a potential difference gains kinetic energy: $W = q\\,\\Delta V = \\tfrac12 mv^2$.",
         "params": {
-          "viewBox": [340, 185],
+          "viewBox": [
+            340,
+            185
+          ],
           "elements": [
-            { "kind": "plate", "x": 55, "y": 45, "w": 12, "h": 105, "charge": "+", "label": "high $V$" },
-            { "kind": "plate", "x": 273, "y": 45, "w": 12, "h": 105, "charge": "-", "label": "low $V$" },
-            { "kind": "charge", "x": 130, "y": 98, "sign": "+", "label": "$q$" },
-            { "kind": "vector", "x1": 150, "y1": 98, "x2": 248, "y2": 98, "color": "velocity", "label": "$v$" },
-            { "kind": "label", "x": 170, "y": 176, "text": "$W = q\\,\\Delta V = \\tfrac12 mv^2$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 55,
+              "y": 45,
+              "w": 12,
+              "h": 105,
+              "charge": "+",
+              "label": "high $V$"
+            },
+            {
+              "kind": "plate",
+              "x": 273,
+              "y": 45,
+              "w": 12,
+              "h": 105,
+              "charge": "-",
+              "label": "low $V$"
+            },
+            {
+              "kind": "charge",
+              "x": 130,
+              "y": 98,
+              "sign": "+",
+              "label": "$q$"
+            },
+            {
+              "kind": "vector",
+              "x1": 150,
+              "y1": 98,
+              "x2": 248,
+              "y2": 98,
+              "color": "velocity",
+              "label": "$v$"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 176,
+              "text": "$W = q\\,\\Delta V = \\tfrac12 mv^2$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -70,20 +234,107 @@
         "type": "schematic",
         "caption": "In a uniform field, equipotentials (dashed) are perpendicular to $\\vec E$, and $V = Ed$.",
         "params": {
-          "viewBox": [340, 196],
+          "viewBox": [
+            340,
+            196
+          ],
           "elements": [
-            { "kind": "plate", "x": 55, "y": 40, "w": 12, "h": 110, "charge": "+" },
-            { "kind": "plate", "x": 273, "y": 40, "w": 12, "h": 110, "charge": "-" },
-            { "kind": "line", "x1": 125, "y1": 48, "x2": 125, "y2": 138, "color": "soft", "dash": true },
-            { "kind": "line", "x1": 170, "y1": 48, "x2": 170, "y2": 138, "color": "soft", "dash": true },
-            { "kind": "line", "x1": 215, "y1": 48, "x2": 215, "y2": 138, "color": "soft", "dash": true },
-            { "kind": "vector", "x1": 80, "y1": 63, "x2": 260, "y2": 63, "color": "field" },
-            { "kind": "vector", "x1": 80, "y1": 95, "x2": 260, "y2": 95, "color": "field" },
-            { "kind": "vector", "x1": 80, "y1": 127, "x2": 260, "y2": 127, "color": "field" },
-            { "kind": "label", "x": 104, "y": 54, "text": "$\\vec E$", "color": "field" },
-            { "kind": "line", "x1": 67, "y1": 156, "x2": 273, "y2": 156, "color": "measure" },
-            { "kind": "label", "x": 170, "y": 147, "text": "$d$", "color": "measure" },
-            { "kind": "label", "x": 170, "y": 183, "text": "$V = Ed$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 55,
+              "y": 40,
+              "w": 12,
+              "h": 110,
+              "charge": "+"
+            },
+            {
+              "kind": "plate",
+              "x": 273,
+              "y": 40,
+              "w": 12,
+              "h": 110,
+              "charge": "-"
+            },
+            {
+              "kind": "line",
+              "x1": 125,
+              "y1": 48,
+              "x2": 125,
+              "y2": 138,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "line",
+              "x1": 170,
+              "y1": 48,
+              "x2": 170,
+              "y2": 138,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "line",
+              "x1": 215,
+              "y1": 48,
+              "x2": 215,
+              "y2": 138,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "vector",
+              "x1": 80,
+              "y1": 63,
+              "x2": 260,
+              "y2": 63,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 80,
+              "y1": 95,
+              "x2": 260,
+              "y2": 95,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 80,
+              "y1": 127,
+              "x2": 260,
+              "y2": 127,
+              "color": "field"
+            },
+            {
+              "kind": "label",
+              "x": 104,
+              "y": 54,
+              "text": "$\\vec E$",
+              "color": "field"
+            },
+            {
+              "kind": "line",
+              "x1": 67,
+              "y1": 156,
+              "x2": 273,
+              "y2": 156,
+              "color": "measure"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 147,
+              "text": "$d$",
+              "color": "measure"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 183,
+              "text": "$V = Ed$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -96,16 +347,73 @@
         "type": "schematic",
         "caption": "Field lines cross equipotential surfaces (dashed) at right angles.",
         "params": {
-          "viewBox": [340, 205],
+          "viewBox": [
+            340,
+            205
+          ],
           "elements": [
-            { "kind": "circle", "x": 170, "y": 90, "r": 40, "color": "soft", "dash": true },
-            { "kind": "circle", "x": 170, "y": 90, "r": 72, "color": "soft", "dash": true },
-            { "kind": "vector", "x1": 170, "y1": 76, "x2": 170, "y2": 8, "color": "field" },
-            { "kind": "vector", "x1": 170, "y1": 104, "x2": 170, "y2": 172, "color": "field" },
-            { "kind": "vector", "x1": 156, "y1": 90, "x2": 80, "y2": 90, "color": "field" },
-            { "kind": "vector", "x1": 184, "y1": 90, "x2": 260, "y2": 90, "color": "field", "label": "$\\vec E$" },
-            { "kind": "charge", "x": 170, "y": 90, "sign": "+" },
-            { "kind": "label", "x": 170, "y": 196, "text": "$1\\ \\text{eV} = 1.6\\times10^{-19}\\ \\text{J}$", "color": "soft" }
+            {
+              "kind": "circle",
+              "x": 170,
+              "y": 90,
+              "r": 40,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "circle",
+              "x": 170,
+              "y": 90,
+              "r": 72,
+              "color": "soft",
+              "dash": true
+            },
+            {
+              "kind": "vector",
+              "x1": 170,
+              "y1": 76,
+              "x2": 170,
+              "y2": 8,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 170,
+              "y1": 104,
+              "x2": 170,
+              "y2": 172,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 156,
+              "y1": 90,
+              "x2": 80,
+              "y2": 90,
+              "color": "field"
+            },
+            {
+              "kind": "vector",
+              "x1": 184,
+              "y1": 90,
+              "x2": 260,
+              "y2": 90,
+              "color": "field",
+              "label": "$\\vec E$"
+            },
+            {
+              "kind": "charge",
+              "x": 170,
+              "y": 90,
+              "sign": "+"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 196,
+              "text": "$1\\ \\text{eV} = 1.6\\times10^{-19}\\ \\text{J}$",
+              "color": "soft"
+            }
           ]
         }
       }
@@ -120,20 +428,108 @@
         "type": "schematic",
         "caption": "The battery holds a 12 V difference; each coulomb gains $W = q\\,\\Delta V$ driving the lamp.",
         "params": {
-          "viewBox": [340, 180],
+          "viewBox": [
+            340,
+            180
+          ],
           "elements": [
-            { "kind": "line", "x1": 70, "y1": 45, "x2": 270, "y2": 45, "color": "ink" },
-            { "kind": "line", "x1": 270, "y1": 45, "x2": 270, "y2": 78, "color": "ink" },
-            { "kind": "line", "x1": 270, "y1": 106, "x2": 270, "y2": 140, "color": "ink" },
-            { "kind": "line", "x1": 70, "y1": 140, "x2": 270, "y2": 140, "color": "ink" },
-            { "kind": "line", "x1": 70, "y1": 45, "x2": 70, "y2": 80, "color": "ink" },
-            { "kind": "line", "x1": 70, "y1": 96, "x2": 70, "y2": 140, "color": "ink" },
-            { "kind": "line", "x1": 56, "y1": 80, "x2": 84, "y2": 80, "color": "ink", "width": 2 },
-            { "kind": "line", "x1": 62, "y1": 96, "x2": 78, "y2": 96, "color": "ink", "width": 5 },
-            { "kind": "label", "x": 48, "y": 88, "text": "$12\\ \\text{V}$", "color": "ink", "anchor": "end" },
-            { "kind": "circle", "x": 270, "y": 92, "r": 14, "color": "velocity" },
-            { "kind": "vector", "x1": 120, "y1": 45, "x2": 178, "y2": 45, "color": "current", "label": "$I$" },
-            { "kind": "label", "x": 170, "y": 168, "text": "each coulomb gains $W = q\\,\\Delta V$", "color": "soft" }
+            {
+              "kind": "line",
+              "x1": 70,
+              "y1": 45,
+              "x2": 270,
+              "y2": 45,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 270,
+              "y1": 45,
+              "x2": 270,
+              "y2": 78,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 270,
+              "y1": 106,
+              "x2": 270,
+              "y2": 140,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 70,
+              "y1": 140,
+              "x2": 270,
+              "y2": 140,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 70,
+              "y1": 45,
+              "x2": 70,
+              "y2": 80,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 70,
+              "y1": 96,
+              "x2": 70,
+              "y2": 140,
+              "color": "ink"
+            },
+            {
+              "kind": "line",
+              "x1": 56,
+              "y1": 80,
+              "x2": 84,
+              "y2": 80,
+              "color": "ink",
+              "width": 2
+            },
+            {
+              "kind": "line",
+              "x1": 62,
+              "y1": 96,
+              "x2": 78,
+              "y2": 96,
+              "color": "ink",
+              "width": 5
+            },
+            {
+              "kind": "label",
+              "x": 48,
+              "y": 88,
+              "text": "$12\\ \\text{V}$",
+              "color": "ink",
+              "anchor": "end"
+            },
+            {
+              "kind": "circle",
+              "x": 270,
+              "y": 92,
+              "r": 14,
+              "color": "velocity"
+            },
+            {
+              "kind": "vector",
+              "x1": 120,
+              "y1": 45,
+              "x2": 178,
+              "y2": 45,
+              "color": "current",
+              "label": "$I$"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 168,
+              "text": "each coulomb gains $W = q\\,\\Delta V$",
+              "color": "soft"
+            }
           ]
         }
       }
@@ -146,14 +542,59 @@
         "type": "schematic",
         "caption": "A charged capacitor releases energy $U = qV$ through the chest to reset the heartbeat.",
         "params": {
-          "viewBox": [340, 175],
+          "viewBox": [
+            340,
+            175
+          ],
           "elements": [
-            { "kind": "plate", "x": 45, "y": 65, "w": 16, "h": 60, "label": "paddle" },
-            { "kind": "plate", "x": 279, "y": 65, "w": 16, "h": 60, "label": "paddle" },
-            { "kind": "circle", "x": 170, "y": 95, "r": 24, "color": "pos", "label": "heart" },
-            { "kind": "vector", "x1": 63, "y1": 95, "x2": 142, "y2": 95, "color": "current", "label": "shock" },
-            { "kind": "vector", "x1": 277, "y1": 95, "x2": 198, "y2": 95, "color": "current" },
-            { "kind": "label", "x": 170, "y": 162, "text": "capacitor dumps $U = qV$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 45,
+              "y": 65,
+              "w": 16,
+              "h": 60,
+              "label": "paddle"
+            },
+            {
+              "kind": "plate",
+              "x": 279,
+              "y": 65,
+              "w": 16,
+              "h": 60,
+              "label": "paddle"
+            },
+            {
+              "kind": "circle",
+              "x": 170,
+              "y": 95,
+              "r": 24,
+              "color": "pos",
+              "label": "heart"
+            },
+            {
+              "kind": "vector",
+              "x1": 63,
+              "y1": 95,
+              "x2": 142,
+              "y2": 95,
+              "color": "current",
+              "label": "shock"
+            },
+            {
+              "kind": "vector",
+              "x1": 277,
+              "y1": 95,
+              "x2": 198,
+              "y2": 95,
+              "color": "current"
+            },
+            {
+              "kind": "label",
+              "x": 170,
+              "y": 162,
+              "text": "capacitor dumps $U = qV$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -166,16 +607,75 @@
         "type": "schematic",
         "caption": "A potential difference does work $qV = \\tfrac12 mv^2$, setting the electron's speed before it hits the screen.",
         "params": {
-          "viewBox": [340, 180],
+          "viewBox": [
+            340,
+            180
+          ],
           "elements": [
-            { "kind": "plate", "x": 40, "y": 55, "w": 10, "h": 70, "charge": "-", "label": "cathode" },
-            { "kind": "plate", "x": 150, "y": 55, "w": 10, "h": 70, "charge": "+", "label": "anode" },
-            { "kind": "charge", "x": 95, "y": 90, "sign": "-", "label": "$e^-$" },
-            { "kind": "vector", "x1": 115, "y1": 90, "x2": 268, "y2": 90, "color": "velocity", "label": "$v$" },
-            { "kind": "line", "x1": 300, "y1": 45, "x2": 300, "y2": 150, "color": "soft", "width": 5 },
-            { "kind": "label", "x": 300, "y": 36, "text": "screen", "color": "soft" },
-            { "kind": "point", "x": 300, "y": 90, "r": 5, "color": "accent" },
-            { "kind": "label", "x": 150, "y": 168, "text": "$qV = \\tfrac12 mv^2$", "color": "ink" }
+            {
+              "kind": "plate",
+              "x": 40,
+              "y": 55,
+              "w": 10,
+              "h": 70,
+              "charge": "-",
+              "label": "cathode"
+            },
+            {
+              "kind": "plate",
+              "x": 150,
+              "y": 55,
+              "w": 10,
+              "h": 70,
+              "charge": "+",
+              "label": "anode"
+            },
+            {
+              "kind": "charge",
+              "x": 95,
+              "y": 90,
+              "sign": "-",
+              "label": "$e^-$"
+            },
+            {
+              "kind": "vector",
+              "x1": 115,
+              "y1": 90,
+              "x2": 268,
+              "y2": 90,
+              "color": "velocity",
+              "label": "$v$"
+            },
+            {
+              "kind": "line",
+              "x1": 300,
+              "y1": 45,
+              "x2": 300,
+              "y2": 150,
+              "color": "soft",
+              "width": 5
+            },
+            {
+              "kind": "label",
+              "x": 300,
+              "y": 36,
+              "text": "screen",
+              "color": "soft"
+            },
+            {
+              "kind": "point",
+              "x": 300,
+              "y": 90,
+              "r": 5,
+              "color": "accent"
+            },
+            {
+              "kind": "label",
+              "x": 150,
+              "y": 168,
+              "text": "$qV = \\tfrac12 mv^2$",
+              "color": "ink"
+            }
           ]
         }
       }
@@ -187,15 +687,125 @@
     "combined_query": "electric potential calculus based physics worked examples volts"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "Find the potential $0.30$ m from a $+5.0\\ \\mu\\text{C}$ point charge.", "correct_answer": "$\\approx 1.5\\times10^{5}$ V", "solution_steps": ["$V = k\\dfrac{q}{r}$", "$V = (8.99\\times10^9)\\dfrac{5.0\\times10^{-6}}{0.30}$", "$V \\approx 1.5\\times10^{5}$ V"], "hint": "Potential of a point charge is $kq/r$ (no square)." },
-    { "id": "p02", "difficulty": "easy", "prompt": "How much work moves a $2.0\\ \\mu\\text{C}$ charge through a potential difference of $100$ V?", "correct_answer": "$2.0\\times10^{-4}$ J", "solution_steps": ["$W = q\\,\\Delta V$", "$W = (2.0\\times10^{-6})(100)$", "$W = 2.0\\times10^{-4}$ J"], "hint": "Work equals charge times potential difference." },
-    { "id": "p03", "difficulty": "easy", "prompt": "A $3.0\\ \\mu\\text{C}$ charge sits where the potential is $200$ V. Find its potential energy.", "correct_answer": "$6.0\\times10^{-4}$ J", "solution_steps": ["$U = qV$", "$U = (3.0\\times10^{-6})(200)$", "$U = 6.0\\times10^{-4}$ J"], "hint": "Energy is charge times potential." },
-    { "id": "p04", "difficulty": "medium", "prompt": "A uniform field $E = 5000$ N/C exists across a $2.0$ cm gap. Find the potential difference across the gap.", "correct_answer": "$100$ V", "solution_steps": ["$V = Ed$", "$V = (5000)(0.020)$", "$V = 100$ V"], "hint": "In a uniform field, voltage is field times distance." },
-    { "id": "p05", "difficulty": "medium", "prompt": "An electron is accelerated from rest through $100$ V. Find its final speed.", "correct_answer": "$\\approx 5.9\\times10^{6}$ m/s", "solution_steps": ["Energy: $eV = \\tfrac12 m v^2 \\Rightarrow v = \\sqrt{2eV/m}$.", "$v = \\sqrt{\\dfrac{2(1.6\\times10^{-19})(100)}{9.11\\times10^{-31}}}$", "$v \\approx 5.9\\times10^{6}$ m/s"], "hint": "Set the energy gained $eV$ equal to kinetic energy." },
-    { "id": "p06", "difficulty": "medium", "prompt": "A $+3\\ \\mu\\text{C}$ and a $-3\\ \\mu\\text{C}$ charge are each $0.20$ m from point P. Find the potential at P.", "correct_answer": "$0$ V", "solution_steps": ["Potentials add as scalars: $V = k\\dfrac{+3\\times10^{-6}}{0.20} + k\\dfrac{-3\\times10^{-6}}{0.20}$.", "The two terms are equal and opposite.", "$V = 0$."], "hint": "Potential is a signed scalar; opposite equal charges at equal distance cancel." },
-    { "id": "p07", "difficulty": "medium", "prompt": "How much energy (in joules) does an electron gain crossing $500$ V?", "correct_answer": "$8.0\\times10^{-17}$ J", "solution_steps": ["$W = eV = (1.6\\times10^{-19})(500)$", "$W = 8.0\\times10^{-17}$ J", "(equivalently $500$ eV)"], "hint": "Use $W = eV$; each volt gives the electron $1.6\\times10^{-19}$ J." },
-    { "id": "p08", "difficulty": "hard", "prompt": "Two $+2.0\\ \\mu\\text{C}$ charges are $0.40$ m apart. Find the potential at the midpoint between them.", "correct_answer": "$\\approx 1.8\\times10^{5}$ V", "solution_steps": ["Each charge is $0.20$ m from the midpoint.", "$V = 2 \\times k\\dfrac{2.0\\times10^{-6}}{0.20} = 2(8.99\\times10^{4})$", "$V \\approx 1.8\\times10^{5}$ V"], "hint": "Add the (scalar) potentials of the two charges — they reinforce here." },
-    { "id": "p09", "difficulty": "hard", "prompt": "Find the potential energy of a $+4.0\\ \\mu\\text{C}$ and a $+2.0\\ \\mu\\text{C}$ charge separated by $0.30$ m.", "correct_answer": "$\\approx 0.24$ J", "solution_steps": ["$U = k\\dfrac{q_1 q_2}{r}$", "$U = (8.99\\times10^9)\\dfrac{(4.0\\times10^{-6})(2.0\\times10^{-6})}{0.30}$", "$U \\approx 0.24$ J"], "hint": "Use the pair potential energy $U = kq_1q_2/r$ (one power of $r$)." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "How much work is required to bring two $+3.0\\ \\mu\\text{C}$ charges from far apart to $0.10$ m apart?", "correct_answer": "$\\approx 0.81$ J", "solution_steps": ["Work equals the final potential energy (starting energy at infinity is zero).", "$W = U = k\\dfrac{q^2}{r} = (8.99\\times10^9)\\dfrac{(3.0\\times10^{-6})^2}{0.10}$", "$W \\approx 0.81$ J"], "hint": "The work done equals the assembled pair's potential energy." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the potential $0.30$ m from a $+5.0\\ \\mu\\text{C}$ point charge.",
+      "correct_answer": "$\\approx 1.5\\times10^{5}$ V",
+      "solution_steps": [
+        "$V = k\\dfrac{q}{r}$",
+        "$V = (8.99\\times10^9)\\dfrac{5.0\\times10^{-6}}{0.30}$",
+        "$V \\approx 1.5\\times10^{5}$ V"
+      ],
+      "hint": "Potential of a point charge is $kq/r$ (no square)."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "How much work moves a $2.0\\ \\mu\\text{C}$ charge through a potential difference of $100$ V?",
+      "correct_answer": "$2.0\\times10^{-4}$ J",
+      "solution_steps": [
+        "$W = q\\,\\Delta V$",
+        "$W = (2.0\\times10^{-6})(100)$",
+        "$W = 2.0\\times10^{-4}$ J"
+      ],
+      "hint": "Work equals charge times potential difference."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "A $3.0\\ \\mu\\text{C}$ charge sits where the potential is $200$ V. Find its potential energy.",
+      "correct_answer": "$6.0\\times10^{-4}$ J",
+      "solution_steps": [
+        "$U = qV$",
+        "$U = (3.0\\times10^{-6})(200)$",
+        "$U = 6.0\\times10^{-4}$ J"
+      ],
+      "hint": "Energy is charge times potential."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A uniform field $E = 5000$ N/C exists across a $2.0$ cm gap. Find the potential difference across the gap.",
+      "correct_answer": "$100$ V",
+      "solution_steps": [
+        "$V = Ed$",
+        "$V = (5000)(0.020)$",
+        "$V = 100$ V"
+      ],
+      "hint": "In a uniform field, voltage is field times distance."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "An electron is accelerated from rest through $100$ V. Find its final speed.",
+      "correct_answer": "$\\approx 5.9\\times10^{6}$ m/s",
+      "solution_steps": [
+        "Energy: $eV = \\tfrac12 m v^2 \\Rightarrow v = \\sqrt{2eV/m}$.",
+        "$v = \\sqrt{\\dfrac{2(1.6\\times10^{-19})(100)}{9.11\\times10^{-31}}}$",
+        "$v \\approx 5.9\\times10^{6}$ m/s"
+      ],
+      "hint": "Set the energy gained $eV$ equal to kinetic energy."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "A $+3\\ \\mu\\text{C}$ and a $-3\\ \\mu\\text{C}$ charge are each $0.20$ m from point P. Find the potential at P.",
+      "correct_answer": "$0$ V",
+      "solution_steps": [
+        "Potentials add as scalars: $V = k\\dfrac{+3\\times10^{-6}}{0.20} + k\\dfrac{-3\\times10^{-6}}{0.20}$.",
+        "The two terms are equal and opposite.",
+        "$V = 0$."
+      ],
+      "hint": "Potential is a signed scalar; opposite equal charges at equal distance cancel."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "How much energy (in joules) does an electron gain crossing $500$ V?",
+      "correct_answer": "$8.0\\times10^{-17}$ J",
+      "solution_steps": [
+        "$W = eV = (1.6\\times10^{-19})(500)$",
+        "$W = 8.0\\times10^{-17}$ J",
+        "(equivalently $500$ eV)"
+      ],
+      "hint": "Use $W = eV$; each volt gives the electron $1.6\\times10^{-19}$ J."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Two $+2.0\\ \\mu\\text{C}$ charges are $0.40$ m apart. Find the potential at the midpoint between them.",
+      "correct_answer": "$\\approx 1.8\\times10^{5}$ V",
+      "solution_steps": [
+        "Each charge is $0.20$ m from the midpoint.",
+        "$V = 2 \\times k\\dfrac{2.0\\times10^{-6}}{0.20} = 2(8.99\\times10^{4})$",
+        "$V \\approx 1.8\\times10^{5}$ V"
+      ],
+      "hint": "Add the (scalar) potentials of the two charges — they reinforce here."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "Find the potential energy of a $+4.0\\ \\mu\\text{C}$ and a $+2.0\\ \\mu\\text{C}$ charge separated by $0.30$ m.",
+      "correct_answer": "$\\approx 0.24$ J",
+      "solution_steps": [
+        "$U = k\\dfrac{q_1 q_2}{r}$",
+        "$U = (8.99\\times10^9)\\dfrac{(4.0\\times10^{-6})(2.0\\times10^{-6})}{0.30}$",
+        "$U \\approx 0.24$ J"
+      ],
+      "hint": "Use the pair potential energy $U = kq_1q_2/r$ (one power of $r$)."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "How much work is required to bring two $+3.0\\ \\mu\\text{C}$ charges from far apart to $0.10$ m apart?",
+      "correct_answer": "$\\approx 0.81$ J",
+      "solution_steps": [
+        "Work equals the final potential energy (starting energy at infinity is zero).",
+        "$W = U = k\\dfrac{q^2}{r} = (8.99\\times10^9)\\dfrac{(3.0\\times10^{-6})^2}{0.10}$",
+        "$W \\approx 0.81$ J"
+      ],
+      "hint": "The work done equals the assembled pair's potential energy."
+    }
   ]
 }

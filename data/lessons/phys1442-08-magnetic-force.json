@@ -1,17 +1,83 @@
 {
   "title": "Magnetic Forces & Fields",
   "summary": "A magnetic field exerts a force on moving charge, $F = qvB\\sin\\theta$, and on a current-carrying wire, $F = BIL\\sin\\theta$. The force is always perpendicular to the velocity, so charges move in circles of radius $r = mv/(qB)$, and current loops feel a torque $\\tau = NBIA\\sin\\theta$. (University Physics Vol. 2, Ch. 11.)",
+  "glossary": {
+    "magnetic field": {
+      "plain": "The region around a magnet or current where magnetic forces act.",
+      "in_class": "Symbol $\\vec B$, measured in teslas; it exerts force on moving charges."
+    },
+    "tesla": {
+      "plain": "The unit of magnetic field strength.",
+      "in_class": "$1\\text{ T}$ is strong; Earth's field is about $5\\times10^{-5}$ T."
+    },
+    "magnetic force": {
+      "plain": "The force a magnetic field exerts on a moving charge or current.",
+      "in_class": "$\\vec F = q\\vec v \\times \\vec B$; on a wire, $\\vec F = I\\vec L \\times \\vec B$."
+    },
+    "Lorentz force": {
+      "plain": "The combined electric and magnetic force on a charge.",
+      "in_class": "$\\vec F = q(\\vec E + \\vec v \\times \\vec B)$."
+    },
+    "right-hand rule": {
+      "plain": "A hand trick to find the direction of a magnetic force or field.",
+      "in_class": "Point fingers along $\\vec v$, curl toward $\\vec B$; the thumb gives $\\vec v \\times \\vec B$ for positive charge."
+    },
+    "cross product": {
+      "plain": "A way to multiply two vectors that gives a vector perpendicular to both.",
+      "in_class": "$|\\vec v \\times \\vec B| = vB\\sin\\theta$; its direction comes from the right-hand rule."
+    },
+    "cyclotron": {
+      "plain": "Circular motion of a charge trapped in a magnetic field.",
+      "in_class": "The magnetic force provides the centripetal force: $qvB = \\dfrac{mv^2}{r}$."
+    },
+    "magnetic flux": {
+      "plain": "How much magnetic field passes through an area.",
+      "in_class": "$\\Phi_B = \\vec B \\cdot \\vec A = BA\\cos\\theta$, in webers."
+    }
+  },
   "concept_sections": [
-    { "level": 1, "heading": "Force on a moving charge", "explanation": "A magnetic field $B$ pushes on charge only when it moves: $F = qvB\\sin\\theta$, where $\\theta$ is the angle between the velocity and the field. A charge moving along the field ($\\theta = 0$) feels no force; moving across it ($\\theta = 90^\\circ$) feels the maximum." },
-    { "level": 2, "heading": "Direction: the right-hand rule", "explanation": "The force is perpendicular to both the velocity and the field, given by $\\vec{F} = q\\vec{v}\\times\\vec{B}$. Point your right hand's fingers along $\\vec{v}$, curl toward $\\vec{B}$; the thumb gives the force on a positive charge (reverse it for negative). This is why the force never speeds a charge up — only turns it." },
-    { "level": 3, "heading": "Force on a current-carrying wire", "explanation": "A wire is just moving charges, so a field pushes on it too: $F = BIL\\sin\\theta$, where $I$ is the current, $L$ the length in the field, and $\\theta$ the angle between the wire and $\\vec{B}$. This force is what spins every electric motor." },
-    { "level": 4, "heading": "Circular motion", "explanation": "Because the magnetic force is always perpendicular to the velocity, a charge entering a uniform field moves in a circle. Setting $qvB = mv^2/r$ gives radius $r = \\dfrac{mv}{qB}$ and period $T = \\dfrac{2\\pi m}{qB}$ (independent of speed) — the principle of cyclotrons and mass spectrometers." },
-    { "level": 5, "heading": "Torque on a current loop", "explanation": "A loop of $N$ turns carrying current $I$ with area $A$ in a field feels a torque $\\tau = NBIA\\sin\\theta$, where $\\theta$ is between the field and the loop's normal. The loop twists to align — the working principle of motors and analog meters. The product $NIA$ is the loop's magnetic moment." }
+    {
+      "level": 1,
+      "heading": "Force on a moving charge",
+      "explanation": "A magnetic field $B$ pushes on charge only when it moves: $F = qvB\\sin\\theta$, where $\\theta$ is the angle between the velocity and the field. A charge moving along the field ($\\theta = 0$) feels no force; moving across it ($\\theta = 90^\\circ$) feels the maximum."
+    },
+    {
+      "level": 2,
+      "heading": "Direction: the right-hand rule",
+      "explanation": "The force is perpendicular to both the velocity and the field, given by $\\vec{F} = q\\vec{v}\\times\\vec{B}$. Point your right hand's fingers along $\\vec{v}$, curl toward $\\vec{B}$; the thumb gives the force on a positive charge (reverse it for negative). This is why the force never speeds a charge up — only turns it."
+    },
+    {
+      "level": 3,
+      "heading": "Force on a current-carrying wire",
+      "explanation": "A wire is just moving charges, so a field pushes on it too: $F = BIL\\sin\\theta$, where $I$ is the current, $L$ the length in the field, and $\\theta$ the angle between the wire and $\\vec{B}$. This force is what spins every electric motor."
+    },
+    {
+      "level": 4,
+      "heading": "Circular motion",
+      "explanation": "Because the magnetic force is always perpendicular to the velocity, a charge entering a uniform field moves in a circle. Setting $qvB = mv^2/r$ gives radius $r = \\dfrac{mv}{qB}$ and period $T = \\dfrac{2\\pi m}{qB}$ (independent of speed) — the principle of cyclotrons and mass spectrometers."
+    },
+    {
+      "level": 5,
+      "heading": "Torque on a current loop",
+      "explanation": "A loop of $N$ turns carrying current $I$ with area $A$ in a field feels a torque $\\tau = NBIA\\sin\\theta$, where $\\theta$ is between the field and the loop's normal. The loop twists to align — the working principle of motors and analog meters. The product $NIA$ is the loop's magnetic moment."
+    }
   ],
   "real_world_examples": [
-    { "title": "Mass spectrometer", "scenario": "A lab identifies molecules by their mass.", "how_the_math_applies": "Ions of the same speed curve with radius $r = mv/(qB)$; heavier ions curve less. Measuring $r$ reveals the mass, separating the sample by molecular weight." },
-    { "title": "Electric motor", "scenario": "A motor turns electrical energy into rotation.", "how_the_math_applies": "Current loops in a field feel torque $\\tau = NBIA\\sin\\theta$. Commutators flip the current each half-turn so the torque keeps the shaft spinning one way." },
-    { "title": "The aurora", "scenario": "Charged particles from the Sun glow near the poles.", "how_the_math_applies": "Earth's magnetic field bends the particles via $F = qvB\\sin\\theta$, funneling them along field lines toward the poles where they strike the atmosphere and glow." }
+    {
+      "title": "Mass spectrometer",
+      "scenario": "A lab identifies molecules by their mass.",
+      "how_the_math_applies": "Ions of the same speed curve with radius $r = mv/(qB)$; heavier ions curve less. Measuring $r$ reveals the mass, separating the sample by molecular weight."
+    },
+    {
+      "title": "Electric motor",
+      "scenario": "A motor turns electrical energy into rotation.",
+      "how_the_math_applies": "Current loops in a field feel torque $\\tau = NBIA\\sin\\theta$. Commutators flip the current each half-turn so the torque keeps the shaft spinning one way."
+    },
+    {
+      "title": "The aurora",
+      "scenario": "Charged particles from the Sun glow near the poles.",
+      "how_the_math_applies": "Earth's magnetic field bends the particles via $F = qvB\\sin\\theta$, funneling them along field lines toward the poles where they strike the atmosphere and glow."
+    }
   ],
   "videos": {
     "concept_query": "magnetic force on moving charge right hand rule explained",
@@ -19,15 +85,125 @@
     "combined_query": "magnetic forces and fields calculus based physics worked examples"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "A charge $q = 1.6\\times10^{-19}$ C moves at $v = 1.0\\times10^{6}$ m/s perpendicular to a field $B = 0.50$ T. Find the force.", "correct_answer": "$8.0\\times10^{-14}$ N", "solution_steps": ["$F = qvB\\sin 90^\\circ = qvB$", "$F = (1.6\\times10^{-19})(1.0\\times10^{6})(0.50)$", "$F = 8.0\\times10^{-14}$ N"], "hint": "At $90^\\circ$, $F = qvB$." },
-    { "id": "p02", "difficulty": "easy", "prompt": "A wire of length $0.50$ m carries $3.0$ A perpendicular to a field $B = 0.20$ T. Find the force on it.", "correct_answer": "$0.30$ N", "solution_steps": ["$F = BIL$", "$F = (0.20)(3.0)(0.50)$", "$F = 0.30$ N"], "hint": "Use $F = BIL$ at $90^\\circ$." },
-    { "id": "p03", "difficulty": "easy", "prompt": "A positive charge moves in $+x$; the field points in $+y$. Which way is the magnetic force?", "correct_answer": "$+z$", "solution_steps": ["$\\vec{F} = q\\vec{v}\\times\\vec{B}$.", "$\\hat{x}\\times\\hat{y} = \\hat{z}$, and $q>0$.", "So the force is in $+z$."], "hint": "Use the right-hand rule: $\\hat{x}\\times\\hat{y}=\\hat{z}$." },
-    { "id": "p04", "difficulty": "medium", "prompt": "An electron ($m = 9.11\\times10^{-31}$ kg) moves at $v = 1.0\\times10^{7}$ m/s across a field $B = 0.010$ T. Find the radius of its circular path.", "correct_answer": "$\\approx 5.7\\times10^{-3}$ m", "solution_steps": ["$r = \\dfrac{mv}{qB}$", "$r = \\dfrac{(9.11\\times10^{-31})(1.0\\times10^{7})}{(1.6\\times10^{-19})(0.010)}$", "$r \\approx 5.7\\times10^{-3}$ m"], "hint": "Set $qvB = mv^2/r$ and solve for $r$." },
-    { "id": "p05", "difficulty": "medium", "prompt": "A proton moves at $v = 2.0\\times10^{6}$ m/s perpendicular to $B = 0.30$ T. Find the force ($q = 1.6\\times10^{-19}$ C).", "correct_answer": "$\\approx 9.6\\times10^{-14}$ N", "solution_steps": ["$F = qvB$", "$F = (1.6\\times10^{-19})(2.0\\times10^{6})(0.30)$", "$F \\approx 9.6\\times10^{-14}$ N"], "hint": "Perpendicular, so $F = qvB$." },
-    { "id": "p06", "difficulty": "medium", "prompt": "In a velocity selector, $E = 1.0\\times10^{4}$ V/m and $B = 0.020$ T are crossed. What speed passes straight through?", "correct_answer": "$5.0\\times10^{5}$ m/s", "solution_steps": ["Forces balance: $qE = qvB \\Rightarrow v = E/B$.", "$v = \\dfrac{1.0\\times10^{4}}{0.020}$", "$v = 5.0\\times10^{5}$ m/s"], "hint": "The electric and magnetic forces cancel when $v = E/B$." },
-    { "id": "p07", "difficulty": "medium", "prompt": "A wire carries $5.0$ A over a length $2.0$ m in a field $B = 0.40$ T at $30^\\circ$ to the wire. Find the force.", "correct_answer": "$2.0$ N", "solution_steps": ["$F = BIL\\sin\\theta$", "$F = (0.40)(5.0)(2.0)\\sin 30^\\circ$", "$F = (0.40)(5.0)(2.0)(0.5) = 2.0$ N"], "hint": "Include $\\sin\\theta$ with $\\theta = 30^\\circ$." },
-    { "id": "p08", "difficulty": "hard", "prompt": "Find the period of a proton's circular motion in $B = 0.50$ T ($m = 1.67\\times10^{-27}$ kg, $q = 1.6\\times10^{-19}$ C).", "correct_answer": "$\\approx 1.3\\times10^{-7}$ s", "solution_steps": ["$T = \\dfrac{2\\pi m}{qB}$", "$T = \\dfrac{2\\pi (1.67\\times10^{-27})}{(1.6\\times10^{-19})(0.50)}$", "$T \\approx 1.3\\times10^{-7}$ s"], "hint": "The period is independent of speed: $T = 2\\pi m/(qB)$." },
-    { "id": "p09", "difficulty": "hard", "prompt": "A coil of $100$ turns, area $0.010\\ \\text{m}^2$, carries $2.0$ A in a field $B = 0.20$ T with the field in the plane of the loop. Find the torque.", "correct_answer": "$0.40$ N·m", "solution_steps": ["Field in the plane means $\\theta = 90^\\circ$, so $\\tau = NBIA$.", "$\\tau = (100)(0.20)(2.0)(0.010)$", "$\\tau = 0.40$ N·m"], "hint": "Maximum torque ($\\sin 90^\\circ = 1$): $\\tau = NBIA$." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "How much work does the magnetic force do on a charge moving through a magnetic field, and why?", "correct_answer": "Zero", "solution_steps": ["The magnetic force is always perpendicular to the velocity.", "Work $= \\vec{F}\\cdot\\vec{d}$, and a perpendicular force does no work.", "So the magnetic force does zero work — it changes direction, not speed."], "hint": "Think about the angle between the force and the motion." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A charge $q = 1.6\\times10^{-19}$ C moves at $v = 1.0\\times10^{6}$ m/s perpendicular to a field $B = 0.50$ T. Find the force.",
+      "correct_answer": "$8.0\\times10^{-14}$ N",
+      "solution_steps": [
+        "$F = qvB\\sin 90^\\circ = qvB$",
+        "$F = (1.6\\times10^{-19})(1.0\\times10^{6})(0.50)$",
+        "$F = 8.0\\times10^{-14}$ N"
+      ],
+      "hint": "At $90^\\circ$, $F = qvB$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A wire of length $0.50$ m carries $3.0$ A perpendicular to a field $B = 0.20$ T. Find the force on it.",
+      "correct_answer": "$0.30$ N",
+      "solution_steps": [
+        "$F = BIL$",
+        "$F = (0.20)(3.0)(0.50)$",
+        "$F = 0.30$ N"
+      ],
+      "hint": "Use $F = BIL$ at $90^\\circ$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "A positive charge moves in $+x$; the field points in $+y$. Which way is the magnetic force?",
+      "correct_answer": "$+z$",
+      "solution_steps": [
+        "$\\vec{F} = q\\vec{v}\\times\\vec{B}$.",
+        "$\\hat{x}\\times\\hat{y} = \\hat{z}$, and $q>0$.",
+        "So the force is in $+z$."
+      ],
+      "hint": "Use the right-hand rule: $\\hat{x}\\times\\hat{y}=\\hat{z}$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "An electron ($m = 9.11\\times10^{-31}$ kg) moves at $v = 1.0\\times10^{7}$ m/s across a field $B = 0.010$ T. Find the radius of its circular path.",
+      "correct_answer": "$\\approx 5.7\\times10^{-3}$ m",
+      "solution_steps": [
+        "$r = \\dfrac{mv}{qB}$",
+        "$r = \\dfrac{(9.11\\times10^{-31})(1.0\\times10^{7})}{(1.6\\times10^{-19})(0.010)}$",
+        "$r \\approx 5.7\\times10^{-3}$ m"
+      ],
+      "hint": "Set $qvB = mv^2/r$ and solve for $r$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A proton moves at $v = 2.0\\times10^{6}$ m/s perpendicular to $B = 0.30$ T. Find the force ($q = 1.6\\times10^{-19}$ C).",
+      "correct_answer": "$\\approx 9.6\\times10^{-14}$ N",
+      "solution_steps": [
+        "$F = qvB$",
+        "$F = (1.6\\times10^{-19})(2.0\\times10^{6})(0.30)$",
+        "$F \\approx 9.6\\times10^{-14}$ N"
+      ],
+      "hint": "Perpendicular, so $F = qvB$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "In a velocity selector, $E = 1.0\\times10^{4}$ V/m and $B = 0.020$ T are crossed. What speed passes straight through?",
+      "correct_answer": "$5.0\\times10^{5}$ m/s",
+      "solution_steps": [
+        "Forces balance: $qE = qvB \\Rightarrow v = E/B$.",
+        "$v = \\dfrac{1.0\\times10^{4}}{0.020}$",
+        "$v = 5.0\\times10^{5}$ m/s"
+      ],
+      "hint": "The electric and magnetic forces cancel when $v = E/B$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "A wire carries $5.0$ A over a length $2.0$ m in a field $B = 0.40$ T at $30^\\circ$ to the wire. Find the force.",
+      "correct_answer": "$2.0$ N",
+      "solution_steps": [
+        "$F = BIL\\sin\\theta$",
+        "$F = (0.40)(5.0)(2.0)\\sin 30^\\circ$",
+        "$F = (0.40)(5.0)(2.0)(0.5) = 2.0$ N"
+      ],
+      "hint": "Include $\\sin\\theta$ with $\\theta = 30^\\circ$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Find the period of a proton's circular motion in $B = 0.50$ T ($m = 1.67\\times10^{-27}$ kg, $q = 1.6\\times10^{-19}$ C).",
+      "correct_answer": "$\\approx 1.3\\times10^{-7}$ s",
+      "solution_steps": [
+        "$T = \\dfrac{2\\pi m}{qB}$",
+        "$T = \\dfrac{2\\pi (1.67\\times10^{-27})}{(1.6\\times10^{-19})(0.50)}$",
+        "$T \\approx 1.3\\times10^{-7}$ s"
+      ],
+      "hint": "The period is independent of speed: $T = 2\\pi m/(qB)$."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "A coil of $100$ turns, area $0.010\\ \\text{m}^2$, carries $2.0$ A in a field $B = 0.20$ T with the field in the plane of the loop. Find the torque.",
+      "correct_answer": "$0.40$ N·m",
+      "solution_steps": [
+        "Field in the plane means $\\theta = 90^\\circ$, so $\\tau = NBIA$.",
+        "$\\tau = (100)(0.20)(2.0)(0.010)$",
+        "$\\tau = 0.40$ N·m"
+      ],
+      "hint": "Maximum torque ($\\sin 90^\\circ = 1$): $\\tau = NBIA$."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "How much work does the magnetic force do on a charge moving through a magnetic field, and why?",
+      "correct_answer": "Zero",
+      "solution_steps": [
+        "The magnetic force is always perpendicular to the velocity.",
+        "Work $= \\vec{F}\\cdot\\vec{d}$, and a perpendicular force does no work.",
+        "So the magnetic force does zero work — it changes direction, not speed."
+      ],
+      "hint": "Think about the angle between the force and the motion."
+    }
   ]
 }

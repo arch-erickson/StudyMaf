@@ -838,6 +838,14 @@ window.App = (function () {
     top.append(closeX, title, clock); session.appendChild(top);
     var body = el("div", "session-body"); var inner = el("div", "session-inner"); inner.style.maxWidth = "760px"; body.appendChild(inner); session.appendChild(body);
 
+    // Quiz allows scratch work + the full calculator (but no hints / steps / tutor).
+    var qtools = el("div", "q-tools"); qtools.style.margin = "0 0 16px";
+    var padBtn = ib("btn subtle", "edit", "Scratch work");
+    var calcBtn = ib("btn subtle", "calculator", "Calculator");
+    padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: "quiz", problemLabel: "Quiz scratch", prompt: "Quiz — " + lesson.title, hasSession: true }); };
+    calcBtn.onclick = function () { Calculator.open(); };
+    qtools.append(padBtn, calcBtn); inner.appendChild(qtools);
+
     var entries = [];
     questions.forEach(function (q, i) {
       var card = el("div", "steps-panel quiz-q"); card.hidden = false; card.style.marginBottom = "18px";

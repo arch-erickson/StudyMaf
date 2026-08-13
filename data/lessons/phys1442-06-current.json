@@ -1,17 +1,83 @@
 {
   "title": "Electric Current & Resistance",
   "summary": "Electric current is the rate charge flows, $I = Q/t$ (amperes). In many materials current and voltage obey Ohm's law $V = IR$; resistance depends on the material and shape, $R = \\rho L/A$; and electrical power is $P = IV = I^2R = V^2/R$. (University Physics Vol. 2, Ch. 9.)",
+  "glossary": {
+    "current": {
+      "plain": "The rate that electric charge flows past a point.",
+      "in_class": "$I = \\dfrac{\\Delta Q}{\\Delta t}$, measured in amperes; direction is that of positive charge flow."
+    },
+    "ampere": {
+      "plain": "The unit of electric current — one coulomb of charge per second.",
+      "in_class": "$1\\text{ A} = 1\\text{ C/s}$."
+    },
+    "resistance": {
+      "plain": "How strongly a material opposes the flow of current.",
+      "in_class": "$R = V/I$, measured in ohms; larger $R$ means less current for the same voltage."
+    },
+    "ohm": {
+      "plain": "The unit of resistance — one volt per ampere.",
+      "in_class": "$1\\ \\Omega = 1\\text{ V/A}$."
+    },
+    "resistivity": {
+      "plain": "A material property saying how much it resists current, regardless of shape.",
+      "in_class": "$R = \\rho\\dfrac{L}{A}$: longer or thinner wires have more resistance."
+    },
+    "Ohm's law": {
+      "plain": "For many materials, current is proportional to the voltage across them.",
+      "in_class": "$V = IR$ — the workhorse relation for resistors in this chapter."
+    },
+    "drift velocity": {
+      "plain": "The slow average speed charges actually move through a wire.",
+      "in_class": "Tiny (mm/s), even though the electrical signal travels near light speed."
+    },
+    "power": {
+      "plain": "The rate energy is delivered or used.",
+      "in_class": "$P = IV = I^2 R = V^2/R$, measured in watts."
+    }
+  },
   "concept_sections": [
-    { "level": 1, "heading": "What current is", "explanation": "Electric current is how fast charge flows past a point: $I = \\dfrac{Q}{t}$, measured in amperes (1 A = 1 C/s). By convention, current points the way positive charge would move — opposite to the actual electron flow in a wire." },
-    { "level": 2, "heading": "The microscopic picture", "explanation": "Inside a wire, countless electrons drift slowly (millimeters per second) under an applied field. The current relates to this drift by $I = nqv_d A$, where $n$ is the charge-carrier density and $v_d$ the drift speed. The 'signal' travels near light speed even though individual electrons crawl." },
-    { "level": 3, "heading": "Ohm's law", "explanation": "For an ohmic material the current is proportional to the voltage across it: $V = IR$. The constant $R$ is the resistance, in ohms ($\\Omega$). More voltage pushes more current; more resistance allows less. Rearrange as needed: $I = V/R$ or $R = V/I$." },
-    { "level": 4, "heading": "What sets the resistance", "explanation": "Resistance grows with length and shrinks with cross-section: $R = \\rho\\dfrac{L}{A}$, where $\\rho$ is the material's resistivity (copper is tiny, rubber is huge). A long thin wire resists more than a short fat one of the same material — just like a narrow pipe resists water flow." },
-    { "level": 5, "heading": "Electric power", "explanation": "Charge moving through a voltage delivers energy at rate $P = IV$. Using Ohm's law this is also $P = I^2R = \\dfrac{V^2}{R}$. In a resistor this power becomes heat (a toaster, a bulb filament). Energy used is power times time; utilities bill it in kilowatt-hours." }
+    {
+      "level": 1,
+      "heading": "What current is",
+      "explanation": "Electric current is how fast charge flows past a point: $I = \\dfrac{Q}{t}$, measured in amperes (1 A = 1 C/s). By convention, current points the way positive charge would move — opposite to the actual electron flow in a wire."
+    },
+    {
+      "level": 2,
+      "heading": "The microscopic picture",
+      "explanation": "Inside a wire, countless electrons drift slowly (millimeters per second) under an applied field. The current relates to this drift by $I = nqv_d A$, where $n$ is the charge-carrier density and $v_d$ the drift speed. The 'signal' travels near light speed even though individual electrons crawl."
+    },
+    {
+      "level": 3,
+      "heading": "Ohm's law",
+      "explanation": "For an ohmic material the current is proportional to the voltage across it: $V = IR$. The constant $R$ is the resistance, in ohms ($\\Omega$). More voltage pushes more current; more resistance allows less. Rearrange as needed: $I = V/R$ or $R = V/I$."
+    },
+    {
+      "level": 4,
+      "heading": "What sets the resistance",
+      "explanation": "Resistance grows with length and shrinks with cross-section: $R = \\rho\\dfrac{L}{A}$, where $\\rho$ is the material's resistivity (copper is tiny, rubber is huge). A long thin wire resists more than a short fat one of the same material — just like a narrow pipe resists water flow."
+    },
+    {
+      "level": 5,
+      "heading": "Electric power",
+      "explanation": "Charge moving through a voltage delivers energy at rate $P = IV$. Using Ohm's law this is also $P = I^2R = \\dfrac{V^2}{R}$. In a resistor this power becomes heat (a toaster, a bulb filament). Energy used is power times time; utilities bill it in kilowatt-hours."
+    }
   ],
   "real_world_examples": [
-    { "title": "A fuse or circuit breaker", "scenario": "Too many appliances trip the breaker.", "how_the_math_applies": "Each device draws current $I = P/V$. When the total exceeds the breaker's rating, $I^2R$ heating in the wires would become unsafe, so the breaker opens the circuit." },
-    { "title": "A light-bulb filament", "scenario": "An incandescent bulb glows when switched on.", "how_the_math_applies": "The thin, high-resistance filament dissipates $P = V^2/R$ as heat and light. Its small area $A$ and long coiled length $L$ give the large $R$ needed to reach glowing temperature." },
-    { "title": "A warm extension cord", "scenario": "A long thin cord feels warm under heavy load.", "how_the_math_applies": "The cord's own resistance $R = \\rho L/A$ dissipates $I^2R$. A longer or thinner cord has more $R$, so it wastes more power as heat — why heavy loads need thick cords." }
+    {
+      "title": "A fuse or circuit breaker",
+      "scenario": "Too many appliances trip the breaker.",
+      "how_the_math_applies": "Each device draws current $I = P/V$. When the total exceeds the breaker's rating, $I^2R$ heating in the wires would become unsafe, so the breaker opens the circuit."
+    },
+    {
+      "title": "A light-bulb filament",
+      "scenario": "An incandescent bulb glows when switched on.",
+      "how_the_math_applies": "The thin, high-resistance filament dissipates $P = V^2/R$ as heat and light. Its small area $A$ and long coiled length $L$ give the large $R$ needed to reach glowing temperature."
+    },
+    {
+      "title": "A warm extension cord",
+      "scenario": "A long thin cord feels warm under heavy load.",
+      "how_the_math_applies": "The cord's own resistance $R = \\rho L/A$ dissipates $I^2R$. A longer or thinner cord has more $R$, so it wastes more power as heat — why heavy loads need thick cords."
+    }
   ],
   "videos": {
     "concept_query": "electric current resistance and Ohm's law explained",
@@ -19,15 +85,125 @@
     "combined_query": "electric current resistance power calculus based physics worked examples"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "A charge of $60$ C passes a point in $30$ s. Find the current.", "correct_answer": "$2.0$ A", "solution_steps": ["$I = Q/t$", "$I = 60/30$", "$I = 2.0$ A"], "hint": "Current is charge per unit time." },
-    { "id": "p02", "difficulty": "easy", "prompt": "A $6.0\\ \\Omega$ resistor carries $2.0$ A. Find the voltage across it.", "correct_answer": "$12$ V", "solution_steps": ["$V = IR$", "$V = (2.0)(6.0)$", "$V = 12$ V"], "hint": "Use Ohm's law." },
-    { "id": "p03", "difficulty": "easy", "prompt": "A device draws $3.0$ A at $12$ V. Find its resistance.", "correct_answer": "$4.0\\ \\Omega$", "solution_steps": ["$R = V/I$", "$R = 12/3.0$", "$R = 4.0\\ \\Omega$"], "hint": "Rearrange Ohm's law for $R$." },
-    { "id": "p04", "difficulty": "medium", "prompt": "A copper wire ($\\rho = 1.7\\times10^{-8}\\ \\Omega\\cdot\\text{m}$) is $10$ m long with cross-section $1.0\\times10^{-6}\\ \\text{m}^2$. Find its resistance.", "correct_answer": "$0.17\\ \\Omega$", "solution_steps": ["$R = \\rho L/A$", "$R = \\dfrac{(1.7\\times10^{-8})(10)}{1.0\\times10^{-6}}$", "$R = 0.17\\ \\Omega$"], "hint": "Plug into $R = \\rho L/A$." },
-    { "id": "p05", "difficulty": "medium", "prompt": "A motor runs at $120$ V drawing $0.50$ A. Find its power.", "correct_answer": "$60$ W", "solution_steps": ["$P = IV$", "$P = (0.50)(120)$", "$P = 60$ W"], "hint": "Power is current times voltage." },
-    { "id": "p06", "difficulty": "medium", "prompt": "A $10\\ \\Omega$ resistor carries $2.0$ A. Find the power dissipated.", "correct_answer": "$40$ W", "solution_steps": ["$P = I^2R$", "$P = (2.0)^2(10)$", "$P = 40$ W"], "hint": "Use $P = I^2R$." },
-    { "id": "p07", "difficulty": "medium", "prompt": "How much energy (in J) does a $100$ W bulb use in $2.0$ hours?", "correct_answer": "$7.2\\times10^{5}$ J", "solution_steps": ["Energy $= P t$, with $t = 2.0\\times3600 = 7200$ s.", "$E = (100)(7200)$", "$E = 7.2\\times10^{5}$ J (= 0.20 kWh)"], "hint": "Convert hours to seconds, then $E = Pt$." },
-    { "id": "p08", "difficulty": "hard", "prompt": "A $1500$ W heater runs on $120$ V. Find the current it draws and its resistance.", "correct_answer": "$I = 12.5$ A, $R = 9.6\\ \\Omega$", "solution_steps": ["$I = P/V = 1500/120 = 12.5$ A.", "$R = V/I = 120/12.5$", "$R = 9.6\\ \\Omega$"], "hint": "First get $I$ from $P = IV$, then $R = V/I$." },
-    { "id": "p09", "difficulty": "hard", "prompt": "How many electrons per second flow in a $2.0$ A current?", "correct_answer": "$1.25\\times10^{19}$ per second", "solution_steps": ["Electrons per second $= I/e$.", "$= \\dfrac{2.0}{1.6\\times10^{-19}}$", "$= 1.25\\times10^{19}$ /s"], "hint": "Each electron carries charge $e$; divide the current by $e$." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "A wire has resistance $2.0\\ \\Omega$. If it is stretched to twice its length with half the cross-sectional area, find the new resistance.", "correct_answer": "$8.0\\ \\Omega$", "solution_steps": ["$R = \\rho L/A$. Doubling $L$ multiplies $R$ by 2; halving $A$ multiplies by another 2.", "Total factor $= 4$.", "$R' = 4 \\times 2.0 = 8.0\\ \\Omega$"], "hint": "See how $R = \\rho L/A$ scales with each change." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A charge of $60$ C passes a point in $30$ s. Find the current.",
+      "correct_answer": "$2.0$ A",
+      "solution_steps": [
+        "$I = Q/t$",
+        "$I = 60/30$",
+        "$I = 2.0$ A"
+      ],
+      "hint": "Current is charge per unit time."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $6.0\\ \\Omega$ resistor carries $2.0$ A. Find the voltage across it.",
+      "correct_answer": "$12$ V",
+      "solution_steps": [
+        "$V = IR$",
+        "$V = (2.0)(6.0)$",
+        "$V = 12$ V"
+      ],
+      "hint": "Use Ohm's law."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "A device draws $3.0$ A at $12$ V. Find its resistance.",
+      "correct_answer": "$4.0\\ \\Omega$",
+      "solution_steps": [
+        "$R = V/I$",
+        "$R = 12/3.0$",
+        "$R = 4.0\\ \\Omega$"
+      ],
+      "hint": "Rearrange Ohm's law for $R$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A copper wire ($\\rho = 1.7\\times10^{-8}\\ \\Omega\\cdot\\text{m}$) is $10$ m long with cross-section $1.0\\times10^{-6}\\ \\text{m}^2$. Find its resistance.",
+      "correct_answer": "$0.17\\ \\Omega$",
+      "solution_steps": [
+        "$R = \\rho L/A$",
+        "$R = \\dfrac{(1.7\\times10^{-8})(10)}{1.0\\times10^{-6}}$",
+        "$R = 0.17\\ \\Omega$"
+      ],
+      "hint": "Plug into $R = \\rho L/A$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A motor runs at $120$ V drawing $0.50$ A. Find its power.",
+      "correct_answer": "$60$ W",
+      "solution_steps": [
+        "$P = IV$",
+        "$P = (0.50)(120)$",
+        "$P = 60$ W"
+      ],
+      "hint": "Power is current times voltage."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "A $10\\ \\Omega$ resistor carries $2.0$ A. Find the power dissipated.",
+      "correct_answer": "$40$ W",
+      "solution_steps": [
+        "$P = I^2R$",
+        "$P = (2.0)^2(10)$",
+        "$P = 40$ W"
+      ],
+      "hint": "Use $P = I^2R$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "How much energy (in J) does a $100$ W bulb use in $2.0$ hours?",
+      "correct_answer": "$7.2\\times10^{5}$ J",
+      "solution_steps": [
+        "Energy $= P t$, with $t = 2.0\\times3600 = 7200$ s.",
+        "$E = (100)(7200)$",
+        "$E = 7.2\\times10^{5}$ J (= 0.20 kWh)"
+      ],
+      "hint": "Convert hours to seconds, then $E = Pt$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "A $1500$ W heater runs on $120$ V. Find the current it draws and its resistance.",
+      "correct_answer": "$I = 12.5$ A, $R = 9.6\\ \\Omega$",
+      "solution_steps": [
+        "$I = P/V = 1500/120 = 12.5$ A.",
+        "$R = V/I = 120/12.5$",
+        "$R = 9.6\\ \\Omega$"
+      ],
+      "hint": "First get $I$ from $P = IV$, then $R = V/I$."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "How many electrons per second flow in a $2.0$ A current?",
+      "correct_answer": "$1.25\\times10^{19}$ per second",
+      "solution_steps": [
+        "Electrons per second $= I/e$.",
+        "$= \\dfrac{2.0}{1.6\\times10^{-19}}$",
+        "$= 1.25\\times10^{19}$ /s"
+      ],
+      "hint": "Each electron carries charge $e$; divide the current by $e$."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "A wire has resistance $2.0\\ \\Omega$. If it is stretched to twice its length with half the cross-sectional area, find the new resistance.",
+      "correct_answer": "$8.0\\ \\Omega$",
+      "solution_steps": [
+        "$R = \\rho L/A$. Doubling $L$ multiplies $R$ by 2; halving $A$ multiplies by another 2.",
+        "Total factor $= 4$.",
+        "$R' = 4 \\times 2.0 = 8.0\\ \\Omega$"
+      ],
+      "hint": "See how $R = \\rho L/A$ scales with each change."
+    }
   ]
 }

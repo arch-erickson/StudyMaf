@@ -1,17 +1,83 @@
 {
   "title": "DC Circuits & Kirchhoff's Rules",
   "summary": "Resistors in series add ($R_{eq}=\\sum R$); in parallel their reciprocals add ($1/R_{eq}=\\sum 1/R$). A real battery has EMF and internal resistance, so terminal voltage is $V = \\mathcal{E} - Ir$. Kirchhoff's junction and loop rules solve any circuit, and RC circuits charge/discharge with time constant $\\tau = RC$. (University Physics Vol. 2, Ch. 10.)",
+  "glossary": {
+    "EMF": {
+      "plain": "The 'push' a battery or source gives per unit charge to drive a circuit.",
+      "in_class": "Symbol $\\varepsilon$, measured in volts; the ideal source voltage before internal losses."
+    },
+    "internal resistance": {
+      "plain": "The small resistance inside a real battery itself.",
+      "in_class": "Drops the usable (terminal) voltage: $V = \\varepsilon - Ir$."
+    },
+    "terminal voltage": {
+      "plain": "The actual voltage a battery delivers to the circuit.",
+      "in_class": "$V = \\varepsilon - Ir$; less than the EMF when current flows."
+    },
+    "junction rule": {
+      "plain": "At any wire junction, the current flowing in equals the current flowing out.",
+      "in_class": "Kirchhoff's current rule — conservation of charge: $\\sum I_{in} = \\sum I_{out}$."
+    },
+    "loop rule": {
+      "plain": "Going around any closed loop, the voltage changes add up to zero.",
+      "in_class": "Kirchhoff's voltage rule — conservation of energy: $\\sum \\Delta V = 0$."
+    },
+    "equivalent resistance": {
+      "plain": "One resistor that would behave the same as a whole combination.",
+      "in_class": "Series: $R_{eq} = \\sum R_i$. Parallel: $\\dfrac{1}{R_{eq}} = \\sum \\dfrac{1}{R_i}$."
+    },
+    "RC circuit": {
+      "plain": "A circuit with a resistor and capacitor together.",
+      "in_class": "Charges/discharges gradually; the pace is set by the time constant."
+    },
+    "time constant": {
+      "plain": "How long an RC circuit takes to charge or discharge most of the way.",
+      "in_class": "$\\tau = RC$; after one $\\tau$ the capacitor is $\\approx 63\\%$ charged."
+    }
+  },
   "concept_sections": [
-    { "level": 1, "heading": "EMF and terminal voltage", "explanation": "A battery's EMF $\\mathcal{E}$ is the voltage it would provide with no current flowing. Real batteries have a small internal resistance $r$, so under load the terminal voltage drops: $V = \\mathcal{E} - Ir$. That is why headlights dim when you crank the starter." },
-    { "level": 2, "heading": "Resistors in series", "explanation": "Series resistors carry the same current and their voltages add, so resistances add: $R_{eq} = R_1 + R_2 + \\cdots$. The equivalent resistance is larger than any single one. Voltage divides in proportion to each resistance." },
-    { "level": 3, "heading": "Resistors in parallel", "explanation": "Parallel resistors share the same voltage and their currents add, so reciprocals add: $\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\cdots$. The equivalent resistance is smaller than the smallest branch — more paths mean easier flow." },
-    { "level": 4, "heading": "Kirchhoff's rules", "explanation": "For circuits you can't reduce by series/parallel, use Kirchhoff: the junction rule (currents in = currents out, charge conservation) and the loop rule (voltage changes around any loop sum to zero, energy conservation). Together they give enough equations to solve for every current." },
-    { "level": 5, "heading": "RC circuits", "explanation": "When a resistor charges a capacitor, the charge rises toward its final value with time constant $\\tau = RC$. After one $\\tau$ the capacitor reaches about 63% of full charge; after $\\sim5\\tau$ it is essentially done. Discharging follows the same exponential decay." }
+    {
+      "level": 1,
+      "heading": "EMF and terminal voltage",
+      "explanation": "A battery's EMF $\\mathcal{E}$ is the voltage it would provide with no current flowing. Real batteries have a small internal resistance $r$, so under load the terminal voltage drops: $V = \\mathcal{E} - Ir$. That is why headlights dim when you crank the starter."
+    },
+    {
+      "level": 2,
+      "heading": "Resistors in series",
+      "explanation": "Series resistors carry the same current and their voltages add, so resistances add: $R_{eq} = R_1 + R_2 + \\cdots$. The equivalent resistance is larger than any single one. Voltage divides in proportion to each resistance."
+    },
+    {
+      "level": 3,
+      "heading": "Resistors in parallel",
+      "explanation": "Parallel resistors share the same voltage and their currents add, so reciprocals add: $\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\cdots$. The equivalent resistance is smaller than the smallest branch — more paths mean easier flow."
+    },
+    {
+      "level": 4,
+      "heading": "Kirchhoff's rules",
+      "explanation": "For circuits you can't reduce by series/parallel, use Kirchhoff: the junction rule (currents in = currents out, charge conservation) and the loop rule (voltage changes around any loop sum to zero, energy conservation). Together they give enough equations to solve for every current."
+    },
+    {
+      "level": 5,
+      "heading": "RC circuits",
+      "explanation": "When a resistor charges a capacitor, the charge rises toward its final value with time constant $\\tau = RC$. After one $\\tau$ the capacitor reaches about 63% of full charge; after $\\sim5\\tau$ it is essentially done. Discharging follows the same exponential decay."
+    }
   ],
   "real_world_examples": [
-    { "title": "Holiday light strings", "scenario": "Old series strings go fully dark if one bulb fails; modern parallel ones don't.", "how_the_math_applies": "In series, one break stops the single current path. In parallel each bulb has its own path at the same voltage, so the rest stay lit — a direct series-vs-parallel comparison." },
-    { "title": "Car battery under load", "scenario": "Interior lights dim when you start the engine.", "how_the_math_applies": "The starter draws a huge current $I$, so the drop $Ir$ across the battery's internal resistance is large and terminal voltage $V = \\mathcal{E} - Ir$ sags momentarily." },
-    { "title": "Camera flash charge-up", "scenario": "A flash needs a second to 'recharge' between shots.", "how_the_math_applies": "A resistor charges the flash capacitor with time constant $\\tau = RC$; you wait a few $\\tau$ for it to reach full voltage before it can fire again." }
+    {
+      "title": "Holiday light strings",
+      "scenario": "Old series strings go fully dark if one bulb fails; modern parallel ones don't.",
+      "how_the_math_applies": "In series, one break stops the single current path. In parallel each bulb has its own path at the same voltage, so the rest stay lit — a direct series-vs-parallel comparison."
+    },
+    {
+      "title": "Car battery under load",
+      "scenario": "Interior lights dim when you start the engine.",
+      "how_the_math_applies": "The starter draws a huge current $I$, so the drop $Ir$ across the battery's internal resistance is large and terminal voltage $V = \\mathcal{E} - Ir$ sags momentarily."
+    },
+    {
+      "title": "Camera flash charge-up",
+      "scenario": "A flash needs a second to 'recharge' between shots.",
+      "how_the_math_applies": "A resistor charges the flash capacitor with time constant $\\tau = RC$; you wait a few $\\tau$ for it to reach full voltage before it can fire again."
+    }
   ],
   "videos": {
     "concept_query": "series and parallel resistors Kirchhoff's rules explained",
@@ -19,15 +85,123 @@
     "combined_query": "DC circuits calculus based physics worked examples equivalent resistance"
   },
   "problems": [
-    { "id": "p01", "difficulty": "easy", "prompt": "Resistors of $2$, $3$, and $5\\ \\Omega$ are in series. Find the equivalent resistance.", "correct_answer": "$10\\ \\Omega$", "solution_steps": ["Series: $R_{eq} = R_1 + R_2 + R_3$", "$R_{eq} = 2 + 3 + 5$", "$R_{eq} = 10\\ \\Omega$"], "hint": "Series resistances add." },
-    { "id": "p02", "difficulty": "easy", "prompt": "A $6\\ \\Omega$ and a $3\\ \\Omega$ resistor are in parallel. Find the equivalent resistance.", "correct_answer": "$2\\ \\Omega$", "solution_steps": ["$\\dfrac{1}{R_{eq}} = \\dfrac{1}{6} + \\dfrac{1}{3} = \\dfrac{1}{2}$", "$R_{eq} = 2\\ \\Omega$"], "hint": "Add reciprocals for parallel." },
-    { "id": "p03", "difficulty": "easy", "prompt": "A $12$ V battery drives a $4\\ \\Omega$ resistor. Find the current.", "correct_answer": "$3.0$ A", "solution_steps": ["$I = V/R$", "$I = 12/4$", "$I = 3.0$ A"], "hint": "Ohm's law." },
-    { "id": "p04", "difficulty": "medium", "prompt": "A battery has EMF $12$ V and internal resistance $0.50\\ \\Omega$. It supplies $4.0$ A. Find the terminal voltage.", "correct_answer": "$10$ V", "solution_steps": ["$V = \\mathcal{E} - Ir$", "$V = 12 - (4.0)(0.50)$", "$V = 10$ V"], "hint": "Subtract the internal-resistance drop from the EMF." },
-    { "id": "p05", "difficulty": "medium", "prompt": "Three $6\\ \\Omega$ resistors are in parallel. Find the equivalent resistance.", "correct_answer": "$2\\ \\Omega$", "solution_steps": ["$\\dfrac{1}{R_{eq}} = \\dfrac{1}{6} + \\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{1}{2}$", "$R_{eq} = 2\\ \\Omega$"], "hint": "For $n$ equal resistors in parallel, $R_{eq} = R/n$." },
-    { "id": "p06", "difficulty": "medium", "prompt": "A $5\\ \\Omega$ resistor has $10$ V across it. Find the power dissipated.", "correct_answer": "$20$ W", "solution_steps": ["$P = V^2/R$", "$P = (10)^2/5$", "$P = 20$ W"], "hint": "Use $P = V^2/R$." },
-    { "id": "p07", "difficulty": "medium", "prompt": "A $4\\ \\Omega$ resistor is in series with a parallel pair of $6\\ \\Omega$ and $3\\ \\Omega$. A $12$ V battery drives the circuit. Find the total current.", "correct_answer": "$2.0$ A", "solution_steps": ["Parallel pair: $6\\|3 = 2\\ \\Omega$.", "Total: $R_{eq} = 4 + 2 = 6\\ \\Omega$.", "$I = V/R_{eq} = 12/6 = 2.0$ A"], "hint": "Reduce the parallel section first, then add the series resistor." },
-    { "id": "p08", "difficulty": "hard", "prompt": "A $4\\ \\Omega$ and a $6\\ \\Omega$ resistor are in series across $20$ V. Find the voltage across the $6\\ \\Omega$ resistor.", "correct_answer": "$12$ V", "solution_steps": ["Current: $I = 20/(4+6) = 2.0$ A.", "$V_6 = IR = (2.0)(6)$", "$V_6 = 12$ V"], "hint": "Find the series current, then $V = IR$ across the one resistor (voltage divider)." },
-    { "id": "p09", "difficulty": "hard", "prompt": "A $100\\ \\mu\\text{F}$ capacitor charges through a $1000\\ \\Omega$ resistor. Find the time constant, and roughly what fraction is charged after one time constant.", "correct_answer": "$\\tau = 0.10$ s; $\\approx 63\\%$", "solution_steps": ["$\\tau = RC = (1000)(100\\times10^{-6}) = 0.10$ s.", "After one $\\tau$ the charge is $1 - e^{-1} \\approx 0.63$ of full.", "So about $63\\%$."], "hint": "$\\tau = RC$; one time constant gives $1-e^{-1}$." },
-    { "id": "p10", "difficulty": "stretch", "prompt": "A $10\\ \\mu\\text{F}$ capacitor charged to $100$ V discharges through a $5000\\ \\Omega$ resistor. Find the initial discharge current.", "correct_answer": "$0.020$ A (20 mA)", "solution_steps": ["At $t=0$ the full voltage is across the resistor: $I_0 = V/R$.", "$I_0 = 100/5000$", "$I_0 = 0.020$ A"], "hint": "Initially the capacitor's full voltage drives the resistor: $I_0 = V/R$." }
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Resistors of $2$, $3$, and $5\\ \\Omega$ are in series. Find the equivalent resistance.",
+      "correct_answer": "$10\\ \\Omega$",
+      "solution_steps": [
+        "Series: $R_{eq} = R_1 + R_2 + R_3$",
+        "$R_{eq} = 2 + 3 + 5$",
+        "$R_{eq} = 10\\ \\Omega$"
+      ],
+      "hint": "Series resistances add."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $6\\ \\Omega$ and a $3\\ \\Omega$ resistor are in parallel. Find the equivalent resistance.",
+      "correct_answer": "$2\\ \\Omega$",
+      "solution_steps": [
+        "$\\dfrac{1}{R_{eq}} = \\dfrac{1}{6} + \\dfrac{1}{3} = \\dfrac{1}{2}$",
+        "$R_{eq} = 2\\ \\Omega$"
+      ],
+      "hint": "Add reciprocals for parallel."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "A $12$ V battery drives a $4\\ \\Omega$ resistor. Find the current.",
+      "correct_answer": "$3.0$ A",
+      "solution_steps": [
+        "$I = V/R$",
+        "$I = 12/4$",
+        "$I = 3.0$ A"
+      ],
+      "hint": "Ohm's law."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A battery has EMF $12$ V and internal resistance $0.50\\ \\Omega$. It supplies $4.0$ A. Find the terminal voltage.",
+      "correct_answer": "$10$ V",
+      "solution_steps": [
+        "$V = \\mathcal{E} - Ir$",
+        "$V = 12 - (4.0)(0.50)$",
+        "$V = 10$ V"
+      ],
+      "hint": "Subtract the internal-resistance drop from the EMF."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Three $6\\ \\Omega$ resistors are in parallel. Find the equivalent resistance.",
+      "correct_answer": "$2\\ \\Omega$",
+      "solution_steps": [
+        "$\\dfrac{1}{R_{eq}} = \\dfrac{1}{6} + \\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{1}{2}$",
+        "$R_{eq} = 2\\ \\Omega$"
+      ],
+      "hint": "For $n$ equal resistors in parallel, $R_{eq} = R/n$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "A $5\\ \\Omega$ resistor has $10$ V across it. Find the power dissipated.",
+      "correct_answer": "$20$ W",
+      "solution_steps": [
+        "$P = V^2/R$",
+        "$P = (10)^2/5$",
+        "$P = 20$ W"
+      ],
+      "hint": "Use $P = V^2/R$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "A $4\\ \\Omega$ resistor is in series with a parallel pair of $6\\ \\Omega$ and $3\\ \\Omega$. A $12$ V battery drives the circuit. Find the total current.",
+      "correct_answer": "$2.0$ A",
+      "solution_steps": [
+        "Parallel pair: $6\\|3 = 2\\ \\Omega$.",
+        "Total: $R_{eq} = 4 + 2 = 6\\ \\Omega$.",
+        "$I = V/R_{eq} = 12/6 = 2.0$ A"
+      ],
+      "hint": "Reduce the parallel section first, then add the series resistor."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "A $4\\ \\Omega$ and a $6\\ \\Omega$ resistor are in series across $20$ V. Find the voltage across the $6\\ \\Omega$ resistor.",
+      "correct_answer": "$12$ V",
+      "solution_steps": [
+        "Current: $I = 20/(4+6) = 2.0$ A.",
+        "$V_6 = IR = (2.0)(6)$",
+        "$V_6 = 12$ V"
+      ],
+      "hint": "Find the series current, then $V = IR$ across the one resistor (voltage divider)."
+    },
+    {
+      "id": "p09",
+      "difficulty": "hard",
+      "prompt": "A $100\\ \\mu\\text{F}$ capacitor charges through a $1000\\ \\Omega$ resistor. Find the time constant, and roughly what fraction is charged after one time constant.",
+      "correct_answer": "$\\tau = 0.10$ s; $\\approx 63\\%$",
+      "solution_steps": [
+        "$\\tau = RC = (1000)(100\\times10^{-6}) = 0.10$ s.",
+        "After one $\\tau$ the charge is $1 - e^{-1} \\approx 0.63$ of full.",
+        "So about $63\\%$."
+      ],
+      "hint": "$\\tau = RC$; one time constant gives $1-e^{-1}$."
+    },
+    {
+      "id": "p10",
+      "difficulty": "stretch",
+      "prompt": "A $10\\ \\mu\\text{F}$ capacitor charged to $100$ V discharges through a $5000\\ \\Omega$ resistor. Find the initial discharge current.",
+      "correct_answer": "$0.020$ A (20 mA)",
+      "solution_steps": [
+        "At $t=0$ the full voltage is across the resistor: $I_0 = V/R$.",
+        "$I_0 = 100/5000$",
+        "$I_0 = 0.020$ A"
+      ],
+      "hint": "Initially the capacitor's full voltage drives the resistor: $I_0 = V/R$."
+    }
   ]
 }
