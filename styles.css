@@ -326,6 +326,7 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .modal { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; max-width: 460px; padding: 26px; max-height: 90vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 .modal.wide { max-width: 720px; }
 .modal.wide { max-width: 940px; }
+.modal{position:relative}.modal-x{position:absolute;right:15px;top:15px;z-index:3;width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink-soft);font:500 1.25rem/1 Inter,Arial,sans-serif;cursor:pointer}.modal-x:hover{background:var(--surface-2);color:var(--ink)}.modal>div>h2:first-child,.modal>div>.control-eyebrow:first-child{padding-right:42px}
 
 /* Dashboard version of the protected teaching workspace. */
 @media(max-width:900px){.control-workspace{grid-template-columns:1fr!important}.control-nav{position:static!important;display:flex!important;gap:5px;overflow:auto;padding:7px}.control-nav .nav-mark,.control-nav .nav-bottom{display:none!important}.control-nav button{width:auto!important;white-space:nowrap}.control-layout{grid-template-columns:1fr!important}}@media(max-width:620px){.control-hero{display:block!important}.control-hero p{margin-top:10px}.account-grid{grid-template-columns:1fr!important}.control-table th,.control-table td{padding:10px}.person{min-width:150px}}

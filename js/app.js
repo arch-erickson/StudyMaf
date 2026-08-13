@@ -163,6 +163,9 @@ window.App = (function () {
     var host = document.getElementById("modal-host");
     host.innerHTML = ""; host.hidden = false; host.setAttribute("aria-hidden", "false");
     var m = el("div", "modal" + (opts && opts.wide ? " wide" : ""));
+    var dismiss = el("button", "modal-x", "×");
+    dismiss.type = "button"; dismiss.setAttribute("aria-label", "Close"); dismiss.setAttribute("data-close", "");
+    m.appendChild(dismiss);
     m.appendChild(h(html));
     host.appendChild(m);
     host.onclick = function (e) { if (e.target === host || e.target.hasAttribute("data-close")) closeModal(); };
