@@ -7,7 +7,7 @@
 window.App = (function () {
   "use strict";
 
-  var appEl, lessonIndex = [], lessonCache = {}, catalog = { classes: [] };
+  var appEl, lessonIndex = [], lessonCache = {}, catalog = { classes: [] }, AccountUI = null;
   // ---- class catalog (join codes + syllabus grade targets) ----
   function catalogClassByCode(code) {
     var c = String(code || "").trim().toUpperCase();
@@ -1210,6 +1210,14 @@ window.App = (function () {
     var m = hash.match(/^#\/class\/([^?]+)(?:\?lesson=([^&]+))?$/);
     if (m) renderClass(m[1], m[2] ? decodeURIComponent(m[2]) : "");
     else if (hash === "#/notebook") renderNotebook();
+    else if (hash === "#/professor") {
+      if (AccountUI) AccountUI.renderProfessor(appEl);
+      else renderDashboard();
+    }
+    else if (hash === "#/admin") {
+      if (AccountUI) AccountUI.renderAdmin(appEl);
+      else renderDashboard();
+    }
     else renderDashboard();
   }
 
@@ -1669,6 +1677,15 @@ window.App = (function () {
     applyAccent(Store.getAccent());
     applyIpadMode();
     bindHeader();
+    // Accounts are isolated in a small ES module so the static app can still
+    // load even if an auth provider is temporarily unavailable.
+    import("./account-ui.js?v=1").then(function (mod) {
+      AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
+      AccountUI.mountHeader();
+      return AccountUI.ready();
+    }).then(function () {
+      if (location.hash === "#/admin" || location.hash === "#/professor") route();
+    }).catch(function () { /* Sign-in is optional until it is configured. */ });
     Promise.all([
       fetchJSON("data/index.json"),
       fetchJSON("data/classes.json").catch(function () { return { classes: [] }; })
