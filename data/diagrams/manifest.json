@@ -1,0 +1,67 @@
+{
+  "generated": "2026-08-13T04:57:33.827Z",
+  "source": "tools/build-lesson-diagrams.js",
+  "diagrams": [
+    {
+      "id": "phys1442-02-field-around-charges",
+      "subject": "physics",
+      "title": "Electric field around point charges",
+      "file": "data/diagrams/phys1442-02-field-around-charges.svg",
+      "caption": "Field arrows point away from a positive charge and toward a negative charge.",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ],
+      "attributionRequired": []
+    },
+    {
+      "id": "phys1442-02-uniform-field-plates",
+      "subject": "physics",
+      "title": "Uniform field between parallel plates",
+      "file": "data/diagrams/phys1442-02-uniform-field-plates.svg",
+      "caption": "Between charged parallel plates the field $\\vec E$ is uniform — evenly spaced, parallel lines.",
+      "assets": [
+        {
+          "id": "parallel-plates",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ],
+      "attributionRequired": []
+    },
+    {
+      "id": "phys1442-02-force-on-test-charge",
+      "subject": "physics",
+      "title": "Force on a test charge",
+      "file": "data/diagrams/phys1442-02-force-on-test-charge.svg",
+      "caption": "In the same field $\\vec E$, the force $\\vec F = q\\vec E$ is along $\\vec E$ on $+q$ and opposite on $-q$.",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ],
+      "attributionRequired": []
+    }
+  ],
+  "attribution": []
+}

@@ -33,7 +33,10 @@ const num = (n) => (Math.round(n * 100) / 100);
 let _katex = null; try { _katex = require("katex"); } catch (e) { /* optional */ }
 function mathML(latex) {
   if (!_katex) return null;
-  let html; try { html = _katex.renderToString(String(latex), { output: "mathml", throwOnError: false }); } catch (e) { return null; }
+  // tolerate authors passing "$…$" (KaTeX wants the raw LaTeX without delimiters)
+  const src = String(latex).replace(/^\s*\$+|\$+\s*$/g, "");
+  let html; try { html = _katex.renderToString(src, { output: "mathml", throwOnError: false }); } catch (e) { return null; }
+  if (/katex-error/.test(html)) return null;
   const m = html.match(/<math[\s\S]*?<\/math>/);
   return m ? m[0] : null;
 }

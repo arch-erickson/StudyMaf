@@ -349,10 +349,29 @@ window.Figures = (function () {
     return svg;
   }
 
+  // A prebuilt SVG from the Diagram Generation Engine (build-time). The lesson
+  // references a committed file (fig.src) or carries the markup inline (fig.svg).
+  // Math is already baked into the SVG (KaTeX→MathML) so it needs no runtime KaTeX.
+  function dgeEmbed(fig) {
+    var host = document.createElement("div"); host.className = "dge-svg";
+    function inject(markup) {
+      host.innerHTML = markup;
+      var s = host.querySelector("svg");
+      if (s) { s.style.width = "100%"; s.style.height = "auto"; s.style.maxHeight = "320px"; s.removeAttribute("height"); }
+    }
+    if (fig.svg) inject(fig.svg);
+    else if (fig.src) {
+      fetch(fig.src, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+        .then(inject).catch(function () { host.textContent = ""; });
+    }
+    return host;
+  }
+
   function draw(fig) {
     if (fig.type === "coordinate-plane") return coordinatePlane(fig.params);
     if (fig.type === "number-line") return numberLine(fig.params);
     if (fig.type === "schematic") return schematic(fig.params);
+    if (fig.type === "svg" || fig.type === "dge") return dgeEmbed(fig);
     return null;
   }
 
