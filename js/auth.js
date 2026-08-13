@@ -68,8 +68,10 @@ export const Auth = {
   getSession: function () { return session; },
   getAccount: function () { return account; },
   onChange: function (fn) { listeners.push(fn); return function () { const n = listeners.indexOf(fn); if (n >= 0) listeners.splice(n, 1); }; },
-  async sendEmailCode(email) {
-    return request('/otp', { method: 'POST', body: JSON.stringify({ email: String(email || '').trim(), create_user: true }) });
+  async sendEmailCode(email, redirectTo) {
+    var body = { email: String(email || '').trim(), create_user: true };
+    if (redirectTo) body.email_redirect_to = redirectTo;
+    return request('/otp', { method: 'POST', body: JSON.stringify(body) });
   },
   async verifyEmailCode(email, token) {
     const data = await request('/verify', { method: 'POST', body: JSON.stringify({ email: String(email || '').trim(), token: String(token || '').trim(), type: 'email' }) });

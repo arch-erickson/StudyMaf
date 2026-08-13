@@ -45,7 +45,7 @@ export function createAccountUI(options) {
     m.querySelector('#auth-email-form').onsubmit = async function (event) {
       event.preventDefault(); const input = m.querySelector('#auth-email'), err = m.querySelector('#auth-error'), button = m.querySelector('button[type="submit"]');
       button.disabled = true; button.textContent = 'Sending…'; err.innerHTML = '';
-      try { await Auth.sendEmailCode(input.value); showVerify(m, input.value); }
+      try { await Auth.sendEmailCode(input.value, appPage('signin/')); showVerify(m, input.value); }
       catch (error) { err.innerHTML = errorBox(error.message); button.disabled = false; button.textContent = 'Email me a code'; }
     };
   }
