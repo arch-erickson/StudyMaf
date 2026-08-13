@@ -43,44 +43,84 @@
     {
       "level": 1,
       "heading": "Reflection and refraction",
-      "explanation": "Light bounces off surfaces with the angle of reflection equal to the angle of incidence ($\\theta_i = \\theta_r$, both measured from the normal). Passing into a new medium it bends, following Snell's law $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ — toward the normal when entering a denser medium."
+      "explanation": "Light bounces off surfaces with the angle of reflection equal to the angle of incidence ($\\theta_i = \\theta_r$, both measured from the normal). Passing into a new medium it bends, following Snell's law $n_1\\sin\\theta_1 = n_2\\sin\\theta_2$ — toward the normal when entering a denser medium.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-c1.svg",
+        "caption": "At a surface, light reflects and refracts (bends)."
+      }
     },
     {
       "level": 2,
       "heading": "Index of refraction",
-      "explanation": "Light slows in matter: $n = \\dfrac{c}{v}$, so $n = 1$ in vacuum, $1.33$ in water, $1.5$ in glass. A bigger $n$ means slower light and more bending. When light tries to leave a dense medium at a steep angle it can't escape — total internal reflection past the critical angle $\\sin\\theta_c = n_2/n_1$."
+      "explanation": "Light slows in matter: $n = \\dfrac{c}{v}$, so $n = 1$ in vacuum, $1.33$ in water, $1.5$ in glass. A bigger $n$ means slower light and more bending. When light tries to leave a dense medium at a steep angle it can't escape — total internal reflection past the critical angle $\\sin\\theta_c = n_2/n_1$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-c2.svg",
+        "caption": "Index $n=c/v$ sets the bending: $n_1\\sin\\theta_1=n_2\\sin\\theta_2$."
+      }
     },
     {
       "level": 3,
       "heading": "Mirrors",
-      "explanation": "A curved mirror of radius $R$ has focal length $f = R/2$. Object and image distances obey the mirror equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. A positive $d_i$ means a real image (in front); negative means a virtual image (behind)."
+      "explanation": "A curved mirror of radius $R$ has focal length $f = R/2$. Object and image distances obey the mirror equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. A positive $d_i$ means a real image (in front); negative means a virtual image (behind).",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-c3.svg",
+        "caption": "Curved mirrors focus light to (or from) a focal point."
+      }
     },
     {
       "level": 4,
       "heading": "Magnification",
-      "explanation": "The image size relative to the object is $m = -\\dfrac{d_i}{d_o}$. A negative $m$ means an inverted image; $|m| > 1$ means enlarged. The same relation applies to mirrors and lenses."
+      "explanation": "The image size relative to the object is $m = -\\dfrac{d_i}{d_o}$. A negative $m$ means an inverted image; $|m| > 1$ means enlarged. The same relation applies to mirrors and lenses.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-c4.svg",
+        "caption": "Magnification $m=-d_i/d_o$; a negative sign means inverted."
+      }
     },
     {
       "level": 5,
       "heading": "Thin lenses",
-      "explanation": "Lenses obey the same thin-lens equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. Converging (convex) lenses have positive $f$; diverging (concave) lenses negative. An object inside the focal length gives an upright, magnified virtual image — a magnifying glass."
+      "explanation": "Lenses obey the same thin-lens equation $\\dfrac{1}{f} = \\dfrac{1}{d_o} + \\dfrac{1}{d_i}$. Converging (convex) lenses have positive $f$; diverging (concave) lenses negative. An object inside the focal length gives an upright, magnified virtual image — a magnifying glass.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-c5.svg",
+        "caption": "Thin lens: $1/f = 1/d_o + 1/d_i$."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Eyeglasses",
       "scenario": "Lenses correct near- or far-sightedness.",
-      "how_the_math_applies": "The lens's focal length shifts where images form on the retina; the thin-lens equation $1/f = 1/d_o + 1/d_i$ sets the prescription."
+      "how_the_math_applies": "The lens's focal length shifts where images form on the retina; the thin-lens equation $1/f = 1/d_o + 1/d_i$ sets the prescription.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-e1.svg",
+        "caption": "Eyeglass lenses converge or diverge light to focus on the retina."
+      }
     },
     {
       "title": "Fiber-optic internet",
       "scenario": "Data travels as light down thin glass fibers.",
-      "how_the_math_applies": "Light hits the fiber wall past the critical angle and totally internally reflects, so it stays trapped and travels for kilometers with little loss."
+      "how_the_math_applies": "Light hits the fiber wall past the critical angle and totally internally reflects, so it stays trapped and travels for kilometers with little loss.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-e2.svg",
+        "caption": "Fiber optics trap light by total internal reflection."
+      }
     },
     {
       "title": "Car passenger mirror",
       "scenario": "'Objects are closer than they appear.'",
-      "how_the_math_applies": "A convex mirror gives a reduced, upright virtual image ($m < 1$), widening the view but making things look farther away."
+      "how_the_math_applies": "A convex mirror gives a reduced, upright virtual image ($m < 1$), widening the view but making things look farther away.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-13-geometric-optics-e3.svg",
+        "caption": "A convex passenger mirror widens the view (objects look smaller)."
+      }
     }
   ],
   "videos": {

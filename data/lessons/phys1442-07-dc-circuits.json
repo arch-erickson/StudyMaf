@@ -39,44 +39,84 @@
     {
       "level": 1,
       "heading": "EMF and terminal voltage",
-      "explanation": "A battery's EMF $\\mathcal{E}$ is the voltage it would provide with no current flowing. Real batteries have a small internal resistance $r$, so under load the terminal voltage drops: $V = \\mathcal{E} - Ir$. That is why headlights dim when you crank the starter."
+      "explanation": "A battery's EMF $\\mathcal{E}$ is the voltage it would provide with no current flowing. Real batteries have a small internal resistance $r$, so under load the terminal voltage drops: $V = \\mathcal{E} - Ir$. That is why headlights dim when you crank the starter.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-c1.svg",
+        "caption": "Real batteries have internal resistance: $V = \\varepsilon - Ir$."
+      }
     },
     {
       "level": 2,
       "heading": "Resistors in series",
-      "explanation": "Series resistors carry the same current and their voltages add, so resistances add: $R_{eq} = R_1 + R_2 + \\cdots$. The equivalent resistance is larger than any single one. Voltage divides in proportion to each resistance."
+      "explanation": "Series resistors carry the same current and their voltages add, so resistances add: $R_{eq} = R_1 + R_2 + \\cdots$. The equivalent resistance is larger than any single one. Voltage divides in proportion to each resistance.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-c2.svg",
+        "caption": "Resistors in series add: $R_{eq} = R_1 + R_2$."
+      }
     },
     {
       "level": 3,
       "heading": "Resistors in parallel",
-      "explanation": "Parallel resistors share the same voltage and their currents add, so reciprocals add: $\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\cdots$. The equivalent resistance is smaller than the smallest branch — more paths mean easier flow."
+      "explanation": "Parallel resistors share the same voltage and their currents add, so reciprocals add: $\\dfrac{1}{R_{eq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\cdots$. The equivalent resistance is smaller than the smallest branch — more paths mean easier flow.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-c3.svg",
+        "caption": "Resistors in parallel: $1/R_{eq} = 1/R_1 + 1/R_2$."
+      }
     },
     {
       "level": 4,
       "heading": "Kirchhoff's rules",
-      "explanation": "For circuits you can't reduce by series/parallel, use Kirchhoff: the junction rule (currents in = currents out, charge conservation) and the loop rule (voltage changes around any loop sum to zero, energy conservation). Together they give enough equations to solve for every current."
+      "explanation": "For circuits you can't reduce by series/parallel, use Kirchhoff: the junction rule (currents in = currents out, charge conservation) and the loop rule (voltage changes around any loop sum to zero, energy conservation). Together they give enough equations to solve for every current.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-c4.svg",
+        "caption": "Kirchhoff: currents balance at a junction; voltages sum to zero."
+      }
     },
     {
       "level": 5,
       "heading": "RC circuits",
-      "explanation": "When a resistor charges a capacitor, the charge rises toward its final value with time constant $\\tau = RC$. After one $\\tau$ the capacitor reaches about 63% of full charge; after $\\sim5\\tau$ it is essentially done. Discharging follows the same exponential decay."
+      "explanation": "When a resistor charges a capacitor, the charge rises toward its final value with time constant $\\tau = RC$. After one $\\tau$ the capacitor reaches about 63% of full charge; after $\\sim5\\tau$ it is essentially done. Discharging follows the same exponential decay.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-c5.svg",
+        "caption": "An RC circuit charges/discharges over time constant $\\tau = RC$."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Holiday light strings",
       "scenario": "Old series strings go fully dark if one bulb fails; modern parallel ones don't.",
-      "how_the_math_applies": "In series, one break stops the single current path. In parallel each bulb has its own path at the same voltage, so the rest stay lit — a direct series-vs-parallel comparison."
+      "how_the_math_applies": "In series, one break stops the single current path. In parallel each bulb has its own path at the same voltage, so the rest stay lit — a direct series-vs-parallel comparison.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-e1.svg",
+        "caption": "Old series light strings: one bulb out breaks the whole loop."
+      }
     },
     {
       "title": "Car battery under load",
       "scenario": "Interior lights dim when you start the engine.",
-      "how_the_math_applies": "The starter draws a huge current $I$, so the drop $Ir$ across the battery's internal resistance is large and terminal voltage $V = \\mathcal{E} - Ir$ sags momentarily."
+      "how_the_math_applies": "The starter draws a huge current $I$, so the drop $Ir$ across the battery's internal resistance is large and terminal voltage $V = \\mathcal{E} - Ir$ sags momentarily.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-e2.svg",
+        "caption": "Under load the battery's terminal voltage sags ($V=\\varepsilon-Ir$)."
+      }
     },
     {
       "title": "Camera flash charge-up",
       "scenario": "A flash needs a second to 'recharge' between shots.",
-      "how_the_math_applies": "A resistor charges the flash capacitor with time constant $\\tau = RC$; you wait a few $\\tau$ for it to reach full voltage before it can fire again."
+      "how_the_math_applies": "A resistor charges the flash capacitor with time constant $\\tau = RC$; you wait a few $\\tau$ for it to reach full voltage before it can fire again.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-07-dc-circuits-e3.svg",
+        "caption": "A flash charges a capacitor through a resistor, then fires."
+      }
     }
   ],
   "videos": {

@@ -35,44 +35,84 @@
     {
       "level": 1,
       "heading": "Inductance",
-      "explanation": "An inductor resists changes in current by inducing a back-EMF $\\mathcal{E} = -L\\dfrac{\\Delta I}{\\Delta t}$. It stores energy in its magnetic field, $U = \\tfrac12 L I^2$. Inductance $L$ is measured in henries (H)."
+      "explanation": "An inductor resists changes in current by inducing a back-EMF $\\mathcal{E} = -L\\dfrac{\\Delta I}{\\Delta t}$. It stores energy in its magnetic field, $U = \\tfrac12 L I^2$. Inductance $L$ is measured in henries (H).",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-c1.svg",
+        "caption": "An inductor opposes current change: $\\varepsilon = -L\\,dI/dt$."
+      }
     },
     {
       "level": 2,
       "heading": "AC and rms values",
-      "explanation": "Household current alternates sinusoidally. Because it swings positive and negative, we quote the root-mean-square value: $V_{rms} = V_0/\\sqrt{2}$ (and likewise for current). '120 V' outlets actually peak near 170 V. rms values let AC power formulas look like DC ones."
+      "explanation": "Household current alternates sinusoidally. Because it swings positive and negative, we quote the root-mean-square value: $V_{rms} = V_0/\\sqrt{2}$ (and likewise for current). '120 V' outlets actually peak near 170 V. rms values let AC power formulas look like DC ones.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-c2.svg",
+        "caption": "AC oscillates; rms values give the effective size ($V_{rms}=V_0/\\sqrt2$)."
+      }
     },
     {
       "level": 3,
       "heading": "Reactance",
-      "explanation": "Inductors and capacitors oppose AC without dissipating energy, through reactance: $X_L = \\omega L$ (inductors block high frequencies) and $X_C = \\dfrac{1}{\\omega C}$ (capacitors block low frequencies), where $\\omega = 2\\pi f$. Both are measured in ohms."
+      "explanation": "Inductors and capacitors oppose AC without dissipating energy, through reactance: $X_L = \\omega L$ (inductors block high frequencies) and $X_C = \\dfrac{1}{\\omega C}$ (capacitors block low frequencies), where $\\omega = 2\\pi f$. Both are measured in ohms.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-c3.svg",
+        "caption": "Reactance is AC opposition: $X_L=\\omega L$, $X_C=1/\\omega C$."
+      }
     },
     {
       "level": 4,
       "heading": "Impedance of a series RLC",
-      "explanation": "Resistance and the two reactances combine into impedance $Z = \\sqrt{R^2 + (X_L - X_C)^2}$, and Ohm's law becomes $V_{rms} = I_{rms} Z$. The reactances partly cancel because inductor and capacitor voltages are out of phase."
+      "explanation": "Resistance and the two reactances combine into impedance $Z = \\sqrt{R^2 + (X_L - X_C)^2}$, and Ohm's law becomes $V_{rms} = I_{rms} Z$. The reactances partly cancel because inductor and capacitor voltages are out of phase.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-c4.svg",
+        "caption": "A series RLC combines into impedance $Z$."
+      }
     },
     {
       "level": 5,
       "heading": "Resonance",
-      "explanation": "When $X_L = X_C$ the reactances cancel, $Z$ is minimum ($=R$), and current peaks. This happens at the resonant frequency $\\omega_0 = \\dfrac{1}{\\sqrt{LC}}$ (or $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$) — how a radio selects one station."
+      "explanation": "When $X_L = X_C$ the reactances cancel, $Z$ is minimum ($=R$), and current peaks. This happens at the resonant frequency $\\omega_0 = \\dfrac{1}{\\sqrt{LC}}$ (or $f_0 = \\dfrac{1}{2\\pi\\sqrt{LC}}$) — how a radio selects one station.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-c5.svg",
+        "caption": "At resonance $X_L=X_C$ and the current peaks: $\\omega_0=1/\\sqrt{LC}$."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Tuning a radio",
       "scenario": "You turn a dial to pick one station.",
-      "how_the_math_applies": "The dial changes $C$, shifting the resonant frequency $f_0 = 1/(2\\pi\\sqrt{LC})$ so the circuit responds strongly to just one broadcast frequency."
+      "how_the_math_applies": "The dial changes $C$, shifting the resonant frequency $f_0 = 1/(2\\pi\\sqrt{LC})$ so the circuit responds strongly to just one broadcast frequency.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-e1.svg",
+        "caption": "A radio tunes to one station by matching its resonant frequency."
+      }
     },
     {
       "title": "Phone charger / adapter",
       "scenario": "A charger converts wall AC to low-voltage DC.",
-      "how_the_math_applies": "It uses rms voltages and a transformer, then rectifies and smooths with capacitors whose reactance $X_C$ filters the ripple."
+      "how_the_math_applies": "It uses rms voltages and a transformer, then rectifies and smooths with capacitors whose reactance $X_C$ filters the ripple.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-e2.svg",
+        "caption": "A charger transforms and rectifies AC into steady DC."
+      }
     },
     {
       "title": "Fluorescent light ballast",
       "scenario": "A tube light has a 'ballast' inside.",
-      "how_the_math_applies": "An inductor's reactance $X_L = \\omega L$ limits the current through the tube, preventing it from drawing a destructive surge."
+      "how_the_math_applies": "An inductor's reactance $X_L = \\omega L$ limits the current through the tube, preventing it from drawing a destructive surge.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-11-ac-circuits-e3.svg",
+        "caption": "A ballast (inductor) limits the current through a fluorescent tube."
+      }
     }
   ],
   "videos": {

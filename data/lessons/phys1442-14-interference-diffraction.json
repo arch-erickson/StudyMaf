@@ -43,44 +43,84 @@
     {
       "level": 1,
       "heading": "Converging and diverging lenses",
-      "explanation": "A converging (convex) lens bends parallel rays to a focus; a diverging (concave) lens spreads them so they seem to come from a focus behind it. Ray tracing — a ray through the center goes straight, a parallel ray bends through the focus — locates the image, consistent with $1/f = 1/d_o + 1/d_i$."
+      "explanation": "A converging (convex) lens bends parallel rays to a focus; a diverging (concave) lens spreads them so they seem to come from a focus behind it. Ray tracing — a ray through the center goes straight, a parallel ray bends through the focus — locates the image, consistent with $1/f = 1/d_o + 1/d_i$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-c1.svg",
+        "caption": "Converging lenses focus parallel light; diverging spread it."
+      }
     },
     {
       "level": 2,
       "heading": "Young's double slit",
-      "explanation": "Light through two close slits overlaps and interferes, making bright and dark bands. Bright fringes occur where the path difference is a whole number of wavelengths: $d\\sin\\theta = m\\lambda$. On a screen a distance $L$ away, the bright fringes sit at $y = \\dfrac{m\\lambda L}{d}$ — proof that light is a wave."
+      "explanation": "Light through two close slits overlaps and interferes, making bright and dark bands. Bright fringes occur where the path difference is a whole number of wavelengths: $d\\sin\\theta = m\\lambda$. On a screen a distance $L$ away, the bright fringes sit at $y = \\dfrac{m\\lambda L}{d}$ — proof that light is a wave.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-c2.svg",
+        "caption": "Two slits interfere: bright fringes at $d\\sin\\theta = m\\lambda$."
+      }
     },
     {
       "level": 3,
       "heading": "Single-slit diffraction",
-      "explanation": "Even one slit spreads light into a pattern, because waves from different parts of the slit interfere. The dark minima are at $a\\sin\\theta = m\\lambda$ (with $m = 1, 2, \\dots$), where $a$ is the slit width. Narrower slits spread light more."
+      "explanation": "Even one slit spreads light into a pattern, because waves from different parts of the slit interfere. The dark minima are at $a\\sin\\theta = m\\lambda$ (with $m = 1, 2, \\dots$), where $a$ is the slit width. Narrower slits spread light more.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-c3.svg",
+        "caption": "A single slit spreads light into a diffraction pattern."
+      }
     },
     {
       "level": 4,
       "heading": "Diffraction gratings",
-      "explanation": "A grating has thousands of slits. The same condition $d\\sin\\theta = m\\lambda$ holds, but with so many slits the bright lines become very sharp and separated. Different wavelengths appear at different angles, spreading light into a spectrum — how we measure the composition of light."
+      "explanation": "A grating has thousands of slits. The same condition $d\\sin\\theta = m\\lambda$ holds, but with so many slits the bright lines become very sharp and separated. Different wavelengths appear at different angles, spreading light into a spectrum — how we measure the composition of light.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-c4.svg",
+        "caption": "A grating's many slits give sharp maxima: $d\\sin\\theta = m\\lambda$."
+      }
     },
     {
       "level": 5,
       "heading": "Thin films and resolution",
-      "explanation": "Interference also happens in thin films (soap bubbles, anti-reflective coatings), where reflections off the two surfaces combine. Diffraction also sets the ultimate limit on how finely any lens or telescope can resolve detail — smaller wavelengths and bigger apertures resolve more."
+      "explanation": "Interference also happens in thin films (soap bubbles, anti-reflective coatings), where reflections off the two surfaces combine. Diffraction also sets the ultimate limit on how finely any lens or telescope can resolve detail — smaller wavelengths and bigger apertures resolve more.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-c5.svg",
+        "caption": "Thin films interfere; resolution is limited by diffraction."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Colors on a CD or DVD",
       "scenario": "A disc throws rainbow colors in the light.",
-      "how_the_math_applies": "The closely spaced tracks act as a reflection grating; $d\\sin\\theta = m\\lambda$ sends each color to a different angle, splitting white light into a spectrum."
+      "how_the_math_applies": "The closely spaced tracks act as a reflection grating; $d\\sin\\theta = m\\lambda$ sends each color to a different angle, splitting white light into a spectrum.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-e1.svg",
+        "caption": "A CD's fine tracks act as a grating, splitting light into colors."
+      }
     },
     {
       "title": "Anti-reflective coating",
       "scenario": "Camera and glasses lenses have a faint colored sheen.",
-      "how_the_math_applies": "A thin coating makes reflections off its two surfaces interfere destructively, cancelling glare for the targeted wavelength."
+      "how_the_math_applies": "A thin coating makes reflections off its two surfaces interfere destructively, cancelling glare for the targeted wavelength.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-e2.svg",
+        "caption": "An anti-reflective coating cancels reflections by interference."
+      }
     },
     {
       "title": "Telescope resolution",
       "scenario": "Bigger telescopes see finer detail.",
-      "how_the_math_applies": "Diffraction blurs points by an amount set by wavelength over aperture; a larger aperture $D$ shrinks the blur, resolving closer stars."
+      "how_the_math_applies": "Diffraction blurs points by an amount set by wavelength over aperture; a larger aperture $D$ shrinks the blur, resolving closer stars.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-14-interference-diffraction-e3.svg",
+        "caption": "A telescope's aperture sets the smallest detail it can resolve."
+      }
     }
   ],
   "videos": {

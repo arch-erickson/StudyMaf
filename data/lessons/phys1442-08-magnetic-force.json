@@ -39,44 +39,84 @@
     {
       "level": 1,
       "heading": "Force on a moving charge",
-      "explanation": "A magnetic field $B$ pushes on charge only when it moves: $F = qvB\\sin\\theta$, where $\\theta$ is the angle between the velocity and the field. A charge moving along the field ($\\theta = 0$) feels no force; moving across it ($\\theta = 90^\\circ$) feels the maximum."
+      "explanation": "A magnetic field $B$ pushes on charge only when it moves: $F = qvB\\sin\\theta$, where $\\theta$ is the angle between the velocity and the field. A charge moving along the field ($\\theta = 0$) feels no force; moving across it ($\\theta = 90^\\circ$) feels the maximum.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-c1.svg",
+        "caption": "A moving charge feels $\\vec F = q\\vec v\\times\\vec B$."
+      }
     },
     {
       "level": 2,
       "heading": "Direction: the right-hand rule",
-      "explanation": "The force is perpendicular to both the velocity and the field, given by $\\vec{F} = q\\vec{v}\\times\\vec{B}$. Point your right hand's fingers along $\\vec{v}$, curl toward $\\vec{B}$; the thumb gives the force on a positive charge (reverse it for negative). This is why the force never speeds a charge up — only turns it."
+      "explanation": "The force is perpendicular to both the velocity and the field, given by $\\vec{F} = q\\vec{v}\\times\\vec{B}$. Point your right hand's fingers along $\\vec{v}$, curl toward $\\vec{B}$; the thumb gives the force on a positive charge (reverse it for negative). This is why the force never speeds a charge up — only turns it.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-c2.svg",
+        "caption": "Right-hand rule gives the direction of $\\vec v\\times\\vec B$."
+      }
     },
     {
       "level": 3,
       "heading": "Force on a current-carrying wire",
-      "explanation": "A wire is just moving charges, so a field pushes on it too: $F = BIL\\sin\\theta$, where $I$ is the current, $L$ the length in the field, and $\\theta$ the angle between the wire and $\\vec{B}$. This force is what spins every electric motor."
+      "explanation": "A wire is just moving charges, so a field pushes on it too: $F = BIL\\sin\\theta$, where $I$ is the current, $L$ the length in the field, and $\\theta$ the angle between the wire and $\\vec{B}$. This force is what spins every electric motor.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-c3.svg",
+        "caption": "A current-carrying wire in a field feels $\\vec F = I\\vec L\\times\\vec B$."
+      }
     },
     {
       "level": 4,
       "heading": "Circular motion",
-      "explanation": "Because the magnetic force is always perpendicular to the velocity, a charge entering a uniform field moves in a circle. Setting $qvB = mv^2/r$ gives radius $r = \\dfrac{mv}{qB}$ and period $T = \\dfrac{2\\pi m}{qB}$ (independent of speed) — the principle of cyclotrons and mass spectrometers."
+      "explanation": "Because the magnetic force is always perpendicular to the velocity, a charge entering a uniform field moves in a circle. Setting $qvB = mv^2/r$ gives radius $r = \\dfrac{mv}{qB}$ and period $T = \\dfrac{2\\pi m}{qB}$ (independent of speed) — the principle of cyclotrons and mass spectrometers.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-c4.svg",
+        "caption": "The magnetic force curves a charge into a circle: $qvB = mv^2/r$."
+      }
     },
     {
       "level": 5,
       "heading": "Torque on a current loop",
-      "explanation": "A loop of $N$ turns carrying current $I$ with area $A$ in a field feels a torque $\\tau = NBIA\\sin\\theta$, where $\\theta$ is between the field and the loop's normal. The loop twists to align — the working principle of motors and analog meters. The product $NIA$ is the loop's magnetic moment."
+      "explanation": "A loop of $N$ turns carrying current $I$ with area $A$ in a field feels a torque $\\tau = NBIA\\sin\\theta$, where $\\theta$ is between the field and the loop's normal. The loop twists to align — the working principle of motors and analog meters. The product $NIA$ is the loop's magnetic moment.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-c5.svg",
+        "caption": "A current loop in a field feels a torque — the motor principle."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Mass spectrometer",
       "scenario": "A lab identifies molecules by their mass.",
-      "how_the_math_applies": "Ions of the same speed curve with radius $r = mv/(qB)$; heavier ions curve less. Measuring $r$ reveals the mass, separating the sample by molecular weight."
+      "how_the_math_applies": "Ions of the same speed curve with radius $r = mv/(qB)$; heavier ions curve less. Measuring $r$ reveals the mass, separating the sample by molecular weight.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-e1.svg",
+        "caption": "A mass spectrometer bends ions by mass along circular paths."
+      }
     },
     {
       "title": "Electric motor",
       "scenario": "A motor turns electrical energy into rotation.",
-      "how_the_math_applies": "Current loops in a field feel torque $\\tau = NBIA\\sin\\theta$. Commutators flip the current each half-turn so the torque keeps the shaft spinning one way."
+      "how_the_math_applies": "Current loops in a field feel torque $\\tau = NBIA\\sin\\theta$. Commutators flip the current each half-turn so the torque keeps the shaft spinning one way.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-e2.svg",
+        "caption": "An electric motor spins a current loop between magnet poles."
+      }
     },
     {
       "title": "The aurora",
       "scenario": "Charged particles from the Sun glow near the poles.",
-      "how_the_math_applies": "Earth's magnetic field bends the particles via $F = qvB\\sin\\theta$, funneling them along field lines toward the poles where they strike the atmosphere and glow."
+      "how_the_math_applies": "Earth's magnetic field bends the particles via $F = qvB\\sin\\theta$, funneling them along field lines toward the poles where they strike the atmosphere and glow.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-08-magnetic-force-e3.svg",
+        "caption": "The aurora: charged particles spiral along Earth's field lines."
+      }
     }
   ],
   "videos": {

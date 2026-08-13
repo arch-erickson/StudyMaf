@@ -35,44 +35,84 @@
     {
       "level": 1,
       "heading": "Maxwell's synthesis",
-      "explanation": "Maxwell's four equations gather all of electromagnetism: Gauss's law (charges make $E$ fields), its magnetic version (no magnetic monopoles), Faraday's law (changing $B$ makes $E$), and Ampère–Maxwell (currents and changing $E$ make $B$). Maxwell's new 'displacement current' term made the set consistent."
+      "explanation": "Maxwell's four equations gather all of electromagnetism: Gauss's law (charges make $E$ fields), its magnetic version (no magnetic monopoles), Faraday's law (changing $B$ makes $E$), and Ampère–Maxwell (currents and changing $E$ make $B$). Maxwell's new 'displacement current' term made the set consistent.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-c1.svg",
+        "caption": "Maxwell's four laws unify electricity, magnetism, and light."
+      }
     },
     {
       "level": 2,
       "heading": "Electromagnetic waves",
-      "explanation": "A changing electric field makes a magnetic field and vice versa, so the two can sustain each other and travel as a wave — with no medium needed. The fields are perpendicular to each other and to the direction of travel (a transverse wave)."
+      "explanation": "A changing electric field makes a magnetic field and vice versa, so the two can sustain each other and travel as a wave — with no medium needed. The fields are perpendicular to each other and to the direction of travel (a transverse wave).",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-c2.svg",
+        "caption": "In an EM wave, $\\vec E$ and $\\vec B$ oscillate perpendicular to travel."
+      }
     },
     {
       "level": 3,
       "heading": "The speed of light",
-      "explanation": "The theory fixes the speed: $c = \\dfrac{1}{\\sqrt{\\mu_0\\varepsilon_0}} = 3.0\\times10^8$ m/s. All EM waves obey $c = f\\lambda$, and the field magnitudes are locked together by $\\dfrac{E}{B} = c$. Radio, microwaves, light, and X-rays differ only in frequency."
+      "explanation": "The theory fixes the speed: $c = \\dfrac{1}{\\sqrt{\\mu_0\\varepsilon_0}} = 3.0\\times10^8$ m/s. All EM waves obey $c = f\\lambda$, and the field magnitudes are locked together by $\\dfrac{E}{B} = c$. Radio, microwaves, light, and X-rays differ only in frequency.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-c3.svg",
+        "caption": "All EM waves travel at $c = 1/\\sqrt{\\mu_0\\varepsilon_0}\\approx 3\\times10^8$ m/s."
+      }
     },
     {
       "level": 4,
       "heading": "Energy and the spectrum",
-      "explanation": "EM waves carry energy; their intensity depends on the square of the field amplitude, and they even exert a small radiation pressure. Ordering by frequency gives the electromagnetic spectrum: radio → microwave → infrared → visible → ultraviolet → X-ray → gamma."
+      "explanation": "EM waves carry energy; their intensity depends on the square of the field amplitude, and they even exert a small radiation pressure. Ordering by frequency gives the electromagnetic spectrum: radio → microwave → infrared → visible → ultraviolet → X-ray → gamma.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-c4.svg",
+        "caption": "Wavelength sets the band, from radio to gamma (the spectrum)."
+      }
     },
     {
       "level": 5,
       "heading": "Polarization and Malus's law",
-      "explanation": "Light's electric field can point in a definite direction — that's polarization. A polarizer passes only the aligned component. If already-polarized light hits a polarizer at angle $\\theta$, the transmitted intensity is $I = I_0\\cos^2\\theta$ (Malus's law). Unpolarized light loses half its intensity through the first polarizer."
+      "explanation": "Light's electric field can point in a definite direction — that's polarization. A polarizer passes only the aligned component. If already-polarized light hits a polarizer at angle $\\theta$, the transmitted intensity is $I = I_0\\cos^2\\theta$ (Malus's law). Unpolarized light loses half its intensity through the first polarizer.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-c5.svg",
+        "caption": "A polarizer passes one direction; $I = I_0\\cos^2\\theta$ (Malus)."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "The electromagnetic spectrum",
       "scenario": "Wi-Fi, visible light, and X-rays are all 'the same thing.'",
-      "how_the_math_applies": "All obey $c = f\\lambda$; only the frequency differs. Wi-Fi is ~$5\\times10^9$ Hz, visible light ~$5\\times10^{14}$ Hz — same wave, different $f$."
+      "how_the_math_applies": "All obey $c = f\\lambda$; only the frequency differs. Wi-Fi is ~$5\\times10^9$ Hz, visible light ~$5\\times10^{14}$ Hz — same wave, different $f$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-e1.svg",
+        "caption": "The spectrum spans radio → micro → visible → X-ray → gamma."
+      }
     },
     {
       "title": "Polarized sunglasses",
       "scenario": "Polarized lenses cut glare off water and roads.",
-      "how_the_math_applies": "Glare is horizontally polarized; a vertical polarizer blocks it. Malus's law $I = I_0\\cos^2\\theta$ gives how much passes at each angle."
+      "how_the_math_applies": "Glare is horizontally polarized; a vertical polarizer blocks it. Malus's law $I = I_0\\cos^2\\theta$ gives how much passes at each angle.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-e2.svg",
+        "caption": "Polarized sunglasses block the horizontally-polarized glare."
+      }
     },
     {
       "title": "LCD screens",
       "scenario": "Your monitor uses polarizers you can't see.",
-      "how_the_math_applies": "Liquid crystals rotate light's polarization; crossed polarizers then turn each pixel bright or dark via $I = I_0\\cos^2\\theta$."
+      "how_the_math_applies": "Liquid crystals rotate light's polarization; crossed polarizers then turn each pixel bright or dark via $I = I_0\\cos^2\\theta$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-12-em-waves-e3.svg",
+        "caption": "LCDs switch light with liquid crystals between two polarizers."
+      }
     }
   ],
   "videos": {

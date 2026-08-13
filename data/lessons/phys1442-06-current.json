@@ -39,44 +39,84 @@
     {
       "level": 1,
       "heading": "What current is",
-      "explanation": "Electric current is how fast charge flows past a point: $I = \\dfrac{Q}{t}$, measured in amperes (1 A = 1 C/s). By convention, current points the way positive charge would move — opposite to the actual electron flow in a wire."
+      "explanation": "Electric current is how fast charge flows past a point: $I = \\dfrac{Q}{t}$, measured in amperes (1 A = 1 C/s). By convention, current points the way positive charge would move — opposite to the actual electron flow in a wire.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-c1.svg",
+        "caption": "Current is charge flow per second: $I = \\Delta Q/\\Delta t$."
+      }
     },
     {
       "level": 2,
       "heading": "The microscopic picture",
-      "explanation": "Inside a wire, countless electrons drift slowly (millimeters per second) under an applied field. The current relates to this drift by $I = nqv_d A$, where $n$ is the charge-carrier density and $v_d$ the drift speed. The 'signal' travels near light speed even though individual electrons crawl."
+      "explanation": "Inside a wire, countless electrons drift slowly (millimeters per second) under an applied field. The current relates to this drift by $I = nqv_d A$, where $n$ is the charge-carrier density and $v_d$ the drift speed. The 'signal' travels near light speed even though individual electrons crawl.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-c2.svg",
+        "caption": "Electrons drift slowly through the lattice, colliding as they go."
+      }
     },
     {
       "level": 3,
       "heading": "Ohm's law",
-      "explanation": "For an ohmic material the current is proportional to the voltage across it: $V = IR$. The constant $R$ is the resistance, in ohms ($\\Omega$). More voltage pushes more current; more resistance allows less. Rearrange as needed: $I = V/R$ or $R = V/I$."
+      "explanation": "For an ohmic material the current is proportional to the voltage across it: $V = IR$. The constant $R$ is the resistance, in ohms ($\\Omega$). More voltage pushes more current; more resistance allows less. Rearrange as needed: $I = V/R$ or $R = V/I$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-c3.svg",
+        "caption": "Ohm's law: $V = IR$ — voltage drives current through resistance."
+      }
     },
     {
       "level": 4,
       "heading": "What sets the resistance",
-      "explanation": "Resistance grows with length and shrinks with cross-section: $R = \\rho\\dfrac{L}{A}$, where $\\rho$ is the material's resistivity (copper is tiny, rubber is huge). A long thin wire resists more than a short fat one of the same material — just like a narrow pipe resists water flow."
+      "explanation": "Resistance grows with length and shrinks with cross-section: $R = \\rho\\dfrac{L}{A}$, where $\\rho$ is the material's resistivity (copper is tiny, rubber is huge). A long thin wire resists more than a short fat one of the same material — just like a narrow pipe resists water flow.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-c4.svg",
+        "caption": "Resistance grows with length, falls with area: $R = \\rho L/A$."
+      }
     },
     {
       "level": 5,
       "heading": "Electric power",
-      "explanation": "Charge moving through a voltage delivers energy at rate $P = IV$. Using Ohm's law this is also $P = I^2R = \\dfrac{V^2}{R}$. In a resistor this power becomes heat (a toaster, a bulb filament). Energy used is power times time; utilities bill it in kilowatt-hours."
+      "explanation": "Charge moving through a voltage delivers energy at rate $P = IV$. Using Ohm's law this is also $P = I^2R = \\dfrac{V^2}{R}$. In a resistor this power becomes heat (a toaster, a bulb filament). Energy used is power times time; utilities bill it in kilowatt-hours.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-c5.svg",
+        "caption": "Power dissipated: $P = IV = I^2R$."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "A fuse or circuit breaker",
       "scenario": "Too many appliances trip the breaker.",
-      "how_the_math_applies": "Each device draws current $I = P/V$. When the total exceeds the breaker's rating, $I^2R$ heating in the wires would become unsafe, so the breaker opens the circuit."
+      "how_the_math_applies": "Each device draws current $I = P/V$. When the total exceeds the breaker's rating, $I^2R$ heating in the wires would become unsafe, so the breaker opens the circuit.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-e1.svg",
+        "caption": "A fuse's thin link melts and breaks the circuit if $I$ is too high."
+      }
     },
     {
       "title": "A light-bulb filament",
       "scenario": "An incandescent bulb glows when switched on.",
-      "how_the_math_applies": "The thin, high-resistance filament dissipates $P = V^2/R$ as heat and light. Its small area $A$ and long coiled length $L$ give the large $R$ needed to reach glowing temperature."
+      "how_the_math_applies": "The thin, high-resistance filament dissipates $P = V^2/R$ as heat and light. Its small area $A$ and long coiled length $L$ give the large $R$ needed to reach glowing temperature.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-e2.svg",
+        "caption": "A bulb filament glows because $P=I^2R$ heats its resistance."
+      }
     },
     {
       "title": "A warm extension cord",
       "scenario": "A long thin cord feels warm under heavy load.",
-      "how_the_math_applies": "The cord's own resistance $R = \\rho L/A$ dissipates $I^2R$. A longer or thinner cord has more $R$, so it wastes more power as heat — why heavy loads need thick cords."
+      "how_the_math_applies": "The cord's own resistance $R = \\rho L/A$ dissipates $I^2R$. A longer or thinner cord has more $R$, so it wastes more power as heat — why heavy loads need thick cords.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-06-current-e3.svg",
+        "caption": "An overloaded cord warms up: too much current in its resistance."
+      }
     }
   ],
   "videos": {

@@ -35,44 +35,84 @@
     {
       "level": 1,
       "heading": "Moving charge makes a field",
-      "explanation": "Just as a field pushes on current, current creates a field. Around a long straight wire the field circles the wire (right-hand rule: thumb along current, fingers curl the way $B$ points) with magnitude $B = \\dfrac{\\mu_0 I}{2\\pi r}$, falling off as $1/r$."
+      "explanation": "Just as a field pushes on current, current creates a field. Around a long straight wire the field circles the wire (right-hand rule: thumb along current, fingers curl the way $B$ points) with magnitude $B = \\dfrac{\\mu_0 I}{2\\pi r}$, falling off as $1/r$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-c1.svg",
+        "caption": "A straight current makes a circular field: $B = \\mu_0 I/2\\pi r$."
+      }
     },
     {
       "level": 2,
       "heading": "Loops and the Biot–Savart idea",
-      "explanation": "Each little piece of current contributes a bit of field (the Biot–Savart law). Adding them around a circular loop of radius $R$ gives a field at the center $B = \\dfrac{\\mu_0 I}{2R}$, pointing along the loop's axis. Loops concentrate field — the building block of electromagnets."
+      "explanation": "Each little piece of current contributes a bit of field (the Biot–Savart law). Adding them around a circular loop of radius $R$ gives a field at the center $B = \\dfrac{\\mu_0 I}{2R}$, pointing along the loop's axis. Loops concentrate field — the building block of electromagnets.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-c2.svg",
+        "caption": "Each current element adds field (Biot–Savart); a loop concentrates it."
+      }
     },
     {
       "level": 3,
       "heading": "Force between parallel wires",
-      "explanation": "Each wire sits in the other's field, so they push or pull: $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi d}$. Currents in the same direction attract; opposite currents repel. This force once defined the ampere itself."
+      "explanation": "Each wire sits in the other's field, so they push or pull: $\\dfrac{F}{L} = \\dfrac{\\mu_0 I_1 I_2}{2\\pi d}$. Currents in the same direction attract; opposite currents repel. This force once defined the ampere itself.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-c3.svg",
+        "caption": "Parallel currents attract; opposite currents repel."
+      }
     },
     {
       "level": 4,
       "heading": "The solenoid",
-      "explanation": "A solenoid is a long coil of $n$ turns per meter. Inside, the fields of all the loops add to give a nearly uniform $B = \\mu_0 n I$, while outside it is weak. Add an iron core and you have a strong, switchable electromagnet."
+      "explanation": "A solenoid is a long coil of $n$ turns per meter. Inside, the fields of all the loops add to give a nearly uniform $B = \\mu_0 n I$, while outside it is weak. Add an iron core and you have a strong, switchable electromagnet.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-c4.svg",
+        "caption": "A solenoid makes a uniform field inside: $B = \\mu_0 n I$."
+      }
     },
     {
       "level": 5,
       "heading": "Ampère's law",
-      "explanation": "Ampère's law says the field summed around any closed loop equals $\\mu_0$ times the current threading it: $\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 I_{enc}$. With symmetry it gives the wire and solenoid results quickly — the magnetic analog of Gauss's law."
+      "explanation": "Ampère's law says the field summed around any closed loop equals $\\mu_0$ times the current threading it: $\\oint \\vec{B}\\cdot d\\vec{l} = \\mu_0 I_{enc}$. With symmetry it gives the wire and solenoid results quickly — the magnetic analog of Gauss's law.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-c5.svg",
+        "caption": "Ampère's law relates the field around a loop to the enclosed current."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Electromagnet / solenoid",
       "scenario": "A junkyard crane lifts cars with a coil, then drops them by switching off.",
-      "how_the_math_applies": "A solenoid's field $B = \\mu_0 n I$ (boosted by an iron core) is strong while current flows and vanishes when it stops — controllable magnetism."
+      "how_the_math_applies": "A solenoid's field $B = \\mu_0 n I$ (boosted by an iron core) is strong while current flows and vanishes when it stops — controllable magnetism.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-e1.svg",
+        "caption": "An electromagnet: current through a solenoid makes a strong field."
+      }
     },
     {
       "title": "MRI scanner",
       "scenario": "An MRI uses an enormous, steady magnetic field.",
-      "how_the_math_applies": "Superconducting solenoid coils carry huge currents to make a uniform $B = \\mu_0 n I$ of a few tesla across the patient."
+      "how_the_math_applies": "Superconducting solenoid coils carry huge currents to make a uniform $B = \\mu_0 n I$ of a few tesla across the patient.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-e2.svg",
+        "caption": "An MRI uses a huge, steady solenoid field to image the body."
+      }
     },
     {
       "title": "Power-line fields",
       "scenario": "Compasses waver near heavy power cables.",
-      "how_the_math_applies": "The current creates a circling field $B = \\mu_0 I/(2\\pi r)$ that drops with distance — why fields fall off quickly as you step away."
+      "how_the_math_applies": "The current creates a circling field $B = \\mu_0 I/(2\\pi r)$ that drops with distance — why fields fall off quickly as you step away.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-09-magnetic-sources-e3.svg",
+        "caption": "Power lines carry current, so a magnetic field circles them."
+      }
     }
   ],
   "videos": {

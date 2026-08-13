@@ -1,13 +1,11 @@
 {
-  "generated": "2026-08-13T05:03:34.103Z",
+  "generated": "2026-08-13T18:38:01.734Z",
   "source": "tools/build-lesson-diagrams.js",
   "diagrams": [
     {
-      "id": "phys1442-02-field-around-charges",
+      "id": "phys1442-01-coulomb-c1",
       "subject": "physics",
-      "title": "Electric field around point charges",
-      "file": "data/diagrams/phys1442-02-field-around-charges.svg",
-      "caption": "Field arrows point away from a positive charge and toward a negative charge.",
+      "file": "data/diagrams/phys1442-01-coulomb-c1.svg",
       "assets": [
         {
           "id": "charge-positive",
@@ -21,15 +19,178 @@
           "license": "MIT",
           "attribution": null
         }
-      ],
-      "attributionRequired": []
+      ]
     },
     {
-      "id": "phys1442-02-uniform-field-plates",
+      "id": "phys1442-01-coulomb-c2",
       "subject": "physics",
-      "title": "Uniform field between parallel plates",
-      "file": "data/diagrams/phys1442-02-uniform-field-plates.svg",
-      "caption": "Between charged parallel plates the field $\\vec E$ is uniform — evenly spaced, parallel lines.",
+      "file": "data/diagrams/phys1442-01-coulomb-c2.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-01-coulomb-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-01-coulomb-c3.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-01-coulomb-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-01-coulomb-c4.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-01-coulomb-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-01-coulomb-c5.svg",
+      "assets": [
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-01-coulomb-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-01-coulomb-e1.svg",
+      "assets": [
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-01-coulomb-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-01-coulomb-e2.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-01-coulomb-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-01-coulomb-e3.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-02-efield-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-c1.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-02-efield-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-c2.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-02-efield-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-c3.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-02-efield-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-c4.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-02-efield-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-c5.svg",
       "assets": [
         {
           "id": "parallel-plates",
@@ -37,18 +198,28 @@
           "license": "MIT",
           "attribution": null
         }
-      ],
-      "attributionRequired": []
+      ]
     },
     {
-      "id": "phys1442-02-force-on-test-charge",
+      "id": "phys1442-02-efield-e1",
       "subject": "physics",
-      "title": "Force on a test charge",
-      "file": "data/diagrams/phys1442-02-force-on-test-charge.svg",
-      "caption": "In the same field $\\vec E$, the force $\\vec F = q\\vec E$ is along $\\vec E$ on $+q$ and opposite on $-q$.",
+      "file": "data/diagrams/phys1442-02-efield-e1.svg",
       "assets": [
         {
           "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-02-efield-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-e2.svg",
+      "assets": [
+        {
+          "id": "parallel-plates",
           "source": "studymaf",
           "license": "MIT",
           "attribution": null
@@ -59,8 +230,1429 @@
           "license": "MIT",
           "attribution": null
         }
-      ],
-      "attributionRequired": []
+      ]
+    },
+    {
+      "id": "phys1442-02-efield-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-02-efield-e3.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-03-gauss-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-c1.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-03-gauss-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-c2.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-03-gauss-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-c3.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-03-gauss-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-c4.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-03-gauss-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-c5.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-03-gauss-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-e1.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-03-gauss-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-e2.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-03-gauss-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-03-gauss-e3.svg",
+      "assets": [
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-c1.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-c2.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-c3.svg",
+      "assets": [
+        {
+          "id": "parallel-plates",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-c4.svg",
+      "assets": [
+        {
+          "id": "parallel-plates",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-c5.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-e1.svg",
+      "assets": [
+        {
+          "id": "battery-cell",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "light-bulb",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-e2.svg",
+      "assets": [
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-04-potential-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-04-potential-e3.svg",
+      "assets": [
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-c1.svg",
+      "assets": [
+        {
+          "id": "parallel-plates",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-c2.svg",
+      "assets": [
+        {
+          "id": "parallel-plates",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-c3.svg",
+      "assets": [
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-c4.svg",
+      "assets": [
+        {
+          "id": "parallel-plates",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-c5.svg",
+      "assets": [
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-e1.svg",
+      "assets": [
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "light-bulb",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-e2.svg",
+      "assets": [
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-05-capacitance-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-05-capacitance-e3.svg",
+      "assets": [
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-c1.svg",
+      "assets": [
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-c2.svg",
+      "assets": [
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-c3.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-c4.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-c5.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "heat-flow",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-e1.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-e2.svg",
+      "assets": [
+        {
+          "id": "light-bulb",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "heat-flow",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-06-current-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-06-current-e3.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "heat-flow",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-c1.svg",
+      "assets": [
+        {
+          "id": "battery-cell",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-c2.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-c3.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-c4.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-07-dc-circuits-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-c5.svg",
+      "assets": [
+        {
+          "id": "battery-cell",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-e1.svg",
+      "assets": [
+        {
+          "id": "light-bulb",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-e2.svg",
+      "assets": [
+        {
+          "id": "battery-cell",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-07-dc-circuits-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-07-dc-circuits-e3.svg",
+      "assets": [
+        {
+          "id": "battery-cell",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-c1.svg",
+      "assets": [
+        {
+          "id": "field-out-of-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-c2.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-08-magnetic-force-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-c3.svg",
+      "assets": [
+        {
+          "id": "field-out-of-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-c4.svg",
+      "assets": [
+        {
+          "id": "field-into-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-c5.svg",
+      "assets": [
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-e1.svg",
+      "assets": [
+        {
+          "id": "field-into-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-positive",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-e2.svg",
+      "assets": [
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-08-magnetic-force-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-08-magnetic-force-e3.svg",
+      "assets": [
+        {
+          "id": "field-lines-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "charge-negative",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-c1.svg",
+      "assets": [
+        {
+          "id": "field-out-of-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "field-into-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-c2.svg",
+      "assets": [
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-c3.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-c4.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-c5.svg",
+      "assets": [
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-e1.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-e2.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-09-magnetic-sources-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-09-magnetic-sources-e3.svg",
+      "assets": [
+        {
+          "id": "field-out-of-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "field-into-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-c1.svg",
+      "assets": [
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "field-out-of-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-c2.svg",
+      "assets": [
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-c3.svg",
+      "assets": [
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-c4.svg",
+      "assets": [
+        {
+          "id": "field-into-page",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-c5.svg",
+      "assets": [
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-e1.svg",
+      "assets": [
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-e2.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "heat-flow",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-10-induction-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-10-induction-e3.svg",
+      "assets": [
+        {
+          "id": "bar-magnet",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-c1.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-c2.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-c3.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-c4.svg",
+      "assets": [
+        {
+          "id": "resistor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-c5.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-e1.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "capacitor",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-e2.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-11-ac-circuits-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-11-ac-circuits-e3.svg",
+      "assets": [
+        {
+          "id": "solenoid",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "light-bulb",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-c1.svg",
+      "assets": [
+        {
+          "id": "field-lines-radial",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "current-loop",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-c2.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-c3.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-c4.svg",
+      "assets": [
+        {
+          "id": "wavelength-labeled",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-c5.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-e1.svg",
+      "assets": [
+        {
+          "id": "wavelength-labeled",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-e2.svg",
+      "assets": [
+        {
+          "id": "transverse-wave",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-12-em-waves-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-12-em-waves-e3.svg",
+      "assets": [
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-13-geometric-optics-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-c1.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-13-geometric-optics-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-c2.svg",
+      "assets": [
+        {
+          "id": "ray-refraction",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-13-geometric-optics-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-c3.svg",
+      "assets": [
+        {
+          "id": "concave-mirror",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-13-geometric-optics-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-c4.svg",
+      "assets": [
+        {
+          "id": "converging-lens",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-13-geometric-optics-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-c5.svg",
+      "assets": [
+        {
+          "id": "converging-lens",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-13-geometric-optics-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-e1.svg",
+      "assets": [
+        {
+          "id": "converging-lens",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-13-geometric-optics-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-e2.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-13-geometric-optics-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-13-geometric-optics-e3.svg",
+      "assets": [
+        {
+          "id": "convex-mirror",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-c1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-c1.svg",
+      "assets": [
+        {
+          "id": "converging-lens",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        },
+        {
+          "id": "diverging-lens",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-c2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-c2.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-c3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-c3.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-c4",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-c4.svg",
+      "assets": [
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-c5",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-c5.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-e1",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-e1.svg",
+      "assets": [
+        {
+          "id": "grid-square",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-e2",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-e2.svg",
+      "assets": []
+    },
+    {
+      "id": "phys1442-14-interference-diffraction-e3",
+      "subject": "physics",
+      "file": "data/diagrams/phys1442-14-interference-diffraction-e3.svg",
+      "assets": [
+        {
+          "id": "converging-lens",
+          "source": "studymaf",
+          "license": "MIT",
+          "attribution": null
+        }
+      ]
     }
   ],
   "attribution": []

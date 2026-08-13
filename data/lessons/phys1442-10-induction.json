@@ -39,44 +39,84 @@
     {
       "level": 1,
       "heading": "Magnetic flux",
-      "explanation": "Flux measures how much magnetic field passes through a loop: $\\Phi = BA\\cos\\theta$, where $A$ is the loop area and $\\theta$ the angle between $\\vec{B}$ and the loop's normal. It is largest when the field is straight through the loop, zero when the field lies in the loop's plane. Units are webers (Wb)."
+      "explanation": "Flux measures how much magnetic field passes through a loop: $\\Phi = BA\\cos\\theta$, where $A$ is the loop area and $\\theta$ the angle between $\\vec{B}$ and the loop's normal. It is largest when the field is straight through the loop, zero when the field lies in the loop's plane. Units are webers (Wb).",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-c1.svg",
+        "caption": "Magnetic flux = field through a loop: $\\Phi_B = BA\\cos\\theta$."
+      }
     },
     {
       "level": 2,
       "heading": "Faraday's law",
-      "explanation": "A changing flux induces an EMF: $\\mathcal{E} = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$, for $N$ turns. Flux can change three ways: the field changes, the area changes, or the loop rotates. Faster changes make bigger EMF — nothing happens if the flux holds steady."
+      "explanation": "A changing flux induces an EMF: $\\mathcal{E} = -N\\dfrac{\\Delta\\Phi}{\\Delta t}$, for $N$ turns. Flux can change three ways: the field changes, the area changes, or the loop rotates. Faster changes make bigger EMF — nothing happens if the flux holds steady.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-c2.svg",
+        "caption": "A changing flux induces a voltage: $\\varepsilon = -N\\,d\\Phi_B/dt$."
+      }
     },
     {
       "level": 3,
       "heading": "Lenz's law",
-      "explanation": "The minus sign is Lenz's law: the induced current flows so its own magnetic field opposes the change that caused it. Push a magnet toward a coil and the coil pushes back; pull it away and the coil pulls it back. This is energy conservation — you do work against the induced field."
+      "explanation": "The minus sign is Lenz's law: the induced current flows so its own magnetic field opposes the change that caused it. Push a magnet toward a coil and the coil pushes back; pull it away and the coil pulls it back. This is energy conservation — you do work against the induced field.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-c3.svg",
+        "caption": "Lenz's law: the induced current opposes the change in flux."
+      }
     },
     {
       "level": 4,
       "heading": "Motional EMF",
-      "explanation": "Slide a conducting rod of length $L$ at speed $v$ across a field $B$ and it develops $\\mathcal{E} = BLv$. The moving charges in the rod feel a magnetic force that separates them, acting like a tiny battery. Connect it to a circuit and current flows."
+      "explanation": "Slide a conducting rod of length $L$ at speed $v$ across a field $B$ and it develops $\\mathcal{E} = BLv$. The moving charges in the rod feel a magnetic force that separates them, acting like a tiny battery. Connect it to a circuit and current flows.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-c4.svg",
+        "caption": "A rod moving through a field makes motional EMF: $\\varepsilon = BLv$."
+      }
     },
     {
       "level": 5,
       "heading": "Generators and transformers",
-      "explanation": "A coil rotating in a field has continuously changing flux, giving an AC EMF with peak $\\mathcal{E}_0 = NBA\\omega$ — that's a generator. Transformers use a changing flux shared between two coils so the voltage ratio matches the turns ratio, $\\dfrac{V_s}{V_p} = \\dfrac{N_s}{N_p}$."
+      "explanation": "A coil rotating in a field has continuously changing flux, giving an AC EMF with peak $\\mathcal{E}_0 = NBA\\omega$ — that's a generator. Transformers use a changing flux shared between two coils so the voltage ratio matches the turns ratio, $\\dfrac{V_s}{V_p} = \\dfrac{N_s}{N_p}$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-c5.svg",
+        "caption": "Spinning a loop in a field makes AC — a generator."
+      }
     }
   ],
   "real_world_examples": [
     {
       "title": "Power-plant generator",
       "scenario": "A spinning turbine produces household electricity.",
-      "how_the_math_applies": "Rotating coils in a magnetic field give a changing flux, inducing $\\mathcal{E} = -N\\,\\Delta\\Phi/\\Delta t$ — an AC voltage whose peak is $NBA\\omega$."
+      "how_the_math_applies": "Rotating coils in a magnetic field give a changing flux, inducing $\\mathcal{E} = -N\\,\\Delta\\Phi/\\Delta t$ — an AC voltage whose peak is $NBA\\omega$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-e1.svg",
+        "caption": "Power plants spin coils in a field to generate electricity."
+      }
     },
     {
       "title": "Induction cooktop",
       "scenario": "A stovetop heats the pan but not itself.",
-      "how_the_math_applies": "A rapidly changing field induces currents in the metal pan (Faraday's law); the pan's resistance turns those currents into heat."
+      "how_the_math_applies": "A rapidly changing field induces currents in the metal pan (Faraday's law); the pan's resistance turns those currents into heat.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-e2.svg",
+        "caption": "An induction cooktop induces eddy currents that heat the pan."
+      }
     },
     {
       "title": "Electric guitar pickup",
       "scenario": "A pickup turns string vibration into sound.",
-      "how_the_math_applies": "A vibrating steel string changes the flux through a coil, inducing a small EMF that mirrors the string's motion — then amplified."
+      "how_the_math_applies": "A vibrating steel string changes the flux through a coil, inducing a small EMF that mirrors the string's motion — then amplified.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1442-10-induction-e3.svg",
+        "caption": "A vibrating string changes a pickup's flux, inducing the signal."
+      }
     }
   ],
   "videos": {

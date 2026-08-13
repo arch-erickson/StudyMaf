@@ -198,9 +198,35 @@ class Diagram {
     const m = [...this.arrowColors].map(c => `<marker id="ah-${idColor(c)}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="${c}"/></marker>`).join("");
     return m ? `<defs>${m}</defs>` : "";
   }
+  // union of every tracked box (assets, arrows, labels) = the drawn extent
+  _contentBBox() {
+    if (!this.boxes.length) return null;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const b of this.boxes) { x0 = Math.min(x0, b.x); y0 = Math.min(y0, b.y); x1 = Math.max(x1, b.x + b.w); y1 = Math.max(y1, b.y + b.h); }
+    return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+  }
+  // EDGE-SAFE: if the drawn content spills past the frame (or sits off-center),
+  // wrap everything in a transform that scales/translates it to fit inside a small
+  // margin. Well-composed diagrams get s=1 (no change); this is only a safety net so
+  // nothing is ever clipped by the viewBox.
+  _fitTransform(margin) {
+    const bb = this._contentBBox();
+    if (!bb || bb.w <= 0 || bb.h <= 0) return null;
+    const m = margin == null ? 10 : margin;
+    const availW = this.w - 2 * m, availH = this.h - 2 * m;
+    const s = Math.min(1, availW / bb.w, availH / bb.h);
+    const needs = s < 0.999 || bb.x < m - 0.5 || bb.y < m - 0.5 || bb.x + bb.w > this.w - m + 0.5 || bb.y + bb.h > this.h - m + 0.5;
+    if (!needs) return null;
+    const tx = m - bb.x * s + (availW - bb.w * s) / 2;
+    const ty = m - bb.y * s + (availH - bb.h * s) / 2;
+    return `translate(${num(tx)} ${num(ty)}) scale(${num(s)})`;
+  }
   toSVG() {
     const bg = this.bg && this.bg !== "none" ? `<rect width="${this.w}" height="${this.h}" fill="${this.bg}"/>` : "";
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${this.w} ${this.h}" width="100%" font-family="Inter, system-ui, sans-serif">${this._defs()}${bg}${this.content.join("")}${this.annot.join("")}${this.labels.join("")}</svg>`;
+    const inner = `${this.content.join("")}${this.annot.join("")}${this.labels.join("")}`;
+    const tf = this._fitTransform();
+    const wrapped = tf ? `<g transform="${tf}">${inner}</g>` : inner;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${this.w} ${this.h}" width="100%" font-family="Inter, system-ui, sans-serif">${this._defs()}${bg}${wrapped}</svg>`;
   }
 
   // Attribution manifest for this diagram: which assets it used, their source and
@@ -239,7 +265,7 @@ const isNum = (v) => typeof v === "number" && isFinite(v);
 const isPt = (v) => Array.isArray(v) && v.length === 2 && v.every(isNum);
 
 function validateSpec(spec) {
-  const errors = [];
+  const errors = [], warnings = [];
   if (!spec || typeof spec !== "object") throw new Error("DGE spec must be an object");
   const c = spec.canvas || {};
   const subject = spec.subject || c.subject;
@@ -250,6 +276,8 @@ function validateSpec(spec) {
   if (c.width != null && !(isNum(c.width) && c.width > 0)) errors.push("canvas.width must be a positive number");
   if (c.height != null && !(isNum(c.height) && c.height > 0)) errors.push("canvas.height must be a positive number");
   const W = c.width || 480, H = c.height || 320;
+  // off-canvas is a WARNING, not an error: toSVG()'s auto-fit scales/translates any
+  // overspill back inside the frame, so a diagram is never clipped by the viewBox.
   const onCanvas = (x, y) => x >= -2 && y >= -2 && x <= W + 2 && y <= H + 2;
 
   (spec.items || []).forEach((it, i) => {
@@ -259,8 +287,8 @@ function validateSpec(spec) {
     // numeric coordinates / dimensions
     for (const k of ["x", "y", "cx", "cy", "w", "h", "width", "height", "size", "offset"]) if (it[k] != null && !isNum(it[k])) errors.push(`${at}.${k} must be a finite number`);
     for (const k of ["from", "to"]) if (it[k] != null && !isPt(it[k])) errors.push(`${at}.${k} must be [x, y] numbers`);
-    for (const k of ["from", "to"]) if (isPt(it[k]) && !onCanvas(it[k][0], it[k][1])) errors.push(`${at}.${k} = [${it[k]}] is outside the ${W}×${H} canvas`);
-    if (isNum(it.cx) && isNum(it.cy) && !onCanvas(it.cx, it.cy)) errors.push(`${at}: center (${it.cx}, ${it.cy}) is outside the ${W}×${H} canvas`);
+    for (const k of ["from", "to"]) if (isPt(it[k]) && !onCanvas(it[k][0], it[k][1])) warnings.push(`${at}.${k} = [${it[k]}] is outside the ${W}×${H} canvas (auto-fit will rescale)`);
+    if (isNum(it.cx) && isNum(it.cy) && !onCanvas(it.cx, it.cy)) warnings.push(`${at}: center (${it.cx}, ${it.cy}) is outside the ${W}×${H} canvas (auto-fit will rescale)`);
     // asset: must be approved for the subject; validate referenced anchor/role
     if (it.type === "asset") {
       const key = it.id || it.query;
@@ -279,7 +307,8 @@ function validateSpec(spec) {
     for (const k of Object.keys(it)) if (!BASE_PROPS.has(k) && !ok.has(k)) errors.push(`${at}: unsupported property "${k}" for type "${it.type}"`);
   });
 
-  if (errors.length) throw new Error("Invalid DGE spec:\n  - " + errors.join("\n  - "));
+  if (warnings.length && typeof console !== "undefined") console.warn("DGE spec" + (spec.id ? " " + spec.id : "") + " warnings:\n  - " + warnings.join("\n  - "));
+  if (errors.length) throw new Error("Invalid DGE spec" + (spec.id ? " " + spec.id : "") + ":\n  - " + errors.join("\n  - "));
   return true;
 }
 

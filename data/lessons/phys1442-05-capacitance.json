@@ -41,73 +41,9 @@
       "heading": "What a capacitor does",
       "explanation": "A capacitor is two conductors holding equal and opposite charge $\\pm Q$, separated by an insulator. It stores charge (and energy) when a voltage is applied. Capacitance measures how much charge it holds per volt: $C = Q/V$, in farads (1 F = 1 C/V). A farad is huge, so real capacitors are µF, nF, or pF.",
       "figure": {
-        "type": "schematic",
-        "caption": "Two conductors hold $\\pm Q$; capacitance is the charge stored per volt, $C = Q/V$.",
-        "params": {
-          "viewBox": [
-            340,
-            185
-          ],
-          "elements": [
-            {
-              "kind": "label",
-              "x": 170,
-              "y": 30,
-              "text": "voltage $V$ across plates",
-              "color": "soft"
-            },
-            {
-              "kind": "plate",
-              "x": 115,
-              "y": 48,
-              "w": 12,
-              "h": 105,
-              "charge": "+",
-              "label": "$+Q$"
-            },
-            {
-              "kind": "plate",
-              "x": 225,
-              "y": 48,
-              "w": 12,
-              "h": 105,
-              "charge": "-",
-              "label": "$-Q$"
-            },
-            {
-              "kind": "vector",
-              "x1": 132,
-              "y1": 72,
-              "x2": 222,
-              "y2": 72,
-              "color": "field"
-            },
-            {
-              "kind": "vector",
-              "x1": 132,
-              "y1": 100,
-              "x2": 222,
-              "y2": 100,
-              "color": "field",
-              "label": "$\\vec E$"
-            },
-            {
-              "kind": "vector",
-              "x1": 132,
-              "y1": 128,
-              "x2": 222,
-              "y2": 128,
-              "color": "field"
-            },
-            {
-              "kind": "label",
-              "x": 170,
-              "y": 176,
-              "text": "$C = Q/V$",
-              "color": "ink"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-c1.svg",
+        "caption": "Two conductors hold $\\pm Q$; capacitance $C = Q/V$."
       }
     },
     {
@@ -115,70 +51,9 @@
       "heading": "Parallel-plate capacitor",
       "explanation": "For two flat plates of area $A$ separated by $d$ (vacuum), $C = \\dfrac{\\varepsilon_0 A}{d}$. Bigger plates or a smaller gap store more charge per volt. This shows capacitance is set by geometry, not by how much charge you happen to put on it.",
       "figure": {
-        "type": "schematic",
-        "caption": "Capacitance grows with plate area $A$ and shrinks with gap $d$: $C = \\varepsilon_0 A/d$.",
-        "params": {
-          "viewBox": [
-            340,
-            185
-          ],
-          "elements": [
-            {
-              "kind": "plate",
-              "x": 105,
-              "y": 40,
-              "w": 12,
-              "h": 110,
-              "label": "$A$"
-            },
-            {
-              "kind": "plate",
-              "x": 225,
-              "y": 40,
-              "w": 12,
-              "h": 110
-            },
-            {
-              "kind": "line",
-              "x1": 117,
-              "y1": 95,
-              "x2": 225,
-              "y2": 95,
-              "color": "measure",
-              "dash": true
-            },
-            {
-              "kind": "label",
-              "x": 171,
-              "y": 86,
-              "text": "$d$",
-              "color": "measure"
-            },
-            {
-              "kind": "vector",
-              "x1": 122,
-              "y1": 62,
-              "x2": 220,
-              "y2": 62,
-              "color": "field"
-            },
-            {
-              "kind": "vector",
-              "x1": 122,
-              "y1": 128,
-              "x2": 220,
-              "y2": 128,
-              "color": "field"
-            },
-            {
-              "kind": "label",
-              "x": 170,
-              "y": 176,
-              "text": "$C = \\varepsilon_0 A/d$",
-              "color": "ink"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-c2.svg",
+        "caption": "Parallel plates: $C = \\varepsilon_0 A/d$ — bigger area, smaller gap."
       }
     },
     {
@@ -186,73 +61,9 @@
       "heading": "Energy stored",
       "explanation": "Charging a capacitor stores energy in its field: $U = \\tfrac12 C V^2 = \\tfrac12 Q V = \\dfrac{Q^2}{2C}$. These three forms are equal; pick whichever fits the quantities you know. This energy can be released quickly — the idea behind a camera flash.",
       "figure": {
-        "type": "schematic",
-        "caption": "Charging stores energy in the field between the plates: $U = \\tfrac12 CV^2 = \\tfrac12 QV = Q^2/2C$.",
-        "params": {
-          "viewBox": [
-            340,
-            185
-          ],
-          "elements": [
-            {
-              "kind": "plate",
-              "x": 80,
-              "y": 45,
-              "w": 12,
-              "h": 100,
-              "charge": "+"
-            },
-            {
-              "kind": "plate",
-              "x": 180,
-              "y": 45,
-              "w": 12,
-              "h": 100,
-              "charge": "-"
-            },
-            {
-              "kind": "vector",
-              "x1": 97,
-              "y1": 70,
-              "x2": 177,
-              "y2": 70,
-              "color": "field"
-            },
-            {
-              "kind": "vector",
-              "x1": 97,
-              "y1": 95,
-              "x2": 177,
-              "y2": 95,
-              "color": "field",
-              "label": "$\\vec E$"
-            },
-            {
-              "kind": "vector",
-              "x1": 97,
-              "y1": 120,
-              "x2": 177,
-              "y2": 120,
-              "color": "field"
-            },
-            {
-              "kind": "component",
-              "name": "lightning",
-              "x": 255,
-              "y": 92,
-              "scale": 1.2,
-              "color": "velocity",
-              "label": "release"
-            },
-            {
-              "kind": "label",
-              "x": 150,
-              "y": 176,
-              "text": "$U = \\tfrac12 CV^2$",
-              "color": "ink"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-c3.svg",
+        "caption": "Charging stores energy in the field: $U = \\tfrac12 CV^2$."
       }
     },
     {
@@ -260,64 +71,9 @@
       "heading": "Dielectrics",
       "explanation": "Filling the gap with an insulating dielectric increases capacitance by the dielectric constant $\\kappa$: $C = \\dfrac{\\kappa \\varepsilon_0 A}{d}$. The dielectric partly cancels the field, letting the plates hold more charge at the same voltage. Typical $\\kappa$: paper $\\approx 3$, water $\\approx 80$.",
       "figure": {
-        "type": "schematic",
-        "caption": "A dielectric's aligned molecules partly cancel the field, raising capacitance to $C = \\kappa\\varepsilon_0 A/d$.",
-        "params": {
-          "viewBox": [
-            340,
-            185
-          ],
-          "elements": [
-            {
-              "kind": "plate",
-              "x": 78,
-              "y": 45,
-              "w": 12,
-              "h": 105,
-              "charge": "+"
-            },
-            {
-              "kind": "plate",
-              "x": 250,
-              "y": 45,
-              "w": 12,
-              "h": 105,
-              "charge": "-"
-            },
-            {
-              "kind": "region",
-              "x": 108,
-              "y": 52,
-              "w": 130,
-              "h": 91,
-              "color": "field",
-              "label": "dielectric $\\kappa$"
-            },
-            {
-              "kind": "label",
-              "x": 145,
-              "y": 100,
-              "text": "$-\\ +$",
-              "color": "ink",
-              "size": 12
-            },
-            {
-              "kind": "label",
-              "x": 200,
-              "y": 100,
-              "text": "$-\\ +$",
-              "color": "ink",
-              "size": 12
-            },
-            {
-              "kind": "label",
-              "x": 170,
-              "y": 176,
-              "text": "$C = \\kappa\\varepsilon_0 A/d$",
-              "color": "ink"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-c4.svg",
+        "caption": "A dielectric raises capacitance: $C = \\kappa\\varepsilon_0 A/d$."
       }
     },
     {
@@ -325,197 +81,9 @@
       "heading": "Combining capacitors",
       "explanation": "In parallel the plates share the voltage and capacitances add: $C_{eq} = C_1 + C_2 + \\cdots$. In series the charge is the same on each and reciprocals add: $\\dfrac{1}{C_{eq}} = \\dfrac{1}{C_1} + \\dfrac{1}{C_2} + \\cdots$, so the series total is smaller than any single capacitor.",
       "figure": {
-        "type": "schematic",
-        "caption": "Parallel capacitances add; in series the reciprocals add (the total is smaller).",
-        "params": {
-          "viewBox": [
-            340,
-            200
-          ],
-          "elements": [
-            {
-              "kind": "label",
-              "x": 95,
-              "y": 32,
-              "text": "parallel",
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 40,
-              "y1": 52,
-              "x2": 150,
-              "y2": 52,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 40,
-              "y1": 150,
-              "x2": 150,
-              "y2": 150,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 70,
-              "y1": 52,
-              "x2": 70,
-              "y2": 88,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 56,
-              "y1": 88,
-              "x2": 84,
-              "y2": 88,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 56,
-              "y1": 98,
-              "x2": 84,
-              "y2": 98,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 70,
-              "y1": 98,
-              "x2": 70,
-              "y2": 150,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 120,
-              "y1": 52,
-              "x2": 120,
-              "y2": 88,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 106,
-              "y1": 88,
-              "x2": 134,
-              "y2": 88,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 106,
-              "y1": 98,
-              "x2": 134,
-              "y2": 98,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 120,
-              "y1": 98,
-              "x2": 120,
-              "y2": 150,
-              "color": "ink"
-            },
-            {
-              "kind": "label",
-              "x": 95,
-              "y": 182,
-              "text": "$C = C_1 + C_2$",
-              "color": "soft"
-            },
-            {
-              "kind": "line",
-              "x1": 185,
-              "y1": 46,
-              "x2": 185,
-              "y2": 156,
-              "color": "line",
-              "dash": true
-            },
-            {
-              "kind": "label",
-              "x": 255,
-              "y": 32,
-              "text": "series",
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 255,
-              "y1": 52,
-              "x2": 255,
-              "y2": 80,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 241,
-              "y1": 80,
-              "x2": 269,
-              "y2": 80,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 241,
-              "y1": 90,
-              "x2": 269,
-              "y2": 90,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 255,
-              "y1": 90,
-              "x2": 255,
-              "y2": 112,
-              "color": "ink"
-            },
-            {
-              "kind": "line",
-              "x1": 241,
-              "y1": 112,
-              "x2": 269,
-              "y2": 112,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 241,
-              "y1": 122,
-              "x2": 269,
-              "y2": 122,
-              "color": "ink",
-              "width": 3
-            },
-            {
-              "kind": "line",
-              "x1": 255,
-              "y1": 122,
-              "x2": 255,
-              "y2": 150,
-              "color": "ink"
-            },
-            {
-              "kind": "label",
-              "x": 255,
-              "y": 182,
-              "text": "$\\tfrac{1}{C} = \\tfrac{1}{C_1} + \\tfrac{1}{C_2}$",
-              "color": "soft"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-c5.svg",
+        "caption": "Parallel capacitances add; series reciprocals add."
       }
     }
   ],
@@ -525,103 +93,9 @@
       "scenario": "A camera charges up, then fires a bright flash.",
       "how_the_math_applies": "A capacitor slowly stores energy $U = \\tfrac12 CV^2$, then dumps it into the flash tube in milliseconds for a burst of light.",
       "figure": {
-        "type": "schematic",
-        "caption": "The capacitor stores $U = \\tfrac12 CV^2$ slowly, then releases it to the flash tube in milliseconds.",
-        "params": {
-          "viewBox": [
-            340,
-            175
-          ],
-          "elements": [
-            {
-              "kind": "vector",
-              "x1": 28,
-              "y1": 90,
-              "x2": 52,
-              "y2": 90,
-              "color": "current",
-              "label": "charge"
-            },
-            {
-              "kind": "plate",
-              "x": 60,
-              "y": 55,
-              "w": 12,
-              "h": 70,
-              "charge": "+"
-            },
-            {
-              "kind": "plate",
-              "x": 95,
-              "y": 55,
-              "w": 12,
-              "h": 70,
-              "charge": "-"
-            },
-            {
-              "kind": "line",
-              "x1": 107,
-              "y1": 90,
-              "x2": 205,
-              "y2": 90,
-              "color": "ink"
-            },
-            {
-              "kind": "circle",
-              "x": 225,
-              "y": 90,
-              "r": 18,
-              "color": "velocity"
-            },
-            {
-              "kind": "ray",
-              "x1": 245,
-              "y1": 90,
-              "x2": 285,
-              "y2": 90,
-              "color": "accent"
-            },
-            {
-              "kind": "ray",
-              "x1": 225,
-              "y1": 70,
-              "x2": 225,
-              "y2": 38,
-              "color": "accent"
-            },
-            {
-              "kind": "ray",
-              "x1": 239,
-              "y1": 76,
-              "x2": 272,
-              "y2": 54,
-              "color": "accent"
-            },
-            {
-              "kind": "ray",
-              "x1": 239,
-              "y1": 104,
-              "x2": 272,
-              "y2": 126,
-              "color": "accent"
-            },
-            {
-              "kind": "ray",
-              "x1": 225,
-              "y1": 110,
-              "x2": 225,
-              "y2": 142,
-              "color": "accent"
-            },
-            {
-              "kind": "label",
-              "x": 150,
-              "y": 162,
-              "text": "stores $U = \\tfrac12 CV^2$, dumps in ms",
-              "color": "ink"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-e1.svg",
+        "caption": "A capacitor stores $U=\\tfrac12 CV^2$, then dumps it as a flash."
       }
     },
     {
@@ -629,76 +103,9 @@
       "scenario": "Each bit of DRAM is a tiny capacitor.",
       "how_the_math_applies": "Charged ($Q=CV$) means '1', uncharged means '0'. Because $C$ is tiny it leaks and must be refreshed thousands of times a second.",
       "figure": {
-        "type": "schematic",
-        "caption": "Each DRAM bit is a tiny capacitor: charged ($Q=CV$) is 1, empty is 0 — it leaks and must be refreshed.",
-        "params": {
-          "viewBox": [
-            340,
-            170
-          ],
-          "elements": [
-            {
-              "kind": "plate",
-              "x": 65,
-              "y": 45,
-              "w": 10,
-              "h": 55,
-              "charge": "+"
-            },
-            {
-              "kind": "plate",
-              "x": 93,
-              "y": 45,
-              "w": 10,
-              "h": 55,
-              "charge": "-"
-            },
-            {
-              "kind": "label",
-              "x": 84,
-              "y": 120,
-              "text": "1 = charged",
-              "color": "ink"
-            },
-            {
-              "kind": "plate",
-              "x": 235,
-              "y": 45,
-              "w": 10,
-              "h": 55
-            },
-            {
-              "kind": "plate",
-              "x": 263,
-              "y": 45,
-              "w": 10,
-              "h": 55
-            },
-            {
-              "kind": "label",
-              "x": 254,
-              "y": 120,
-              "text": "0 = empty",
-              "color": "soft"
-            },
-            {
-              "kind": "vector",
-              "x1": 118,
-              "y1": 72,
-              "x2": 218,
-              "y2": 72,
-              "color": "velocity",
-              "label": "leaks → refresh"
-            },
-            {
-              "kind": "label",
-              "x": 170,
-              "y": 155,
-              "text": "$Q = CV$",
-              "color": "soft"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-e2.svg",
+        "caption": "Each DRAM bit is a tiny capacitor: charged = 1, empty = 0."
       }
     },
     {
@@ -706,48 +113,9 @@
       "scenario": "Your phone senses your finger.",
       "how_the_math_applies": "Your finger changes the local capacitance $C = \\kappa\\varepsilon_0 A/d$ of the screen grid; the device detects that change to locate the touch.",
       "figure": {
-        "type": "schematic",
-        "caption": "A fingertip alters the local capacitance $C=\\kappa\\varepsilon_0 A/d$ of the screen grid, locating the touch.",
-        "params": {
-          "viewBox": [
-            340,
-            195
-          ],
-          "elements": [
-            {
-              "kind": "component",
-              "name": "mesh",
-              "x": 170,
-              "y": 140,
-              "scale": 1.2
-            },
-            {
-              "kind": "component",
-              "name": "hand",
-              "x": 170,
-              "y": 50,
-              "scale": 1.2
-            },
-            {
-              "kind": "vector",
-              "x1": 170,
-              "y1": 80,
-              "x2": 170,
-              "y2": 100,
-              "color": "field",
-              "label": "$\\Delta C$",
-              "dx": 18,
-              "dy": 0
-            },
-            {
-              "kind": "label",
-              "x": 170,
-              "y": 186,
-              "text": "finger changes $C = \\kappa\\varepsilon_0 A/d$",
-              "color": "ink"
-            }
-          ]
-        }
+        "type": "svg",
+        "src": "data/diagrams/phys1442-05-capacitance-e3.svg",
+        "caption": "Your finger changes the screen's local capacitance $C=\\kappa\\varepsilon_0 A/d$."
       }
     }
   ],
