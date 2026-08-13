@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/tutor/history", "destination": "/api/tutor-memory?action=history" },
+    { "source": "/api/tutor/attempts", "destination": "/api/tutor-memory?action=attempts" }
+  ]
+}
