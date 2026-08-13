@@ -472,14 +472,15 @@ window.App = (function () {
           panel.appendChild(diffRow);
 
           var acts = el("div", "lp-actions");
-          var startLbl = grade.solved > 0 && grade.solved < grade.target ? "Continue" : (grade.target && grade.solved >= grade.target ? "Practice again" : "Start lesson");
-          var start = ib("btn primary", "play", startLbl);
-          start.onclick = function () { startSession(cls, lid, lesson, chosenDiff); };
-          var concepts = ib("btn ghost", "bookOpen", "Read concepts");
-          concepts.onclick = function () { conceptReader(lesson); };
-          var test = ib("btn ghost", "target", "Practice test");
-          test.onclick = function () { startTest(cls, lid, lesson); };
-          acts.append(start, concepts, test);
+          // Learn-first structure: LEARN (guided) · PRACTICE (syllabus problems) · QUIZ (timed check)
+          var learn = ib("btn primary", "bookOpen", "Learn");
+          learn.onclick = function () { startLearn(cls, lid, lesson); };
+          var practiceLbl = grade.solved > 0 && grade.solved < grade.target ? "Practice · Continue" : (grade.target && grade.solved >= grade.target ? "Practice again" : "Practice");
+          var practice = ib("btn ghost", "play", practiceLbl);
+          practice.onclick = function () { startSession(cls, lid, lesson, chosenDiff); };
+          var quiz = ib("btn ghost", "target", "Quiz");
+          quiz.onclick = function () { startQuiz(cls, lid, lesson, chosenDiff); };
+          acts.append(learn, practice, quiz);
           panel.appendChild(acts);
         }).catch(function (e) { panel.innerHTML = "<p class='lp-summary'>Couldn't load lesson: " + esc(e.message) + "</p>"; });
       }
@@ -598,6 +599,324 @@ window.App = (function () {
   }
   // small helper: element with raw innerHTML
   function mkEl(tag, cls, html) { var n = el(tag, cls); n.innerHTML = html; return n; }
+
+  // ====================================================================
+  // LEARN MODE — guided, sequential: one concept, then a practice check on
+  // it, then the next concept, ending with the real-world examples. Keeps
+  // hints / step-by-step / tutorial / unlimited tries; you may skip; concepts
+  // and correct checks earn XP + completion. (Offline; the online/AI-guided
+  // variant reuses this same structure.)
+  // ====================================================================
+  function learnDiffForLevel(level, total, diffs) {
+    var order = ["easy", "medium", "hard", "extreme", "stretch"];
+    var avail = order.filter(function (d) { return diffs.indexOf(d) >= 0; });
+    if (!avail.length) avail = (diffs || []).slice();
+    if (!avail.length) return "easy";
+    var idx = Math.min(avail.length - 1, Math.floor((level - 1) / Math.max(1, total) * avail.length));
+    return avail[idx];
+  }
+
+  function startLearn(cls, lid, lesson) {
+    var gloss = lesson.glossary || null;
+    var sections = (lesson.concept_sections || []).slice().sort(function (a, b) { return a.level - b.level; });
+    var diffs = lessonDifficulties(lid, lesson);
+    var hasGen = !!(window.Generators && Generators.has(lid));
+    setTutorContext(Object.assign({}, tutorContext, { page: "learn mode", class_id: cls.id, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary }));
+
+    // linear walk: concept, its check, concept, check, …, examples, done
+    var steps = [];
+    sections.forEach(function (s) {
+      steps.push({ type: "concept", section: s });
+      steps.push({ type: "practice", level: s.level, diff: learnDiffForLevel(s.level, sections.length, diffs) });
+    });
+    if ((lesson.real_world_examples || []).length) steps.push({ type: "examples" });
+    steps.push({ type: "done" });
+    var i = 0;
+
+    var session = el("div", "session learn-session");
+    var top = el("div", "session-top");
+    var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
+    var track = el("div", "session-progress"); var fill = el("div", "fill"); track.appendChild(fill);
+    var label = el("div", "session-streak"); label.innerHTML = icon("bookOpen") + "<span>Learn</span>";
+    top.append(closeX, track, label); session.appendChild(top);
+    var body = el("div", "session-body"); var inner = el("div", "session-inner"); body.appendChild(inner); session.appendChild(body);
+    var foot = el("div", "session-foot"); var footInner = el("div", "session-foot-inner");
+    var verdict = el("div", "verdict"); var skipBtn = el("button", "btn subtle lg", "Skip"); var nextBtn = el("button", "btn primary lg", "Continue →");
+    footInner.append(verdict, skipBtn, nextBtn); foot.appendChild(footInner); session.appendChild(foot);
+    document.body.appendChild(session);
+
+    function setProgress() { fill.style.width = Math.round(i / Math.max(1, steps.length - 1) * 100) + "%"; }
+    function advance() { i = Math.min(steps.length - 1, i + 1); render(); }
+
+    function render() {
+      setProgress();
+      inner.innerHTML = ""; verdict.textContent = ""; verdict.className = "verdict";
+      nextBtn.style.display = ""; skipBtn.style.display = "none";
+      var step = steps[i];
+      if (step.type === "concept") return renderConcept(step.section);
+      if (step.type === "practice") return renderPractice(step);
+      if (step.type === "examples") return renderExamples();
+      return renderDone();
+    }
+
+    function renderConcept(s) {
+      var c = el("div", "concept learn-concept");
+      c.appendChild(el("span", "level-tag", "Concept " + s.level + " of " + sections.length));
+      c.appendChild(el("h3", null, s.heading));
+      var p = el("p"); c.appendChild(p); richText(p, s.explanation, gloss);
+      if (s.figure) c.appendChild(Figures.element(s.figure));
+      if (s.math_steps && s.math_steps.length) {
+        var mb = el("div", "concept-math"); mb.appendChild(el("span", "cm-label", "Step by step"));
+        var ol = document.createElement("ol"); ol.className = "cm-steps";
+        s.math_steps.forEach(function (st) { var li = el("li"); richText(li, st, gloss); ol.appendChild(li); });
+        mb.appendChild(ol); c.appendChild(mb);
+      }
+      inner.appendChild(c);
+      Store.markConceptLearned(cls.id, lid, s.level, 5); // completion + a little XP, once
+      nextBtn.textContent = "Continue →"; nextBtn.onclick = advance;
+    }
+
+    function renderPractice(step) {
+      if (!hasGen) { advance(); return; }
+      var inst = Generators.make(lid, step.diff);
+      if (!inst) { advance(); return; }
+      setTutorContext(Object.assign({}, tutorContext, { page: "learn practice", question_prompt: inst.prompt, hint: inst.hint || "", difficulty: inst.difficulty || "" }));
+      var wrap = el("div", "learn-check");
+      wrap.appendChild(el("span", "cm-label", "Check your understanding"));
+      var badgeRow = el("div", "q-badge-row"); badgeRow.appendChild(el("span", "q-badge " + inst.difficulty, inst.difficulty));
+      if (inst.source) badgeRow.appendChild(el("span", "q-source", inst.source)); wrap.appendChild(badgeRow);
+      var prompt = el("div", "q-prompt"); prompt.textContent = inst.prompt; wrap.appendChild(prompt); StudyMath.render(prompt);
+      var inputs = [];
+      if (inst.type === "numeric") inputs.push(numericField(wrap, inst));
+      else if (inst.type === "mc") renderChoices(wrap, inst, function () {});
+      else if (inst.type === "multi") inst.parts.forEach(function (part, pi) { inputs.push(partField(wrap, part, pi)); });
+      var tools = el("div", "q-tools");
+      var hintBtn = ib("btn subtle", "bulb", "Hint");
+      var tutBtn = ib("btn subtle", "bookOpen", "Tutorial");
+      var padBtn = ib("btn subtle", "edit", "Scratch work");
+      var calcBtn = ib("btn subtle", "calculator", "Calculator");
+      tools.append(hintBtn, tutBtn, padBtn, calcBtn); wrap.appendChild(tools);
+      var hintPanel = el("div", "hint-panel"); hintPanel.hidden = true;
+      hintPanel.appendChild(el("p", "panel-label", "Hint")); var ht = el("p"); richText(ht, inst.hint || "Work it step by step.", null); hintPanel.appendChild(ht); wrap.appendChild(hintPanel);
+      var steppanel = el("div", "steps-panel"); steppanel.hidden = true;
+      steppanel.appendChild(el("p", "panel-label", "Solution")); var sol = document.createElement("ol");
+      (inst.steps || []).forEach(function (st) { var li = el("li"); richText(li, st, null); sol.appendChild(li); });
+      steppanel.appendChild(sol); wrap.appendChild(steppanel);
+      hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
+      tutBtn.onclick = function () { startTutorial(cls, lid, lesson, inst.difficulty); };
+      padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: "learn-" + step.level, problemLabel: "Concept " + step.level + " check", prompt: inst.prompt, hasSession: true }); };
+      calcBtn.onclick = function () { Calculator.open(); };
+      inner.appendChild(wrap);
+
+      var checked = false;
+      skipBtn.style.display = ""; skipBtn.textContent = "Skip"; skipBtn.onclick = advance;
+      nextBtn.textContent = "Check";
+      nextBtn.onclick = function () {
+        if (!checked) {
+          var ok = evaluate(inst, inputs);
+          checked = true; steppanel.hidden = false; StudyMath.render(steppanel);
+          if (ok) {
+            verdict.textContent = "Correct!"; verdict.className = "verdict right";
+            var xp = { easy: 8, medium: 12, hard: 18, extreme: 30, stretch: 24 }[inst.difficulty] || 10;
+            Store.markProblemDone(cls.id, lid, "learn-" + step.level + "-" + Date.now(), xp);
+            reward(xp, "check", "Nice!");
+            nextBtn.textContent = "Continue →"; skipBtn.style.display = "none";
+          } else {
+            verdict.textContent = "Not quite — read the solution, then try a fresh one."; verdict.className = "verdict wrong";
+            nextBtn.textContent = "Try another →";
+          }
+        } else if (verdict.classList.contains("right")) { advance(); }
+        else { renderPractice(step); } // unlimited tries: same difficulty, new numbers
+      };
+    }
+
+    function renderExamples() {
+      var c = el("div", "concept learn-concept");
+      c.appendChild(el("span", "level-tag", "Real-world examples"));
+      c.appendChild(el("h3", null, "See it in the real world"));
+      var list = el("div", "example-list");
+      (lesson.real_world_examples || []).forEach(function (ex) {
+        var card = el("div", "ex-card"); card.setAttribute("aria-expanded", "false");
+        var ehead = el("button", "ex-head"); var htext = el("div", "ex-head-text");
+        htext.appendChild(el("h4", null, ex.title));
+        var scp = el("p", "ex-scenario"); richText(scp, ex.scenario, gloss); htext.appendChild(scp);
+        ehead.appendChild(htext); var car = el("span", "ex-caret"); car.innerHTML = icon("chevronRight"); ehead.appendChild(car);
+        card.appendChild(ehead);
+        var panel = el("div", "ex-panel"); panel.hidden = true;
+        var ap = el("div", "ex-applies"); ap.appendChild(el("span", "ex-tag", "How the math applies"));
+        var apt = el("p"); richText(apt, ex.how_the_math_applies, gloss); ap.appendChild(apt); panel.appendChild(ap);
+        if (ex.detail) { var dt = el("p", "ex-detail"); richText(dt, ex.detail, gloss); panel.appendChild(dt); }
+        if (ex.figure) panel.appendChild(Figures.element(ex.figure));
+        card.appendChild(panel);
+        ehead.onclick = function () { var open = card.getAttribute("aria-expanded") === "true"; card.setAttribute("aria-expanded", String(!open)); panel.hidden = open; };
+        list.appendChild(card);
+      });
+      c.appendChild(list); inner.appendChild(c);
+      nextBtn.textContent = "Finish →"; nextBtn.onclick = advance;
+    }
+
+    function renderDone() {
+      var comp = Store.learnCompletion(cls.id, lid, sections.length);
+      var done = el("div"); done.style.textAlign = "center"; done.style.paddingTop = "36px";
+      var tro = el("div"); tro.innerHTML = icon("award"); tro.style.color = "var(--accent)";
+      var tsvg = tro.querySelector("svg"); if (tsvg) { tsvg.style.width = "3.5rem"; tsvg.style.height = "3.5rem"; }
+      done.appendChild(tro);
+      done.appendChild(el("h2", null, "Lesson learned!"));
+      done.appendChild(el("p", null, "You worked through " + comp.done + " of " + comp.total + " concepts. Total XP: " + Store.lessonProgress(cls.id, lid).xp));
+      var row = el("div"); row.style.cssText = "display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap";
+      var practice = el("button", "btn primary lg", "Practice problems");
+      practice.onclick = function () { session.remove(); startSession(cls, lid, lesson, "mixed"); };
+      var back = el("button", "btn subtle lg", "Back to class");
+      back.onclick = function () { session.remove(); renderClass(cls.id); };
+      row.append(practice, back); done.appendChild(row); inner.appendChild(done);
+      skipBtn.style.display = "none"; nextBtn.style.display = "none"; fill.style.width = "100%";
+    }
+
+    render();
+  }
+
+  // ====================================================================
+  // QUIZ MODE — timed check: set count / difficulty / timer; NO hints,
+  // steps, tutorial or AI. Afterwards an auto Review shows the missed
+  // questions with solutions and which concepts to relearn.
+  // ====================================================================
+  function startQuiz(cls, lid, lesson, presetDiff) {
+    var diffs = lessonDifficulties(lid, lesson);
+    var hasGen = !!(window.Generators && Generators.has(lid));
+    var poolMax = hasGen ? 20 : (lesson.problems || []).length;
+    if (!poolMax) { toast("No questions available for this lesson yet."); return; }
+    var chosen = presetDiff && diffs.indexOf(presetDiff) >= 0 ? presetDiff : "mixed";
+    var pills = [{ v: "mixed", l: "Mixed" }].concat(diffs.map(function (d) { return { v: d, l: diffLabel(d) }; }));
+    var pillHtml = pills.map(function (o) { return "<button class='lp-pill" + (o.v === chosen ? " on" : "") + "' data-v='" + o.v + "'>" + o.l + "</button>"; }).join("");
+    var m = modal(
+      "<h2>Quiz — " + esc(lesson.title) + "</h2>" +
+      "<p class='modal-sub'>Timed. No hints, steps, or tutor — this is the real check. Afterwards you'll get a review of what to relearn.</p>" +
+      "<div class='row2'>" +
+      "<div class='field'><label>Number of questions</label><input id='q-n' type='number' min='1' max='" + poolMax + "' value='" + Math.min(8, poolMax) + "'></div>" +
+      "<div class='field'><label>Time limit (minutes)</label><input id='q-min' type='number' min='1' max='180' value='12'></div>" +
+      "</div>" +
+      "<div class='field'><label>Difficulty</label><div class='lp-diff' id='q-diff'>" + pillHtml + "</div></div>" +
+      "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='q-go'>Start quiz</button></div>"
+    );
+    m.querySelectorAll("#q-diff .lp-pill").forEach(function (b) {
+      b.onclick = function () { chosen = b.getAttribute("data-v"); m.querySelectorAll("#q-diff .lp-pill").forEach(function (x) { x.classList.toggle("on", x === b); }); };
+    });
+    m.querySelector("#q-go").onclick = function () {
+      var n = Math.max(1, Math.min(poolMax, +m.querySelector("#q-n").value || 8));
+      var mins = Math.max(1, +m.querySelector("#q-min").value || 12);
+      closeModal();
+      var qs = buildQuizQuestions(lid, lesson, n, chosen, diffs, hasGen);
+      runQuiz(cls, lid, lesson, qs, mins);
+    };
+  }
+
+  function buildQuizQuestions(lid, lesson, n, diff, diffs, hasGen) {
+    var out = [];
+    if (hasGen) {
+      var plan = [], seen = {};
+      for (var k = 0; k < n; k++) plan.push(diff === "mixed" ? (diffs[k % diffs.length] || "medium") : diff);
+      plan.forEach(function (d) {
+        var inst = null;
+        for (var t = 0; t < 12; t++) { var cand = Generators.make(lid, d); if (cand && !seen[cand.prompt]) { inst = cand; break; } inst = cand; }
+        if (inst) { seen[inst.prompt] = true; out.push(inst); }
+      });
+    } else {
+      out = shuffle((lesson.problems || []).slice()).slice(0, n).map(function (p) {
+        return { type: "numeric", isStatic: true, prompt: p.prompt, correct_answer: p.correct_answer, steps: p.solution_steps || [], difficulty: p.difficulty || "medium" };
+      });
+    }
+    return out;
+  }
+
+  function runQuiz(cls, lid, lesson, questions, minutes) {
+    if (!questions.length) { toast("No questions available."); return; }
+    var session = el("div", "session quiz-session");
+    var top = el("div", "session-top");
+    var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { clearInterval(timer); session.remove(); renderClass(cls.id); };
+    var title = el("div"); title.style.flex = "1"; title.style.fontWeight = "700"; title.textContent = "Quiz · " + questions.length + " questions";
+    var clock = el("div", "session-streak", minutes + ":00");
+    top.append(closeX, title, clock); session.appendChild(top);
+    var body = el("div", "session-body"); var inner = el("div", "session-inner"); inner.style.maxWidth = "760px"; body.appendChild(inner); session.appendChild(body);
+
+    var entries = [];
+    questions.forEach(function (q, i) {
+      var card = el("div", "steps-panel quiz-q"); card.hidden = false; card.style.marginBottom = "18px";
+      card.appendChild(el("span", "q-badge " + (q.difficulty || "medium"), "Q" + (i + 1) + " · " + (q.difficulty || "")));
+      var pr = el("div", "q-prompt"); pr.textContent = q.prompt; card.appendChild(pr);
+      var inputs = [];
+      if (q.isStatic) { var ab = el("div", "answer-box"); var input = document.createElement("input"); input.type = "text"; input.placeholder = "Answer…"; ab.appendChild(input); card.appendChild(ab); inputs.push({ kind: "static", el: input }); }
+      else if (q.type === "numeric") inputs.push(numericField(card, q));
+      else if (q.type === "mc") renderChoices(card, q, function () {});
+      else if (q.type === "multi") q.parts.forEach(function (part, pi) { inputs.push(partField(card, part, pi)); });
+      inner.appendChild(card); StudyMath.render(card);
+      entries.push({ q: q, inputs: inputs, card: card });
+    });
+    var submit = el("button", "btn primary lg", "Submit quiz"); submit.style.margin = "10px 0 60px"; submit.onclick = grade; inner.appendChild(submit);
+    document.body.appendChild(session);
+
+    var remaining = minutes * 60;
+    var timer = setInterval(function () {
+      remaining--; var mm = Math.floor(remaining / 60), ss = remaining % 60;
+      clock.textContent = mm + ":" + (ss < 10 ? "0" : "") + ss;
+      if (remaining <= 0) { clearInterval(timer); grade(); }
+    }, 1000);
+
+    function checkEntry(e) { return e.q.isStatic ? isCorrect(e.inputs[0].el.value, e.q.correct_answer) : evaluate(e.q, e.inputs); }
+    function grade() {
+      clearInterval(timer);
+      var correct = 0, wrong = [];
+      entries.forEach(function (e) {
+        var ok = checkEntry(e);
+        e.card.style.borderColor = ok ? "var(--easy)" : "var(--hard)"; e.card.style.borderWidth = "2px";
+        if (ok) correct++; else wrong.push(e.q);
+      });
+      var xp = correct * 6 + (correct === entries.length ? 20 : 0);
+      if (xp) Store.addXp(cls.id, lid, xp);
+      session.remove();
+      quizReview(cls, lid, lesson, correct, entries.length, wrong);
+    }
+  }
+
+  function quizReview(cls, lid, lesson, correct, total, wrong) {
+    var sections = (lesson.concept_sections || []).slice().sort(function (a, b) { return a.level - b.level; });
+    var diffs = lessonDifficulties(lid, lesson);
+    var pct = Math.round(correct / total * 100), perfect = correct === total;
+    var m = modal(
+      "<h2>" + (perfect ? "Perfect!" : "Quiz review — " + correct + " / " + total + " (" + pct + "%)") + "</h2>" +
+      (perfect
+        ? "<div class='notice'><strong>Nailed it.</strong>You cleared every question. You've got this lesson down.</div>"
+        : "<div class='notice'><strong>Here's what to relearn.</strong>Review the questions you missed, then revisit these concepts in Learn mode.</div>") +
+      "<div id='qr-wrong'></div>" + (perfect ? "" : "<div id='qr-concepts'></div>") +
+      "<div class='modal-actions'><button class='btn subtle' data-close>Close</button>" +
+      (perfect ? "" : "<button class='btn ghost' id='qr-learn'>Relearn in Learn mode</button>") +
+      "<button class='btn primary' id='qr-retry'>Retake quiz</button></div>",
+      { wide: true }
+    );
+    var wl = m.querySelector("#qr-wrong");
+    wrong.forEach(function (q) {
+      var c = el("div", "steps-panel"); c.hidden = false; c.style.marginBottom = "12px";
+      var pr = el("div"); pr.style.fontWeight = "700"; pr.style.marginBottom = "6px"; pr.textContent = q.prompt; c.appendChild(pr);
+      var ans = q.correct_answer || (q.type === "mc" && q.choices ? q.choices[q.answerIndex] : "");
+      if (ans) c.appendChild(el("p", null, "Correct answer: " + ans));
+      var ol = document.createElement("ol"); (q.steps || q.solution_steps || []).forEach(function (s) { ol.appendChild(el("li", null, s)); });
+      c.appendChild(ol); wl.appendChild(c); StudyMath.render(c);
+    });
+    var cc = m.querySelector("#qr-concepts");
+    if (cc) {
+      cc.appendChild(el("p", "panel-label", "Concepts to relearn"));
+      var ul = document.createElement("ul"); ul.className = "qr-concept-list";
+      var missedDiffs = {}; wrong.forEach(function (q) { if (q.difficulty) missedDiffs[q.difficulty] = true; });
+      var picked = sections.filter(function (s) {
+        if (!Object.keys(missedDiffs).length) return true;
+        return missedDiffs[learnDiffForLevel(s.level, sections.length, diffs)];
+      });
+      if (!picked.length) picked = sections;
+      picked.forEach(function (s) { var li = el("li"); richText(li, "Concept " + s.level + ": " + s.heading, null); ul.appendChild(li); });
+      cc.appendChild(ul);
+      m.querySelector("#qr-learn").onclick = function () { closeModal(); startLearn(cls, lid, lesson); };
+    }
+    m.querySelector("#qr-retry").onclick = function () { closeModal(); startQuiz(cls, lid, lesson); };
+  }
 
   // ====================================================================
   // STUDY SESSION — one problem at a time, Duolingo-style rewards

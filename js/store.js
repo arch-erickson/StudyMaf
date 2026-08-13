@@ -153,6 +153,26 @@ window.Store = (function () {
       if (!p.done[pid]) { p.done[pid] = true; p.xp += (xp || 0); p.solved = (p.solved || 0) + 1; }
       state.progress[k] = p; save(); return p;
     },
+    // add XP without counting a syllabus-grade "solved" (e.g. quiz scoring)
+    addXp: function (cid, lid, xp) {
+      var k = this._pkey(cid, lid);
+      var p = state.progress[k] || { done: {}, xp: 0, solved: 0 };
+      p.xp += (xp || 0); state.progress[k] = p; save(); return p;
+    },
+    // ----- LEARN mode: which concepts the student has walked through -----
+    // Stored inside the lesson's progress record, so it syncs with cloudProgress.
+    markConceptLearned: function (cid, lid, level, xp) {
+      var k = this._pkey(cid, lid);
+      var p = state.progress[k] || { done: {}, xp: 0, solved: 0 };
+      p.learned = p.learned || {};
+      if (!p.learned[level]) { p.learned[level] = true; p.xp += (xp || 0); }
+      state.progress[k] = p; save(); return p;
+    },
+    learnCompletion: function (cid, lid, total) {
+      var p = this.lessonProgress(cid, lid);
+      var done = Object.keys(p.learned || {}).length, t = total || 0;
+      return { done: done, total: t, pct: t ? Math.round(Math.min(done, t) / t * 100) : 0 };
+    },
     // total distinct correct answers in a lesson (grade counts these; EXP is unbounded)
     lessonSolved: function (cid, lid) {
       var p = this.lessonProgress(cid, lid);
