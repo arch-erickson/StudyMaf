@@ -14,8 +14,9 @@
  */
 "use strict";
 const path = require("path");
-const { Library, tintMono } = require("./assets.js");
+const { Library, tintMono, namespaceSvg, parseSvg } = require("./assets.js");
 const { ANNOT, pickPalette, paletteByName } = require("./palette.js");
+const { loadSubject, knownSubjects } = require("./subjects.js");
 const G = require("./geometry.js");
 
 const LIB_DIR = path.resolve(__dirname, "..", "..", "studymaf-visual-library");
@@ -47,40 +48,64 @@ class Diagram {
     this.canvas = { w: this.w, h: this.h };
     this.palette = opts.palette ? (typeof opts.palette === "string" ? paletteByName(opts.palette) : opts.palette) : pickPalette(opts.seed);
     this.bg = opts.bg || "none";
+    this.id = opts.id || null;
+    // a diagram declares its SUBJECT and may only use that subject's library.
+    this.subject = opts.subject || null;
+    this.subjectLib = this.subject ? loadSubject(this.subject) : null;
     this.content = [];      // svg fragments: objects/symbols (drawn first)
     this.annot = [];        // arrows/dimensions/lines
     this.labels = [];       // text (drawn last)
     this.boxes = [];        // content bounding boxes (for collision avoidance)
     this.arrowColors = new Set();
+    this.usedAssets = [];   // {id, source, license} for the attribution manifest
     this._pi = 0;           // palette fill cursor
+    this._ns = 0;           // per-placement namespace counter (safe SVG composition)
   }
 
   // ---- 1. library graphics ----
+  // Resolve an asset + its raw SVG, from the declared subject's curated library
+  // when a subject is set (enforcing subject purity), else the global library.
+  _resolveAsset(query, opts) {
+    if (this.subjectLib) {
+      const a = this.subjectLib.resolve(query, opts);
+      if (!a) return null;
+      return { asset: a, raw: this.subjectLib.raw(a.id), colored: false, source: a.source, license: a.license };
+    }
+    const lib = library();
+    const a = opts.id ? lib.get(opts.id) : lib.one(query, { subject: opts.subject, source: opts.source, colored: opts.colored });
+    if (!a) return null;
+    return { asset: a, raw: lib.raw(a), colored: lib.isColored(a), source: a.source, license: a.license };
+  }
   place(query, opts) {
     opts = opts || {};
-    const lib = library();
-    let asset = opts.id ? lib.get(opts.id) : lib.one(query, { subject: opts.subject, source: opts.source, colored: opts.colored });
-    if (!asset) return null;
-    const { vb, inner, root } = lib.parse(lib.raw(asset));
-    const colored = lib.isColored(asset);
+    const found = this._resolveAsset(query, opts);
+    if (!found) {
+      if (this.subject) throw new Error(`no approved "${this.subject}" asset for "${opts.id || query}" — not in assets/${this.subject}/registry.json`);
+      return null;
+    }
+    const { asset, raw, colored, source, license } = found;
+    const { vb: vb2, inner: inner2, root: root2 } = parseSvg(raw);
     const size = opts.size || Math.max(opts.width || 0, opts.height || 0) || 64;
-    const scale = opts.width ? opts.width / vb.w : opts.height ? opts.height / vb.h : size / Math.max(vb.w, vb.h);
-    const w = vb.w * scale, h = vb.h * scale;
+    const scale = opts.width ? opts.width / vb2.w : opts.height ? opts.height / vb2.h : size / Math.max(vb2.w, vb2.h);
+    const w = vb2.w * scale, h = vb2.h * scale;
     const cx = opts.cx != null ? opts.cx : (opts.x != null ? opts.x + w / 2 : this.w / 2);
     const cy = opts.cy != null ? opts.cy : (opts.y != null ? opts.y + h / 2 : this.h / 2);
     const left = cx - w / 2, top = cy - h / 2;
     const sx = opts.flip ? -scale : scale;
     // color: explicit, or role, or a palette fill for mono; colored assets keep themselves
     const color = colored ? null : (opts.color || (opts.role && ANNOT[opts.role]) || (opts.tone === "cycle" ? this._nextInk() : this.palette.accent));
-    const body = color ? tintMono(inner, color) : inner;
-    const tf = `translate(${num(cx)} ${num(cy)}) scale(${num(sx)} ${num(scale)}) translate(${num(-vb.x - vb.w / 2)} ${num(-vb.y - vb.h / 2)})`;
+    const tinted = color ? tintMono(inner2, color) : inner2;
+    // SAFE COMPOSITION: namespace this placement's ids/refs/classes/styles so
+    // multiple assets with overlapping original ids never collide.
+    const { body, scope } = namespaceSvg(tinted, "a" + (this._ns++));
+    const tf = `translate(${num(cx)} ${num(cy)}) scale(${num(sx)} ${num(scale)}) translate(${num(-vb2.x - vb2.w / 2)} ${num(-vb2.y - vb2.h / 2)})`;
     const op = opts.opacity != null ? ` opacity="${opts.opacity}"` : "";
-    const rootAttr = Object.keys(root || {}).map(k => ` ${k}="${root[k]}"`).join(""); // carry fill=none/stroke defaults
-    this.content.push(`<g transform="${tf}"${op}${color ? ` color="${color}"` : ""}${rootAttr}>${body}</g>`);
-    const bbox = G.box(left, top, w, h);
-    this.boxes.push(bbox);
+    const rootAttr = Object.keys(root2 || {}).map(k => ` ${k}="${root2[k]}"`).join(""); // carry fill=none/stroke defaults
+    this.content.push(`<g class="${scope}" transform="${tf}"${op}${color ? ` color="${color}"` : ""}${rootAttr}>${body}</g>`);
+    this.boxes.push(G.box(left, top, w, h));
+    this.usedAssets.push({ id: asset.id, source: source || "unknown", license: license || "unknown" });
     if (opts.label) this.text(opts.label, cx, top - 4, { anchor: "middle", avoid: true, role: "label" });
-    return { bbox, cx, cy, w, h, asset: asset.id };
+    return { bbox: G.box(left, top, w, h), cx, cy, w, h, asset: asset.id };
   }
   _nextInk(tone) {
     if (tone === "ink") return this.palette.ink;
@@ -174,12 +199,94 @@ class Diagram {
     const bg = this.bg && this.bg !== "none" ? `<rect width="${this.w}" height="${this.h}" fill="${this.bg}"/>` : "";
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${this.w} ${this.h}" width="100%" font-family="Inter, system-ui, sans-serif">${this._defs()}${bg}${this.content.join("")}${this.annot.join("")}${this.labels.join("")}</svg>`;
   }
+
+  // Attribution manifest for this diagram: which assets it used, their source and
+  // license. Third-party sources get an attribution string; StudyMAF-authored ones
+  // need none. Deduplicated by asset id.
+  manifest() {
+    const seen = {}, assets = [];
+    for (const u of this.usedAssets) {
+      if (seen[u.id]) continue; seen[u.id] = 1;
+      const thirdParty = u.source && u.source !== "studymaf";
+      assets.push({
+        id: u.id, source: u.source, license: u.license,
+        attribution: thirdParty ? `${u.id} — ${u.source} (${u.license})` : null
+      });
+    }
+    return {
+      id: this.id, subject: this.subject, assets,
+      attributionRequired: assets.filter(a => a.attribution).map(a => a.attribution)
+    };
+  }
 }
 
-// ---- declarative spec -> SVG (what the AI stage will emit) ----
-function render(spec) {
+// ---- spec validation (fail clearly BEFORE rendering) -----------------------
+const ITEM_TYPES = new Set(["asset", "arrow", "line", "symbol", "text", "dimension", "callout"]);
+const BASE_PROPS = new Set(["type"]);
+const TYPE_PROPS = {
+  asset: new Set(["query", "id", "cx", "cy", "x", "y", "size", "width", "height", "color", "role", "tone", "colored", "source", "subject", "opacity", "flip", "label", "anchor"]),
+  arrow: new Set(["from", "to", "color", "role", "solid", "width", "double", "dashed", "label", "labelSize"]),
+  line: new Set(["from", "to", "color", "width", "guide", "dashed"]),
+  symbol: new Set(["kind", "x", "y", "size", "width", "color", "role"]),
+  text: new Set(["text", "x", "y", "anchor", "color", "size", "weight", "math", "avoid"]),
+  dimension: new Set(["from", "to", "label", "offset"]),
+  callout: new Set(["x", "y", "w", "h", "color", "text", "dashed"])
+};
+const isNum = (v) => typeof v === "number" && isFinite(v);
+const isPt = (v) => Array.isArray(v) && v.length === 2 && v.every(isNum);
+
+function validateSpec(spec) {
+  const errors = [];
+  if (!spec || typeof spec !== "object") throw new Error("DGE spec must be an object");
   const c = spec.canvas || {};
-  const d = new Diagram({ width: c.width, height: c.height, palette: c.palette, seed: c.seed, bg: c.bg });
+  const subject = spec.subject || c.subject;
+  let lib = null;
+  if (!subject) errors.push('spec must declare a subject (e.g. subject: "physics")');
+  else if (!knownSubjects().includes(subject)) errors.push(`unknown subject "${subject}". Known subjects: ${knownSubjects().join(", ")}`);
+  else lib = loadSubject(subject);
+  if (c.width != null && !(isNum(c.width) && c.width > 0)) errors.push("canvas.width must be a positive number");
+  if (c.height != null && !(isNum(c.height) && c.height > 0)) errors.push("canvas.height must be a positive number");
+  const W = c.width || 480, H = c.height || 320;
+  const onCanvas = (x, y) => x >= -2 && y >= -2 && x <= W + 2 && y <= H + 2;
+
+  (spec.items || []).forEach((it, i) => {
+    const at = `item[${i}]` + (it && it.type ? ` (${it.type})` : "");
+    if (!it || typeof it !== "object") { errors.push(`${at} must be an object`); return; }
+    if (!ITEM_TYPES.has(it.type)) { errors.push(`${at}: unknown item type "${it.type}". Allowed: ${[...ITEM_TYPES].join(", ")}`); return; }
+    // numeric coordinates / dimensions
+    for (const k of ["x", "y", "cx", "cy", "w", "h", "width", "height", "size", "offset"]) if (it[k] != null && !isNum(it[k])) errors.push(`${at}.${k} must be a finite number`);
+    for (const k of ["from", "to"]) if (it[k] != null && !isPt(it[k])) errors.push(`${at}.${k} must be [x, y] numbers`);
+    for (const k of ["from", "to"]) if (isPt(it[k]) && !onCanvas(it[k][0], it[k][1])) errors.push(`${at}.${k} = [${it[k]}] is outside the ${W}×${H} canvas`);
+    if (isNum(it.cx) && isNum(it.cy) && !onCanvas(it.cx, it.cy)) errors.push(`${at}: center (${it.cx}, ${it.cy}) is outside the ${W}×${H} canvas`);
+    // asset: must be approved for the subject; validate referenced anchor/role
+    if (it.type === "asset") {
+      const key = it.id || it.query;
+      if (!key) errors.push(`${at}: an asset item needs an "id" or "query"`);
+      else if (lib) {
+        const a = lib.resolve(it.query, it);
+        if (!a) errors.push(`${at}: no approved "${subject}" asset for "${key}". Use an id from assets/${subject}/registry.json.`);
+        else {
+          if (it.anchor && !(a.anchors && a.anchors[it.anchor])) errors.push(`${at}: asset "${a.id}" has no anchor "${it.anchor}" (available: ${Object.keys(a.anchors || {}).join(", ")})`);
+          if (it.role && !(a.roles || []).includes(it.role)) errors.push(`${at}: asset "${a.id}" has no role "${it.role}" (available: ${(a.roles || []).join(", ")})`);
+        }
+      }
+    }
+    // unsupported properties
+    const ok = TYPE_PROPS[it.type] || new Set();
+    for (const k of Object.keys(it)) if (!BASE_PROPS.has(k) && !ok.has(k)) errors.push(`${at}: unsupported property "${k}" for type "${it.type}"`);
+  });
+
+  if (errors.length) throw new Error("Invalid DGE spec:\n  - " + errors.join("\n  - "));
+  return true;
+}
+
+// ---- declarative spec -> { svg, manifest } (what the AI/build stage emits) ----
+// Validates the spec first and throws a clear error listing every problem.
+function render(spec) {
+  validateSpec(spec);
+  const c = spec.canvas || {};
+  const d = new Diagram({ width: c.width, height: c.height, palette: c.palette, seed: c.seed, bg: c.bg, subject: spec.subject || c.subject, id: spec.id });
+  if (spec.title) d.title(spec.title, spec.titleOpts || {});
   for (const it of (spec.items || [])) {
     switch (it.type) {
       case "asset": d.place(it.query, it); break;
@@ -191,7 +298,7 @@ function render(spec) {
       case "callout": d.callout(it.x, it.y, it.w, it.h, it); break;
     }
   }
-  return d.toSVG();
+  return { svg: d.toSVG(), manifest: d.manifest() };
 }
 
-module.exports = { Diagram, render, library, ANNOT };
+module.exports = { Diagram, render, validateSpec, library, ANNOT, knownSubjects };
