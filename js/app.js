@@ -672,6 +672,22 @@ window.App = (function () {
         mb.appendChild(ol); c.appendChild(mb);
       }
       inner.appendChild(c);
+      // ONLINE: Rho guides the concept — personalized explanation + back-and-forth.
+      if (isOnline(cls)) {
+        tutorPanel(inner, {
+          context: { page: "learn concept", concept_heading: s.heading },
+          intro: "I'll walk you through this. Ask me anything, or tap Continue when it clicks.",
+          auto: "Explain this concept simply for a student learning it now, then ask me one quick check question. Concept: " + s.heading + " — " + s.explanation,
+          autoLabel: "Explain: " + s.heading,
+          quick: [
+            { label: "Explain more", prompt: "Go deeper on \"" + s.heading + "\" with a worked example." },
+            { label: "Make it simpler", prompt: "Explain \"" + s.heading + "\" as simply as you can, like I'm new to it." },
+            { label: "Real-world example", prompt: "Give a concrete real-world example of \"" + s.heading + "\"." },
+            { label: "Why it matters", prompt: "Why does \"" + s.heading + "\" matter in this class and beyond?" }
+          ],
+          onContinue: advance
+        });
+      }
       Store.markConceptLearned(cls.id, lid, s.level, 5); // completion + a little XP, once
       nextBtn.textContent = "Continue →"; nextBtn.onclick = advance;
     }
@@ -707,6 +723,18 @@ window.App = (function () {
       padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: "learn-" + step.level, problemLabel: "Concept " + step.level + " check", prompt: inst.prompt, hasSession: true }); };
       calcBtn.onclick = function () { Calculator.open(); };
       inner.appendChild(wrap);
+      // ONLINE: Rho coaches the check — hints first, never the bare answer.
+      if (isOnline(cls)) {
+        tutorPanel(inner, {
+          context: { page: "learn practice", question_prompt: inst.prompt },
+          intro: "Stuck? I'll nudge you with hints before giving anything away.",
+          quick: [
+            { label: "Give me a hint", prompt: "Give ONE small hint for this problem — do not give the answer. Problem: " + inst.prompt },
+            { label: "Explain the method", prompt: "Explain the general method to solve this type of problem, without the final number. Problem: " + inst.prompt },
+            { label: "Make it easier", prompt: "Restate this problem in an easier way and walk me toward it step by step. Problem: " + inst.prompt }
+          ]
+        });
+      }
 
       var checked = false;
       skipBtn.style.display = ""; skipBtn.textContent = "Skip"; skipBtn.onclick = advance;
@@ -888,6 +916,7 @@ window.App = (function () {
   function quizReview(cls, lid, lesson, correct, total, wrong) {
     var sections = (lesson.concept_sections || []).slice().sort(function (a, b) { return a.level - b.level; });
     var diffs = lessonDifficulties(lid, lesson);
+    var online = isOnline(cls);
     var pct = Math.round(correct / total * 100), perfect = correct === total;
     var m = modal(
       "<h2>" + (perfect ? "Perfect!" : "Quiz review — " + correct + " / " + total + " (" + pct + "%)") + "</h2>" +
@@ -895,11 +924,34 @@ window.App = (function () {
         ? "<div class='notice'><strong>Nailed it.</strong>You cleared every question. You've got this lesson down.</div>"
         : "<div class='notice'><strong>Here's what to relearn.</strong>Review the questions you missed, then revisit these concepts in Learn mode.</div>") +
       "<div id='qr-wrong'></div>" + (perfect ? "" : "<div id='qr-concepts'></div>") +
+      (online ? "<div id='qr-grade'></div>" : "") +
       "<div class='modal-actions'><button class='btn subtle' data-close>Close</button>" +
       (perfect ? "" : "<button class='btn ghost' id='qr-learn'>Relearn in Learn mode</button>") +
       "<button class='btn primary' id='qr-retry'>Retake quiz</button></div>",
       { wide: true }
     );
+    // ONLINE: upload your scratch work and get AI feedback / step-by-step grading.
+    var gradeHost = m.querySelector("#qr-grade");
+    if (gradeHost) {
+      gradeHost.appendChild(el("p", "panel-label", "Get step-by-step feedback"));
+      var gi = el("p", "modal-sub"); gi.textContent = "Upload a photo of your worked solution — Rho reviews your steps and gives credit for each correct one, not just the final answer.";
+      gi.style.margin = "0 0 8px"; gradeHost.appendChild(gi);
+      var row = el("div"); row.style.cssText = "display:flex;gap:8px;align-items:center;flex-wrap:wrap";
+      var file = document.createElement("input"); file.type = "file"; file.accept = "image/*";
+      var go = el("button", "btn primary sm", "Grade my work");
+      row.append(file, go); gradeHost.appendChild(row);
+      var out = el("div"); out.style.marginTop = "10px"; gradeHost.appendChild(out);
+      var missedText = wrong.map(function (q, i) { return (i + 1) + ". " + q.prompt + " (answer: " + (q.correct_answer || "") + ")"; }).join("\n");
+      go.onclick = function () {
+        var f = file.files[0]; if (!f) { out.textContent = "Choose an image of your work first."; return; }
+        out.textContent = "Reviewing your work…"; go.disabled = true;
+        compressTutorImage(f).then(function (dataURL) {
+          return askRho("Here is a photo of my worked solutions to the quiz questions I missed. Grade each step: say which steps are correct and award partial credit per correct step, then show how to fix the wrong steps. Questions I missed:\n" + missedText, { image: dataURL, context: { page: "quiz step grading", lesson_id: lid } });
+        }).then(function (text) { out.innerHTML = ""; renderRhoResponse(out, text); })
+          .catch(function (e) { out.textContent = "Couldn't grade your work right now. " + e.message; })
+          .finally(function () { go.disabled = false; });
+      };
+    }
     var wl = m.querySelector("#qr-wrong");
     wrong.forEach(function (q) {
       var c = el("div", "steps-panel"); c.hidden = false; c.style.marginBottom = "12px";
@@ -924,6 +976,111 @@ window.App = (function () {
       m.querySelector("#qr-learn").onclick = function () { closeModal(); startLearn(cls, lid, lesson); };
     }
     m.querySelector("#qr-retry").onclick = function () { closeModal(); startQuiz(cls, lid, lesson); };
+  }
+
+  // ====================================================================
+  // ONLINE MODE — AI-tutor-integrated Learn / Practice / Quiz. The pre-generated
+  // content still drives the flow; Rho layers on personalized, back-and-forth
+  // guidance. Uses the existing tutor endpoint (studymaf.com only) with graceful
+  // degradation when it can't be reached (e.g. local dev / offline).
+  //
+  // FORWARD-COMPATIBLE DIRECTIVE CONTRACT (for the backend prompt to emit): the
+  // AI reply MAY include, on their own, any of —
+  //   [[CONTINUE]]                         → renders a Continue button
+  //   [[CHOICES] a | b | *c | d]           → multiple choice (* marks correct)
+  //   [[INPUT] prompt | answer]            → a checked answer field
+  // Absent these, the reply renders as normal ANSWER/STEPS/FINAL text.
+  // ====================================================================
+  function isOnline(cls) { return !!(Store.getMode(cls.id) || {}).online; }
+
+  function askRho(question, opts) {
+    opts = opts || {};
+    var body = { question: question, context: Object.assign({}, tutorContext, opts.context || {}), history: opts.history || [] };
+    if (opts.image) body.image_data = opts.image;
+    return fetch(TUTOR_API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Tutor unavailable."); return j.answer || ""; }); });
+  }
+
+  function parseRhoDirectives(text) {
+    var controls = [], clean = String(text || "");
+    clean = clean.replace(/\[\[CONTINUE\]\]/gi, function () { controls.push({ type: "continue" }); return ""; });
+    clean = clean.replace(/\[\[CHOICES\]([^\]]*)\]/gi, function (_, b) {
+      var opts = b.split("|").map(function (s) { return s.trim(); }).filter(Boolean);
+      var answer = -1; opts.forEach(function (o, i) { if (/^\*/.test(o)) answer = i; });
+      controls.push({ type: "mc", choices: opts.map(function (o) { return o.replace(/^\*/, ""); }), answer: answer });
+      return "";
+    });
+    clean = clean.replace(/\[\[INPUT\]([^\]]*)\]/gi, function (_, b) {
+      var parts = b.split("|"); controls.push({ type: "input", label: (parts[0] || "").trim(), answer: (parts[1] || "").trim() }); return "";
+    });
+    return { text: clean.trim(), controls: controls };
+  }
+
+  function renderControlledResponse(bubble, text, controlHost, opts) {
+    opts = opts || {};
+    var parsed = parseRhoDirectives(text);
+    renderRhoResponse(bubble, parsed.text || "…");
+    if (!controlHost) return;
+    controlHost.innerHTML = "";
+    parsed.controls.forEach(function (ctl) {
+      if (ctl.type === "continue") {
+        var b = el("button", "btn primary sm", "Continue →");
+        b.onclick = function () { if (opts.onContinue) opts.onContinue(); };
+        controlHost.appendChild(b);
+      } else if (ctl.type === "mc") {
+        var box = el("div", "choice-box");
+        ctl.choices.forEach(function (c, i) {
+          var cb = el("button", "choice"); var t = el("span"); renderTutorText(t, c); cb.appendChild(t);
+          cb.onclick = function () {
+            var right = i === ctl.answer; cb.classList.add("sel");
+            var fb = el("div", "verdict " + (right ? "right" : "wrong")); fb.textContent = right ? "Correct!" : "Not quite — try again.";
+            controlHost.appendChild(fb);
+          };
+          box.appendChild(cb);
+        });
+        controlHost.appendChild(box);
+      } else if (ctl.type === "input") {
+        var wrap = el("div", "answer-box"); var inp = document.createElement("input"); inp.type = "text"; inp.placeholder = ctl.label || "Answer…";
+        var chk = el("button", "btn subtle sm", "Check");
+        chk.onclick = function () { var ok = isCorrect(inp.value, ctl.answer); var fb = el("div", "verdict " + (ok ? "right" : "wrong")); fb.textContent = ok ? "Correct!" : "Not quite."; controlHost.appendChild(fb); };
+        wrap.append(inp, chk); controlHost.appendChild(wrap);
+      }
+    });
+  }
+
+  // Reusable AI guidance panel. opts: { context, auto, quick:[{label,prompt}], onContinue, intro }
+  function tutorPanel(hostEl, opts) {
+    opts = opts || {};
+    var panel = el("div", "tutor-panel");
+    panel.style.cssText = "margin-top:16px;border:1px solid var(--line,#e5e7eb);border-radius:12px;padding:12px;background:var(--card,#fff)";
+    var head = el("div"); head.style.cssText = "display:flex;align-items:center;gap:8px;margin-bottom:8px";
+    var av = el("span"); av.innerHTML = icon("bookOpen"); av.style.color = "var(--accent)";
+    head.append(av, el("span", "tutor-panel-label", "Rho — AI tutor")); panel.appendChild(head);
+    if (opts.intro) { var pi = el("p", "modal-sub"); pi.textContent = opts.intro; pi.style.margin = "0 0 8px"; panel.appendChild(pi); }
+    var log = el("div", "tutor-panel-log"); log.style.cssText = "display:flex;flex-direction:column;gap:10px;max-height:340px;overflow:auto"; panel.appendChild(log);
+    var controls = el("div", "tutor-panel-controls"); controls.style.cssText = "display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"; panel.appendChild(controls);
+    var quick = el("div", "tutor-quick"); quick.style.cssText = "display:flex;flex-wrap:wrap;gap:6px;margin-top:10px";
+    (opts.quick || []).forEach(function (q) { var b = el("button", "btn subtle sm", q.label); b.onclick = function () { ask(q.prompt, q.label); }; quick.appendChild(b); });
+    panel.appendChild(quick);
+    var askRow = el("div", "tutor-ask"); askRow.style.cssText = "display:flex;gap:6px;margin-top:10px";
+    var input = document.createElement("input"); input.type = "text"; input.placeholder = "Ask Rho about this…"; input.style.cssText = "flex:1;padding:8px 10px;border:1px solid var(--line,#e5e7eb);border-radius:8px";
+    var send = el("button", "btn primary sm", "Ask"); askRow.append(input, send); panel.appendChild(askRow);
+
+    function bubble(role) { var b = el("div", "tutor-bubble " + role); b.style.cssText = "padding:8px 10px;border-radius:10px;background:" + (role === "student" ? "var(--accent-weak,#fdece3)" : "var(--surface,#f6f7f9)"); log.appendChild(b); log.scrollTop = log.scrollHeight; return b; }
+    function ask(question, shownAs) {
+      if (!question) return;
+      var sb = bubble("student"); sb.textContent = shownAs || question;
+      var thinking = bubble("assistant"); thinking.textContent = "Thinking…";
+      askRho(question, { context: opts.context }).then(function (text) {
+        thinking.innerHTML = "";
+        renderControlledResponse(thinking, text, controls, { onContinue: opts.onContinue });
+      }).catch(function (e) { thinking.textContent = "I couldn't reach the tutor right now — you can keep going with the lesson. (" + e.message + ")"; });
+    }
+    send.onclick = function () { var q = input.value.trim(); input.value = ""; ask(q); };
+    input.onkeydown = function (e) { if (e.key === "Enter") send.click(); };
+    hostEl.appendChild(panel);
+    if (opts.auto) ask(opts.auto, opts.autoLabel || "Guide me through this");
+    return { ask: ask };
   }
 
   // ====================================================================
@@ -1148,6 +1305,20 @@ window.App = (function () {
       hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
       padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: "slot" + slot, problemLabel: "Question " + (slot + 1), prompt: inst.prompt, hasSession: true }); };
       calcBtn.onclick = function () { Calculator.open(); };
+      // ONLINE: AI-enhanced practice — hints prioritized over answers; adjust on request.
+      if (isOnline(cls)) {
+        tutorPanel(inner, {
+          context: { page: "online practice", question_prompt: inst.prompt, difficulty: inst.difficulty || "" },
+          intro: "Practice with me — I lead with hints and adapt to you. Ask for harder, easier, or more detail.",
+          quick: [
+            { label: "Hint", prompt: "Give ONE hint for this problem, not the answer. Keep it to the syllabus/textbook method. Problem: " + inst.prompt },
+            { label: "Explain in detail", prompt: "Explain how to approach this problem step by step (method, not the final number). Problem: " + inst.prompt },
+            { label: "Make it harder", prompt: "Give me a harder variation of this problem to try, on the same topic. Problem: " + inst.prompt },
+            { label: "Make it easier", prompt: "Give me an easier warm-up version of this problem. Problem: " + inst.prompt },
+            { label: "Be straightforward", prompt: "Just explain this clearly and directly, then show the final answer. Problem: " + inst.prompt }
+          ]
+        });
+      }
 
       verdict.textContent = ""; verdict.className = "verdict"; checked = false;
       actionBtn.textContent = "Check";
