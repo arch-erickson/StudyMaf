@@ -89,6 +89,20 @@ export const Auth = {
     }
     clear();
   },
+  async uploadCourseSource(courseId, kind, file) {
+    await refreshIfNeeded();
+    if (!session || !session.access_token) throw new Error('Sign in required.');
+    if (!file || file.type !== 'application/pdf' || !/\.pdf$/i.test(file.name || '')) throw new Error('Please choose a PDF file.');
+    if (file.size < 1 || file.size > 52428800) throw new Error('Each source PDF must be 50 MB or smaller.');
+    var safeName = String(file.name || 'source.pdf').toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120) || 'source.pdf';
+    var path = String(courseId) + '/' + String(kind) + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 10) + '-' + safeName;
+    var storageUrl = config.supabaseUrl.replace(/\/$/, '') + '/storage/v1/object/course-source/' + path.split('/').map(encodeURIComponent).join('/');
+    var response = await fetch(storageUrl, { method: 'POST', headers: { apikey: config.publishableKey, Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/pdf', 'x-upsert': 'false' }, body: file });
+    var raw = await response.text(), data = null;
+    try { data = raw ? JSON.parse(raw) : null; } catch (e) {}
+    if (!response.ok) throw new Error((data && (data.message || data.error)) || 'Could not store this PDF securely.');
+    return { storage_path: path, original_name: String(file.name || 'source.pdf'), mime_type: 'application/pdf', size_bytes: file.size };
+  },
   async api(path, options) {
     await refreshIfNeeded();
     if (!session || !session.access_token) throw new Error('Sign in required.');

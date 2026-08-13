@@ -1,6 +1,7 @@
 var auth = require('../_lib/studymaf-auth');
 
 function number(value) { return Math.max(0, Number(value) || 0); }
+function emptyUser() { return { total_time_seconds: 0, calculator_uses: 0, modes: { learn: 0, practice: 0, test: 0, study: 0 }, delivery: { online: 0, offline: 0 }, classes: {}, overall_completion_percent: null }; }
 function bucket(map, key, label) {
   if (!map[key]) map[key] = { key: key, label: label || 'Unassigned class', total_time_seconds: 0, calculator_uses: 0, modes: { learn: 0, practice: 0, test: 0, study: 0 }, delivery: { online: 0, offline: 0 }, lessons: {}, completion_percent: null };
   return map[key];
@@ -8,7 +9,7 @@ function bucket(map, key, label) {
 function summarize(events, progressRows) {
   var users = {};
   function user(id) {
-    if (!users[id]) users[id] = { total_time_seconds: 0, calculator_uses: 0, modes: { learn: 0, practice: 0, test: 0, study: 0 }, delivery: { online: 0, offline: 0 }, classes: {}, overall_completion_percent: null };
+    if (!users[id]) users[id] = emptyUser();
     return users[id];
   }
   (events || []).forEach(function (event) {
@@ -42,6 +43,32 @@ function summarize(events, progressRows) {
   return users;
 }
 
+function applyDailyMetrics(users, rows) {
+  var totals = {};
+  (rows || []).forEach(function (row) {
+    var id = row.user_id;
+    if (!id) return;
+    if (!totals[id]) totals[id] = { total_time_seconds: 0, calculator_uses: 0, modes: { learn: 0, practice: 0, test: 0, study: 0 }, delivery: { online: 0, offline: 0 } };
+    var total = totals[id];
+    total.total_time_seconds += number(row.study_seconds);
+    total.calculator_uses += number(row.calculator_uses);
+    total.modes.learn += number(row.learn_seconds);
+    total.modes.practice += number(row.practice_seconds);
+    total.modes.test += number(row.test_seconds);
+    total.modes.study += number(row.study_mode_seconds);
+    total.delivery.online += number(row.online_seconds);
+    total.delivery.offline += number(row.offline_seconds);
+  });
+  Object.keys(totals).forEach(function (id) {
+    if (!users[id]) users[id] = emptyUser();
+    users[id].total_time_seconds = totals[id].total_time_seconds;
+    users[id].calculator_uses = totals[id].calculator_uses;
+    users[id].modes = totals[id].modes;
+    users[id].delivery = totals[id].delivery;
+  });
+  return users;
+}
+
 function hourlySeries(events) {
   var rows = {};
   (events || []).forEach(function (event) {
@@ -56,6 +83,25 @@ function hourlySeries(events) {
     row.delivery[delivery] = number(row.delivery[delivery]) + seconds;
   });
   return Object.keys(rows).sort().map(function (key) { return rows[key]; });
+}
+
+function dailySeries(rows) {
+  var daily = {};
+  (rows || []).forEach(function (row) {
+    var day = String(row.day || '').slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return;
+    if (!daily[day]) daily[day] = { at: day + 'T00:00:00.000Z', study_seconds: 0, calculator_uses: 0, modes: { learn: 0, practice: 0, test: 0, study: 0 }, delivery: { online: 0, offline: 0 } };
+    var out = daily[day];
+    out.study_seconds += number(row.study_seconds);
+    out.calculator_uses += number(row.calculator_uses);
+    out.modes.learn += number(row.learn_seconds);
+    out.modes.practice += number(row.practice_seconds);
+    out.modes.test += number(row.test_seconds);
+    out.modes.study += number(row.study_mode_seconds);
+    out.delivery.online += number(row.online_seconds);
+    out.delivery.offline += number(row.offline_seconds);
+  });
+  return Object.keys(daily).sort().map(function (day) { return daily[day]; });
 }
 
 module.exports = async function handler(req, res) {
@@ -85,13 +131,21 @@ module.exports = async function handler(req, res) {
     var results = await Promise.all([
       auth.db('profiles?select=id,email,display_name,last_seen_at,created_at&order=created_at.desc&limit=500'),
       auth.db('user_roles?select=user_id,role,assigned_at'),
-      auth.db('course_catalog?select=id,code,title,subject,is_active&order=code.asc'),
-      auth.db('class_sections?select=id,section_label,term,professor_id,course_catalog(code,title),profiles!class_sections_professor_id_fkey(email,display_name)&order=created_at.desc'),
+      auth.db('course_catalog?select=id,code,title,subject,is_active,created_at&order=code.asc'),
+      auth.db('class_sections?select=id,course_id,section_label,term,professor_id,course_catalog(code,title),profiles!class_sections_professor_id_fkey(email,display_name)&order=created_at.desc'),
       auth.db('class_enrollments?select=class_section_id,student_id,student_email,status'),
       auth.db('account_role_invites?select=email,role,created_at&order=created_at.desc'),
       auth.db('account_activity_events?select=user_id,class_section_id,class_key,class_name,course_code,lesson_id,event_type,study_mode,delivery_mode,duration_seconds,occurred_at&order=occurred_at.desc&limit=20000'),
-      auth.db('account_progress?select=user_id,state,updated_at')
+      auth.db('account_progress?select=user_id,state,updated_at'),
+      auth.db('account_activity_daily?select=day,user_id,study_seconds,calculator_uses,learn_seconds,practice_seconds,test_seconds,study_mode_seconds,online_seconds,offline_seconds&order=day.asc&limit=50000').catch(function () { return []; }),
+      auth.db('course_documents?select=id,course_id,kind,original_name,processing_status,uploaded_at&order=uploaded_at.desc').catch(function () { return []; }),
+      auth.db('course_ingestion_jobs?select=id,course_id,status,requested_at,message&order=requested_at.desc').catch(function () { return []; })
     ]);
-    auth.json(res, 200, { users: results[0] || [], roles: results[1] || [], courses: results[2] || [], classes: results[3] || [], enrollments: results[4] || [], professor_invites: results[5] || [], analytics: { generated_at: new Date().toISOString(), users: summarize(results[6], results[7]), hourly: hourlySeries(results[6]) } });
+    var documentsByCourse = {}, jobsByCourse = {};
+    (results[9] || []).forEach(function (document) { (documentsByCourse[document.course_id] || (documentsByCourse[document.course_id] = [])).push(document); });
+    (results[10] || []).forEach(function (job) { (jobsByCourse[job.course_id] || (jobsByCourse[job.course_id] = [])).push(job); });
+    (results[2] || []).forEach(function (course) { course.course_documents = documentsByCourse[course.id] || []; course.course_ingestion_jobs = jobsByCourse[course.id] || []; });
+    var metrics = applyDailyMetrics(summarize(results[6], results[7]), results[8]);
+    auth.json(res, 200, { users: results[0] || [], roles: results[1] || [], courses: results[2] || [], classes: results[3] || [], enrollments: results[4] || [], professor_invites: results[5] || [], analytics: { generated_at: new Date().toISOString(), users: metrics, hourly: hourlySeries(results[6]), daily: dailySeries(results[8]) } });
   } catch (error) { auth.json(res, 500, { error: error.message || 'Could not load the admin dashboard.' }); }
 };
