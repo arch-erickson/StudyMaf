@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>StudyMAF Control</title>
+  <link rel="stylesheet" href="../vendor/fonts/inter.css">
+  <link rel="stylesheet" href="control.css">
+</head>
+<body>
+  <main class="control-shell">
+    <a class="brand" href="../landing/">Study<span>MAF</span></a>
+    <section class="auth-card" aria-live="polite">
+      <div class="math-mark" aria-hidden="true">∑</div>
+      <p class="kicker">StudyMAF control</p>
+      <h1>Welcome back.</h1>
+      <p class="intro">Sign in to your study space. No password needed.</p>
+
+      <div class="role-choice" role="group" aria-label="Choose sign-in type">
+        <button type="button" class="role active" data-intent="student">Student</button>
+        <button type="button" class="role" data-intent="professor">Professor</button>
+      </div>
+      <p id="role-note" class="role-note">Use your student email to continue.</p>
+
+      <button class="google" id="google" type="button"><span class="google-mark">G</span> Continue with Google</button>
+      <div class="or"><span></span>or continue with email<span></span></div>
+      <form id="email-form">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <p class="error" id="error" hidden></p>
+        <button class="submit" type="submit">Send verification code <span>→</span></button>
+      </form>
+      <p class="terms">By continuing, you agree to use StudyMAF for learning and classwork.</p>
+    </section>
+    <p class="bottom"><a href="../landing/">← Back to StudyMAF</a></p>
+  </main>
+  <script type="module" src="control.js"></script>
+</body>
+</html>
