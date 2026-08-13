@@ -1,5 +1,5 @@
 import { Auth } from '../js/auth.js';
-import { createAccountUI } from '../js/account-ui.js';
+import { createAccountUI } from '../js/account-ui.js?v=3';
 
 const shell = document.querySelector('.control-shell');
 const card = document.querySelector('.auth-card');
