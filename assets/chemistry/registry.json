@@ -1,0 +1,7 @@
+{
+  "subject": "chemistry",
+  "version": 1,
+  "note": "Chemistry library — routing established; add approved chemistry primitives here.",
+  "generatedBy": "tools/build-subject-libraries.js",
+  "assets": {}
+}

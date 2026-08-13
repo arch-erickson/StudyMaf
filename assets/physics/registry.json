@@ -1,0 +1,2297 @@
+{
+  "subject": "physics",
+  "version": 1,
+  "note": "Approved physics primitives only (StudyMAF-authored, MIT). No generic filler icons.",
+  "generatedBy": "tools/build-subject-libraries.js",
+  "assets": {
+    "force-arrow": {
+      "id": "force-arrow",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "vector",
+        "force"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          30,
+          12
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          24
+        ],
+        "e": [
+          60,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/force-arrow.svg"
+    },
+    "velocity-arrow": {
+      "id": "velocity-arrow",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "vector",
+        "velocity"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          30,
+          12
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          24
+        ],
+        "e": [
+          60,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/velocity-arrow.svg"
+    },
+    "acceleration-arrow": {
+      "id": "acceleration-arrow",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "vector",
+        "acceleration"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          30,
+          12
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          24
+        ],
+        "e": [
+          60,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/acceleration-arrow.svg"
+    },
+    "weight-gravity": {
+      "id": "weight-gravity",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 40,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          20,
+          30
+        ],
+        "n": [
+          20,
+          0
+        ],
+        "s": [
+          20,
+          60
+        ],
+        "e": [
+          40,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/weight-gravity.svg"
+    },
+    "normal-force": {
+      "id": "normal-force",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 40,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          20,
+          30
+        ],
+        "n": [
+          20,
+          0
+        ],
+        "s": [
+          20,
+          60
+        ],
+        "e": [
+          40,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/normal-force.svg"
+    },
+    "friction-force": {
+      "id": "friction-force",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 70,
+        "h": 40
+      },
+      "anchors": {
+        "center": [
+          35,
+          20
+        ],
+        "n": [
+          35,
+          0
+        ],
+        "s": [
+          35,
+          40
+        ],
+        "e": [
+          70,
+          20
+        ],
+        "w": [
+          0,
+          20
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/friction-force.svg"
+    },
+    "inclined-plane": {
+      "id": "inclined-plane",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          60,
+          40
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          80
+        ],
+        "e": [
+          120,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/inclined-plane.svg"
+    },
+    "block-on-incline": {
+      "id": "block-on-incline",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          60,
+          45
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          90
+        ],
+        "e": [
+          120,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/block-on-incline.svg"
+    },
+    "spring": {
+      "id": "spring",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          60,
+          15
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          30
+        ],
+        "e": [
+          120,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/spring.svg"
+    },
+    "spring-mass": {
+      "id": "spring-mass",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 70,
+        "h": 120
+      },
+      "anchors": {
+        "center": [
+          35,
+          60
+        ],
+        "n": [
+          35,
+          0
+        ],
+        "s": [
+          35,
+          120
+        ],
+        "e": [
+          70,
+          60
+        ],
+        "w": [
+          0,
+          60
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/spring-mass.svg"
+    },
+    "pendulum": {
+      "id": "pendulum",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 100
+      },
+      "anchors": {
+        "center": [
+          45,
+          50
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          100
+        ],
+        "e": [
+          90,
+          50
+        ],
+        "w": [
+          0,
+          50
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/pendulum.svg"
+    },
+    "pulley": {
+      "id": "pulley",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 100
+      },
+      "anchors": {
+        "center": [
+          45,
+          50
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          100
+        ],
+        "e": [
+          90,
+          50
+        ],
+        "w": [
+          0,
+          50
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/pulley.svg"
+    },
+    "projectile-path": {
+      "id": "projectile-path",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          60,
+          40
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          80
+        ],
+        "e": [
+          120,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/projectile-path.svg"
+    },
+    "free-body-diagram": {
+      "id": "free-body-diagram",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 100,
+        "h": 100
+      },
+      "anchors": {
+        "center": [
+          50,
+          50
+        ],
+        "n": [
+          50,
+          0
+        ],
+        "s": [
+          50,
+          100
+        ],
+        "e": [
+          100,
+          50
+        ],
+        "w": [
+          0,
+          50
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/free-body-diagram.svg"
+    },
+    "lever": {
+      "id": "lever",
+      "subject": "physics",
+      "topic": "mechanics",
+      "roles": [
+        "mechanics"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 70
+      },
+      "anchors": {
+        "center": [
+          60,
+          35
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          70
+        ],
+        "e": [
+          120,
+          35
+        ],
+        "w": [
+          0,
+          35
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/lever.svg"
+    },
+    "charge-positive": {
+      "id": "charge-positive",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "charge",
+        "positive",
+        "source"
+      ],
+      "bounds": {
+        "w": 30,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          15,
+          15
+        ],
+        "n": [
+          15,
+          0
+        ],
+        "s": [
+          15,
+          30
+        ],
+        "e": [
+          30,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/charge-positive.svg"
+    },
+    "charge-negative": {
+      "id": "charge-negative",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "charge",
+        "negative",
+        "source"
+      ],
+      "bounds": {
+        "w": 30,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          15,
+          15
+        ],
+        "n": [
+          15,
+          0
+        ],
+        "s": [
+          15,
+          30
+        ],
+        "e": [
+          30,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/charge-negative.svg"
+    },
+    "field-lines-radial": {
+      "id": "field-lines-radial",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "field",
+        "radial",
+        "source"
+      ],
+      "bounds": {
+        "w": 100,
+        "h": 100
+      },
+      "anchors": {
+        "center": [
+          50,
+          50
+        ],
+        "n": [
+          50,
+          0
+        ],
+        "s": [
+          50,
+          100
+        ],
+        "e": [
+          100,
+          50
+        ],
+        "w": [
+          0,
+          50
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/field-lines-radial.svg"
+    },
+    "parallel-plates": {
+      "id": "parallel-plates",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "field-region",
+        "capacitor",
+        "plates"
+      ],
+      "bounds": {
+        "w": 100,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          50,
+          40
+        ],
+        "n": [
+          50,
+          0
+        ],
+        "s": [
+          50,
+          80
+        ],
+        "e": [
+          100,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ],
+        "gap-center": [
+          50,
+          40
+        ],
+        "top-plate": [
+          50,
+          16
+        ],
+        "bottom-plate": [
+          50,
+          64
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/parallel-plates.svg"
+    },
+    "resistor": {
+      "id": "resistor",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "component"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          45,
+          12
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          24
+        ],
+        "e": [
+          90,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/resistor.svg"
+    },
+    "battery-cell": {
+      "id": "battery-cell",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "component",
+        "source"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 40
+      },
+      "anchors": {
+        "center": [
+          30,
+          20
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          40
+        ],
+        "e": [
+          60,
+          20
+        ],
+        "w": [
+          0,
+          20
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/battery-cell.svg"
+    },
+    "capacitor": {
+      "id": "capacitor",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "component"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 40
+      },
+      "anchors": {
+        "center": [
+          30,
+          20
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          40
+        ],
+        "e": [
+          60,
+          20
+        ],
+        "w": [
+          0,
+          20
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/capacitor.svg"
+    },
+    "light-bulb": {
+      "id": "light-bulb",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "component"
+      ],
+      "bounds": {
+        "w": 40,
+        "h": 40
+      },
+      "anchors": {
+        "center": [
+          20,
+          20
+        ],
+        "n": [
+          20,
+          0
+        ],
+        "s": [
+          20,
+          40
+        ],
+        "e": [
+          40,
+          20
+        ],
+        "w": [
+          0,
+          20
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/light-bulb.svg"
+    },
+    "switch": {
+      "id": "switch",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "component"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          30,
+          15
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          30
+        ],
+        "e": [
+          60,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/switch.svg"
+    },
+    "circuit-series": {
+      "id": "circuit-series",
+      "subject": "physics",
+      "topic": "electricity",
+      "roles": [
+        "circuit"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          60,
+          45
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          90
+        ],
+        "e": [
+          120,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/circuit-series.svg"
+    },
+    "bar-magnet": {
+      "id": "bar-magnet",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "magnet",
+        "source"
+      ],
+      "bounds": {
+        "w": 100,
+        "h": 40
+      },
+      "anchors": {
+        "center": [
+          50,
+          20
+        ],
+        "n": [
+          50,
+          0
+        ],
+        "s": [
+          50,
+          40
+        ],
+        "e": [
+          100,
+          20
+        ],
+        "w": [
+          0,
+          20
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/bar-magnet.svg"
+    },
+    "field-lines-magnet": {
+      "id": "field-lines-magnet",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "field"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          60,
+          45
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          90
+        ],
+        "e": [
+          120,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/field-lines-magnet.svg"
+    },
+    "solenoid": {
+      "id": "solenoid",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "component"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 50
+      },
+      "anchors": {
+        "center": [
+          60,
+          25
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          50
+        ],
+        "e": [
+          120,
+          25
+        ],
+        "w": [
+          0,
+          25
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/solenoid.svg"
+    },
+    "field-into-page": {
+      "id": "field-into-page",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "magnetism"
+      ],
+      "bounds": {
+        "w": 30,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          15,
+          15
+        ],
+        "n": [
+          15,
+          0
+        ],
+        "s": [
+          15,
+          30
+        ],
+        "e": [
+          30,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/field-into-page.svg"
+    },
+    "field-out-of-page": {
+      "id": "field-out-of-page",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "magnetism"
+      ],
+      "bounds": {
+        "w": 30,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          15,
+          15
+        ],
+        "n": [
+          15,
+          0
+        ],
+        "s": [
+          15,
+          30
+        ],
+        "e": [
+          30,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/field-out-of-page.svg"
+    },
+    "current-loop": {
+      "id": "current-loop",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "magnetism"
+      ],
+      "bounds": {
+        "w": 80,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          40,
+          40
+        ],
+        "n": [
+          40,
+          0
+        ],
+        "s": [
+          40,
+          80
+        ],
+        "e": [
+          80,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/current-loop.svg"
+    },
+    "compass": {
+      "id": "compass",
+      "subject": "physics",
+      "topic": "magnetism",
+      "roles": [
+        "magnetism"
+      ],
+      "bounds": {
+        "w": 50,
+        "h": 50
+      },
+      "anchors": {
+        "center": [
+          25,
+          25
+        ],
+        "n": [
+          25,
+          0
+        ],
+        "s": [
+          25,
+          50
+        ],
+        "e": [
+          50,
+          25
+        ],
+        "w": [
+          0,
+          25
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/compass.svg"
+    },
+    "transverse-wave": {
+      "id": "transverse-wave",
+      "subject": "physics",
+      "topic": "waves",
+      "roles": [
+        "wave"
+      ],
+      "bounds": {
+        "w": 140,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          70,
+          30
+        ],
+        "n": [
+          70,
+          0
+        ],
+        "s": [
+          70,
+          60
+        ],
+        "e": [
+          140,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/transverse-wave.svg"
+    },
+    "wavelength-labeled": {
+      "id": "wavelength-labeled",
+      "subject": "physics",
+      "topic": "waves",
+      "roles": [
+        "wave"
+      ],
+      "bounds": {
+        "w": 140,
+        "h": 70
+      },
+      "anchors": {
+        "center": [
+          70,
+          35
+        ],
+        "n": [
+          70,
+          0
+        ],
+        "s": [
+          70,
+          70
+        ],
+        "e": [
+          140,
+          35
+        ],
+        "w": [
+          0,
+          35
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/wavelength-labeled.svg"
+    },
+    "longitudinal-wave": {
+      "id": "longitudinal-wave",
+      "subject": "physics",
+      "topic": "waves",
+      "roles": [
+        "waves"
+      ],
+      "bounds": {
+        "w": 140,
+        "h": 40
+      },
+      "anchors": {
+        "center": [
+          70,
+          20
+        ],
+        "n": [
+          70,
+          0
+        ],
+        "s": [
+          70,
+          40
+        ],
+        "e": [
+          140,
+          20
+        ],
+        "w": [
+          0,
+          20
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/longitudinal-wave.svg"
+    },
+    "standing-wave": {
+      "id": "standing-wave",
+      "subject": "physics",
+      "topic": "waves",
+      "roles": [
+        "wave"
+      ],
+      "bounds": {
+        "w": 140,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          70,
+          30
+        ],
+        "n": [
+          70,
+          0
+        ],
+        "s": [
+          70,
+          60
+        ],
+        "e": [
+          140,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/standing-wave.svg"
+    },
+    "converging-lens": {
+      "id": "converging-lens",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optic",
+        "lens"
+      ],
+      "bounds": {
+        "w": 70,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          35,
+          45
+        ],
+        "n": [
+          35,
+          0
+        ],
+        "s": [
+          35,
+          90
+        ],
+        "e": [
+          70,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/converging-lens.svg"
+    },
+    "diverging-lens": {
+      "id": "diverging-lens",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optic",
+        "lens"
+      ],
+      "bounds": {
+        "w": 70,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          35,
+          45
+        ],
+        "n": [
+          35,
+          0
+        ],
+        "s": [
+          35,
+          90
+        ],
+        "e": [
+          70,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/diverging-lens.svg"
+    },
+    "concave-mirror": {
+      "id": "concave-mirror",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optic",
+        "mirror"
+      ],
+      "bounds": {
+        "w": 70,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          35,
+          45
+        ],
+        "n": [
+          35,
+          0
+        ],
+        "s": [
+          35,
+          90
+        ],
+        "e": [
+          70,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/concave-mirror.svg"
+    },
+    "convex-mirror": {
+      "id": "convex-mirror",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optic",
+        "mirror"
+      ],
+      "bounds": {
+        "w": 70,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          35,
+          45
+        ],
+        "n": [
+          35,
+          0
+        ],
+        "s": [
+          35,
+          90
+        ],
+        "e": [
+          70,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/convex-mirror.svg"
+    },
+    "plane-mirror": {
+      "id": "plane-mirror",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optics"
+      ],
+      "bounds": {
+        "w": 40,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          20,
+          45
+        ],
+        "n": [
+          20,
+          0
+        ],
+        "s": [
+          20,
+          90
+        ],
+        "e": [
+          40,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/plane-mirror.svg"
+    },
+    "prism": {
+      "id": "prism",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optics"
+      ],
+      "bounds": {
+        "w": 80,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          40,
+          40
+        ],
+        "n": [
+          40,
+          0
+        ],
+        "s": [
+          40,
+          80
+        ],
+        "e": [
+          80,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/prism.svg"
+    },
+    "ray-refraction": {
+      "id": "ray-refraction",
+      "subject": "physics",
+      "topic": "optics",
+      "roles": [
+        "optics"
+      ],
+      "bounds": {
+        "w": 100,
+        "h": 100
+      },
+      "anchors": {
+        "center": [
+          50,
+          50
+        ],
+        "n": [
+          50,
+          0
+        ],
+        "s": [
+          50,
+          100
+        ],
+        "e": [
+          100,
+          50
+        ],
+        "w": [
+          0,
+          50
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/ray-refraction.svg"
+    },
+    "thermometer": {
+      "id": "thermometer",
+      "subject": "physics",
+      "topic": "thermodynamics",
+      "roles": [
+        "thermodynamics"
+      ],
+      "bounds": {
+        "w": 30,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          15,
+          40
+        ],
+        "n": [
+          15,
+          0
+        ],
+        "s": [
+          15,
+          80
+        ],
+        "e": [
+          30,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/thermometer.svg"
+    },
+    "heat-flow": {
+      "id": "heat-flow",
+      "subject": "physics",
+      "topic": "thermodynamics",
+      "roles": [
+        "thermodynamics"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 50
+      },
+      "anchors": {
+        "center": [
+          60,
+          25
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          50
+        ],
+        "e": [
+          120,
+          25
+        ],
+        "w": [
+          0,
+          25
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/heat-flow.svg"
+    },
+    "piston-cylinder": {
+      "id": "piston-cylinder",
+      "subject": "physics",
+      "topic": "thermodynamics",
+      "roles": [
+        "thermodynamics"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          30,
+          45
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          90
+        ],
+        "e": [
+          60,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/piston-cylinder.svg"
+    },
+    "pv-diagram": {
+      "id": "pv-diagram",
+      "subject": "physics",
+      "topic": "thermodynamics",
+      "roles": [
+        "thermodynamics"
+      ],
+      "bounds": {
+        "w": 110,
+        "h": 100
+      },
+      "anchors": {
+        "center": [
+          55,
+          50
+        ],
+        "n": [
+          55,
+          0
+        ],
+        "s": [
+          55,
+          100
+        ],
+        "e": [
+          110,
+          50
+        ],
+        "w": [
+          0,
+          50
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/pv-diagram.svg"
+    },
+    "beaker-fluid": {
+      "id": "beaker-fluid",
+      "subject": "physics",
+      "topic": "fluids",
+      "roles": [
+        "fluids"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          30,
+          40
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          80
+        ],
+        "e": [
+          60,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/beaker-fluid.svg"
+    },
+    "pressure-depth": {
+      "id": "pressure-depth",
+      "subject": "physics",
+      "topic": "fluids",
+      "roles": [
+        "fluids"
+      ],
+      "bounds": {
+        "w": 80,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          40,
+          45
+        ],
+        "n": [
+          40,
+          0
+        ],
+        "s": [
+          40,
+          90
+        ],
+        "e": [
+          80,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/pressure-depth.svg"
+    },
+    "buoyancy": {
+      "id": "buoyancy",
+      "subject": "physics",
+      "topic": "fluids",
+      "roles": [
+        "fluids"
+      ],
+      "bounds": {
+        "w": 80,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          40,
+          45
+        ],
+        "n": [
+          40,
+          0
+        ],
+        "s": [
+          40,
+          90
+        ],
+        "e": [
+          80,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/buoyancy.svg"
+    },
+    "pipe-flow": {
+      "id": "pipe-flow",
+      "subject": "physics",
+      "topic": "fluids",
+      "roles": [
+        "fluids"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          60,
+          30
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          60
+        ],
+        "e": [
+          120,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/pipe-flow.svg"
+    },
+    "bohr-atom": {
+      "id": "bohr-atom",
+      "subject": "physics",
+      "topic": "modern-physics",
+      "roles": [
+        "modern-physics"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          45,
+          45
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          90
+        ],
+        "e": [
+          90,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/bohr-atom.svg"
+    },
+    "nucleus": {
+      "id": "nucleus",
+      "subject": "physics",
+      "topic": "modern-physics",
+      "roles": [
+        "modern-physics"
+      ],
+      "bounds": {
+        "w": 60,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          30,
+          30
+        ],
+        "n": [
+          30,
+          0
+        ],
+        "s": [
+          30,
+          60
+        ],
+        "e": [
+          60,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/nucleus.svg"
+    },
+    "photon": {
+      "id": "photon",
+      "subject": "physics",
+      "topic": "modern-physics",
+      "roles": [
+        "modern-physics"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 30
+      },
+      "anchors": {
+        "center": [
+          45,
+          15
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          30
+        ],
+        "e": [
+          90,
+          15
+        ],
+        "w": [
+          0,
+          15
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/photon.svg"
+    },
+    "energy-levels": {
+      "id": "energy-levels",
+      "subject": "physics",
+      "topic": "modern-physics",
+      "roles": [
+        "modern-physics"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          45,
+          45
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          90
+        ],
+        "e": [
+          90,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/energy-levels.svg"
+    },
+    "arrow-right": {
+      "id": "arrow-right",
+      "subject": "physics",
+      "topic": "arrows",
+      "roles": [
+        "vector"
+      ],
+      "bounds": {
+        "w": 24,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          12,
+          12
+        ],
+        "n": [
+          12,
+          0
+        ],
+        "s": [
+          12,
+          24
+        ],
+        "e": [
+          24,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/arrow-right.svg"
+    },
+    "arrow-double": {
+      "id": "arrow-double",
+      "subject": "physics",
+      "topic": "arrows",
+      "roles": [
+        "dimension"
+      ],
+      "bounds": {
+        "w": 24,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          12,
+          12
+        ],
+        "n": [
+          12,
+          0
+        ],
+        "s": [
+          12,
+          24
+        ],
+        "e": [
+          24,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/arrow-double.svg"
+    },
+    "axes-2d": {
+      "id": "axes-2d",
+      "subject": "physics",
+      "topic": "axes",
+      "roles": [
+        "graph",
+        "axes"
+      ],
+      "bounds": {
+        "w": 48,
+        "h": 48
+      },
+      "anchors": {
+        "center": [
+          24,
+          24
+        ],
+        "n": [
+          24,
+          0
+        ],
+        "s": [
+          24,
+          48
+        ],
+        "e": [
+          48,
+          24
+        ],
+        "w": [
+          0,
+          24
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/axes-2d.svg"
+    },
+    "axes-quadrant1": {
+      "id": "axes-quadrant1",
+      "subject": "physics",
+      "topic": "axes",
+      "roles": [
+        "graph",
+        "axes"
+      ],
+      "bounds": {
+        "w": 48,
+        "h": 48
+      },
+      "anchors": {
+        "center": [
+          24,
+          24
+        ],
+        "n": [
+          24,
+          0
+        ],
+        "s": [
+          24,
+          48
+        ],
+        "e": [
+          48,
+          24
+        ],
+        "w": [
+          0,
+          24
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/axes-quadrant1.svg"
+    },
+    "grid-square": {
+      "id": "grid-square",
+      "subject": "physics",
+      "topic": "grids",
+      "roles": [
+        "graph",
+        "grid"
+      ],
+      "bounds": {
+        "w": 48,
+        "h": 48
+      },
+      "anchors": {
+        "center": [
+          24,
+          24
+        ],
+        "n": [
+          24,
+          0
+        ],
+        "s": [
+          24,
+          48
+        ],
+        "e": [
+          48,
+          24
+        ],
+        "w": [
+          0,
+          24
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/grid-square.svg"
+    },
+    "dimension-horizontal": {
+      "id": "dimension-horizontal",
+      "subject": "physics",
+      "topic": "dimensions",
+      "roles": [
+        "dimension"
+      ],
+      "bounds": {
+        "w": 48,
+        "h": 24
+      },
+      "anchors": {
+        "center": [
+          24,
+          12
+        ],
+        "n": [
+          24,
+          0
+        ],
+        "s": [
+          24,
+          24
+        ],
+        "e": [
+          48,
+          12
+        ],
+        "w": [
+          0,
+          12
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/dimension-horizontal.svg"
+    }
+  }
+}

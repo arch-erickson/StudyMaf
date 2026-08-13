@@ -1,0 +1,7 @@
+{
+  "subject": "calculus",
+  "version": 1,
+  "note": "Calculus library — routing established; add approved calculus primitives here.",
+  "generatedBy": "tools/build-subject-libraries.js",
+  "assets": {}
+}
