@@ -12,9 +12,9 @@ async function supabase(path, options) {
   var url = process.env.SUPABASE_URL;
   var key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error('Tutor service is not configured.');
-  var response = await fetch(url + '/rest/v1/' + path, Object.assign({
-    headers: { apikey: key, Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' }
-  }, options || {}));
+  options = options || {};
+  var headers = Object.assign({ apikey: key, Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' }, options.headers || {});
+  var response = await fetch(url + '/rest/v1/' + path, Object.assign({}, options, { headers: headers }));
   if (!response.ok) throw new Error('Database request failed (' + response.status + ').');
   return response.status === 204 ? null : response.json();
 }

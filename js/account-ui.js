@@ -4,7 +4,7 @@ function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']
 function injectStyles() {
   if (document.getElementById('studymaf-account-styles')) return;
   const style = document.createElement('style'); style.id = 'studymaf-account-styles';
-  style.textContent = '.account-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 22px}.account-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.account-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px}.account-card h3{margin:0 0 6px;font-size:1rem}.account-card p{margin:4px 0;color:var(--ink-soft);font-size:.88rem}.account-table{width:100%;border-collapse:collapse;font-size:.88rem}.account-table th,.account-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.account-table th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}.account-form{display:grid;gap:10px;max-width:500px}.account-form label{display:grid;gap:5px;font-size:.83rem;font-weight:700}.account-form input,.account-form select,.account-form textarea{font:inherit;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:10px 12px}.account-form textarea{min-height:70px;resize:vertical}.account-note{color:var(--ink-soft);font-size:.88rem}.account-role{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.account-empty{padding:22px;border:1px dashed var(--line);border-radius:14px;color:var(--ink-soft);text-align:center}.account-divider{height:1px;background:var(--line);margin:22px 0}.account-header-name{max-width:155px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:620px){.account-table{display:block;overflow:auto}.account-header-name{display:none}}';
+  style.textContent = '.account-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 22px}.account-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.account-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px}.account-card h3{margin:0 0 6px;font-size:1rem}.account-card p{margin:4px 0;color:var(--ink-soft);font-size:.88rem}.account-table{width:100%;border-collapse:collapse;font-size:.88rem}.account-table th,.account-table td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.account-table th{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}.account-form{display:grid;gap:10px;max-width:500px}.account-form label{display:grid;gap:5px;font-size:.83rem;font-weight:700}.account-form input,.account-form select,.account-form textarea{font:inherit;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:10px 12px}.account-form textarea{min-height:70px;resize:vertical}.account-note{color:var(--ink-soft);font-size:.88rem}.account-role{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.account-empty{padding:22px;border:1px dashed var(--line);border-radius:14px;color:var(--ink-soft);text-align:center}.account-divider{height:1px;background:var(--line);margin:22px 0}.account-header-name{max-width:175px;display:inline-flex;gap:8px;align-items:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.account-avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);flex:0 0 auto}.account-avatar svg{width:16px;height:16px}@media(max-width:620px){.account-table{display:block;overflow:auto}.account-header-name .account-name{display:none}}';
   document.head.appendChild(style);
 }
 
@@ -13,27 +13,30 @@ export function createAccountUI(options) {
   const modal = options.modal, closeModal = options.closeModal, reroute = options.reroute;
   let headerButton;
 
+  function appPage(path) { return new URL(path, new URL('../', import.meta.url)).href; }
+
   function account() { return Auth.getAccount(); }
   function isRole(role) { return account() && account().role === role; }
-  function headerLabel() { const a = account(); return a ? ((a.user.name || a.user.email || 'Account').split(' ')[0]) : 'Sign in'; }
+  function headerLabel() { const a = account(); return a ? ((a.user.name || a.user.email || 'Account').split(' ')[0]) : ''; }
   function syncHeader() {
     if (!headerButton) return;
     const a = account();
-    headerButton.textContent = headerLabel();
-    headerButton.className = 'btn ' + (a ? 'ghost account-header-name' : 'primary');
-    headerButton.title = a ? 'Open account menu' : 'Sign in';
+    headerButton.hidden = !a;
+    if (!a) return;
+    headerButton.innerHTML = '<span class="account-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20c.7-3.5 3.5-5.4 7.5-5.4s6.8 1.9 7.5 5.4"/></svg></span><span class="account-name">' + esc(headerLabel()) + '</span>';
+    headerButton.className = 'btn ghost account-header-name';
+    headerButton.title = 'Open account menu';
   }
   function errorBox(message) { return '<div class="join-err">' + esc(message) + '</div>'; }
 
   function openAccount() {
     const a = account();
     if (!a) return openSignIn();
-    const links = (a.role === 'professor' || a.role === 'admin' ? '<button class="btn ghost" id="acct-prof">Professor area</button>' : '') + (a.role === 'admin' ? '<button class="btn ghost" id="acct-admin">Admin dashboard</button>' : '');
+    const links = a.role === 'professor' ? '<button class="btn ghost" id="acct-prof">Professor dashboard</button>' : '';
     const m = modal('<h2>Your account</h2><p class="modal-sub">' + esc(a.user.email) + '</p><p><span class="account-role">' + esc(a.role) + '</span></p><div class="modal-actions">' + links + '<button class="btn subtle" data-close>Close</button><button class="btn primary" id="acct-out">Sign out</button></div>');
-    const p = m.querySelector('#acct-prof'), ad = m.querySelector('#acct-admin');
+    const p = m.querySelector('#acct-prof');
     if (p) p.onclick = function () { closeModal(); location.hash = '#/professor'; };
-    if (ad) ad.onclick = function () { closeModal(); location.hash = '#/admin'; };
-    m.querySelector('#acct-out').onclick = async function () { await Auth.signOut(); closeModal(); reroute(); };
+    m.querySelector('#acct-out').onclick = async function () { await Auth.signOut(); closeModal(); location.assign(appPage('signin/')); };
   }
 
   function openSignIn() {
@@ -59,8 +62,7 @@ export function createAccountUI(options) {
   }
 
   function restricted(target, title, need) {
-    target.innerHTML = '<div class="page wrap"><div class="account-card"><h1>' + esc(title) + '</h1><p class="modal-sub">' + esc(need) + '</p><button class="btn primary" id="account-restricted-signin">Sign in</button></div></div>';
-    target.querySelector('#account-restricted-signin').onclick = openSignIn;
+    target.innerHTML = '<div class="page wrap"><div class="account-card"><h1>' + esc(title) + '</h1><p class="modal-sub">' + esc(need) + '</p><a class="btn primary" href="' + esc(appPage('dashboard/')) + '">Go to your dashboard</a></div></div>';
   }
 
   function setPage(target, title, subtitle) {
@@ -70,7 +72,7 @@ export function createAccountUI(options) {
 
   async function renderProfessor(target) {
     if (!account()) return restricted(target, 'Professor area', 'Sign in with your professor account to manage classes.');
-    if (!['professor', 'admin'].includes(account().role)) return restricted(target, 'Professor area', 'Your account is not marked as a professor yet. Ask an administrator to update it.');
+    if (account().role !== 'professor') return restricted(target, 'Professor area', 'Your account is not marked as a professor yet. Ask an administrator to update it.');
     const body = setPage(target, 'Professor area', 'Create sections from the approved course list and add student email addresses.');
     body.innerHTML = '<div class="account-empty">Loading your classes…</div>';
     try {
@@ -114,7 +116,7 @@ export function createAccountUI(options) {
 
   return {
     ready: function () { return Auth.init(); },
-    mountHeader: function () { const nav = document.querySelector('.header-actions'); if (!nav) return; headerButton = document.createElement('button'); headerButton.type = 'button'; headerButton.onclick = openAccount; nav.appendChild(headerButton); syncHeader(); Auth.onChange(syncHeader); },
+    mountHeader: function () { const nav = document.querySelector('.header-actions'); if (!nav) return; headerButton = document.createElement('button'); headerButton.type = 'button'; headerButton.hidden = true; headerButton.onclick = openAccount; nav.appendChild(headerButton); syncHeader(); Auth.onChange(syncHeader); },
     openSignIn: openSignIn,
     renderProfessor: renderProfessor,
     renderAdmin: renderAdmin,

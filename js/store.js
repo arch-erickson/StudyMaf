@@ -4,12 +4,12 @@
  */
 window.Store = (function () {
   "use strict";
-  var KEY = "studymaf.v1";
-  var state = load();
+  var KEY = "studymaf.v1", activeKey = KEY, listeners = [];
+  var state = load(activeKey);
 
-  function load() {
+  function load(key) {
     try {
-      var raw = localStorage.getItem(KEY);
+      var raw = localStorage.getItem(key || activeKey);
       if (raw) return JSON.parse(raw);
     } catch (e) { /* ignore */ }
     return defaults();
@@ -28,12 +28,62 @@ window.Store = (function () {
     };
   }
   function save() {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* quota */ }
+    try { localStorage.setItem(activeKey, JSON.stringify(state)); } catch (e) { /* quota */ }
+    listeners.slice().forEach(function (listener) { try { listener(); } catch (e) {} });
   }
+  function clone(value) { return JSON.parse(JSON.stringify(value)); }
   function uid() { return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
 
   return {
     all: function () { return state; },
+    onChange: function (listener) {
+      listeners.push(listener);
+      return function () { var index = listeners.indexOf(listener); if (index >= 0) listeners.splice(index, 1); };
+    },
+    // Accounts never share a browser cache. The current anonymous cache is
+    // adopted only when the first account signs in on this device.
+    setAccount: function (userId) {
+      var nextKey = userId ? KEY + ".account." + userId : KEY;
+      if (nextKey === activeKey) return;
+      var oldKey = activeKey, oldState = state;
+      try { localStorage.setItem(oldKey, JSON.stringify(oldState)); } catch (e) {}
+      var hadNext = false;
+      try { hadNext = !!localStorage.getItem(nextKey); } catch (e) {}
+      var next = load(nextKey);
+      if (userId && !hadNext && oldKey === KEY) next = oldState;
+      activeKey = nextKey; state = next || defaults(); save();
+    },
+    cloudProgress: function () {
+      return clone({ version: 1, classes: state.classes || [], progress: state.progress || {}, uploads: state.uploads || {}, modes: state.modes || {}, flags: state.flags || {} });
+    },
+    applyCloudProgress: function (remote) {
+      if (!remote || typeof remote !== "object") return;
+      ["classes", "progress", "uploads", "modes", "flags"].forEach(function (key) {
+        if (remote[key] && typeof remote[key] === "object") state[key] = clone(remote[key]);
+      });
+      save();
+    },
+    syncEnrolledClasses: function (enrollments) {
+      (enrollments || []).forEach(function (row) {
+        var section = row.class_sections || {}, course = section.course_catalog || {};
+        if (!section.id || !course.code) return;
+        var found = state.classes.filter(function (item) { return item.serverSectionId === section.id; })[0];
+        if (found) return;
+        state.classes.push({
+          id: "server-" + section.id,
+          serverSectionId: section.id,
+          name: course.title || course.code,
+          semester: section.term || "",
+          year: "",
+          date: new Date().toISOString().slice(0, 10),
+          thumbSeed: 24,
+          lessonIds: (course.lessons || []).map(function (lesson) { return lesson.id; }),
+          code: course.code,
+          lessonTargets: {}, chapters: {}, createdAt: Date.now()
+        });
+      });
+      save();
+    },
 
     // ----- one-time migration flags -----
     flag: function (name) { return !!(state.flags && state.flags[name]); },

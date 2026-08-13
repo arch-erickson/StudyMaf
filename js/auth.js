@@ -76,9 +76,9 @@ export const Auth = {
     save(data);
     return loadAccount();
   },
-  startGoogle() {
+  startGoogle(redirectTo) {
     if (!configured()) throw new Error('Sign-in has not been configured yet.');
-    const redirect = location.origin + location.pathname;
+    const redirect = redirectTo || (location.origin + location.pathname);
     location.assign(config.supabaseUrl.replace(/\/$/, '') + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(redirect));
   },
   async signOut() {

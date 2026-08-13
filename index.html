@@ -1,93 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>StudyMAF</title>
-
-  <!-- Vendored locally — no external requests (self-contained for GitHub Pages). -->
-  <link rel="stylesheet" href="vendor/fonts/inter.css" />
-  <link rel="stylesheet" href="vendor/katex/katex.min.css" />
-  <link rel="stylesheet" href="vendor/mathlive/mathlive-static.css" />
-  <link rel="stylesheet" href="vendor/mathlive/mathlive-fonts.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyMAF — Learn the why</title>
+  <link rel="stylesheet" href="vendor/fonts/inter.css">
+  <link rel="stylesheet" href="landing-root.css?v=2">
+  <link rel="stylesheet" href="auth-pages.css?v=1">
 </head>
 <body>
-  <!--
-    StudyMAF single-page app. All lesson content lives in /data JSON — never inline here.
-    AI-dependent features (tutor, syllabus->lesson generation, homework/test generation)
-    are scaffolded UI with clear "next stage" placeholders: this MVP has no backend or keys.
-  -->
-
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="#/" aria-label="StudyMAF home">Study<span>MAF</span></a>
-      <nav class="header-actions">
-        <button class="btn ghost" id="open-ai" type="button" title="Ask StudyMAF AI">Ask AI</button>
-        <button class="btn ghost" id="open-calc" type="button" title="Calculator">Calculator</button>
-        <button class="btn ghost" id="open-fs" type="button" title="Full screen">Full screen</button>
-        <button class="btn ghost" id="open-accent" type="button" title="Accent color">
-          <span class="accent-dot" aria-hidden="true"></span> Theme
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <main id="app"><!-- views render here --></main>
-
-  <!-- Floating calculator dock (scientific + graphing). Hidden until opened. -->
-  <div id="calc-dock" class="calc-dock" hidden aria-hidden="true"></div>
-
-  <!-- Floating AI tutor dock. It is built by js/app.js and never blocks the lesson. -->
-  <div id="ai-tutor-dock" class="tutor-dock" hidden aria-hidden="true"></div>
-
-  <!-- Drawing board overlay. Hidden until opened. -->
-  <div id="draw-overlay" class="overlay" hidden aria-hidden="true"></div>
-
-  <!-- Generic modal host + toast/XP layer -->
-  <div id="modal-host" class="overlay" hidden aria-hidden="true"></div>
-  <div id="fx-layer" class="fx-layer" aria-live="polite"></div>
-  <button id="open-ai-fab" class="tutor-launcher" type="button" aria-label="Open StudyMAF tutor" title="Open StudyMAF tutor">Tutor</button>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>StudyMAF — private study tool (MVP). Static site, no accounts, nothing sensitive.</p>
-    </div>
-  </footer>
-
-  <!-- Vendored KaTeX -->
-  <script defer src="vendor/katex/katex.min.js"></script>
-  <script defer src="vendor/katex/auto-render.min.js"></script>
-
-  <!-- Vendored MathLive (editable, click-to-position math field) -->
-  <script defer src="vendor/mathlive/mathlive.min.js"></script>
-  <script>
-    // point MathLive at the vendored fonts once its element is registered
-    window.addEventListener("DOMContentLoaded", function () {
-      if (window.MathfieldElement) {
-        window.MathfieldElement.fontsDirectory = "vendor/mathlive/fonts";
-        window.MathfieldElement.soundsDirectory = null;
-      }
-    });
-  </script>
-
-  <!-- Soft access gate (NOT real security — see js/gate.js). Loads first. -->
-  <script defer src="js/gate.js?v=3"></script>
-
-  <!-- App modules (order matters). The ?v= query busts the browser/CDN cache when a
-       module changes — without it, an updated js/*.js can be served stale (e.g. a
-       diagram's math rendering as raw $…$ because an old figures.js is cached). Bump
-       the number whenever these change. -->
-  <script defer src="js/icons.js?v=3"></script>
-  <script defer src="js/store.js?v=3"></script>
-  <script defer src="js/math.js?v=3"></script>
-  <script defer src="js/figures.js?v=3"></script>
-  <script defer src="js/calculator.js?v=3"></script>
-  <script defer src="js/notebook.js?v=3"></script>
-  <script defer src="js/generators.js?v=3"></script>
-  <!-- Rho Talk loads its open-source voice only when a learner starts a voice chat. -->
-  <script type="module" src="js/rho-voice.js?v=3"></script>
-  <script defer src="js/app.js?v=3"></script>
+  <main class="sl-page">
+    <header class="sl-nav">
+      <a class="sl-brand" href="./" aria-label="StudyMAF home">Study<span>MAF</span></a>
+      <div class="sl-nav-actions"><a class="sl-signin-link" href="signin/">Sign in</a><a class="sl-admin" href="control/">Admin control</a></div>
+    </header>
+    <section class="sl-hero">
+      <p class="sl-kicker">Math, one clear step at a time</p>
+      <h1>Learn the <em>why,</em><br>not just the answer.</h1>
+      <p class="sl-copy">Practice with a plan, see the math clearly, and get useful help when you are stuck.</p>
+      <a class="sl-action" href="signin/">Get started <span aria-hidden="true">→</span></a>
+      <div class="sl-math" aria-hidden="true">
+        <div class="sl-grid"></div>
+        <svg class="sl-curve" viewBox="0 0 760 390"><defs><linearGradient id="sl-gradient" x1="20" y1="330" x2="720" y2="40"><stop stop-color="#ffb36b"/><stop offset=".5" stop-color="#ef8354"/><stop offset="1" stop-color="#7665c6"/></linearGradient></defs><path d="M-20 304 C86 304 105 55 228 88 S347 315 456 219 S582 59 790 142" fill="none" stroke="url(#sl-gradient)" stroke-width="4"/></svg>
+        <div class="sl-formula a">∫₀¹ x² dx</div><div class="sl-formula b">f′(x) = 2x</div><div class="sl-formula c">lim x→∞ 1/x = 0</div>
+      </div>
+    </section>
+    <section class="sl-value"><div><p class="sl-kicker">Built for momentum</p><h2>Good study habits,<br><em>without the noise.</em></h2></div><p>Focused lessons, problems that build in difficulty, and Rho — a tutor that teaches the method instead of handing you a shortcut.</p></section>
+    <section class="sl-features"><article><span>01</span><h3>Practice with purpose</h3><p>Work through one problem at a time, at the level you are ready for.</p></article><article><span>02</span><h3>See the math</h3><p>Clear notation, diagrams, and steps make each idea easier to hold onto.</p></article><article><span>03</span><h3>Get unstuck</h3><p>Ask Rho for a useful hint or a new way to see it.</p></article></section>
+    <footer class="sl-footer">© StudyMAF</footer>
+  </main>
 </body>
 </html>

@@ -1,0 +1,35 @@
+import { Auth } from './auth.js';
+
+let started = false, muted = false, timer = 0;
+
+function uploadSoon() {
+  if (muted || !Auth.getAccount()) return;
+  clearTimeout(timer);
+  timer = setTimeout(async function () {
+    try { await Auth.api('/api/student/progress', { method: 'PUT', body: JSON.stringify({ state: Store.cloudProgress() }) }); }
+    catch (error) { console.warn('StudyMAF progress will retry after your next change.', error.message); }
+  }, 850);
+}
+
+async function switchAccount(account) {
+  clearTimeout(timer); muted = true;
+  try {
+    if (!account) { Store.setAccount(null); return; }
+    Store.setAccount(account.user.id);
+    var remote = await Auth.api('/api/student/progress');
+    if (remote.progress && remote.progress.state) Store.applyCloudProgress(remote.progress.state);
+    else await Auth.api('/api/student/progress', { method: 'PUT', body: JSON.stringify({ state: Store.cloudProgress() }) });
+    var classes = await Auth.api('/api/student/classes');
+    Store.syncEnrolledClasses(classes.classes || []);
+    window.dispatchEvent(new Event('studymaf-account-ready'));
+  } catch (error) { console.warn('StudyMAF could not sync your account yet.', error.message); }
+  finally { muted = false; }
+}
+
+export function startProgressSync() {
+  if (started) return;
+  started = true;
+  Store.onChange(uploadSoon);
+  Auth.onChange(switchAccount);
+  switchAccount(Auth.getAccount());
+}

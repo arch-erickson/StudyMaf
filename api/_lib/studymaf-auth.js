@@ -34,9 +34,9 @@ function code(value, limit) { return text(value, limit || 32).toUpperCase().repl
 
 async function db(path, options) {
   var c = config();
-  var response = await fetch(c.url + '/rest/v1/' + path, Object.assign({
-    headers: { apikey: c.key, Authorization: 'Bearer ' + c.key, 'Content-Type': 'application/json' }
-  }, options || {}));
+  options = options || {};
+  var headers = Object.assign({ apikey: c.key, Authorization: 'Bearer ' + c.key, 'Content-Type': 'application/json' }, options.headers || {});
+  var response = await fetch(c.url + '/rest/v1/' + path, Object.assign({}, options, { headers: headers }));
   var raw = await response.text();
   var data = raw ? JSON.parse(raw) : null;
   if (!response.ok) {

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="../">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>StudyMAF dashboard</title>
+  <link rel="stylesheet" href="vendor/fonts/inter.css" />
+  <link rel="stylesheet" href="vendor/katex/katex.min.css" />
+  <link rel="stylesheet" href="vendor/mathlive/mathlive-static.css" />
+  <link rel="stylesheet" href="vendor/mathlive/mathlive-fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>body{visibility:hidden}body.studymaf-dashboard-ready{visibility:visible}</style>
+</head>
+<body>
+  <header class="site-header"><div class="wrap header-inner"><a class="brand" href="#/" aria-label="StudyMAF dashboard">Study<span>MAF</span></a><nav class="header-actions"><button class="btn ghost" id="open-ai" type="button" title="Ask StudyMAF AI">Ask AI</button><button class="btn ghost" id="open-calc" type="button" title="Calculator">Calculator</button><button class="btn ghost" id="open-fs" type="button" title="Full screen">Full screen</button><button class="btn ghost" id="open-accent" type="button" title="Accent color"><span class="accent-dot" aria-hidden="true"></span> Theme</button></nav></div></header>
+  <main id="app"></main><div id="calc-dock" class="calc-dock" hidden aria-hidden="true"></div><div id="ai-tutor-dock" class="tutor-dock" hidden aria-hidden="true"></div><div id="draw-overlay" class="overlay" hidden aria-hidden="true"></div><div id="modal-host" class="overlay" hidden aria-hidden="true"></div><div id="fx-layer" class="fx-layer" aria-live="polite"></div><button id="open-ai-fab" class="tutor-launcher" type="button" aria-label="Open StudyMAF tutor" title="Open StudyMAF tutor">Tutor</button>
+  <footer class="site-footer"><div class="wrap"><p>StudyMAF — your private study space.</p></div></footer>
+  <script defer src="vendor/katex/katex.min.js"></script><script defer src="vendor/katex/auto-render.min.js"></script><script defer src="vendor/mathlive/mathlive.min.js"></script>
+  <script>window.addEventListener('DOMContentLoaded',function(){if(window.MathfieldElement){window.MathfieldElement.fontsDirectory='vendor/mathlive/fonts';window.MathfieldElement.soundsDirectory=null;}});</script>
+  <script defer src="js/icons.js?v=3"></script><script defer src="js/store.js?v=4"></script><script defer src="js/math.js?v=3"></script><script defer src="js/figures.js?v=3"></script><script defer src="js/calculator.js?v=3"></script><script defer src="js/notebook.js?v=3"></script><script defer src="js/generators.js?v=3"></script><script type="module" src="js/rho-voice.js?v=3"></script><script defer src="js/app.js?v=4"></script><script type="module" src="js/dashboard-auth.js?v=1"></script>
+</body>
+</html>

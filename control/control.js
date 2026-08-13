@@ -1,46 +1,20 @@
 import { Auth } from '../js/auth.js';
+import { createAccountUI } from '../js/account-ui.js';
 
-const params = new URLSearchParams(location.search);
-let intent = params.get('intent') === 'professor' ? 'professor' : 'student';
+const shell = document.querySelector('.control-shell');
+const card = document.querySelector('.auth-card');
+const app = document.querySelector('#control-app');
+const host = document.querySelector('#control-modal');
+const bottom = document.querySelector('.bottom');
 const form = document.querySelector('#email-form');
 const error = document.querySelector('#error');
-const email = document.querySelector('#email');
-const google = document.querySelector('#google');
-const note = document.querySelector('#role-note');
-
-function showError(message) { error.textContent = message; error.hidden = !message; }
-function setIntent(next) {
-  intent = next;
-  document.querySelectorAll('[data-intent]').forEach(function (button) { button.classList.toggle('active', button.dataset.intent === intent); });
-  note.textContent = intent === 'professor' ? 'Use your professor email. Your role is checked after sign-in.' : 'Use your student email to continue.';
-}
-function destination(account) {
-  if (intent === 'professor' && !['professor', 'admin'].includes(account.role)) throw new Error('This account is not marked as a professor yet. Ask an administrator to give it professor access.');
-  if (account.role === 'admin') return '../#/admin';
-  if (intent === 'professor') return '../#/professor';
-  return '../#/';
-}
-function verifyScreen(address) {
-  document.querySelector('.auth-card').innerHTML = '<div class="math-mark" aria-hidden="true">✓</div><p class="kicker">Check your inbox</p><h1>Enter your code.</h1><p class="intro">We sent a six-digit verification code to <strong>' + address.replace(/[<>&]/g, '') + '</strong>.</p><form id="code-form"><label for="code">Verification code</label><input id="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="123456" required autofocus><p class="error" id="error" hidden></p><button class="submit" type="submit">Verify and continue <span>→</span></button></form><p class="terms"><a href="./" id="different-email">Use a different email</a></p>';
-  document.querySelector('#different-email').onclick = function (event) { event.preventDefault(); location.reload(); };
-  document.querySelector('#code-form').onsubmit = async function (event) {
-    event.preventDefault(); const button = event.currentTarget.querySelector('button'), localError = document.querySelector('#error'); localError.hidden = true; button.disabled = true; button.textContent = 'Verifying…';
-    try { const account = await Auth.verifyEmailCode(address, document.querySelector('#code').value); location.assign(destination(account)); }
-    catch (reason) { localError.textContent = reason.message; localError.hidden = false; button.disabled = false; button.innerHTML = 'Verify and continue <span>→</span>'; }
-  };
-}
-
-document.querySelectorAll('[data-intent]').forEach(function (button) { button.onclick = function () { setIntent(button.dataset.intent); }; });
-google.onclick = function () { try { Auth.startGoogle(); } catch (reason) { showError(reason.message); } };
-form.onsubmit = async function (event) {
-  event.preventDefault(); const button = form.querySelector('button'); button.disabled = true; button.textContent = 'Sending…'; showError('');
-  try { await Auth.sendEmailCode(email.value); verifyScreen(email.value); }
-  catch (reason) { showError(reason.message); button.disabled = false; button.innerHTML = 'Send verification code <span>→</span>'; }
-};
-
-setIntent(intent);
-Auth.init().then(function (account) {
-  if (!account) return;
-  try { location.assign(destination(account)); }
-  catch (reason) { showError(reason.message); }
-}).catch(function () {});
+function showError(message) { error.textContent = message || ''; error.hidden = !message; }
+function closeModal() { host.hidden = true; host.innerHTML = ''; }
+function modal(html) { host.hidden = false; host.innerHTML = '<div class="control-modal-backdrop"><section class="control-modal-card">' + html + '</section></div>'; host.querySelectorAll('[data-close]').forEach(function (button) { button.onclick = closeModal; }); return host; }
+const portal = createAccountUI({ modal: modal, closeModal: closeModal, reroute: renderPortal });
+function deny(message) { shell.classList.remove('portal'); app.hidden = true; card.hidden = false; bottom.hidden = false; showError(message); }
+function renderPortal() { const account = Auth.getAccount(); if (!account || account.role !== 'admin') return deny(account ? 'This account is not approved for StudyMAF Control.' : 'Sign in with an administrator account.'); card.hidden = true; bottom.hidden = true; app.hidden = false; shell.classList.add('portal'); portal.renderAdmin(app); }
+function verifyScreen(address) { card.innerHTML = '<div class="math-mark" aria-hidden="true">✓</div><p class="kicker">Check your inbox</p><h1>Enter your code.</h1><p class="intro">We sent a verification code to <strong>' + address.replace(/[&<>"']/g, '') + '</strong>.</p><form id="code-form"><label for="code">Verification code</label><input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" required placeholder="123456"><p class="error" id="code-error" hidden></p><button class="submit" type="submit">Verify and continue →</button></form><p class="terms"><a href="./">Use a different email</a></p>'; card.querySelector('#code-form').onsubmit = async function (event) { event.preventDefault(); const button = event.currentTarget.querySelector('button'); const codeError = card.querySelector('#code-error'); button.disabled = true; try { await Auth.verifyEmailCode(address, card.querySelector('#code').value); renderPortal(); } catch (reason) { codeError.textContent = reason.message; codeError.hidden = false; button.disabled = false; } }; }
+document.querySelector('#google').onclick = function () { try { Auth.startGoogle(location.href); } catch (reason) { showError(reason.message); } };
+form.onsubmit = async function (event) { event.preventDefault(); const button = form.querySelector('button'); button.disabled = true; showError(''); try { const address = document.querySelector('#email').value.trim(); await Auth.sendEmailCode(address); verifyScreen(address); } catch (reason) { showError(reason.message); button.disabled = false; } };
+Auth.init().then(renderPortal).catch(function () { deny('Sign in with an administrator account.'); });

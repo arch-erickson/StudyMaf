@@ -1679,10 +1679,14 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=1").then(function (mod) {
+    import("./account-ui.js?v=2").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();
+    }).then(function () {
+      return import("./progress-sync.js?v=1");
+    }).then(function (mod) {
+      mod.startProgressSync();
     }).then(function () {
       if (location.hash === "#/admin" || location.hash === "#/professor") route();
     }).catch(function () { /* Sign-in is optional until it is configured. */ });
@@ -1699,6 +1703,7 @@ window.App = (function () {
     }).then(function () {
       seedIfEmpty();
       reconcilePhysLessons();
+      window.addEventListener("studymaf-account-ready", function () { reconcilePhysLessons(); route(); });
       window.addEventListener("hashchange", route);
       route();
     }).catch(function (e) {
