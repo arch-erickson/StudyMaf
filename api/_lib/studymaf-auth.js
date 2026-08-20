@@ -58,6 +58,29 @@ async function deleteAuthUser(userId) {
   return data;
 }
 
+async function signedCourseDocument(document, expiresIn) {
+  if (!document || !document.storage_bucket || !document.storage_path) return null;
+  var c = config(), seconds = Math.max(60, Math.min(Number(expiresIn) || 300, 900));
+  var endpoint = c.url + '/storage/v1/object/sign/' + encodeURIComponent(document.storage_bucket) + '/' + String(document.storage_path).split('/').map(encodeURIComponent).join('/');
+  var response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { apikey: c.key, Authorization: 'Bearer ' + c.key, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ expiresIn: seconds, download: document.original_name || true })
+  });
+  var raw = await response.text(), data = null;
+  try { data = raw ? JSON.parse(raw) : null; } catch (error) {}
+  if (!response.ok) throw new Error(data && (data.message || data.error) || 'Could not prepare this private course document.');
+  var signed = data && (data.signedURL || data.signedUrl);
+  if (!signed) throw new Error('The document service did not return a download link.');
+  return Object.assign({}, document, { download_url: /^https?:\/\//i.test(signed) ? signed : c.url + '/storage/v1' + signed, download_expires_in: seconds });
+}
+
+async function signedCourseDocuments(courseId, expiresIn) {
+  if (!courseId) return [];
+  var documents = await db('course_documents?course_id=eq.' + encodeURIComponent(courseId) + '&select=id,kind,original_name,storage_bucket,storage_path,mime_type,size_bytes,processing_status,uploaded_at&order=kind.asc,uploaded_at.asc');
+  return Promise.all((documents || []).map(function (document) { return signedCourseDocument(document, expiresIn); }));
+}
+
 async function ensureProfile(user) {
   var name = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
   var body = { id: user.id, email: String(user.email || '').toLowerCase(), last_seen_at: new Date().toISOString() };
@@ -95,4 +118,4 @@ async function ownedSection(sectionId, professorId) {
   return rows && rows[0] || null;
 }
 
-module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, authenticated: authenticated, requireRole: requireRole, ownedSection: ownedSection };
+module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, signedCourseDocument: signedCourseDocument, signedCourseDocuments: signedCourseDocuments, authenticated: authenticated, requireRole: requireRole, ownedSection: ownedSection };

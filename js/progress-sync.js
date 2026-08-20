@@ -14,12 +14,17 @@ function uploadSoon() {
 async function switchAccount(account) {
   clearTimeout(timer); muted = true;
   try {
-    if (!account) { Store.setAccount(null); return; }
+    if (!account) { window.StudyMAFPrivateCourseDocuments = {}; Store.setAccount(null); return; }
     Store.setAccount(account.user.id);
     var remote = await Auth.api('/api/student/progress');
     if (remote.progress && remote.progress.state) Store.applyCloudProgress(remote.progress.state);
     else await Auth.api('/api/student/progress', { method: 'PUT', body: JSON.stringify({ state: Store.cloudProgress() }) });
     var classes = await Auth.api('/api/student/classes');
+    window.StudyMAFPrivateCourseDocuments = {};
+    (classes.classes || []).forEach(function (row) {
+      var section = row.class_sections || {}, course = section.course_catalog || {};
+      if (section.id) window.StudyMAFPrivateCourseDocuments['server-' + section.id] = Array.isArray(course.course_documents) ? course.course_documents : [];
+    });
     Store.syncEnrolledClasses(classes.classes || []);
     window.dispatchEvent(new Event('studymaf-account-ready'));
   } catch (error) { console.warn('StudyMAF could not sync your account yet.', error.message); }

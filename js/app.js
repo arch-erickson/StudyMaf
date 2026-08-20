@@ -1642,6 +1642,15 @@ window.App = (function () {
 
   function materialsDialog(id) {
     var u = Store.getUploads(id);
+    var privateFiles = (window.StudyMAFPrivateCourseDocuments || {})[id] || [];
+    if (privateFiles.length) {
+      modal("<h2>Course materials</h2>" +
+        "<p class='modal-sub'>These files are private. A download link is created only when you choose a file.</p>" +
+        "<div class='source-download-grid'>" + privateFiles.map(function (file) {
+          return "<a class='source-download' href='" + esc(file.download_url || '#') + "' target='_blank' rel='noopener'><span class='source-kind'>" + esc(file.kind === 'syllabus' ? 'Syllabus' : 'Textbook') + "</span><strong>" + esc(file.original_name || 'Course PDF') + "</strong><b>Download PDF <span aria-hidden='true'>↓</span></b></a>";
+        }).join("") + "</div><div class='modal-actions'><button class='btn primary' data-close>Done</button></div>", { wide: true });
+      return;
+    }
     var m = modal(
       "<h2>Course materials</h2>" +
       "<p class='modal-sub'>Attached when you created the class. Update them any time.</p>" +
@@ -2184,12 +2193,12 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=6").then(function (mod) {
+    import("./account-ui.js?v=7").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();
     }).then(function () {
-      return import("./progress-sync.js?v=1");
+      return import("./progress-sync.js?v=2");
     }).then(function (mod) {
       mod.startProgressSync();
     }).then(function () {

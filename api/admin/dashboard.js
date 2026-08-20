@@ -131,7 +131,7 @@ module.exports = async function handler(req, res) {
     var results = await Promise.all([
       auth.db('profiles?select=id,email,display_name,last_seen_at,created_at&order=created_at.desc&limit=500'),
       auth.db('user_roles?select=user_id,role,assigned_at'),
-      auth.db('course_catalog?select=id,code,title,subject,is_active,created_at&order=code.asc'),
+      auth.db('course_catalog?select=id,code,title,subject,description,lessons,textbooks,is_active,created_at&order=code.asc'),
       auth.db('class_sections?select=id,course_id,section_label,term,professor_id,course_catalog(code,title),profiles!class_sections_professor_id_fkey(email,display_name)&order=created_at.desc'),
       auth.db('class_enrollments?select=class_section_id,student_id,student_email,status'),
       auth.db('account_role_invites?select=email,role,created_at&order=created_at.desc'),

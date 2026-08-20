@@ -770,3 +770,16 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .tutor-launcher svg { width: 19px; height: 19px; }.tutor-launcher:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(45,49,66,.3); }
 @keyframes tutor-pulse { 50% { transform: scale(1.12); } }
 @media (max-width: 640px) { .tutor-dock { right: 8px; bottom: 8px; width: calc(100vw - 16px); height: min(570px, calc(100vh - 16px)); resize: none; } .tutor-dock.max { inset: 6px !important; } .tutor-launcher { right: 14px; bottom: 14px; } .tutor-context { max-width: 170px; } }
+
+/* Private course-library downloads and full course-code badges. */
+.course-code-full { max-width: none !important; white-space: nowrap; font-size: .66rem !important; letter-spacing: .02em !important; }
+.source-card .class-card-footer > div { display: flex; gap: 7px; flex-wrap: wrap; }
+.source-document-list { background: #f8fbff; border-color: #d5e3f3; }
+.source-document-empty { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+.source-download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 9px; margin-top: 5px; }
+.source-download { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.78); color: var(--ink); text-decoration: none; transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
+.source-download:hover { transform: translateY(-1px); border-color: var(--accent); box-shadow: 0 8px 16px rgba(30,25,20,.07); }
+.source-download strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .78rem; }
+.source-download b { color: var(--accent); font-size: .69rem; }
+.source-kind { color: var(--ink-soft) !important; font-size: .62rem !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+@media (max-width: 700px) { .source-document-empty { grid-template-columns: 1fr; } }

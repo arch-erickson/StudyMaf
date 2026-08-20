@@ -4,7 +4,7 @@ function documentBody(body, courseId, userId) {
   var kind = auth.text(body.kind, 20), path = auth.text(body.storage_path, 500), name = auth.text(body.original_name, 240), mime = auth.text(body.mime_type, 100), size = Math.max(0, Number(body.size_bytes) || 0);
   if (['syllabus', 'textbook'].indexOf(kind) < 0) throw new Error('Choose a syllabus or textbook PDF.');
   if (!name || mime !== 'application/pdf' || !/\.pdf$/i.test(name)) throw new Error('Only PDF source documents can be added.');
-  if (size < 1 || size > 52428800) throw new Error('Each source PDF must be between 1 byte and 50 MB.');
+  if (size < 1 || size > 52428800) throw new Error('Each source PDF must be between 1 byte and 50 MB on the current plan.');
   if (path.indexOf(courseId + '/' + kind + '/') !== 0 || !/^[a-zA-Z0-9_./-]+$/.test(path)) throw new Error('The uploaded document path is not valid.');
   return { course_id: courseId, kind: kind, original_name: name, storage_bucket: 'course-source', storage_path: path, mime_type: mime, size_bytes: size, processing_status: 'uploaded', uploaded_by: userId };
 }
@@ -15,6 +15,13 @@ module.exports = async function handler(req, res) {
     var account = await auth.requireRole(req, res, ['admin']);
     if (!account) return;
     if (req.method === 'GET') {
+      var courseId = auth.text(req.query && req.query.course_id, 80);
+      if (courseId) {
+        var found = await auth.db('course_catalog?id=eq.' + encodeURIComponent(courseId) + '&select=*&limit=1');
+        if (!found || !found[0]) return auth.json(res, 404, { error: 'Course not found.' });
+        found[0].course_documents = await auth.signedCourseDocuments(found[0].id);
+        return auth.json(res, 200, { course: found[0] });
+      }
       var courses = await auth.db('course_catalog?select=*&order=code.asc');
       return auth.json(res, 200, { courses: courses || [] });
     }

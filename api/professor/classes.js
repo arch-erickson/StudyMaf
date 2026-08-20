@@ -73,6 +73,7 @@ async function detail(account, sectionId) {
   var progressRows = results[0] || [], eventRows = results[1] || [], attemptRows = results[2] || [], memoryRows = results[3] || [], byProgress = {};
   progressRows.forEach(function (row) { byProgress[row.user_id] = row; });
   var course = section.course_catalog || {};
+  course.course_documents = await auth.signedCourseDocuments(course.id);
   var students = (enrolled || []).map(function (enrollment) {
     var profile = profileOf(enrollment), id = enrollment.student_id, progress = id ? progressFor(id, (byProgress[id] || {}).state, section, course) : progressFor('', {}, section, course), activity = id ? activityFor(id, eventRows) : activityFor('', []), tutor = id ? tutorFor(id, attemptRows, memoryRows) : tutorFor('', [], []);
     return { id: id || '', email: profile.email || enrollment.student_email, display_name: profile.display_name || '', status: enrollment.status, invited_at: enrollment.invited_at, joined_at: enrollment.joined_at, last_seen_at: profile.last_seen_at || null, progress: progress, activity: activity, attempts: tutor };

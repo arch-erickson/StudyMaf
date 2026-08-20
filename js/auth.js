@@ -93,7 +93,7 @@ export const Auth = {
     await refreshIfNeeded();
     if (!session || !session.access_token) throw new Error('Sign in required.');
     if (!file || file.type !== 'application/pdf' || !/\.pdf$/i.test(file.name || '')) throw new Error('Please choose a PDF file.');
-    if (file.size < 1 || file.size > 52428800) throw new Error('Each source PDF must be 50 MB or smaller.');
+    if (file.size < 1 || file.size > 52428800) throw new Error('Each source PDF must be 50 MB or smaller on the current plan.');
     var safeName = String(file.name || 'source.pdf').toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 120) || 'source.pdf';
     var path = String(courseId) + '/' + String(kind) + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 10) + '-' + safeName;
     var storageUrl = config.supabaseUrl.replace(/\/$/, '') + '/storage/v1/object/course-source/' + path.split('/').map(encodeURIComponent).join('/');
