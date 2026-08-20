@@ -28,7 +28,7 @@
     },
     "henry": {
       "plain": "The unit of inductance.",
-      "in_class": "$1\\text{ H} = 1\\text{ V·s/A}$."
+      "in_class": "$1\\text{ H} = 1\\mathrm{ V\\cdot s/A}$."
     },
     "eddy current": {
       "plain": "Swirling induced currents in a solid piece of metal.",

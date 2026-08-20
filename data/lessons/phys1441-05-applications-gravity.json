@@ -24,7 +24,7 @@
     },
     "gravitational constant": {
       "plain": "The constant $G$ in Newton's law.",
-      "in_class": "$G=6.67\\times10^{-11}\\ \\text{N·m}^2/\\text{kg}^2$."
+      "in_class": "$G=6.67\\times10^{-11}\\ \\mathrm{N\\cdot m}^2/\\text{kg}^2$."
     },
     "orbital motion": {
       "plain": "Gravity providing the centripetal force.",

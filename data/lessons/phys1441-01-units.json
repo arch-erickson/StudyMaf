@@ -39,7 +39,7 @@
     {
       "level": 1,
       "heading": "SI base units",
-      "explanation": "All mechanical quantities build from meter, kilogram, and second. Derived units combine them: velocity is m/s, force is $\\text{kg·m/s}^2=\\text{N}$, energy is $\\text{N·m}=\\text{J}$.",
+      "explanation": "All mechanical quantities build from meter, kilogram, and second. Derived units combine them: velocity is m/s, force is $\\mathrm{kg\\cdot m/s}^2=\\text{N}$, energy is $\\mathrm{N\\cdot m}=\\text{J}$.",
       "math_steps": [
         "Identify the base units involved.",
         "Combine them per the definition.",
@@ -178,7 +178,7 @@
       "id": "p03",
       "difficulty": "easy",
       "prompt": "What are the SI units of force?",
-      "correct_answer": "$\\text{kg·m/s}^2$ (N)",
+      "correct_answer": "$\\mathrm{kg\\cdot m/s}^2$ (N)",
       "solution_steps": [
         "$F=ma$.",
         "$\\text{kg}\\cdot\\text{m/s}^2$.",

@@ -58,14 +58,14 @@
     {
       "level": 2,
       "heading": "Coulomb's law (magnitude)",
-      "explanation": "The force between two point charges is $F = k\\dfrac{|q_1 q_2|}{r^2}$, where $k = 8.99\\times10^{9}\\ \\text{N·m}^2/\\text{C}^2$ and $r$ is the distance between them. The force grows with the product of the charges and falls off as the square of the distance — this inverse-square drop means doubling the distance cuts the force to one quarter.",
+      "explanation": "The force between two point charges is $F = k\\dfrac{|q_1 q_2|}{r^2}$, where $k = 8.99\\times10^{9}\\ \\mathrm{N\\cdot m}^2/\\text{C}^2$ and $r$ is the distance between them. The force grows with the product of the charges and falls off as the square of the distance — this inverse-square drop means doubling the distance cuts the force to one quarter.",
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1442-01-coulomb-c2.svg",
         "caption": "Coulomb's law: $F = k\\,q_1q_2/r^2$ — weaker with distance."
       },
       "math_steps": [
-        "Write Coulomb's law: $F = k\\dfrac{|q_1||q_2|}{r^2}$ with $k = 8.99\\times10^{9}\\ \\text{N·m}^2/\\text{C}^2$.",
+        "Write Coulomb's law: $F = k\\dfrac{|q_1||q_2|}{r^2}$ with $k = 8.99\\times10^{9}\\ \\mathrm{N\\cdot m}^2/\\text{C}^2$.",
         "Put both charges in coulombs and the separation $r$ in meters.",
         "Because of the $r^2$ in the denominator, doubling $r$ makes the force $4\\times$ weaker (inverse-square).",
         "The result $F$ is the magnitude of the force each charge feels."

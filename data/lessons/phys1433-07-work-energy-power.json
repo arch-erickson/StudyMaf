@@ -32,7 +32,7 @@
     },
     "joule": {
       "plain": "The SI unit of energy.",
-      "in_class": "$1\\ \\text{J}=1\\ \\text{N·m}$."
+      "in_class": "$1\\ \\text{J}=1\\ \\mathrm{N\\cdot m}$."
     }
   },
   "concept_sections": [

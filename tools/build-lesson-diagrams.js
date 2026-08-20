@@ -127,7 +127,7 @@ const SPEC = {
     c4: { cap: "A dielectric raises capacitance: $C = \\kappa\\varepsilon_0 A/d$.", items: [
       { type: "asset", id: "parallel-plates", cx: 190, cy: 110, width: 200, color: INK }, CO(140, 70, 100, 80), M("\\kappa", 190, 110), M("C = \\kappa\\varepsilon_0 A/d", 200, 205) ] },
     c5: { cap: "Parallel capacitances add; series reciprocals add.", w: 460, items: [
-      AST("capacitor", 110, 100, 70, null, INK), AST("capacitor", 110, 165, 70, null, INK), TX("parallel: C = C_1+C_2", 110, 205),
+      AST("capacitor", 110, 100, 70, null, INK), AST("capacitor", 110, 165, 70, null, INK), M("\\text{parallel: } C = C_1+C_2", 110, 205),
       AST("capacitor", 330, 90, 70, null, INK), AST("capacitor", 330, 150, 70, null, INK), M("\\tfrac{1}{C}=\\tfrac{1}{C_1}+\\tfrac{1}{C_2}", 330, 205) ] },
     e1: { cap: "A capacitor stores $U=\\tfrac12 CV^2$, then dumps it as a flash.", items: [
       AST("capacitor", 110, 115, 80, null, INK), AR([50, 115], [78, 115], "current", "charge"), AST("light-bulb", 300, 115, 66, "flash", ANNOT.velocity) ] },
@@ -163,7 +163,7 @@ const SPEC = {
       AST("resistor", 200, 80, 110, "R_1", INK), AST("resistor", 200, 150, 110, "R_2", INK), M("\\tfrac{1}{R_{eq}}=\\tfrac{1}{R_1}+\\tfrac{1}{R_2}", 200, 205) ] },
     c4: { cap: "Kirchhoff: currents balance at a junction; voltages sum to zero.", items: [
       LN([80, 115], [200, 115], { color: INK, width: 2 }), AR([90, 115], [150, 115], "current", "I"),
-      AR([200, 115], [320, 70], "current", "I_1"), AR([200, 115], [320, 160], "current", "I_2"), TX("I = I_1 + I_2", 250, 195) ] },
+      AR([200, 115], [320, 70], "current", "I_1"), AR([200, 115], [320, 160], "current", "I_2"), M("I = I_1 + I_2", 250, 195) ] },
     c5: { cap: "An RC circuit charges/discharges over time constant $\\tau = RC$.", items: [
       AST("battery-cell", 90, 110, 70, null, INK), AST("resistor", 210, 90, 90, "R", INK), AST("capacitor", 320, 110, 70, "C", INK), M("\\tau = RC", 200, 200) ] },
     e1: { cap: "Old series light strings: one bulb out breaks the whole loop.", items: [

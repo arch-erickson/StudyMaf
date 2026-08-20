@@ -107,7 +107,7 @@ class Diagram {
     this.content.push(`<g class="${scope}" transform="${tf}"${op}${color ? ` color="${color}"` : ""}${rootAttr}>${body}</g>`);
     this.boxes.push(G.box(left, top, w, h));
     this.usedAssets.push({ id: asset.id, source: source || "unknown", license: license || "unknown" });
-    if (opts.label) this.text(opts.label, cx, top - 4, { anchor: "middle", avoid: true, role: "label" });
+    if (opts.label) this.text(opts.label, cx, top - 4, { anchor: "middle", avoid: true, role: "label", math: opts.labelMath !== false });
     return { bbox: G.box(left, top, w, h), cx, cy, w, h, asset: asset.id };
   }
   _nextInk(tone) {
@@ -133,7 +133,7 @@ class Diagram {
     this.annot.push(`<line x1="${num(from[0])}" y1="${num(from[1])}" x2="${num(to[0])}" y2="${num(to[1])}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" opacity="${op}" marker-end="url(#ah-${idColor(color)})"${dbl}${opts.dashed ? ' stroke-dasharray="5 4"' : ""}/>`);
     // slim collision box along the arrow so labels dodge it
     this.boxes.push(G.box(Math.min(from[0], to[0]) - 3, Math.min(from[1], to[1]) - 3, Math.abs(to[0] - from[0]) + 6, Math.abs(to[1] - from[1]) + 6));
-    if (opts.label) { const mid = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2]; this.text(opts.label, mid[0], mid[1], { anchor: "middle", avoid: true, color, size: opts.labelSize || 13 }); }
+    if (opts.label) { const mid = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2]; this.text(opts.label, mid[0], mid[1], { anchor: "middle", avoid: true, color, size: opts.labelSize || 13, math: opts.labelMath !== false }); }
   }
   line(from, to, opts) {
     opts = opts || {};

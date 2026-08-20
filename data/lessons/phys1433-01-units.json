@@ -39,7 +39,7 @@
     {
       "level": 1,
       "heading": "SI units",
-      "explanation": "Mechanical quantities build from meter, kilogram, and second; derived units like the newton ($\\text{kg·m/s}^2$) and joule ($\\text{N·m}$) combine them.",
+      "explanation": "Mechanical quantities build from meter, kilogram, and second; derived units like the newton ($\\mathrm{kg\\cdot m/s}^2$) and joule ($\\mathrm{N\\cdot m}$) combine them.",
       "math_steps": [
         "Identify the base units.",
         "Combine per the definition.",
