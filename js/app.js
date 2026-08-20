@@ -40,9 +40,16 @@ window.App = (function () {
     tutorContext = Object.assign({ page: String(location.hash || "#/"), learner_id: tutorLearnerId(), class_id: "", lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" }, next || {});
     if (window.__studymafTutor && window.__studymafTutor.updateContext) window.__studymafTutor.updateContext(tutorContext);
   }
+  // Textbook titles for a class. Under the City Tech MVP these come from the
+  // course catalog (the professor's class), with any locally-noted books as a
+  // fallback for older installs.
+  function classTextbookList(cls) {
+    var cat = cls && catalogClassByCode(cls.code);
+    if (cat && (cat.textbooks || []).length) return cat.textbooks.slice();
+    return ((cls && Store.getUploads(cls.id).textbooks) || []).map(function (b) { return b.value; });
+  }
   function classTextbooks(cls) {
-    var books = (Store.getUploads(cls.id).textbooks || []).map(function (b) { return b.value; });
-    return books.join("; ");
+    return classTextbookList(cls).join("; ");
   }
   function recordTutorAttempt(outcome) {
     if (!tutorContext.lesson_id || !tutorContext.question_id) return;
@@ -402,14 +409,10 @@ window.App = (function () {
     tb.appendChild(sw);
     page.appendChild(tb);
 
-    var upl = Store.getUploads(id);
-    if (upl.syllabus || (upl.textbooks && upl.textbooks.length)) {
-      var books = (upl.textbooks || []).map(function (b) { return esc(b.value) + (b.kind === "cover" ? " (cover)" : ""); }).join(", ");
+    var matBooks = classTextbookList(Store.getClass(id) || { code: "" });
+    if (matBooks.length) {
       var info = el("div", "notice");
-      info.innerHTML = "<strong>Course materials</strong>" +
-        (upl.syllabus ? "Syllabus: " + esc(upl.syllabus) + ". " : "") +
-        (books ? "Textbooks: " + books + ". " : "") +
-        "Auto-generating lessons from these needs the AI stage — for now lessons come from your data files.";
+      info.innerHTML = "<strong>Course materials</strong>Textbooks: " + matBooks.map(esc).join(", ") + ". Tap <strong>Materials</strong> above to view them any time.";
       page.appendChild(info);
     }
 
@@ -465,29 +468,16 @@ window.App = (function () {
           setTutorContext({ page: "lesson", class_id: cls.id, class_name: cls.name, lesson_id: lid, lesson_title: lesson.title, lesson_summary: lesson.summary, chapter: chapter, textbook: classTextbooks(cls) });
           panel.innerHTML = "";
           var sum = el("p", "lp-summary", lesson.summary); panel.appendChild(sum); StudyMath.render(sum);
-          // difficulty chooser — pick the level of problems you want to practice
-          var diffs = lessonDifficulties(lid, lesson);
-          var chosenDiff = "mixed";
-          var diffRow = el("div", "lp-diff");
-          diffRow.appendChild(el("span", "lp-diff-label", "Difficulty"));
-          var pills = [];
-          function setDiff(v) { chosenDiff = v; pills.forEach(function (p) { p.classList.toggle("on", p.getAttribute("data-v") === v); }); }
-          [{ v: "mixed", l: "Mixed" }].concat(diffs.map(function (d) { return { v: d, l: diffLabel(d) }; })).forEach(function (o) {
-            var pill = el("button", "lp-pill", o.l); pill.setAttribute("data-v", o.v);
-            pill.onclick = function () { setDiff(o.v); }; pills.push(pill); diffRow.appendChild(pill);
-          });
-          setDiff("mixed");
-          panel.appendChild(diffRow);
-
+          // Difficulty is chosen inside Practice / Quiz / Test — not on the lesson card.
+          // Learn is guided and needs no difficulty.
           var acts = el("div", "lp-actions");
-          // Learn-first structure: LEARN (guided) · PRACTICE (syllabus problems) · QUIZ (timed check)
           var learn = ib("btn primary", "bookOpen", "Learn");
           learn.onclick = function () { startLearn(cls, lid, lesson); };
           var practiceLbl = grade.solved > 0 && grade.solved < grade.target ? "Practice · Continue" : (grade.target && grade.solved >= grade.target ? "Practice again" : "Practice");
           var practice = ib("btn ghost", "play", practiceLbl);
-          practice.onclick = function () { startSession(cls, lid, lesson, chosenDiff); };
+          practice.onclick = function () { practiceIntro(cls, lid, lesson); };
           var quiz = ib("btn ghost", "target", "Quiz");
-          quiz.onclick = function () { startQuiz(cls, lid, lesson, chosenDiff); };
+          quiz.onclick = function () { startQuiz(cls, lid, lesson); };
           acts.append(learn, practice, quiz);
           panel.appendChild(acts);
         }).catch(function (e) { panel.innerHTML = "<p class='lp-summary'>Couldn't load lesson: " + esc(e.message) + "</p>"; });
@@ -1096,6 +1086,23 @@ window.App = (function () {
   // ====================================================================
   // Dispatcher: use the generation engine when the lesson has generators,
   // otherwise fall back to the lesson's static problems.
+  // Practice difficulty is chosen here (not on the lesson card): a small picker,
+  // then the practice session starts at the selected level.
+  function practiceIntro(cls, lid, lesson) {
+    var diffs = lessonDifficulties(lid, lesson);
+    var pills = [{ v: "mixed", l: "Mixed" }].concat(diffs.map(function (d) { return { v: d, l: diffLabel(d) }; }));
+    var pillHtml = pills.map(function (o, i) { return "<button type='button' class='lp-pill" + (i === 0 ? " on" : "") + "' data-v='" + o.v + "'>" + o.l + "</button>"; }).join("");
+    var m = modal(
+      "<h2>Practice — " + esc(lesson.title) + "</h2>" +
+      "<p class='modal-sub'>Choose a difficulty. Practice is untimed with hints, worked steps, and the tutor.</p>" +
+      "<div class='field'><label>Difficulty</label><div class='lp-diff' id='p-diff'>" + pillHtml + "</div></div>" +
+      "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='p-go'>Start practice</button></div>"
+    );
+    var chosen = "mixed";
+    m.querySelectorAll("#p-diff .lp-pill").forEach(function (b) { b.onclick = function () { chosen = b.getAttribute("data-v"); m.querySelectorAll("#p-diff .lp-pill").forEach(function (x) { x.classList.toggle("on", x === b); }); }; });
+    m.querySelector("#p-go").onclick = function () { closeModal(); startSession(cls, lid, lesson, chosen); };
+  }
+
   function startSession(cls, lid, lesson, difficulty, problemId) {
     if (window.Generators && Generators.has(lid)) return startGenSession(cls, lid, lesson, difficulty);
     return startStaticSession(cls, lid, lesson, difficulty, problemId);
@@ -1531,20 +1538,28 @@ window.App = (function () {
   }
 
   function startTest(cls, lid, lesson) {
-    var pool = (lesson.problems || []).slice();
-    var maxN = pool.length;
-    modal(
+    var allProblems = (lesson.problems || []).slice();
+    var maxN = allProblems.length;
+    var diffs = lessonDifficulties(lid, lesson);
+    var pills = [{ v: "mixed", l: "Mixed" }].concat(diffs.map(function (d) { return { v: d, l: diffLabel(d) }; }));
+    var pillHtml = pills.map(function (o, i) { return "<button type='button' class='lp-pill" + (i === 0 ? " on" : "") + "' data-v='" + o.v + "'>" + o.l + "</button>"; }).join("");
+    var m = modal(
       "<h2>Practice exam — " + esc(lesson.title) + "</h2>" +
       "<p class='modal-sub'>Set your parameters. Each question has a hint. You'll see all questions but verify one at a time.</p>" +
       "<div class='row2'>" +
       "<div class='field'><label>Number of questions</label><input id='t-n' type='number' min='1' max='" + maxN + "' value='" + Math.min(10, maxN) + "'></div>" +
       "<div class='field'><label>Time limit (minutes)</label><input id='t-min' type='number' min='1' max='180' value='15'></div>" +
       "</div>" +
+      "<div class='field'><label>Difficulty</label><div class='lp-diff' id='t-diff'>" + pillHtml + "</div></div>" +
       "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='t-go'>Start exam</button></div>"
-    ).querySelector("#t-go").onclick = function () {
-      var host = document.getElementById("modal-host");
-      var n = Math.max(1, Math.min(maxN, +host.querySelector("#t-n").value || 10));
-      var mins = Math.max(1, +host.querySelector("#t-min").value || 15);
+    );
+    var chosen = "mixed";
+    m.querySelectorAll("#t-diff .lp-pill").forEach(function (b) { b.onclick = function () { chosen = b.getAttribute("data-v"); m.querySelectorAll("#t-diff .lp-pill").forEach(function (x) { x.classList.toggle("on", x === b); }); }; });
+    m.querySelector("#t-go").onclick = function () {
+      var pool = allProblems;
+      if (chosen !== "mixed") { var want = chosen === "extreme" ? "stretch" : chosen; var filtered = allProblems.filter(function (p) { return p.difficulty === want; }); if (filtered.length) pool = filtered; }
+      var n = Math.max(1, Math.min(pool.length, +m.querySelector("#t-n").value || 10));
+      var mins = Math.max(1, +m.querySelector("#t-min").value || 15);
       closeModal();
       runExam(cls, lid, shuffle(pool).slice(0, n), mins);
     };
@@ -1641,53 +1656,29 @@ window.App = (function () {
     };
   }
 
+  // City Tech MVP: materials are set by the professor's class, not the student.
+  // Students only view the textbooks in use (and download any course files the
+  // administrator attached). No uploading or editing.
   function materialsDialog(id) {
-    var u = Store.getUploads(id);
+    var cls = Store.getClass(id) || {};
+    var books = classTextbookList(cls);
     var privateFiles = (window.StudyMAFPrivateCourseDocuments || {})[id] || [];
-    if (privateFiles.length) {
-      modal("<h2>Course materials</h2>" +
-        "<p class='modal-sub'>These files are private. A download link is created only when you choose a file.</p>" +
-        "<div class='source-download-grid'>" + privateFiles.map(function (file) {
+    var booksHtml = books.length
+      ? "<ul class='materials-books'>" + books.map(function (b) { return "<li>" + esc(b) + "</li>"; }).join("") + "</ul>"
+      : "<p class='modal-sub'>No textbook has been listed for this class yet.</p>";
+    var filesHtml = privateFiles.length
+      ? "<div class='field'><label>Course files</label><p class='modal-sub'>A download link is created only when you open a file.</p><div class='source-download-grid'>" + privateFiles.map(function (file) {
           return "<a class='source-download' href='" + esc(file.download_url || '#') + "' target='_blank' rel='noopener'><span class='source-kind'>" + esc(file.kind === 'syllabus' ? 'Syllabus' : 'Textbook') + "</span><strong>" + esc(file.original_name || 'Course PDF') + "</strong><b>Download PDF <span aria-hidden='true'>↓</span></b></a>";
-        }).join("") + "</div><div class='modal-actions'><button class='btn primary' data-close>Done</button></div>", { wide: true });
-      return;
-    }
-    var m = modal(
+        }).join("") + "</div></div>"
+      : "";
+    modal(
       "<h2>Course materials</h2>" +
-      "<p class='modal-sub'>Attached when you created the class. Update them any time.</p>" +
-      "<div class='field'><label>Syllabus</label><div style='display:flex;gap:8px;align-items:center'>" +
-      "<span style='flex:1;color:" + (u.syllabus ? "var(--ink)" : "var(--ink-soft)") + "'>" + esc(u.syllabus || "None attached") + "</span>" +
-      "<button class='btn subtle' id='m-syl'>" + (u.syllabus ? "Replace" : "Add") + "</button></div></div>" +
-      "<div class='field'><label>Textbooks</label><div id='m-books'></div>" +
-      "<div style='display:flex;gap:8px;margin-top:8px'>" +
-      "<button type='button' class='btn subtle' id='m-addname'>+ By name</button>" +
-      "<button type='button' class='btn subtle' id='m-addcover'>+ Cover photo</button></div></div>" +
-      "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>"
+      "<p class='modal-sub'>The textbooks your professor uses for this class.</p>" +
+      "<div class='field'><label>Textbooks</label>" + booksHtml + "</div>" +
+      filesHtml +
+      "<div class='modal-actions'><button class='btn primary' data-close>Done</button></div>",
+      { wide: !!privateFiles.length }
     );
-    var host = m.querySelector("#m-books");
-    function draw() {
-      var books = Store.getUploads(id).textbooks;
-      host.innerHTML = "";
-      if (!books.length) host.appendChild(el("p", "modal-sub", "None yet."));
-      books.forEach(function (b, i) {
-        var row = el("div", "eq-row"); row.style.marginBottom = "6px";
-        var span = el("span"); span.style.flex = "1"; span.textContent = b.value + (b.kind === "cover" ? "  (cover)" : "");
-        var rm = el("button", "eq-rm"); rm.innerHTML = icon("trash");
-        rm.onclick = function () { Store.removeTextbook(id, i); draw(); };
-        row.append(span, rm); host.appendChild(row);
-      });
-    }
-    draw();
-    m.querySelector("#m-syl").onclick = function () { uploadDialog(id, "syllabus"); };
-    m.querySelector("#m-addname").onclick = function () {
-      var name = prompt("Textbook name (title, author, edition):");
-      if (name && name.trim()) { Store.addTextbook(id, "name", name.trim()); draw(); }
-    };
-    m.querySelector("#m-addcover").onclick = function () {
-      var f = document.createElement("input"); f.type = "file"; f.accept = "image/*";
-      f.onchange = function () { if (f.files[0]) { Store.addTextbook(id, "cover", f.files[0].name); draw(); } };
-      f.click();
-    };
   }
 
   function homeworkMode(id) {

@@ -881,3 +881,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .reviewer-lesson .lp-diff { margin: 0 0 18px; row-gap: 10px; }
 .reviewer-lesson .lp-actions { margin: 0; }
 .reviewer-lesson .review-mode-slot:not(:empty) { margin-top: 18px; }
+
+/* Read-only course materials list (City Tech MVP: professor-set, no upload). */
+.materials-books { margin: 6px 0 0; padding-left: 18px; }
+.materials-books li { color: var(--ink); font-size: .86rem; line-height: 1.55; margin: 3px 0; }
