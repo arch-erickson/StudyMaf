@@ -28,3 +28,7 @@
 .prof-student{display:flex;align-items:center;gap:10px}
 .prof-student strong{display:block;font-size:.82rem}
 .prof-student small{display:block;margin-top:1px;color:var(--ink-soft);font-size:.71rem;text-transform:capitalize}
+
+/* Course-card primary action stays accent orange on the admin page. */
+.control-class-card .class-card-footer .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.control-class-card .class-card-footer .btn.primary:hover { filter: brightness(1.05); }
