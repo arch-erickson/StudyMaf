@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-06-partial-fractions-c1.svg",
-        "caption": "Set up the decomposition"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-06-partial-fractions-c4.svg",
-        "caption": "Integrating the pieces"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-06-partial-fractions-e2.svg",
-        "caption": "Circuit charge over time"
+        "caption": ""
       }
     },
     {

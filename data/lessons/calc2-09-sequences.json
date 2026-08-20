@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-c1.svg",
-        "caption": "Limits of sequences"
+        "caption": ""
       }
     },
     {
@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-c2.svg",
-        "caption": "Common limit forms"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-c3.svg",
-        "caption": "The squeeze theorem"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-c4.svg",
-        "caption": "Monotone and bounded"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-c5.svg",
-        "caption": "Divergence"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-e1.svg",
-        "caption": "Repeated averaging"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-e2.svg",
-        "caption": "Drug half-life leftovers"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-09-sequences-e3.svg",
-        "caption": "Digital sampling"
+        "caption": ""
       }
     }
   ],

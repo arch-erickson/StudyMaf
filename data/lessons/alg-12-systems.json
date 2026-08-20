@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-12-systems-c1.svg",
-        "caption": "Substitution"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-12-systems-c4.svg",
-        "caption": "Nonlinear systems"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-12-systems-e2.svg",
-        "caption": "Break-even with two costs"
+        "caption": ""
       }
     },
     {

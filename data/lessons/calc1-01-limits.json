@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-01-limits-c2.svg",
-        "caption": "One-sided limits"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-01-limits-c3.svg",
-        "caption": "The limit laws"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-01-limits-c5.svg",
-        "caption": "Indeterminate forms $0/0$"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-01-limits-e1.svg",
-        "caption": "A car's instantaneous speed"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-01-limits-e3.svg",
-        "caption": "Dosage approaching a steady level"
+        "caption": ""
       }
     }
   ],

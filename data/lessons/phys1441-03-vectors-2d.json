@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1441-03-vectors-2d-c3.svg",
-        "caption": "Independence of 2D motion"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1441-03-vectors-2d-e1.svg",
-        "caption": "A kicked football"
+        "caption": ""
       }
     },
     {

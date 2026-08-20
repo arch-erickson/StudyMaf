@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-07-quadratic-equations-c3.svg",
-        "caption": "Completing the square"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-07-quadratic-equations-e1.svg",
-        "caption": "Projectile height"
+        "caption": ""
       }
     },
     {

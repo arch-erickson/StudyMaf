@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-01-antiderivatives-ftc-c2.svg",
-        "caption": "The definite integral as net area"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-01-antiderivatives-ftc-c5.svg",
-        "caption": "Average value"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-01-antiderivatives-ftc-e3.svg",
-        "caption": "Average temperature"
+        "caption": ""
       }
     }
   ],

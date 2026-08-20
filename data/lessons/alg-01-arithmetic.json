@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-01-arithmetic-c1.svg",
-        "caption": "Signed-number arithmetic"
+        "caption": ""
       }
     },
     {
@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-01-arithmetic-c2.svg",
-        "caption": "Absolute value"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-01-arithmetic-c4.svg",
-        "caption": "Order of operations"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-01-arithmetic-c5.svg",
-        "caption": "Evaluating expressions"
+        "caption": ""
       }
     }
   ],
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-01-arithmetic-e2.svg",
-        "caption": "Temperature swings"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-01-arithmetic-e3.svg",
-        "caption": "Scaling a recipe"
+        "caption": ""
       }
     }
   ],

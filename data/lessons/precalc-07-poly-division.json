@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-07-poly-division-c3.svg",
-        "caption": "The Remainder Theorem"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-07-poly-division-e1.svg",
-        "caption": "Simplifying a rational expression"
+        "caption": ""
       }
     },
     {

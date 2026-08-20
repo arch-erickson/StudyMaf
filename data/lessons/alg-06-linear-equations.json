@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-06-linear-equations-c2.svg",
-        "caption": "Equations with fractions"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-06-linear-equations-c5.svg",
-        "caption": "Word problems"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-06-linear-equations-e3.svg",
-        "caption": "Temperature conversion"
+        "caption": ""
       }
     }
   ],

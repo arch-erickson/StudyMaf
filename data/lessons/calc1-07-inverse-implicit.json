@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-07-inverse-implicit-c2.svg",
-        "caption": "Solving for $dy/dx$"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-07-inverse-implicit-c5.svg",
-        "caption": "Inverse trig derivatives"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-07-inverse-implicit-e3.svg",
-        "caption": "Undoing a function"
+        "caption": ""
       }
     }
   ],

@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-13-exponential-c2.svg",
-        "caption": "Growth vs decay"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-13-exponential-c5.svg",
-        "caption": "Modeling with exponentials"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-13-exponential-e3.svg",
-        "caption": "Viral spread"
+        "caption": ""
       }
     }
   ],

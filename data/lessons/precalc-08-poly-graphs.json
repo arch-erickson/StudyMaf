@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-08-poly-graphs-c3.svg",
-        "caption": "Multiplicity"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-08-poly-graphs-e1.svg",
-        "caption": "Modeling a trend that reverses"
+        "caption": ""
       }
     },
     {

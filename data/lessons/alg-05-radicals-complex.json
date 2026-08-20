@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-05-radicals-complex-c2.svg",
-        "caption": "Operating on radicals"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-05-radicals-complex-c5.svg",
-        "caption": "Complex arithmetic"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-05-radicals-complex-e3.svg",
-        "caption": "Signal phase"
+        "caption": ""
       }
     }
   ],

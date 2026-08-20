@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-10-linearization-c2.svg",
-        "caption": "Differentials"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-10-linearization-c5.svg",
-        "caption": "Why it works and its limits"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-10-linearization-e3.svg",
-        "caption": "Quick mental math for scientists"
+        "caption": ""
       }
     }
   ],

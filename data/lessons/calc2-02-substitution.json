@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-02-substitution-c2.svg",
-        "caption": "Adjusting constants"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-02-substitution-c5.svg",
-        "caption": "Exponentials and trig via substitution"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-02-substitution-e3.svg",
-        "caption": "Chain-rule in reverse for signals"
+        "caption": ""
       }
     }
   ],

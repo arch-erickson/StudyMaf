@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-c1.svg",
-        "caption": "SI units"
+        "caption": ""
       }
     },
     {
@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-c2.svg",
-        "caption": "Unit conversion"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-c3.svg",
-        "caption": "Significant figures"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-c4.svg",
-        "caption": "Dimensional checks"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-c5.svg",
-        "caption": "Estimation and strategy"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-e1.svg",
-        "caption": "Speed limit conversion"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-e2.svg",
-        "caption": "Checking an answer's size"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-01-units-e3.svg",
-        "caption": "Lab measurement precision"
+        "caption": ""
       }
     }
   ],

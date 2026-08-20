@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-05-trig-substitution-c3.svg",
-        "caption": "Integrating in $\\theta$"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-05-trig-substitution-e1.svg",
-        "caption": "Area of a circle segment"
+        "caption": ""
       }
     },
     {

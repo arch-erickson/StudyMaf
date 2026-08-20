@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-04-differentiation-rules-c3.svg",
-        "caption": "The product rule"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-04-differentiation-rules-e1.svg",
-        "caption": "Acceleration from position"
+        "caption": ""
       }
     },
     {

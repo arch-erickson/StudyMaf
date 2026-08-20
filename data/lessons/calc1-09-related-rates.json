@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-09-related-rates-c2.svg",
-        "caption": "Differentiating in time"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-09-related-rates-c5.svg",
-        "caption": "Interpreting the answer"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-09-related-rates-e3.svg",
-        "caption": "Expanding oil spill"
+        "caption": ""
       }
     }
   ],

@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-10-lines-c2.svg",
-        "caption": "Slope-intercept form"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-10-lines-c3.svg",
-        "caption": "Point-slope form"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-10-lines-c5.svg",
-        "caption": "Finding a line from two points"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-10-lines-e1.svg",
-        "caption": "Cost with a flat fee"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-10-lines-e3.svg",
-        "caption": "Depreciation"
+        "caption": ""
       }
     }
   ],

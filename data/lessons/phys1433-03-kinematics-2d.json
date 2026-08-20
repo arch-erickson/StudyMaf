@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-03-kinematics-2d-c3.svg",
-        "caption": "Projectile launch"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-03-kinematics-2d-e1.svg",
-        "caption": "A long jump"
+        "caption": ""
       }
     },
     {

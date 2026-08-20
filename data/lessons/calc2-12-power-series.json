@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-12-power-series-c1.svg",
-        "caption": "Radius via the ratio test"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-12-power-series-c4.svg",
-        "caption": "Term-by-term calculus"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-12-power-series-e2.svg",
-        "caption": "Solving differential equations"
+        "caption": ""
       }
     },
     {

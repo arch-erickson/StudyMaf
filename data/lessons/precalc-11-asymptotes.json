@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-11-asymptotes-c1.svg",
-        "caption": "Removable vs infinite"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-11-asymptotes-c4.svg",
-        "caption": "Slant asymptotes"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-11-asymptotes-e2.svg",
-        "caption": "Population carrying capacity"
+        "caption": ""
       }
     },
     {

@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-09-rotation-torque-c3.svg",
-        "caption": "Moment of inertia and $\\tau=I\\alpha$"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-09-rotation-torque-e1.svg",
-        "caption": "A wrench on a bolt"
+        "caption": ""
       }
     },
     {

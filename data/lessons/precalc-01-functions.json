@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-01-functions-c2.svg",
-        "caption": "Four representations"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-01-functions-c3.svg",
-        "caption": "Domain and range"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-01-functions-c5.svg",
-        "caption": "The vertical line test"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-01-functions-e1.svg",
-        "caption": "A vending machine"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-01-functions-e3.svg",
-        "caption": "A thermometer reading"
+        "caption": ""
       }
     }
   ],

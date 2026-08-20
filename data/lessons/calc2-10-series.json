@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-10-series-c1.svg",
-        "caption": "Series and partial sums"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-10-series-c3.svg",
-        "caption": "The divergence test"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-10-series-c4.svg",
-        "caption": "The integral test"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-10-series-e1.svg",
-        "caption": "A bouncing ball's total distance"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-10-series-e2.svg",
-        "caption": "Repeating decimals"
+        "caption": ""
       }
     },
     {

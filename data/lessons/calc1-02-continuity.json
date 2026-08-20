@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-02-continuity-c1.svg",
-        "caption": "The three-part test"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-02-continuity-c4.svg",
-        "caption": "Making a piecewise function continuous"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-02-continuity-e2.svg",
-        "caption": "A jump in a parking fee"
+        "caption": ""
       }
     },
     {

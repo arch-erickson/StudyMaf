@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-10-rational-c1.svg",
-        "caption": "Domain and vertical asymptotes"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-10-rational-c3.svg",
-        "caption": "Slant asymptotes"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-10-rational-c4.svg",
-        "caption": "Intercepts"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-10-rational-e1.svg",
-        "caption": "Average cost per unit"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-10-rational-e2.svg",
-        "caption": "Concentration over time"
+        "caption": ""
       }
     },
     {

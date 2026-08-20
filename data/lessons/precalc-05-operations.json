@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-05-operations-c2.svg",
-        "caption": "Composition"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-05-operations-c3.svg",
-        "caption": "Order matters"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-05-operations-c5.svg",
-        "caption": "Decomposing functions"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-05-operations-e1.svg",
-        "caption": "Discount then tax"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-05-operations-e3.svg",
-        "caption": "Total revenue model"
+        "caption": ""
       }
     }
   ],

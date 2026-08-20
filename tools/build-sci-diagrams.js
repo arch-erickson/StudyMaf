@@ -65,6 +65,17 @@ const POOLS = {
 
 const COLORS = [ANNOT.ink, "#6B7A99", "#7FA893", "#8983B8", "#C08A6E"];
 
+// "Generic" scaffolding assets don't illustrate a specific concept — a bare
+// coordinate plane, axes, number line, plain arrow, grid, or dimension. For
+// those we show a neutral "pending" placeholder instead of a filler diagram.
+const GENERIC = new Set([
+  "coordinate-plane", "coordinate-plane-q1", "polar-plane", "axes-2d", "axes-quadrant1", "axes-3d",
+  "number-line", "number-line-point", "grid-square", "grid-dots", "grid-polar",
+  "arrow-right", "arrow-double", "arrow-curved", "arrow-block", "arrow-dashed", "arrow-return",
+  "dimension-horizontal", "dimension-vertical", "dimension-radius", "dimension-angle", "leader-line", "label-dot"
+]);
+const PENDING_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="100%" font-family="Inter, system-ui, sans-serif"><text x="190" y="112" fill="#9aa0aa" font-size="15" font-style="italic" text-anchor="middle" dominant-baseline="middle">pending</text></svg>';
+
 function diagram(id, subject, assetId, seedIdx) {
   const spec = {
     id, subject,
@@ -88,10 +99,11 @@ function processClass(list) {
     const emit = (slot, target, caption) => {
       const asset = pool.a[k % pool.a.length];
       const id = L.id + "-" + slot;
-      const svg = diagram(id, pool.s, asset, k);
+      const generic = GENERIC.has(asset);
+      const svg = generic ? PENDING_SVG : diagram(id, pool.s, asset, k);
       fs.writeFileSync(path.join(OUT, id + ".svg"), svg + "\n");
-      target.figure = { type: "svg", src: "data/diagrams/" + id + ".svg", caption: caption };
-      manifest.diagrams.push({ id, subject: pool.s, file: "data/diagrams/" + id + ".svg", asset });
+      target.figure = { type: "svg", src: "data/diagrams/" + id + ".svg", caption: generic ? "" : caption };
+      manifest.diagrams.push({ id, subject: pool.s, file: "data/diagrams/" + id + ".svg", asset, pending: generic });
       made++; wired++; k++;
     };
     concepts.forEach((c, i) => emit("c" + (i + 1), c, c.heading));

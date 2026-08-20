@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-11-alternating-ratio-c1.svg",
-        "caption": "The alternating series test"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-11-alternating-ratio-c3.svg",
-        "caption": "The ratio test"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-11-alternating-ratio-c4.svg",
-        "caption": "The root test"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-11-alternating-ratio-e1.svg",
-        "caption": "Leibniz's formula for $\\pi$"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-11-alternating-ratio-e2.svg",
-        "caption": "Truncation error control"
+        "caption": ""
       }
     },
     {

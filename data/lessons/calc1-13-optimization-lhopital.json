@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-13-optimization-lhopital-c2.svg",
-        "caption": "Solving the optimization"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-13-optimization-lhopital-c5.svg",
-        "caption": "Other indeterminate forms"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-13-optimization-lhopital-e3.svg",
-        "caption": "Growth vs decay race"
+        "caption": ""
       }
     }
   ],

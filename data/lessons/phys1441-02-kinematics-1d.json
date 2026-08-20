@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1441-02-kinematics-1d-c3.svg",
-        "caption": "Free fall"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1441-02-kinematics-1d-e1.svg",
-        "caption": "Braking distance"
+        "caption": ""
       }
     },
     {

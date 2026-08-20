@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-08-exp-log-derivatives-c2.svg",
-        "caption": "Chain rule versions"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-08-exp-log-derivatives-c5.svg",
-        "caption": "Exponential growth models"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-08-exp-log-derivatives-e3.svg",
-        "caption": "Sound level in decibels"
+        "caption": ""
       }
     }
   ],

@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-14-integral-c3.svg",
-        "caption": "Riemann sums and area"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-14-integral-e1.svg",
-        "caption": "Distance from velocity"
+        "caption": ""
       }
     },
     {

@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-09-radical-equations-c1.svg",
-        "caption": "Isolate then power"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-09-radical-equations-c4.svg",
-        "caption": "Higher-index roots"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-09-radical-equations-e2.svg",
-        "caption": "Distance and speed"
+        "caption": ""
       }
     },
     {

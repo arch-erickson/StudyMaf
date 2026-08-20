@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-09-poly-roots-c3.svg",
-        "caption": "Peeling off roots"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-09-poly-roots-e1.svg",
-        "caption": "Solving a design equation"
+        "caption": ""
       }
     },
     {

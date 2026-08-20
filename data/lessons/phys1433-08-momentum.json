@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-08-momentum-c3.svg",
-        "caption": "Elastic vs inelastic"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/phys1433-08-momentum-e1.svg",
-        "caption": "Catching an egg gently"
+        "caption": ""
       }
     },
     {

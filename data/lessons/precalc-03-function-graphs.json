@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-03-function-graphs-c1.svg",
-        "caption": "Intercepts"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-03-function-graphs-c4.svg",
-        "caption": "Even and odd symmetry"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-03-function-graphs-e2.svg",
-        "caption": "A projectile's height graph"
+        "caption": ""
       }
     },
     {

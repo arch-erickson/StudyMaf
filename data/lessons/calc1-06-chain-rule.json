@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-06-chain-rule-c3.svg",
-        "caption": "The general power rule"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc1-06-chain-rule-e1.svg",
-        "caption": "Ripple radius and area"
+        "caption": ""
       }
     },
     {

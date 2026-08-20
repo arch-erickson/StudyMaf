@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-08-polynomial-rational-equations-c2.svg",
-        "caption": "Equations reducible to quadratic"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-08-polynomial-rational-equations-c5.svg",
-        "caption": "Verifying and counting"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-08-polynomial-rational-equations-e3.svg",
-        "caption": "Designing a box"
+        "caption": ""
       }
     }
   ],

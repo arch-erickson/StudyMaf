@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-14-volumes-c2.svg",
-        "caption": "Cylindrical shells"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-14-volumes-c5.svg",
-        "caption": "Surface area of revolution"
+        "caption": ""
       }
     }
   ],
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/calc2-14-volumes-e3.svg",
-        "caption": "Surface area of a dome"
+        "caption": ""
       }
     }
   ],

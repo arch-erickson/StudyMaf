@@ -48,7 +48,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-c1.svg",
-        "caption": "Find the critical values"
+        "caption": ""
       }
     },
     {
@@ -63,7 +63,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-c2.svg",
-        "caption": "Build a sign chart"
+        "caption": ""
       }
     },
     {
@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-c3.svg",
-        "caption": "Read the solution"
+        "caption": ""
       }
     },
     {
@@ -93,7 +93,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-c4.svg",
-        "caption": "Handle the boundaries"
+        "caption": ""
       }
     },
     {
@@ -108,7 +108,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-c5.svg",
-        "caption": "Rational inequalities"
+        "caption": ""
       }
     }
   ],
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-e1.svg",
-        "caption": "Profit above a target"
+        "caption": ""
       }
     },
     {
@@ -130,7 +130,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-e2.svg",
-        "caption": "Safe dosage range"
+        "caption": ""
       }
     },
     {
@@ -140,7 +140,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-12-inequalities-e3.svg",
-        "caption": "Structural load limits"
+        "caption": ""
       }
     }
   ],

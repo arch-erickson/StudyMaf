@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-06-inverse-c3.svg",
-        "caption": "Finding an inverse algebraically"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/precalc-06-inverse-e1.svg",
-        "caption": "Encoding and decoding"
+        "caption": ""
       }
     },
     {

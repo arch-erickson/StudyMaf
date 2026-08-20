@@ -78,7 +78,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-11-conics-c3.svg",
-        "caption": "The parabola in vertex form"
+        "caption": ""
       }
     },
     {
@@ -120,7 +120,7 @@
       "figure": {
         "type": "svg",
         "src": "data/diagrams/alg-11-conics-e1.svg",
-        "caption": "GPS trilateration"
+        "caption": ""
       }
     },
     {
