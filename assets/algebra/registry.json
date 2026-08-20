@@ -1,12 +1,12 @@
 {
-  "subject": "calculus",
+  "subject": "algebra",
   "version": 1,
-  "note": "Approved calculus/graphing primitives only (StudyMAF-authored, MIT): coordinate planes, function graphs, tangent/secant/area/Riemann/limit, trig. No generic filler.",
+  "note": "Approved algebra/graphing primitives only (StudyMAF-authored, MIT): coordinate planes, graphs, geometry, trig, balance-scale/function-machine. No generic filler.",
   "generatedBy": "tools/build-subject-libraries.js",
   "assets": {
     "arrow-right": {
       "id": "arrow-right",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "arrows",
       "roles": [
         "vector"
@@ -43,7 +43,7 @@
     },
     "arrow-double": {
       "id": "arrow-double",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "arrows",
       "roles": [
         "dimension"
@@ -80,7 +80,7 @@
     },
     "arrow-curved": {
       "id": "arrow-curved",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "arrows",
       "roles": [
         "arrows"
@@ -117,7 +117,7 @@
     },
     "arrow-block": {
       "id": "arrow-block",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "arrows",
       "roles": [
         "arrows"
@@ -154,7 +154,7 @@
     },
     "arrow-dashed": {
       "id": "arrow-dashed",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "arrows",
       "roles": [
         "arrows"
@@ -191,7 +191,7 @@
     },
     "arrow-return": {
       "id": "arrow-return",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "arrows",
       "roles": [
         "arrows"
@@ -228,7 +228,7 @@
     },
     "axes-2d": {
       "id": "axes-2d",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "axes",
       "roles": [
         "graph",
@@ -266,7 +266,7 @@
     },
     "axes-quadrant1": {
       "id": "axes-quadrant1",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "axes",
       "roles": [
         "graph",
@@ -304,7 +304,7 @@
     },
     "axes-3d": {
       "id": "axes-3d",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "axes",
       "roles": [
         "axes"
@@ -341,7 +341,7 @@
     },
     "grid-square": {
       "id": "grid-square",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "grids",
       "roles": [
         "graph",
@@ -379,7 +379,7 @@
     },
     "grid-dots": {
       "id": "grid-dots",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "grids",
       "roles": [
         "grids"
@@ -416,7 +416,7 @@
     },
     "grid-polar": {
       "id": "grid-polar",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "grids",
       "roles": [
         "grids"
@@ -453,7 +453,7 @@
     },
     "dimension-horizontal": {
       "id": "dimension-horizontal",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "dimensions",
       "roles": [
         "dimension"
@@ -490,7 +490,7 @@
     },
     "dimension-vertical": {
       "id": "dimension-vertical",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "dimensions",
       "roles": [
         "dimensions"
@@ -527,7 +527,7 @@
     },
     "dimension-radius": {
       "id": "dimension-radius",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "dimensions",
       "roles": [
         "dimensions"
@@ -564,7 +564,7 @@
     },
     "dimension-angle": {
       "id": "dimension-angle",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "dimensions",
       "roles": [
         "dimensions"
@@ -601,7 +601,7 @@
     },
     "leader-line": {
       "id": "leader-line",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "labels",
       "roles": [
         "labels"
@@ -638,7 +638,7 @@
     },
     "label-dot": {
       "id": "label-dot",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "labels",
       "roles": [
         "labels"
@@ -675,7 +675,7 @@
     },
     "callout-rounded": {
       "id": "callout-rounded",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "callouts",
       "roles": [
         "callouts"
@@ -712,7 +712,7 @@
     },
     "callout-circle": {
       "id": "callout-circle",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "callouts",
       "roles": [
         "callouts"
@@ -749,7 +749,7 @@
     },
     "coordinate-plane": {
       "id": "coordinate-plane",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "coordinate-systems",
       "roles": [
         "coordinate-systems"
@@ -786,7 +786,7 @@
     },
     "coordinate-plane-q1": {
       "id": "coordinate-plane-q1",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "coordinate-systems",
       "roles": [
         "coordinate-systems"
@@ -823,7 +823,7 @@
     },
     "polar-plane": {
       "id": "polar-plane",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "coordinate-systems",
       "roles": [
         "coordinate-systems"
@@ -860,7 +860,7 @@
     },
     "number-line": {
       "id": "number-line",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "coordinate-systems",
       "roles": [
         "coordinate-systems"
@@ -897,7 +897,7 @@
     },
     "number-line-point": {
       "id": "number-line-point",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "coordinate-systems",
       "roles": [
         "coordinate-systems"
@@ -934,7 +934,7 @@
     },
     "line-linear": {
       "id": "line-linear",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -971,7 +971,7 @@
     },
     "parabola": {
       "id": "parabola",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1008,7 +1008,7 @@
     },
     "parabola-down": {
       "id": "parabola-down",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1045,7 +1045,7 @@
     },
     "cubic": {
       "id": "cubic",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1082,7 +1082,7 @@
     },
     "sine-wave": {
       "id": "sine-wave",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1119,7 +1119,7 @@
     },
     "cosine-wave": {
       "id": "cosine-wave",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1156,7 +1156,7 @@
     },
     "exponential": {
       "id": "exponential",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1193,7 +1193,7 @@
     },
     "absolute-value": {
       "id": "absolute-value",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "graphs",
       "roles": [
         "graphs"
@@ -1228,206 +1228,317 @@
       "license": "MIT",
       "file": "primitives/absolute-value.svg"
     },
-    "tangent-line": {
-      "id": "tangent-line",
-      "subject": "calculus",
-      "topic": "calculus",
+    "triangle": {
+      "id": "triangle",
+      "subject": "algebra",
+      "topic": "geometry",
       "roles": [
-        "calculus"
+        "geometry"
       ],
       "bounds": {
-        "w": 120,
-        "h": 120
+        "w": 80,
+        "h": 80
       },
       "anchors": {
         "center": [
-          60,
-          60
+          40,
+          40
         ],
         "n": [
-          60,
+          40,
           0
         ],
         "s": [
-          60,
-          120
+          40,
+          80
         ],
         "e": [
-          120,
-          60
+          80,
+          40
         ],
         "w": [
           0,
-          60
+          40
         ]
       },
       "source": "studymaf",
       "license": "MIT",
-      "file": "primitives/tangent-line.svg"
+      "file": "primitives/triangle.svg"
     },
-    "secant-line": {
-      "id": "secant-line",
-      "subject": "calculus",
-      "topic": "calculus",
+    "triangle-right": {
+      "id": "triangle-right",
+      "subject": "algebra",
+      "topic": "geometry",
       "roles": [
-        "calculus"
+        "geometry"
       ],
       "bounds": {
-        "w": 120,
-        "h": 120
+        "w": 80,
+        "h": 80
       },
       "anchors": {
         "center": [
-          60,
-          60
+          40,
+          40
         ],
         "n": [
-          60,
+          40,
           0
         ],
         "s": [
-          60,
-          120
+          40,
+          80
         ],
         "e": [
-          120,
-          60
+          80,
+          40
         ],
         "w": [
           0,
-          60
+          40
         ]
       },
       "source": "studymaf",
       "license": "MIT",
-      "file": "primitives/secant-line.svg"
+      "file": "primitives/triangle-right.svg"
     },
-    "area-under-curve": {
-      "id": "area-under-curve",
-      "subject": "calculus",
-      "topic": "calculus",
+    "circle-radius": {
+      "id": "circle-radius",
+      "subject": "algebra",
+      "topic": "geometry",
       "roles": [
-        "calculus"
+        "geometry"
       ],
       "bounds": {
-        "w": 120,
-        "h": 120
+        "w": 80,
+        "h": 80
       },
       "anchors": {
         "center": [
-          60,
-          60
+          40,
+          40
         ],
         "n": [
-          60,
+          40,
           0
         ],
         "s": [
-          60,
-          120
+          40,
+          80
         ],
         "e": [
-          120,
-          60
+          80,
+          40
         ],
         "w": [
           0,
-          60
+          40
         ]
       },
       "source": "studymaf",
       "license": "MIT",
-      "file": "primitives/area-under-curve.svg"
+      "file": "primitives/circle-radius.svg"
     },
-    "riemann-rectangles": {
-      "id": "riemann-rectangles",
-      "subject": "calculus",
-      "topic": "calculus",
+    "square": {
+      "id": "square",
+      "subject": "algebra",
+      "topic": "geometry",
       "roles": [
-        "calculus"
+        "geometry"
       ],
       "bounds": {
-        "w": 120,
-        "h": 120
+        "w": 80,
+        "h": 80
       },
       "anchors": {
         "center": [
-          60,
-          60
+          40,
+          40
         ],
         "n": [
-          60,
+          40,
           0
         ],
         "s": [
-          60,
-          120
+          40,
+          80
         ],
         "e": [
-          120,
-          60
+          80,
+          40
         ],
         "w": [
           0,
-          60
+          40
         ]
       },
       "source": "studymaf",
       "license": "MIT",
-      "file": "primitives/riemann-rectangles.svg"
+      "file": "primitives/square.svg"
     },
-    "limit-hole": {
-      "id": "limit-hole",
-      "subject": "calculus",
-      "topic": "calculus",
+    "rectangle": {
+      "id": "rectangle",
+      "subject": "algebra",
+      "topic": "geometry",
       "roles": [
-        "calculus"
+        "geometry"
       ],
       "bounds": {
-        "w": 120,
-        "h": 120
+        "w": 90,
+        "h": 70
       },
       "anchors": {
         "center": [
-          60,
-          60
+          45,
+          35
         ],
         "n": [
-          60,
+          45,
           0
         ],
         "s": [
-          60,
-          120
+          45,
+          70
         ],
         "e": [
-          120,
-          60
+          90,
+          35
         ],
         "w": [
           0,
-          60
+          35
         ]
       },
       "source": "studymaf",
       "license": "MIT",
-      "file": "primitives/limit-hole.svg"
+      "file": "primitives/rectangle.svg"
     },
-    "slope-field": {
-      "id": "slope-field",
-      "subject": "calculus",
-      "topic": "calculus",
+    "parallelogram": {
+      "id": "parallelogram",
+      "subject": "algebra",
+      "topic": "geometry",
       "roles": [
-        "calculus"
+        "geometry"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 70
+      },
+      "anchors": {
+        "center": [
+          45,
+          35
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          70
+        ],
+        "e": [
+          90,
+          35
+        ],
+        "w": [
+          0,
+          35
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/parallelogram.svg"
+    },
+    "trapezoid": {
+      "id": "trapezoid",
+      "subject": "algebra",
+      "topic": "geometry",
+      "roles": [
+        "geometry"
+      ],
+      "bounds": {
+        "w": 90,
+        "h": 70
+      },
+      "anchors": {
+        "center": [
+          45,
+          35
+        ],
+        "n": [
+          45,
+          0
+        ],
+        "s": [
+          45,
+          70
+        ],
+        "e": [
+          90,
+          35
+        ],
+        "w": [
+          0,
+          35
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/trapezoid.svg"
+    },
+    "angle-arc": {
+      "id": "angle-arc",
+      "subject": "algebra",
+      "topic": "geometry",
+      "roles": [
+        "geometry"
+      ],
+      "bounds": {
+        "w": 80,
+        "h": 80
+      },
+      "anchors": {
+        "center": [
+          40,
+          40
+        ],
+        "n": [
+          40,
+          0
+        ],
+        "s": [
+          40,
+          80
+        ],
+        "e": [
+          80,
+          40
+        ],
+        "w": [
+          0,
+          40
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/angle-arc.svg"
+    },
+    "protractor": {
+      "id": "protractor",
+      "subject": "algebra",
+      "topic": "geometry",
+      "roles": [
+        "geometry"
       ],
       "bounds": {
         "w": 120,
-        "h": 120
+        "h": 72
       },
       "anchors": {
         "center": [
           60,
-          60
+          36
         ],
         "n": [
           60,
@@ -1435,24 +1546,24 @@
         ],
         "s": [
           60,
-          120
+          72
         ],
         "e": [
           120,
-          60
+          36
         ],
         "w": [
           0,
-          60
+          36
         ]
       },
       "source": "studymaf",
       "license": "MIT",
-      "file": "primitives/slope-field.svg"
+      "file": "primitives/protractor.svg"
     },
     "unit-circle": {
       "id": "unit-circle",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "trigonometry",
       "roles": [
         "trigonometry"
@@ -1489,7 +1600,7 @@
     },
     "right-triangle-labeled": {
       "id": "right-triangle-labeled",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "trigonometry",
       "roles": [
         "trigonometry"
@@ -1526,7 +1637,7 @@
     },
     "angle-standard": {
       "id": "angle-standard",
-      "subject": "calculus",
+      "subject": "algebra",
       "topic": "trigonometry",
       "roles": [
         "trigonometry"
@@ -1560,6 +1671,117 @@
       "source": "studymaf",
       "license": "MIT",
       "file": "primitives/angle-standard.svg"
+    },
+    "balance-scale": {
+      "id": "balance-scale",
+      "subject": "algebra",
+      "topic": "algebra",
+      "roles": [
+        "algebra"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          60,
+          45
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          90
+        ],
+        "e": [
+          120,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/balance-scale.svg"
+    },
+    "function-machine": {
+      "id": "function-machine",
+      "subject": "algebra",
+      "topic": "algebra",
+      "roles": [
+        "algebra"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 90
+      },
+      "anchors": {
+        "center": [
+          60,
+          45
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          90
+        ],
+        "e": [
+          120,
+          45
+        ],
+        "w": [
+          0,
+          45
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/function-machine.svg"
+    },
+    "bar-model": {
+      "id": "bar-model",
+      "subject": "algebra",
+      "topic": "algebra",
+      "roles": [
+        "algebra"
+      ],
+      "bounds": {
+        "w": 120,
+        "h": 60
+      },
+      "anchors": {
+        "center": [
+          60,
+          30
+        ],
+        "n": [
+          60,
+          0
+        ],
+        "s": [
+          60,
+          60
+        ],
+        "e": [
+          120,
+          30
+        ],
+        "w": [
+          0,
+          30
+        ]
+      },
+      "source": "studymaf",
+      "license": "MIT",
+      "file": "primitives/bar-model.svg"
     }
   }
 }

@@ -112,10 +112,22 @@ const physicsEntries = [
 const nPhys = buildSubject("physics", physicsEntries, {
   note: "Approved physics primitives only (StudyMAF-authored, MIT). No generic filler icons."
 });
-emptySubject("calculus", "Calculus library — routing established; add approved calculus primitives here.");
+
+// MATH libraries — built from the authored mathematics/* primitives + neutral
+// STEM diagram components. Calculus and (college) algebra each get a curated set.
+const mathCommon = (p) => p.startsWith("mathematics/coordinate-systems/") || p.startsWith("mathematics/graphs/") || p.startsWith("diagram-components/");
+const calcEntries = Object.entries(AUTHORED).filter(([p]) => mathCommon(p) || p.startsWith("mathematics/calculus/") || p.startsWith("mathematics/trigonometry/"));
+const algEntries = Object.entries(AUTHORED).filter(([p]) => mathCommon(p) || p.startsWith("mathematics/geometry/") || p.startsWith("mathematics/trigonometry/") || p.startsWith("mathematics/algebra/"));
+const nCalc = buildSubject("calculus", calcEntries, {
+  note: "Approved calculus/graphing primitives only (StudyMAF-authored, MIT): coordinate planes, function graphs, tangent/secant/area/Riemann/limit, trig. No generic filler."
+});
+const nAlg = buildSubject("algebra", algEntries, {
+  note: "Approved algebra/graphing primitives only (StudyMAF-authored, MIT): coordinate planes, graphs, geometry, trig, balance-scale/function-machine. No generic filler."
+});
 emptySubject("chemistry", "Chemistry library — routing established; add approved chemistry primitives here.");
 
 console.log(`built subject libraries → assets/`);
 console.log(`  physics:   ${nPhys} approved assets`);
-console.log(`  calculus:  0 (registry scaffold)`);
+console.log(`  calculus:  ${nCalc} approved assets`);
+console.log(`  algebra:   ${nAlg} approved assets`);
 console.log(`  chemistry: 0 (registry scaffold)`);
