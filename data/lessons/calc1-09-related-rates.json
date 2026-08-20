@@ -1,0 +1,238 @@
+{
+  "title": "Related Rates",
+  "summary": "Related-rates problems link the rates of two quantities through an equation. Differentiate the relating equation with respect to time (chain rule), then substitute known values to solve for the unknown rate.",
+  "glossary": {
+    "related rates": {
+      "plain": "Two changing quantities tied by an equation.",
+      "in_class": "Differentiate the equation in time to relate $dx/dt$ and $dy/dt$."
+    },
+    "rate with respect to time": {
+      "plain": "How fast a quantity changes per second.",
+      "in_class": "Written $\\dfrac{dQ}{dt}$."
+    },
+    "relating equation": {
+      "plain": "A formula connecting the quantities (area, Pythagorean, volume).",
+      "in_class": "Differentiate it implicitly in $t$."
+    },
+    "geometric model": {
+      "plain": "The shape/relationship behind the problem.",
+      "in_class": "Circle area, cone volume, right triangle, etc."
+    },
+    "substitute last": {
+      "plain": "Plug in numbers only after differentiating.",
+      "in_class": "Keeps variables that are still changing from being frozen too early."
+    },
+    "Pythagorean relation": {
+      "plain": "$x^2+y^2=z^2$ for right-triangle setups.",
+      "in_class": "Differentiates to $x\\dot x+y\\dot y=z\\dot z$."
+    },
+    "cone volume": {
+      "plain": "$V=\\tfrac13\\pi r^2 h$ for tanks and piles.",
+      "in_class": "Often reduce to one variable before differentiating."
+    },
+    "sign of a rate": {
+      "plain": "Positive = increasing, negative = decreasing.",
+      "in_class": "Match the sign to the described motion."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The strategy",
+      "explanation": "Draw the situation, name the quantities, and write an equation connecting them. Differentiate with respect to time, then substitute the instant's values to solve for the unknown rate.",
+      "math_steps": [
+        "Sketch and label variables.",
+        "Write the relating equation.",
+        "Differentiate in $t$, then substitute and solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-c1.svg",
+        "caption": "The strategy"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Differentiating in time",
+      "explanation": "Every variable is a function of $t$, so differentiating brings a $\\dfrac{d}{dt}$ factor by the chain rule: $\\frac{d}{dt}x^2=2x\\dfrac{dx}{dt}$.",
+      "math_steps": [
+        "Treat each variable as depending on $t$.",
+        "Apply the chain rule to every term.",
+        "Attach the matching rate to each."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-c2.svg",
+        "caption": "Differentiating in time"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Reducing variables",
+      "explanation": "If the geometry links variables (a cone with fixed shape has $r$ proportional to $h$), substitute to write the equation in a single variable before differentiating.",
+      "math_steps": [
+        "Find a constraint between variables.",
+        "Substitute to eliminate one.",
+        "Differentiate the simpler relation."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-c3.svg",
+        "caption": "Reducing variables"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Substitute values last",
+      "explanation": "Keep variables symbolic while differentiating; only after you have the rate equation do you plug in the given instantaneous values. Substituting early freezes a changing quantity.",
+      "math_steps": [
+        "Differentiate fully first.",
+        "Then insert the given numbers.",
+        "Solve for the unknown rate."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-c4.svg",
+        "caption": "Substitute values last"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Interpreting the answer",
+      "explanation": "The sign shows increase or decrease and the units come from the setup. Check that the magnitude and sign make physical sense.",
+      "math_steps": [
+        "Read the sign: + increasing, − decreasing.",
+        "Attach correct units.",
+        "Sanity-check against the scenario."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-c5.svg",
+        "caption": "Interpreting the answer"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Sliding ladder",
+      "scenario": "A ladder's base is pulled away from a wall.",
+      "how_the_math_applies": "$x^2+y^2=L^2$ differentiates to relate how fast the top drops to how fast the base moves.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-e1.svg",
+        "caption": "Sliding ladder"
+      }
+    },
+    {
+      "title": "Filling a conical tank",
+      "scenario": "Water pours into a cone-shaped tank.",
+      "how_the_math_applies": "$V=\\tfrac13\\pi r^2h$ links the rising water level to the constant inflow rate.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-e2.svg",
+        "caption": "Filling a conical tank"
+      }
+    },
+    {
+      "title": "Expanding oil spill",
+      "scenario": "A circular spill's radius grows steadily.",
+      "how_the_math_applies": "$A=\\pi r^2$ relates the area's growth to the radius's growth: $\\dot A=2\\pi r\\dot r$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-09-related-rates-e3.svg",
+        "caption": "Expanding oil spill"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "related rates strategy differentiate with respect to time",
+    "math_query": "related rates ladder cone spill examples",
+    "combined_query": "calculus related rates worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A circle's radius grows at $3$ cm/s. How fast is the area growing when $r=5$?",
+      "correct_answer": "$30\\pi$ cm²/s",
+      "solution_steps": [
+        "$A=\\pi r^2$; $\\dot A=2\\pi r\\dot r$.",
+        "$=2\\pi(5)(3)$.",
+        "$30\\pi$ cm²/s."
+      ],
+      "hint": "Differentiate $A=\\pi r^2$ in time."
+    },
+    {
+      "id": "p02",
+      "difficulty": "medium",
+      "prompt": "A $10$-ft ladder's base moves out at $2$ ft/s. How fast does the top drop when the base is $6$ ft out?",
+      "correct_answer": "$-1.5$ ft/s",
+      "solution_steps": [
+        "$x^2+y^2=100$; $x\\dot x+y\\dot y=0$.",
+        "At $x=6$, $y=8$: $6(2)+8\\dot y=0$.",
+        "$\\dot y=-1.5$ ft/s."
+      ],
+      "hint": "Use $x\\dot x+y\\dot y=0$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A balloon's volume grows at $100$ cm³/s. How fast is the radius growing when $r=5$? ($V=\\tfrac43\\pi r^3$)",
+      "correct_answer": "$\\dfrac{1}{\\pi}$ cm/s",
+      "solution_steps": [
+        "$\\dot V=4\\pi r^2\\dot r$.",
+        "$100=4\\pi(25)\\dot r=100\\pi\\dot r$.",
+        "$\\dot r=1/\\pi$ cm/s."
+      ],
+      "hint": "Differentiate the sphere volume."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A square's side grows at $2$ cm/s. How fast is its area growing when the side is $10$?",
+      "correct_answer": "$40$ cm²/s",
+      "solution_steps": [
+        "$A=s^2$; $\\dot A=2s\\dot s$.",
+        "$=2(10)(2)$.",
+        "$40$ cm²/s."
+      ],
+      "hint": "$\\dot A=2s\\dot s$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "hard",
+      "prompt": "Sand forms a cone with $h=r$. If volume grows at $12$ ft³/min, how fast is the height rising when $h=2$? ($V=\\tfrac13\\pi r^2h$)",
+      "correct_answer": "$\\dfrac{3}{\\pi}$ ft/min",
+      "solution_steps": [
+        "With $r=h$: $V=\\tfrac13\\pi h^3$; $\\dot V=\\pi h^2\\dot h$.",
+        "$12=\\pi(4)\\dot h$.",
+        "$\\dot h=3/\\pi$ ft/min."
+      ],
+      "hint": "Use $r=h$ to reduce to one variable."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Two cars leave a point, one north at $30$, one east at $40$ mph. How fast are they separating after 1 h?",
+      "correct_answer": "$50$ mph",
+      "solution_steps": [
+        "$z^2=x^2+y^2$; $z\\dot z=x\\dot x+y\\dot y$.",
+        "At $x=40,y=30,z=50$: $50\\dot z=40(40)+30(30)=2500$.",
+        "$\\dot z=50$ mph."
+      ],
+      "hint": "Pythagorean related rate."
+    },
+    {
+      "id": "p07",
+      "difficulty": "stretch",
+      "prompt": "A streetlight is $12$ ft tall; a $6$-ft person walks away at $3$ ft/s. How fast does the shadow tip move?",
+      "correct_answer": "$6$ ft/s",
+      "solution_steps": [
+        "Similar triangles: tip distance $=2x$ where $x$ is the person's distance.",
+        "$\\frac{d}{dt}(2x)=2(3)$.",
+        "$6$ ft/s."
+      ],
+      "hint": "Set up similar triangles first."
+    }
+  ]
+}

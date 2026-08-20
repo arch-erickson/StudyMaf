@@ -1,0 +1,250 @@
+{
+  "title": "Right-Triangle Trig & the Unit Circle",
+  "summary": "Trig ratios sine, cosine, and tangent relate a right triangle's angles to its sides (SOH-CAH-TOA). The unit circle extends these to all angles, with coordinates $(\\cos\\theta,\\sin\\theta)$ and special angles $30^\\circ,45^\\circ,60^\\circ$ giving exact values.",
+  "glossary": {
+    "sine": {
+      "plain": "Opposite over hypotenuse in a right triangle.",
+      "in_class": "$\\sin\\theta=\\dfrac{\\text{opp}}{\\text{hyp}}$."
+    },
+    "cosine": {
+      "plain": "Adjacent over hypotenuse.",
+      "in_class": "$\\cos\\theta=\\dfrac{\\text{adj}}{\\text{hyp}}$."
+    },
+    "tangent": {
+      "plain": "Opposite over adjacent.",
+      "in_class": "$\\tan\\theta=\\dfrac{\\text{opp}}{\\text{adj}}=\\dfrac{\\sin}{\\cos}$."
+    },
+    "SOH-CAH-TOA": {
+      "plain": "Memory aid for the three ratios.",
+      "in_class": "Sine-Opp-Hyp, Cos-Adj-Hyp, Tan-Opp-Adj."
+    },
+    "unit circle": {
+      "plain": "A circle of radius 1 centered at the origin.",
+      "in_class": "A point at angle $\\theta$ is $(\\cos\\theta,\\sin\\theta)$."
+    },
+    "special angles": {
+      "plain": "$30^\\circ,45^\\circ,60^\\circ$ with exact values.",
+      "in_class": "From the 30-60-90 and 45-45-90 triangles."
+    },
+    "radian": {
+      "plain": "An angle measure based on arc length.",
+      "in_class": "$180^\\circ=\\pi$ radians."
+    },
+    "reference angle": {
+      "plain": "The acute angle to the $x$-axis.",
+      "in_class": "Gives the magnitude of trig values in any quadrant."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The three ratios",
+      "explanation": "In a right triangle, sine, cosine, and tangent are fixed ratios of the sides for a given acute angle — SOH-CAH-TOA. They let you find unknown sides or angles.",
+      "math_steps": [
+        "Label opposite, adjacent, hypotenuse relative to the angle.",
+        "Pick the ratio with your known and unknown sides.",
+        "Solve for the unknown."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-c1.svg",
+        "caption": "The three ratios"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Solving right triangles",
+      "explanation": "Given an angle and a side, use a trig ratio to find another side; given two sides, use an inverse trig function to find the angle.",
+      "math_steps": [
+        "Choose the ratio linking known and unknown.",
+        "Set up and solve the equation.",
+        "Use $\\sin^{-1}$, etc., for angles."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-c2.svg",
+        "caption": "Solving right triangles"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Special right triangles",
+      "explanation": "The 45-45-90 triangle has sides $1:1:\\sqrt2$; the 30-60-90 has $1:\\sqrt3:2$. These give exact trig values for $30^\\circ,45^\\circ,60^\\circ$.",
+      "math_steps": [
+        "Recall the side ratios.",
+        "Read off exact sine/cosine.",
+        "e.g. $\\sin30^\\circ=\\tfrac12$, $\\cos45^\\circ=\\tfrac{\\sqrt2}{2}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-c3.svg",
+        "caption": "Special right triangles"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The unit circle",
+      "explanation": "On the unit circle, the point at angle $\\theta$ has coordinates $(\\cos\\theta,\\sin\\theta)$. This defines sine and cosine for every angle, positive or negative.",
+      "math_steps": [
+        "Place the angle from the positive $x$-axis.",
+        "The point's coordinates are $(\\cos\\theta,\\sin\\theta)$.",
+        "Signs follow the quadrant."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-c4.svg",
+        "caption": "The unit circle"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Radians and reference angles",
+      "explanation": "Convert degrees and radians with $180^\\circ=\\pi$. In any quadrant, the reference angle gives the value's size; the quadrant gives the sign.",
+      "math_steps": [
+        "Convert using $\\pi=180^\\circ$.",
+        "Find the reference angle to the $x$-axis.",
+        "Apply the quadrant sign."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-c5.svg",
+        "caption": "Radians and reference angles"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Height of a building",
+      "scenario": "Measure an angle of elevation from a distance.",
+      "how_the_math_applies": "$\\tan\\theta=\\dfrac{\\text{height}}{\\text{distance}}$ solves for the height.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-e1.svg",
+        "caption": "Height of a building"
+      }
+    },
+    {
+      "title": "Ramp angle",
+      "scenario": "A wheelchair ramp's rise and run.",
+      "how_the_math_applies": "The angle satisfies $\\sin\\theta=\\dfrac{\\text{rise}}{\\text{length}}$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-e2.svg",
+        "caption": "Ramp angle"
+      }
+    },
+    {
+      "title": "Ferris wheel height",
+      "scenario": "A rider's height as the wheel turns.",
+      "how_the_math_applies": "Height varies as $\\sin\\theta$ around the circle — the unit-circle idea.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-13-right-triangle-trig-e3.svg",
+        "caption": "Ferris wheel height"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "right triangle trigonometry SOH CAH TOA ratios",
+    "math_query": "unit circle special angles reference angle examples",
+    "combined_query": "college algebra trigonometry right triangle unit circle problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "In a right triangle, opp $=3$, hyp $=5$. Find $\\sin\\theta$.",
+      "correct_answer": "$\\tfrac35$",
+      "solution_steps": [
+        "$\\sin=\\text{opp}/\\text{hyp}$.",
+        "$3/5$.",
+        "$\\tfrac35$."
+      ],
+      "hint": "SOH."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find $\\cos60^\\circ$.",
+      "correct_answer": "$\\tfrac12$",
+      "solution_steps": [
+        "30-60-90 triangle.",
+        "adj/hyp $=1/2$.",
+        "$\\tfrac12$."
+      ],
+      "hint": "Special angle."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Find $\\tan45^\\circ$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "45-45-90: opp $=$ adj.",
+        "$1/1$.",
+        "$1$."
+      ],
+      "hint": "Equal legs."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "opp $=4$, adj $=3$. Find the hypotenuse and $\\sin\\theta$.",
+      "correct_answer": "hyp $=5$, $\\sin=\\tfrac45$",
+      "solution_steps": [
+        "$\\sqrt{16+9}=5$.",
+        "$\\sin=4/5$.",
+        "Done."
+      ],
+      "hint": "Pythagorean theorem first."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find $\\sin30^\\circ$ and $\\cos30^\\circ$.",
+      "correct_answer": "$\\tfrac12,\\ \\tfrac{\\sqrt3}{2}$",
+      "solution_steps": [
+        "30-60-90 sides $1:\\sqrt3:2$.",
+        "$\\sin30=1/2$, $\\cos30=\\sqrt3/2$.",
+        "Done."
+      ],
+      "hint": "Use the special triangle."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Convert $90^\\circ$ to radians.",
+      "correct_answer": "$\\tfrac{\\pi}{2}$",
+      "solution_steps": [
+        "$180^\\circ=\\pi$.",
+        "$90^\\circ=\\pi/2$.",
+        "Done."
+      ],
+      "hint": "Scale by $\\pi/180$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A 20-ft ladder leans at $60^\\circ$. How high does it reach?",
+      "correct_answer": "$10\\sqrt3\\approx17.3$ ft",
+      "solution_steps": [
+        "Height $=20\\sin60^\\circ$.",
+        "$=20\\cdot\\tfrac{\\sqrt3}{2}$.",
+        "$10\\sqrt3$ ft."
+      ],
+      "hint": "$\\sin60^\\circ=\\sqrt3/2$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "On the unit circle, what point is at $\\theta=180^\\circ$?",
+      "correct_answer": "$(-1,0)$",
+      "solution_steps": [
+        "$(\\cos180^\\circ,\\sin180^\\circ)$.",
+        "$=(-1,0)$.",
+        "Done."
+      ],
+      "hint": "Coordinates are $(\\cos,\\sin)$."
+    }
+  ]
+}

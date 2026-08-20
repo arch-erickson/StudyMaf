@@ -1,0 +1,250 @@
+{
+  "title": "Volumes & Arc Length",
+  "summary": "Solids of revolution have volume by disks/washers $\\int\\pi(R^2-r^2)\\,dx$ or cylindrical shells $\\int2\\pi(\\text{radius})(\\text{height})\\,dx$. Arc length integrates $\\sqrt{1+(f')^2}$, and surface area adds a $2\\pi r$ factor.",
+  "glossary": {
+    "solid of revolution": {
+      "plain": "A shape made by spinning a region about a line.",
+      "in_class": "Volume via disks, washers, or shells."
+    },
+    "disk method": {
+      "plain": "Slices perpendicular to the axis, no hole.",
+      "in_class": "$V=\\int\\pi R^2\\,dx$."
+    },
+    "washer method": {
+      "plain": "Slices with a hole (region away from the axis).",
+      "in_class": "$V=\\int\\pi(R^2-r^2)\\,dx$."
+    },
+    "cylindrical shells": {
+      "plain": "Nested thin cylinders parallel to the axis.",
+      "in_class": "$V=\\int 2\\pi(\\text{radius})(\\text{height})\\,dx$."
+    },
+    "axis of revolution": {
+      "plain": "The line the region spins around.",
+      "in_class": "Sets the radius in each formula."
+    },
+    "arc length": {
+      "plain": "The true length of a curve.",
+      "in_class": "$L=\\int_a^b\\sqrt{1+(f')^2}\\,dx$."
+    },
+    "surface area": {
+      "plain": "Area of a surface of revolution.",
+      "in_class": "$S=\\int 2\\pi r\\sqrt{1+(f')^2}\\,dx$."
+    },
+    "representative slice": {
+      "plain": "The generic thin piece you sum.",
+      "in_class": "Disk, washer, or shell — model it, then integrate."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Disks and washers",
+      "explanation": "Spin a region about an axis and slice perpendicular to it. A solid slice is a disk ($\\pi R^2$); a slice with a gap is a washer ($\\pi(R^2-r^2)$). Integrate along the axis.",
+      "math_steps": [
+        "Slice perpendicular to the axis.",
+        "Outer radius $R$, inner radius $r$ (if any).",
+        "$V=\\int\\pi(R^2-r^2)\\,dx$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-c1.svg",
+        "caption": "Disks and washers"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Cylindrical shells",
+      "explanation": "Slice parallel to the axis into thin cylindrical shells of radius (distance to axis) and height (curve). Unrolled, each is a rectangle: $V=\\int 2\\pi(\\text{radius})(\\text{height})\\,dx$.",
+      "math_steps": [
+        "Identify each shell's radius and height.",
+        "Shell volume $\\approx 2\\pi r\\,h\\,dx$.",
+        "Integrate over the region."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-c2.svg",
+        "caption": "Cylindrical shells"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Choosing disks vs shells",
+      "explanation": "Match the slice to the geometry: if slices perpendicular to the axis are simple, use disks/washers; if parallel slices are simpler (or the axis is offset), use shells.",
+      "math_steps": [
+        "Sketch the region and axis.",
+        "See which slicing avoids solving for the other variable.",
+        "Pick disks/washers or shells accordingly."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-c3.svg",
+        "caption": "Choosing disks vs shells"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Arc length",
+      "explanation": "Sum tiny hypotenuses $\\sqrt{dx^2+dy^2}=\\sqrt{1+(f')^2}\\,dx$ along the curve: $L=\\int_a^b\\sqrt{1+(f'(x))^2}\\,dx$.",
+      "math_steps": [
+        "Compute $f'(x)$.",
+        "Form $\\sqrt{1+(f')^2}$.",
+        "Integrate over $[a,b]$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-c4.svg",
+        "caption": "Arc length"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Surface area of revolution",
+      "explanation": "Spinning a curve sweeps a surface; each band has area $2\\pi r$ times the arc-length element: $S=\\int 2\\pi r\\sqrt{1+(f')^2}\\,dx$, with $r$ the distance to the axis.",
+      "math_steps": [
+        "Find the radius $r$ (distance to axis).",
+        "Multiply the arc-length element by $2\\pi r$.",
+        "Integrate."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-c5.svg",
+        "caption": "Surface area of revolution"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Volume of a wine barrel",
+      "scenario": "A curved profile spun into a solid.",
+      "how_the_math_applies": "Disk/washer integration of the profile gives the barrel's volume.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-e1.svg",
+        "caption": "Volume of a wine barrel"
+      }
+    },
+    {
+      "title": "Length of a suspension cable",
+      "scenario": "A hanging cable follows a curve.",
+      "how_the_math_applies": "Arc-length integration measures the true cable length for material estimates.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-e2.svg",
+        "caption": "Length of a suspension cable"
+      }
+    },
+    {
+      "title": "Surface area of a dome",
+      "scenario": "A curve revolved into a dome shape.",
+      "how_the_math_applies": "The surface-area integral gives how much material covers the dome.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-14-volumes-e3.svg",
+        "caption": "Surface area of a dome"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "volume solids of revolution disk washer shell method",
+    "math_query": "arc length surface area of revolution formula examples",
+    "combined_query": "calculus 2 volumes arc length worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Volume when $y=\\sqrt{x}$, $0\\le x\\le4$, is revolved about the $x$-axis (disks).",
+      "correct_answer": "$8\\pi$",
+      "solution_steps": [
+        "$V=\\int_0^4\\pi(\\sqrt x)^2\\,dx=\\pi\\int_0^4 x\\,dx$.",
+        "$=\\pi\\cdot8$.",
+        "$8\\pi$."
+      ],
+      "hint": "Disk radius is $\\sqrt x$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Volume when $y=x$, $0\\le x\\le1$, revolved about the $x$-axis.",
+      "correct_answer": "$\\tfrac{\\pi}{3}$",
+      "solution_steps": [
+        "$V=\\pi\\int_0^1 x^2\\,dx$.",
+        "$=\\pi\\cdot\\tfrac13$.",
+        "$\\tfrac{\\pi}{3}$."
+      ],
+      "hint": "Radius $=x$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Volume: region between $y=x$ and $y=x^2$ revolved about the $x$-axis (washers).",
+      "correct_answer": "$\\tfrac{2\\pi}{15}$",
+      "solution_steps": [
+        "$V=\\pi\\int_0^1(x^2-x^4)\\,dx$.",
+        "$=\\pi(\\tfrac13-\\tfrac15)$.",
+        "$\\tfrac{2\\pi}{15}$."
+      ],
+      "hint": "$R=x$, $r=x^2$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Shell volume: $y=x^2$, $0\\le x\\le2$, about the $y$-axis.",
+      "correct_answer": "$8\\pi$",
+      "solution_steps": [
+        "$V=\\int_0^2 2\\pi x\\,(x^2)\\,dx=2\\pi\\int_0^2 x^3\\,dx$.",
+        "$=2\\pi\\cdot4$.",
+        "$8\\pi$."
+      ],
+      "hint": "Shell: $2\\pi(\\text{radius})(\\text{height})$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Set up the arc length of $y=x^{3/2}$ on $[0,1]$.",
+      "correct_answer": "$\\int_0^1\\sqrt{1+\\tfrac94 x}\\,dx$",
+      "solution_steps": [
+        "$f'=\\tfrac32 x^{1/2}$; $(f')^2=\\tfrac94 x$.",
+        "$\\sqrt{1+\\tfrac94 x}$.",
+        "Integrate $0$ to $1$."
+      ],
+      "hint": "$L=\\int\\sqrt{1+(f')^2}$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Arc length of $y=\\tfrac23 x^{3/2}$ on $[0,3]$.",
+      "correct_answer": "$\\tfrac{14}{3}$",
+      "solution_steps": [
+        "$f'=x^{1/2}$; $\\sqrt{1+x}$.",
+        "$\\int_0^3\\sqrt{1+x}\\,dx=\\tfrac23(1+x)^{3/2}\\big|_0^3$.",
+        "$\\tfrac23(8-1)=\\tfrac{14}{3}$."
+      ],
+      "hint": "$(f')^2=x$ makes it integrable."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Volume when $y=\\sqrt{x}$, $0\\le x\\le4$, revolved about the $y$-axis (shells).",
+      "correct_answer": "$\\tfrac{128\\pi}{5}$",
+      "solution_steps": [
+        "$V=\\int_0^4 2\\pi x\\sqrt x\\,dx=2\\pi\\int_0^4 x^{3/2}\\,dx$.",
+        "$=2\\pi\\cdot\\tfrac25\\cdot32$.",
+        "$\\tfrac{128\\pi}{5}$."
+      ],
+      "hint": "Shell radius $x$, height $\\sqrt x$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Surface area when $y=x$, $0\\le x\\le1$, revolved about the $x$-axis.",
+      "correct_answer": "$\\sqrt2\\,\\pi$",
+      "solution_steps": [
+        "$S=\\int_0^1 2\\pi x\\sqrt{1+1}\\,dx=2\\sqrt2\\,\\pi\\int_0^1 x\\,dx$.",
+        "$=2\\sqrt2\\,\\pi\\cdot\\tfrac12$.",
+        "$\\sqrt2\\,\\pi$."
+      ],
+      "hint": "$r=x$, $\\sqrt{1+(f')^2}=\\sqrt2$."
+    }
+  ]
+}

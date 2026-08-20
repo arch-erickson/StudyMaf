@@ -1,0 +1,250 @@
+{
+  "title": "Radicals & Complex Numbers",
+  "summary": "Radicals simplify by pulling out perfect-power factors; you add like radicals, multiply with the product rule, and rationalize denominators. When a square root of a negative appears, complex numbers with $i=\\sqrt{-1}$ extend the number system.",
+  "glossary": {
+    "radical": {
+      "plain": "A root expression like $\\sqrt{x}$ or $\\sqrt[3]{x}$.",
+      "in_class": "Index shows which root; simplify by extracting perfect powers."
+    },
+    "radicand": {
+      "plain": "The quantity under the radical.",
+      "in_class": "Factor it to find perfect-power pieces."
+    },
+    "rationalize": {
+      "plain": "Clear a radical from a denominator.",
+      "in_class": "Multiply by a form of 1 (the radical or a conjugate)."
+    },
+    "conjugate": {
+      "plain": "$a-b\\sqrt{c}$ pairs with $a+b\\sqrt{c}$.",
+      "in_class": "Their product removes the radical: $a^2-b^2c$."
+    },
+    "imaginary unit": {
+      "plain": "$i$, defined by $i^2=-1$.",
+      "in_class": "$\\sqrt{-1}=i$; makes negative roots meaningful."
+    },
+    "complex number": {
+      "plain": "A number $a+bi$ with real and imaginary parts.",
+      "in_class": "Combine like terms; use $i^2=-1$."
+    },
+    "like radicals": {
+      "plain": "Radicals with the same index and radicand.",
+      "in_class": "Only these can be added/subtracted."
+    },
+    "product rule (radicals)": {
+      "plain": "$\\sqrt{ab}=\\sqrt a\\,\\sqrt b$.",
+      "in_class": "Splits a radicand to extract perfect squares."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Simplifying radicals",
+      "explanation": "Factor the radicand and pull out perfect-power factors: $\\sqrt{50}=\\sqrt{25\\cdot2}=5\\sqrt2$. For higher roots, extract groups matching the index.",
+      "math_steps": [
+        "Factor out the largest perfect power.",
+        "Take its root outside.",
+        "Leave the rest inside."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-c1.svg",
+        "caption": "Simplifying radicals"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Operating on radicals",
+      "explanation": "Add or subtract only like radicals (same index and radicand). Multiply with $\\sqrt a\\,\\sqrt b=\\sqrt{ab}$, then simplify.",
+      "math_steps": [
+        "Simplify each radical first.",
+        "Add/subtract like radicals by their coefficients.",
+        "Multiply radicands together, then simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-c2.svg",
+        "caption": "Operating on radicals"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Rationalizing denominators",
+      "explanation": "Remove a radical from the bottom by multiplying by it (single term) or by the conjugate (a sum/difference), which uses the difference-of-squares to clear the root.",
+      "math_steps": [
+        "Single radical: multiply top and bottom by that radical.",
+        "Binomial: multiply by the conjugate.",
+        "Simplify the cleared expression."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-c3.svg",
+        "caption": "Rationalizing denominators"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The imaginary unit",
+      "explanation": "Define $i=\\sqrt{-1}$, so $i^2=-1$. Then $\\sqrt{-9}=3i$, and higher powers cycle $i,-1,-i,1$.",
+      "math_steps": [
+        "Write $\\sqrt{-a}=\\sqrt{a}\\,i$.",
+        "Replace $i^2$ with $-1$.",
+        "Reduce $i^n$ using the 4-cycle."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-c4.svg",
+        "caption": "The imaginary unit"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Complex arithmetic",
+      "explanation": "Add/subtract real and imaginary parts separately; multiply with FOIL using $i^2=-1$; divide by multiplying by the complex conjugate.",
+      "math_steps": [
+        "Add: combine real with real, imaginary with imaginary.",
+        "Multiply: FOIL, then apply $i^2=-1$.",
+        "Divide: multiply by the conjugate $a-bi$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-c5.svg",
+        "caption": "Complex arithmetic"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Diagonal of a screen",
+      "scenario": "A TV's diagonal from width and height.",
+      "how_the_math_applies": "The Pythagorean theorem gives a radical like $\\sqrt{w^2+h^2}$ to simplify.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-e1.svg",
+        "caption": "Diagonal of a screen"
+      }
+    },
+    {
+      "title": "AC circuit impedance",
+      "scenario": "Resistance and reactance combine.",
+      "how_the_math_applies": "Impedance is a complex number $R+iX$; its magnitude uses $\\sqrt{R^2+X^2}$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-e2.svg",
+        "caption": "AC circuit impedance"
+      }
+    },
+    {
+      "title": "Signal phase",
+      "scenario": "Waves described by real and imaginary parts.",
+      "how_the_math_applies": "Complex numbers encode amplitude and phase compactly.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-05-radicals-complex-e3.svg",
+        "caption": "Signal phase"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "simplify radicals product rule rationalize denominator",
+    "math_query": "complex numbers i imaginary unit add multiply examples",
+    "combined_query": "college algebra radicals complex numbers worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Simplify $\\sqrt{50}$.",
+      "correct_answer": "$5\\sqrt2$",
+      "solution_steps": [
+        "$50=25\\cdot2$.",
+        "$\\sqrt{25}=5$.",
+        "$5\\sqrt2$."
+      ],
+      "hint": "Pull out the perfect square."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Simplify $\\sqrt{-16}$.",
+      "correct_answer": "$4i$",
+      "solution_steps": [
+        "$\\sqrt{16}\\cdot\\sqrt{-1}$.",
+        "$4i$.",
+        "Done."
+      ],
+      "hint": "$\\sqrt{-1}=i$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Add $2\\sqrt3+5\\sqrt3$.",
+      "correct_answer": "$7\\sqrt3$",
+      "solution_steps": [
+        "Like radicals.",
+        "Add coefficients.",
+        "$7\\sqrt3$."
+      ],
+      "hint": "Same radicand ⇒ add."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Multiply $\\sqrt6\\cdot\\sqrt{10}$.",
+      "correct_answer": "$2\\sqrt{15}$",
+      "solution_steps": [
+        "$\\sqrt{60}$.",
+        "$=\\sqrt{4\\cdot15}$.",
+        "$2\\sqrt{15}$."
+      ],
+      "hint": "Multiply radicands, then simplify."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Rationalize $\\dfrac{1}{\\sqrt2}$.",
+      "correct_answer": "$\\dfrac{\\sqrt2}{2}$",
+      "solution_steps": [
+        "Multiply by $\\sqrt2/\\sqrt2$.",
+        "$\\dfrac{\\sqrt2}{2}$.",
+        "Done."
+      ],
+      "hint": "Multiply by the radical over itself."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Simplify $(2+3i)+(4-i)$.",
+      "correct_answer": "$6+2i$",
+      "solution_steps": [
+        "Real: $2+4$; imaginary: $3-1$.",
+        "$6+2i$.",
+        "Done."
+      ],
+      "hint": "Combine like parts."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Multiply $(2+i)(3-2i)$.",
+      "correct_answer": "$8-i$",
+      "solution_steps": [
+        "FOIL: $6-4i+3i-2i^2$.",
+        "$6-i+2$ (since $i^2=-1$).",
+        "$8-i$."
+      ],
+      "hint": "Use $i^2=-1$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Rationalize $\\dfrac{1}{2-\\sqrt3}$.",
+      "correct_answer": "$2+\\sqrt3$",
+      "solution_steps": [
+        "Multiply by the conjugate $2+\\sqrt3$.",
+        "Denominator $4-3=1$.",
+        "$2+\\sqrt3$."
+      ],
+      "hint": "Use the conjugate to clear the root."
+    }
+  ]
+}

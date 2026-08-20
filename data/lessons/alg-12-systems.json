@@ -1,0 +1,250 @@
+{
+  "title": "Systems of Equations",
+  "summary": "A system asks for values satisfying several equations at once. Solve linear systems by substitution or elimination; nonlinear systems (a line and a circle) by substitution. A system has one solution, none (parallel), or infinitely many (same line).",
+  "glossary": {
+    "system of equations": {
+      "plain": "Two or more equations solved together.",
+      "in_class": "A solution satisfies all of them."
+    },
+    "substitution": {
+      "plain": "Solve one equation for a variable, plug into the other.",
+      "in_class": "Reduces to a single-variable equation."
+    },
+    "elimination": {
+      "plain": "Add/subtract equations to cancel a variable.",
+      "in_class": "Scale first so coefficients match."
+    },
+    "consistent": {
+      "plain": "Has at least one solution.",
+      "in_class": "Independent (one) or dependent (infinite)."
+    },
+    "inconsistent": {
+      "plain": "No solution — equations contradict.",
+      "in_class": "Parallel lines; elimination gives a false statement."
+    },
+    "dependent": {
+      "plain": "Infinitely many solutions — same line.",
+      "in_class": "Elimination gives $0=0$."
+    },
+    "nonlinear system": {
+      "plain": "At least one non-line (circle, parabola).",
+      "in_class": "Usually solved by substitution."
+    },
+    "point of intersection": {
+      "plain": "Where the graphs meet — the solution.",
+      "in_class": "Coordinates satisfying every equation."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Substitution",
+      "explanation": "Solve one equation for a variable, substitute into the other, solve the single-variable equation, then back-substitute for the second variable.",
+      "math_steps": [
+        "Isolate a variable in one equation.",
+        "Substitute into the other.",
+        "Solve, then back-substitute."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-c1.svg",
+        "caption": "Substitution"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Elimination",
+      "explanation": "Scale the equations so one variable's coefficients are opposites, add to cancel it, solve for the remaining variable, then back-substitute.",
+      "math_steps": [
+        "Multiply to align coefficients.",
+        "Add to eliminate one variable.",
+        "Solve and back-substitute."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-c2.svg",
+        "caption": "Elimination"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Number of solutions",
+      "explanation": "One intersection ⇒ one solution; parallel lines ⇒ none (inconsistent); identical lines ⇒ infinitely many (dependent). Elimination reveals which via $0=0$ or $0=c$.",
+      "math_steps": [
+        "Attempt to solve.",
+        "$0=c$ (false) ⇒ no solution.",
+        "$0=0$ ⇒ infinitely many."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-c3.svg",
+        "caption": "Number of solutions"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Nonlinear systems",
+      "explanation": "For a line and a conic, substitute the line into the conic to get a quadratic; its solutions give the intersection points (0, 1, or 2).",
+      "math_steps": [
+        "Solve the linear equation for one variable.",
+        "Substitute into the nonlinear one.",
+        "Solve the resulting quadratic."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-c4.svg",
+        "caption": "Nonlinear systems"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Word problems with systems",
+      "explanation": "Mixture, rate, and money problems often need two equations. Define two variables, write two relationships, and solve the system.",
+      "math_steps": [
+        "Name two unknowns.",
+        "Write two equations from the conditions.",
+        "Solve by substitution or elimination."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-c5.svg",
+        "caption": "Word problems with systems"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Ticket sales mix",
+      "scenario": "Adult and child tickets total a known count and revenue.",
+      "how_the_math_applies": "Two equations in two unknowns solve for how many of each sold.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-e1.svg",
+        "caption": "Ticket sales mix"
+      }
+    },
+    {
+      "title": "Break-even with two costs",
+      "scenario": "Two plans priced differently.",
+      "how_the_math_applies": "Setting the plans equal is a system whose solution is the crossover point.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-e2.svg",
+        "caption": "Break-even with two costs"
+      }
+    },
+    {
+      "title": "Blending investments",
+      "scenario": "Split money between two rates.",
+      "how_the_math_applies": "A system in the two amounts matches a target total and interest.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-12-systems-e3.svg",
+        "caption": "Blending investments"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "systems of equations substitution elimination method",
+    "math_query": "systems solutions consistent inconsistent nonlinear examples",
+    "combined_query": "college algebra systems of equations worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Solve $y=2x$, $x+y=6$.",
+      "correct_answer": "$(2,4)$",
+      "solution_steps": [
+        "Substitute: $x+2x=6$.",
+        "$x=2$, $y=4$.",
+        "$(2,4)$."
+      ],
+      "hint": "Substitute the first into the second."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Solve $x+y=5$, $x-y=1$.",
+      "correct_answer": "$(3,2)$",
+      "solution_steps": [
+        "Add: $2x=6\\Rightarrow x=3$.",
+        "$y=2$.",
+        "$(3,2)$."
+      ],
+      "hint": "Elimination by adding."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Solve $2x+y=7$, $x-y=2$.",
+      "correct_answer": "$(3,1)$",
+      "solution_steps": [
+        "Add: $3x=9\\Rightarrow x=3$.",
+        "$y=1$.",
+        "$(3,1)$."
+      ],
+      "hint": "Add to cancel $y$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Solve $3x+2y=12$, $x=2$.",
+      "correct_answer": "$(2,3)$",
+      "solution_steps": [
+        "Substitute $x=2$: $6+2y=12$.",
+        "$y=3$.",
+        "$(2,3)$."
+      ],
+      "hint": "Plug in the known value."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "How many solutions: $y=2x+1$, $y=2x-3$?",
+      "correct_answer": "None (parallel)",
+      "solution_steps": [
+        "Same slope, different intercept.",
+        "Parallel lines.",
+        "No solution."
+      ],
+      "hint": "Equal slopes, unequal intercepts."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Solve $y=x^2$, $y=x+2$.",
+      "correct_answer": "$(2,4)$ and $(-1,1)$",
+      "solution_steps": [
+        "$x^2=x+2\\Rightarrow x^2-x-2=0$.",
+        "$x=2,-1$.",
+        "$(2,4),(-1,1)$."
+      ],
+      "hint": "Substitute the line into the parabola."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve $2x+3y=13$, $3x-y=3$ (elimination).",
+      "correct_answer": "$(2,3)$",
+      "solution_steps": [
+        "From the 2nd, $y=3x-3$; substitute: $2x+9x-9=13$.",
+        "$11x=22\\Rightarrow x=2$, $y=3$.",
+        "$(2,3)$."
+      ],
+      "hint": "Solve one for $y$, then substitute."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "A line $y=x$ meets circle $x^2+y^2=8$ where?",
+      "correct_answer": "$(2,2)$ and $(-2,-2)$",
+      "solution_steps": [
+        "Substitute: $2x^2=8\\Rightarrow x^2=4$.",
+        "$x=\\pm2$, $y=x$.",
+        "$(2,2),(-2,-2)$."
+      ],
+      "hint": "Put $y=x$ into the circle."
+    }
+  ]
+}

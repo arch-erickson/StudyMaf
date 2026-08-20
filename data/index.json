@@ -1,19 +1,289 @@
 {
   "lessons": [
-    { "id": "phys1442-01-coulomb",        "title": "Electric Charge & Coulomb's Law",              "file": "lessons/phys1442-01-coulomb.json" },
-    { "id": "phys1442-02-efield",         "title": "The Electric Field",                           "file": "lessons/phys1442-02-efield.json" },
-    { "id": "phys1442-03-gauss",          "title": "Gauss's Law",                                  "file": "lessons/phys1442-03-gauss.json" },
-    { "id": "phys1442-04-potential",      "title": "Electric Potential",                           "file": "lessons/phys1442-04-potential.json" },
-    { "id": "phys1442-05-capacitance",    "title": "Capacitance & Capacitors",                     "file": "lessons/phys1442-05-capacitance.json" },
-    { "id": "phys1442-06-current",        "title": "Electric Current & Resistance",                "file": "lessons/phys1442-06-current.json" },
-    { "id": "phys1442-07-dc-circuits",    "title": "DC Circuits & Kirchhoff's Rules",              "file": "lessons/phys1442-07-dc-circuits.json" },
-    { "id": "phys1442-08-magnetic-force", "title": "Magnetic Forces & Fields",                     "file": "lessons/phys1442-08-magnetic-force.json" },
-    { "id": "phys1442-09-magnetic-sources","title": "Sources of Magnetic Field",                   "file": "lessons/phys1442-09-magnetic-sources.json" },
-    { "id": "phys1442-10-induction",      "title": "Electromagnetic Induction & Faraday's Law",    "file": "lessons/phys1442-10-induction.json" },
-    { "id": "phys1442-11-ac-circuits",    "title": "AC Circuits",                                  "file": "lessons/phys1442-11-ac-circuits.json" },
-    { "id": "phys1442-12-em-waves",       "title": "Maxwell's Equations, EM Waves & Polarization", "file": "lessons/phys1442-12-em-waves.json" },
-    { "id": "phys1442-13-geometric-optics","title": "Geometric Optics",                            "file": "lessons/phys1442-13-geometric-optics.json" },
-    { "id": "phys1442-14-interference-diffraction","title": "Lenses, Interference & Diffraction",  "file": "lessons/phys1442-14-interference-diffraction.json" },
-    { "id": "sample",                     "title": "Linear Equations in One Variable",             "file": "lessons/sample.json" }
+    {
+      "id": "phys1442-01-coulomb",
+      "title": "Electric Charge & Coulomb's Law",
+      "file": "lessons/phys1442-01-coulomb.json"
+    },
+    {
+      "id": "phys1442-02-efield",
+      "title": "The Electric Field",
+      "file": "lessons/phys1442-02-efield.json"
+    },
+    {
+      "id": "phys1442-03-gauss",
+      "title": "Gauss's Law",
+      "file": "lessons/phys1442-03-gauss.json"
+    },
+    {
+      "id": "phys1442-04-potential",
+      "title": "Electric Potential",
+      "file": "lessons/phys1442-04-potential.json"
+    },
+    {
+      "id": "phys1442-05-capacitance",
+      "title": "Capacitance & Capacitors",
+      "file": "lessons/phys1442-05-capacitance.json"
+    },
+    {
+      "id": "phys1442-06-current",
+      "title": "Electric Current & Resistance",
+      "file": "lessons/phys1442-06-current.json"
+    },
+    {
+      "id": "phys1442-07-dc-circuits",
+      "title": "DC Circuits & Kirchhoff's Rules",
+      "file": "lessons/phys1442-07-dc-circuits.json"
+    },
+    {
+      "id": "phys1442-08-magnetic-force",
+      "title": "Magnetic Forces & Fields",
+      "file": "lessons/phys1442-08-magnetic-force.json"
+    },
+    {
+      "id": "phys1442-09-magnetic-sources",
+      "title": "Sources of Magnetic Field",
+      "file": "lessons/phys1442-09-magnetic-sources.json"
+    },
+    {
+      "id": "phys1442-10-induction",
+      "title": "Electromagnetic Induction & Faraday's Law",
+      "file": "lessons/phys1442-10-induction.json"
+    },
+    {
+      "id": "phys1442-11-ac-circuits",
+      "title": "AC Circuits",
+      "file": "lessons/phys1442-11-ac-circuits.json"
+    },
+    {
+      "id": "phys1442-12-em-waves",
+      "title": "Maxwell's Equations, EM Waves & Polarization",
+      "file": "lessons/phys1442-12-em-waves.json"
+    },
+    {
+      "id": "phys1442-13-geometric-optics",
+      "title": "Geometric Optics",
+      "file": "lessons/phys1442-13-geometric-optics.json"
+    },
+    {
+      "id": "phys1442-14-interference-diffraction",
+      "title": "Lenses, Interference & Diffraction",
+      "file": "lessons/phys1442-14-interference-diffraction.json"
+    },
+    {
+      "id": "sample",
+      "title": "Linear Equations in One Variable",
+      "file": "lessons/sample.json"
+    },
+    {
+      "id": "calc1-01-limits",
+      "title": "Limits & Limit Laws",
+      "file": "lessons/calc1-01-limits.json"
+    },
+    {
+      "id": "calc1-02-continuity",
+      "title": "Continuity",
+      "file": "lessons/calc1-02-continuity.json"
+    },
+    {
+      "id": "calc1-03-derivative-definition",
+      "title": "Defining the Derivative",
+      "file": "lessons/calc1-03-derivative-definition.json"
+    },
+    {
+      "id": "calc1-04-differentiation-rules",
+      "title": "Differentiation Rules",
+      "file": "lessons/calc1-04-differentiation-rules.json"
+    },
+    {
+      "id": "calc1-05-rates-trig",
+      "title": "Rates of Change & Trig Derivatives",
+      "file": "lessons/calc1-05-rates-trig.json"
+    },
+    {
+      "id": "calc1-06-chain-rule",
+      "title": "The Chain Rule",
+      "file": "lessons/calc1-06-chain-rule.json"
+    },
+    {
+      "id": "calc1-07-inverse-implicit",
+      "title": "Inverse & Implicit Differentiation",
+      "file": "lessons/calc1-07-inverse-implicit.json"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives",
+      "title": "Derivatives of Exponential & Log Functions",
+      "file": "lessons/calc1-08-exp-log-derivatives.json"
+    },
+    {
+      "id": "calc1-09-related-rates",
+      "title": "Related Rates",
+      "file": "lessons/calc1-09-related-rates.json"
+    },
+    {
+      "id": "calc1-10-linearization",
+      "title": "Linear Approximation & Differentials",
+      "file": "lessons/calc1-10-linearization.json"
+    },
+    {
+      "id": "calc1-11-extrema-mvt",
+      "title": "Extrema & the Mean Value Theorem",
+      "file": "lessons/calc1-11-extrema-mvt.json"
+    },
+    {
+      "id": "calc1-12-curve-sketching",
+      "title": "Curve Sketching: Shape & Asymptotes",
+      "file": "lessons/calc1-12-curve-sketching.json"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital",
+      "title": "Optimization & L'Hôpital's Rule",
+      "file": "lessons/calc1-13-optimization-lhopital.json"
+    },
+    {
+      "id": "calc1-14-integral",
+      "title": "Antiderivatives & the Definite Integral",
+      "file": "lessons/calc1-14-integral.json"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc",
+      "title": "Antiderivatives & the Fundamental Theorem",
+      "file": "lessons/calc2-01-antiderivatives-ftc.json"
+    },
+    {
+      "id": "calc2-02-substitution",
+      "title": "Integration by Substitution",
+      "file": "lessons/calc2-02-substitution.json"
+    },
+    {
+      "id": "calc2-03-parts",
+      "title": "Integration by Parts",
+      "file": "lessons/calc2-03-parts.json"
+    },
+    {
+      "id": "calc2-04-trig-integrals",
+      "title": "Trigonometric Integrals",
+      "file": "lessons/calc2-04-trig-integrals.json"
+    },
+    {
+      "id": "calc2-05-trig-substitution",
+      "title": "Trigonometric Substitution",
+      "file": "lessons/calc2-05-trig-substitution.json"
+    },
+    {
+      "id": "calc2-06-partial-fractions",
+      "title": "Partial Fractions",
+      "file": "lessons/calc2-06-partial-fractions.json"
+    },
+    {
+      "id": "calc2-07-improper",
+      "title": "Improper Integrals",
+      "file": "lessons/calc2-07-improper.json"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials",
+      "title": "Taylor & Maclaurin Polynomials",
+      "file": "lessons/calc2-08-taylor-polynomials.json"
+    },
+    {
+      "id": "calc2-09-sequences",
+      "title": "Sequences",
+      "file": "lessons/calc2-09-sequences.json"
+    },
+    {
+      "id": "calc2-10-series",
+      "title": "Infinite Series & Comparison Tests",
+      "file": "lessons/calc2-10-series.json"
+    },
+    {
+      "id": "calc2-11-alternating-ratio",
+      "title": "Alternating, Ratio & Root Tests",
+      "file": "lessons/calc2-11-alternating-ratio.json"
+    },
+    {
+      "id": "calc2-12-power-series",
+      "title": "Power & Taylor Series",
+      "file": "lessons/calc2-12-power-series.json"
+    },
+    {
+      "id": "calc2-13-areas",
+      "title": "Areas Between Curves",
+      "file": "lessons/calc2-13-areas.json"
+    },
+    {
+      "id": "calc2-14-volumes",
+      "title": "Volumes & Arc Length",
+      "file": "lessons/calc2-14-volumes.json"
+    },
+    {
+      "id": "alg-01-arithmetic",
+      "title": "Arithmetic & Order of Operations",
+      "file": "lessons/alg-01-arithmetic.json"
+    },
+    {
+      "id": "alg-02-exponents-polynomials",
+      "title": "Exponents & Polynomial Operations",
+      "file": "lessons/alg-02-exponents-polynomials.json"
+    },
+    {
+      "id": "alg-03-factoring",
+      "title": "Factoring Polynomials",
+      "file": "lessons/alg-03-factoring.json"
+    },
+    {
+      "id": "alg-04-rational-expressions",
+      "title": "Rational Expressions",
+      "file": "lessons/alg-04-rational-expressions.json"
+    },
+    {
+      "id": "alg-05-radicals-complex",
+      "title": "Radicals & Complex Numbers",
+      "file": "lessons/alg-05-radicals-complex.json"
+    },
+    {
+      "id": "alg-06-linear-equations",
+      "title": "Linear Equations & Inequalities",
+      "file": "lessons/alg-06-linear-equations.json"
+    },
+    {
+      "id": "alg-07-quadratic-equations",
+      "title": "Quadratic Equations",
+      "file": "lessons/alg-07-quadratic-equations.json"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations",
+      "title": "Polynomial & Rational Equations",
+      "file": "lessons/alg-08-polynomial-rational-equations.json"
+    },
+    {
+      "id": "alg-09-radical-equations",
+      "title": "Radical Equations",
+      "file": "lessons/alg-09-radical-equations.json"
+    },
+    {
+      "id": "alg-10-lines",
+      "title": "Lines: Slope & Equations",
+      "file": "lessons/alg-10-lines.json"
+    },
+    {
+      "id": "alg-11-conics",
+      "title": "Circles & Parabolas",
+      "file": "lessons/alg-11-conics.json"
+    },
+    {
+      "id": "alg-12-systems",
+      "title": "Systems of Equations",
+      "file": "lessons/alg-12-systems.json"
+    },
+    {
+      "id": "alg-13-right-triangle-trig",
+      "title": "Right-Triangle Trig & the Unit Circle",
+      "file": "lessons/alg-13-right-triangle-trig.json"
+    },
+    {
+      "id": "alg-14-exp-log",
+      "title": "Exponential & Logarithmic Expressions",
+      "file": "lessons/alg-14-exp-log.json"
+    }
   ]
 }

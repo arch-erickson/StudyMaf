@@ -1,0 +1,250 @@
+{
+  "title": "Exponential & Logarithmic Expressions",
+  "summary": "Exponential expressions $a^x$ grow or decay by a constant factor; logarithms invert them: $\\log_a x=y$ means $a^y=x$. The log laws turn products, quotients, and powers into sums, differences, and multiples, and let you solve exponential equations.",
+  "glossary": {
+    "exponential expression": {
+      "plain": "A constant raised to a variable power.",
+      "in_class": "$a^x$; grows if $a>1$, decays if $0<a<1$."
+    },
+    "logarithm": {
+      "plain": "The inverse of an exponential.",
+      "in_class": "$\\log_a x=y\\iff a^y=x$."
+    },
+    "common log": {
+      "plain": "Base-10 logarithm.",
+      "in_class": "$\\log x=\\log_{10}x$."
+    },
+    "natural log": {
+      "plain": "Base-$e$ logarithm.",
+      "in_class": "$\\ln x=\\log_e x$."
+    },
+    "product law": {
+      "plain": "Log of a product is a sum of logs.",
+      "in_class": "$\\log(MN)=\\log M+\\log N$."
+    },
+    "quotient law": {
+      "plain": "Log of a quotient is a difference.",
+      "in_class": "$\\log\\tfrac{M}{N}=\\log M-\\log N$."
+    },
+    "power law": {
+      "plain": "Log of a power pulls the exponent out.",
+      "in_class": "$\\log M^p=p\\log M$."
+    },
+    "change of base": {
+      "plain": "Rewrite a log in another base.",
+      "in_class": "$\\log_a x=\\dfrac{\\ln x}{\\ln a}$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Exponential expressions",
+      "explanation": "$a^x$ multiplies by $a$ each time $x$ increases by 1 — growth if $a>1$, decay if $0<a<1$. The base sets the rate; the exponent sets how many steps.",
+      "math_steps": [
+        "Identify the base $a$.",
+        "Growth if $a>1$, decay if $a<1$.",
+        "Evaluate by repeated multiplication or exponent laws."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-c1.svg",
+        "caption": "Exponential expressions"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Logarithms as inverses",
+      "explanation": "$\\log_a x=y$ asks 'what power of $a$ gives $x$?' It undoes the exponential: $a^{\\log_a x}=x$ and $\\log_a(a^x)=x$.",
+      "math_steps": [
+        "Rewrite $\\log_a x=y$ as $a^y=x$.",
+        "Evaluate simple logs by inspection.",
+        "Use inverses to cancel matching bases."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-c2.svg",
+        "caption": "Logarithms as inverses"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The log laws",
+      "explanation": "Products become sums, quotients become differences, and powers become coefficients: $\\log(MN)=\\log M+\\log N$, $\\log\\tfrac{M}{N}=\\log M-\\log N$, $\\log M^p=p\\log M$.",
+      "math_steps": [
+        "Expand products/quotients into sums/differences.",
+        "Pull exponents to the front.",
+        "Combine or condense as needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-c3.svg",
+        "caption": "The log laws"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Change of base",
+      "explanation": "To evaluate $\\log_a x$ on a calculator, use $\\log_a x=\\dfrac{\\ln x}{\\ln a}$ (or with $\\log_{10}$). It also rewrites logs into a common base.",
+      "math_steps": [
+        "Pick a convenient base ($e$ or 10).",
+        "Write $\\dfrac{\\ln x}{\\ln a}$.",
+        "Evaluate numerically."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-c4.svg",
+        "caption": "Change of base"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Solving exponential equations",
+      "explanation": "Take a logarithm of both sides to bring the variable exponent down, then solve the resulting linear equation.",
+      "math_steps": [
+        "Isolate the exponential.",
+        "Take $\\ln$ (or $\\log$) of both sides.",
+        "Use the power law to free the exponent, then solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-c5.svg",
+        "caption": "Solving exponential equations"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Compound interest",
+      "scenario": "Money grows by a fixed percent each year.",
+      "how_the_math_applies": "Balance is exponential $P(1+r)^t$; logs solve for the time to reach a goal.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-e1.svg",
+        "caption": "Compound interest"
+      }
+    },
+    {
+      "title": "pH of a solution",
+      "scenario": "Acidity on a logarithmic scale.",
+      "how_the_math_applies": "$\\text{pH}=-\\log[\\text{H}^+]$ uses the common logarithm.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-e2.svg",
+        "caption": "pH of a solution"
+      }
+    },
+    {
+      "title": "Carbon dating",
+      "scenario": "Radioactive decay measures age.",
+      "how_the_math_applies": "The remaining fraction is exponential; a logarithm recovers the elapsed time.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-14-exp-log-e3.svg",
+        "caption": "Carbon dating"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "exponential expressions logarithm definition inverse",
+    "math_query": "log laws product quotient power change of base examples",
+    "combined_query": "college algebra exponential logarithmic expressions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\log_2 8$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$2^?=8$.",
+        "$2^3=8$.",
+        "$3$."
+      ],
+      "hint": "What power of 2 is 8?"
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\log_{10}1000$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$10^3=1000$.",
+        "$3$.",
+        "Done."
+      ],
+      "hint": "Powers of 10."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Rewrite $\\log_5 25=2$ in exponential form.",
+      "correct_answer": "$5^2=25$",
+      "solution_steps": [
+        "$\\log_a x=y\\iff a^y=x$.",
+        "$5^2=25$.",
+        "Done."
+      ],
+      "hint": "Definition of a log."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Expand $\\log(xy)$.",
+      "correct_answer": "$\\log x+\\log y$",
+      "solution_steps": [
+        "Product law.",
+        "$\\log x+\\log y$.",
+        "Done."
+      ],
+      "hint": "Product ⇒ sum."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Expand $\\log\\dfrac{x^2}{y}$.",
+      "correct_answer": "$2\\log x-\\log y$",
+      "solution_steps": [
+        "Quotient then power law.",
+        "$\\log x^2-\\log y$.",
+        "$2\\log x-\\log y$."
+      ],
+      "hint": "Combine quotient and power laws."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\ln e^3$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$\\ln$ and $e$ are inverses.",
+        "$\\ln e^3=3$.",
+        "Done."
+      ],
+      "hint": "Inverse cancels."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve $2^x=16$.",
+      "correct_answer": "$x=4$",
+      "solution_steps": [
+        "$16=2^4$.",
+        "So $x=4$.",
+        "Or take $\\log_2$."
+      ],
+      "hint": "Match the bases."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Solve $e^x=10$ (to 2 dp).",
+      "correct_answer": "$x=\\ln 10\\approx2.30$",
+      "solution_steps": [
+        "Take $\\ln$ of both sides.",
+        "$x=\\ln10$.",
+        "$\\approx2.30$."
+      ],
+      "hint": "Take the natural log."
+    }
+  ]
+}

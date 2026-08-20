@@ -1,0 +1,238 @@
+{
+  "title": "Inverse & Implicit Differentiation",
+  "summary": "Implicit differentiation differentiates an equation in $x$ and $y$ without solving for $y$, treating $y$ as a function of $x$ and applying the chain rule. It also yields derivatives of inverse functions like $\\arcsin$ and $\\arctan$.",
+  "glossary": {
+    "implicit function": {
+      "plain": "A relationship where $y$ isn't isolated, like $x^2+y^2=1$.",
+      "in_class": "Differentiate both sides, treating $y$ as $y(x)$."
+    },
+    "implicit differentiation": {
+      "plain": "Differentiating an equation term by term in $x$.",
+      "in_class": "Every $y$ term picks up a $\\dfrac{dy}{dx}$ via the chain rule."
+    },
+    "inverse function": {
+      "plain": "A function that undoes another.",
+      "in_class": "If $y=f^{-1}(x)$ then $f(y)=x$; differentiate implicitly to find its derivative."
+    },
+    "arcsin derivative": {
+      "plain": "Slope of the inverse sine.",
+      "in_class": "$\\frac{d}{dx}\\arcsin x=\\dfrac{1}{\\sqrt{1-x^2}}$."
+    },
+    "arctan derivative": {
+      "plain": "Slope of the inverse tangent.",
+      "in_class": "$\\frac{d}{dx}\\arctan x=\\dfrac{1}{1+x^2}$."
+    },
+    "related variable": {
+      "plain": "A quantity linked to another through an equation.",
+      "in_class": "Implicit differentiation relates their rates."
+    },
+    "chain rule on y": {
+      "plain": "Differentiating a function of $y$ where $y=y(x)$.",
+      "in_class": "$\\frac{d}{dx}[y^2]=2y\\,\\dfrac{dy}{dx}$."
+    },
+    "tangent to a curve": {
+      "plain": "A line touching an implicitly-defined curve.",
+      "in_class": "Use the implicit $dy/dx$ at the point for the slope."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Treating $y$ as a function of $x$",
+      "explanation": "In an implicit equation, $y$ secretly depends on $x$. Differentiating a $y$-term uses the chain rule and produces a $\\dfrac{dy}{dx}$ factor.",
+      "math_steps": [
+        "Differentiate both sides with respect to $x$.",
+        "For any $y$-term, multiply by $\\dfrac{dy}{dx}$.",
+        "You now have an equation containing $\\dfrac{dy}{dx}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-c1.svg",
+        "caption": "Treating $y$ as a function of $x$"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Solving for $dy/dx$",
+      "explanation": "Collect all $\\dfrac{dy}{dx}$ terms on one side, factor it out, and divide. The result usually depends on both $x$ and $y$.",
+      "math_steps": [
+        "Gather $\\dfrac{dy}{dx}$ terms together.",
+        "Factor out $\\dfrac{dy}{dx}$.",
+        "Divide to isolate it."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-c2.svg",
+        "caption": "Solving for $dy/dx$"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Tangents to implicit curves",
+      "explanation": "To find a tangent to a curve like a circle, get $\\dfrac{dy}{dx}$ implicitly, plug in the point's $(x,y)$, and use point-slope form.",
+      "math_steps": [
+        "Differentiate implicitly.",
+        "Substitute the point's coordinates for the slope.",
+        "Write $y-y_0=m(x-x_0)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-c3.svg",
+        "caption": "Tangents to implicit curves"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Derivatives of inverse functions",
+      "explanation": "If $y=f^{-1}(x)$ then $f(y)=x$; differentiating implicitly gives $\\dfrac{dy}{dx}=\\dfrac{1}{f'(y)}$. This produces the inverse-trig derivatives.",
+      "math_steps": [
+        "Write $f(y)=x$.",
+        "Differentiate implicitly: $f'(y)\\dfrac{dy}{dx}=1$.",
+        "Solve: $\\dfrac{dy}{dx}=1/f'(y)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-c4.svg",
+        "caption": "Derivatives of inverse functions"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Inverse trig derivatives",
+      "explanation": "The key results: $\\frac{d}{dx}\\arcsin x=\\dfrac{1}{\\sqrt{1-x^2}}$ and $\\frac{d}{dx}\\arctan x=\\dfrac{1}{1+x^2}$ — algebraic formulas from trig inverses.",
+      "math_steps": [
+        "Recall $\\arcsin\\to\\dfrac{1}{\\sqrt{1-x^2}}$.",
+        "Recall $\\arctan\\to\\dfrac{1}{1+x^2}$.",
+        "Combine with the chain rule for compositions."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-c5.svg",
+        "caption": "Inverse trig derivatives"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A ladder sliding down a wall",
+      "scenario": "The top slides down as the base slides out.",
+      "how_the_math_applies": "The wall equation $x^2+y^2=L^2$ relates the two by implicit differentiation — the basis of related rates.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-e1.svg",
+        "caption": "A ladder sliding down a wall"
+      }
+    },
+    {
+      "title": "A circle's tangent line",
+      "scenario": "Find the tangent to a round track at a point.",
+      "how_the_math_applies": "Implicit differentiation of $x^2+y^2=r^2$ gives the slope without solving for $y$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-e2.svg",
+        "caption": "A circle's tangent line"
+      }
+    },
+    {
+      "title": "Undoing a function",
+      "scenario": "A conversion and its reverse (Celsius↔Fahrenheit style, but curved).",
+      "how_the_math_applies": "The reverse process is an inverse function; its rate is the reciprocal of the original's rate.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-07-inverse-implicit-e3.svg",
+        "caption": "Undoing a function"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "implicit differentiation dy dx chain rule y",
+    "math_query": "implicit differentiation examples inverse trig derivatives",
+    "combined_query": "calculus implicit differentiation tangent circle problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "If $x^2+y^2=25$, find $\\dfrac{dy}{dx}$.",
+      "correct_answer": "$-\\dfrac{x}{y}$",
+      "solution_steps": [
+        "Differentiate: $2x+2y\\,y'=0$.",
+        "$y'=-x/y$.",
+        "Done."
+      ],
+      "hint": "Every $y$-term gets a $y'$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "medium",
+      "prompt": "Find $\\dfrac{dy}{dx}$ for $xy=4$.",
+      "correct_answer": "$-\\dfrac{y}{x}$",
+      "solution_steps": [
+        "Product rule: $y+x\\,y'=0$.",
+        "$y'=-y/x$.",
+        "Done."
+      ],
+      "hint": "$xy$ needs the product rule."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the slope of $x^2+y^2=25$ at $(3,4)$.",
+      "correct_answer": "$-\\tfrac34$",
+      "solution_steps": [
+        "$y'=-x/y$.",
+        "At $(3,4)$: $-3/4$.",
+        "$-\\tfrac34$."
+      ],
+      "hint": "Plug the point into $-x/y$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find $\\dfrac{dy}{dx}$ for $x^2+xy+y^2=7$.",
+      "correct_answer": "$-\\dfrac{2x+y}{x+2y}$",
+      "solution_steps": [
+        "$2x+y+xy'+2yy'=0$.",
+        "$(x+2y)y'=-(2x+y)$.",
+        "$y'=-\\dfrac{2x+y}{x+2y}$."
+      ],
+      "hint": "Collect $y'$ terms and factor."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=\\arctan x$.",
+      "correct_answer": "$\\dfrac{1}{1+x^2}$",
+      "solution_steps": [
+        "Standard inverse-trig derivative.",
+        "$\\dfrac{1}{1+x^2}$.",
+        "Done."
+      ],
+      "hint": "Memorize the arctan derivative."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Differentiate $f(x)=\\arcsin(2x)$.",
+      "correct_answer": "$\\dfrac{2}{\\sqrt{1-4x^2}}$",
+      "solution_steps": [
+        "Chain: $\\dfrac{1}{\\sqrt{1-(2x)^2}}\\cdot2$.",
+        "$\\dfrac{2}{\\sqrt{1-4x^2}}$.",
+        "Done."
+      ],
+      "hint": "Arcsin derivative times inner derivative $2$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find $\\dfrac{dy}{dx}$ for $\\sin y=x$.",
+      "correct_answer": "$\\dfrac{1}{\\cos y}$",
+      "solution_steps": [
+        "Differentiate: $\\cos y\\,y'=1$.",
+        "$y'=1/\\cos y$.",
+        "Done."
+      ],
+      "hint": "Implicit derivative of $\\arcsin$."
+    }
+  ]
+}

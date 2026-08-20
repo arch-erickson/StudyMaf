@@ -1,0 +1,250 @@
+{
+  "title": "Polynomial & Rational Equations",
+  "summary": "Higher-degree polynomial equations solve by factoring to zero-product form. Rational equations clear denominators by multiplying by the LCD, then solve — but you must reject any solution that makes an original denominator zero (extraneous).",
+  "glossary": {
+    "polynomial equation": {
+      "plain": "A polynomial set equal to zero.",
+      "in_class": "Degree $n$ can have up to $n$ real roots."
+    },
+    "zero-product property": {
+      "plain": "A product is 0 iff a factor is 0.",
+      "in_class": "Solve each factor after full factoring."
+    },
+    "rational equation": {
+      "plain": "An equation containing rational expressions.",
+      "in_class": "Clear denominators with the LCD."
+    },
+    "LCD (equations)": {
+      "plain": "Least common denominator to multiply through by.",
+      "in_class": "Removes all fractions from the equation."
+    },
+    "extraneous solution": {
+      "plain": "A candidate that fails in the original equation.",
+      "in_class": "Usually makes a denominator zero — reject it."
+    },
+    "factor completely": {
+      "plain": "Reduce a polynomial to prime factors.",
+      "in_class": "Reveals every root via zero-product."
+    },
+    "degree and roots": {
+      "plain": "A degree-$n$ polynomial has $\\le n$ roots.",
+      "in_class": "Counting multiplicity, exactly $n$ (over the complexes)."
+    },
+    "check solutions": {
+      "plain": "Verify each candidate in the original.",
+      "in_class": "Especially crucial for rational equations."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Higher-degree by factoring",
+      "explanation": "Set the polynomial to zero, factor completely (GCF, grouping, special forms), and apply the zero-product property to each factor.",
+      "math_steps": [
+        "Write it as $=0$.",
+        "Factor fully.",
+        "Solve each factor $=0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-c1.svg",
+        "caption": "Higher-degree by factoring"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Equations reducible to quadratic",
+      "explanation": "Some equations become quadratic with a substitution (e.g. $u=x^2$ in $x^4-5x^2+4=0$). Solve for $u$, then back-substitute.",
+      "math_steps": [
+        "Spot the quadratic pattern in a new variable.",
+        "Substitute $u$ and solve the quadratic.",
+        "Back-substitute and solve for $x$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-c2.svg",
+        "caption": "Equations reducible to quadratic"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Clearing rational equations",
+      "explanation": "Multiply every term by the LCD to remove denominators, turning the equation into a polynomial one you can solve.",
+      "math_steps": [
+        "Find the LCD of all denominators.",
+        "Multiply each term by it.",
+        "Solve the resulting polynomial equation."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-c3.svg",
+        "caption": "Clearing rational equations"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Extraneous solutions",
+      "explanation": "Multiplying by the LCD can introduce false solutions. Check each candidate in the original: reject any that makes a denominator zero.",
+      "math_steps": [
+        "List the excluded values first.",
+        "Solve the cleared equation.",
+        "Discard candidates equal to an excluded value."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-c4.svg",
+        "caption": "Extraneous solutions"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Verifying and counting",
+      "explanation": "A degree-$n$ polynomial has at most $n$ real roots. Verify solutions and note repeated roots (multiplicity) where the graph touches without crossing.",
+      "math_steps": [
+        "Count expected roots by degree.",
+        "Verify each in the original.",
+        "Note multiplicities."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-c5.svg",
+        "caption": "Verifying and counting"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Concentration reaching a target",
+      "scenario": "Mixing to hit a desired strength.",
+      "how_the_math_applies": "The balance equation is rational; clearing denominators solves for the amount to add.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-e1.svg",
+        "caption": "Concentration reaching a target"
+      }
+    },
+    {
+      "title": "Shared task time",
+      "scenario": "Two pumps drain a tank together.",
+      "how_the_math_applies": "$\\tfrac1a+\\tfrac1b=\\tfrac1t$ is a rational equation solved for the combined time.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-e2.svg",
+        "caption": "Shared task time"
+      }
+    },
+    {
+      "title": "Designing a box",
+      "scenario": "Volume as a cubic in one dimension.",
+      "how_the_math_applies": "Setting the volume polynomial to a target and factoring gives the dimension.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-08-polynomial-rational-equations-e3.svg",
+        "caption": "Designing a box"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "polynomial equations factoring zero product higher degree",
+    "math_query": "rational equations LCD extraneous solutions examples",
+    "combined_query": "college algebra polynomial rational equations worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Solve $x^3-4x=0$.",
+      "correct_answer": "$x=0,\\pm2$",
+      "solution_steps": [
+        "Factor $x(x^2-4)=x(x-2)(x+2)$.",
+        "Each factor 0.",
+        "$x=0,2,-2$."
+      ],
+      "hint": "GCF then difference of squares."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Solve $(x-1)(x+2)(x-3)=0$.",
+      "correct_answer": "$x=1,-2,3$",
+      "solution_steps": [
+        "Zero-product.",
+        "Each factor 0.",
+        "$1,-2,3$."
+      ],
+      "hint": "Set each factor to zero."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Solve $x^4-5x^2+4=0$.",
+      "correct_answer": "$x=\\pm1,\\pm2$",
+      "solution_steps": [
+        "Let $u=x^2$: $u^2-5u+4=0\\Rightarrow u=1,4$.",
+        "$x^2=1$ or $x^2=4$.",
+        "$x=\\pm1,\\pm2$."
+      ],
+      "hint": "Substitute $u=x^2$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Solve $\\dfrac{1}{x}+\\dfrac{1}{2}=\\dfrac{3}{4}$.",
+      "correct_answer": "$x=4$",
+      "solution_steps": [
+        "LCD $4x$: $4+2x=3x$.",
+        "$x=4$.",
+        "Check: allowed."
+      ],
+      "hint": "Multiply through by $4x$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Solve $\\dfrac{x}{x-1}=2$.",
+      "correct_answer": "$x=2$",
+      "solution_steps": [
+        "Multiply by $x-1$: $x=2(x-1)$.",
+        "$x=2x-2\\Rightarrow x=2$.",
+        "Check: $x\\neq1$ ✓."
+      ],
+      "hint": "Clear the denominator, then check."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Solve $\\dfrac{1}{x-2}=\\dfrac{x}{x-2}$ and check.",
+      "correct_answer": "$x=1$",
+      "solution_steps": [
+        "Multiply by $x-2$: $1=x$.",
+        "Candidate $x=1$ (not 2).",
+        "Valid; $x=1$."
+      ],
+      "hint": "Exclude $x=2$ first."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve $\\dfrac{2}{x}+\\dfrac{3}{x+1}=\\dfrac{5}{2}$ (leading step).",
+      "correct_answer": "clear by LCD $2x(x+1)$",
+      "solution_steps": [
+        "LCD is $2x(x+1)$.",
+        "$4(x+1)+6x=5x(x+1)$.",
+        "Solve the quadratic, then check."
+      ],
+      "hint": "Multiply every term by the LCD."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Why is $x=3$ extraneous for $\\dfrac{1}{x-3}=\\dfrac{2}{x-3}$?",
+      "correct_answer": "It makes a denominator 0",
+      "solution_steps": [
+        "$x=3$ zeros the denominators.",
+        "Undefined in the original.",
+        "Reject it."
+      ],
+      "hint": "Excluded values can't be solutions."
+    }
+  ]
+}

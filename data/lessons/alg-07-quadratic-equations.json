@@ -1,0 +1,250 @@
+{
+  "title": "Quadratic Equations",
+  "summary": "A quadratic $ax^2+bx+c=0$ can be solved by factoring (zero-product), the square-root property, completing the square, or the quadratic formula $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. The discriminant $b^2-4ac$ tells how many real solutions exist.",
+  "glossary": {
+    "quadratic equation": {
+      "plain": "A degree-2 equation $ax^2+bx+c=0$.",
+      "in_class": "Up to two solutions."
+    },
+    "zero-product property": {
+      "plain": "A product is zero only if a factor is zero.",
+      "in_class": "Factor, then set each factor to 0."
+    },
+    "square-root property": {
+      "plain": "Solve $x^2=k$ by taking $\\pm\\sqrt{k}$.",
+      "in_class": "$x=\\pm\\sqrt k$."
+    },
+    "completing the square": {
+      "plain": "Rewriting to a perfect-square form.",
+      "in_class": "Add $(b/2)^2$ to both sides."
+    },
+    "quadratic formula": {
+      "plain": "The solution formula for any quadratic.",
+      "in_class": "$x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$."
+    },
+    "discriminant": {
+      "plain": "The $b^2-4ac$ under the radical.",
+      "in_class": "$>0$ two real, $=0$ one, $<0$ two complex."
+    },
+    "vertex": {
+      "plain": "The turning point of the parabola.",
+      "in_class": "At $x=-b/(2a)$; the max or min."
+    },
+    "roots": {
+      "plain": "The solutions — where the parabola meets the $x$-axis.",
+      "in_class": "Also called zeros."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Solving by factoring",
+      "explanation": "If the quadratic factors, set it to zero, factor, and apply the zero-product property: each factor equal to zero gives a solution.",
+      "math_steps": [
+        "Write it as $=0$.",
+        "Factor the quadratic.",
+        "Set each factor to 0 and solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-c1.svg",
+        "caption": "Solving by factoring"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The square-root property",
+      "explanation": "For $x^2=k$ (or $(x-h)^2=k$), take the square root of both sides, remembering the $\\pm$: $x=\\pm\\sqrt k$.",
+      "math_steps": [
+        "Isolate the squared term.",
+        "Take $\\pm\\sqrt{\\ }$ of both sides.",
+        "Solve for $x$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-c2.svg",
+        "caption": "The square-root property"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Completing the square",
+      "explanation": "Turn $x^2+bx$ into a perfect square by adding $(b/2)^2$ to both sides, then use the square-root property. This also derives the quadratic formula.",
+      "math_steps": [
+        "Move the constant across.",
+        "Add $(b/2)^2$ to both sides.",
+        "Factor the perfect square and take roots."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-c3.svg",
+        "caption": "Completing the square"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The quadratic formula",
+      "explanation": "For any $ax^2+bx+c=0$, $x=\\dfrac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. It always works — plug in $a,b,c$ carefully with signs.",
+      "math_steps": [
+        "Identify $a,b,c$.",
+        "Compute the discriminant $b^2-4ac$.",
+        "Apply the formula and simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-c4.svg",
+        "caption": "The quadratic formula"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "The discriminant",
+      "explanation": "The sign of $b^2-4ac$ tells the solution count: positive ⇒ two real, zero ⇒ one (repeated), negative ⇒ two complex.",
+      "math_steps": [
+        "Compute $b^2-4ac$.",
+        "$>0$: two real; $=0$: one; $<0$: complex.",
+        "Interpret before fully solving."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-c5.svg",
+        "caption": "The discriminant"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Projectile height",
+      "scenario": "A ball's height is quadratic in time.",
+      "how_the_math_applies": "Setting height to zero and solving finds when it lands — a quadratic equation.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-e1.svg",
+        "caption": "Projectile height"
+      }
+    },
+    {
+      "title": "Maximizing area",
+      "scenario": "A fixed fence enclosing the most area.",
+      "how_the_math_applies": "The area is a quadratic; its vertex gives the optimal dimensions.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-e2.svg",
+        "caption": "Maximizing area"
+      }
+    },
+    {
+      "title": "Golden-ratio design",
+      "scenario": "A pleasing rectangle proportion.",
+      "how_the_math_applies": "The defining proportion leads to a quadratic solved by the formula.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-07-quadratic-equations-e3.svg",
+        "caption": "Golden-ratio design"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "solving quadratic equations factoring square root property",
+    "math_query": "completing the square quadratic formula discriminant examples",
+    "combined_query": "college algebra quadratic equations worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Solve $x^2-9=0$.",
+      "correct_answer": "$x=\\pm3$",
+      "solution_steps": [
+        "$x^2=9$.",
+        "$x=\\pm\\sqrt9$.",
+        "$\\pm3$."
+      ],
+      "hint": "Square-root property."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Solve $x^2-5x+6=0$.",
+      "correct_answer": "$x=2,3$",
+      "solution_steps": [
+        "Factor $(x-2)(x-3)=0$.",
+        "Each factor 0.",
+        "$x=2,3$."
+      ],
+      "hint": "Zero-product property."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Solve $x^2+4x=0$.",
+      "correct_answer": "$x=0,-4$",
+      "solution_steps": [
+        "Factor $x(x+4)=0$.",
+        "$x=0$ or $x=-4$.",
+        "Done."
+      ],
+      "hint": "Factor out $x$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Solve $(x-3)^2=16$.",
+      "correct_answer": "$x=7,-1$",
+      "solution_steps": [
+        "$x-3=\\pm4$.",
+        "$x=7$ or $x=-1$.",
+        "Done."
+      ],
+      "hint": "Square-root property with $\\pm$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Use the formula: $x^2+2x-3=0$.",
+      "correct_answer": "$x=1,-3$",
+      "solution_steps": [
+        "$a=1,b=2,c=-3$; disc $=16$.",
+        "$x=\\dfrac{-2\\pm4}{2}$.",
+        "$1,-3$."
+      ],
+      "hint": "Plug into the quadratic formula."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find the discriminant of $x^2+x+1=0$ and the solution type.",
+      "correct_answer": "$-3$; two complex",
+      "solution_steps": [
+        "$b^2-4ac=1-4$.",
+        "$=-3<0$.",
+        "Two complex solutions."
+      ],
+      "hint": "Sign of $b^2-4ac$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve by completing the square: $x^2+6x+5=0$.",
+      "correct_answer": "$x=-1,-5$",
+      "solution_steps": [
+        "$x^2+6x=-5$; add 9.",
+        "$(x+3)^2=4$; $x+3=\\pm2$.",
+        "$x=-1,-5$."
+      ],
+      "hint": "Add $(6/2)^2=9$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Solve $2x^2-4x-1=0$ (formula).",
+      "correct_answer": "$x=\\dfrac{2\\pm\\sqrt6}{2}$",
+      "solution_steps": [
+        "$a=2,b=-4,c=-1$; disc $=24$.",
+        "$x=\\dfrac{4\\pm\\sqrt{24}}{4}=\\dfrac{4\\pm2\\sqrt6}{4}$.",
+        "$\\dfrac{2\\pm\\sqrt6}{2}$."
+      ],
+      "hint": "Simplify the radical carefully."
+    }
+  ]
+}

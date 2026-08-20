@@ -1,0 +1,238 @@
+{
+  "title": "Derivatives of Exponential & Log Functions",
+  "summary": "$e^x$ is its own derivative; $\\ln x$ differentiates to $1/x$. With the chain rule these give $\\frac{d}{dx}e^{g}=e^{g}g'$ and $\\frac{d}{dx}\\ln g=g'/g$. Logarithmic differentiation tames products, quotients, and variable exponents.",
+  "glossary": {
+    "natural exponential": {
+      "plain": "The function $e^x$ with base $e\\approx2.718$.",
+      "in_class": "Uniquely, $\\frac{d}{dx}e^x=e^x$ — its own derivative."
+    },
+    "natural log": {
+      "plain": "The inverse of $e^x$, written $\\ln x$.",
+      "in_class": "$\\frac{d}{dx}\\ln x=\\dfrac1x$ for $x>0$."
+    },
+    "base-a exponential": {
+      "plain": "An exponential with base other than $e$.",
+      "in_class": "$\\frac{d}{dx}a^x=a^x\\ln a$."
+    },
+    "base-a log": {
+      "plain": "Logarithm to base $a$.",
+      "in_class": "$\\frac{d}{dx}\\log_a x=\\dfrac{1}{x\\ln a}$."
+    },
+    "logarithmic differentiation": {
+      "plain": "Taking $\\ln$ of both sides before differentiating.",
+      "in_class": "Turns products/powers into sums — handy for messy functions."
+    },
+    "exponential growth": {
+      "plain": "Growth proportional to current size.",
+      "in_class": "Solutions of $y'=ky$ are $y=Ce^{kt}$."
+    },
+    "e": {
+      "plain": "Euler's number, $\\approx2.71828$.",
+      "in_class": "The base that makes the exponential its own derivative."
+    },
+    "chain with exp/log": {
+      "plain": "Differentiating $e^{g}$ or $\\ln g$.",
+      "in_class": "$e^{g}g'$ and $g'/g$ respectively."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Derivative of $e^x$ and $\\ln x$",
+      "explanation": "The two headline facts: $\\frac{d}{dx}e^x=e^x$ and $\\frac{d}{dx}\\ln x=\\dfrac1x$. Everything else builds on these.",
+      "math_steps": [
+        "$e^x$ is unchanged by differentiation.",
+        "$\\ln x$ becomes $1/x$.",
+        "Combine with sum/product/quotient rules."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-c1.svg",
+        "caption": "Derivative of $e^x$ and $\\ln x$"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Chain rule versions",
+      "explanation": "With an inside function: $\\frac{d}{dx}e^{g(x)}=e^{g(x)}g'(x)$ and $\\frac{d}{dx}\\ln g(x)=\\dfrac{g'(x)}{g(x)}$.",
+      "math_steps": [
+        "Differentiate the outer $e$ or $\\ln$.",
+        "Multiply by the inner derivative $g'$.",
+        "For $\\ln$, that means $g'/g$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-c2.svg",
+        "caption": "Chain rule versions"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Other bases",
+      "explanation": "For base $a$: $\\frac{d}{dx}a^x=a^x\\ln a$ and $\\frac{d}{dx}\\log_a x=\\dfrac{1}{x\\ln a}$. The extra $\\ln a$ comes from converting to base $e$.",
+      "math_steps": [
+        "Write $a^x=e^{x\\ln a}$ if you forget.",
+        "$a^x\\to a^x\\ln a$.",
+        "$\\log_a x\\to\\dfrac{1}{x\\ln a}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-c3.svg",
+        "caption": "Other bases"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Logarithmic differentiation",
+      "explanation": "For products, quotients, and variable exponents (like $x^x$), take $\\ln$ of both sides first: it turns products into sums and exponents into factors, which are easy to differentiate.",
+      "math_steps": [
+        "Take $\\ln$ of both sides.",
+        "Use log laws to expand, then differentiate implicitly.",
+        "Multiply back by $y$ to isolate $y'$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-c4.svg",
+        "caption": "Logarithmic differentiation"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Exponential growth models",
+      "explanation": "Anything growing at a rate proportional to its size satisfies $y'=ky$, whose solution is $y=Ce^{kt}$. The derivative link makes exponentials the natural model.",
+      "math_steps": [
+        "Recognize 'rate proportional to amount'.",
+        "Write $y=Ce^{kt}$.",
+        "Differentiate to confirm $y'=ky$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-c5.svg",
+        "caption": "Exponential growth models"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Radioactive decay",
+      "scenario": "A sample loses a fixed fraction each period.",
+      "how_the_math_applies": "Its amount follows $N=N_0e^{-kt}$; the decay rate is the derivative $-kN$, proportional to the amount left.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-e1.svg",
+        "caption": "Radioactive decay"
+      }
+    },
+    {
+      "title": "Compound interest",
+      "scenario": "Money grows continuously in an account.",
+      "how_the_math_applies": "Balance $A=Pe^{rt}$; the growth rate is $rA$, the derivative — interest on interest.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-e2.svg",
+        "caption": "Compound interest"
+      }
+    },
+    {
+      "title": "Sound level in decibels",
+      "scenario": "Perceived loudness scales logarithmically.",
+      "how_the_math_applies": "Rates of change of a log quantity use $\\frac{d}{dx}\\ln x=1/x$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-08-exp-log-derivatives-e3.svg",
+        "caption": "Sound level in decibels"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "derivative e^x natural log 1/x rules",
+    "math_query": "derivatives exponential logarithmic chain rule logarithmic differentiation",
+    "combined_query": "calculus exponential log derivatives worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=e^x+\\ln x$.",
+      "correct_answer": "$e^x+\\dfrac1x$",
+      "solution_steps": [
+        "$e^x\\to e^x$, $\\ln x\\to1/x$.",
+        "Add.",
+        "$e^x+\\dfrac1x$."
+      ],
+      "hint": "Two headline derivatives."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=e^{3x}$.",
+      "correct_answer": "$3e^{3x}$",
+      "solution_steps": [
+        "Chain: $e^{3x}\\cdot3$.",
+        "$3e^{3x}$.",
+        "Done."
+      ],
+      "hint": "Multiply by the inner derivative."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=\\ln(x^2+1)$.",
+      "correct_answer": "$\\dfrac{2x}{x^2+1}$",
+      "solution_steps": [
+        "$g'/g$ with $g=x^2+1$.",
+        "$\\dfrac{2x}{x^2+1}$.",
+        "Done."
+      ],
+      "hint": "$\\ln g\\to g'/g$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=x e^x$.",
+      "correct_answer": "$e^x(1+x)$",
+      "solution_steps": [
+        "Product rule: $e^x+xe^x$.",
+        "Factor.",
+        "$e^x(1+x)$."
+      ],
+      "hint": "$f'g+fg'$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=2^x$.",
+      "correct_answer": "$2^x\\ln 2$",
+      "solution_steps": [
+        "Base-$a$ rule.",
+        "$2^x\\ln2$.",
+        "Done."
+      ],
+      "hint": "Extra $\\ln a$ factor."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Differentiate $f(x)=x^x$ (logarithmic differentiation).",
+      "correct_answer": "$x^x(\\ln x+1)$",
+      "solution_steps": [
+        "$\\ln y=x\\ln x$.",
+        "$y'/y=\\ln x+1$.",
+        "$y'=x^x(\\ln x+1)$."
+      ],
+      "hint": "Take $\\ln$ of both sides first."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A culture grows as $N=100e^{0.2t}$. Find $N'(0)$.",
+      "correct_answer": "$20$",
+      "solution_steps": [
+        "$N'=100(0.2)e^{0.2t}=20e^{0.2t}$.",
+        "At $t=0$: $20$.",
+        "$N'(0)=20$."
+      ],
+      "hint": "$\\frac{d}{dt}Ce^{kt}=kCe^{kt}$."
+    }
+  ]
+}

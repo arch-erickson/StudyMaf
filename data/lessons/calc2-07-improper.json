@@ -1,0 +1,250 @@
+{
+  "title": "Improper Integrals",
+  "summary": "Improper integrals have an infinite limit or an unbounded integrand. Replace the trouble with a limit: $\\int_a^\\infty f\\,dx=\\lim_{t\\to\\infty}\\int_a^t f\\,dx$. If the limit is finite the integral converges; otherwise it diverges.",
+  "glossary": {
+    "improper integral": {
+      "plain": "An integral with an infinite bound or a blowup.",
+      "in_class": "Defined by a limit of ordinary integrals."
+    },
+    "converges": {
+      "plain": "The limit defining it is a finite number.",
+      "in_class": "The area is finite despite the infinite extent."
+    },
+    "diverges": {
+      "plain": "The limit is infinite or does not exist.",
+      "in_class": "No finite value."
+    },
+    "type 1": {
+      "plain": "Infinite interval of integration.",
+      "in_class": "$\\int_a^\\infty$ or $\\int_{-\\infty}^b$."
+    },
+    "type 2": {
+      "plain": "Integrand unbounded at a point.",
+      "in_class": "A vertical asymptote inside or at an endpoint."
+    },
+    "p-integral": {
+      "plain": "The benchmark $\\int_1^\\infty x^{-p}\\,dx$.",
+      "in_class": "Converges iff $p>1$."
+    },
+    "comparison test": {
+      "plain": "Bound your integrand by a known one.",
+      "in_class": "Smaller than a convergent ⇒ converges; bigger than a divergent ⇒ diverges."
+    },
+    "split at the blowup": {
+      "plain": "Break the integral at an interior singularity.",
+      "in_class": "Each piece must converge on its own."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Infinite intervals (Type 1)",
+      "explanation": "Replace the infinite bound by $t$ and take a limit: $\\int_a^\\infty f\\,dx=\\lim_{t\\to\\infty}\\int_a^t f\\,dx$. A finite limit means convergence.",
+      "math_steps": [
+        "Rewrite with a finite upper limit $t$.",
+        "Integrate normally.",
+        "Take the limit as $t\\to\\infty$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-c1.svg",
+        "caption": "Infinite intervals (Type 1)"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Unbounded integrands (Type 2)",
+      "explanation": "If $f$ blows up at an endpoint $c$, use $\\lim_{t\\to c}\\int_a^t f\\,dx$. If the blowup is interior, split there and require both halves to converge.",
+      "math_steps": [
+        "Locate the singularity.",
+        "Approach it with a limit.",
+        "Split at interior blowups; both pieces must converge."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-c2.svg",
+        "caption": "Unbounded integrands (Type 2)"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The $p$-test",
+      "explanation": "The benchmark $\\int_1^\\infty x^{-p}\\,dx$ converges exactly when $p>1$; $\\int_0^1 x^{-p}\\,dx$ converges when $p<1$. Memorize these thresholds.",
+      "math_steps": [
+        "Match your integral to a $p$-form.",
+        "Apply the threshold.",
+        "Conclude convergence or divergence."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-c3.svg",
+        "caption": "The $p$-test"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Comparison test",
+      "explanation": "If $0\\le f\\le g$ and $\\int g$ converges, so does $\\int f$; if $f\\ge g\\ge0$ and $\\int g$ diverges, so does $\\int f$. Compare to a known $p$-integral.",
+      "math_steps": [
+        "Bound $f$ above or below by a simpler $g$.",
+        "Know whether $\\int g$ converges.",
+        "Transfer the conclusion to $\\int f$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-c4.svg",
+        "caption": "Comparison test"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Evaluating exactly",
+      "explanation": "When it converges, compute the value: find the antiderivative, evaluate at $t$, and take the limit. Many give clean numbers like $1$ or $\\ln$-free constants.",
+      "math_steps": [
+        "Antidifferentiate.",
+        "Evaluate the limit expression.",
+        "Simplify to the finite value."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-c5.svg",
+        "caption": "Evaluating exactly"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Escape energy",
+      "scenario": "Work to move a rocket infinitely far from Earth.",
+      "how_the_math_applies": "Gravity $\\propto1/r^2$ gives a convergent improper integral — finite escape energy.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-e1.svg",
+        "caption": "Escape energy"
+      }
+    },
+    {
+      "title": "Probability tails",
+      "scenario": "A distribution stretching to infinity must total 1.",
+      "how_the_math_applies": "Normalizing a density requires a convergent improper integral over all outcomes.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-e2.svg",
+        "caption": "Probability tails"
+      }
+    },
+    {
+      "title": "Steady-state accumulation",
+      "scenario": "A decaying signal integrated over all time.",
+      "how_the_math_applies": "Exponential decay $e^{-t}$ integrates to a finite total, converging.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-07-improper-e3.svg",
+        "caption": "Steady-state accumulation"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "improper integrals infinite limits convergence divergence",
+    "math_query": "improper integral p test comparison examples",
+    "combined_query": "calculus 2 improper integrals worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\int_1^\\infty\\dfrac{1}{x^2}\\,dx$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "$\\lim_{t\\to\\infty}[-1/x]_1^t$.",
+        "$=\\lim(-1/t+1)$.",
+        "$=1$ (converges)."
+      ],
+      "hint": "$p=2>1$ ⇒ converges."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Does $\\int_1^\\infty\\dfrac{1}{x}\\,dx$ converge?",
+      "correct_answer": "No (diverges)",
+      "solution_steps": [
+        "$\\lim[\\ln x]_1^t=\\lim\\ln t$.",
+        "$\\to\\infty$.",
+        "Diverges."
+      ],
+      "hint": "$p=1$ is the borderline — diverges."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int_0^\\infty e^{-x}\\,dx$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "$\\lim[-e^{-x}]_0^t$.",
+        "$=\\lim(-e^{-t}+1)$.",
+        "$=1$."
+      ],
+      "hint": "Exponential decay converges."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Does $\\int_1^\\infty\\dfrac{1}{x^{3/2}}\\,dx$ converge?",
+      "correct_answer": "Yes",
+      "solution_steps": [
+        "$p=3/2>1$.",
+        "By the $p$-test it converges.",
+        "(Value $2$.)"
+      ],
+      "hint": "Check $p$ against $1$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int_0^1\\dfrac{1}{\\sqrt{x}}\\,dx$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "Type 2 at $0$: $\\lim_{t\\to0^+}[2\\sqrt x]_t^1$.",
+        "$=2-0$.",
+        "$=2$ (converges, $p=\\tfrac12<1$)."
+      ],
+      "hint": "$\\int_0^1 x^{-p}$ converges for $p<1$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Use comparison: does $\\int_1^\\infty\\dfrac{1}{x^2+1}\\,dx$ converge?",
+      "correct_answer": "Yes",
+      "solution_steps": [
+        "$\\dfrac{1}{x^2+1}\\le\\dfrac{1}{x^2}$.",
+        "$\\int_1^\\infty x^{-2}$ converges.",
+        "So does the smaller one."
+      ],
+      "hint": "Compare to $1/x^2$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\int_0^\\infty x e^{-x}\\,dx$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "Parts: antiderivative $-e^{-x}(x+1)$.",
+        "$\\lim[-e^{-x}(x+1)]_0^t=0-(-1)$.",
+        "$=1$."
+      ],
+      "hint": "Integrate by parts, then take the limit."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Does $\\int_2^\\infty\\dfrac{1}{x\\ln x}\\,dx$ converge?",
+      "correct_answer": "No (diverges)",
+      "solution_steps": [
+        "$u=\\ln x$: $\\int\\frac{du}{u}=\\ln\\ln x$.",
+        "$\\to\\infty$.",
+        "Diverges."
+      ],
+      "hint": "Substitute $u=\\ln x$."
+    }
+  ]
+}

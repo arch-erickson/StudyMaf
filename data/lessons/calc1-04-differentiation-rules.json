@@ -1,0 +1,238 @@
+{
+  "title": "Differentiation Rules",
+  "summary": "Instead of limits every time, use rules: the power rule $\\frac{d}{dx}x^n=nx^{n-1}$, constant-multiple and sum rules, the product rule, and the quotient rule. Together they differentiate any polynomial or rational function quickly.",
+  "glossary": {
+    "power rule": {
+      "plain": "Differentiate a power by dropping the exponent out front and lowering it by one.",
+      "in_class": "$\\frac{d}{dx}x^n=nx^{n-1}$."
+    },
+    "constant multiple rule": {
+      "plain": "A constant factor stays put through differentiation.",
+      "in_class": "$\\frac{d}{dx}[c\\,f]=c\\,f'$."
+    },
+    "sum rule": {
+      "plain": "Differentiate a sum term by term.",
+      "in_class": "$(f+g)'=f'+g'$."
+    },
+    "product rule": {
+      "plain": "Differentiating a product mixes each factor with the other's derivative.",
+      "in_class": "$(fg)'=f'g+fg'$."
+    },
+    "quotient rule": {
+      "plain": "A rule for the derivative of a fraction of functions.",
+      "in_class": "$\\left(\\dfrac{f}{g}\\right)'=\\dfrac{f'g-fg'}{g^2}$."
+    },
+    "polynomial": {
+      "plain": "A sum of power terms like $3x^2-5x+1$.",
+      "in_class": "Differentiate term by term with the power rule."
+    },
+    "higher-order derivative": {
+      "plain": "The derivative of a derivative.",
+      "in_class": "$f''$ (second), $f'''$ (third), … ; $f''$ gives concavity."
+    },
+    "constant rule": {
+      "plain": "The derivative of a constant is zero.",
+      "in_class": "$\\frac{d}{dx}c=0$ — flat lines have slope 0."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Power, constant, and sum rules",
+      "explanation": "The workhorses: $\\frac{d}{dx}x^n=nx^{n-1}$, constants pull out, and sums differentiate term by term. A constant alone has derivative $0$.",
+      "math_steps": [
+        "Bring the exponent down and subtract one: $x^n\\to nx^{n-1}$.",
+        "Keep constant multipliers: $c\\,x^n\\to c\\,nx^{n-1}$.",
+        "Differentiate each term and add."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-c1.svg",
+        "caption": "Power, constant, and sum rules"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Negative and fractional powers",
+      "explanation": "The power rule works for any real exponent. Rewrite roots and reciprocals as powers first: $\\sqrt{x}=x^{1/2}$, $1/x^3=x^{-3}$.",
+      "math_steps": [
+        "Rewrite as $x^n$ with $n$ possibly negative or fractional.",
+        "Apply $nx^{n-1}$.",
+        "Rewrite back with roots/fractions if desired."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-c2.svg",
+        "caption": "Negative and fractional powers"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The product rule",
+      "explanation": "The derivative of a product is not the product of derivatives. Use $(fg)'=f'g+fg'$ — differentiate one factor at a time and keep the other.",
+      "math_steps": [
+        "Identify $f$ and $g$.",
+        "Compute $f'$ and $g'$.",
+        "Combine: $f'g+fg'$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-c3.svg",
+        "caption": "The product rule"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The quotient rule",
+      "explanation": "For a ratio, $\\left(\\dfrac{f}{g}\\right)'=\\dfrac{f'g-fg'}{g^2}$ — 'low d-high minus high d-low, over low squared'. Order matters because of the subtraction.",
+      "math_steps": [
+        "Set top $=f$, bottom $=g$.",
+        "Compute $f'g-fg'$.",
+        "Divide by $g^2$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-c4.svg",
+        "caption": "The quotient rule"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Higher-order derivatives",
+      "explanation": "Differentiate again to get $f''$, and again for $f'''$. The second derivative measures how the slope itself changes — concavity and acceleration.",
+      "math_steps": [
+        "Differentiate $f$ to get $f'$.",
+        "Differentiate $f'$ to get $f''$.",
+        "Repeat as needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-c5.svg",
+        "caption": "Higher-order derivatives"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Acceleration from position",
+      "scenario": "A drone's height is a function of time.",
+      "how_the_math_applies": "The first derivative is velocity, the second is acceleration — higher-order derivatives with physical meaning.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-e1.svg",
+        "caption": "Acceleration from position"
+      }
+    },
+    {
+      "title": "Revenue = price × quantity",
+      "scenario": "A shop's revenue depends on two changing quantities.",
+      "how_the_math_applies": "The product rule differentiates $R=p\\cdot q$ when both price and quantity vary with time.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-e2.svg",
+        "caption": "Revenue = price × quantity"
+      }
+    },
+    {
+      "title": "Fuel efficiency",
+      "scenario": "Distance per gallon changes with speed.",
+      "how_the_math_applies": "Rates that are ratios (miles per gallon) differentiate with the quotient rule when both parts vary.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-04-differentiation-rules-e3.svg",
+        "caption": "Fuel efficiency"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "power rule constant multiple sum rule derivatives",
+    "math_query": "product rule quotient rule examples derivatives",
+    "combined_query": "calculus differentiation rules worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=x^5$.",
+      "correct_answer": "$5x^4$",
+      "solution_steps": [
+        "Power rule.",
+        "$5x^{5-1}$.",
+        "$5x^4$."
+      ],
+      "hint": "Drop the exponent, subtract one."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=3x^4-2x+7$.",
+      "correct_answer": "$12x^3-2$",
+      "solution_steps": [
+        "Term by term.",
+        "$12x^3-2+0$.",
+        "$12x^3-2$."
+      ],
+      "hint": "Constant's derivative is 0."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=\\sqrt{x}$.",
+      "correct_answer": "$\\dfrac{1}{2\\sqrt{x}}$",
+      "solution_steps": [
+        "$x^{1/2}$.",
+        "$\\tfrac12 x^{-1/2}$.",
+        "$\\dfrac{1}{2\\sqrt{x}}$."
+      ],
+      "hint": "Write the root as a power."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=x^2(x^3+1)$ with the product rule.",
+      "correct_answer": "$5x^4+2x$",
+      "solution_steps": [
+        "$f'=2x(x^3+1)+x^2(3x^2)$.",
+        "$=2x^4+2x+3x^4$.",
+        "$=5x^4+2x$."
+      ],
+      "hint": "$f'g+fg'$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=\\dfrac{x}{x+1}$.",
+      "correct_answer": "$\\dfrac{1}{(x+1)^2}$",
+      "solution_steps": [
+        "Quotient rule: $\\dfrac{(1)(x+1)-x(1)}{(x+1)^2}$.",
+        "$=\\dfrac{1}{(x+1)^2}$.",
+        "Done."
+      ],
+      "hint": "Low d-high minus high d-low, over low squared."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find $f''(x)$ for $f(x)=x^4$.",
+      "correct_answer": "$12x^2$",
+      "solution_steps": [
+        "$f'=4x^3$.",
+        "$f''=12x^2$.",
+        "Done."
+      ],
+      "hint": "Differentiate twice."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the slope of $f(x)=\\dfrac{x^2+1}{x}$ at $x=2$.",
+      "correct_answer": "$\\tfrac34$",
+      "solution_steps": [
+        "Rewrite: $x+x^{-1}$; $f'=1-x^{-2}$.",
+        "At $x=2$: $1-\\tfrac14$.",
+        "$\\tfrac34$."
+      ],
+      "hint": "Simplify before differentiating if you can."
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "title": "Trigonometric Substitution",
+  "summary": "Radicals of the form $\\sqrt{a^2-x^2}$, $\\sqrt{a^2+x^2}$, and $\\sqrt{x^2-a^2}$ simplify with trig substitutions $x=a\\sin\\theta$, $a\\tan\\theta$, $a\\sec\\theta$, using Pythagorean identities to remove the root. Convert back with a reference triangle.",
+  "glossary": {
+    "trig substitution": {
+      "plain": "Replacing $x$ with a trig function to kill a radical.",
+      "in_class": "$x=a\\sin\\theta$, $a\\tan\\theta$, or $a\\sec\\theta$ by the form."
+    },
+    "a^2 - x^2 form": {
+      "plain": "Use $x=a\\sin\\theta$.",
+      "in_class": "Then $\\sqrt{a^2-x^2}=a\\cos\\theta$."
+    },
+    "a^2 + x^2 form": {
+      "plain": "Use $x=a\\tan\\theta$.",
+      "in_class": "Then $\\sqrt{a^2+x^2}=a\\sec\\theta$."
+    },
+    "x^2 - a^2 form": {
+      "plain": "Use $x=a\\sec\\theta$.",
+      "in_class": "Then $\\sqrt{x^2-a^2}=a\\tan\\theta$."
+    },
+    "reference triangle": {
+      "plain": "A right triangle encoding the substitution.",
+      "in_class": "Reads off trig functions to convert back to $x$."
+    },
+    "back-substitute theta": {
+      "plain": "Returning from $\\theta$ to $x$.",
+      "in_class": "Use the triangle: $\\sin\\theta=x/a$, etc."
+    },
+    "identity used": {
+      "plain": "The Pythagorean identity that removes the root.",
+      "in_class": "$1-\\sin^2=\\cos^2$, $1+\\tan^2=\\sec^2$, $\\sec^2-1=\\tan^2$."
+    },
+    "dx conversion": {
+      "plain": "Differentiating the substitution for $dx$.",
+      "in_class": "e.g. $dx=a\\cos\\theta\\,d\\theta$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Matching the radical",
+      "explanation": "Choose the substitution by the radical: $\\sqrt{a^2-x^2}\\to x=a\\sin\\theta$, $\\sqrt{a^2+x^2}\\to x=a\\tan\\theta$, $\\sqrt{x^2-a^2}\\to x=a\\sec\\theta$.",
+      "math_steps": [
+        "Identify the form of the radical.",
+        "Pick the matching trig substitution.",
+        "Also compute $dx$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-c1.svg",
+        "caption": "Matching the radical"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Removing the root",
+      "explanation": "The Pythagorean identity turns the radical into a single trig function: e.g. $\\sqrt{a^2-x^2}=a\\cos\\theta$. The integral becomes a trig integral.",
+      "math_steps": [
+        "Substitute $x$ and $dx$.",
+        "Simplify the radical with the identity.",
+        "You now have an integral in $\\theta$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-c2.svg",
+        "caption": "Removing the root"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Integrating in $\\theta$",
+      "explanation": "Evaluate the resulting trig integral (often $\\int\\cos^2$, $\\int\\sec^3$, etc.) using earlier techniques.",
+      "math_steps": [
+        "Integrate the trig expression.",
+        "Use power-reduction or parts as needed.",
+        "Keep the result in $\\theta$ for now."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-c3.svg",
+        "caption": "Integrating in $\\theta$"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Converting back with a triangle",
+      "explanation": "Draw a right triangle matching the substitution to express $\\theta$-functions in $x$. For $x=a\\sin\\theta$: opposite $x$, hypotenuse $a$, adjacent $\\sqrt{a^2-x^2}$.",
+      "math_steps": [
+        "Draw the reference triangle.",
+        "Read off each needed trig ratio in terms of $x$.",
+        "Replace the $\\theta$-expressions."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-c4.svg",
+        "caption": "Converting back with a triangle"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Completing the square first",
+      "explanation": "For radicals like $\\sqrt{x^2+4x+5}$, complete the square to $\\sqrt{(x+2)^2+1}$ and then apply the standard substitution.",
+      "math_steps": [
+        "Complete the square inside the root.",
+        "Shift with a small substitution.",
+        "Apply the matching trig substitution."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-c5.svg",
+        "caption": "Completing the square first"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Area of a circle segment",
+      "scenario": "Compute the area of part of a disk.",
+      "how_the_math_applies": "The bounding $\\sqrt{a^2-x^2}$ integrates via $x=a\\sin\\theta$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-e1.svg",
+        "caption": "Area of a circle segment"
+      }
+    },
+    {
+      "title": "Arc length of a curve",
+      "scenario": "Length involves $\\sqrt{1+(f')^2}$.",
+      "how_the_math_applies": "Radicals of the $\\sqrt{a^2+x^2}$ type resolve with $x=a\\tan\\theta$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-e2.svg",
+        "caption": "Arc length of a curve"
+      }
+    },
+    {
+      "title": "Electric field of a rod",
+      "scenario": "Physics integrals with $\\sqrt{x^2+a^2}$ in the denominator.",
+      "how_the_math_applies": "Trig substitution with $x=a\\tan\\theta$ evaluates them cleanly.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-05-trig-substitution-e3.svg",
+        "caption": "Electric field of a rod"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "trigonometric substitution which substitution radical forms",
+    "math_query": "trig substitution reference triangle back substitute examples",
+    "combined_query": "calculus 2 trig substitution worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Which substitution suits $\\int\\dfrac{dx}{\\sqrt{9-x^2}}$?",
+      "correct_answer": "$x=3\\sin\\theta$",
+      "solution_steps": [
+        "Form $a^2-x^2$ with $a=3$.",
+        "Use $x=a\\sin\\theta$.",
+        "$x=3\\sin\\theta$."
+      ],
+      "hint": "$a^2-x^2\\Rightarrow\\sin$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\int\\dfrac{dx}{\\sqrt{1-x^2}}$.",
+      "correct_answer": "$\\arcsin x+C$",
+      "solution_steps": [
+        "$x=\\sin\\theta$; integral becomes $\\int d\\theta$.",
+        "$\\theta=\\arcsin x$.",
+        "$\\arcsin x+C$."
+      ],
+      "hint": "A standard result."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int\\dfrac{dx}{1+x^2}$.",
+      "correct_answer": "$\\arctan x+C$",
+      "solution_steps": [
+        "$x=\\tan\\theta$; $dx=\\sec^2\\theta\\,d\\theta$, denom $=\\sec^2\\theta$.",
+        "$\\int d\\theta=\\theta$.",
+        "$\\arctan x+C$."
+      ],
+      "hint": "$a^2+x^2\\Rightarrow\\tan$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Which substitution suits $\\int\\sqrt{x^2-4}\\,dx$?",
+      "correct_answer": "$x=2\\sec\\theta$",
+      "solution_steps": [
+        "Form $x^2-a^2$ with $a=2$.",
+        "Use $x=a\\sec\\theta$.",
+        "$x=2\\sec\\theta$."
+      ],
+      "hint": "$x^2-a^2\\Rightarrow\\sec$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "For $x=3\\sin\\theta$, what is $\\sqrt{9-x^2}$?",
+      "correct_answer": "$3\\cos\\theta$",
+      "solution_steps": [
+        "$9-9\\sin^2\\theta=9\\cos^2\\theta$.",
+        "Root: $3\\cos\\theta$.",
+        "Done."
+      ],
+      "hint": "$1-\\sin^2=\\cos^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\int\\sqrt{4-x^2}\\,dx$.",
+      "correct_answer": "$2\\arcsin\\tfrac{x}{2}+\\tfrac{x}{2}\\sqrt{4-x^2}+C$",
+      "solution_steps": [
+        "$x=2\\sin\\theta$: $\\int 4\\cos^2\\theta\\,d\\theta$.",
+        "Power-reduce and integrate: $2\\theta+2\\sin\\theta\\cos\\theta$.",
+        "Back-substitute via the triangle."
+      ],
+      "hint": "$\\int\\cos^2$ then triangle."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Complete the square: $\\sqrt{x^2+2x+5}$.",
+      "correct_answer": "$\\sqrt{(x+1)^2+4}$",
+      "solution_steps": [
+        "$x^2+2x+5=(x+1)^2+4$.",
+        "Now $a^2+u^2$ form.",
+        "Use $u=2\\tan\\theta$."
+      ],
+      "hint": "Complete the square before substituting."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Evaluate $\\int\\dfrac{dx}{\\sqrt{x^2+1}}$.",
+      "correct_answer": "$\\ln|x+\\sqrt{x^2+1}|+C$",
+      "solution_steps": [
+        "$x=\\tan\\theta$: $\\int\\sec\\theta\\,d\\theta=\\ln|\\sec\\theta+\\tan\\theta|$.",
+        "Triangle: $\\sec\\theta=\\sqrt{x^2+1}$, $\\tan\\theta=x$.",
+        "$\\ln|x+\\sqrt{x^2+1}|+C$."
+      ],
+      "hint": "$\\int\\sec\\theta$ is a known log."
+    }
+  ]
+}

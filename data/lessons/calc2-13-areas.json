@@ -1,0 +1,250 @@
+{
+  "title": "Areas Between Curves",
+  "summary": "The area between two curves is $\\int_a^b(\\text{top}-\\text{bottom})\\,dx$. Find the bounds from intersection points, integrate the height difference, and switch to $\\int(\\text{right}-\\text{left})\\,dy$ when horizontal strips are simpler.",
+  "glossary": {
+    "area between curves": {
+      "plain": "The region trapped between two graphs.",
+      "in_class": "$\\int_a^b (f-g)\\,dx$ with $f$ on top."
+    },
+    "top minus bottom": {
+      "plain": "The height of a vertical strip.",
+      "in_class": "Upper curve value minus lower curve value."
+    },
+    "intersection points": {
+      "plain": "Where the curves meet, setting the bounds.",
+      "in_class": "Solve $f(x)=g(x)$."
+    },
+    "vertical strips": {
+      "plain": "Thin $dx$-wide rectangles.",
+      "in_class": "Height $f-g$; integrate in $x$."
+    },
+    "horizontal strips": {
+      "plain": "Thin $dy$-wide rectangles.",
+      "in_class": "Width right$-$left; integrate in $y$."
+    },
+    "which is on top": {
+      "plain": "The larger function over the interval.",
+      "in_class": "Test a sample point if unsure."
+    },
+    "signed vs geometric area": {
+      "plain": "Geometric area uses top$-$bottom (always $\\ge0$).",
+      "in_class": "Different from a single signed integral."
+    },
+    "split the region": {
+      "plain": "Break where the curves swap order.",
+      "in_class": "Integrate each piece with the correct top."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The height-difference integral",
+      "explanation": "Between $x=a$ and $x=b$, a vertical strip has height (top curve $-$ bottom curve). Integrating this height gives the area: $\\int_a^b (f-g)\\,dx$.",
+      "math_steps": [
+        "Identify the upper and lower curves.",
+        "Height $=f(x)-g(x)$.",
+        "Integrate over $[a,b]$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-c1.svg",
+        "caption": "The height-difference integral"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Finding the bounds",
+      "explanation": "The limits come from where the curves cross. Solve $f(x)=g(x)$ for the intersection $x$-values; those are $a$ and $b$.",
+      "math_steps": [
+        "Set $f(x)=g(x)$.",
+        "Solve for the intersection points.",
+        "Use the smallest and largest as bounds."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-c2.svg",
+        "caption": "Finding the bounds"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Deciding which is on top",
+      "explanation": "Over the interval, one curve stays above. Test a sample $x$ between the intersections to see which value is larger, and put it first.",
+      "math_steps": [
+        "Pick a test point between crossings.",
+        "Evaluate both curves there.",
+        "Larger one is 'top'."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-c3.svg",
+        "caption": "Deciding which is on top"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Horizontal strips",
+      "explanation": "When curves are easier as $x=$ functions of $y$ (sideways parabolas, etc.), integrate right$-$left in $y$: $\\int_c^d(\\text{right}-\\text{left})\\,dy$.",
+      "math_steps": [
+        "Solve for $x$ in terms of $y$.",
+        "Width $=$ right $-$ left.",
+        "Integrate over the $y$-range."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-c4.svg",
+        "caption": "Horizontal strips"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Regions that swap",
+      "explanation": "If the curves cross inside the interval, the top and bottom trade places. Split at the crossing and integrate each piece with its correct height.",
+      "math_steps": [
+        "Find all interior crossings.",
+        "Split the interval there.",
+        "Integrate each subregion separately."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-c5.svg",
+        "caption": "Regions that swap"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Profit between revenue and cost",
+      "scenario": "Revenue and cost curves versus quantity.",
+      "how_the_math_applies": "The area between them over the profitable range represents total profit.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-e1.svg",
+        "caption": "Profit between revenue and cost"
+      }
+    },
+    {
+      "title": "Cross-section of a lens",
+      "scenario": "A lens bounded by two arcs.",
+      "how_the_math_applies": "The area between the arcs gives the lens's cross-sectional area.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-e2.svg",
+        "caption": "Cross-section of a lens"
+      }
+    },
+    {
+      "title": "Water between two levels",
+      "scenario": "A channel bounded above and below by curves.",
+      "how_the_math_applies": "The between-curves integral gives the cross-sectional flow area.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-13-areas-e3.svg",
+        "caption": "Water between two levels"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "area between two curves top minus bottom intersection",
+    "math_query": "area between curves vertical horizontal strips examples",
+    "combined_query": "calculus 2 area between curves worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Area between $y=x$ and $y=x^2$ from $0$ to $1$.",
+      "correct_answer": "$\\tfrac16$",
+      "solution_steps": [
+        "Top $x$, bottom $x^2$.",
+        "$\\int_0^1(x-x^2)\\,dx=\\tfrac12-\\tfrac13$.",
+        "$=\\tfrac16$."
+      ],
+      "hint": "Top minus bottom."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Where do $y=x$ and $y=x^2$ intersect?",
+      "correct_answer": "$x=0,1$",
+      "solution_steps": [
+        "$x=x^2$.",
+        "$x(1-x)=0$.",
+        "$x=0,1$."
+      ],
+      "hint": "Set them equal."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Area between $y=4-x^2$ and $y=0$.",
+      "correct_answer": "$\\tfrac{32}{3}$",
+      "solution_steps": [
+        "Roots $x=\\pm2$.",
+        "$\\int_{-2}^2(4-x^2)\\,dx=8x-\\tfrac{x^3}{3}\\big|$... $=\\tfrac{32}{3}$.",
+        "Done."
+      ],
+      "hint": "Integrate the parabola over $[-2,2]$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Area between $y=x^2$ and $y=2x$.",
+      "correct_answer": "$\\tfrac43$",
+      "solution_steps": [
+        "Intersect at $0,2$; line on top.",
+        "$\\int_0^2(2x-x^2)\\,dx=x^2-\\tfrac{x^3}{3}\\big|_0^2$.",
+        "$4-\\tfrac83=\\tfrac43$."
+      ],
+      "hint": "Line minus parabola."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Which is on top between $y=x^2$ and $y=2x$ on $(0,2)$?",
+      "correct_answer": "$y=2x$",
+      "solution_steps": [
+        "Test $x=1$: line $2$, parabola $1$.",
+        "Line larger.",
+        "$y=2x$ on top."
+      ],
+      "hint": "Test a middle point."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Area between $y=x^3$ and $y=x$ on $[0,1]$.",
+      "correct_answer": "$\\tfrac14$",
+      "solution_steps": [
+        "On $(0,1)$, $x>x^3$.",
+        "$\\int_0^1(x-x^3)\\,dx=\\tfrac12-\\tfrac14$.",
+        "$=\\tfrac14$."
+      ],
+      "hint": "$x$ is above $x^3$ there."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Area between $x=y^2$ and $x=y+2$ (use $dy$).",
+      "correct_answer": "$\\tfrac92$",
+      "solution_steps": [
+        "Intersect: $y^2=y+2\\Rightarrow y=-1,2$.",
+        "$\\int_{-1}^2((y+2)-y^2)\\,dy$.",
+        "$=\\tfrac92$."
+      ],
+      "hint": "Horizontal strips: right minus left."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Area enclosed by $y=\\sin x$ and $y=\\cos x$ on $[0,\\pi/4]$.",
+      "correct_answer": "$\\sqrt2-1$",
+      "solution_steps": [
+        "$\\cos\\ge\\sin$ there.",
+        "$\\int_0^{\\pi/4}(\\cos x-\\sin x)\\,dx=[\\sin x+\\cos x]_0^{\\pi/4}$.",
+        "$\\sqrt2-1$."
+      ],
+      "hint": "Cosine is on top on $[0,\\pi/4]$."
+    }
+  ]
+}

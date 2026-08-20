@@ -1,0 +1,238 @@
+{
+  "title": "Curve Sketching: Shape & Asymptotes",
+  "summary": "The first derivative gives increasing/decreasing behavior and local extrema; the second derivative gives concavity and inflection points. Limits at infinity reveal horizontal asymptotes. Together they let you sketch a function's full graph.",
+  "glossary": {
+    "increasing/decreasing": {
+      "plain": "Going up or down as $x$ grows.",
+      "in_class": "$f'>0$ increasing, $f'<0$ decreasing."
+    },
+    "concavity": {
+      "plain": "Whether a curve bends up (cup) or down (cap).",
+      "in_class": "$f''>0$ concave up, $f''<0$ concave down."
+    },
+    "inflection point": {
+      "plain": "Where concavity switches.",
+      "in_class": "$f''=0$ and changes sign."
+    },
+    "second derivative test": {
+      "plain": "Classify a critical point by concavity.",
+      "in_class": "$f''>0$ ⇒ local min, $f''<0$ ⇒ local max."
+    },
+    "horizontal asymptote": {
+      "plain": "A level the graph approaches far out.",
+      "in_class": "$\\lim_{x\\to\\pm\\infty}f(x)=L$ gives $y=L$."
+    },
+    "vertical asymptote": {
+      "plain": "A line the graph shoots up/down along.",
+      "in_class": "Where the function → ±∞, often a zero denominator."
+    },
+    "limit at infinity": {
+      "plain": "End behavior as $x\\to\\pm\\infty$.",
+      "in_class": "Compare leading terms of top and bottom for rationals."
+    },
+    "monotonic": {
+      "plain": "Always increasing or always decreasing.",
+      "in_class": "No sign changes in $f'$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Increasing and decreasing",
+      "explanation": "Where $f'>0$ the function rises; where $f'<0$ it falls. Critical points split the line into intervals to test.",
+      "math_steps": [
+        "Find critical points from $f'=0$.",
+        "Test the sign of $f'$ on each interval.",
+        "$+$ rising, $-$ falling."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-c1.svg",
+        "caption": "Increasing and decreasing"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Concavity and inflection",
+      "explanation": "$f''>0$ means concave up (holds water), $f''<0$ concave down. Where $f''$ changes sign you get an inflection point.",
+      "math_steps": [
+        "Compute $f''$.",
+        "Find where $f''=0$ or is undefined.",
+        "A sign change there is an inflection point."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-c2.svg",
+        "caption": "Concavity and inflection"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The second derivative test",
+      "explanation": "At a critical point, positive concavity makes a valley (local min) and negative concavity a peak (local max). If $f''=0$, the test is inconclusive.",
+      "math_steps": [
+        "Find critical points.",
+        "Evaluate $f''$ there.",
+        "$+$ ⇒ min, $-$ ⇒ max, $0$ ⇒ inconclusive."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-c3.svg",
+        "caption": "The second derivative test"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Limits at infinity",
+      "explanation": "For end behavior, examine $\\lim_{x\\to\\pm\\infty}f(x)$. For a rational function compare the degrees of numerator and denominator to find horizontal asymptotes.",
+      "math_steps": [
+        "Look at the highest-degree terms.",
+        "Equal degrees ⇒ ratio of leading coefficients.",
+        "Top smaller ⇒ $y=0$; top bigger ⇒ no horizontal asymptote."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-c4.svg",
+        "caption": "Limits at infinity"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Assembling the sketch",
+      "explanation": "Combine intercepts, asymptotes, increasing/decreasing, and concavity to draw the graph — the derivatives tell you every feature.",
+      "math_steps": [
+        "Mark intercepts and asymptotes.",
+        "Add rise/fall and extrema from $f'$.",
+        "Add concavity and inflections from $f''$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-c5.svg",
+        "caption": "Assembling the sketch"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A drug's concentration curve",
+      "scenario": "Concentration rises, peaks, then tapers to zero.",
+      "how_the_math_applies": "The peak is where $f'=0$; the long-run zero is a horizontal asymptote as $t\\to\\infty$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-e1.svg",
+        "caption": "A drug's concentration curve"
+      }
+    },
+    {
+      "title": "Population S-curve",
+      "scenario": "Growth accelerates then levels off (logistic).",
+      "how_the_math_applies": "The inflection point marks fastest growth ($f''=0$); the ceiling is a horizontal asymptote.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-e2.svg",
+        "caption": "Population S-curve"
+      }
+    },
+    {
+      "title": "Cost per unit at scale",
+      "scenario": "Average cost falls then flattens.",
+      "how_the_math_applies": "End behavior (a horizontal asymptote) shows the minimum achievable average cost.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-12-curve-sketching-e3.svg",
+        "caption": "Cost per unit at scale"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "first derivative increasing decreasing concavity second derivative",
+    "math_query": "curve sketching asymptotes inflection points examples",
+    "combined_query": "calculus graphing derivatives shape of graph problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "On what interval is $f(x)=x^2-4x$ increasing?",
+      "correct_answer": "$x>2$",
+      "solution_steps": [
+        "$f'=2x-4>0$.",
+        "$x>2$.",
+        "Increasing there."
+      ],
+      "hint": "Solve $f'>0$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the concavity of $f(x)=x^3$ at $x=1$.",
+      "correct_answer": "concave up",
+      "solution_steps": [
+        "$f''=6x$; $f''(1)=6>0$.",
+        "Concave up.",
+        "Done."
+      ],
+      "hint": "Sign of $f''$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the inflection point of $f(x)=x^3-3x^2$.",
+      "correct_answer": "$x=1$",
+      "solution_steps": [
+        "$f''=6x-6=0$.",
+        "$x=1$; sign changes.",
+        "Inflection at $x=1$."
+      ],
+      "hint": "$f''=0$ and changes sign."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Use the second derivative test on $f(x)=x^2-6x$ at its critical point.",
+      "correct_answer": "local min",
+      "solution_steps": [
+        "$f'=2x-6=0\\Rightarrow x=3$; $f''=2>0$.",
+        "Concave up.",
+        "Local min."
+      ],
+      "hint": "$f''>0$ ⇒ min."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find the horizontal asymptote of $f(x)=\\dfrac{2x+1}{x-3}$.",
+      "correct_answer": "$y=2$",
+      "solution_steps": [
+        "Equal degrees; ratio of leading coefficients.",
+        "$2/1$.",
+        "$y=2$."
+      ],
+      "hint": "Compare leading terms."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the horizontal asymptote of $f(x)=\\dfrac{3x^2}{x^2+1}$.",
+      "correct_answer": "$y=3$",
+      "solution_steps": [
+        "Equal degrees.",
+        "Leading ratio $3/1$.",
+        "$y=3$."
+      ],
+      "hint": "Degrees equal ⇒ coefficient ratio."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Where is $f(x)=x^4-4x^3$ concave down?",
+      "correct_answer": "$0<x<2$",
+      "solution_steps": [
+        "$f''=12x^2-24x=12x(x-2)<0$.",
+        "Between the roots.",
+        "$0<x<2$."
+      ],
+      "hint": "Solve $f''<0$."
+    }
+  ]
+}

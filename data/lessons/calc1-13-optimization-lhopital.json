@@ -1,0 +1,238 @@
+{
+  "title": "Optimization & L'Hôpital's Rule",
+  "summary": "Optimization finds the biggest or smallest value: model the quantity, reduce to one variable, and use critical points. L'Hôpital's Rule evaluates $0/0$ and $\\infty/\\infty$ limits by differentiating top and bottom separately.",
+  "glossary": {
+    "optimization": {
+      "plain": "Finding a maximum or minimum in a real problem.",
+      "in_class": "Model, reduce to one variable, find critical points."
+    },
+    "objective function": {
+      "plain": "The quantity you want to maximize or minimize.",
+      "in_class": "Express it in terms of one variable using a constraint."
+    },
+    "constraint": {
+      "plain": "A relationship that ties the variables together.",
+      "in_class": "Use it to eliminate a variable from the objective."
+    },
+    "closed vs open domain": {
+      "plain": "Whether endpoints are included.",
+      "in_class": "On a closed interval, check endpoints too."
+    },
+    "L'Hopital's Rule": {
+      "plain": "Differentiate top and bottom to resolve $0/0$ or $\\infty/\\infty$.",
+      "in_class": "$\\lim\\dfrac{f}{g}=\\lim\\dfrac{f'}{g'}$ when the form is indeterminate."
+    },
+    "indeterminate quotient": {
+      "plain": "A limit form like $0/0$ or $\\infty/\\infty$.",
+      "in_class": "Required before applying L'Hôpital."
+    },
+    "other indeterminates": {
+      "plain": "Forms like $0\\cdot\\infty$, $\\infty-\\infty$, $1^\\infty$.",
+      "in_class": "Rewrite as a quotient, then use L'Hôpital."
+    },
+    "feasible region": {
+      "plain": "The set of allowed inputs.",
+      "in_class": "Optimum lies at a critical point or a boundary of it."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Setting up optimization",
+      "explanation": "Write the quantity to optimize (the objective), then use the constraint to express it in a single variable. State the domain from the context.",
+      "math_steps": [
+        "Name variables and the objective.",
+        "Use the constraint to eliminate variables.",
+        "Determine the valid domain."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-c1.svg",
+        "caption": "Setting up optimization"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Solving the optimization",
+      "explanation": "Differentiate the one-variable objective, find critical points, and test them (and any endpoints) to identify the max or min.",
+      "math_steps": [
+        "Differentiate the objective.",
+        "Solve $=0$ for critical points.",
+        "Compare values (and endpoints) to pick the optimum."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-c2.svg",
+        "caption": "Solving the optimization"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Common shapes",
+      "explanation": "Boxes, cans, fences, and distances recur. Typical constraints are fixed perimeter, area, or volume; typical objectives are area, volume, cost, or distance.",
+      "math_steps": [
+        "Recognize the geometric template.",
+        "Write area/volume/cost formulas.",
+        "Reduce and optimize."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-c3.svg",
+        "caption": "Common shapes"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "L'Hôpital for $0/0$ and $\\infty/\\infty$",
+      "explanation": "If a limit is $0/0$ or $\\infty/\\infty$, then $\\lim\\dfrac{f}{g}=\\lim\\dfrac{f'}{g'}$. Differentiate numerator and denominator separately (not the quotient) and re-evaluate.",
+      "math_steps": [
+        "Confirm the form is $0/0$ or $\\infty/\\infty$.",
+        "Differentiate top and bottom separately.",
+        "Take the limit again; repeat if still indeterminate."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-c4.svg",
+        "caption": "L'Hôpital for $0/0$ and $\\infty/\\infty$"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Other indeterminate forms",
+      "explanation": "Forms like $0\\cdot\\infty$, $\\infty-\\infty$, and $1^\\infty$ must be rewritten as a quotient (or via logarithms) before L'Hôpital applies.",
+      "math_steps": [
+        "Rearrange into $\\dfrac{0}{0}$ or $\\dfrac{\\infty}{\\infty}$.",
+        "For $1^\\infty$ type, take $\\ln$ first.",
+        "Then apply L'Hôpital."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-c5.svg",
+        "caption": "Other indeterminate forms"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Least-material can",
+      "scenario": "Design a soda can holding a fixed volume with minimum metal.",
+      "how_the_math_applies": "Minimize surface area subject to the volume constraint — a classic optimization.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-e1.svg",
+        "caption": "Least-material can"
+      }
+    },
+    {
+      "title": "Fastest route to shore",
+      "scenario": "A lifeguard runs then swims to a drowning swimmer.",
+      "how_the_math_applies": "Minimize total time as a function of the entry point — optimization with a distance objective.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-e2.svg",
+        "caption": "Fastest route to shore"
+      }
+    },
+    {
+      "title": "Growth vs decay race",
+      "scenario": "Which wins as $x\\to\\infty$: $x^{100}$ or $e^x$?",
+      "how_the_math_applies": "L'Hôpital shows $e^x$ dominates any power — $\\lim x^n/e^x=0$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-13-optimization-lhopital-e3.svg",
+        "caption": "Growth vs decay race"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "optimization setup objective constraint one variable",
+    "math_query": "lhopitals rule 0/0 infinity examples",
+    "combined_query": "calculus optimization lhopital worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Two numbers sum to $10$. Maximize their product.",
+      "correct_answer": "$25$ (at $5,5$)",
+      "solution_steps": [
+        "$P=x(10-x)=10x-x^2$.",
+        "$P'=10-2x=0\\Rightarrow x=5$.",
+        "$P=25$."
+      ],
+      "hint": "Objective in one variable, then $P'=0$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\lim_{x\\to0}\\dfrac{\\sin x}{x}$ by L'Hôpital.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "$0/0$; differentiate: $\\dfrac{\\cos x}{1}$.",
+        "At $0$: $1$.",
+        "$=1$."
+      ],
+      "hint": "Differentiate top and bottom."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A rectangle with perimeter $20$ has maximum area when?",
+      "correct_answer": "$5\\times5$, area $25$",
+      "solution_steps": [
+        "$A=x(10-x)$.",
+        "$A'=10-2x=0\\Rightarrow x=5$.",
+        "Square, area $25$."
+      ],
+      "hint": "Fixed perimeter ⇒ square maximizes area."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\lim_{x\\to\\infty}\\dfrac{\\ln x}{x}$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$\\infty/\\infty$; L'Hôpital: $\\dfrac{1/x}{1}=\\dfrac1x$.",
+        "As $x\\to\\infty$, $\\to0$.",
+        "$=0$."
+      ],
+      "hint": "$\\ln$ grows slower than $x$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\lim_{x\\to0}\\dfrac{e^x-1}{x}$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "$0/0$; L'Hôpital: $\\dfrac{e^x}{1}$.",
+        "At $0$: $1$.",
+        "$=1$."
+      ],
+      "hint": "Differentiate numerator and denominator."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Maximize the area of a rectangle inscribed under $y=4-x^2$ (base on the $x$-axis).",
+      "correct_answer": "area $=\\dfrac{32}{3\\sqrt3}$",
+      "solution_steps": [
+        "$A=2x(4-x^2)=8x-2x^3$.",
+        "$A'=8-6x^2=0\\Rightarrow x=2/\\sqrt3$.",
+        "$A=\\dfrac{32}{3\\sqrt3}$."
+      ],
+      "hint": "Width $2x$, height $4-x^2$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\lim_{x\\to\\infty}\\dfrac{x^2}{e^x}$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$\\infty/\\infty$; apply L'Hôpital twice: $\\dfrac{2x}{e^x}\\to\\dfrac{2}{e^x}$.",
+        "$\\to0$.",
+        "$=0$."
+      ],
+      "hint": "Exponentials beat powers."
+    }
+  ]
+}

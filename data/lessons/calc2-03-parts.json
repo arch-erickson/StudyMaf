@@ -1,0 +1,250 @@
+{
+  "title": "Integration by Parts",
+  "summary": "Integration by parts reverses the product rule: $\\int u\\,dv=uv-\\int v\\,du$. Choosing $u$ (to differentiate) and $dv$ (to integrate) wisely — often by the LIATE guide — turns products like $x e^x$ and $x\\ln x$ into simpler integrals.",
+  "glossary": {
+    "integration by parts": {
+      "plain": "A rule for integrating a product of functions.",
+      "in_class": "$\\int u\\,dv=uv-\\int v\\,du$; reverses the product rule."
+    },
+    "LIATE": {
+      "plain": "A guide for choosing $u$: Log, Inverse-trig, Algebraic, Trig, Exponential.",
+      "in_class": "Pick $u$ as the earliest type on the list."
+    },
+    "u and dv": {
+      "plain": "The two pieces you split the integrand into.",
+      "in_class": "$u$ gets differentiated, $dv$ gets integrated."
+    },
+    "reduction formula": {
+      "plain": "Applying parts to lower a power step by step.",
+      "in_class": "e.g. reduces $\\int x^n e^x\\,dx$ each round."
+    },
+    "cyclic integral": {
+      "plain": "Parts loops back to the original integral.",
+      "in_class": "Solve algebraically for the integral (e.g. $\\int e^x\\sin x$)."
+    },
+    "product rule reversed": {
+      "plain": "The origin of the parts formula.",
+      "in_class": "$(uv)'=u'v+uv'$ integrated and rearranged."
+    },
+    "definite parts": {
+      "plain": "Parts on $[a,b]$.",
+      "in_class": "$\\big[uv\\big]_a^b-\\int_a^b v\\,du$."
+    },
+    "choosing wisely": {
+      "plain": "Good $u$/dv makes the new integral easier.",
+      "in_class": "Aim for a $\\int v\\,du$ simpler than the original."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The formula",
+      "explanation": "From the product rule, $\\int u\\,dv=uv-\\int v\\,du$. Split the integrand into a part to differentiate ($u$) and a part to integrate ($dv$).",
+      "math_steps": [
+        "Choose $u$ and $dv$ so $u\\,dv$ is the integrand.",
+        "Differentiate $u$; integrate $dv$.",
+        "Assemble $uv-\\int v\\,du$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-c1.svg",
+        "caption": "The formula"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Choosing $u$ with LIATE",
+      "explanation": "Pick $u$ as the function type appearing earliest in LIATE (Log, Inverse-trig, Algebraic, Trig, Exponential); the rest is $dv$. This usually makes $\\int v\\,du$ simpler.",
+      "math_steps": [
+        "Classify each factor by LIATE.",
+        "Let $u$ be the earlier type.",
+        "Let $dv$ be the remainder."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-c2.svg",
+        "caption": "Choosing $u$ with LIATE"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Algebraic × exponential/trig",
+      "explanation": "For $\\int x e^x\\,dx$ or $\\int x\\cos x\\,dx$, choose $u=x$ (differentiates to a constant) so one round of parts finishes the job.",
+      "math_steps": [
+        "Set $u=x$, $dv=e^x\\,dx$ (or $\\cos x\\,dx$).",
+        "Apply the formula.",
+        "The remaining integral is elementary."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-c3.svg",
+        "caption": "Algebraic × exponential/trig"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Logarithms and inverse trig",
+      "explanation": "For $\\int\\ln x\\,dx$ or $\\int\\arctan x\\,dx$, let $u$ be the log/inverse-trig (there's no obvious antiderivative) and $dv=dx$.",
+      "math_steps": [
+        "Set $u=\\ln x$ (or $\\arctan x$), $dv=dx$.",
+        "Then $v=x$ and $du$ is algebraic.",
+        "Finish the simpler integral."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-c4.svg",
+        "caption": "Logarithms and inverse trig"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Repeat and cyclic cases",
+      "explanation": "Sometimes parts must be applied twice (reduction), or it cycles back to the original integral — then solve for it algebraically, as with $\\int e^x\\sin x\\,dx$.",
+      "math_steps": [
+        "Apply parts once; if still a product, apply again.",
+        "If the original reappears, set the equation.",
+        "Solve algebraically for the integral."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-c5.svg",
+        "caption": "Repeat and cyclic cases"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Work by a spring-like force",
+      "scenario": "Force times distance where force depends on position.",
+      "how_the_math_applies": "Products like $x\\,e^{-x}$ arise and integrate by parts to give total work.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-e1.svg",
+        "caption": "Work by a spring-like force"
+      }
+    },
+    {
+      "title": "Expected value in probability",
+      "scenario": "Averaging $x$ against a density $e^{-x}$.",
+      "how_the_math_applies": "$\\int x e^{-x}\\,dx$ (an expected value) is a textbook integration-by-parts.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-e2.svg",
+        "caption": "Expected value in probability"
+      }
+    },
+    {
+      "title": "Signal energy",
+      "scenario": "Combining a ramp with an oscillation.",
+      "how_the_math_applies": "$\\int x\\sin x\\,dx$-type integrals appear and are solved by parts.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-03-parts-e3.svg",
+        "caption": "Signal energy"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "integration by parts formula LIATE choosing u dv",
+    "math_query": "integration by parts examples ln x arctan cyclic",
+    "combined_query": "calculus 2 integration by parts worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find $\\int x e^x\\,dx$.",
+      "correct_answer": "$e^x(x-1)+C$",
+      "solution_steps": [
+        "$u=x$, $dv=e^x\\,dx$; $v=e^x$.",
+        "$xe^x-\\int e^x\\,dx$.",
+        "$e^x(x-1)+C$."
+      ],
+      "hint": "Let $u=x$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find $\\int \\ln x\\,dx$.",
+      "correct_answer": "$x\\ln x-x+C$",
+      "solution_steps": [
+        "$u=\\ln x$, $dv=dx$; $v=x$.",
+        "$x\\ln x-\\int 1\\,dx$.",
+        "$x\\ln x-x+C$."
+      ],
+      "hint": "$u=\\ln x$, $dv=dx$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find $\\int x\\cos x\\,dx$.",
+      "correct_answer": "$x\\sin x+\\cos x+C$",
+      "solution_steps": [
+        "$u=x$, $dv=\\cos x\\,dx$; $v=\\sin x$.",
+        "$x\\sin x-\\int\\sin x\\,dx$.",
+        "$x\\sin x+\\cos x+C$."
+      ],
+      "hint": "$u=x$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find $\\int x\\ln x\\,dx$.",
+      "correct_answer": "$\\tfrac{x^2}{2}\\ln x-\\tfrac{x^2}{4}+C$",
+      "solution_steps": [
+        "$u=\\ln x$, $dv=x\\,dx$; $v=\\tfrac{x^2}{2}$.",
+        "$\\tfrac{x^2}{2}\\ln x-\\int\\tfrac{x}{2}\\,dx$.",
+        "$\\tfrac{x^2}{2}\\ln x-\\tfrac{x^2}{4}+C$."
+      ],
+      "hint": "$u=\\ln x$ even with the $x$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find $\\int \\arctan x\\,dx$.",
+      "correct_answer": "$x\\arctan x-\\tfrac12\\ln(1+x^2)+C$",
+      "solution_steps": [
+        "$u=\\arctan x$, $dv=dx$; $v=x$.",
+        "$x\\arctan x-\\int\\frac{x}{1+x^2}\\,dx$.",
+        "$x\\arctan x-\\tfrac12\\ln(1+x^2)+C$."
+      ],
+      "hint": "$dv=dx$; finish with a log substitution."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find $\\int x^2 e^x\\,dx$.",
+      "correct_answer": "$e^x(x^2-2x+2)+C$",
+      "solution_steps": [
+        "Parts once: $x^2e^x-2\\int xe^x\\,dx$.",
+        "Use the earlier result for $\\int xe^x$.",
+        "$e^x(x^2-2x+2)+C$."
+      ],
+      "hint": "Apply parts twice (reduction)."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\int_0^1 x e^x\\,dx$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "Antiderivative $e^x(x-1)$.",
+        "$[e^x(x-1)]_0^1=0-(-1)$.",
+        "$=1$."
+      ],
+      "hint": "Use the indefinite result, then FTC."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Find $\\int e^x\\sin x\\,dx$.",
+      "correct_answer": "$\\tfrac12 e^x(\\sin x-\\cos x)+C$",
+      "solution_steps": [
+        "Parts twice returns the original integral $I$.",
+        "$I=e^x\\sin x-e^x\\cos x-I$ (up to signs).",
+        "Solve: $I=\\tfrac12 e^x(\\sin x-\\cos x)+C$."
+      ],
+      "hint": "Cyclic — solve for $I$."
+    }
+  ]
+}

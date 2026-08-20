@@ -1,0 +1,250 @@
+{
+  "title": "Partial Fractions",
+  "summary": "A proper rational function splits into a sum of simpler fractions whose denominators are the factors of the original. Each piece integrates to a logarithm or arctangent, making $\\int\\frac{P(x)}{Q(x)}\\,dx$ tractable.",
+  "glossary": {
+    "partial fractions": {
+      "plain": "Breaking one fraction into a sum of simpler ones.",
+      "in_class": "Match denominators to the factors of $Q(x)$."
+    },
+    "proper fraction": {
+      "plain": "Numerator degree less than denominator degree.",
+      "in_class": "Required first; otherwise do polynomial division."
+    },
+    "linear factor": {
+      "plain": "A factor like $(x-a)$.",
+      "in_class": "Contributes a term $\\dfrac{A}{x-a}$."
+    },
+    "repeated factor": {
+      "plain": "A factor raised to a power, $(x-a)^2$.",
+      "in_class": "Needs terms for each power: $\\dfrac{A}{x-a}+\\dfrac{B}{(x-a)^2}$."
+    },
+    "irreducible quadratic": {
+      "plain": "A quadratic with no real roots.",
+      "in_class": "Contributes $\\dfrac{Ax+B}{x^2+bx+c}$; integrates to log + arctan."
+    },
+    "cover-up method": {
+      "plain": "Fast way to find constants over linear factors.",
+      "in_class": "Plug in the factor's root to isolate that constant."
+    },
+    "polynomial division": {
+      "plain": "Reducing an improper fraction first.",
+      "in_class": "Quotient + proper remainder over $Q$."
+    },
+    "clear denominators": {
+      "plain": "Multiply through to solve for the constants.",
+      "in_class": "Then match coefficients or substitute roots."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Set up the decomposition",
+      "explanation": "Factor $Q(x)$ fully. Each distinct linear factor $(x-a)$ gives $\\dfrac{A}{x-a}$; repeated factors give a term per power; irreducible quadratics give $\\dfrac{Ax+B}{\\ldots}$.",
+      "math_steps": [
+        "Factor the denominator completely.",
+        "Write one fraction per factor (per power for repeats).",
+        "Use $Ax+B$ over irreducible quadratics."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-c1.svg",
+        "caption": "Set up the decomposition"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Solve for the constants",
+      "explanation": "Clear denominators and either substitute the roots (cover-up) or match coefficients of like powers to get a system for $A,B,\\ldots$.",
+      "math_steps": [
+        "Multiply both sides by $Q(x)$.",
+        "Plug in roots to isolate constants, or equate coefficients.",
+        "Solve the resulting system."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-c2.svg",
+        "caption": "Solve for the constants"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Improper fractions first",
+      "explanation": "If the numerator's degree is $\\ge$ the denominator's, do polynomial long division first: write quotient plus a proper remainder, then decompose the remainder.",
+      "math_steps": [
+        "Compare degrees.",
+        "Divide to get quotient + proper fraction.",
+        "Decompose the proper part."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-c3.svg",
+        "caption": "Improper fractions first"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Integrating the pieces",
+      "explanation": "Each simple fraction integrates cleanly: $\\int\\dfrac{A}{x-a}\\,dx=A\\ln|x-a|$, and $\\dfrac{Ax+B}{x^2+c}$ splits into a log and an arctangent.",
+      "math_steps": [
+        "Integrate linear-denominator terms to logs.",
+        "Split quadratic terms into log + arctan.",
+        "Add the results."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-c4.svg",
+        "caption": "Integrating the pieces"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Repeated and quadratic factors",
+      "explanation": "Repeated linear factors and irreducible quadratics need their full set of terms; missing a term makes the system unsolvable. Include every power and every $Ax+B$.",
+      "math_steps": [
+        "List every required term.",
+        "Solve the complete system.",
+        "Integrate all pieces."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-c5.svg",
+        "caption": "Repeated and quadratic factors"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Logistic population model",
+      "scenario": "Growth that slows as it nears a cap.",
+      "how_the_math_applies": "Solving it requires $\\int\\frac{dP}{P(1-P)}$, a partial-fraction integral.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-e1.svg",
+        "caption": "Logistic population model"
+      }
+    },
+    {
+      "title": "Circuit charge over time",
+      "scenario": "A rational rate expression in an RC network.",
+      "how_the_math_applies": "Partial fractions integrate the rational function to describe the charge.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-e2.svg",
+        "caption": "Circuit charge over time"
+      }
+    },
+    {
+      "title": "Chemical reaction rates",
+      "scenario": "Concentration change as a ratio of polynomials.",
+      "how_the_math_applies": "Rate laws often integrate via partial fractions to a log expression.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-06-partial-fractions-e3.svg",
+        "caption": "Chemical reaction rates"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "partial fractions decomposition linear repeated quadratic factors",
+    "math_query": "partial fractions cover up method integrate examples",
+    "combined_query": "calculus 2 partial fractions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Decompose $\\dfrac{1}{(x-1)(x+1)}$.",
+      "correct_answer": "$\\tfrac12\\left(\\dfrac{1}{x-1}-\\dfrac{1}{x+1}\\right)$",
+      "solution_steps": [
+        "$\\dfrac{A}{x-1}+\\dfrac{B}{x+1}$; cover-up gives $A=\\tfrac12$, $B=-\\tfrac12$.",
+        "Combine.",
+        "$\\tfrac12\\left(\\dfrac{1}{x-1}-\\dfrac{1}{x+1}\\right)$."
+      ],
+      "hint": "Cover-up at $x=1$ and $x=-1$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find $\\int\\dfrac{dx}{x^2-1}$.",
+      "correct_answer": "$\\tfrac12\\ln\\left|\\dfrac{x-1}{x+1}\\right|+C$",
+      "solution_steps": [
+        "Use the decomposition above.",
+        "$\\tfrac12(\\ln|x-1|-\\ln|x+1|)$.",
+        "$\\tfrac12\\ln\\left|\\dfrac{x-1}{x+1}\\right|+C$."
+      ],
+      "hint": "Integrate each simple fraction."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Decompose $\\dfrac{3x+1}{x(x+1)}$.",
+      "correct_answer": "$\\dfrac{1}{x}+\\dfrac{2}{x+1}$",
+      "solution_steps": [
+        "$\\dfrac{A}{x}+\\dfrac{B}{x+1}$; $A=1$ (at $x=0$), $B=2$ (at $x=-1$).",
+        "Combine.",
+        "$\\dfrac{1}{x}+\\dfrac{2}{x+1}$."
+      ],
+      "hint": "Cover-up at the roots."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find $\\int\\dfrac{3x+1}{x(x+1)}\\,dx$.",
+      "correct_answer": "$\\ln|x|+2\\ln|x+1|+C$",
+      "solution_steps": [
+        "Use the decomposition.",
+        "$\\int\\tfrac1x+\\tfrac{2}{x+1}\\,dx$.",
+        "$\\ln|x|+2\\ln|x+1|+C$."
+      ],
+      "hint": "Each term is a log."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "What form fits $\\dfrac{1}{x(x^2+1)}$?",
+      "correct_answer": "$\\dfrac{A}{x}+\\dfrac{Bx+C}{x^2+1}$",
+      "solution_steps": [
+        "$x$ is linear; $x^2+1$ is irreducible.",
+        "Use $Bx+C$ over the quadratic.",
+        "$\\dfrac{A}{x}+\\dfrac{Bx+C}{x^2+1}$."
+      ],
+      "hint": "Irreducible quadratic needs $Bx+C$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find $\\int\\dfrac{dx}{x(x^2+1)}$.",
+      "correct_answer": "$\\ln|x|-\\tfrac12\\ln(x^2+1)+C$",
+      "solution_steps": [
+        "Decompose: $\\tfrac1x-\\dfrac{x}{x^2+1}$.",
+        "Integrate: $\\ln|x|-\\tfrac12\\ln(x^2+1)$.",
+        "$+C$."
+      ],
+      "hint": "Split off the quadratic term."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Decompose $\\dfrac{x}{(x-1)^2}$.",
+      "correct_answer": "$\\dfrac{1}{x-1}+\\dfrac{1}{(x-1)^2}$",
+      "solution_steps": [
+        "Repeated factor: $\\dfrac{A}{x-1}+\\dfrac{B}{(x-1)^2}$.",
+        "$x=A(x-1)+B$; $A=1$, $B=1$.",
+        "$\\dfrac{1}{x-1}+\\dfrac{1}{(x-1)^2}$."
+      ],
+      "hint": "Include both powers."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Before decomposing $\\dfrac{x^2}{x^2-1}$, what must you do?",
+      "correct_answer": "Divide first (it's improper)",
+      "solution_steps": [
+        "Degrees are equal ⇒ improper.",
+        "Divide: $1+\\dfrac{1}{x^2-1}$.",
+        "Then decompose the remainder."
+      ],
+      "hint": "Improper ⇒ polynomial division first."
+    }
+  ]
+}

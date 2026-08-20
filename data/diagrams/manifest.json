@@ -1653,7 +1653,2024 @@
           "attribution": null
         }
       ]
+    },
+    {
+      "id": "calc1-01-limits-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-c1.svg",
+      "asset": "limit-hole"
+    },
+    {
+      "id": "calc1-01-limits-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-01-limits-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-c3.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc1-01-limits-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-c4.svg",
+      "asset": "limit-hole"
+    },
+    {
+      "id": "calc1-01-limits-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-01-limits-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-e1.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc1-01-limits-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-e2.svg",
+      "asset": "limit-hole"
+    },
+    {
+      "id": "calc1-01-limits-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-01-limits-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-02-continuity-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-c1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-02-continuity-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-c2.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "calc1-02-continuity-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-c3.svg",
+      "asset": "limit-hole"
+    },
+    {
+      "id": "calc1-02-continuity-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-c4.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-02-continuity-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-c5.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "calc1-02-continuity-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-e1.svg",
+      "asset": "limit-hole"
+    },
+    {
+      "id": "calc1-02-continuity-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-e2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-02-continuity-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-02-continuity-e3.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "calc1-03-derivative-definition-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-c1.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-03-derivative-definition-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-c2.svg",
+      "asset": "secant-line"
+    },
+    {
+      "id": "calc1-03-derivative-definition-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-03-derivative-definition-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-c4.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-03-derivative-definition-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-c5.svg",
+      "asset": "secant-line"
+    },
+    {
+      "id": "calc1-03-derivative-definition-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-03-derivative-definition-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-e2.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-03-derivative-definition-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-03-derivative-definition-e3.svg",
+      "asset": "secant-line"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-c1.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-c2.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-c4.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-c5.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-e2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-04-differentiation-rules-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-04-differentiation-rules-e3.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-05-rates-trig-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-c1.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc1-05-rates-trig-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-c2.svg",
+      "asset": "cosine-wave"
+    },
+    {
+      "id": "calc1-05-rates-trig-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-c3.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-05-rates-trig-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-c4.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc1-05-rates-trig-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-c5.svg",
+      "asset": "cosine-wave"
+    },
+    {
+      "id": "calc1-05-rates-trig-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-e1.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-05-rates-trig-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-e2.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc1-05-rates-trig-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-05-rates-trig-e3.svg",
+      "asset": "cosine-wave"
+    },
+    {
+      "id": "calc1-06-chain-rule-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-c1.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc1-06-chain-rule-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-c2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-06-chain-rule-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-06-chain-rule-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-c4.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc1-06-chain-rule-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-c5.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-06-chain-rule-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-06-chain-rule-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-e2.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc1-06-chain-rule-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-06-chain-rule-e3.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-c1.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-c3.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-c4.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-e1.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-e2.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "calc1-07-inverse-implicit-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-07-inverse-implicit-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-c1.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-c3.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-c4.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-e1.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-e2.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc1-08-exp-log-derivatives-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-08-exp-log-derivatives-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-09-related-rates-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-c1.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "calc1-09-related-rates-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-09-related-rates-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-c3.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-09-related-rates-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-c4.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "calc1-09-related-rates-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-09-related-rates-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-e1.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-09-related-rates-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-e2.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "calc1-09-related-rates-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-09-related-rates-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-10-linearization-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-c1.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-10-linearization-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-10-linearization-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-c3.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-10-linearization-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-c4.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-10-linearization-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-10-linearization-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-e1.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-10-linearization-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-e2.svg",
+      "asset": "tangent-line"
+    },
+    {
+      "id": "calc1-10-linearization-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-10-linearization-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-c1.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-c2.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-c3.svg",
+      "asset": "secant-line"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-c4.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-c5.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-e1.svg",
+      "asset": "secant-line"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-e2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc1-11-extrema-mvt-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-11-extrema-mvt-e3.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-12-curve-sketching-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-c1.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-12-curve-sketching-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-c2.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "calc1-12-curve-sketching-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-12-curve-sketching-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-c4.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-12-curve-sketching-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-c5.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "calc1-12-curve-sketching-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-12-curve-sketching-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-e2.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc1-12-curve-sketching-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-12-curve-sketching-e3.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-c1.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-c3.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-c4.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-e1.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-e2.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "calc1-13-optimization-lhopital-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-13-optimization-lhopital-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-14-integral-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-c1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc1-14-integral-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-c2.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc1-14-integral-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-14-integral-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-c4.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc1-14-integral-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-c5.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc1-14-integral-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc1-14-integral-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-e2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc1-14-integral-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc1-14-integral-e3.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-c1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-c3.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-c4.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-e1.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-e2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-01-antiderivatives-ftc-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-01-antiderivatives-ftc-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-02-substitution-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-c1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-02-substitution-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-02-substitution-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-c3.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-02-substitution-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-c4.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-02-substitution-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-02-substitution-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-e1.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-02-substitution-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-e2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-02-substitution-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-02-substitution-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-03-parts-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-c1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-03-parts-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-c2.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-03-parts-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-03-parts-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-c4.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-03-parts-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-c5.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-03-parts-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-03-parts-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-e2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-03-parts-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-03-parts-e3.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-04-trig-integrals-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-c1.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc2-04-trig-integrals-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-c2.svg",
+      "asset": "cosine-wave"
+    },
+    {
+      "id": "calc2-04-trig-integrals-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-c3.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-04-trig-integrals-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-c4.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc2-04-trig-integrals-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-c5.svg",
+      "asset": "cosine-wave"
+    },
+    {
+      "id": "calc2-04-trig-integrals-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-e1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-04-trig-integrals-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-e2.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc2-04-trig-integrals-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-04-trig-integrals-e3.svg",
+      "asset": "cosine-wave"
+    },
+    {
+      "id": "calc2-05-trig-substitution-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-c1.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "calc2-05-trig-substitution-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-c2.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "calc2-05-trig-substitution-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-05-trig-substitution-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-c4.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "calc2-05-trig-substitution-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-c5.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "calc2-05-trig-substitution-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-05-trig-substitution-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-e2.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "calc2-05-trig-substitution-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-05-trig-substitution-e3.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "calc2-06-partial-fractions-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-c1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-06-partial-fractions-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-c2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-06-partial-fractions-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-c3.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "calc2-06-partial-fractions-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-c4.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-06-partial-fractions-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-c5.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-06-partial-fractions-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-e1.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "calc2-06-partial-fractions-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-e2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-06-partial-fractions-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-06-partial-fractions-e3.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-07-improper-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-c1.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-07-improper-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-c2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-07-improper-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-07-improper-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-c4.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-07-improper-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-c5.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-07-improper-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-07-improper-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-e2.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-07-improper-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-07-improper-e3.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-c1.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-c2.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-c4.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-c5.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-e2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-08-taylor-polynomials-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-08-taylor-polynomials-e3.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "calc2-09-sequences-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-c1.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-09-sequences-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-c2.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "calc2-09-sequences-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-09-sequences-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-c4.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-09-sequences-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-c5.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "calc2-09-sequences-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-09-sequences-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-e2.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-09-sequences-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-09-sequences-e3.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "calc2-10-series-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-c1.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-10-series-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-c2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-10-series-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-10-series-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-c4.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-10-series-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-c5.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-10-series-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-10-series-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-e2.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-10-series-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-10-series-e3.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-c1.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-c2.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-c4.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-c5.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-e2.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "calc2-11-alternating-ratio-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-11-alternating-ratio-e3.svg",
+      "asset": "sine-wave"
+    },
+    {
+      "id": "calc2-12-power-series-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-c1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-12-power-series-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-c2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-12-power-series-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-c3.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-12-power-series-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-c4.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-12-power-series-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-c5.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-12-power-series-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-e1.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "calc2-12-power-series-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-e2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-12-power-series-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-12-power-series-e3.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-13-areas-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-c1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-13-areas-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-c2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-13-areas-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-13-areas-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-c4.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-13-areas-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-c5.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-13-areas-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-13-areas-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-e2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-13-areas-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-13-areas-e3.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "calc2-14-volumes-c1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-c1.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-14-volumes-c2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-14-volumes-c3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-c3.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-14-volumes-c4",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-c4.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-14-volumes-c5",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "calc2-14-volumes-e1",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-e1.svg",
+      "asset": "riemann-rectangles"
+    },
+    {
+      "id": "calc2-14-volumes-e2",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-e2.svg",
+      "asset": "area-under-curve"
+    },
+    {
+      "id": "calc2-14-volumes-e3",
+      "subject": "calculus",
+      "file": "data/diagrams/calc2-14-volumes-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-01-arithmetic-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-c1.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "alg-01-arithmetic-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-c2.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "alg-01-arithmetic-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-c3.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-01-arithmetic-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-c4.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "alg-01-arithmetic-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-c5.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "alg-01-arithmetic-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-e1.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-01-arithmetic-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-e2.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "alg-01-arithmetic-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-01-arithmetic-e3.svg",
+      "asset": "number-line-point"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-c1.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-c2.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-c3.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-c4.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-c5.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-e1.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-e2.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-02-exponents-polynomials-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-02-exponents-polynomials-e3.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-03-factoring-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-c1.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-03-factoring-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-c2.svg",
+      "asset": "square"
+    },
+    {
+      "id": "alg-03-factoring-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-c3.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-03-factoring-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-c4.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-03-factoring-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-c5.svg",
+      "asset": "square"
+    },
+    {
+      "id": "alg-03-factoring-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-e1.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-03-factoring-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-e2.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-03-factoring-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-03-factoring-e3.svg",
+      "asset": "square"
+    },
+    {
+      "id": "alg-04-rational-expressions-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-c1.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-04-rational-expressions-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-c2.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-04-rational-expressions-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-c3.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-04-rational-expressions-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-c4.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-04-rational-expressions-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-c5.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-04-rational-expressions-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-e1.svg",
+      "asset": "rectangle"
+    },
+    {
+      "id": "alg-04-rational-expressions-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-e2.svg",
+      "asset": "bar-model"
+    },
+    {
+      "id": "alg-04-rational-expressions-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-04-rational-expressions-e3.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-05-radicals-complex-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-c1.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-05-radicals-complex-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-05-radicals-complex-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-c3.svg",
+      "asset": "square"
+    },
+    {
+      "id": "alg-05-radicals-complex-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-c4.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-05-radicals-complex-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-05-radicals-complex-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-e1.svg",
+      "asset": "square"
+    },
+    {
+      "id": "alg-05-radicals-complex-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-e2.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-05-radicals-complex-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-05-radicals-complex-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-06-linear-equations-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-c1.svg",
+      "asset": "balance-scale"
+    },
+    {
+      "id": "alg-06-linear-equations-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-c2.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "alg-06-linear-equations-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-c3.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-06-linear-equations-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-c4.svg",
+      "asset": "balance-scale"
+    },
+    {
+      "id": "alg-06-linear-equations-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-c5.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "alg-06-linear-equations-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-e1.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-06-linear-equations-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-e2.svg",
+      "asset": "balance-scale"
+    },
+    {
+      "id": "alg-06-linear-equations-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-06-linear-equations-e3.svg",
+      "asset": "number-line"
+    },
+    {
+      "id": "alg-07-quadratic-equations-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-c1.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "alg-07-quadratic-equations-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-c2.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "alg-07-quadratic-equations-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-07-quadratic-equations-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-c4.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "alg-07-quadratic-equations-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-c5.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "alg-07-quadratic-equations-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-07-quadratic-equations-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-e2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "alg-07-quadratic-equations-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-07-quadratic-equations-e3.svg",
+      "asset": "parabola-down"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-c1.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-c3.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-c4.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-e1.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-e2.svg",
+      "asset": "cubic"
+    },
+    {
+      "id": "alg-08-polynomial-rational-equations-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-08-polynomial-rational-equations-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-09-radical-equations-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-c1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-09-radical-equations-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-c2.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-09-radical-equations-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-c3.svg",
+      "asset": "balance-scale"
+    },
+    {
+      "id": "alg-09-radical-equations-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-c4.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-09-radical-equations-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-c5.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-09-radical-equations-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-e1.svg",
+      "asset": "balance-scale"
+    },
+    {
+      "id": "alg-09-radical-equations-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-e2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-09-radical-equations-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-09-radical-equations-e3.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-10-lines-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-c1.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-10-lines-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-10-lines-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-c3.svg",
+      "asset": "coordinate-plane-q1"
+    },
+    {
+      "id": "alg-10-lines-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-c4.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-10-lines-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-10-lines-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-e1.svg",
+      "asset": "coordinate-plane-q1"
+    },
+    {
+      "id": "alg-10-lines-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-e2.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-10-lines-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-10-lines-e3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-11-conics-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-c1.svg",
+      "asset": "circle-radius"
+    },
+    {
+      "id": "alg-11-conics-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-c2.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "alg-11-conics-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-c3.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-11-conics-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-c4.svg",
+      "asset": "circle-radius"
+    },
+    {
+      "id": "alg-11-conics-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-c5.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "alg-11-conics-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-e1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-11-conics-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-e2.svg",
+      "asset": "circle-radius"
+    },
+    {
+      "id": "alg-11-conics-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-11-conics-e3.svg",
+      "asset": "parabola"
+    },
+    {
+      "id": "alg-12-systems-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-c1.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-12-systems-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-c2.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-12-systems-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-c3.svg",
+      "asset": "circle-radius"
+    },
+    {
+      "id": "alg-12-systems-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-c4.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-12-systems-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-c5.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-12-systems-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-e1.svg",
+      "asset": "circle-radius"
+    },
+    {
+      "id": "alg-12-systems-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-e2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-12-systems-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-12-systems-e3.svg",
+      "asset": "line-linear"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-c1.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-c2.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-c3.svg",
+      "asset": "angle-standard"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-c4.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-c5.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-e1.svg",
+      "asset": "angle-standard"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-e2.svg",
+      "asset": "right-triangle-labeled"
+    },
+    {
+      "id": "alg-13-right-triangle-trig-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-13-right-triangle-trig-e3.svg",
+      "asset": "unit-circle"
+    },
+    {
+      "id": "alg-14-exp-log-c1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-c1.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "alg-14-exp-log-c2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-c2.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-14-exp-log-c3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-c3.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-14-exp-log-c4",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-c4.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "alg-14-exp-log-c5",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-c5.svg",
+      "asset": "coordinate-plane"
+    },
+    {
+      "id": "alg-14-exp-log-e1",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-e1.svg",
+      "asset": "function-machine"
+    },
+    {
+      "id": "alg-14-exp-log-e2",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-e2.svg",
+      "asset": "exponential"
+    },
+    {
+      "id": "alg-14-exp-log-e3",
+      "subject": "algebra",
+      "file": "data/diagrams/alg-14-exp-log-e3.svg",
+      "asset": "coordinate-plane"
     }
   ],
-  "attribution": []
+  "attribution": [],
+  "mathGenerated": "2026-08-20T05:18:09.814Z"
 }

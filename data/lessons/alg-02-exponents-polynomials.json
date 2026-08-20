@@ -1,0 +1,250 @@
+{
+  "title": "Exponents & Polynomial Operations",
+  "summary": "Exponent laws let you multiply, divide, and raise powers, and handle zero and negatives. Polynomials add, subtract, and multiply term by term — including the FOIL pattern and special products like $(a\\pm b)^2$ and $(a+b)(a-b)$.",
+  "glossary": {
+    "exponent": {
+      "plain": "How many times to multiply the base by itself.",
+      "in_class": "$a^n$; laws combine like bases."
+    },
+    "product rule (exponents)": {
+      "plain": "Multiply same bases by adding exponents.",
+      "in_class": "$a^m a^n=a^{m+n}$."
+    },
+    "quotient rule (exponents)": {
+      "plain": "Divide same bases by subtracting exponents.",
+      "in_class": "$a^m/a^n=a^{m-n}$."
+    },
+    "power rule (exponents)": {
+      "plain": "Raise a power to a power by multiplying.",
+      "in_class": "$(a^m)^n=a^{mn}$."
+    },
+    "zero exponent": {
+      "plain": "Any nonzero base to the zero is 1.",
+      "in_class": "$a^0=1$."
+    },
+    "negative exponent": {
+      "plain": "Reciprocal of the positive power.",
+      "in_class": "$a^{-n}=\\dfrac{1}{a^n}$."
+    },
+    "polynomial": {
+      "plain": "A sum of terms $c\\,x^k$ with whole-number exponents.",
+      "in_class": "Add/subtract like terms; multiply by distribution."
+    },
+    "FOIL": {
+      "plain": "First-Outer-Inner-Last for multiplying two binomials.",
+      "in_class": "$(a+b)(c+d)=ac+ad+bc+bd$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Exponent laws",
+      "explanation": "Combine like bases: add exponents to multiply, subtract to divide, multiply to raise a power to a power. These three rules cover most simplification.",
+      "math_steps": [
+        "$a^m a^n=a^{m+n}$.",
+        "$a^m/a^n=a^{m-n}$.",
+        "$(a^m)^n=a^{mn}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-c1.svg",
+        "caption": "Exponent laws"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Zero and negative exponents",
+      "explanation": "A zero exponent gives $1$; a negative exponent means reciprocal. Rewrite negatives as positives by moving the factor across the fraction bar.",
+      "math_steps": [
+        "$a^0=1$ for $a\\neq0$.",
+        "$a^{-n}=1/a^n$.",
+        "Move a factor to the other side of the bar to flip the sign."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-c2.svg",
+        "caption": "Zero and negative exponents"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Adding and subtracting polynomials",
+      "explanation": "Combine only like terms — same variable and exponent. Line them up and add coefficients; distribute a leading minus carefully.",
+      "math_steps": [
+        "Identify like terms.",
+        "Add/subtract their coefficients.",
+        "Distribute any subtraction across all terms."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-c3.svg",
+        "caption": "Adding and subtracting polynomials"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Multiplying polynomials",
+      "explanation": "Distribute every term of one factor over every term of the other. For two binomials this is FOIL; for larger ones, be systematic.",
+      "math_steps": [
+        "Multiply each term by each term.",
+        "Use FOIL for binomials.",
+        "Collect like terms."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-c4.svg",
+        "caption": "Multiplying polynomials"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Special products",
+      "explanation": "Memorize $(a+b)^2=a^2+2ab+b^2$, $(a-b)^2=a^2-2ab+b^2$, and $(a+b)(a-b)=a^2-b^2$. They speed up expansion and later factoring.",
+      "math_steps": [
+        "Square of a sum: middle term $2ab$.",
+        "Square of a difference: middle term $-2ab$.",
+        "Product of conjugates: $a^2-b^2$ (no middle)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-c5.svg",
+        "caption": "Special products"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Scientific notation",
+      "scenario": "Very large or small measurements.",
+      "how_the_math_applies": "Exponent laws multiply and divide numbers written as $c\\times10^n$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-e1.svg",
+        "caption": "Scientific notation"
+      }
+    },
+    {
+      "title": "Compound area",
+      "scenario": "A square garden's side is a binomial length.",
+      "how_the_math_applies": "Its area $(x+3)^2$ expands with the square-of-a-sum special product.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-e2.svg",
+        "caption": "Compound area"
+      }
+    },
+    {
+      "title": "Computer storage doubling",
+      "scenario": "Capacity doubles each generation.",
+      "how_the_math_applies": "Powers of two and the product rule track total growth $2^m\\cdot2^n=2^{m+n}$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-02-exponents-polynomials-e3.svg",
+        "caption": "Computer storage doubling"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "exponent rules product quotient power zero negative",
+    "math_query": "multiplying polynomials FOIL special products examples",
+    "combined_query": "college algebra exponents polynomials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Simplify $x^3\\cdot x^4$.",
+      "correct_answer": "$x^7$",
+      "solution_steps": [
+        "Add exponents.",
+        "$x^{3+4}$.",
+        "$x^7$."
+      ],
+      "hint": "Same base ⇒ add exponents."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Simplify $\\dfrac{x^5}{x^2}$.",
+      "correct_answer": "$x^3$",
+      "solution_steps": [
+        "Subtract exponents.",
+        "$x^{5-2}$.",
+        "$x^3$."
+      ],
+      "hint": "Divide ⇒ subtract."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Simplify $(x^2)^3$.",
+      "correct_answer": "$x^6$",
+      "solution_steps": [
+        "Multiply exponents.",
+        "$x^{2\\cdot3}$.",
+        "$x^6$."
+      ],
+      "hint": "Power of a power."
+    },
+    {
+      "id": "p04",
+      "difficulty": "easy",
+      "prompt": "Simplify $2^{-3}$.",
+      "correct_answer": "$\\tfrac18$",
+      "solution_steps": [
+        "Reciprocal of $2^3$.",
+        "$1/8$.",
+        "$\\tfrac18$."
+      ],
+      "hint": "Negative ⇒ reciprocal."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Expand $(x+3)(x-2)$.",
+      "correct_answer": "$x^2+x-6$",
+      "solution_steps": [
+        "FOIL.",
+        "$x^2-2x+3x-6$.",
+        "$x^2+x-6$."
+      ],
+      "hint": "First-Outer-Inner-Last."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Expand $(x+4)^2$.",
+      "correct_answer": "$x^2+8x+16$",
+      "solution_steps": [
+        "Square of a sum.",
+        "$x^2+2(4)x+16$.",
+        "$x^2+8x+16$."
+      ],
+      "hint": "Middle term is $2ab$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "Expand $(x+5)(x-5)$.",
+      "correct_answer": "$x^2-25$",
+      "solution_steps": [
+        "Conjugates.",
+        "$x^2-25$.",
+        "No middle term."
+      ],
+      "hint": "Difference of squares."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Subtract $(3x^2-2x+1)-(x^2+4x-3)$.",
+      "correct_answer": "$2x^2-6x+4$",
+      "solution_steps": [
+        "Distribute the minus.",
+        "$3x^2-2x+1-x^2-4x+3$.",
+        "$2x^2-6x+4$."
+      ],
+      "hint": "Distribute the subtraction to every term."
+    }
+  ]
+}

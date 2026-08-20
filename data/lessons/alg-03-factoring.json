@@ -1,0 +1,250 @@
+{
+  "title": "Factoring Polynomials",
+  "summary": "Factoring reverses multiplication: pull out the GCF, factor by grouping, factor trinomials, and recognize special forms (difference of squares, perfect-square trinomials, sum/difference of cubes). Factoring is the key to solving polynomial equations.",
+  "glossary": {
+    "factor": {
+      "plain": "A multiplied piece of an expression.",
+      "in_class": "Factoring writes a polynomial as a product."
+    },
+    "GCF": {
+      "plain": "Greatest common factor of all terms.",
+      "in_class": "Pull it out first, always."
+    },
+    "grouping": {
+      "plain": "Factoring four-term polynomials in pairs.",
+      "in_class": "Group, factor each pair, then factor the shared binomial."
+    },
+    "trinomial": {
+      "plain": "A three-term polynomial like $x^2+bx+c$.",
+      "in_class": "Find factors of $c$ that add to $b$."
+    },
+    "difference of squares": {
+      "plain": "$a^2-b^2$ factors to conjugates.",
+      "in_class": "$a^2-b^2=(a+b)(a-b)$."
+    },
+    "perfect-square trinomial": {
+      "plain": "A trinomial that's a squared binomial.",
+      "in_class": "$a^2\\pm2ab+b^2=(a\\pm b)^2$."
+    },
+    "sum/difference of cubes": {
+      "plain": "Special cubic factorizations.",
+      "in_class": "$a^3\\pm b^3=(a\\pm b)(a^2\\mp ab+b^2)$."
+    },
+    "leading coefficient": {
+      "plain": "The number in front of the highest power.",
+      "in_class": "Affects the trinomial method (a≠1 needs AC method)."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Greatest common factor",
+      "explanation": "Always factor out the GCF first — the largest monomial dividing every term. It simplifies whatever technique comes next.",
+      "math_steps": [
+        "Find the largest common numeric and variable factor.",
+        "Divide it out of every term.",
+        "Write GCF × remaining polynomial."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-c1.svg",
+        "caption": "Greatest common factor"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Factoring by grouping",
+      "explanation": "For four terms, group into two pairs, factor each pair, and if a common binomial appears, factor it out.",
+      "math_steps": [
+        "Group the terms in pairs.",
+        "Factor the GCF from each pair.",
+        "Factor out the shared binomial."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-c2.svg",
+        "caption": "Factoring by grouping"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Trinomials $x^2+bx+c$",
+      "explanation": "Find two numbers that multiply to $c$ and add to $b$; they give the binomial factors $(x+p)(x+q)$. When the leading coefficient isn't 1, use the AC method.",
+      "math_steps": [
+        "List factor pairs of $c$.",
+        "Pick the pair summing to $b$.",
+        "Write $(x+p)(x+q)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-c3.svg",
+        "caption": "Trinomials $x^2+bx+c$"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Special forms",
+      "explanation": "Recognize $a^2-b^2=(a+b)(a-b)$, perfect squares $a^2\\pm2ab+b^2=(a\\pm b)^2$, and cubes $a^3\\pm b^3$. Spotting these skips trial and error.",
+      "math_steps": [
+        "Check for a difference of squares.",
+        "Check for a perfect-square pattern.",
+        "Check for sum/difference of cubes."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-c4.svg",
+        "caption": "Special forms"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "A general strategy",
+      "explanation": "Factor completely: GCF first, then match a special form, then trinomial or grouping, and finally check that each factor is fully factored.",
+      "math_steps": [
+        "Pull out the GCF.",
+        "Try special forms, then trinomial/grouping.",
+        "Factor every piece until prime."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-c5.svg",
+        "caption": "A general strategy"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Solving by the zero-product rule",
+      "scenario": "An equation set to zero.",
+      "how_the_math_applies": "Factoring turns $x^2-5x+6=0$ into $(x-2)(x-3)=0$, revealing the roots.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-e1.svg",
+        "caption": "Solving by the zero-product rule"
+      }
+    },
+    {
+      "title": "Simplifying a rational expression",
+      "scenario": "Reduce a fraction of polynomials.",
+      "how_the_math_applies": "Factoring top and bottom lets common factors cancel.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-e2.svg",
+        "caption": "Simplifying a rational expression"
+      }
+    },
+    {
+      "title": "Optimizing dimensions",
+      "scenario": "Area expressions in design.",
+      "how_the_math_applies": "Factoring an area polynomial exposes the dimensions that make it zero or maximal.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-03-factoring-e3.svg",
+        "caption": "Optimizing dimensions"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "factoring GCF grouping trinomials explained",
+    "math_query": "difference of squares perfect square cubes factoring examples",
+    "combined_query": "college algebra factoring polynomials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Factor $6x^2+9x$.",
+      "correct_answer": "$3x(2x+3)$",
+      "solution_steps": [
+        "GCF is $3x$.",
+        "$3x(2x+3)$.",
+        "Done."
+      ],
+      "hint": "Pull out the GCF."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Factor $x^2-9$.",
+      "correct_answer": "$(x+3)(x-3)$",
+      "solution_steps": [
+        "Difference of squares.",
+        "$a=x$, $b=3$.",
+        "$(x+3)(x-3)$."
+      ],
+      "hint": "$a^2-b^2$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Factor $x^2+5x+6$.",
+      "correct_answer": "$(x+2)(x+3)$",
+      "solution_steps": [
+        "Product 6, sum 5.",
+        "$2$ and $3$.",
+        "$(x+2)(x+3)$."
+      ],
+      "hint": "Two numbers: multiply to 6, add to 5."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Factor $x^2-7x+12$.",
+      "correct_answer": "$(x-3)(x-4)$",
+      "solution_steps": [
+        "Product 12, sum $-7$.",
+        "$-3,-4$.",
+        "$(x-3)(x-4)$."
+      ],
+      "hint": "Both negative here."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Factor $x^2+6x+9$.",
+      "correct_answer": "$(x+3)^2$",
+      "solution_steps": [
+        "Perfect-square trinomial.",
+        "$a=x$, $b=3$.",
+        "$(x+3)^2$."
+      ],
+      "hint": "Middle $=2ab$ signals a perfect square."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Factor by grouping $x^3+2x^2+3x+6$.",
+      "correct_answer": "$(x^2+3)(x+2)$",
+      "solution_steps": [
+        "Group: $x^2(x+2)+3(x+2)$.",
+        "Common $(x+2)$.",
+        "$(x^2+3)(x+2)$."
+      ],
+      "hint": "Group in pairs."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Factor $2x^2+7x+3$.",
+      "correct_answer": "$(2x+1)(x+3)$",
+      "solution_steps": [
+        "AC method: $2\\cdot3=6$, split $7=6+1$.",
+        "$2x^2+6x+x+3=2x(x+3)+1(x+3)$.",
+        "$(2x+1)(x+3)$."
+      ],
+      "hint": "Use the AC method for $a\\neq1$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Factor $x^3-8$.",
+      "correct_answer": "$(x-2)(x^2+2x+4)$",
+      "solution_steps": [
+        "Difference of cubes, $b=2$.",
+        "$(x-2)(x^2+2x+4)$.",
+        "Done."
+      ],
+      "hint": "$a^3-b^3=(a-b)(a^2+ab+b^2)$."
+    }
+  ]
+}

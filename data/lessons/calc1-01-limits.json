@@ -1,0 +1,262 @@
+{
+  "title": "Limits & Limit Laws",
+  "summary": "A limit describes the value a function approaches as $x$ nears a point, even where the function is undefined. Limits can be read from tables and graphs, and computed with the limit laws — sums, products, quotients, and direct substitution for continuous pieces.",
+  "glossary": {
+    "limit": {
+      "plain": "The value a function heads toward as the input approaches some number.",
+      "in_class": "Written $\\lim_{x\\to a}f(x)=L$; the cornerstone of calculus."
+    },
+    "one-sided limit": {
+      "plain": "The value approached from just the left or just the right of a point.",
+      "in_class": "$\\lim_{x\\to a^-}$ (left) and $\\lim_{x\\to a^+}$ (right); the two-sided limit exists only if they agree."
+    },
+    "limit laws": {
+      "plain": "Rules that let you split a limit across sums, products, and quotients.",
+      "in_class": "e.g. $\\lim(f+g)=\\lim f+\\lim g$; they reduce hard limits to simple pieces."
+    },
+    "direct substitution": {
+      "plain": "Plugging the number straight into the function to get the limit.",
+      "in_class": "Works whenever the function is continuous there: $\\lim_{x\\to a}f(x)=f(a)$."
+    },
+    "indeterminate form": {
+      "plain": "An expression like $0/0$ that doesn't settle the limit on its own.",
+      "in_class": "Signals you must simplify (factor, rationalize) before the limit appears."
+    },
+    "does not exist": {
+      "plain": "When a function approaches no single value (e.g. left ≠ right).",
+      "in_class": "Abbreviated DNE; common at jumps and vertical asymptotes."
+    },
+    "squeeze theorem": {
+      "plain": "If a function is trapped between two others with equal limits, it shares that limit.",
+      "in_class": "Used for limits like $\\lim_{x\\to0}x^2\\sin(1/x)=0$."
+    },
+    "continuous": {
+      "plain": "A function with no breaks — you can draw it without lifting your pen.",
+      "in_class": "For continuous functions the limit equals the function value."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "What a limit is",
+      "explanation": "A limit asks: as $x$ gets arbitrarily close to $a$, what value does $f(x)$ approach? It does not care what happens right at $a$ — only nearby. You can estimate a limit numerically from a table of $x$-values closing in on $a$, or read it off a graph.",
+      "math_steps": [
+        "Pick $x$-values approaching $a$ from both sides.",
+        "Track the outputs $f(x)$ — do they settle on one number $L$?",
+        "If so, $\\lim_{x\\to a}f(x)=L$, regardless of $f(a)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-c1.svg",
+        "caption": "What a limit is"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "One-sided limits",
+      "explanation": "Approaching from the left ($x\\to a^-$) and the right ($x\\to a^+$) can give different answers. The two-sided limit exists only when both one-sided limits exist and are equal. At a jump, they disagree and the limit does not exist.",
+      "math_steps": [
+        "Find $\\lim_{x\\to a^-}f(x)$ (from below).",
+        "Find $\\lim_{x\\to a^+}f(x)$ (from above).",
+        "If they match, that common value is $\\lim_{x\\to a}f(x)$; if not, the limit DNE."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-c2.svg",
+        "caption": "One-sided limits"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The limit laws",
+      "explanation": "When the pieces have limits, the limit of a sum, difference, product, or quotient is the sum, difference, product, or quotient of the limits (quotient only if the denominator's limit is nonzero). Constants pull out and powers/roots pass through.",
+      "math_steps": [
+        "Break the function into simple parts.",
+        "Apply the matching law: $\\lim(f\\pm g)=\\lim f\\pm\\lim g$, $\\lim(fg)=\\lim f\\cdot\\lim g$.",
+        "For a quotient, use $\\lim(f/g)=\\lim f/\\lim g$ when $\\lim g\\neq0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-c3.svg",
+        "caption": "The limit laws"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Direct substitution",
+      "explanation": "For polynomials, and any function continuous at $a$, the limit is just $f(a)$ — plug in. Substitution is always the first thing to try; if it gives a real number, you're done.",
+      "math_steps": [
+        "Substitute $x=a$ into $f$.",
+        "If you get a finite number, that's the limit.",
+        "If you get $0/0$, the form is indeterminate — simplify first."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-c4.svg",
+        "caption": "Direct substitution"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Indeterminate forms $0/0$",
+      "explanation": "When substitution yields $0/0$, the limit still may exist — you just have to reveal it. Factor and cancel the common term, or rationalize a radical, then substitute again.",
+      "math_steps": [
+        "Substitute; if you get $0/0$, do not stop.",
+        "Factor numerator and denominator and cancel the shared factor (or multiply by a conjugate).",
+        "Substitute into the simplified expression to read off the limit."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-c5.svg",
+        "caption": "Indeterminate forms $0/0$"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A car's instantaneous speed",
+      "scenario": "The speedometer shows speed at an instant, not over an interval.",
+      "how_the_math_applies": "Average speed over a shrinking time interval approaches a limit — the instantaneous speed. That limiting process is exactly $\\lim_{\\Delta t\\to0}\\Delta x/\\Delta t$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-e1.svg",
+        "caption": "A car's instantaneous speed"
+      }
+    },
+    {
+      "title": "Zooming a digital image",
+      "scenario": "Zoom in on a smooth curve and it looks straight.",
+      "how_the_math_applies": "As the viewing window shrinks toward a point, the curve approaches its tangent line — a geometric limit underlying the derivative.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-e2.svg",
+        "caption": "Zooming a digital image"
+      }
+    },
+    {
+      "title": "Dosage approaching a steady level",
+      "scenario": "Repeated medication doses build toward a stable concentration.",
+      "how_the_math_applies": "The blood concentration approaches a limiting value as the number of doses grows — a real-world limit of a sequence of values.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-01-limits-e3.svg",
+        "caption": "Dosage approaching a steady level"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "what is a limit calculus intuition one sided limits",
+    "math_query": "limit laws examples direct substitution factoring 0/0",
+    "combined_query": "calculus 1 limits worked examples limit laws"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\lim_{x\\to3}(2x+1)$.",
+      "correct_answer": "$7$",
+      "solution_steps": [
+        "The function is a polynomial, so substitute directly.",
+        "$2(3)+1$",
+        "$=7$."
+      ],
+      "hint": "Polynomials are continuous — just plug in."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\lim_{x\\to2}(x^2-4x+5)$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "Substitute $x=2$.",
+        "$4-8+5$",
+        "$=1$."
+      ],
+      "hint": "Direct substitution works for polynomials."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\lim_{x\\to0}\\dfrac{\\sin x}{x}$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "This is a standard special limit.",
+        "As $x\\to0$, $\\dfrac{\\sin x}{x}\\to1$.",
+        "$=1$."
+      ],
+      "hint": "Memorize this fundamental trig limit."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\lim_{x\\to2}\\dfrac{x^2-4}{x-2}$.",
+      "correct_answer": "$4$",
+      "solution_steps": [
+        "Substitution gives $0/0$ — factor.",
+        "$\\dfrac{(x-2)(x+2)}{x-2}=x+2$.",
+        "Substitute: $2+2=4$."
+      ],
+      "hint": "Factor the difference of squares and cancel."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\lim_{x\\to0}\\dfrac{\\sqrt{x+9}-3}{x}$.",
+      "correct_answer": "$\\tfrac16$",
+      "solution_steps": [
+        "$0/0$: multiply by the conjugate $\\sqrt{x+9}+3$.",
+        "$\\dfrac{(x+9)-9}{x(\\sqrt{x+9}+3)}=\\dfrac{1}{\\sqrt{x+9}+3}$.",
+        "Substitute: $\\dfrac{1}{3+3}=\\tfrac16$."
+      ],
+      "hint": "Rationalize the numerator."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "If $\\lim_{x\\to1}f(x)=4$ and $\\lim_{x\\to1}g(x)=2$, find $\\lim_{x\\to1}\\dfrac{f(x)}{g(x)}$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "Denominator limit is nonzero, so use the quotient law.",
+        "$\\dfrac{\\lim f}{\\lim g}=\\dfrac{4}{2}$.",
+        "$=2$."
+      ],
+      "hint": "Quotient law needs the bottom limit $\\neq0$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\lim_{x\\to3}\\dfrac{x^2-9}{x^2-x-6}$.",
+      "correct_answer": "$\\tfrac65$",
+      "solution_steps": [
+        "$0/0$: factor both.",
+        "$\\dfrac{(x-3)(x+3)}{(x-3)(x+2)}=\\dfrac{x+3}{x+2}$.",
+        "Substitute: $\\dfrac{6}{5}$."
+      ],
+      "hint": "Factor top and bottom, cancel $(x-3)$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "For $f(x)=\\begin{cases}x+1,&x<2\\\\ 3x-3,&x\\ge2\\end{cases}$, find $\\lim_{x\\to2}f(x)$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "Left limit: $x+1\\to3$.",
+        "Right limit: $3x-3\\to3$.",
+        "Both sides give $3$, so the limit is $3$."
+      ],
+      "hint": "Check both one-sided limits at the split."
+    },
+    {
+      "id": "p09",
+      "difficulty": "stretch",
+      "prompt": "Evaluate $\\lim_{x\\to0}x^2\\cos\\dfrac1x$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$-1\\le\\cos(1/x)\\le1$, so $-x^2\\le x^2\\cos(1/x)\\le x^2$.",
+        "Both bounds $\\to0$ as $x\\to0$.",
+        "By the squeeze theorem the limit is $0$."
+      ],
+      "hint": "Trap it between $\\pm x^2$ and squeeze."
+    }
+  ]
+}

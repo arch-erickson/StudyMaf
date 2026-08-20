@@ -1,0 +1,238 @@
+{
+  "title": "Rates of Change & Trig Derivatives",
+  "summary": "The derivative is a rate of change: velocity from position, and marginal quantities in economics. The trig derivatives $\\frac{d}{dx}\\sin x=\\cos x$ and $\\frac{d}{dx}\\cos x=-\\sin x$ (and the rest) extend differentiation to oscillating functions.",
+  "glossary": {
+    "rate of change": {
+      "plain": "How fast one quantity changes per unit of another.",
+      "in_class": "The derivative; average over an interval, instantaneous at a point."
+    },
+    "velocity": {
+      "plain": "The rate of change of position — signed speed.",
+      "in_class": "$v(t)=s'(t)$; negative means moving backward."
+    },
+    "acceleration": {
+      "plain": "The rate of change of velocity.",
+      "in_class": "$a(t)=v'(t)=s''(t)$."
+    },
+    "marginal": {
+      "plain": "The change from one more unit (cost, revenue, profit).",
+      "in_class": "Approximated by the derivative of the total."
+    },
+    "sine derivative": {
+      "plain": "How the sine curve's slope behaves.",
+      "in_class": "$\\frac{d}{dx}\\sin x=\\cos x$."
+    },
+    "cosine derivative": {
+      "plain": "The slope of cosine.",
+      "in_class": "$\\frac{d}{dx}\\cos x=-\\sin x$ (note the minus)."
+    },
+    "tangent derivative": {
+      "plain": "Derivative of $\\tan x$.",
+      "in_class": "$\\frac{d}{dx}\\tan x=\\sec^2 x$."
+    },
+    "speed": {
+      "plain": "The magnitude of velocity — always nonnegative.",
+      "in_class": "$\\text{speed}=|v(t)|$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Derivative as velocity",
+      "explanation": "If $s(t)$ is position, then $s'(t)$ is velocity and $s''(t)$ is acceleration. The sign of velocity tells direction; speed is its absolute value.",
+      "math_steps": [
+        "Differentiate position to get velocity.",
+        "Differentiate velocity to get acceleration.",
+        "Read direction from the sign, speed from $|v|$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-c1.svg",
+        "caption": "Derivative as velocity"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Marginal quantities",
+      "explanation": "In economics the derivative of a total (cost, revenue, profit) is the marginal quantity — roughly the effect of one more unit. Marginal cost is $C'(x)$.",
+      "math_steps": [
+        "Model the total as a function of quantity.",
+        "Differentiate to get the marginal function.",
+        "Evaluate to estimate the next-unit effect."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-c2.svg",
+        "caption": "Marginal quantities"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Derivatives of sine and cosine",
+      "explanation": "The sine and cosine trade places under differentiation: $\\frac{d}{dx}\\sin x=\\cos x$ and $\\frac{d}{dx}\\cos x=-\\sin x$. The minus sign on cosine is essential.",
+      "math_steps": [
+        "Memorize $\\sin\\to\\cos$, $\\cos\\to-\\sin$.",
+        "Differentiate term by term with the other rules.",
+        "Keep the negative sign on the cosine derivative."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-c3.svg",
+        "caption": "Derivatives of sine and cosine"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Other trig derivatives",
+      "explanation": "From the quotient rule: $\\frac{d}{dx}\\tan x=\\sec^2 x$, $\\frac{d}{dx}\\sec x=\\sec x\\tan x$, and the co-functions carry minus signs.",
+      "math_steps": [
+        "Write $\\tan=\\sin/\\cos$ and apply the quotient rule if you forget.",
+        "$\\tan\\to\\sec^2$, $\\sec\\to\\sec\\tan$.",
+        "Cofunctions ($\\cot,\\csc$) get negative signs."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-c4.svg",
+        "caption": "Other trig derivatives"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Combining rules",
+      "explanation": "Real problems mix trig with products and quotients. Differentiate $x\\sin x$ with the product rule, and $\\dfrac{\\sin x}{x}$ with the quotient rule.",
+      "math_steps": [
+        "Spot the outer structure (product or quotient).",
+        "Apply that rule, using the trig derivatives inside.",
+        "Simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-c5.svg",
+        "caption": "Combining rules"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A pendulum's motion",
+      "scenario": "A pendulum swings back and forth like $\\sin(t)$.",
+      "how_the_math_applies": "Its velocity is the derivative $\\cos(t)$ — fastest at the bottom, zero at the ends of the swing.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-e1.svg",
+        "caption": "A pendulum's motion"
+      }
+    },
+    {
+      "title": "Tides through the day",
+      "scenario": "Water height rises and falls sinusoidally.",
+      "how_the_math_applies": "The rate the tide comes in is the derivative of a sinusoid — a cosine giving the flow speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-e2.svg",
+        "caption": "Tides through the day"
+      }
+    },
+    {
+      "title": "Marginal profit",
+      "scenario": "A company's profit depends on units sold.",
+      "how_the_math_applies": "The derivative of profit tells whether selling one more unit still helps — marginal analysis.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-05-rates-trig-e3.svg",
+        "caption": "Marginal profit"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "derivative rate of change velocity acceleration position",
+    "math_query": "derivatives of sine cosine tangent examples",
+    "combined_query": "calculus trig derivatives rates of change problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A particle's position is $s(t)=t^2-4t$. Find its velocity at $t=3$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "$v=s'=2t-4$.",
+        "At $t=3$: $6-4$.",
+        "$v=2$."
+      ],
+      "hint": "Velocity is the derivative of position."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=\\sin x+\\cos x$.",
+      "correct_answer": "$\\cos x-\\sin x$",
+      "solution_steps": [
+        "$\\sin\\to\\cos$, $\\cos\\to-\\sin$.",
+        "Add.",
+        "$\\cos x-\\sin x$."
+      ],
+      "hint": "Mind the minus on cosine."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Differentiate $f(x)=3\\sin x$.",
+      "correct_answer": "$3\\cos x$",
+      "solution_steps": [
+        "Constant multiple.",
+        "$3\\cos x$.",
+        "Done."
+      ],
+      "hint": "Constant stays."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Position $s(t)=t^3-6t^2$. Find the acceleration at $t=1$.",
+      "correct_answer": "$-6$",
+      "solution_steps": [
+        "$v=3t^2-12t$; $a=6t-12$.",
+        "At $t=1$: $6-12$.",
+        "$a=-6$."
+      ],
+      "hint": "Differentiate twice."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=x\\sin x$.",
+      "correct_answer": "$\\sin x+x\\cos x$",
+      "solution_steps": [
+        "Product rule: $(1)\\sin x+x\\cos x$.",
+        "Combine.",
+        "$\\sin x+x\\cos x$."
+      ],
+      "hint": "$f'g+fg'$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Differentiate $f(x)=\\tan x$.",
+      "correct_answer": "$\\sec^2 x$",
+      "solution_steps": [
+        "Standard trig derivative.",
+        "$\\frac{d}{dx}\\tan x=\\sec^2 x$.",
+        "Done."
+      ],
+      "hint": "Memorize or use the quotient rule."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "When is the particle $s(t)=t^3-3t$ momentarily at rest?",
+      "correct_answer": "$t=1$",
+      "solution_steps": [
+        "$v=3t^2-3=0$.",
+        "$t^2=1$, $t=1$ (for $t\\ge0$).",
+        "At rest at $t=1$."
+      ],
+      "hint": "At rest ⇒ velocity zero."
+    }
+  ]
+}

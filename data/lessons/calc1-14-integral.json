@@ -1,0 +1,250 @@
+{
+  "title": "Antiderivatives & the Definite Integral",
+  "summary": "An antiderivative reverses differentiation; the indefinite integral $\\int f\\,dx$ collects them all (plus $+C$). The definite integral $\\int_a^b f\\,dx$ is a limit of Riemann sums measuring net area, and the Fundamental Theorem ties the two together.",
+  "glossary": {
+    "antiderivative": {
+      "plain": "A function whose derivative is the given one.",
+      "in_class": "$F'=f$; they differ by a constant."
+    },
+    "indefinite integral": {
+      "plain": "The family of all antiderivatives.",
+      "in_class": "$\\int f\\,dx=F(x)+C$."
+    },
+    "constant of integration": {
+      "plain": "The $+C$ that captures every antiderivative.",
+      "in_class": "Undetermined without an initial condition."
+    },
+    "Riemann sum": {
+      "plain": "Adding up rectangle areas to approximate area under a curve.",
+      "in_class": "$\\sum f(x_i)\\Delta x$; the integral is its limit."
+    },
+    "definite integral": {
+      "plain": "Net signed area between the curve and the axis on $[a,b]$.",
+      "in_class": "$\\int_a^b f\\,dx=\\lim\\sum f(x_i)\\Delta x$."
+    },
+    "Fundamental Theorem": {
+      "plain": "Links derivatives and integrals.",
+      "in_class": "$\\int_a^b f\\,dx=F(b)-F(a)$ where $F'=f$."
+    },
+    "net area": {
+      "plain": "Area above the axis minus area below.",
+      "in_class": "Regions under the axis count negative."
+    },
+    "power rule for integrals": {
+      "plain": "Reverse of the power rule.",
+      "in_class": "$\\int x^n\\,dx=\\dfrac{x^{n+1}}{n+1}+C$ ($n\\neq-1$)."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Antiderivatives",
+      "explanation": "To undo a derivative, raise the power and divide: $\\int x^n\\,dx=\\dfrac{x^{n+1}}{n+1}+C$. Every antiderivative differs by a constant, hence the $+C$.",
+      "math_steps": [
+        "Add one to the exponent.",
+        "Divide by the new exponent.",
+        "Add $+C$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-c1.svg",
+        "caption": "Antiderivatives"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Basic integral formulas",
+      "explanation": "Reverse the standard derivatives: $\\int\\cos x\\,dx=\\sin x+C$, $\\int e^x\\,dx=e^x+C$, $\\int\\frac1x\\,dx=\\ln|x|+C$.",
+      "math_steps": [
+        "Recall the derivative that produces the integrand.",
+        "Reverse it.",
+        "Attach $+C$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-c2.svg",
+        "caption": "Basic integral formulas"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Riemann sums and area",
+      "explanation": "Slice $[a,b]$ into rectangles of width $\\Delta x$, sum their areas $\\sum f(x_i)\\Delta x$, and let $\\Delta x\\to0$. The limit is the definite integral — the (net) area under the curve.",
+      "math_steps": [
+        "Partition $[a,b]$ into $n$ pieces.",
+        "Add rectangle areas $f(x_i)\\Delta x$.",
+        "Take the limit as $n\\to\\infty$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-c3.svg",
+        "caption": "Riemann sums and area"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The Fundamental Theorem",
+      "explanation": "To evaluate $\\int_a^b f\\,dx$, find any antiderivative $F$ and compute $F(b)-F(a)$. This converts area (a limit of sums) into a single subtraction.",
+      "math_steps": [
+        "Find an antiderivative $F$.",
+        "Evaluate $F(b)-F(a)$.",
+        "That number is the definite integral."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-c4.svg",
+        "caption": "The Fundamental Theorem"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Net vs total area",
+      "explanation": "The definite integral counts area below the axis as negative. For total (unsigned) area, split at the roots and integrate the absolute value piecewise.",
+      "math_steps": [
+        "Find where $f=0$.",
+        "Integrate over each sign region.",
+        "Add magnitudes for total area, or keep signs for net area."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-c5.svg",
+        "caption": "Net vs total area"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Distance from velocity",
+      "scenario": "A car's velocity is recorded over time.",
+      "how_the_math_applies": "The definite integral of velocity is the net displacement — the Fundamental Theorem in action.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-e1.svg",
+        "caption": "Distance from velocity"
+      }
+    },
+    {
+      "title": "Total rainfall",
+      "scenario": "A gauge reports rainfall rate through a storm.",
+      "how_the_math_applies": "Integrating the rate over the storm's duration gives total accumulated rainfall.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-e2.svg",
+        "caption": "Total rainfall"
+      }
+    },
+    {
+      "title": "Area of an odd region",
+      "scenario": "Land bounded by a curved river.",
+      "how_the_math_applies": "A definite integral computes the area under the boundary curve.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-14-integral-e3.svg",
+        "caption": "Area of an odd region"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "antiderivative indefinite integral power rule +C",
+    "math_query": "riemann sums definite integral fundamental theorem examples",
+    "combined_query": "calculus integrals FTC worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find $\\int x^3\\,dx$.",
+      "correct_answer": "$\\dfrac{x^4}{4}+C$",
+      "solution_steps": [
+        "Add one to the power, divide.",
+        "$\\dfrac{x^4}{4}$.",
+        "$+C$."
+      ],
+      "hint": "Reverse the power rule."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find $\\int (2x+3)\\,dx$.",
+      "correct_answer": "$x^2+3x+C$",
+      "solution_steps": [
+        "Term by term.",
+        "$x^2+3x$.",
+        "$+C$."
+      ],
+      "hint": "Integrate each term."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Find $\\int\\cos x\\,dx$.",
+      "correct_answer": "$\\sin x+C$",
+      "solution_steps": [
+        "Reverse $\\frac{d}{dx}\\sin x=\\cos x$.",
+        "$\\sin x$.",
+        "$+C$."
+      ],
+      "hint": "What differentiates to $\\cos x$?"
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int_0^2 x\\,dx$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "$F=\\tfrac12 x^2$.",
+        "$F(2)-F(0)=2-0$.",
+        "$=2$."
+      ],
+      "hint": "FTC: $F(b)-F(a)$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int_1^3 (2x)\\,dx$.",
+      "correct_answer": "$8$",
+      "solution_steps": [
+        "$F=x^2$.",
+        "$9-1$.",
+        "$=8$."
+      ],
+      "hint": "Antiderivative then subtract."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int_0^{\\pi}\\sin x\\,dx$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "$F=-\\cos x$.",
+        "$-\\cos\\pi-(-\\cos0)=1+1$.",
+        "$=2$."
+      ],
+      "hint": "$\\int\\sin=-\\cos$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\int_1^2\\dfrac1x\\,dx$.",
+      "correct_answer": "$\\ln 2$",
+      "solution_steps": [
+        "$F=\\ln|x|$.",
+        "$\\ln2-\\ln1$.",
+        "$=\\ln2$."
+      ],
+      "hint": "$\\int 1/x=\\ln|x|$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Find the area under $f(x)=x^2$ from $0$ to $3$.",
+      "correct_answer": "$9$",
+      "solution_steps": [
+        "$\\int_0^3 x^2\\,dx=\\big[\\tfrac{x^3}{3}\\big]_0^3$.",
+        "$=9-0$.",
+        "$=9$."
+      ],
+      "hint": "Definite integral of $x^2$."
+    }
+  ]
+}

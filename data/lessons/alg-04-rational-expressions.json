@@ -1,0 +1,250 @@
+{
+  "title": "Rational Expressions",
+  "summary": "A rational expression is a fraction of polynomials. Simplify by factoring and cancelling; multiply/divide as with fractions; add/subtract over a common denominator. Watch for excluded values that make a denominator zero.",
+  "glossary": {
+    "rational expression": {
+      "plain": "A ratio of two polynomials.",
+      "in_class": "$\\dfrac{P(x)}{Q(x)}$ with $Q\\neq0$."
+    },
+    "excluded value": {
+      "plain": "An $x$ that makes a denominator zero.",
+      "in_class": "Not allowed in the domain."
+    },
+    "simplify": {
+      "plain": "Cancel common factors after factoring.",
+      "in_class": "Only cancel factors, never terms."
+    },
+    "common denominator": {
+      "plain": "A shared bottom to add/subtract fractions.",
+      "in_class": "Least common multiple of the denominators."
+    },
+    "complex fraction": {
+      "plain": "A fraction with fractions inside.",
+      "in_class": "Clear by multiplying by the LCD of the inner fractions."
+    },
+    "least common denominator": {
+      "plain": "Smallest expression all denominators divide.",
+      "in_class": "Built from each distinct factor to its highest power."
+    },
+    "reciprocal (division)": {
+      "plain": "Divide by multiplying by the flip.",
+      "in_class": "$\\dfrac{A}{B}\\div\\dfrac{C}{D}=\\dfrac{A}{B}\\cdot\\dfrac{D}{C}$."
+    },
+    "cancel factors": {
+      "plain": "Remove a factor common to top and bottom.",
+      "in_class": "e.g. $\\dfrac{(x-2)(x+1)}{(x-2)}=x+1$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Simplifying",
+      "explanation": "Factor numerator and denominator, then cancel factors they share. Note the excluded values before you cancel — they stay excluded.",
+      "math_steps": [
+        "Factor top and bottom.",
+        "Cancel common factors.",
+        "State excluded values (where the original bottom was 0)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-c1.svg",
+        "caption": "Simplifying"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Multiplying and dividing",
+      "explanation": "Multiply straight across (factor and cancel first to keep it small). Divide by multiplying by the reciprocal.",
+      "math_steps": [
+        "Factor everything.",
+        "Cancel across the product.",
+        "For division, flip the second fraction first."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-c2.svg",
+        "caption": "Multiplying and dividing"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Common denominators",
+      "explanation": "To add or subtract, build the least common denominator from each distinct factor at its highest power, rewrite each fraction, then combine numerators.",
+      "math_steps": [
+        "Find the LCD from the factored denominators.",
+        "Rewrite each fraction over the LCD.",
+        "Combine the numerators; simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-c3.svg",
+        "caption": "Common denominators"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Complex fractions",
+      "explanation": "A fraction containing fractions clears by multiplying top and bottom by the LCD of the inner fractions, collapsing it to a single ratio.",
+      "math_steps": [
+        "Find the LCD of the small fractions.",
+        "Multiply numerator and denominator by it.",
+        "Simplify the result."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-c4.svg",
+        "caption": "Complex fractions"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Excluded values and domain",
+      "explanation": "Any $x$ making an original denominator zero is excluded, even if it cancels. Always list these restrictions with the answer.",
+      "math_steps": [
+        "Set each original denominator to zero.",
+        "Those $x$ are excluded.",
+        "Keep them out of the domain of the simplified form."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-c5.svg",
+        "caption": "Excluded values and domain"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Combining work rates",
+      "scenario": "Two workers finish a job at different speeds.",
+      "how_the_math_applies": "Their combined rate adds rational expressions $\\tfrac1a+\\tfrac1b$ over a common denominator.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-e1.svg",
+        "caption": "Combining work rates"
+      }
+    },
+    {
+      "title": "Average speed round trip",
+      "scenario": "Different speeds out and back.",
+      "how_the_math_applies": "The average uses a rational expression that simplifies with a common denominator.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-e2.svg",
+        "caption": "Average speed round trip"
+      }
+    },
+    {
+      "title": "Mixing concentrations",
+      "scenario": "Blending two solutions.",
+      "how_the_math_applies": "The resulting concentration is a rational expression in the amounts mixed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-04-rational-expressions-e3.svg",
+        "caption": "Mixing concentrations"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "simplify rational expressions factor cancel excluded values",
+    "math_query": "add subtract multiply divide rational expressions examples",
+    "combined_query": "college algebra rational expressions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Simplify $\\dfrac{x^2-4}{x-2}$.",
+      "correct_answer": "$x+2,\\ x\\neq2$",
+      "solution_steps": [
+        "Factor: $\\dfrac{(x-2)(x+2)}{x-2}$.",
+        "Cancel $(x-2)$.",
+        "$x+2$, excluding $x=2$."
+      ],
+      "hint": "Factor then cancel; note the exclusion."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "State the excluded value of $\\dfrac{1}{x-5}$.",
+      "correct_answer": "$x=5$",
+      "solution_steps": [
+        "Denominator zero.",
+        "$x-5=0$.",
+        "$x=5$."
+      ],
+      "hint": "Set the denominator to zero."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Multiply $\\dfrac{x}{x+1}\\cdot\\dfrac{x+1}{x-2}$.",
+      "correct_answer": "$\\dfrac{x}{x-2}$",
+      "solution_steps": [
+        "Cancel $(x+1)$.",
+        "$\\dfrac{x}{x-2}$.",
+        "Done."
+      ],
+      "hint": "Cancel before multiplying."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Divide $\\dfrac{x}{2}\\div\\dfrac{x}{4}$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "Flip: $\\dfrac{x}{2}\\cdot\\dfrac{4}{x}$.",
+        "$\\dfrac{4}{2}$.",
+        "$2$."
+      ],
+      "hint": "Multiply by the reciprocal."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Add $\\dfrac{1}{x}+\\dfrac{1}{x+1}$.",
+      "correct_answer": "$\\dfrac{2x+1}{x(x+1)}$",
+      "solution_steps": [
+        "LCD $x(x+1)$.",
+        "$\\dfrac{(x+1)+x}{x(x+1)}$.",
+        "$\\dfrac{2x+1}{x(x+1)}$."
+      ],
+      "hint": "Common denominator first."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Simplify $\\dfrac{x^2-x-6}{x^2-9}$.",
+      "correct_answer": "$\\dfrac{x+2}{x+3},\\ x\\neq\\pm3$",
+      "solution_steps": [
+        "Factor: $\\dfrac{(x-3)(x+2)}{(x-3)(x+3)}$.",
+        "Cancel $(x-3)$.",
+        "$\\dfrac{x+2}{x+3}$."
+      ],
+      "hint": "Factor top and bottom."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Subtract $\\dfrac{2}{x-1}-\\dfrac{1}{x+1}$.",
+      "correct_answer": "$\\dfrac{x+3}{(x-1)(x+1)}$",
+      "solution_steps": [
+        "LCD $(x-1)(x+1)$.",
+        "$\\dfrac{2(x+1)-(x-1)}{(x-1)(x+1)}$.",
+        "$\\dfrac{x+3}{(x-1)(x+1)}$."
+      ],
+      "hint": "Distribute the subtraction in the numerator."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Simplify the complex fraction $\\dfrac{\\tfrac1x+1}{\\tfrac1x}$.",
+      "correct_answer": "$1+x$",
+      "solution_steps": [
+        "Multiply top and bottom by $x$.",
+        "$\\dfrac{1+x}{1}$.",
+        "$1+x$."
+      ],
+      "hint": "Multiply by the inner LCD $x$."
+    }
+  ]
+}

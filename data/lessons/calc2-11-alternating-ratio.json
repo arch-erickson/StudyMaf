@@ -1,0 +1,250 @@
+{
+  "title": "Alternating, Ratio & Root Tests",
+  "summary": "The alternating series test handles sign-flipping series; absolute convergence is stronger than conditional. The ratio and root tests examine the growth of $|a_n|$ and settle most series with factorials or exponentials.",
+  "glossary": {
+    "alternating series": {
+      "plain": "Signs flip term to term.",
+      "in_class": "$\\sum(-1)^n b_n$ with $b_n>0$."
+    },
+    "alternating series test": {
+      "plain": "Converges if terms decrease to 0.",
+      "in_class": "$b_n\\downarrow0$ ⇒ $\\sum(-1)^n b_n$ converges."
+    },
+    "absolute convergence": {
+      "plain": "$\\sum|a_n|$ converges.",
+      "in_class": "Implies the series itself converges — the strong kind."
+    },
+    "conditional convergence": {
+      "plain": "Converges, but $\\sum|a_n|$ diverges.",
+      "in_class": "e.g. the alternating harmonic series."
+    },
+    "ratio test": {
+      "plain": "Look at $\\lim|a_{n+1}/a_n|$.",
+      "in_class": "$<1$ converges (absolutely), $>1$ diverges, $=1$ inconclusive."
+    },
+    "root test": {
+      "plain": "Look at $\\lim\\sqrt[n]{|a_n|}$.",
+      "in_class": "Same thresholds as the ratio test; good for $n$-th powers."
+    },
+    "error bound": {
+      "plain": "Alternating series error is under the next term.",
+      "in_class": "$|S-S_N|\\le b_{N+1}$."
+    },
+    "factorial growth": {
+      "plain": "$n!$ dominates exponentials.",
+      "in_class": "Ratio test shines when factorials appear."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The alternating series test",
+      "explanation": "If a series alternates sign and its magnitudes $b_n$ decrease to $0$, it converges. The error after $N$ terms is at most the first omitted term $b_{N+1}$.",
+      "math_steps": [
+        "Confirm the signs alternate.",
+        "Confirm $b_n$ decreasing and $\\to0$.",
+        "Conclude convergence; bound error by $b_{N+1}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-c1.svg",
+        "caption": "The alternating series test"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Absolute vs conditional",
+      "explanation": "If $\\sum|a_n|$ converges, the series converges absolutely (and unconditionally). If the series converges but $\\sum|a_n|$ diverges, it's conditional — order-sensitive.",
+      "math_steps": [
+        "Test $\\sum|a_n|$ first.",
+        "Converges ⇒ absolute.",
+        "If not, but the series still converges ⇒ conditional."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-c2.svg",
+        "caption": "Absolute vs conditional"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The ratio test",
+      "explanation": "Compute $L=\\lim\\left|\\dfrac{a_{n+1}}{a_n}\\right|$. If $L<1$ it converges absolutely; $L>1$ (or $\\infty$) diverges; $L=1$ is inconclusive. Ideal for factorials and exponentials.",
+      "math_steps": [
+        "Form the ratio of consecutive terms.",
+        "Take its limit $L$.",
+        "Apply the $<1/>1/=1$ rule."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-c3.svg",
+        "caption": "The ratio test"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The root test",
+      "explanation": "Compute $L=\\lim\\sqrt[n]{|a_n|}$ with the same thresholds. Use it when $a_n$ has an $n$-th power, like $\\left(\\tfrac{n}{n+1}\\right)^{n^2}$.",
+      "math_steps": [
+        "Take the $n$-th root of $|a_n|$.",
+        "Compute its limit $L$.",
+        "Same $<1/>1/=1$ conclusions."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-c4.svg",
+        "caption": "The root test"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Choosing a test",
+      "explanation": "Factorials or products ⇒ ratio test; $n$-th powers ⇒ root test; simple sign flips ⇒ alternating test; otherwise comparison or integral. A quick scan picks the tool.",
+      "math_steps": [
+        "Scan the term's structure.",
+        "Match to the most efficient test.",
+        "Apply and conclude."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-c5.svg",
+        "caption": "Choosing a test"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Leibniz's formula for $\\pi$",
+      "scenario": "$\\pi/4=1-\\tfrac13+\\tfrac15-\\cdots$.",
+      "how_the_math_applies": "This alternating series converges (conditionally) by the alternating series test.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-e1.svg",
+        "caption": "Leibniz's formula for $\\pi$"
+      }
+    },
+    {
+      "title": "Truncation error control",
+      "scenario": "Approximate a value and bound the error.",
+      "how_the_math_applies": "For an alternating series the error is at most the next term — a clean guarantee.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-e2.svg",
+        "caption": "Truncation error control"
+      }
+    },
+    {
+      "title": "Exponential series convergence",
+      "scenario": "Why $e^x=\\sum x^n/n!$ works for all $x$.",
+      "how_the_math_applies": "The ratio test gives $L=0<1$ for every $x$ — converges everywhere.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-11-alternating-ratio-e3.svg",
+        "caption": "Exponential series convergence"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "alternating series test absolute conditional convergence",
+    "math_query": "ratio test root test factorial examples",
+    "combined_query": "calculus 2 series ratio root alternating worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Does $\\sum(-1)^n\\dfrac1n$ converge?",
+      "correct_answer": "Yes (conditionally)",
+      "solution_steps": [
+        "Alternating, $b_n=\\tfrac1n\\downarrow0$.",
+        "Alternating test ⇒ converges.",
+        "$\\sum\\tfrac1n$ diverges ⇒ conditional."
+      ],
+      "hint": "Alternating harmonic series."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Apply the ratio test to $\\sum\\dfrac{1}{n!}$.",
+      "correct_answer": "Converges",
+      "solution_steps": [
+        "$\\dfrac{a_{n+1}}{a_n}=\\dfrac{1}{n+1}\\to0$.",
+        "$L=0<1$.",
+        "Converges (to $e$)."
+      ],
+      "hint": "Factorials shrink the ratio to 0."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Apply the ratio test to $\\sum\\dfrac{2^n}{n!}$.",
+      "correct_answer": "Converges",
+      "solution_steps": [
+        "$\\dfrac{2^{n+1}/(n+1)!}{2^n/n!}=\\dfrac{2}{n+1}\\to0$.",
+        "$L=0<1$.",
+        "Converges."
+      ],
+      "hint": "$n!$ beats $2^n$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Apply the ratio test to $\\sum n\\left(\\tfrac12\\right)^n$.",
+      "correct_answer": "Converges",
+      "solution_steps": [
+        "Ratio $\\to\\tfrac12<1$.",
+        "Converges absolutely.",
+        "Done."
+      ],
+      "hint": "$L=\\tfrac12$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Is $\\sum\\dfrac{(-1)^n}{n^2}$ absolutely convergent?",
+      "correct_answer": "Yes",
+      "solution_steps": [
+        "$\\sum\\tfrac{1}{n^2}$ converges ($p=2$).",
+        "So it's absolute.",
+        "Converges."
+      ],
+      "hint": "Check $\\sum|a_n|$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Apply the ratio test to $\\sum\\dfrac{n!}{n^n}$.",
+      "correct_answer": "Converges",
+      "solution_steps": [
+        "Ratio $\\to\\dfrac{1}{(1+1/n)^n}\\to\\tfrac1e<1$.",
+        "$L=1/e<1$.",
+        "Converges."
+      ],
+      "hint": "Ratio limit is $1/e$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Apply the root test to $\\sum\\left(\\dfrac{n}{2n+1}\\right)^n$.",
+      "correct_answer": "Converges",
+      "solution_steps": [
+        "$\\sqrt[n]{|a_n|}=\\dfrac{n}{2n+1}\\to\\tfrac12$.",
+        "$L=\\tfrac12<1$.",
+        "Converges."
+      ],
+      "hint": "$n$-th power ⇒ root test."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "How many terms of $\\sum\\dfrac{(-1)^n}{n}$ ensure error $<0.1$?",
+      "correct_answer": "10 terms",
+      "solution_steps": [
+        "Error $\\le b_{N+1}=\\dfrac{1}{N+1}$.",
+        "$\\dfrac{1}{N+1}<0.1\\Rightarrow N+1>10$.",
+        "$N=10$."
+      ],
+      "hint": "Alternating error $\\le$ next term."
+    }
+  ]
+}

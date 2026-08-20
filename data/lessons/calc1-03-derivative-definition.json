@@ -1,0 +1,238 @@
+{
+  "title": "Defining the Derivative",
+  "summary": "The derivative $f'(a)$ is the slope of the tangent line — the limit of secant slopes as the second point closes in: $f'(a)=\\lim_{h\\to0}\\dfrac{f(a+h)-f(a)}{h}$. As a function, $f'(x)$ gives the instantaneous rate of change everywhere.",
+  "glossary": {
+    "derivative": {
+      "plain": "The instantaneous rate of change of a function — the slope of its tangent line.",
+      "in_class": "$f'(a)=\\lim_{h\\to0}\\dfrac{f(a+h)-f(a)}{h}$."
+    },
+    "secant line": {
+      "plain": "A line through two points on a curve; its slope is an average rate.",
+      "in_class": "As the points merge, its slope approaches the tangent slope."
+    },
+    "tangent line": {
+      "plain": "The line touching a curve at one point with the same slope.",
+      "in_class": "Its slope is $f'(a)$; equation $y-f(a)=f'(a)(x-a)$."
+    },
+    "difference quotient": {
+      "plain": "The average-rate expression $\\dfrac{f(a+h)-f(a)}{h}$.",
+      "in_class": "Its limit as $h\\to0$ is the derivative."
+    },
+    "differentiable": {
+      "plain": "Having a derivative — smooth, with a well-defined tangent.",
+      "in_class": "Differentiable ⇒ continuous, but not vice versa (corners fail)."
+    },
+    "instantaneous rate": {
+      "plain": "How fast something changes at a single instant.",
+      "in_class": "The derivative; e.g. velocity is the derivative of position."
+    },
+    "notation": {
+      "plain": "Ways to write the derivative.",
+      "in_class": "$f'(x)$, $\\dfrac{dy}{dx}$, $\\dfrac{d}{dx}f$ all mean the same thing."
+    },
+    "non-differentiable": {
+      "plain": "Points with no single tangent slope.",
+      "in_class": "Corners, cusps, vertical tangents, and discontinuities."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Slope of a secant",
+      "explanation": "The average rate of change of $f$ between $a$ and $a+h$ is the secant slope $\\dfrac{f(a+h)-f(a)}{h}$. It measures how much $f$ changed per unit of $x$ over that interval.",
+      "math_steps": [
+        "Take two points $(a,f(a))$ and $(a+h,f(a+h))$.",
+        "Rise over run: $\\dfrac{f(a+h)-f(a)}{h}$.",
+        "This is the average rate of change on $[a,a+h]$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-c1.svg",
+        "caption": "Slope of a secant"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The limit definition",
+      "explanation": "Shrink $h$ toward $0$: the secant pivots into the tangent, and its slope becomes the derivative $f'(a)=\\lim_{h\\to0}\\dfrac{f(a+h)-f(a)}{h}$. This limit is the instantaneous rate of change at $a$.",
+      "math_steps": [
+        "Form the difference quotient.",
+        "Simplify until $h$ cancels from the denominator.",
+        "Let $h\\to0$ to get $f'(a)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-c2.svg",
+        "caption": "The limit definition"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The tangent line",
+      "explanation": "Once you have $f'(a)$, the tangent at $x=a$ is $y-f(a)=f'(a)(x-a)$. It is the best straight-line approximation of the curve near that point.",
+      "math_steps": [
+        "Compute the point $(a,f(a))$.",
+        "Compute the slope $m=f'(a)$.",
+        "Write $y-f(a)=m(x-a)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-c3.svg",
+        "caption": "The tangent line"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The derivative as a function",
+      "explanation": "Leaving $a$ general as $x$ turns the derivative into a new function $f'(x)$ that reports the slope at every point. You can then evaluate it anywhere.",
+      "math_steps": [
+        "Apply the limit definition with $x$ in place of $a$.",
+        "Simplify to a formula in $x$.",
+        "Plug in any value to get that point's slope."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-c4.svg",
+        "caption": "The derivative as a function"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Differentiability vs continuity",
+      "explanation": "If $f$ is differentiable at $a$ it must be continuous there — but continuity is not enough. Corners (like $|x|$ at $0$), cusps, and vertical tangents are continuous yet not differentiable.",
+      "math_steps": [
+        "Differentiable ⇒ continuous.",
+        "Continuous ⇏ differentiable.",
+        "Watch for corners, cusps, and vertical tangents."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-c5.svg",
+        "caption": "Differentiability vs continuity"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Speedometer from odometer",
+      "scenario": "A car's position is recorded over time.",
+      "how_the_math_applies": "The derivative of position with respect to time is velocity — the speedometer reading at each instant.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-e1.svg",
+        "caption": "Speedometer from odometer"
+      }
+    },
+    {
+      "title": "Marginal cost",
+      "scenario": "A factory tracks total cost versus units produced.",
+      "how_the_math_applies": "The derivative of cost is the marginal cost — the extra cost of one more unit.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-e2.svg",
+        "caption": "Marginal cost"
+      }
+    },
+    {
+      "title": "A ball's peak height",
+      "scenario": "A tossed ball rises, stops, and falls.",
+      "how_the_math_applies": "At the top its velocity (the derivative of height) is momentarily zero — where the tangent is horizontal.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-03-derivative-definition-e3.svg",
+        "caption": "A ball's peak height"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "derivative definition slope of tangent secant limit",
+    "math_query": "derivative limit definition examples tangent line equation",
+    "combined_query": "calculus derivative from definition worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find $f'(x)$ for $f(x)=3x+2$ from the definition.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$\\dfrac{3(x+h)+2-(3x+2)}{h}=\\dfrac{3h}{h}=3$.",
+        "Limit as $h\\to0$ is $3$.",
+        "$f'(x)=3$."
+      ],
+      "hint": "A line's derivative is its slope."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the slope of the tangent to $f(x)=x^2$ at $x=2$.",
+      "correct_answer": "$4$",
+      "solution_steps": [
+        "$f'(x)=2x$ (from the definition).",
+        "At $x=2$: $2(2)=4$.",
+        "Slope $=4$."
+      ],
+      "hint": "Use $f'(x)=2x$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Use the definition to find $f'(x)$ for $f(x)=x^2$.",
+      "correct_answer": "$2x$",
+      "solution_steps": [
+        "$\\dfrac{(x+h)^2-x^2}{h}=\\dfrac{2xh+h^2}{h}=2x+h$.",
+        "Let $h\\to0$.",
+        "$f'(x)=2x$."
+      ],
+      "hint": "Expand $(x+h)^2$ and cancel $h$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the tangent line to $f(x)=x^2$ at $x=3$.",
+      "correct_answer": "$y=6x-9$",
+      "solution_steps": [
+        "Point: $(3,9)$. Slope: $f'(3)=6$.",
+        "$y-9=6(x-3)$.",
+        "$y=6x-9$."
+      ],
+      "hint": "Point-slope with $m=f'(3)$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Use the definition to find $f'(x)$ for $f(x)=1/x$.",
+      "correct_answer": "$-1/x^2$",
+      "solution_steps": [
+        "$\\dfrac{1/(x+h)-1/x}{h}=\\dfrac{-h}{h\\,x(x+h)}=\\dfrac{-1}{x(x+h)}$.",
+        "Let $h\\to0$.",
+        "$f'(x)=-1/x^2$."
+      ],
+      "hint": "Combine the fractions over a common denominator."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find $f'(x)$ for $f(x)=\\sqrt{x}$ from the definition.",
+      "correct_answer": "$\\dfrac{1}{2\\sqrt{x}}$",
+      "solution_steps": [
+        "Rationalize: $\\dfrac{\\sqrt{x+h}-\\sqrt{x}}{h}\\cdot\\dfrac{\\sqrt{x+h}+\\sqrt{x}}{\\sqrt{x+h}+\\sqrt{x}}=\\dfrac{1}{\\sqrt{x+h}+\\sqrt{x}}$.",
+        "Let $h\\to0$.",
+        "$\\dfrac{1}{2\\sqrt{x}}$."
+      ],
+      "hint": "Multiply by the conjugate."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "At what $x$ is the tangent to $f(x)=x^2-6x$ horizontal?",
+      "correct_answer": "$x=3$",
+      "solution_steps": [
+        "$f'(x)=2x-6$.",
+        "Set $=0$: $2x-6=0$.",
+        "$x=3$."
+      ],
+      "hint": "Horizontal tangent ⇒ $f'(x)=0$."
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "title": "Linear Approximation & Differentials",
+  "summary": "Near a point, a curve looks like its tangent line, so $f(x)\\approx f(a)+f'(a)(x-a)$ gives a quick estimate. The differential $dy=f'(x)\\,dx$ turns this into an estimate of how much $f$ changes for a small change in $x$.",
+  "glossary": {
+    "linearization": {
+      "plain": "The tangent-line approximation of a function near a point.",
+      "in_class": "$L(x)=f(a)+f'(a)(x-a)\\approx f(x)$ for $x$ near $a$."
+    },
+    "differential": {
+      "plain": "A small change estimate: $dy=f'(x)\\,dx$.",
+      "in_class": "Approximates the true change $\\Delta y$ for small $dx$."
+    },
+    "tangent approximation": {
+      "plain": "Using the tangent line in place of the curve.",
+      "in_class": "Accurate for small distances from the point."
+    },
+    "delta y": {
+      "plain": "The actual change in $f$.",
+      "in_class": "$\\Delta y=f(x+\\Delta x)-f(x)$; $dy$ approximates it."
+    },
+    "percent error": {
+      "plain": "Relative size of an approximation's error.",
+      "in_class": "$\\dfrac{|dy|}{|y|}\\times100\\%$."
+    },
+    "base point": {
+      "plain": "The nearby value $a$ where the function is easy to evaluate.",
+      "in_class": "Choose $a$ close to the target with a known $f(a)$."
+    },
+    "propagated error": {
+      "plain": "How input error spreads to the output.",
+      "in_class": "Estimated by $dy=f'(x)\\,dx$."
+    },
+    "small change": {
+      "plain": "A tiny $dx$ where the linear estimate is reliable.",
+      "in_class": "The smaller $dx$, the better the approximation."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The tangent-line estimate",
+      "explanation": "Because the tangent hugs the curve near the point, $f(x)\\approx f(a)+f'(a)(x-a)$. Pick $a$ where $f(a)$ and $f'(a)$ are easy, close to your target.",
+      "math_steps": [
+        "Choose a convenient base point $a$.",
+        "Compute $f(a)$ and $f'(a)$.",
+        "Evaluate $L(x)=f(a)+f'(a)(x-a)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-c1.svg",
+        "caption": "The tangent-line estimate"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Differentials",
+      "explanation": "Write $dy=f'(x)\\,dx$: a small input change $dx$ produces an estimated output change $dy$. It's the linearization rephrased in terms of changes.",
+      "math_steps": [
+        "Differentiate to get $f'(x)$.",
+        "Multiply by the small change $dx$.",
+        "$dy$ estimates the actual $\\Delta y$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-c2.svg",
+        "caption": "Differentials"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Estimating values",
+      "explanation": "To estimate something like $\\sqrt{4.1}$, linearize $\\sqrt{x}$ at $a=4$: $L(x)=2+\\tfrac14(x-4)$, giving $\\approx2.025$.",
+      "math_steps": [
+        "Rewrite the target as $f$ at a nearby nice $a$.",
+        "Build $L(x)$.",
+        "Plug in the target $x$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-c3.svg",
+        "caption": "Estimating values"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Error propagation",
+      "explanation": "If a measured $x$ has a small error $dx$, the resulting error in $f$ is about $dy=f'(x)\\,dx$. Divide by $y$ for percent error.",
+      "math_steps": [
+        "Identify the measurement error $dx$.",
+        "Compute $dy=f'(x)\\,dx$.",
+        "Relative error $=dy/y$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-c4.svg",
+        "caption": "Error propagation"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Why it works and its limits",
+      "explanation": "The estimate is exact at $a$ and degrades as you move away, because the curve bends away from the tangent. Smaller $|x-a|$ means better accuracy.",
+      "math_steps": [
+        "Best right at the base point.",
+        "Worse as $|x-a|$ grows.",
+        "Concavity controls the error direction."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-c5.svg",
+        "caption": "Why it works and its limits"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Estimating a square root by hand",
+      "scenario": "You need $\\sqrt{101}$ without a calculator.",
+      "how_the_math_applies": "Linearize $\\sqrt{x}$ at $100$: $\\approx10+\\tfrac{1}{20}(1)=10.05$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-e1.svg",
+        "caption": "Estimating a square root by hand"
+      }
+    },
+    {
+      "title": "Measurement tolerance",
+      "scenario": "A machined rod's radius is known to ±0.01 mm.",
+      "how_the_math_applies": "The differential $dV=\\ldots\\,dr$ estimates how much the volume could be off.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-e2.svg",
+        "caption": "Measurement tolerance"
+      }
+    },
+    {
+      "title": "Quick mental math for scientists",
+      "scenario": "Rapidly approximate a function change in the field.",
+      "how_the_math_applies": "The tangent-line rule gives a fast, good-enough estimate near a known value.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc1-10-linearization-e3.svg",
+        "caption": "Quick mental math for scientists"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "linear approximation tangent line estimate",
+    "math_query": "differentials dy dx error estimation examples",
+    "combined_query": "calculus linearization differentials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Linearize $f(x)=\\sqrt{x}$ at $a=9$.",
+      "correct_answer": "$L(x)=3+\\tfrac16(x-9)$",
+      "solution_steps": [
+        "$f(9)=3$, $f'(x)=\\tfrac{1}{2\\sqrt x}$, $f'(9)=\\tfrac16$.",
+        "$L(x)=3+\\tfrac16(x-9)$.",
+        "Done."
+      ],
+      "hint": "$L=f(a)+f'(a)(x-a)$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Use it to estimate $\\sqrt{9.1}$.",
+      "correct_answer": "$\\approx3.0167$",
+      "solution_steps": [
+        "$L(9.1)=3+\\tfrac16(0.1)$.",
+        "$=3+0.0167$.",
+        "$\\approx3.0167$."
+      ],
+      "hint": "Plug $9.1$ into the linearization."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Estimate $(2.01)^3$ using differentials.",
+      "correct_answer": "$\\approx8.12$",
+      "solution_steps": [
+        "$f=x^3$, $f'=3x^2$; at $x=2$, $dy=12(0.01)=0.12$.",
+        "$8+0.12$.",
+        "$\\approx8.12$."
+      ],
+      "hint": "$dy=f'(x)\\,dx$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A cube's side is $5\\pm0.1$ cm. Estimate the error in volume.",
+      "correct_answer": "$\\pm7.5$ cm³",
+      "solution_steps": [
+        "$V=s^3$, $dV=3s^2\\,ds$.",
+        "$=3(25)(0.1)$.",
+        "$\\pm7.5$ cm³."
+      ],
+      "hint": "Differentiate $V=s^3$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Estimate $\\ln(1.05)$.",
+      "correct_answer": "$\\approx0.05$",
+      "solution_steps": [
+        "Linearize $\\ln x$ at $1$: $L=0+1\\cdot(x-1)$.",
+        "$L(1.05)=0.05$.",
+        "$\\approx0.05$."
+      ],
+      "hint": "$f'(1)=1$ for $\\ln x$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A circle's radius is measured as $10\\pm0.05$ cm. Estimate the percent error in area.",
+      "correct_answer": "$1\\%$",
+      "solution_steps": [
+        "$A=\\pi r^2$, $dA=2\\pi r\\,dr$; $dA/A=2\\,dr/r$.",
+        "$=2(0.05/10)=0.01$.",
+        "$1\\%$."
+      ],
+      "hint": "Relative area error is twice the relative radius error."
+    }
+  ]
+}

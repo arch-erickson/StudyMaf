@@ -1,0 +1,250 @@
+{
+  "title": "Arithmetic & Order of Operations",
+  "summary": "Real-number arithmetic — signed integers, fractions, and the order of operations (PEMDAS) — is the foundation for all of algebra. Master signs, common denominators, and the operation hierarchy so later manipulations stay error-free.",
+  "glossary": {
+    "integer": {
+      "plain": "A whole number, positive, negative, or zero.",
+      "in_class": "$\\ldots,-2,-1,0,1,2,\\ldots$"
+    },
+    "absolute value": {
+      "plain": "Distance from zero, always nonnegative.",
+      "in_class": "$|-4|=4$; strips the sign."
+    },
+    "order of operations": {
+      "plain": "The agreed sequence for evaluating expressions.",
+      "in_class": "PEMDAS: parentheses, exponents, multiply/divide, add/subtract."
+    },
+    "fraction": {
+      "plain": "A ratio of two integers, part over whole.",
+      "in_class": "$\\tfrac{a}{b}$ with $b\\neq0$."
+    },
+    "common denominator": {
+      "plain": "A shared bottom needed to add fractions.",
+      "in_class": "Use the least common multiple of the denominators."
+    },
+    "reciprocal": {
+      "plain": "The flip of a fraction; multiply to divide.",
+      "in_class": "$\\tfrac{a}{b}\\div\\tfrac{c}{d}=\\tfrac{a}{b}\\cdot\\tfrac{d}{c}$."
+    },
+    "signed number": {
+      "plain": "A number carrying a $+$ or $-$.",
+      "in_class": "Same signs add; different signs subtract."
+    },
+    "expression": {
+      "plain": "A combination of numbers, variables, and operations.",
+      "in_class": "Evaluated by the order of operations."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Signed-number arithmetic",
+      "explanation": "Adding numbers with the same sign adds magnitudes and keeps the sign; different signs subtract and take the larger's sign. Subtracting is adding the opposite; a product/quotient is negative only with an odd number of negatives.",
+      "math_steps": [
+        "Same signs: add magnitudes, keep sign.",
+        "Different signs: subtract, keep the bigger's sign.",
+        "Products: count the negatives — odd ⇒ negative."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-c1.svg",
+        "caption": "Signed-number arithmetic"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Absolute value",
+      "explanation": "The absolute value $|x|$ is the distance from $0$, so it's never negative. It appears in distance and error contexts and in solving $|x|=a$.",
+      "math_steps": [
+        "Drop the sign to get the magnitude.",
+        "$|x|=a$ means $x=a$ or $x=-a$.",
+        "Distance between $a,b$ is $|a-b|$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-c2.svg",
+        "caption": "Absolute value"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Fractions",
+      "explanation": "To add or subtract, get a common denominator; to multiply, multiply straight across; to divide, multiply by the reciprocal. Always reduce to lowest terms.",
+      "math_steps": [
+        "Add/subtract: common denominator, then combine tops.",
+        "Multiply: across the top and bottom.",
+        "Divide: multiply by the reciprocal; simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-c3.svg",
+        "caption": "Fractions"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Order of operations",
+      "explanation": "Evaluate in the order PEMDAS: parentheses first, then exponents, then multiplication and division left to right, then addition and subtraction left to right.",
+      "math_steps": [
+        "Do grouping symbols first.",
+        "Then exponents.",
+        "Then ×/÷, then +/−, each left to right."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-c4.svg",
+        "caption": "Order of operations"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Evaluating expressions",
+      "explanation": "Substitute values for variables, then apply the order of operations carefully — especially with negative substitutions and exponents on negatives.",
+      "math_steps": [
+        "Replace variables with their values (use parentheses).",
+        "Follow PEMDAS.",
+        "Watch signs, e.g. $(-2)^2=4$ vs $-2^2=-4$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-c5.svg",
+        "caption": "Evaluating expressions"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Splitting a bill with tip",
+      "scenario": "Divide a total plus tip among friends.",
+      "how_the_math_applies": "Order of operations decides whether you add the tip before or after dividing — the grouping matters.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-e1.svg",
+        "caption": "Splitting a bill with tip"
+      }
+    },
+    {
+      "title": "Temperature swings",
+      "scenario": "Overnight the temperature drops below zero.",
+      "how_the_math_applies": "Signed-number subtraction finds the change: $|-5-8|=13$ degrees of swing.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-e2.svg",
+        "caption": "Temperature swings"
+      }
+    },
+    {
+      "title": "Scaling a recipe",
+      "scenario": "Make two-thirds of a recipe.",
+      "how_the_math_applies": "Multiplying each fractional amount by $\\tfrac23$ uses fraction multiplication.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-01-arithmetic-e3.svg",
+        "caption": "Scaling a recipe"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "order of operations pemdas signed numbers explained",
+    "math_query": "adding subtracting multiplying dividing fractions examples",
+    "combined_query": "college algebra real number arithmetic worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Evaluate $-3+7$.",
+      "correct_answer": "$4$",
+      "solution_steps": [
+        "Different signs, subtract.",
+        "$7-3=4$, keep the $+$.",
+        "$4$."
+      ],
+      "hint": "Larger magnitude keeps its sign."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $2+3\\cdot4$.",
+      "correct_answer": "$14$",
+      "solution_steps": [
+        "Multiply first.",
+        "$3\\cdot4=12$.",
+        "$2+12=14$."
+      ],
+      "hint": "PEMDAS: × before +."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Evaluate $|-6|$.",
+      "correct_answer": "$6$",
+      "solution_steps": [
+        "Distance from zero.",
+        "$6$.",
+        "Done."
+      ],
+      "hint": "Drop the sign."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\tfrac12+\\tfrac13$.",
+      "correct_answer": "$\\tfrac56$",
+      "solution_steps": [
+        "Common denominator 6.",
+        "$\\tfrac36+\\tfrac26$.",
+        "$\\tfrac56$."
+      ],
+      "hint": "LCD is 6."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Evaluate $(2+3)^2-4$.",
+      "correct_answer": "$21$",
+      "solution_steps": [
+        "Parentheses: $5$.",
+        "$5^2=25$.",
+        "$25-4=21$."
+      ],
+      "hint": "Parentheses, then exponent."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\tfrac23\\div\\tfrac49$.",
+      "correct_answer": "$\\tfrac32$",
+      "solution_steps": [
+        "Multiply by the reciprocal.",
+        "$\\tfrac23\\cdot\\tfrac94=\\tfrac{18}{12}$.",
+        "$\\tfrac32$."
+      ],
+      "hint": "Divide = multiply by the flip."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $-2^2+(-2)^2$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$-2^2=-4$ (exponent before sign).",
+        "$(-2)^2=4$.",
+        "$-4+4=0$."
+      ],
+      "hint": "Parentheses change the sign's fate."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Evaluate $3-2(5-8)$.",
+      "correct_answer": "$9$",
+      "solution_steps": [
+        "Inside: $5-8=-3$.",
+        "$-2(-3)=6$.",
+        "$3+6=9$."
+      ],
+      "hint": "Do the grouping first."
+    }
+  ]
+}

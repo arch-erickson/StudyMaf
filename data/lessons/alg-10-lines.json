@@ -1,0 +1,250 @@
+{
+  "title": "Lines: Slope & Equations",
+  "summary": "A line's slope $m=\\dfrac{\\Delta y}{\\Delta x}$ measures steepness. Write lines in slope-intercept $y=mx+b$ or point-slope $y-y_1=m(x-x_1)$ form. Parallel lines share a slope; perpendicular slopes are negative reciprocals.",
+  "glossary": {
+    "slope": {
+      "plain": "Rise over run — steepness of a line.",
+      "in_class": "$m=\\dfrac{y_2-y_1}{x_2-x_1}$."
+    },
+    "y-intercept": {
+      "plain": "Where the line crosses the $y$-axis.",
+      "in_class": "The $b$ in $y=mx+b$; $x=0$ there."
+    },
+    "slope-intercept form": {
+      "plain": "$y=mx+b$.",
+      "in_class": "Reads off slope and intercept directly."
+    },
+    "point-slope form": {
+      "plain": "$y-y_1=m(x-x_1)$.",
+      "in_class": "Build a line from a point and a slope."
+    },
+    "parallel lines": {
+      "plain": "Lines that never meet — same slope.",
+      "in_class": "$m_1=m_2$."
+    },
+    "perpendicular lines": {
+      "plain": "Lines meeting at a right angle.",
+      "in_class": "Slopes are negative reciprocals: $m_1 m_2=-1$."
+    },
+    "x-intercept": {
+      "plain": "Where the line crosses the $x$-axis.",
+      "in_class": "Set $y=0$ and solve."
+    },
+    "horizontal/vertical": {
+      "plain": "Zero slope vs undefined slope.",
+      "in_class": "$y=c$ (flat) and $x=c$ (vertical)."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Slope",
+      "explanation": "Slope is the ratio of vertical change to horizontal change between two points: $m=\\dfrac{y_2-y_1}{x_2-x_1}$. Positive rises, negative falls, zero is flat, undefined is vertical.",
+      "math_steps": [
+        "Pick two points.",
+        "Compute rise $\\div$ run.",
+        "Interpret the sign and size."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-c1.svg",
+        "caption": "Slope"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Slope-intercept form",
+      "explanation": "$y=mx+b$ shows the slope $m$ and $y$-intercept $b$ at a glance — the easiest form for graphing and reading behavior.",
+      "math_steps": [
+        "Solve the equation for $y$.",
+        "Read $m$ (coefficient) and $b$ (constant).",
+        "Plot $b$, then use $m$ to step."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-c2.svg",
+        "caption": "Slope-intercept form"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Point-slope form",
+      "explanation": "Given a point $(x_1,y_1)$ and slope $m$, write $y-y_1=m(x-x_1)$. Convert to slope-intercept if desired.",
+      "math_steps": [
+        "Insert the point and slope.",
+        "Simplify.",
+        "Rearrange to $y=mx+b$ if needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-c3.svg",
+        "caption": "Point-slope form"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Parallel and perpendicular",
+      "explanation": "Parallel lines share the same slope; perpendicular lines have slopes that are negative reciprocals ($m$ and $-1/m$).",
+      "math_steps": [
+        "Parallel: match the slope.",
+        "Perpendicular: flip and negate the slope.",
+        "Use with a point to build the line."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-c4.svg",
+        "caption": "Parallel and perpendicular"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Finding a line from two points",
+      "explanation": "Compute the slope from the two points, then use point-slope with either point to get the equation.",
+      "math_steps": [
+        "Find $m$ from the two points.",
+        "Apply point-slope with one point.",
+        "Simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-c5.svg",
+        "caption": "Finding a line from two points"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Cost with a flat fee",
+      "scenario": "A plan charges a base fee plus per-unit cost.",
+      "how_the_math_applies": "Total cost is linear: $y=mx+b$, with $b$ the fee and $m$ the rate.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-e1.svg",
+        "caption": "Cost with a flat fee"
+      }
+    },
+    {
+      "title": "Road grade",
+      "scenario": "A highway sign shows a percent grade.",
+      "how_the_math_applies": "Grade is slope — rise over run — expressed as a percentage.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-e2.svg",
+        "caption": "Road grade"
+      }
+    },
+    {
+      "title": "Depreciation",
+      "scenario": "An asset loses value at a steady rate.",
+      "how_the_math_applies": "Its value is a line with negative slope; the intercept is the purchase price.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-10-lines-e3.svg",
+        "caption": "Depreciation"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "slope formula slope intercept form graphing lines",
+    "math_query": "point slope parallel perpendicular lines examples",
+    "combined_query": "college algebra lines slope equations worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the slope through $(1,2)$ and $(4,8)$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "$m=\\dfrac{8-2}{4-1}$.",
+        "$=\\dfrac63$.",
+        "$2$."
+      ],
+      "hint": "Rise over run."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Give the slope and $y$-intercept of $y=3x-4$.",
+      "correct_answer": "$m=3,\\ b=-4$",
+      "solution_steps": [
+        "Slope-intercept form.",
+        "$m=3$, $b=-4$.",
+        "Done."
+      ],
+      "hint": "Read off $y=mx+b$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Write the line with slope $2$ through $(1,3)$.",
+      "correct_answer": "$y=2x+1$",
+      "solution_steps": [
+        "Point-slope: $y-3=2(x-1)$.",
+        "$y=2x+1$.",
+        "Done."
+      ],
+      "hint": "Use point-slope, then simplify."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the line through $(0,2)$ and $(2,6)$.",
+      "correct_answer": "$y=2x+2$",
+      "solution_steps": [
+        "$m=\\dfrac{6-2}{2-0}=2$.",
+        "$b=2$ (from $(0,2)$).",
+        "$y=2x+2$."
+      ],
+      "hint": "Slope, then intercept."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "What slope is perpendicular to $m=\\tfrac23$?",
+      "correct_answer": "$-\\tfrac32$",
+      "solution_steps": [
+        "Negative reciprocal.",
+        "Flip and negate.",
+        "$-\\tfrac32$."
+      ],
+      "hint": "$m_1 m_2=-1$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find the $x$-intercept of $y=2x-6$.",
+      "correct_answer": "$x=3$",
+      "solution_steps": [
+        "Set $y=0$: $0=2x-6$.",
+        "$x=3$.",
+        "Done."
+      ],
+      "hint": "Set $y=0$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Line parallel to $y=3x+1$ through $(2,1)$.",
+      "correct_answer": "$y=3x-5$",
+      "solution_steps": [
+        "Same slope $3$; point-slope $y-1=3(x-2)$.",
+        "$y=3x-5$.",
+        "Done."
+      ],
+      "hint": "Parallel ⇒ same slope."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Line perpendicular to $y=\\tfrac12 x$ through $(4,0)$.",
+      "correct_answer": "$y=-2x+8$",
+      "solution_steps": [
+        "Perp slope $-2$; $y-0=-2(x-4)$.",
+        "$y=-2x+8$.",
+        "Done."
+      ],
+      "hint": "Negative reciprocal slope."
+    }
+  ]
+}

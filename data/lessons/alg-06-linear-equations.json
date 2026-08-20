@@ -1,0 +1,250 @@
+{
+  "title": "Linear Equations & Inequalities",
+  "summary": "A linear equation has the variable to the first power. Solve by isolating it with inverse operations; solve inequalities the same way but flip the sign when multiplying or dividing by a negative. Word problems translate into linear equations.",
+  "glossary": {
+    "linear equation": {
+      "plain": "An equation with the variable to the first power.",
+      "in_class": "$ax+b=c$; one solution (usually)."
+    },
+    "inverse operation": {
+      "plain": "The operation that undoes another.",
+      "in_class": "Subtract to undo add, divide to undo multiply."
+    },
+    "isolate the variable": {
+      "plain": "Get the variable alone on one side.",
+      "in_class": "Apply inverse operations to both sides."
+    },
+    "inequality": {
+      "plain": "A statement with $<,\\le,>,\\ge$.",
+      "in_class": "Solutions form a range, not a single number."
+    },
+    "flip the inequality": {
+      "plain": "Reverse $<$↔$>$ when multiplying/dividing by a negative.",
+      "in_class": "Essential rule for inequalities."
+    },
+    "literal equation": {
+      "plain": "A formula solved for one of its letters.",
+      "in_class": "Isolate the desired variable symbolically."
+    },
+    "solution set": {
+      "plain": "All values that satisfy the equation/inequality.",
+      "in_class": "For linear inequalities, an interval."
+    },
+    "translate": {
+      "plain": "Turn words into an equation.",
+      "in_class": "Map phrases like 'is', 'more than' to symbols."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Solving linear equations",
+      "explanation": "Undo operations in reverse order to isolate the variable: clear parentheses and fractions, combine like terms, then move variable terms to one side and constants to the other.",
+      "math_steps": [
+        "Simplify each side (distribute, combine).",
+        "Get variable terms together, constants together.",
+        "Divide by the coefficient."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-c1.svg",
+        "caption": "Solving linear equations"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Equations with fractions",
+      "explanation": "Multiply every term by the LCD to clear fractions, turning the equation into an integer-coefficient one that's easier to solve.",
+      "math_steps": [
+        "Find the LCD of all fractions.",
+        "Multiply every term by it.",
+        "Solve the resulting equation."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-c2.svg",
+        "caption": "Equations with fractions"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Literal equations",
+      "explanation": "To solve a formula for a chosen variable, treat the others as constants and isolate it with the same inverse-operation steps.",
+      "math_steps": [
+        "Pick the target variable.",
+        "Move everything else away using inverse operations.",
+        "Divide out its coefficient."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-c3.svg",
+        "caption": "Literal equations"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Linear inequalities",
+      "explanation": "Solve like equations, but reverse the inequality symbol whenever you multiply or divide both sides by a negative. The answer is an interval.",
+      "math_steps": [
+        "Isolate the variable as usual.",
+        "Flip the sign if you multiply/divide by a negative.",
+        "Write the solution as an interval."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-c4.svg",
+        "caption": "Linear inequalities"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Word problems",
+      "explanation": "Translate the words into an equation: name the unknown, express relationships as symbols, solve, and check the answer against the story.",
+      "math_steps": [
+        "Define the variable.",
+        "Write the equation from the relationships.",
+        "Solve and verify in context."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-c5.svg",
+        "caption": "Word problems"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Budgeting to a target",
+      "scenario": "Save a fixed amount to reach a goal.",
+      "how_the_math_applies": "A linear equation solves for how many weeks of saving are needed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-e1.svg",
+        "caption": "Budgeting to a target"
+      }
+    },
+    {
+      "title": "Break-even point",
+      "scenario": "Cost equals revenue.",
+      "how_the_math_applies": "Setting a linear cost equal to a linear revenue and solving finds the break-even quantity.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-e2.svg",
+        "caption": "Break-even point"
+      }
+    },
+    {
+      "title": "Temperature conversion",
+      "scenario": "Convert between Celsius and Fahrenheit.",
+      "how_the_math_applies": "The literal equation $F=\\tfrac95 C+32$ is solved for either variable.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-06-linear-equations-e3.svg",
+        "caption": "Temperature conversion"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "solving linear equations isolate variable steps",
+    "math_query": "linear inequalities flip sign word problems examples",
+    "combined_query": "college algebra linear equations worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Solve $2x+3=11$.",
+      "correct_answer": "$x=4$",
+      "solution_steps": [
+        "Subtract 3: $2x=8$.",
+        "Divide by 2.",
+        "$x=4$."
+      ],
+      "hint": "Undo add, then multiply."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Solve $5x=20$.",
+      "correct_answer": "$x=4$",
+      "solution_steps": [
+        "Divide by 5.",
+        "$x=4$.",
+        "Done."
+      ],
+      "hint": "Divide by the coefficient."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Solve $3(x-2)=12$.",
+      "correct_answer": "$x=6$",
+      "solution_steps": [
+        "Distribute or divide first: $x-2=4$.",
+        "$x=6$.",
+        "Done."
+      ],
+      "hint": "Handle the parentheses."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Solve $\\tfrac{x}{2}+1=4$.",
+      "correct_answer": "$x=6$",
+      "solution_steps": [
+        "Subtract 1: $\\tfrac{x}{2}=3$.",
+        "Multiply by 2.",
+        "$x=6$."
+      ],
+      "hint": "Undo the fraction last."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Solve $2x+5=x-3$.",
+      "correct_answer": "$x=-8$",
+      "solution_steps": [
+        "Subtract $x$: $x+5=-3$.",
+        "Subtract 5.",
+        "$x=-8$."
+      ],
+      "hint": "Collect variable terms on one side."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Solve the inequality $-2x>6$.",
+      "correct_answer": "$x<-3$",
+      "solution_steps": [
+        "Divide by $-2$, flip the sign.",
+        "$x<-3$.",
+        "Done."
+      ],
+      "hint": "Flip when dividing by a negative."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve $ax+b=c$ for $x$.",
+      "correct_answer": "$x=\\dfrac{c-b}{a}$",
+      "solution_steps": [
+        "Subtract $b$.",
+        "Divide by $a$.",
+        "$x=\\dfrac{c-b}{a}$."
+      ],
+      "hint": "Treat $a,b,c$ as constants."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "A number tripled and increased by 4 is 19. Find it.",
+      "correct_answer": "$5$",
+      "solution_steps": [
+        "$3x+4=19$.",
+        "$3x=15$.",
+        "$x=5$."
+      ],
+      "hint": "Translate then solve."
+    }
+  ]
+}

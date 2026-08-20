@@ -1,0 +1,250 @@
+{
+  "title": "Trigonometric Integrals",
+  "summary": "Integrals of powers of sine, cosine, tangent, and secant use trig identities to reduce to substitutions. Odd powers peel off one factor for $u$-substitution; even powers use the power-reduction (half-angle) identities.",
+  "glossary": {
+    "power-reduction": {
+      "plain": "Identities that lower even powers of sin/cos.",
+      "in_class": "$\\sin^2 x=\\tfrac{1-\\cos2x}{2}$, $\\cos^2 x=\\tfrac{1+\\cos2x}{2}$."
+    },
+    "odd power trick": {
+      "plain": "Peel one factor to pair with $du$.",
+      "in_class": "Save one $\\sin$ (or $\\cos$) and convert the rest with $\\sin^2+\\cos^2=1$."
+    },
+    "Pythagorean identity": {
+      "plain": "$\\sin^2 x+\\cos^2 x=1$ and its relatives.",
+      "in_class": "Also $1+\\tan^2=\\sec^2$; used to swap functions."
+    },
+    "secant-tangent": {
+      "plain": "Integrals of $\\sec^m\\tan^n$.",
+      "in_class": "Save a $\\sec\\tan$ or $\\sec^2$ for the substitution."
+    },
+    "double-angle": {
+      "plain": "Formulas relating angle $2x$ to $x$.",
+      "in_class": "$\\sin2x=2\\sin x\\cos x$; useful for products."
+    },
+    "u = sin or cos": {
+      "plain": "The substitution after peeling a factor.",
+      "in_class": "Choose so its derivative matches the saved factor."
+    },
+    "product to sum": {
+      "plain": "Rewriting $\\sin A\\cos B$ etc. as sums.",
+      "in_class": "Handles $\\int\\sin(mx)\\cos(nx)\\,dx$."
+    },
+    "reduce then integrate": {
+      "plain": "Simplify with identities before integrating.",
+      "in_class": "Turn powers into manageable single terms."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Odd powers of sine or cosine",
+      "explanation": "If one of them has an odd power, save a single factor for $du$ and convert the remaining even power with $\\sin^2+\\cos^2=1$, then substitute.",
+      "math_steps": [
+        "Save one $\\sin$ (or $\\cos$) factor.",
+        "Convert the rest using $\\sin^2=1-\\cos^2$.",
+        "Substitute $u=\\cos$ (or $\\sin$) and integrate."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-c1.svg",
+        "caption": "Odd powers of sine or cosine"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Even powers",
+      "explanation": "When both powers are even, use power-reduction: $\\sin^2 x=\\tfrac{1-\\cos2x}{2}$, $\\cos^2 x=\\tfrac{1+\\cos2x}{2}$. This lowers the degree until integration is direct.",
+      "math_steps": [
+        "Apply the half-angle identity.",
+        "Expand and simplify.",
+        "Integrate each term (repeat if needed)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-c2.svg",
+        "caption": "Even powers"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Tangent and secant",
+      "explanation": "For $\\int\\sec^m\\tan^n$, if $\\sec$ has an even power save $\\sec^2$ ($=du$ for $u=\\tan$); if $\\tan$ has an odd power save $\\sec\\tan$ ($=du$ for $u=\\sec$). Use $1+\\tan^2=\\sec^2$ to convert.",
+      "math_steps": [
+        "Decide whether $u=\\tan$ or $u=\\sec$ fits.",
+        "Save the matching factor for $du$.",
+        "Convert the rest with $1+\\tan^2=\\sec^2$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-c3.svg",
+        "caption": "Tangent and secant"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Products of different angles",
+      "explanation": "For $\\int\\sin(mx)\\cos(nx)\\,dx$ use product-to-sum identities to turn the product into a sum of single trig terms, then integrate.",
+      "math_steps": [
+        "Apply a product-to-sum formula.",
+        "Integrate each simple term.",
+        "Combine."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-c4.svg",
+        "caption": "Products of different angles"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Choosing the method",
+      "explanation": "Scan the powers: any odd power ⇒ peel a factor; all even ⇒ power-reduce; sec/tan ⇒ pick $u=\\tan$ or $u=\\sec$. A quick classification saves work.",
+      "math_steps": [
+        "Check parity of the powers.",
+        "Match to the right technique.",
+        "Then substitute and integrate."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-c5.svg",
+        "caption": "Choosing the method"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Power in AC circuits",
+      "scenario": "Average power involves $\\int\\sin^2$ or $\\cos^2$.",
+      "how_the_math_applies": "Power-reduction identities evaluate these to give the rms-based average power.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-e1.svg",
+        "caption": "Power in AC circuits"
+      }
+    },
+    {
+      "title": "Fourier analysis",
+      "scenario": "Signals decompose into sines and cosines.",
+      "how_the_math_applies": "Orthogonality integrals $\\int\\sin(mx)\\cos(nx)$ use product-to-sum formulas.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-e2.svg",
+        "caption": "Fourier analysis"
+      }
+    },
+    {
+      "title": "Area of a wavy region",
+      "scenario": "A region bounded by a squared sinusoid.",
+      "how_the_math_applies": "Its area needs $\\int\\sin^2$ or $\\cos^2$, done by power reduction.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-04-trig-integrals-e3.svg",
+        "caption": "Area of a wavy region"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "trigonometric integrals odd even powers sine cosine",
+    "math_query": "secant tangent integrals power reduction examples",
+    "combined_query": "calculus 2 trig integrals worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find $\\int \\sin^2 x\\,dx$.",
+      "correct_answer": "$\\tfrac{x}{2}-\\tfrac{\\sin2x}{4}+C$",
+      "solution_steps": [
+        "$\\sin^2 x=\\tfrac{1-\\cos2x}{2}$.",
+        "$\\int\\tfrac12-\\tfrac12\\cos2x\\,dx$.",
+        "$\\tfrac{x}{2}-\\tfrac{\\sin2x}{4}+C$."
+      ],
+      "hint": "Half-angle identity."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find $\\int \\cos^2 x\\,dx$.",
+      "correct_answer": "$\\tfrac{x}{2}+\\tfrac{\\sin2x}{4}+C$",
+      "solution_steps": [
+        "$\\cos^2 x=\\tfrac{1+\\cos2x}{2}$.",
+        "Integrate.",
+        "$\\tfrac{x}{2}+\\tfrac{\\sin2x}{4}+C$."
+      ],
+      "hint": "Power reduction."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find $\\int \\sin^3 x\\,dx$.",
+      "correct_answer": "$-\\cos x+\\tfrac13\\cos^3 x+C$",
+      "solution_steps": [
+        "Save $\\sin x$: $\\sin^2 x=1-\\cos^2 x$.",
+        "$u=\\cos x$: $-\\int(1-u^2)\\,du$.",
+        "$-\\cos x+\\tfrac13\\cos^3 x+C$."
+      ],
+      "hint": "Peel one sine, convert the rest."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find $\\int \\sin x\\cos^2 x\\,dx$.",
+      "correct_answer": "$-\\tfrac13\\cos^3 x+C$",
+      "solution_steps": [
+        "$u=\\cos x$, $du=-\\sin x\\,dx$.",
+        "$-\\int u^2\\,du$.",
+        "$-\\tfrac13\\cos^3 x+C$."
+      ],
+      "hint": "$u=\\cos x$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find $\\int \\sec^2 x\\tan x\\,dx$.",
+      "correct_answer": "$\\tfrac12\\tan^2 x+C$",
+      "solution_steps": [
+        "$u=\\tan x$, $du=\\sec^2 x\\,dx$.",
+        "$\\int u\\,du$.",
+        "$\\tfrac12\\tan^2 x+C$."
+      ],
+      "hint": "Save $\\sec^2$ for $du$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find $\\int \\tan^3 x\\sec x\\,dx$? Simpler: $\\int \\sec x\\tan x\\,dx$.",
+      "correct_answer": "$\\sec x+C$",
+      "solution_steps": [
+        "Recognize the derivative of $\\sec x$.",
+        "$\\frac{d}{dx}\\sec x=\\sec x\\tan x$.",
+        "$\\sec x+C$."
+      ],
+      "hint": "Know the sec derivative."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\int_0^{\\pi} \\sin^2 x\\,dx$.",
+      "correct_answer": "$\\tfrac{\\pi}{2}$",
+      "solution_steps": [
+        "Antiderivative $\\tfrac{x}{2}-\\tfrac{\\sin2x}{4}$.",
+        "$\\big[\\tfrac{x}{2}\\big]_0^\\pi$ ($\\sin$ terms vanish).",
+        "$\\tfrac{\\pi}{2}$."
+      ],
+      "hint": "The average of $\\sin^2$ is $\\tfrac12$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Find $\\int \\cos^3 x\\,dx$.",
+      "correct_answer": "$\\sin x-\\tfrac13\\sin^3 x+C$",
+      "solution_steps": [
+        "Save $\\cos x$: $\\cos^2=1-\\sin^2$.",
+        "$u=\\sin x$: $\\int(1-u^2)\\,du$.",
+        "$\\sin x-\\tfrac13\\sin^3 x+C$."
+      ],
+      "hint": "Peel one cosine."
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "title": "Taylor & Maclaurin Polynomials",
+  "summary": "A Taylor polynomial approximates a function near $a$ using its derivatives there: $P_n(x)=\\sum_{k=0}^n\\dfrac{f^{(k)}(a)}{k!}(x-a)^k$. Centered at $0$ it's a Maclaurin polynomial. Higher degree means better local accuracy.",
+  "glossary": {
+    "Taylor polynomial": {
+      "plain": "A polynomial matching a function's derivatives at $a$.",
+      "in_class": "$P_n(x)=\\sum_{k=0}^n\\dfrac{f^{(k)}(a)}{k!}(x-a)^k$."
+    },
+    "Maclaurin polynomial": {
+      "plain": "A Taylor polynomial centered at $0$.",
+      "in_class": "$\\sum\\dfrac{f^{(k)}(0)}{k!}x^k$."
+    },
+    "center": {
+      "plain": "The point $a$ where derivatives are taken.",
+      "in_class": "Approximation is best near $a$."
+    },
+    "degree n": {
+      "plain": "The highest power kept.",
+      "in_class": "More terms ⇒ better local fit."
+    },
+    "factorial": {
+      "plain": "$k!=k(k-1)\\cdots1$ in the denominators.",
+      "in_class": "Scales each derivative term."
+    },
+    "remainder": {
+      "plain": "The error $R_n=f-P_n$.",
+      "in_class": "Taylor's theorem bounds it."
+    },
+    "linear approximation": {
+      "plain": "The degree-1 Taylor polynomial.",
+      "in_class": "The tangent line $f(a)+f'(a)(x-a)$."
+    },
+    "quadratic approximation": {
+      "plain": "Degree-2 Taylor polynomial.",
+      "in_class": "Adds the curvature term $\\tfrac{f''(a)}{2}(x-a)^2$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Matching derivatives",
+      "explanation": "The Taylor polynomial is built so that $P_n$ and its first $n$ derivatives equal $f$'s at $a$. The $k$-th term is $\\dfrac{f^{(k)}(a)}{k!}(x-a)^k$.",
+      "math_steps": [
+        "Compute $f(a),f'(a),\\ldots,f^{(n)}(a)$.",
+        "Form each term $\\dfrac{f^{(k)}(a)}{k!}(x-a)^k$.",
+        "Sum them for $P_n$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-c1.svg",
+        "caption": "Matching derivatives"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Maclaurin (center 0)",
+      "explanation": "Centered at $0$, the formula simplifies to $\\sum\\dfrac{f^{(k)}(0)}{k!}x^k$. The classics: $e^x$, $\\sin x$, $\\cos x$, and $\\frac{1}{1-x}$.",
+      "math_steps": [
+        "Evaluate derivatives at $0$.",
+        "Use powers of $x$.",
+        "Recognize the standard series patterns."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-c2.svg",
+        "caption": "Maclaurin (center 0)"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Standard expansions",
+      "explanation": "$e^x=1+x+\\tfrac{x^2}{2!}+\\cdots$, $\\sin x=x-\\tfrac{x^3}{3!}+\\cdots$, $\\cos x=1-\\tfrac{x^2}{2!}+\\cdots$. Knowing these lets you build others by substitution.",
+      "math_steps": [
+        "Memorize $e^x,\\sin x,\\cos x$ series.",
+        "Substitute to get related ones (e.g. $e^{-x^2}$).",
+        "Truncate to the needed degree."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-c3.svg",
+        "caption": "Standard expansions"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Accuracy and remainder",
+      "explanation": "The error $R_n(x)=f(x)-P_n(x)$ shrinks as $n$ grows or $x$ nears $a$. Taylor's remainder gives a bound $\\dfrac{M}{(n+1)!}|x-a|^{n+1}$.",
+      "math_steps": [
+        "Estimate the max derivative $M$ on the interval.",
+        "Apply the remainder bound.",
+        "Choose $n$ to hit a target accuracy."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-c4.svg",
+        "caption": "Accuracy and remainder"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Using polynomials to estimate",
+      "explanation": "Plug a value into $P_n$ to approximate $f$ — e.g. $e^{0.1}\\approx1+0.1+\\tfrac{0.01}{2}$. This is how calculators evaluate transcendental functions.",
+      "math_steps": [
+        "Pick the degree for the accuracy you need.",
+        "Substitute the value.",
+        "Add the terms."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-c5.svg",
+        "caption": "Using polynomials to estimate"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "How calculators compute $\\sin$",
+      "scenario": "A calculator needs $\\sin(0.3)$ instantly.",
+      "how_the_math_applies": "It sums a few Maclaurin terms — a polynomial the hardware can evaluate directly.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-e1.svg",
+        "caption": "How calculators compute $\\sin$"
+      }
+    },
+    {
+      "title": "Small-angle pendulum",
+      "scenario": "For tiny swings, $\\sin\\theta\\approx\\theta$.",
+      "how_the_math_applies": "The first Taylor term linearizes the pendulum equation.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-e2.svg",
+        "caption": "Small-angle pendulum"
+      }
+    },
+    {
+      "title": "Approximating $e$",
+      "scenario": "Estimate $e$ by hand.",
+      "how_the_math_applies": "$e=e^1\\approx1+1+\\tfrac12+\\tfrac16+\\cdots$ from the Maclaurin polynomial.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-08-taylor-polynomials-e3.svg",
+        "caption": "Approximating $e$"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "taylor maclaurin polynomial derivatives factorial formula",
+    "math_query": "taylor polynomial e^x sin cos approximation examples",
+    "combined_query": "calculus 2 taylor maclaurin polynomials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the degree-2 Maclaurin polynomial of $e^x$.",
+      "correct_answer": "$1+x+\\tfrac{x^2}{2}$",
+      "solution_steps": [
+        "$f,f',f''=e^x$; at $0$ all equal $1$.",
+        "Terms $1,\\ x,\\ \\tfrac{x^2}{2}$.",
+        "$1+x+\\tfrac{x^2}{2}$."
+      ],
+      "hint": "All derivatives of $e^x$ are $1$ at $0$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the degree-3 Maclaurin polynomial of $\\sin x$.",
+      "correct_answer": "$x-\\tfrac{x^3}{6}$",
+      "solution_steps": [
+        "$\\sin$ series.",
+        "$x-\\tfrac{x^3}{3!}$.",
+        "$x-\\tfrac{x^3}{6}$."
+      ],
+      "hint": "Odd powers only."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the degree-2 Maclaurin polynomial of $\\cos x$.",
+      "correct_answer": "$1-\\tfrac{x^2}{2}$",
+      "solution_steps": [
+        "$\\cos$ series.",
+        "$1-\\tfrac{x^2}{2!}$.",
+        "$1-\\tfrac{x^2}{2}$."
+      ],
+      "hint": "Even powers only."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Use it to estimate $e^{0.1}$ (degree 2).",
+      "correct_answer": "$\\approx1.105$",
+      "solution_steps": [
+        "$1+0.1+\\tfrac{0.01}{2}$.",
+        "$=1.105$.",
+        "Close to $1.10517$."
+      ],
+      "hint": "Plug $0.1$ into the polynomial."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find the degree-1 Taylor polynomial of $\\ln x$ at $a=1$.",
+      "correct_answer": "$x-1$",
+      "solution_steps": [
+        "$f(1)=0$, $f'(1)=1$.",
+        "$0+1\\cdot(x-1)$.",
+        "$x-1$."
+      ],
+      "hint": "Linear Taylor = tangent line."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the degree-2 Taylor polynomial of $\\sqrt{x}$ at $a=4$.",
+      "correct_answer": "$2+\\tfrac14(x-4)-\\tfrac{1}{64}(x-4)^2$",
+      "solution_steps": [
+        "$f=2$, $f'=\\tfrac14$, $f''=-\\tfrac{1}{32}$ at $4$.",
+        "Second term $\\tfrac{f''}{2}(x-4)^2$.",
+        "$2+\\tfrac14(x-4)-\\tfrac{1}{64}(x-4)^2$."
+      ],
+      "hint": "Compute $f,f',f''$ at $4$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the Maclaurin polynomial (degree 4) of $e^{-x^2}$.",
+      "correct_answer": "$1-x^2+\\tfrac{x^4}{2}$",
+      "solution_steps": [
+        "Substitute $-x^2$ into $e^u=1+u+\\tfrac{u^2}{2}$.",
+        "$1-x^2+\\tfrac{x^4}{2}$.",
+        "Done."
+      ],
+      "hint": "Substitute into the $e^u$ series."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Estimate $\\cos(0.2)$ (degree 2).",
+      "correct_answer": "$\\approx0.98$",
+      "solution_steps": [
+        "$1-\\tfrac{0.04}{2}$.",
+        "$=1-0.02$.",
+        "$\\approx0.98$."
+      ],
+      "hint": "Use the $\\cos$ polynomial."
+    }
+  ]
+}

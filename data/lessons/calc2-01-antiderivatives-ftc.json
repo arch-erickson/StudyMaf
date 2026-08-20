@@ -1,0 +1,262 @@
+{
+  "title": "Antiderivatives & the Fundamental Theorem",
+  "summary": "The definite integral $\\int_a^b f\\,dx$ is the net signed area under $f$. The Fundamental Theorem of Calculus evaluates it as $F(b)-F(a)$ for any antiderivative $F$, and says $\\frac{d}{dx}\\int_a^x f\\,dt=f(x)$ — integration and differentiation are inverses.",
+  "glossary": {
+    "antiderivative": {
+      "plain": "A function whose derivative is the integrand.",
+      "in_class": "$F'=f$; the indefinite integral is $F+C$."
+    },
+    "definite integral": {
+      "plain": "Net signed area between a curve and the axis on $[a,b]$.",
+      "in_class": "$\\int_a^b f\\,dx$; a number, not a family."
+    },
+    "Fundamental Theorem Part 1": {
+      "plain": "The derivative of an accumulation function is the integrand.",
+      "in_class": "$\\frac{d}{dx}\\int_a^x f\\,dt=f(x)$."
+    },
+    "Fundamental Theorem Part 2": {
+      "plain": "Evaluate a definite integral with any antiderivative.",
+      "in_class": "$\\int_a^b f\\,dx=F(b)-F(a)$."
+    },
+    "net area": {
+      "plain": "Area above the axis minus area below it.",
+      "in_class": "The definite integral counts below-axis regions as negative."
+    },
+    "accumulation function": {
+      "plain": "The running integral $A(x)=\\int_a^x f\\,dt$.",
+      "in_class": "Its slope at $x$ is $f(x)$."
+    },
+    "average value": {
+      "plain": "The mean height of a function over an interval.",
+      "in_class": "$\\dfrac{1}{b-a}\\int_a^b f\\,dx$."
+    },
+    "properties of integrals": {
+      "plain": "Linearity and interval rules.",
+      "in_class": "$\\int(cf+g)=c\\int f+\\int g$; $\\int_a^b=-\\int_b^a$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Antiderivatives review",
+      "explanation": "Reverse the derivative rules: $\\int x^n\\,dx=\\dfrac{x^{n+1}}{n+1}+C$, $\\int e^x\\,dx=e^x+C$, $\\int\\frac1x\\,dx=\\ln|x|+C$, and the trig reversals. The $+C$ captures all antiderivatives.",
+      "math_steps": [
+        "Recall which derivative gives the integrand.",
+        "Reverse it and add $+C$.",
+        "Check by differentiating your answer."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-c1.svg",
+        "caption": "Antiderivatives review"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The definite integral as net area",
+      "explanation": "$\\int_a^b f\\,dx$ is the limit of Riemann sums — the net area, with area below the axis subtracted. Linearity and the endpoint-swap rule ($\\int_a^b=-\\int_b^a$) simplify computations.",
+      "math_steps": [
+        "Interpret the integral as signed area.",
+        "Use linearity to split integrals.",
+        "Swap limits with a sign change if needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-c2.svg",
+        "caption": "The definite integral as net area"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "FTC Part 2: evaluating",
+      "explanation": "To compute $\\int_a^b f\\,dx$, find any antiderivative $F$ and subtract: $F(b)-F(a)$. This turns an area (a limit of sums) into one subtraction.",
+      "math_steps": [
+        "Find an antiderivative $F$.",
+        "Compute $F(b)$ and $F(a)$.",
+        "Subtract: $F(b)-F(a)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-c3.svg",
+        "caption": "FTC Part 2: evaluating"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "FTC Part 1: accumulation",
+      "explanation": "The area accumulated from $a$ to $x$ defines $A(x)=\\int_a^x f\\,dt$, and $A'(x)=f(x)$. Differentiation undoes the accumulation — with the chain rule when the upper limit is a function.",
+      "math_steps": [
+        "Recognize an accumulation function.",
+        "Its derivative is the integrand at the top limit.",
+        "Apply the chain rule if the top limit is $g(x)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-c4.svg",
+        "caption": "FTC Part 1: accumulation"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Average value",
+      "explanation": "The average value of $f$ on $[a,b]$ is $\\dfrac{1}{b-a}\\int_a^b f\\,dx$ — the constant height with the same area. The Mean Value Theorem for integrals guarantees $f$ actually attains it.",
+      "math_steps": [
+        "Integrate $f$ over $[a,b]$.",
+        "Divide by the length $b-a$.",
+        "That's the average height."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-c5.svg",
+        "caption": "Average value"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Total distance from a speedometer",
+      "scenario": "A car's speed is logged over a trip.",
+      "how_the_math_applies": "Integrating speed over time gives total distance — FTC Part 2 with velocity as the integrand.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-e1.svg",
+        "caption": "Total distance from a speedometer"
+      }
+    },
+    {
+      "title": "Accumulated interest",
+      "scenario": "Interest accrues continuously at a varying rate.",
+      "how_the_math_applies": "The accumulation function $\\int_0^t r(s)\\,ds$ totals the interest, and its derivative recovers the instantaneous rate.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-e2.svg",
+        "caption": "Accumulated interest"
+      }
+    },
+    {
+      "title": "Average temperature",
+      "scenario": "Temperature varies through the day.",
+      "how_the_math_applies": "The average value integral gives the day's mean temperature.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-01-antiderivatives-ftc-e3.svg",
+        "caption": "Average temperature"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "fundamental theorem of calculus part 1 part 2 explained",
+    "math_query": "definite integral evaluate antiderivative average value examples",
+    "combined_query": "calculus 2 FTC accumulation function worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\int_0^3 x^2\\,dx$.",
+      "correct_answer": "$9$",
+      "solution_steps": [
+        "$F=\\tfrac{x^3}{3}$.",
+        "$9-0$.",
+        "$=9$."
+      ],
+      "hint": "FTC: $F(3)-F(0)$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\int_1^4 (2x)\\,dx$.",
+      "correct_answer": "$15$",
+      "solution_steps": [
+        "$F=x^2$.",
+        "$16-1$.",
+        "$=15$."
+      ],
+      "hint": "Antiderivative then subtract."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Find $\\int (3x^2-2)\\,dx$.",
+      "correct_answer": "$x^3-2x+C$",
+      "solution_steps": [
+        "Term by term.",
+        "$x^3-2x$.",
+        "$+C$."
+      ],
+      "hint": "Reverse each derivative."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\int_0^{\\pi/2}\\cos x\\,dx$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "$F=\\sin x$.",
+        "$\\sin(\\pi/2)-\\sin0=1-0$.",
+        "$=1$."
+      ],
+      "hint": "$\\int\\cos=\\sin$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find $\\dfrac{d}{dx}\\int_0^x \\sqrt{t^2+1}\\,dt$.",
+      "correct_answer": "$\\sqrt{x^2+1}$",
+      "solution_steps": [
+        "FTC Part 1.",
+        "Derivative = integrand at the top limit.",
+        "$\\sqrt{x^2+1}$."
+      ],
+      "hint": "The derivative just plugs $x$ into the integrand."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find the average value of $f(x)=x^2$ on $[0,3]$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$\\dfrac{1}{3}\\int_0^3 x^2\\,dx=\\dfrac{9}{3}$.",
+        "$=3$.",
+        "Done."
+      ],
+      "hint": "$\\dfrac{1}{b-a}\\int_a^b f$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Evaluate $\\int_1^2\\left(\\dfrac1x+x\\right)dx$.",
+      "correct_answer": "$\\ln2+\\tfrac32$",
+      "solution_steps": [
+        "$F=\\ln|x|+\\tfrac{x^2}{2}$.",
+        "$(\\ln2+2)-(0+\\tfrac12)$.",
+        "$\\ln2+\\tfrac32$."
+      ],
+      "hint": "Integrate each piece."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Find $\\dfrac{d}{dx}\\int_0^{x^2}\\sin t\\,dt$.",
+      "correct_answer": "$2x\\sin(x^2)$",
+      "solution_steps": [
+        "FTC + chain rule.",
+        "$\\sin(x^2)\\cdot\\frac{d}{dx}x^2$.",
+        "$2x\\sin(x^2)$."
+      ],
+      "hint": "Chain rule on the upper limit."
+    },
+    {
+      "id": "p09",
+      "difficulty": "stretch",
+      "prompt": "Evaluate $\\int_{-1}^{1} x^3\\,dx$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$x^3$ is odd; areas cancel.",
+        "$F=\\tfrac{x^4}{4}$: $\\tfrac14-\\tfrac14$.",
+        "$=0$."
+      ],
+      "hint": "Odd function over a symmetric interval."
+    }
+  ]
+}

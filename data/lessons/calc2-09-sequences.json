@@ -1,0 +1,250 @@
+{
+  "title": "Sequences",
+  "summary": "A sequence is an ordered list $a_1,a_2,\\ldots$; it converges if $\\lim_{n\\to\\infty}a_n=L$ exists. Limit laws, the squeeze theorem, and monotone-plus-bounded arguments determine convergence — the groundwork for infinite series.",
+  "glossary": {
+    "sequence": {
+      "plain": "An ordered list of numbers indexed by $n$.",
+      "in_class": "Written $\\{a_n\\}$; a function on the positive integers."
+    },
+    "converges": {
+      "plain": "The terms approach a finite limit.",
+      "in_class": "$\\lim_{n\\to\\infty}a_n=L$ exists."
+    },
+    "diverges": {
+      "plain": "No finite limit (grows, oscillates, etc.).",
+      "in_class": "$\\lim a_n$ is $\\pm\\infty$ or DNE."
+    },
+    "monotonic": {
+      "plain": "Always increasing or always decreasing.",
+      "in_class": "$a_{n+1}\\ge a_n$ (or $\\le$) for all $n$."
+    },
+    "bounded": {
+      "plain": "Trapped between fixed numbers.",
+      "in_class": "There's an $M$ with $|a_n|\\le M$."
+    },
+    "monotone convergence": {
+      "plain": "Monotonic + bounded ⇒ convergent.",
+      "in_class": "A key existence theorem for limits."
+    },
+    "recursive sequence": {
+      "plain": "Each term defined from previous ones.",
+      "in_class": "e.g. $a_{n+1}=\\tfrac12(a_n+2/a_n)$."
+    },
+    "squeeze for sequences": {
+      "plain": "Trap $a_n$ between two sequences with equal limits.",
+      "in_class": "Then $a_n$ shares that limit."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Limits of sequences",
+      "explanation": "A sequence converges to $L$ if its terms get and stay arbitrarily close to $L$. Compute limits with the same tools as functions: divide by the highest power, use known limits.",
+      "math_steps": [
+        "Write $a_n$ as a function of $n$.",
+        "Take $\\lim_{n\\to\\infty}$ using algebra or known limits.",
+        "A finite result means convergence."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-c1.svg",
+        "caption": "Limits of sequences"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Common limit forms",
+      "explanation": "Useful facts: $\\dfrac{1}{n^p}\\to0$ ($p>0$), $r^n\\to0$ if $|r|<1$, $\\sqrt[n]{n}\\to1$, and $\\left(1+\\tfrac{x}{n}\\right)^n\\to e^x$.",
+      "math_steps": [
+        "Recognize the standard form.",
+        "Apply the known limit.",
+        "Combine with limit laws."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-c2.svg",
+        "caption": "Common limit forms"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The squeeze theorem",
+      "explanation": "If $b_n\\le a_n\\le c_n$ and $b_n,c_n\\to L$, then $a_n\\to L$. Handy for terms with bounded oscillating factors like $\\dfrac{\\sin n}{n}$.",
+      "math_steps": [
+        "Bound $a_n$ above and below.",
+        "Show both bounds share a limit.",
+        "Conclude $a_n$ has that limit."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-c3.svg",
+        "caption": "The squeeze theorem"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Monotone and bounded",
+      "explanation": "A sequence that is monotonic and bounded must converge (even if you can't find the limit). This proves existence for recursive sequences.",
+      "math_steps": [
+        "Show the sequence is monotonic.",
+        "Show it's bounded.",
+        "Conclude it converges."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-c4.svg",
+        "caption": "Monotone and bounded"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Divergence",
+      "explanation": "Sequences diverge by growing without bound, or by oscillating (like $(-1)^n$) so no single limit exists. Recognizing divergence prevents wasted series tests later.",
+      "math_steps": [
+        "Check for unbounded growth.",
+        "Check for persistent oscillation.",
+        "Either ⇒ diverges."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-c5.svg",
+        "caption": "Divergence"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Repeated averaging",
+      "scenario": "Newton's method refines a guess each step.",
+      "how_the_math_applies": "The iterates form a recursive sequence converging to the root.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-e1.svg",
+        "caption": "Repeated averaging"
+      }
+    },
+    {
+      "title": "Drug half-life leftovers",
+      "scenario": "A dose halves each period.",
+      "how_the_math_applies": "The remaining amount is a geometric sequence $a_n=a_0 r^n\\to0$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-e2.svg",
+        "caption": "Drug half-life leftovers"
+      }
+    },
+    {
+      "title": "Digital sampling",
+      "scenario": "A signal sampled ever more finely.",
+      "how_the_math_applies": "The sample values form a sequence whose limit is the true value.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-09-sequences-e3.svg",
+        "caption": "Digital sampling"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "sequences limit convergence divergence examples",
+    "math_query": "sequence limit laws squeeze monotone bounded",
+    "combined_query": "calculus 2 sequences worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\dfrac{1}{n}$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "Reciprocal of a growing number.",
+        "$\\to0$.",
+        "Converges to $0$."
+      ],
+      "hint": "$1/n^p\\to0$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\dfrac{3n+1}{n}$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$3+\\tfrac1n$.",
+        "$\\to3$.",
+        "Converges."
+      ],
+      "hint": "Split the fraction."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Does $a_n=(-1)^n$ converge?",
+      "correct_answer": "No",
+      "solution_steps": [
+        "Terms alternate $1,-1,1,\\ldots$.",
+        "No single limit.",
+        "Diverges."
+      ],
+      "hint": "Oscillation ⇒ divergence."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\dfrac{2n^2}{n^2+1}$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "Divide by $n^2$: $\\dfrac{2}{1+1/n^2}$.",
+        "$\\to2$.",
+        "Converges."
+      ],
+      "hint": "Divide by the highest power."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\left(\\tfrac12\\right)^n$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$|r|=\\tfrac12<1$.",
+        "$r^n\\to0$.",
+        "$=0$."
+      ],
+      "hint": "Geometric with $|r|<1$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\dfrac{\\sin n}{n}$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$-\\tfrac1n\\le\\dfrac{\\sin n}{n}\\le\\tfrac1n$.",
+        "Both bounds $\\to0$.",
+        "Squeeze ⇒ $0$."
+      ],
+      "hint": "Squeeze with $\\pm1/n$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\left(1+\\tfrac1n\\right)^n$.",
+      "correct_answer": "$e$",
+      "solution_steps": [
+        "Standard limit.",
+        "$\\to e$.",
+        "$\\approx2.718$."
+      ],
+      "hint": "The definition of $e$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Find $\\lim_{n\\to\\infty}\\sqrt[n]{n}$.",
+      "correct_answer": "$1$",
+      "solution_steps": [
+        "Take $\\ln$: $\\tfrac{\\ln n}{n}\\to0$.",
+        "So the sequence $\\to e^0$.",
+        "$=1$."
+      ],
+      "hint": "Take a log and use L'Hôpital."
+    }
+  ]
+}

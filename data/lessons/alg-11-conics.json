@@ -1,0 +1,250 @@
+{
+  "title": "Circles & Parabolas",
+  "summary": "A circle of radius $r$ centered at $(h,k)$ is $(x-h)^2+(y-k)^2=r^2$. A parabola $y=a(x-h)^2+k$ opens up or down with vertex $(h,k)$. Completing the square converts general equations to these standard forms.",
+  "glossary": {
+    "circle": {
+      "plain": "All points a fixed distance from a center.",
+      "in_class": "$(x-h)^2+(y-k)^2=r^2$."
+    },
+    "center and radius": {
+      "plain": "The circle's middle point and its size.",
+      "in_class": "$(h,k)$ and $r$ from standard form."
+    },
+    "parabola": {
+      "plain": "A U-shaped curve, graph of a quadratic.",
+      "in_class": "$y=a(x-h)^2+k$ with vertex $(h,k)$."
+    },
+    "vertex": {
+      "plain": "The turning point of a parabola.",
+      "in_class": "Max if it opens down, min if up."
+    },
+    "axis of symmetry": {
+      "plain": "The vertical line through the vertex.",
+      "in_class": "$x=h$; the parabola mirrors across it."
+    },
+    "standard form": {
+      "plain": "The clean form revealing key features.",
+      "in_class": "Circle: center-radius; parabola: vertex form."
+    },
+    "completing the square": {
+      "plain": "Converting general to standard form.",
+      "in_class": "Group and add $(b/2)^2$ to build squares."
+    },
+    "opens up/down": {
+      "plain": "Direction a parabola faces.",
+      "in_class": "$a>0$ up (min), $a<0$ down (max)."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The circle equation",
+      "explanation": "A circle centered at $(h,k)$ with radius $r$ is $(x-h)^2+(y-k)^2=r^2$. Read the center and radius straight from this form.",
+      "math_steps": [
+        "Match to $(x-h)^2+(y-k)^2=r^2$.",
+        "Center is $(h,k)$.",
+        "Radius is $\\sqrt{r^2}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-c1.svg",
+        "caption": "The circle equation"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "General to standard (circle)",
+      "explanation": "From $x^2+y^2+Dx+Ey+F=0$, complete the square in $x$ and in $y$ to recover the center and radius.",
+      "math_steps": [
+        "Group $x$-terms and $y$-terms.",
+        "Complete each square.",
+        "Rewrite as center-radius form."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-c2.svg",
+        "caption": "General to standard (circle)"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The parabola in vertex form",
+      "explanation": "$y=a(x-h)^2+k$ has vertex $(h,k)$ and axis $x=h$; $a$ sets width and direction (up if $a>0$).",
+      "math_steps": [
+        "Read the vertex $(h,k)$.",
+        "Direction from the sign of $a$.",
+        "Axis of symmetry $x=h$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-c3.svg",
+        "caption": "The parabola in vertex form"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Finding the vertex from $y=ax^2+bx+c$",
+      "explanation": "The vertex is at $x=-\\dfrac{b}{2a}$; plug in to get $y$. Or complete the square to reach vertex form.",
+      "math_steps": [
+        "Compute $x=-b/(2a)$.",
+        "Evaluate $y$ there.",
+        "That point is the vertex."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-c4.svg",
+        "caption": "Finding the vertex from $y=ax^2+bx+c$"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Graphing conics",
+      "explanation": "Plot the center/vertex, use the radius or a few symmetric points, and sketch. Symmetry cuts the work in half.",
+      "math_steps": [
+        "Plot the key point (center or vertex).",
+        "Add symmetric points.",
+        "Draw the smooth curve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-c5.svg",
+        "caption": "Graphing conics"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "GPS trilateration",
+      "scenario": "Distance from towers locates a phone.",
+      "how_the_math_applies": "Each 'within range $r$ of a tower' is a circle; intersections pin the position.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-e1.svg",
+        "caption": "GPS trilateration"
+      }
+    },
+    {
+      "title": "Satellite dish shape",
+      "scenario": "A dish focuses signals to one point.",
+      "how_the_math_applies": "Its cross-section is a parabola, whose vertex form places the focus.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-e2.svg",
+        "caption": "Satellite dish shape"
+      }
+    },
+    {
+      "title": "Projectile arc",
+      "scenario": "A thrown ball traces a curve.",
+      "how_the_math_applies": "The path is a parabola; the vertex is the peak height.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/alg-11-conics-e3.svg",
+        "caption": "Projectile arc"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "circle equation center radius standard form",
+    "math_query": "parabola vertex form axis of symmetry completing the square",
+    "combined_query": "college algebra circles parabolas conics worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Center and radius of $(x-2)^2+(y+3)^2=16$.",
+      "correct_answer": "Center $(2,-3)$, $r=4$",
+      "solution_steps": [
+        "Match standard form.",
+        "$h=2,k=-3$, $r^2=16$.",
+        "$r=4$."
+      ],
+      "hint": "Signs flip inside the squares."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Equation of a circle centered at origin, radius 5.",
+      "correct_answer": "$x^2+y^2=25$",
+      "solution_steps": [
+        "$(x-0)^2+(y-0)^2=5^2$.",
+        "$x^2+y^2=25$.",
+        "Done."
+      ],
+      "hint": "$h=k=0$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Vertex of $y=(x-1)^2+4$.",
+      "correct_answer": "$(1,4)$",
+      "solution_steps": [
+        "Vertex form.",
+        "$h=1,k=4$.",
+        "$(1,4)$."
+      ],
+      "hint": "Read $(h,k)$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Vertex of $y=x^2-6x+5$.",
+      "correct_answer": "$(3,-4)$",
+      "solution_steps": [
+        "$x=-b/(2a)=3$.",
+        "$y=9-18+5=-4$.",
+        "$(3,-4)$."
+      ],
+      "hint": "$x=-b/(2a)$, then find $y$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Does $y=-2(x+1)^2+3$ open up or down?",
+      "correct_answer": "Down (max at $(-1,3)$)",
+      "solution_steps": [
+        "$a=-2<0$.",
+        "Opens down.",
+        "Vertex is a max."
+      ],
+      "hint": "Sign of $a$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the center/radius of $x^2+y^2-4x+6y-3=0$.",
+      "correct_answer": "Center $(2,-3)$, $r=4$",
+      "solution_steps": [
+        "Complete squares: $(x-2)^2+(y+3)^2=3+4+9$.",
+        "$=16$.",
+        "Center $(2,-3)$, $r=4$."
+      ],
+      "hint": "Complete the square in $x$ and $y$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Write $y=x^2+4x+1$ in vertex form.",
+      "correct_answer": "$y=(x+2)^2-3$",
+      "solution_steps": [
+        "Complete the square: $x^2+4x+4-4+1$.",
+        "$(x+2)^2-3$.",
+        "Done."
+      ],
+      "hint": "Add and subtract $(4/2)^2=4$."
+    },
+    {
+      "id": "p08",
+      "difficulty": "hard",
+      "prompt": "Axis of symmetry of $y=2x^2-8x+1$.",
+      "correct_answer": "$x=2$",
+      "solution_steps": [
+        "$x=-b/(2a)=8/4$.",
+        "$=2$.",
+        "$x=2$."
+      ],
+      "hint": "Axis is $x=-b/(2a)$."
+    }
+  ]
+}

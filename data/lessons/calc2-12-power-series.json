@@ -1,0 +1,250 @@
+{
+  "title": "Power & Taylor Series",
+  "summary": "A power series $\\sum c_n(x-a)^n$ converges on an interval set by its radius $R$ (found via the ratio test). Within $R$ it represents a function you can differentiate and integrate term by term; Taylor series extend the polynomial idea to infinitely many terms.",
+  "glossary": {
+    "power series": {
+      "plain": "A series in powers of $(x-a)$.",
+      "in_class": "$\\sum c_n(x-a)^n$; a function of $x$ where it converges."
+    },
+    "radius of convergence": {
+      "plain": "Half-width of the interval where it converges.",
+      "in_class": "Found from the ratio/root test: $R$."
+    },
+    "interval of convergence": {
+      "plain": "All $x$ for which the series converges.",
+      "in_class": "Center $\\pm R$, with endpoints checked separately."
+    },
+    "center a": {
+      "plain": "The point the powers are measured from.",
+      "in_class": "Convergence is symmetric about $a$."
+    },
+    "term-by-term": {
+      "plain": "Differentiate/integrate each term inside $R$.",
+      "in_class": "Legal within the radius of convergence."
+    },
+    "Taylor series": {
+      "plain": "The infinite Taylor polynomial.",
+      "in_class": "$\\sum\\dfrac{f^{(n)}(a)}{n!}(x-a)^n$."
+    },
+    "geometric building block": {
+      "plain": "$\\dfrac{1}{1-x}=\\sum x^n$ for $|x|<1$.",
+      "in_class": "A source series to manipulate into others."
+    },
+    "endpoint test": {
+      "plain": "Checking convergence at $x=a\\pm R$.",
+      "in_class": "Use alternating/comparison at each endpoint."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Radius via the ratio test",
+      "explanation": "Apply the ratio test to $\\sum c_n(x-a)^n$ treating $x$ as fixed: convergence requires the limiting ratio $<1$, which solves to $|x-a|<R$.",
+      "math_steps": [
+        "Form $\\left|\\dfrac{c_{n+1}(x-a)^{n+1}}{c_n(x-a)^n}\\right|$.",
+        "Take the limit and set $<1$.",
+        "Read off $R$ from $|x-a|<R$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-c1.svg",
+        "caption": "Radius via the ratio test"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Interval and endpoints",
+      "explanation": "The series converges on $(a-R,a+R)$; the endpoints $x=a\\pm R$ must be tested individually (they can converge, diverge, or converge conditionally).",
+      "math_steps": [
+        "State the open interval from $R$.",
+        "Substitute each endpoint.",
+        "Test that numeric series separately."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-c2.svg",
+        "caption": "Interval and endpoints"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Building new series",
+      "explanation": "Start from $\\dfrac{1}{1-x}=\\sum x^n$ ($|x|<1$) and substitute or manipulate to get others (e.g. $\\dfrac{1}{1+x^2}$, then integrate for $\\arctan$).",
+      "math_steps": [
+        "Recognize a geometric-type base.",
+        "Substitute to match your function.",
+        "Adjust the interval accordingly."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-c3.svg",
+        "caption": "Building new series"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Term-by-term calculus",
+      "explanation": "Inside the radius, a power series can be differentiated and integrated term by term, producing new series with the same radius — a powerful way to find sums and antiderivatives.",
+      "math_steps": [
+        "Differentiate/integrate each term.",
+        "Keep the same radius $R$.",
+        "Re-index if needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-c4.svg",
+        "caption": "Term-by-term calculus"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Taylor series representation",
+      "explanation": "Extending Taylor polynomials to infinitely many terms gives $f(x)=\\sum\\dfrac{f^{(n)}(a)}{n!}(x-a)^n$, valid where the remainder $\\to0$. The classics ($e^x,\\sin,\\cos$) converge for all $x$.",
+      "math_steps": [
+        "Compute the Taylor coefficients.",
+        "Write the infinite series.",
+        "State where it represents $f$ (its interval)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-c5.svg",
+        "caption": "Taylor series representation"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Representing functions in software",
+      "scenario": "A library needs $\\ln(1+x)$ for small $x$.",
+      "how_the_math_applies": "Its power series $x-\\tfrac{x^2}{2}+\\cdots$ evaluates it term by term.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-e1.svg",
+        "caption": "Representing functions in software"
+      }
+    },
+    {
+      "title": "Solving differential equations",
+      "scenario": "Some ODEs have no elementary solution.",
+      "how_the_math_applies": "A power-series ansatz builds the solution coefficient by coefficient.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-e2.svg",
+        "caption": "Solving differential equations"
+      }
+    },
+    {
+      "title": "Deriving $\\arctan$'s series",
+      "scenario": "Integrate the geometric series for $\\tfrac{1}{1+x^2}$.",
+      "how_the_math_applies": "Term-by-term integration yields $\\arctan x=x-\\tfrac{x^3}{3}+\\cdots$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/calc2-12-power-series-e3.svg",
+        "caption": "Deriving $\\arctan$'s series"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "power series radius interval of convergence ratio test",
+    "math_query": "power series term by term taylor series examples",
+    "combined_query": "calculus 2 power taylor series worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the radius of convergence of $\\sum\\dfrac{x^n}{n!}$.",
+      "correct_answer": "$R=\\infty$",
+      "solution_steps": [
+        "Ratio $\\dfrac{|x|}{n+1}\\to0$ for all $x$.",
+        "Always $<1$.",
+        "$R=\\infty$."
+      ],
+      "hint": "Factorials give infinite radius."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the radius of convergence of $\\sum x^n$.",
+      "correct_answer": "$R=1$",
+      "solution_steps": [
+        "Ratio $|x|<1$.",
+        "So $R=1$.",
+        "(Geometric.)"
+      ],
+      "hint": "Geometric converges for $|x|<1$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the radius of $\\sum\\dfrac{x^n}{n}$.",
+      "correct_answer": "$R=1$",
+      "solution_steps": [
+        "Ratio $\\dfrac{n}{n+1}|x|\\to|x|<1$.",
+        "$R=1$.",
+        "Done."
+      ],
+      "hint": "The $1/n$ doesn't change the radius."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Write $\\dfrac{1}{1-x}$ as a power series and give its interval.",
+      "correct_answer": "$\\sum x^n,\\ |x|<1$",
+      "solution_steps": [
+        "Geometric series.",
+        "$\\sum_{n=0}^\\infty x^n$.",
+        "Converges for $|x|<1$."
+      ],
+      "hint": "The fundamental power series."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find a series for $\\dfrac{1}{1+x^2}$.",
+      "correct_answer": "$\\sum(-1)^n x^{2n}$",
+      "solution_steps": [
+        "Substitute $-x^2$ into $\\sum x^n$.",
+        "$\\sum(-x^2)^n=\\sum(-1)^n x^{2n}$.",
+        "$|x|<1$."
+      ],
+      "hint": "Substitute $-x^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Find the interval of convergence of $\\sum\\dfrac{x^n}{n}$ (with endpoints).",
+      "correct_answer": "$[-1,1)$",
+      "solution_steps": [
+        "$R=1$ ⇒ $(-1,1)$.",
+        "$x=1$: harmonic diverges; $x=-1$: alternating converges.",
+        "$[-1,1)$."
+      ],
+      "hint": "Test both endpoints."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Derive the series for $\\arctan x$ from $\\dfrac{1}{1+x^2}$.",
+      "correct_answer": "$\\sum\\dfrac{(-1)^n x^{2n+1}}{2n+1}$",
+      "solution_steps": [
+        "Integrate $\\sum(-1)^n x^{2n}$ term by term.",
+        "$\\sum(-1)^n\\dfrac{x^{2n+1}}{2n+1}$.",
+        "$=\\arctan x$."
+      ],
+      "hint": "Integrate the geometric-type series."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "Find $R$ for $\\sum n! \\,x^n$.",
+      "correct_answer": "$R=0$",
+      "solution_steps": [
+        "Ratio $(n+1)|x|\\to\\infty$ unless $x=0$.",
+        "Converges only at $x=0$.",
+        "$R=0$."
+      ],
+      "hint": "Factorials in the numerator kill the radius."
+    }
+  ]
+}
