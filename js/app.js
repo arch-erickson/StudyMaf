@@ -24,7 +24,9 @@ window.App = (function () {
     var m = {}; (cls.lessonIds || []).forEach(function (lid) { var e = lessonIndex.filter(function (x) { return x.id === lid; })[0]; m[lid] = e ? (e.problemCount || 0) : 0; });
     return m;
   }
-  var TUTOR_URL = "REPLACE_WITH_YOUR_TUTOR_URL"; // <-- paste your Custom GPT / Claude Project URL
+  // Sparkle mark shown on each lesson when the class's online tutor is enabled.
+  var SPARKLE_SVG = '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M10 2c.35 4.2 2.3 6.15 6.5 6.5-4.2.35-6.15 2.3-6.5 6.5-.35-4.2-2.3-6.15-6.5-6.5C7.7 8.15 9.65 6.2 10 2Z"/><path d="M18 13.5c.18 2.1 1.15 3.07 3.25 3.25-2.1.18-3.07 1.15-3.25 3.25-.18-2.1-1.15-3.07-3.25-3.25 2.1-.18 3.07-1.15 3.25-3.25Z"/></svg>';
+  var TUTOR_URL = "REPLACE_WITH_YOUR_TUTOR_URL"; // legacy external-tutor URL (no longer surfaced in the UI)
   var TUTOR_API_URL = "https://studymaf-tutor.vercel.app/api/tutor/chat";
   // This is updated as a student moves through StudyMAF. The API receives the
   // exact lesson/problem text; the tutor does not have to guess from the URL.
@@ -405,16 +407,10 @@ window.App = (function () {
     var inp = document.createElement("input"); inp.type = "checkbox"; inp.checked = mode.online;
     var track = el("span", "track");
     sw.appendChild(el("span", "mode-tag", "Online tutor")); sw.appendChild(inp); sw.appendChild(track);
-    inp.onchange = function () { Store.setOnline(id, inp.checked); if (inp.checked) onlineTutorNotice(); };
+    inp.onchange = function () { Store.setOnline(id, inp.checked); renderClass(id); };
     tb.appendChild(sw);
     page.appendChild(tb);
 
-    var matBooks = classTextbookList(Store.getClass(id) || { code: "" });
-    if (matBooks.length) {
-      var info = el("div", "notice");
-      info.innerHTML = "<strong>Course materials</strong>Textbooks: " + matBooks.map(esc).join(", ") + ". Tap <strong>Materials</strong> above to view them any time.";
-      page.appendChild(info);
-    }
 
     // lessons
     page.appendChild(el("h2", "step-block", "Lessons"));
@@ -450,6 +446,10 @@ window.App = (function () {
     mp.appendChild(el("span", "lesson-xp", (prog.xp || 0).toLocaleString() + " XP"));
     if (chapter) mp.appendChild(el("span", "lesson-chapter", chapter));
     main.appendChild(mp); btn.appendChild(main);
+    if (isOnline(cls)) {
+      var spark = el("span", "lesson-ai"); spark.title = "Online tutor is on for this class";
+      spark.innerHTML = SPARKLE_SVG; btn.appendChild(spark);
+    }
     var caret = el("span", "lesson-caret"); caret.innerHTML = icon("chevronRight"); btn.appendChild(caret);
     row.appendChild(btn);
 
@@ -629,14 +629,16 @@ window.App = (function () {
     });
     if ((lesson.real_world_examples || []).length) steps.push({ type: "examples" });
     steps.push({ type: "done" });
-    var i = 0;
+    var i = 0, streak = 0, xpTotal = 0;
 
     var session = el("div", "session learn-session");
     var top = el("div", "session-top");
     var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
     var track = el("div", "session-progress"); var fill = el("div", "fill"); track.appendChild(fill);
-    var label = el("div", "session-streak"); label.innerHTML = icon("bookOpen") + "<span>Learn</span>";
-    top.append(closeX, track, label); session.appendChild(top);
+    var xpEl = el("div", "session-xp"), streakEl = el("div", "session-streak");
+    function setStats() { streakEl.innerHTML = icon("flame") + "<span>" + streak + "</span>"; xpEl.textContent = xpTotal.toLocaleString() + " XP"; }
+    setStats();
+    top.append(closeX, track, xpEl, streakEl); session.appendChild(top);
     var body = el("div", "session-body"); var inner = el("div", "session-inner"); body.appendChild(inner); session.appendChild(body);
     var foot = el("div", "session-foot"); var footInner = el("div", "session-foot-inner");
     var verdict = el("div", "verdict"); var skipBtn = el("button", "btn subtle lg", "Skip"); var nextBtn = el("button", "btn primary lg", "Continue →");
@@ -744,11 +746,13 @@ window.App = (function () {
           if (ok) {
             verdict.textContent = "Correct!"; verdict.className = "verdict right";
             var xp = { easy: 8, medium: 12, hard: 18, extreme: 30, stretch: 24 }[inst.difficulty] || 10;
+            streak++; xpTotal += xp; setStats();
             Store.markProblemDone(cls.id, lid, "learn-" + step.level + "-" + Date.now(), xp);
-            reward(xp, "check", "Nice!");
+            reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
             nextBtn.textContent = "Continue →"; skipBtn.style.display = "none";
           } else {
             verdict.textContent = "Not quite — read the solution, then try a fresh one."; verdict.className = "verdict wrong";
+            streak = 0; setStats();
             nextBtn.textContent = "Try another →";
           }
         } else if (verdict.classList.contains("right")) { advance(); }
@@ -1128,7 +1132,7 @@ window.App = (function () {
       var filtered = problems.filter(function (p) { return p.difficulty === want; });
       if (filtered.length) problems = filtered;
     }
-    var idx = 0, streak = 0;
+    var idx = 0, streak = 0, xpTotal = 0;
     var prog = Store.lessonProgress(cls.id, lid);
     // resume at first not-done
     for (var k = 0; k < problems.length; k++) { if (!prog.done[problems[k].id]) { idx = k; break; } }
@@ -1141,8 +1145,9 @@ window.App = (function () {
     var top = el("div", "session-top");
     var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
     var track = el("div", "session-progress"); var fill = el("div", "fill"); track.appendChild(fill);
+    var xpEl = el("div", "session-xp"); function setXp() { xpEl.textContent = xpTotal.toLocaleString() + " XP"; } setXp();
     var streakEl = el("div", "session-streak"); function setStreak(n) { streakEl.innerHTML = icon("flame") + "<span>" + n + "</span>"; } setStreak(0);
-    top.append(closeX, track, streakEl); session.appendChild(top);
+    top.append(closeX, track, xpEl, streakEl); session.appendChild(top);
 
     var body = el("div", "session-body"); var inner = el("div", "session-inner"); body.appendChild(inner); session.appendChild(body);
 
@@ -1208,15 +1213,16 @@ window.App = (function () {
             verdict.textContent = "Correct!"; verdict.className = "verdict right";
             recordTutorAttempt("correct");
             streak++; var xp = 10 + (p.difficulty === "hard" ? 5 : 0) + (p.difficulty === "stretch" ? 10 : 0);
+            xpTotal += xp;
             Store.markProblemDone(cls.id, lid, p.id, xp);
             reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
           } else {
             verdict.textContent = "Not quite — check the solution."; verdict.className = "verdict wrong";
             recordTutorAttempt("wrong");
-            streak = 0;
+            streak = 0; xpTotal += 2;
             Store.markProblemDone(cls.id, lid, p.id, 2); // small XP for the attempt
           }
-          setStreak(streak);
+          setStreak(streak); setXp();
           nextBtn.textContent = idx + 1 >= problems.length ? "Finish" : "Next →";
         } else {
           idx++; render();
@@ -1256,14 +1262,15 @@ window.App = (function () {
     // resume where you left off in the full (mixed) lesson; single-difficulty runs start fresh
     function saveSlot(s) { if (!single) Store.setGenSlot(cls.id, lid, s); }
     var slot = single ? 0 : (Store.getGenSlot(cls.id, lid) || 0); if (slot >= plan.length) slot = 0;
-    var streak = 0, solved = slot, inst = null, checked = false, chosen = null, seen = {};
+    var streak = 0, solved = slot, inst = null, checked = false, chosen = null, seen = {}, xpTotal = 0;
 
     var session = el("div", "session");
     var top = el("div", "session-top");
     var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { session.remove(); renderClass(cls.id); };
     var track = el("div", "session-progress"); var fill = el("div", "fill"); track.appendChild(fill);
+    var xpEl = el("div", "session-xp"); function setXp() { xpEl.textContent = xpTotal.toLocaleString() + " XP"; } setXp();
     var streakEl = el("div", "session-streak"); function setStreak(n) { streakEl.innerHTML = icon("flame") + "<span>" + n + "</span>"; } setStreak(0);
-    top.append(closeX, track, streakEl); session.appendChild(top);
+    top.append(closeX, track, xpEl, streakEl); session.appendChild(top);
 
     var body = el("div", "session-body"); var inner = el("div", "session-inner"); body.appendChild(inner); session.appendChild(body);
     var foot = el("div", "session-foot"); var footInner = el("div", "session-foot-inner");
@@ -1347,6 +1354,7 @@ window.App = (function () {
             verdict.textContent = "Correct!"; verdict.className = "verdict right";
             recordTutorAttempt("correct");
             streak++; var xp = { easy: 8, medium: 12, hard: 18, extreme: 30 }[inst.difficulty] || 10;
+            xpTotal += xp;
             Store.markProblemDone(cls.id, lid, "slot" + slot + "-" + Date.now(), xp);
             reward(xp, streak >= 3 ? "flame" : "check", streak >= 3 ? streak + " in a row!" : "Nice!");
             actionBtn.textContent = "Next →"; skipBtn.style.display = "none";
@@ -1355,7 +1363,7 @@ window.App = (function () {
             recordTutorAttempt("wrong");
             streak = 0; actionBtn.textContent = "Try another →";
           }
-          setStreak(streak);
+          setStreak(streak); setXp();
         } else {
           if (verdict.classList.contains("right")) { solved++; slot++; saveSlot(slot); loadSlot(); }
           else { loadSlot(); } // same difficulty, new numbers

@@ -772,6 +772,13 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .tutor-premium-link { align-self: flex-start; color: var(--accent); font-size: .78rem; font-weight: 700; text-decoration: none; }
 .tutor-launcher { position: fixed; z-index: 45; right: 22px; bottom: 22px; display: inline-flex; align-items: center; gap: 8px; padding: 12px 15px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); box-shadow: 0 8px 24px rgba(45,49,66,.25); cursor: pointer; font: 800 14px/1 Inter, sans-serif; transition: transform .16s ease, box-shadow .16s ease; }
 .tutor-launcher svg { width: 19px; height: 19px; }.tutor-launcher:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(45,49,66,.3); }
+.tutor-launcher { padding: 10px 16px 10px 11px; text-align: left; }
+.tutor-launcher-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.22); flex: 0 0 auto; }
+.tutor-launcher-copy { display: flex; flex-direction: column; line-height: 1.15; }
+.tutor-launcher-copy b { font-size: 14px; font-weight: 850; }
+.tutor-launcher-copy small { font-size: 11px; font-weight: 650; opacity: .9; }
+.lesson-ai { display: inline-grid; place-items: center; color: var(--accent); margin-left: auto; margin-right: 4px; flex: 0 0 auto; }
+.lesson-btn .lesson-ai + .lesson-caret { margin-left: 8px; }
 @keyframes tutor-pulse { 50% { transform: scale(1.12); } }
 @media (max-width: 640px) { .tutor-dock { right: 8px; bottom: 8px; width: calc(100vw - 16px); height: min(570px, calc(100vh - 16px)); resize: none; } .tutor-dock.max { inset: 6px !important; } .tutor-launcher { right: 14px; bottom: 14px; } .tutor-context { max-width: 170px; } }
 
@@ -885,3 +892,6 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 /* Read-only course materials list (City Tech MVP: professor-set, no upload). */
 .materials-books { margin: 6px 0 0; padding-left: 18px; }
 .materials-books li { color: var(--ink); font-size: .86rem; line-height: 1.55; margin: 3px 0; }
+
+/* Running XP counter in Learn/Practice session headers (not quiz/test). */
+.session-xp { font-weight: 800; color: var(--ink-soft); font-size: .9rem; display: inline-flex; align-items: center; white-space: nowrap; }
