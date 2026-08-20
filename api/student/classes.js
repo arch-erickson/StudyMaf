@@ -17,9 +17,14 @@ module.exports = async function handler(req, res) {
     // Match by email (professors always enroll by email) so the roster and the student
     // dashboard stay in sync whether or not the enrollment was linked to an account id.
     var rows = await auth.db('class_enrollments?student_email=eq.' + encodeURIComponent(email) + '&status=neq.removed&select=id,status,joined_at,class_sections(id,section_label,term,join_code,course_catalog(id,code,title,subject,description,lessons,textbooks))&order=joined_at.desc');
+    // Source PDFs are an optional enhancement. A missing/processing source file
+    // must never prevent a student's enrolled class cards from loading.
     await Promise.all((rows || []).map(async function (row) {
       var section = row.class_sections || {}, course = section.course_catalog || {};
-      if (course.id) course.course_documents = await auth.signedCourseDocuments(course.id);
+      course.course_documents = [];
+      if (!course.id) return;
+      try { course.course_documents = await auth.signedCourseDocuments(course.id); }
+      catch (documentError) { /* The class remains available while documents retry later. */ }
     }));
     auth.json(res, 200, { classes: rows || [] });
   } catch (error) { auth.json(res, 500, { error: error.message || 'Could not load your classes.' }); }
