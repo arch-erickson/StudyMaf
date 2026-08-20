@@ -1,4 +1,4 @@
-import { Auth } from './auth.js';
+import { Auth } from './auth.js?v=2';
 
 function leave(path) { location.replace(new URL(path, document.baseURI).href); }
 Auth.init().then(function (account) {

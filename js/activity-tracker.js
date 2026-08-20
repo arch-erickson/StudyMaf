@@ -1,4 +1,4 @@
-import { Auth } from './auth.js';
+import { Auth } from './auth.js?v=2';
 
 // Small, batched, account-bound analytics. It records real active study time,
 // never typed answers, tutor messages, screenshots, or calculator expressions.

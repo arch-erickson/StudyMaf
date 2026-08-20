@@ -2200,12 +2200,12 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=16").then(function (mod) {
+    import("./account-ui.js?v=17").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();
     }).then(function () {
-      return import("./progress-sync.js?v=4");
+      return import("./progress-sync.js?v=5");
     }).then(function (mod) {
       mod.startProgressSync();
     }).then(function () {

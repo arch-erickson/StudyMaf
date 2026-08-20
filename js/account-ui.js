@@ -1,4 +1,4 @@
-import { Auth } from './auth.js';
+import { Auth } from './auth.js?v=2';
 
 function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
 function n(value) { return Math.max(0, Number(value) || 0); }

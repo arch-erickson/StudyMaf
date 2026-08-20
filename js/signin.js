@@ -1,4 +1,4 @@
-import { Auth } from './auth.js';
+import { Auth } from './auth.js?v=2';
 
 const root = document.querySelector('#signin-app');
 let intent = new URLSearchParams(location.search).get('intent') === 'professor' ? 'professor' : 'student';

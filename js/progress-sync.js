@@ -1,4 +1,4 @@
-import { Auth } from './auth.js';
+import { Auth } from './auth.js?v=2';
 
 let started = false, muted = false, timer = 0;
 
