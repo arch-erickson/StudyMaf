@@ -64,28 +64,35 @@ window.Store = (function () {
       save();
     },
     syncEnrolledClasses: function (enrollments) {
-      (enrollments || []).forEach(function (row) {
+      /* A signed-in student's class list is server-authoritative. Earlier
+       * StudyMAF versions allowed browser-only classes, so merging those with
+       * the roster can show the same course twice. Keep only current sections
+       * returned by the professor-managed enrollment API. */
+      var existing = (state.classes || []).reduce(function (map, item) {
+        if (item && item.serverSectionId) map[item.serverSectionId] = item;
+        return map;
+      }, {}), seen = {};
+      state.classes = (enrollments || []).map(function (row) {
         // PostgREST returns to-one embeds as objects, but an older cached schema
-        // can return a one-item array. Support both so an enrollment is never
-        // silently skipped while the relationship cache catches up.
+        // can return a one-item array. Support both shapes during refreshes.
         var section = Array.isArray(row.class_sections) ? row.class_sections[0] : row.class_sections || {};
         var course = Array.isArray(section.course_catalog) ? section.course_catalog[0] : section.course_catalog || {};
-        if (!section.id || !course.code) return;
-        var found = state.classes.filter(function (item) { return item.serverSectionId === section.id; })[0];
-        if (found) return;
-        state.classes.push({
-          id: "server-" + section.id,
+        if (!section.id || !course.code || seen[section.id]) return null;
+        seen[section.id] = true;
+        var prior = existing[section.id] || {};
+        return Object.assign({}, prior, {
+          id: prior.id || "server-" + section.id,
           serverSectionId: section.id,
           name: course.title || course.code,
           semester: section.term || "",
           year: "",
-          date: new Date().toISOString().slice(0, 10),
-          thumbSeed: (function (s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360; return h; })(String(course.code || section.id)),
-          lessonIds: (course.lessons || []).map(function (lesson) { return lesson.id; }),
+          date: prior.date || new Date().toISOString().slice(0, 10),
+          thumbSeed: prior.thumbSeed == null ? (function (s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360; return h; })(String(course.code || section.id)) : prior.thumbSeed,
+          lessonIds: (course.lessons || []).map(function (lesson) { return lesson.id; }) || prior.lessonIds || [],
           code: course.code,
-          lessonTargets: {}, chapters: {}, createdAt: Date.now()
+          lessonTargets: prior.lessonTargets || {}, chapters: prior.chapters || {}, createdAt: prior.createdAt || Date.now()
         });
-      });
+      }).filter(Boolean);
       save();
     },
 

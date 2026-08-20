@@ -41,7 +41,7 @@ async function switchAccount(account) {
     window.StudyMAFClassSync = { status: 'ready', count: (classes.classes || []).length };
     window.dispatchEvent(new Event('studymaf-account-ready'));
   } catch (error) { window.StudyMAFClassSync = { status: 'error', message: error.message || 'Could not load enrolled classes.' }; console.warn('StudyMAF could not sync your enrolled classes yet.', error.message); }
-  finally { muted = false; }
+  finally { muted = false; if (account && account.role === 'student' && window.StudyMAFClassSync && window.StudyMAFClassSync.status === 'ready') uploadSoon(); }
 }
 
 export function startProgressSync() {
