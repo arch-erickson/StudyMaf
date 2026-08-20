@@ -22,7 +22,8 @@ async function switchAccount(account) {
     var classes = await Auth.api('/api/student/classes');
     window.StudyMAFPrivateCourseDocuments = {};
     (classes.classes || []).forEach(function (row) {
-      var section = row.class_sections || {}, course = section.course_catalog || {};
+      var section = Array.isArray(row.class_sections) ? row.class_sections[0] : row.class_sections || {};
+      var course = Array.isArray(section.course_catalog) ? section.course_catalog[0] : section.course_catalog || {};
       if (section.id) window.StudyMAFPrivateCourseDocuments['server-' + section.id] = Array.isArray(course.course_documents) ? course.course_documents : [];
     });
     Store.syncEnrolledClasses(classes.classes || []);

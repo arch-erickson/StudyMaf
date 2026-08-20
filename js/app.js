@@ -2213,7 +2213,7 @@ window.App = (function () {
       AccountUI.mountHeader();
       return AccountUI.ready();
     }).then(function () {
-      return import("./progress-sync.js?v=2");
+      return import("./progress-sync.js?v=3");
     }).then(function (mod) {
       mod.startProgressSync();
     }).then(function () {
