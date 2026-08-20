@@ -869,3 +869,11 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .prof-card-actions .btn.wide { flex: 1 1 100%; }
 .prof-empty { grid-column: 1 / -1; text-align: left; }
 .professor-show-more { width: 100%; margin-top: 12px; justify-content: center; }
+
+/* Reviewer lesson panel: roomier, even vertical rhythm. */
+.reviewer-lesson .lesson-panel { padding: 6px 18px 20px; }
+.reviewer-lesson .lp-summary { margin: 10px 0 18px; }
+.reviewer-lesson .concept-chips { margin: 0 0 18px; row-gap: 7px; }
+.reviewer-lesson .lp-diff { margin: 0 0 18px; row-gap: 10px; }
+.reviewer-lesson .lp-actions { margin: 0; }
+.reviewer-lesson .review-mode-slot:not(:empty) { margin-top: 18px; }
