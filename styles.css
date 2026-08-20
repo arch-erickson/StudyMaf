@@ -783,3 +783,14 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .source-download b { color: var(--accent); font-size: .69rem; }
 .source-kind { color: var(--ink-soft) !important; font-size: .62rem !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 @media (max-width: 700px) { .source-document-empty { grid-template-columns: 1fr; } }
+
+/* Professor cards keep the class identity separate from the actions. */
+.professor-class-card { display: grid !important; gap: 15px; align-items: stretch !important; }
+.professor-class-copy h3, .course-library-card h3 { margin: 8px 0 3px; }
+.professor-class-copy p, .course-library-card p { margin: 0; color: var(--ink); font-weight: 700; }
+.professor-class-copy small, .course-library-card small { display: block; margin-top: 6px; color: var(--ink-soft); }
+.professor-class-actions { display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 13px; }
+.professor-library { margin-top: 22px; }
+.professor-library-list { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.course-library-card { display: grid !important; gap: 15px; align-content: space-between; min-height: 184px; }
+.course-library-card .btn { justify-self: start; }
