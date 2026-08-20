@@ -305,7 +305,7 @@ window.App = (function () {
   function renderNotebook() {
     appEl.innerHTML = "";
     var page = el("div", "page wrap");
-    var crumbs = el("div", "crumbs"); crumbs.innerHTML = "<a href='#/'>← All classes</a>"; page.appendChild(crumbs);
+    var crumbs = el("div", "crumbs"); var backLink = el("a", null, "← All classes"); backLink.href = "#/"; backLink.onclick = function (e) { e.preventDefault(); location.hash = "#/"; }; crumbs.appendChild(backLink); page.appendChild(crumbs);
     page.appendChild(el("h1", null, "Notebook"));
     page.appendChild(el("p", "section-sub", "Your saved scratch work, newest first."));
 
@@ -358,7 +358,7 @@ window.App = (function () {
     appEl.innerHTML = "";
     var page = el("div", "page wrap");
 
-    var crumbs = el("div", "crumbs"); crumbs.innerHTML = "<a href='#/'>← All classes</a>"; page.appendChild(crumbs);
+    var crumbs = el("div", "crumbs"); var backLink = el("a", null, "← All classes"); backLink.href = "#/"; backLink.onclick = function (e) { e.preventDefault(); location.hash = "#/"; }; crumbs.appendChild(backLink); page.appendChild(crumbs);
 
     var hero = el("div", "class-hero");
     var htext = el("div");
@@ -2184,6 +2184,21 @@ window.App = (function () {
     });
   }
 
+  // Server-enrolled classes (added by a professor) arrive with only catalog metadata —
+  // the DB course row carries no inline lessons. Resolve their lessons, grade targets,
+  // and chapters from the static catalog by course code so they are fully studyable.
+  function reconcileEnrolledClasses() {
+    Store.classes().forEach(function (c) {
+      if (!c.serverSectionId) return;                 // server-synced classes only
+      if (c.lessonIds && c.lessonIds.length) return;  // already resolved
+      var cat = catalogClassByCode(c.code);
+      if (!cat) return;
+      var meta = catalogMeta(cat);
+      if (meta.lessonIds && meta.lessonIds.length) Store.setClassLessons(c.id, meta.lessonIds);
+      Store.setClassCatalog(c.id, { code: cat.code, lessonTargets: meta.lessonTargets, chapters: meta.chapters });
+    });
+  }
+
   function applyIpadMode() { document.body.classList.toggle("ipad-mode", Store.getIpadMode()); }
 
   function init() {
@@ -2193,7 +2208,7 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=8").then(function (mod) {
+    import("./account-ui.js?v=12").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();
@@ -2217,7 +2232,8 @@ window.App = (function () {
     }).then(function () {
       seedIfEmpty();
       reconcilePhysLessons();
-      window.addEventListener("studymaf-account-ready", function () { reconcilePhysLessons(); route(); });
+      reconcileEnrolledClasses();
+      window.addEventListener("studymaf-account-ready", function () { reconcilePhysLessons(); reconcileEnrolledClasses(); route(); });
       window.addEventListener("hashchange", route);
       route();
     }).catch(function (e) {

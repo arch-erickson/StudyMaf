@@ -76,7 +76,7 @@ window.Store = (function () {
           semester: section.term || "",
           year: "",
           date: new Date().toISOString().slice(0, 10),
-          thumbSeed: 24,
+          thumbSeed: (function (s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360; return h; })(String(course.code || section.id)),
           lessonIds: (course.lessons || []).map(function (lesson) { return lesson.id; }),
           code: course.code,
           lessonTargets: {}, chapters: {}, createdAt: Date.now()

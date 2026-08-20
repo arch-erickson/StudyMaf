@@ -1,6 +1,8 @@
 import { Auth } from '../js/auth.js';
 import '../js/generators.js';
-import { createAccountUI } from '../js/account-ui.js?v=11';
+import '../js/generators-math.js';
+import '../js/generators-more.js';
+import { createAccountUI } from '../js/account-ui.js?v=12';
 
 const shell = document.querySelector('.control-shell');
 const card = document.querySelector('.auth-card');
