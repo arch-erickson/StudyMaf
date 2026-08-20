@@ -101,6 +101,10 @@ h1,h2,h3 { letter-spacing: -0.02em; }
   position: absolute; left: 12px; bottom: 12px; background: rgba(255,255,255,.9); color: var(--navy);
   font-size: .72rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; backdrop-filter: blur(4px);
 }
+.class-thumb .thumb-code {
+  position: absolute; left: 12px; top: 12px; background: var(--navy); color: #fff;
+  font-size: .68rem; font-weight: 800; letter-spacing: .03em; padding: 4px 9px; border-radius: 8px;
+}
 .class-body { padding: 16px 18px 18px; }
 .class-body h3 { margin: 0 0 4px; font-size: 1.1rem; }
 .class-meta { color: var(--ink-soft); font-size: .85rem; margin: 0 0 12px; }

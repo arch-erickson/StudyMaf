@@ -233,6 +233,7 @@ window.App = (function () {
       var card = el("button", "class-card");
       var thumb = el("div", "class-thumb"); thumb.setAttribute("style", thumbStyle(c.thumbSeed));
       var badge = el("span", "thumb-badge", (c.lessonIds.length) + " lesson" + (c.lessonIds.length === 1 ? "" : "s"));
+      if (c.code) thumb.appendChild(el("span", "thumb-code", c.code));
       thumb.appendChild(badge); card.appendChild(thumb);
       var body = el("div", "class-body");
       body.appendChild(el("h3", null, c.name));
