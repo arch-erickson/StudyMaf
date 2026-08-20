@@ -853,3 +853,19 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 /* Professor workspace: natural-height panels + collapsible class list. */
 .professor-top-layout { align-items: start; }
 .professor-show-more { width: 100%; margin-top: 4px; justify-content: center; }
+
+/* Professor workspace — reorganized: hero + section card grids. */
+.professor-shell { display: grid; gap: 24px; }
+.control-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.prof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; align-items: stretch; }
+.prof-card { display: flex; flex-direction: column; gap: 9px; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 8px 20px rgba(30,25,20,.05); transition: transform .16s ease, box-shadow .16s ease; }
+.prof-card:hover { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(30,25,20,.1); }
+.prof-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.prof-card-tag { color: var(--ink-soft); font-size: .69rem; font-weight: 750; white-space: nowrap; }
+.prof-card h3 { margin: 2px 0 0; font-size: 1rem; letter-spacing: -.03em; }
+.prof-card-title { margin: 0; color: var(--ink-soft); font-size: .8rem; line-height: 1.4; }
+.prof-card-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 12px; }
+.prof-card-actions .btn { flex: 1; justify-content: center; }
+.prof-card-actions .btn.wide { flex: 1 1 100%; }
+.prof-empty { grid-column: 1 / -1; text-align: left; }
+.professor-show-more { width: 100%; margin-top: 12px; justify-content: center; }
