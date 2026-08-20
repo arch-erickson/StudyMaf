@@ -14,9 +14,21 @@ module.exports = async function handler(req, res) {
         await auth.db('class_enrollments?student_email=eq.' + encodeURIComponent(email) + '&student_id=is.null&status=eq.invited', { method: 'PATCH', headers: { Prefer: 'return=minimal' }, body: JSON.stringify({ student_id: uid, status: 'active', joined_at: new Date().toISOString() }) });
       } catch (linkError) { /* Non-fatal: the class list below still resolves by email. */ }
     }
-    // Match by email (professors always enroll by email) so the roster and the student
-    // dashboard stay in sync whether or not the enrollment was linked to an account id.
-    var rows = await auth.db('class_enrollments?student_email=eq.' + encodeURIComponent(email) + '&status=neq.removed&select=id,status,joined_at,class_sections(id,section_label,term,join_code,course_catalog(id,code,title,subject,description,lessons,textbooks))&order=joined_at.desc');
+    // Resolve the three tables explicitly rather than relying on a nested REST
+    // relation shape. This keeps each enrolled class visible even while the
+    // PostgREST relationship cache is refreshing after schema changes.
+    var rows = await auth.db('class_enrollments?student_email=eq.' + encodeURIComponent(email) + '&status=neq.removed&select=id,status,joined_at,class_section_id&order=joined_at.desc');
+    var sectionIds = (rows || []).map(function (row) { return row.class_section_id; }).filter(Boolean);
+    var sections = sectionIds.length ? await auth.db('class_sections?id=in.(' + sectionIds.map(encodeURIComponent).join(',') + ')&select=id,section_label,term,join_code,course_id') : [];
+    var sectionsById = (sections || []).reduce(function (map, section) { map[section.id] = section; return map; }, {});
+    var courseIds = (sections || []).map(function (section) { return section.course_id; }).filter(Boolean);
+    var courses = courseIds.length ? await auth.db('course_catalog?id=in.(' + courseIds.map(encodeURIComponent).join(',') + ')&select=id,code,title,subject,description,lessons,textbooks') : [];
+    var coursesById = (courses || []).reduce(function (map, course) { map[course.id] = course; return map; }, {});
+    rows = (rows || []).map(function (row) {
+      var section = sectionsById[row.class_section_id] || {};
+      row.class_sections = Object.assign({}, section, { course_catalog: coursesById[section.course_id] || {} });
+      return row;
+    });
     // Source PDFs are an optional enhancement. A missing/processing source file
     // must never prevent a student's enrolled class cards from loading.
     await Promise.all((rows || []).map(async function (row) {
