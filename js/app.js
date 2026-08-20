@@ -225,8 +225,6 @@ window.App = (function () {
 
     var head = el("div", "section-head");
     head.appendChild(el("h2", null, "Classes"));
-    var addBtn = el("button", "btn primary", "+ Add class"); addBtn.onclick = openJoinClass;
-    head.appendChild(addBtn);
     page.appendChild(head);
 
     var grid = el("div", "class-grid");
@@ -251,10 +249,12 @@ window.App = (function () {
       grid.appendChild(card);
     });
 
-    var add = el("button", "add-card");
-    add.appendChild(el("span", "plus", "+")); add.appendChild(el("span", null, "Enter a class code"));
-    add.onclick = openJoinClass;
-    grid.appendChild(add);
+    if (!Store.classes().length) {
+      var emptyCard = el("div", "add-card empty-classes");
+      emptyCard.appendChild(el("span", "plus", "◎"));
+      emptyCard.appendChild(el("span", null, "Your professor adds you to a class and it appears here automatically."));
+      grid.appendChild(emptyCard);
+    }
 
     page.appendChild(grid);
     appEl.appendChild(page);
@@ -2208,7 +2208,7 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=12").then(function (mod) {
+    import("./account-ui.js?v=13").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();

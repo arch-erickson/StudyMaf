@@ -775,7 +775,8 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .course-code-full { max-width: none !important; white-space: nowrap; font-size: .66rem !important; letter-spacing: .02em !important; }
 .source-card .class-card-footer > div { display: flex; gap: 7px; flex-wrap: wrap; }
 .source-document-list { background: #f8fbff; border-color: #d5e3f3; }
-.source-document-empty { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+.source-document-empty { grid-template-columns: 1fr; align-items: start; }
+.source-document-empty .btn { justify-self: start; margin-top: 4px; }
 .source-download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 9px; margin-top: 5px; }
 .source-download { display: grid; gap: 4px; padding: 12px; border: 1px solid var(--line); border-radius: 11px; background: rgba(255,255,255,.78); color: var(--ink); text-decoration: none; transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease; }
 .source-download:hover { transform: translateY(-1px); border-color: var(--accent); box-shadow: 0 8px 16px rgba(30,25,20,.07); }
@@ -843,3 +844,8 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .instructor-solution ol { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: .8rem; line-height: 1.5; }
 .instructor-preview-intro { margin-bottom: 13px; }
 .instructor-preview-intro p { margin: 6px 0 0; color: var(--ink-soft); font-size: .8rem; line-height: 1.5; }
+
+/* Roster rows: push the remove action to the right. */
+.roster-list > div > p { flex: 1; }
+.roster-list > div > .btn { flex: 0 0 auto; }
+.class-preview-btn { justify-self: start; margin-top: -4px; }

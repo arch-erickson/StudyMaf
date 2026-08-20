@@ -13,6 +13,14 @@ module.exports = async function handler(req, res) {
       var students = await auth.db('class_enrollments?class_section_id=eq.' + encodeURIComponent(sectionId) + '&select=id,student_email,status,invited_at,joined_at,profiles(id,email,display_name,last_seen_at)&order=student_email.asc');
       return auth.json(res, 200, { students: students || [] });
     }
+    if (req.method === 'DELETE') {
+      var removeEmail = auth.email(body.student_email || (req.query && req.query.student_email));
+      var removeId = auth.text(body.enrollment_id || (req.query && req.query.enrollment_id), 80);
+      if (!removeEmail && !removeId) return auth.json(res, 400, { error: 'A student email or enrollment id is required.' });
+      var filter = removeId ? 'id=eq.' + encodeURIComponent(removeId) : 'student_email=eq.' + encodeURIComponent(removeEmail);
+      await auth.db('class_enrollments?class_section_id=eq.' + encodeURIComponent(sectionId) + '&' + filter, { method: 'DELETE', headers: { Prefer: 'return=minimal' } });
+      return auth.json(res, 200, { removed: true });
+    }
     if (req.method !== 'POST') return auth.json(res, 405, { error: 'Method not allowed.' });
     var studentEmail = auth.email(body.student_email);
     if (!studentEmail) return auth.json(res, 400, { error: 'Enter a valid student email.' });
