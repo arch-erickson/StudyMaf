@@ -1,0 +1,238 @@
+{
+  "title": "Applications of Newton's Laws & Gravitation",
+  "summary": "Applying Newton's laws covers friction, uniform circular motion, and universal gravitation. Friction is $f=\\mu N$; circular motion needs centripetal force $F_c=mv^2/r$; gravity is $F=Gm_1m_2/r^2$.",
+  "glossary": {
+    "friction": {
+      "plain": "A force opposing relative sliding.",
+      "in_class": "$f=\\mu N$; static (up to a max) or kinetic."
+    },
+    "coefficient of friction": {
+      "plain": "Ratio setting friction's strength.",
+      "in_class": "$\\mu$; kinetic $\\mu_k$ usually less than static $\\mu_s$."
+    },
+    "centripetal force": {
+      "plain": "The net inward force for circular motion.",
+      "in_class": "$F_c=\\dfrac{mv^2}{r}$; points to the center."
+    },
+    "centripetal acceleration": {
+      "plain": "Acceleration toward the center.",
+      "in_class": "$a_c=\\dfrac{v^2}{r}$."
+    },
+    "universal gravitation": {
+      "plain": "Every mass attracts every other.",
+      "in_class": "$F=G\\dfrac{m_1m_2}{r^2}$."
+    },
+    "gravitational constant": {
+      "plain": "The constant $G$ in Newton's law.",
+      "in_class": "$G=6.67\\times10^{-11}\\ \\text{N·m}^2/\\text{kg}^2$."
+    },
+    "orbital motion": {
+      "plain": "Gravity providing the centripetal force.",
+      "in_class": "$\\dfrac{GMm}{r^2}=\\dfrac{mv^2}{r}$."
+    },
+    "banked curve": {
+      "plain": "A tilted road aiding circular motion.",
+      "in_class": "The normal force's component supplies centripetal force."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Friction",
+      "explanation": "Kinetic friction opposes sliding with $f_k=\\mu_k N$; static friction can grow up to $f_{s,\\max}=\\mu_s N$ before slipping. Include it in the force balance along the surface.",
+      "math_steps": [
+        "Find the normal force $N$.",
+        "Compute $f=\\mu N$.",
+        "Add friction (opposing motion) to $\\sum F=ma$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-c1.svg",
+        "caption": "Friction"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Uniform circular motion",
+      "explanation": "Moving in a circle at constant speed still accelerates — toward the center, $a_c=v^2/r$. Some real force (tension, friction, gravity) must supply $F_c=mv^2/r$.",
+      "math_steps": [
+        "Identify what provides the inward force.",
+        "Set it equal to $mv^2/r$.",
+        "Solve for the unknown."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-c2.svg",
+        "caption": "Uniform circular motion"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Newton's law of gravitation",
+      "explanation": "Any two masses attract with $F=Gm_1m_2/r^2$ along the line joining them — the same inverse-square form as Coulomb's law.",
+      "math_steps": [
+        "Insert the two masses and separation.",
+        "Apply $F=Gm_1m_2/r^2$.",
+        "Direction is attractive along the line."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-c3.svg",
+        "caption": "Newton's law of gravitation"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Orbits",
+      "explanation": "For a circular orbit, gravity is the centripetal force: $GMm/r^2=mv^2/r$. This gives orbital speed $v=\\sqrt{GM/r}$ and relates period to radius.",
+      "math_steps": [
+        "Set gravity equal to $mv^2/r$.",
+        "Solve $v=\\sqrt{GM/r}$.",
+        "Use $v=2\\pi r/T$ for the period."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-c4.svg",
+        "caption": "Orbits"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Weight on other planets",
+      "explanation": "Surface gravity is $g=GM/R^2$, so weight $mg$ changes with a planet's mass and radius even though mass stays the same.",
+      "math_steps": [
+        "Compute $g=GM/R^2$.",
+        "Weight $=mg$ there.",
+        "Mass is unchanged."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-c5.svg",
+        "caption": "Weight on other planets"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A car rounding a curve",
+      "scenario": "Friction keeps a car on a flat curve.",
+      "how_the_math_applies": "Static friction supplies $mv^2/r$; too fast and it slips.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-e1.svg",
+        "caption": "A car rounding a curve"
+      }
+    },
+    {
+      "title": "The Moon's orbit",
+      "scenario": "The Moon circles Earth.",
+      "how_the_math_applies": "Earth's gravity provides exactly the centripetal force for the orbit.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-e2.svg",
+        "caption": "The Moon's orbit"
+      }
+    },
+    {
+      "title": "Weight on the Moon",
+      "scenario": "Astronauts feel lighter on the Moon.",
+      "how_the_math_applies": "$g_{Moon}=GM/R^2$ is about $1/6$ of Earth's, so weight drops.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-05-applications-gravity-e3.svg",
+        "caption": "Weight on the Moon"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "friction centripetal force circular motion physics",
+    "math_query": "universal gravitation orbital speed examples",
+    "combined_query": "physics 1 friction circular motion gravity worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $10$ kg box on a floor has $\\mu_k=0.3$. Find the kinetic friction force.",
+      "correct_answer": "$\\approx29.4$ N",
+      "solution_steps": [
+        "$N=mg=98$ N.",
+        "$f=\\mu N=0.3(98)$.",
+        "$29.4$ N."
+      ],
+      "hint": "$f=\\mu N$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $2$ kg ball moves in a circle of radius $1$ m at $3$ m/s. Find the centripetal force.",
+      "correct_answer": "$18$ N",
+      "solution_steps": [
+        "$F_c=mv^2/r$.",
+        "$=2(9)/1$.",
+        "$18$ N."
+      ],
+      "hint": "$F_c=mv^2/r$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the centripetal acceleration for $v=10$ m/s, $r=25$ m.",
+      "correct_answer": "$4$ m/s²",
+      "solution_steps": [
+        "$a_c=v^2/r$.",
+        "$=100/25$.",
+        "$4$ m/s²."
+      ],
+      "hint": "$a_c=v^2/r$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Two $1000$ kg masses are $2$ m apart. Find the gravitational force.",
+      "correct_answer": "$\\approx1.67\\times10^{-5}$ N",
+      "solution_steps": [
+        "$F=G m_1m_2/r^2$.",
+        "$=6.67\\times10^{-11}(10^6)/4$.",
+        "$\\approx1.67\\times10^{-5}$ N."
+      ],
+      "hint": "$F=Gm_1m_2/r^2$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $5$ kg block is pushed at constant velocity against $\\mu_k=0.4$. Find the push force.",
+      "correct_answer": "$\\approx19.6$ N",
+      "solution_steps": [
+        "Constant velocity ⇒ push $=f=\\mu mg$.",
+        "$=0.4(5)(9.8)$.",
+        "$19.6$ N."
+      ],
+      "hint": "At constant velocity, push equals friction."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the orbital speed at radius $r=7\\times10^6$ m around Earth ($M=5.97\\times10^{24}$ kg).",
+      "correct_answer": "$\\approx7.5\\times10^3$ m/s",
+      "solution_steps": [
+        "$v=\\sqrt{GM/r}$.",
+        "$=\\sqrt{6.67\\times10^{-11}(5.97\\times10^{24})/7\\times10^6}$.",
+        "$\\approx7.5$ km/s."
+      ],
+      "hint": "$v=\\sqrt{GM/r}$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A car rounds a flat curve ($r=50$ m, $\\mu_s=0.8$). Find the maximum speed.",
+      "correct_answer": "$\\approx19.8$ m/s",
+      "solution_steps": [
+        "$\\mu_s mg=mv^2/r$ ⇒ $v=\\sqrt{\\mu_s g r}$.",
+        "$=\\sqrt{0.8(9.8)(50)}$.",
+        "$\\approx19.8$ m/s."
+      ],
+      "hint": "$v=\\sqrt{\\mu_s g r}$."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "title": "Fluids",
+  "summary": "Fluids exert pressure that grows with depth ($P=P_0+\\rho gh$). Buoyancy equals the weight of displaced fluid (Archimedes). Pascal's principle powers hydraulics, continuity conserves flow rate, and Bernoulli links pressure to speed.",
+  "glossary": {
+    "pressure": {
+      "plain": "Force per unit area.",
+      "in_class": "$P=F/A$, in pascals."
+    },
+    "density": {
+      "plain": "Mass per unit volume.",
+      "in_class": "$\\rho=m/V$."
+    },
+    "pressure with depth": {
+      "plain": "Deeper means higher pressure.",
+      "in_class": "$P=P_0+\\rho gh$."
+    },
+    "buoyant force": {
+      "plain": "Upward force on a submerged object.",
+      "in_class": "Weight of displaced fluid."
+    },
+    "Archimedes' principle": {
+      "plain": "Buoyancy = displaced fluid weight.",
+      "in_class": "$F_b=\\rho Vg$."
+    },
+    "Pascal's principle": {
+      "plain": "Applied pressure transmits fully.",
+      "in_class": "Basis of hydraulic lifts."
+    },
+    "continuity": {
+      "plain": "Flow rate is constant.",
+      "in_class": "$A_1v_1=A_2v_2$."
+    },
+    "Bernoulli's principle": {
+      "plain": "Faster flow, lower pressure.",
+      "in_class": "$P+\\tfrac12\\rho v^2+\\rho gh=$ const."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Pressure and depth",
+      "explanation": "Pressure rises with depth: $P=P_0+\\rho gh$, and acts equally in all directions at a point.",
+      "math_steps": [
+        "Start from surface pressure.",
+        "Add $\\rho gh$.",
+        "Same at equal depths."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-c1.svg",
+        "caption": "Pressure and depth"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Buoyancy",
+      "explanation": "A submerged object feels an upward force equal to the weight of displaced fluid: $F_b=\\rho_{fluid}Vg$. It floats if that matches its weight.",
+      "math_steps": [
+        "Find displaced volume.",
+        "$F_b=\\rho Vg$.",
+        "Compare to weight."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-c2.svg",
+        "caption": "Buoyancy"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Pascal's principle",
+      "explanation": "Pressure applied to a confined fluid transmits everywhere, so a hydraulic system multiplies force by the piston-area ratio.",
+      "math_steps": [
+        "Equal pressure on both pistons.",
+        "$F_1/A_1=F_2/A_2$.",
+        "Bigger area ⇒ bigger force."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-c3.svg",
+        "caption": "Pascal's principle"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Continuity",
+      "explanation": "Incompressible flow keeps $Av$ constant, so a narrower pipe speeds the fluid up.",
+      "math_steps": [
+        "$A_1v_1=A_2v_2$.",
+        "Smaller area ⇒ faster.",
+        "Solve for the unknown speed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-c4.svg",
+        "caption": "Continuity"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Bernoulli's principle",
+      "explanation": "Along a streamline, higher speed means lower pressure ($P+\\tfrac12\\rho v^2+\\rho gh$ constant) — the idea behind lift and atomizers.",
+      "math_steps": [
+        "Write Bernoulli at two points.",
+        "Faster ⇒ lower pressure.",
+        "Solve for $P$ or $v$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-c5.svg",
+        "caption": "Bernoulli's principle"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Floating and sinking",
+      "scenario": "A cork floats; a coin sinks.",
+      "how_the_math_applies": "Objects float when their density is below the fluid's — a buoyancy comparison.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-e1.svg",
+        "caption": "Floating and sinking"
+      }
+    },
+    {
+      "title": "Hydraulic brakes",
+      "scenario": "A light pedal press stops a car.",
+      "how_the_math_applies": "Pascal's principle amplifies the force through the brake fluid.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-e2.svg",
+        "caption": "Hydraulic brakes"
+      }
+    },
+    {
+      "title": "A shower curtain pulling in",
+      "scenario": "The curtain billows toward the water.",
+      "how_the_math_applies": "Fast-moving air lowers pressure (Bernoulli), so outside air pushes it in.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-11-fluids-e3.svg",
+        "caption": "A shower curtain pulling in"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "fluid pressure depth buoyancy archimedes algebra",
+    "math_query": "pascal continuity bernoulli examples",
+    "combined_query": "physics 1 fluids worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the pressure $4$ m deep in water ($\\rho=1000$, ignore atmosphere).",
+      "correct_answer": "$\\approx3.92\\times10^{4}$ Pa",
+      "solution_steps": [
+        "$P=\\rho gh$.",
+        "$=1000(9.8)(4)$.",
+        "$3.92\\times10^4$ Pa."
+      ],
+      "hint": "$P=\\rho gh$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the density of $9$ kg in $0.003$ m³.",
+      "correct_answer": "$3000$ kg/m³",
+      "solution_steps": [
+        "$\\rho=m/V$.",
+        "$=9/0.003$.",
+        "$3000$ kg/m³."
+      ],
+      "hint": "$\\rho=m/V$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "An object displaces $0.02$ m³ of water. Find the buoyant force.",
+      "correct_answer": "$196$ N",
+      "solution_steps": [
+        "$F_b=\\rho Vg$.",
+        "$=1000(0.02)(9.8)$.",
+        "$196$ N."
+      ],
+      "hint": "$F_b=\\rho_{fluid}Vg$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Water at $3$ m/s in area $0.2$ m². Find the speed where area is $0.05$ m².",
+      "correct_answer": "$12$ m/s",
+      "solution_steps": [
+        "$A_1v_1=A_2v_2$.",
+        "$0.2(3)=0.05v$.",
+        "$12$ m/s."
+      ],
+      "hint": "Continuity."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Hydraulic lift: $200$ N on $0.02$ m². Find the force on $0.5$ m².",
+      "correct_answer": "$5000$ N",
+      "solution_steps": [
+        "$F_2=F_1A_2/A_1$.",
+        "$=200(0.5/0.02)$.",
+        "$5000$ N."
+      ],
+      "hint": "$F_1/A_1=F_2/A_2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A block of density $800$ kg/m³ floats in water. What fraction is submerged?",
+      "correct_answer": "$0.8$",
+      "solution_steps": [
+        "Fraction $=\\rho_{obj}/\\rho_{water}$.",
+        "$=800/1000$.",
+        "$0.8$."
+      ],
+      "hint": "Density ratio."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Total pressure $3$ m deep in water (atmosphere $1.0\\times10^5$ Pa).",
+      "correct_answer": "$\\approx1.29\\times10^{5}$ Pa",
+      "solution_steps": [
+        "$P=P_0+\\rho gh=10^5+1000(9.8)(3)$.",
+        "$=10^5+2.94\\times10^4$.",
+        "$\\approx1.29\\times10^5$ Pa."
+      ],
+      "hint": "Add atmospheric pressure."
+    }
+  ]
+}

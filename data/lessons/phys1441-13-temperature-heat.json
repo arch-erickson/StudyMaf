@@ -1,0 +1,238 @@
+{
+  "title": "Temperature, Heat & Kinetic Theory",
+  "summary": "Temperature measures average molecular kinetic energy. Heat $Q$ flows between objects at different temperatures; $Q=mc\\Delta T$ raises temperature and $Q=mL$ drives phase changes. The ideal gas law $PV=nRT$ links pressure, volume, and temperature.",
+  "glossary": {
+    "temperature": {
+      "plain": "A measure of average molecular kinetic energy.",
+      "in_class": "In kelvin for gas-law calculations."
+    },
+    "heat": {
+      "plain": "Energy transferred due to a temperature difference.",
+      "in_class": "$Q$, in joules; flows hot → cold."
+    },
+    "specific heat": {
+      "plain": "Heat to raise 1 kg by 1 K.",
+      "in_class": "$Q=mc\\Delta T$."
+    },
+    "latent heat": {
+      "plain": "Heat for a phase change at constant temperature.",
+      "in_class": "$Q=mL$ (fusion or vaporization)."
+    },
+    "thermal expansion": {
+      "plain": "Materials grow with temperature.",
+      "in_class": "$\\Delta L=\\alpha L\\Delta T$."
+    },
+    "ideal gas law": {
+      "plain": "Relation among $P$, $V$, $T$ for a gas.",
+      "in_class": "$PV=nRT$."
+    },
+    "kinetic theory": {
+      "plain": "Gas behavior from molecular motion.",
+      "in_class": "Average KE $\\propto T$."
+    },
+    "heat transfer": {
+      "plain": "Conduction, convection, radiation.",
+      "in_class": "Three ways heat moves."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Temperature vs heat",
+      "explanation": "Temperature measures average molecular kinetic energy; heat is energy in transit due to a temperature difference. Heat flows from hot to cold until equilibrium.",
+      "math_steps": [
+        "Temperature ↔ molecular KE.",
+        "Heat is transferred energy.",
+        "Flow direction: hot → cold."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-c1.svg",
+        "caption": "Temperature vs heat"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Specific heat",
+      "explanation": "To change temperature without a phase change, $Q=mc\\Delta T$. Water's high specific heat means it resists temperature change.",
+      "math_steps": [
+        "Identify mass, specific heat, temperature change.",
+        "$Q=mc\\Delta T$.",
+        "Positive $Q$ warms, negative cools."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-c2.svg",
+        "caption": "Specific heat"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Phase changes and latent heat",
+      "explanation": "During melting or boiling, temperature stays constant while heat $Q=mL$ is absorbed or released to change phase.",
+      "math_steps": [
+        "Use $Q=mL$ (fusion or vaporization).",
+        "Temperature is constant during the change.",
+        "Add $mc\\Delta T$ segments for full heating curves."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-c3.svg",
+        "caption": "Phase changes and latent heat"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Thermal expansion",
+      "explanation": "Most materials expand when heated: $\\Delta L=\\alpha L\\Delta T$. This is why bridges have expansion joints.",
+      "math_steps": [
+        "Find the expansion coefficient $\\alpha$.",
+        "$\\Delta L=\\alpha L\\Delta T$.",
+        "Areas and volumes expand accordingly."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-c4.svg",
+        "caption": "Thermal expansion"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "The ideal gas law",
+      "explanation": "For a gas, $PV=nRT$ ties pressure, volume, and absolute temperature together. Use kelvin, and hold quantities fixed to find how the others respond.",
+      "math_steps": [
+        "Convert temperatures to kelvin.",
+        "Apply $PV=nRT$.",
+        "For a fixed amount, $P_1V_1/T_1=P_2V_2/T_2$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-c5.svg",
+        "caption": "The ideal gas law"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Coastal climate moderation",
+      "scenario": "Coasts have milder temperatures.",
+      "how_the_math_applies": "Water's large specific heat stores heat, buffering temperature swings.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-e1.svg",
+        "caption": "Coastal climate moderation"
+      }
+    },
+    {
+      "title": "Ice cooling a drink",
+      "scenario": "Melting ice keeps a drink cold.",
+      "how_the_math_applies": "Latent heat of fusion absorbs energy at constant $0^\\circ$C.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-e2.svg",
+        "caption": "Ice cooling a drink"
+      }
+    },
+    {
+      "title": "A hot-air balloon",
+      "scenario": "Heating air makes it rise.",
+      "how_the_math_applies": "The ideal gas law: heating at constant pressure lowers density, giving lift.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-13-temperature-heat-e3.svg",
+        "caption": "A hot-air balloon"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "temperature heat specific heat latent heat kinetic theory",
+    "math_query": "specific heat phase change ideal gas law examples",
+    "combined_query": "physics 1 thermal heat worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "How much heat raises $2$ kg of water ($c=4186$) by $10$ K?",
+      "correct_answer": "$\\approx83720$ J",
+      "solution_steps": [
+        "$Q=mc\\Delta T$.",
+        "$=2(4186)(10)$.",
+        "$83720$ J."
+      ],
+      "hint": "$Q=mc\\Delta T$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Convert $27^\\circ$C to kelvin.",
+      "correct_answer": "$300$ K",
+      "solution_steps": [
+        "$K=C+273$.",
+        "$27+273$.",
+        "$300$ K."
+      ],
+      "hint": "Add 273."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Melt $0.5$ kg of ice ($L_f=3.34\\times10^5$ J/kg). Find the heat.",
+      "correct_answer": "$\\approx1.67\\times10^{5}$ J",
+      "solution_steps": [
+        "$Q=mL$.",
+        "$=0.5(3.34\\times10^5)$.",
+        "$1.67\\times10^5$ J."
+      ],
+      "hint": "$Q=mL$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $2$ m steel rod ($\\alpha=1.2\\times10^{-5}$) heats by $50$ K. Find $\\Delta L$.",
+      "correct_answer": "$1.2\\times10^{-3}$ m",
+      "solution_steps": [
+        "$\\Delta L=\\alpha L\\Delta T$.",
+        "$=1.2\\times10^{-5}(2)(50)$.",
+        "$1.2\\times10^{-3}$ m."
+      ],
+      "hint": "$\\Delta L=\\alpha L\\Delta T$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A gas at $2$ atm, $300$ K is heated to $600$ K at constant volume. Find the new pressure.",
+      "correct_answer": "$4$ atm",
+      "solution_steps": [
+        "$P_1/T_1=P_2/T_2$.",
+        "$2/300=P/600$.",
+        "$4$ atm."
+      ],
+      "hint": "Constant $V$: $P\\propto T$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the temperature of $1$ mol of gas at $P=1.0\\times10^5$ Pa, $V=0.025$ m³ ($R=8.31$).",
+      "correct_answer": "$\\approx301$ K",
+      "solution_steps": [
+        "$T=PV/(nR)$.",
+        "$=10^5(0.025)/8.31$.",
+        "$\\approx301$ K."
+      ],
+      "hint": "$PV=nRT$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "How much heat warms $0.5$ kg of water from $20^\\circ$C to $100^\\circ$C, then boils it all ($L_v=2.26\\times10^6$)? ($c=4186$)",
+      "correct_answer": "$\\approx1.30\\times10^{6}$ J",
+      "solution_steps": [
+        "Heat: $0.5(4186)(80)=1.67\\times10^5$ J.",
+        "Boil: $0.5(2.26\\times10^6)=1.13\\times10^6$ J.",
+        "Total $\\approx1.30\\times10^6$ J."
+      ],
+      "hint": "Add $mc\\Delta T$ then $mL_v$."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "title": "Roots of Polynomials",
+  "summary": "Finding all roots uses the Rational Root Theorem to list candidates, synthetic division to peel off factors, and the quadratic formula for what remains. The Fundamental Theorem guarantees $n$ roots (counting complex ones and multiplicity) for a degree-$n$ polynomial.",
+  "glossary": {
+    "root/zero": {
+      "plain": "A value where the polynomial is 0.",
+      "in_class": "$P(r)=0$."
+    },
+    "Rational Root Theorem": {
+      "plain": "Lists possible rational roots.",
+      "in_class": "$\\pm\\dfrac{\\text{factor of constant}}{\\text{factor of lead}}$."
+    },
+    "Fundamental Theorem of Algebra": {
+      "plain": "A degree-$n$ polynomial has $n$ complex roots.",
+      "in_class": "Counting multiplicity."
+    },
+    "complex roots": {
+      "plain": "Roots involving $i$.",
+      "in_class": "Come in conjugate pairs for real coefficients."
+    },
+    "conjugate pair": {
+      "plain": "$a+bi$ and $a-bi$ together.",
+      "in_class": "Both are roots if one is (real coefficients)."
+    },
+    "multiplicity": {
+      "plain": "How many times a root repeats.",
+      "in_class": "Sum of multiplicities equals the degree."
+    },
+    "depressed polynomial": {
+      "plain": "What's left after dividing out a root.",
+      "in_class": "Lower degree; solve it next."
+    },
+    "factored form": {
+      "plain": "The polynomial written as a product of factors.",
+      "in_class": "Reveals all roots."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The Fundamental Theorem",
+      "explanation": "A degree-$n$ polynomial has exactly $n$ roots in the complex numbers, counting multiplicity. Real ones are x-intercepts; others come in complex conjugate pairs.",
+      "math_steps": [
+        "Count expected roots by degree.",
+        "Some may be complex.",
+        "Complex roots pair as conjugates."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-c1.svg",
+        "caption": "The Fundamental Theorem"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The Rational Root Theorem",
+      "explanation": "Possible rational roots are $\\pm\\dfrac{p}{q}$ where $p$ divides the constant term and $q$ divides the leading coefficient. Test these candidates.",
+      "math_steps": [
+        "List factors of the constant and leading coefficient.",
+        "Form all $\\pm p/q$.",
+        "Test with the Remainder Theorem."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-c2.svg",
+        "caption": "The Rational Root Theorem"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Peeling off roots",
+      "explanation": "Once a root $r$ is found, divide by $(x-r)$ to get a lower-degree 'depressed' polynomial, then repeat or solve it directly.",
+      "math_steps": [
+        "Confirm a root by $P(r)=0$.",
+        "Divide out $(x-r)$.",
+        "Solve the remaining polynomial."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-c3.svg",
+        "caption": "Peeling off roots"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Complex conjugate roots",
+      "explanation": "For real-coefficient polynomials, complex roots always occur in conjugate pairs $a\\pm bi$. Finding one gives its partner for free.",
+      "math_steps": [
+        "A complex root implies its conjugate.",
+        "They multiply to a real quadratic.",
+        "Account for both."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-c4.svg",
+        "caption": "Complex conjugate roots"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Full factorization",
+      "explanation": "Combine all roots (real and complex, with multiplicity) to write the polynomial as a product of linear (and irreducible quadratic) factors.",
+      "math_steps": [
+        "Collect every root.",
+        "Write $(x-r)$ factors.",
+        "Include multiplicity and quadratic factors."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-c5.svg",
+        "caption": "Full factorization"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Solving a design equation",
+      "scenario": "A volume equation is a cubic.",
+      "how_the_math_applies": "The Rational Root Theorem finds a workable dimension, then the rest solves as a quadratic.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-e1.svg",
+        "caption": "Solving a design equation"
+      }
+    },
+    {
+      "title": "Signal frequencies",
+      "scenario": "Roots of a characteristic polynomial.",
+      "how_the_math_applies": "Complex conjugate roots correspond to oscillating behavior.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-e2.svg",
+        "caption": "Signal frequencies"
+      }
+    },
+    {
+      "title": "Break-even analysis",
+      "scenario": "Profit is a polynomial set to zero.",
+      "how_the_math_applies": "Its real roots are the break-even quantities.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-09-poly-roots-e3.svg",
+        "caption": "Break-even analysis"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "rational root theorem fundamental theorem of algebra",
+    "math_query": "finding polynomial roots synthetic division complex examples",
+    "combined_query": "precalculus roots of polynomials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "How many roots (with multiplicity) does a degree-3 polynomial have?",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "Fundamental Theorem.",
+        "Degree 3.",
+        "$3$ roots."
+      ],
+      "hint": "Count equals the degree."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "List possible rational roots of $x^2-5x+6$.",
+      "correct_answer": "$\\pm1,\\pm2,\\pm3,\\pm6$",
+      "solution_steps": [
+        "Factors of 6 over factors of 1.",
+        "$\\pm1,2,3,6$.",
+        "Test these."
+      ],
+      "hint": "$p/q$ with $p\\mid6$, $q\\mid1$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the roots of $x^2-5x+6$.",
+      "correct_answer": "$x=2,3$",
+      "solution_steps": [
+        "Factor $(x-2)(x-3)$.",
+        "Roots $2,3$.",
+        "Both rational."
+      ],
+      "hint": "Factor the quadratic."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "If $2+i$ is a root of a real polynomial, name another root.",
+      "correct_answer": "$2-i$",
+      "solution_steps": [
+        "Complex roots pair as conjugates.",
+        "$2-i$.",
+        "Done."
+      ],
+      "hint": "Conjugate pair."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Given $x=1$ is a root of $x^3-1$, find the depressed polynomial.",
+      "correct_answer": "$x^2+x+1$",
+      "solution_steps": [
+        "Divide $x^3-1$ by $x-1$.",
+        "$x^2+x+1$.",
+        "Done."
+      ],
+      "hint": "Synthetic division by $x-1$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find all roots of $x^3-1=0$.",
+      "correct_answer": "$1,\\ \\dfrac{-1\\pm\\sqrt3\\,i}{2}$",
+      "solution_steps": [
+        "$x=1$; then $x^2+x+1=0$.",
+        "Quadratic formula gives complex pair.",
+        "$\\dfrac{-1\\pm\\sqrt3 i}{2}$."
+      ],
+      "hint": "Solve the quadratic factor."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A cubic has roots $2, 2, -1$. Write it (leading coefficient 1).",
+      "correct_answer": "$(x-2)^2(x+1)$",
+      "solution_steps": [
+        "Repeated root at 2, single at $-1$.",
+        "$(x-2)^2(x+1)$.",
+        "Done."
+      ],
+      "hint": "Include the multiplicity."
+    }
+  ]
+}

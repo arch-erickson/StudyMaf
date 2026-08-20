@@ -1,0 +1,238 @@
+{
+  "title": "Rotational Motion & Torque",
+  "summary": "Rotation mirrors linear motion with angular position, velocity, and acceleration. Torque $\\tau=rF\\sin\\theta$ is the turning effect of a force; $\\tau=I\\alpha$ is the rotational $F=ma$; and angular momentum $L=I\\omega$ is conserved without external torque.",
+  "glossary": {
+    "angular velocity": {
+      "plain": "Rotation rate.",
+      "in_class": "$\\omega$, in rad/s; $v=r\\omega$."
+    },
+    "angular acceleration": {
+      "plain": "Rate of change of $\\omega$.",
+      "in_class": "$\\alpha$; $a=r\\alpha$."
+    },
+    "torque": {
+      "plain": "A force's turning effect.",
+      "in_class": "$\\tau=rF\\sin\\theta$."
+    },
+    "lever arm": {
+      "plain": "Perpendicular distance from axis to force.",
+      "in_class": "Longer arm ⇒ more torque."
+    },
+    "moment of inertia": {
+      "plain": "Rotational resistance to speeding up.",
+      "in_class": "$I$; depends on mass distribution."
+    },
+    "rotational Newton's law": {
+      "plain": "$\\tau=I\\alpha$.",
+      "in_class": "The rotational analog of $F=ma$."
+    },
+    "angular momentum": {
+      "plain": "Rotational momentum $L=I\\omega$.",
+      "in_class": "Conserved without external torque."
+    },
+    "rotational KE": {
+      "plain": "Energy of spinning.",
+      "in_class": "$\\tfrac12I\\omega^2$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Angular quantities",
+      "explanation": "Rotation uses angular position, velocity $\\omega$, and acceleration $\\alpha$, linked to linear motion by $v=r\\omega$ and $a=r\\alpha$.",
+      "math_steps": [
+        "Use $\\theta,\\omega,\\alpha$ like $x,v,a$.",
+        "Convert with $v=r\\omega$.",
+        "Apply the rotational kinematic equations."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-c1.svg",
+        "caption": "Angular quantities"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Torque",
+      "explanation": "Torque is the turning effect of a force: $\\tau=rF\\sin\\theta$. It's largest with a long lever arm and a perpendicular push.",
+      "math_steps": [
+        "Find the distance from the axis.",
+        "$\\tau=rF\\sin\\theta$.",
+        "Maximum when the force is perpendicular."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-c2.svg",
+        "caption": "Torque"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Moment of inertia and $\\tau=I\\alpha$",
+      "explanation": "Moment of inertia is rotational mass; the net torque gives angular acceleration via $\\tau=I\\alpha$.",
+      "math_steps": [
+        "Get $I$ for the object.",
+        "Sum torques.",
+        "$\\sum\\tau=I\\alpha$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-c3.svg",
+        "caption": "Moment of inertia and $\\tau=I\\alpha$"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Rotational equilibrium and energy",
+      "explanation": "For balance, net torque is zero; a spinning object stores $\\tfrac12I\\omega^2$ of energy.",
+      "math_steps": [
+        "Set $\\sum\\tau=0$ for balance.",
+        "Rotational KE $=\\tfrac12I\\omega^2$.",
+        "Rolling adds $\\tfrac12mv^2$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-c4.svg",
+        "caption": "Rotational equilibrium and energy"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Angular momentum conservation",
+      "explanation": "With no external torque, $L=I\\omega$ stays constant; drawing mass inward lowers $I$ and speeds up rotation.",
+      "math_steps": [
+        "Set $I_i\\omega_i=I_f\\omega_f$.",
+        "Smaller $I$ ⇒ larger $\\omega$.",
+        "Solve for the new spin."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-c5.svg",
+        "caption": "Angular momentum conservation"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A wrench on a bolt",
+      "scenario": "A longer wrench loosens a stubborn bolt.",
+      "how_the_math_applies": "The longer lever arm increases torque for the same force.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-e1.svg",
+        "caption": "A wrench on a bolt"
+      }
+    },
+    {
+      "title": "A diver's tuck",
+      "scenario": "A diver tucks to flip faster.",
+      "how_the_math_applies": "Reducing $I$ raises $\\omega$ since angular momentum is conserved.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-e2.svg",
+        "caption": "A diver's tuck"
+      }
+    },
+    {
+      "title": "A merry-go-round",
+      "scenario": "Kids run and jump on.",
+      "how_the_math_applies": "Torque changes its spin; angular momentum accounts for the new rate.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-09-rotation-torque-e3.svg",
+        "caption": "A merry-go-round"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "rotational motion torque lever arm moment of inertia",
+    "math_query": "angular momentum conservation rotational kinematics examples",
+    "combined_query": "physics 1 rotation torque worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A wheel spins at $8$ rad/s, radius $0.25$ m. Find the rim speed.",
+      "correct_answer": "$2$ m/s",
+      "solution_steps": [
+        "$v=r\\omega$.",
+        "$=0.25(8)$.",
+        "$2$ m/s."
+      ],
+      "hint": "$v=r\\omega$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $25$ N force acts $0.4$ m from an axis, perpendicular. Find the torque.",
+      "correct_answer": "$10$ N·m",
+      "solution_steps": [
+        "$\\tau=rF$.",
+        "$=0.4(25)$.",
+        "$10$ N·m."
+      ],
+      "hint": "$\\tau=rF$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Torque $18$ N·m on $I=6$ kg·m². Find $\\alpha$.",
+      "correct_answer": "$3$ rad/s²",
+      "solution_steps": [
+        "$\\alpha=\\tau/I$.",
+        "$=18/6$.",
+        "$3$ rad/s²."
+      ],
+      "hint": "$\\tau=I\\alpha$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $40$ N force acts $0.5$ m from a pivot at $30^\\circ$. Find the torque.",
+      "correct_answer": "$10$ N·m",
+      "solution_steps": [
+        "$\\tau=rF\\sin\\theta$.",
+        "$=0.5(40)(0.5)$.",
+        "$10$ N·m."
+      ],
+      "hint": "Include $\\sin\\theta$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Rotational KE of $I=3$ kg·m² at $4$ rad/s.",
+      "correct_answer": "$24$ J",
+      "solution_steps": [
+        "$\\tfrac12I\\omega^2$.",
+        "$=\\tfrac12(3)(16)$.",
+        "$24$ J."
+      ],
+      "hint": "$\\tfrac12I\\omega^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A diver with $I=6$ kg·m² at $1.5$ rad/s tucks to $I=2$. Find the new $\\omega$.",
+      "correct_answer": "$4.5$ rad/s",
+      "solution_steps": [
+        "$6(1.5)=2\\omega$.",
+        "$\\omega=9/2$.",
+        "$4.5$ rad/s."
+      ],
+      "hint": "Conserve $L=I\\omega$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A balanced seesaw: a $40$ kg child sits $1.5$ m left. A $30$ kg child sits how far right?",
+      "correct_answer": "$2$ m",
+      "solution_steps": [
+        "$40(1.5)=30 d$.",
+        "$d=60/30$.",
+        "$2$ m."
+      ],
+      "hint": "Set torques equal."
+    }
+  ]
+}

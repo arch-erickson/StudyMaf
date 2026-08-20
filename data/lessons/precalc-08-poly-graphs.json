@@ -1,0 +1,238 @@
+{
+  "title": "Graphing Polynomials",
+  "summary": "A polynomial's graph is set by its degree and leading coefficient (end behavior), its real zeros (x-intercepts), and the multiplicity of each zero (cross vs touch). Together these sketch the curve's overall shape.",
+  "glossary": {
+    "degree": {
+      "plain": "Highest power in the polynomial.",
+      "in_class": "Sets the number of turns and end behavior."
+    },
+    "leading coefficient": {
+      "plain": "Coefficient of the highest power.",
+      "in_class": "Its sign controls the end behavior."
+    },
+    "end behavior": {
+      "plain": "What the graph does as $x\\to\\pm\\infty$.",
+      "in_class": "Determined by degree and leading coefficient."
+    },
+    "zero (root)": {
+      "plain": "Where the polynomial equals 0.",
+      "in_class": "An x-intercept of the graph."
+    },
+    "multiplicity": {
+      "plain": "How many times a factor repeats.",
+      "in_class": "Odd ⇒ crosses; even ⇒ touches."
+    },
+    "turning point": {
+      "plain": "A local max or min.",
+      "in_class": "At most degree − 1 of them."
+    },
+    "cross vs touch": {
+      "plain": "How the graph meets the x-axis at a zero.",
+      "in_class": "Odd multiplicity crosses, even touches."
+    },
+    "y-intercept": {
+      "plain": "The value at $x=0$.",
+      "in_class": "The constant term."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "End behavior",
+      "explanation": "The degree and leading coefficient set the ends: even degree sends both ends the same way, odd degree opposite ways; a positive leading coefficient lifts the right end.",
+      "math_steps": [
+        "Look at the degree (even/odd).",
+        "Look at the leading coefficient's sign.",
+        "Determine both ends."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-c1.svg",
+        "caption": "End behavior"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Zeros and factors",
+      "explanation": "Real zeros are x-intercepts, found by setting the factored polynomial to zero. Each factor $(x-a)$ gives a zero at $a$.",
+      "math_steps": [
+        "Factor the polynomial.",
+        "Set each factor to zero.",
+        "Those are the x-intercepts."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-c2.svg",
+        "caption": "Zeros and factors"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Multiplicity",
+      "explanation": "A zero's multiplicity (the power of its factor) tells how the graph behaves there: odd multiplicity crosses the axis, even multiplicity touches and turns back.",
+      "math_steps": [
+        "Read each factor's power.",
+        "Odd ⇒ crosses.",
+        "Even ⇒ touches (bounces)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-c3.svg",
+        "caption": "Multiplicity"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Turning points",
+      "explanation": "A degree-$n$ polynomial has at most $n-1$ turning points. Between consecutive zeros the graph must turn.",
+      "math_steps": [
+        "Count possible turns: up to $n-1$.",
+        "The graph turns between zeros.",
+        "Use this to shape the sketch."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-c4.svg",
+        "caption": "Turning points"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Putting it together",
+      "explanation": "Combine end behavior, x-intercepts with their multiplicities, and the y-intercept to sketch the full curve.",
+      "math_steps": [
+        "Plot intercepts (with cross/touch).",
+        "Draw the ends from end behavior.",
+        "Connect smoothly with turns."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-c5.svg",
+        "caption": "Putting it together"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Modeling a trend that reverses",
+      "scenario": "Data rises, dips, then rises again.",
+      "how_the_math_applies": "A cubic's shape (odd degree) captures a reversing trend.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-e1.svg",
+        "caption": "Modeling a trend that reverses"
+      }
+    },
+    {
+      "title": "Design curves",
+      "scenario": "A smooth curve passes through set points.",
+      "how_the_math_applies": "Polynomial graphs interpolate points with controllable turns.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-e2.svg",
+        "caption": "Design curves"
+      }
+    },
+    {
+      "title": "Predicting long-run behavior",
+      "scenario": "What happens for very large inputs?",
+      "how_the_math_applies": "End behavior from degree and leading coefficient forecasts the extremes.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-08-poly-graphs-e3.svg",
+        "caption": "Predicting long-run behavior"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "graphing polynomials end behavior zeros multiplicity",
+    "math_query": "polynomial graph multiplicity turning points examples",
+    "combined_query": "precalculus graphing polynomials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "End behavior of $f(x)=x^2$: both ends go?",
+      "correct_answer": "Up",
+      "solution_steps": [
+        "Even degree, positive lead.",
+        "Both ends up.",
+        "Done."
+      ],
+      "hint": "Even degree ⇒ ends match."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "How many x-intercepts does $f(x)=(x-1)(x+2)$ have?",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "Zeros at $1$ and $-2$.",
+        "Two intercepts.",
+        "Done."
+      ],
+      "hint": "One per distinct factor."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "At the zero of $(x-3)^2$, does the graph cross or touch?",
+      "correct_answer": "Touch",
+      "solution_steps": [
+        "Multiplicity 2 (even).",
+        "Touches and turns.",
+        "Touch."
+      ],
+      "hint": "Even multiplicity touches."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "End behavior of $f(x)=-x^3$: as $x\\to\\infty$, $y\\to$?",
+      "correct_answer": "$-\\infty$",
+      "solution_steps": [
+        "Odd degree, negative lead.",
+        "Right end goes down.",
+        "$-\\infty$."
+      ],
+      "hint": "Negative lead flips the ends."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Max number of turning points for a degree-4 polynomial?",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "At most $n-1$.",
+        "$4-1$.",
+        "$3$."
+      ],
+      "hint": "$n-1$ turning points."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "At the zero of $(x+1)^3$, cross or touch?",
+      "correct_answer": "Cross",
+      "solution_steps": [
+        "Multiplicity 3 (odd).",
+        "Crosses (with a flattening).",
+        "Cross."
+      ],
+      "hint": "Odd multiplicity crosses."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the y-intercept of $f(x)=(x-2)(x+1)(x-3)$.",
+      "correct_answer": "$6$",
+      "solution_steps": [
+        "$f(0)=(-2)(1)(-3)$.",
+        "$=6$.",
+        "Done."
+      ],
+      "hint": "Evaluate at $x=0$."
+    }
+  ]
+}

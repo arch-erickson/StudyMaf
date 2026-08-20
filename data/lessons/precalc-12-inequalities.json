@@ -1,0 +1,238 @@
+{
+  "title": "Polynomial & Rational Inequalities",
+  "summary": "To solve $P(x)>0$ or $R(x)\\le0$, find where the expression is zero or undefined, split the number line into intervals, and test the sign in each. The solution is the union of intervals with the correct sign.",
+  "glossary": {
+    "inequality": {
+      "plain": "A statement with $<,\\le,>,\\ge$.",
+      "in_class": "Solutions form intervals, not single points."
+    },
+    "critical values": {
+      "plain": "Where the expression is 0 or undefined.",
+      "in_class": "They split the number line."
+    },
+    "sign chart": {
+      "plain": "A number line marked with the sign on each interval.",
+      "in_class": "Reveals where the inequality holds."
+    },
+    "test point": {
+      "plain": "A value picked to check an interval's sign.",
+      "in_class": "Its sign applies to the whole interval."
+    },
+    "boundary included?": {
+      "plain": "Whether endpoints satisfy $\\le/\\ge$.",
+      "in_class": "Included for $\\le/\\ge$, excluded for $</>$ and where undefined."
+    },
+    "rational inequality": {
+      "plain": "An inequality with a fraction.",
+      "in_class": "Include denominator zeros as critical values (excluded)."
+    },
+    "union of intervals": {
+      "plain": "Combining solution pieces.",
+      "in_class": "Joined with $\\cup$."
+    },
+    "strict vs non-strict": {
+      "plain": "$</>$ vs $\\le/\\ge$.",
+      "in_class": "Determines open vs closed endpoints."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Find the critical values",
+      "explanation": "Locate where the expression equals zero (from the numerator) and where it's undefined (denominator zeros). These are the only places the sign can change.",
+      "math_steps": [
+        "Set the numerator to zero.",
+        "Set the denominator to zero (rational).",
+        "Mark all on a number line."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-c1.svg",
+        "caption": "Find the critical values"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Build a sign chart",
+      "explanation": "The critical values split the line into intervals. Pick a test point in each and record whether the expression is positive or negative there.",
+      "math_steps": [
+        "Divide the line at critical values.",
+        "Test one point per interval.",
+        "Record + or −."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-c2.svg",
+        "caption": "Build a sign chart"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Read the solution",
+      "explanation": "Select the intervals whose sign matches the inequality. Union them for the answer.",
+      "math_steps": [
+        "Match the required sign.",
+        "Collect those intervals.",
+        "Join with $\\cup$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-c3.svg",
+        "caption": "Read the solution"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Handle the boundaries",
+      "explanation": "For $\\le$ or $\\ge$, include zeros of the numerator; always exclude denominator zeros (undefined). Strict inequalities exclude all zeros.",
+      "math_steps": [
+        "Include numerator zeros for $\\le/\\ge$.",
+        "Always exclude denominator zeros.",
+        "Strict ⇒ exclude all boundaries."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-c4.svg",
+        "caption": "Handle the boundaries"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Rational inequalities",
+      "explanation": "Move everything to one side and combine into a single fraction first — never multiply across by a variable expression whose sign is unknown.",
+      "math_steps": [
+        "Get 0 on one side.",
+        "Combine into one fraction.",
+        "Then make the sign chart."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-c5.svg",
+        "caption": "Rational inequalities"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Profit above a target",
+      "scenario": "Profit must exceed a threshold.",
+      "how_the_math_applies": "A polynomial inequality gives the range of quantities that clear the target.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-e1.svg",
+        "caption": "Profit above a target"
+      }
+    },
+    {
+      "title": "Safe dosage range",
+      "scenario": "Concentration must stay within limits.",
+      "how_the_math_applies": "A rational inequality yields the acceptable interval.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-e2.svg",
+        "caption": "Safe dosage range"
+      }
+    },
+    {
+      "title": "Structural load limits",
+      "scenario": "Stress must stay below a maximum.",
+      "how_the_math_applies": "Solving an inequality gives the allowable range of a parameter.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-12-inequalities-e3.svg",
+        "caption": "Structural load limits"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "polynomial rational inequalities sign chart",
+    "math_query": "solving inequalities test point intervals examples",
+    "combined_query": "precalculus inequalities worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Solve $x-3>0$.",
+      "correct_answer": "$x>3$",
+      "solution_steps": [
+        "Add 3.",
+        "$x>3$.",
+        "$(3,\\infty)$."
+      ],
+      "hint": "Isolate $x$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Critical values of $(x-1)(x+2)$.",
+      "correct_answer": "$x=1,-2$",
+      "solution_steps": [
+        "Set each factor to zero.",
+        "$1$ and $-2$.",
+        "Done."
+      ],
+      "hint": "Zeros of the factors."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Solve $(x-1)(x+2)>0$.",
+      "correct_answer": "$x<-2$ or $x>1$",
+      "solution_steps": [
+        "Sign chart: + outside the roots.",
+        "Test points confirm.",
+        "$(-\\infty,-2)\\cup(1,\\infty)$."
+      ],
+      "hint": "Positive outside the roots."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Solve $x^2-4\\le0$.",
+      "correct_answer": "$-2\\le x\\le2$",
+      "solution_steps": [
+        "Roots $\\pm2$; parabola $\\le0$ between them.",
+        "$[-2,2]$.",
+        "Done."
+      ],
+      "hint": "Between the roots for $\\le0$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Solve $\\dfrac{1}{x-2}>0$.",
+      "correct_answer": "$x>2$",
+      "solution_steps": [
+        "Positive when $x-2>0$.",
+        "$x>2$.",
+        "Exclude 2."
+      ],
+      "hint": "Fraction positive when denominator positive."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Solve $\\dfrac{x-1}{x+2}\\ge0$.",
+      "correct_answer": "$x<-2$ or $x\\ge1$",
+      "solution_steps": [
+        "Critical: $1$ (zero), $-2$ (undefined).",
+        "Sign chart: + outside, include $1$, exclude $-2$.",
+        "$(-\\infty,-2)\\cup[1,\\infty)$."
+      ],
+      "hint": "Include the numerator zero, exclude the denominator zero."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve $x^2-x-6<0$.",
+      "correct_answer": "$-2<x<3$",
+      "solution_steps": [
+        "Factor $(x-3)(x+2)$; roots $3,-2$.",
+        "Negative between them.",
+        "$(-2,3)$."
+      ],
+      "hint": "Between the roots for $<0$."
+    }
+  ]
+}

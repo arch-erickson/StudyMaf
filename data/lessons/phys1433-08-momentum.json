@@ -1,0 +1,238 @@
+{
+  "title": "Momentum & Collisions",
+  "summary": "Momentum $p=mv$ changes by impulse $J=F\\Delta t=\\Delta p$. In an isolated system total momentum is conserved. Collisions are elastic (KE conserved) or inelastic (KE lost); perfectly inelastic collisions stick together.",
+  "glossary": {
+    "momentum": {
+      "plain": "Mass times velocity.",
+      "in_class": "$p=mv$; a vector."
+    },
+    "impulse": {
+      "plain": "Force applied over time.",
+      "in_class": "$J=F\\Delta t=\\Delta p$."
+    },
+    "conservation of momentum": {
+      "plain": "Total momentum constant with no external force.",
+      "in_class": "$\\sum p_i=\\sum p_f$."
+    },
+    "elastic collision": {
+      "plain": "Kinetic energy is conserved.",
+      "in_class": "Both $p$ and $KE$ conserved."
+    },
+    "inelastic collision": {
+      "plain": "Some kinetic energy is lost.",
+      "in_class": "$p$ conserved, $KE$ not."
+    },
+    "perfectly inelastic": {
+      "plain": "Objects stick together.",
+      "in_class": "Common final velocity."
+    },
+    "recoil": {
+      "plain": "Backward motion from ejecting mass.",
+      "in_class": "From zero total momentum."
+    },
+    "impulse-momentum theorem": {
+      "plain": "Impulse equals momentum change.",
+      "in_class": "$F\\Delta t=\\Delta p$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Momentum and impulse",
+      "explanation": "Momentum is $p=mv$; a force acting over time delivers impulse $J=F\\Delta t=\\Delta p$. Longer contact time means smaller force for the same change.",
+      "math_steps": [
+        "Compute $p=mv$.",
+        "Impulse $=F\\Delta t=\\Delta p$.",
+        "Longer $\\Delta t$ ⇒ smaller $F$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-c1.svg",
+        "caption": "Momentum and impulse"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Conservation of momentum",
+      "explanation": "With no external force, total momentum is unchanged. Set total momentum before equal to after.",
+      "math_steps": [
+        "Sum momenta before.",
+        "Sum momenta after.",
+        "Set them equal."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-c2.svg",
+        "caption": "Conservation of momentum"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Elastic vs inelastic",
+      "explanation": "Elastic collisions conserve kinetic energy; inelastic ones don't. Perfectly inelastic collisions stick together and lose the most KE.",
+      "math_steps": [
+        "Elastic: $p$ and $KE$ conserved.",
+        "Inelastic: only $p$ conserved.",
+        "Perfectly inelastic: common velocity."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-c3.svg",
+        "caption": "Elastic vs inelastic"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Perfectly inelastic collisions",
+      "explanation": "When objects stick, momentum conservation gives one common final velocity: $m_1v_1+m_2v_2=(m_1+m_2)v_f$.",
+      "math_steps": [
+        "Add the incoming momenta.",
+        "Divide by the total mass.",
+        "That's the common speed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-c4.svg",
+        "caption": "Perfectly inelastic collisions"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Impulse and safety",
+      "explanation": "Extending a collision's duration lowers the peak force ($F=\\Delta p/\\Delta t$) — why we use airbags, padding, and follow-through.",
+      "math_steps": [
+        "Fix $\\Delta p$.",
+        "Increase $\\Delta t$.",
+        "Peak force drops."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-c5.svg",
+        "caption": "Impulse and safety"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Catching an egg gently",
+      "scenario": "You move your hands back to catch it.",
+      "how_the_math_applies": "Lengthening the stopping time reduces the force, so the egg survives.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-e1.svg",
+        "caption": "Catching an egg gently"
+      }
+    },
+    {
+      "title": "Rocket launch",
+      "scenario": "Exhaust shoots out the bottom.",
+      "how_the_math_applies": "Momentum conservation propels the rocket up with equal-and-opposite momentum.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-e2.svg",
+        "caption": "Rocket launch"
+      }
+    },
+    {
+      "title": "A car crash",
+      "scenario": "Two cars collide and crumple.",
+      "how_the_math_applies": "An inelastic collision conserves momentum while losing kinetic energy to deformation.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-08-momentum-e3.svg",
+        "caption": "A car crash"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "momentum impulse conservation collisions algebra",
+    "math_query": "elastic inelastic collision recoil examples",
+    "combined_query": "physics 1 momentum collisions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the momentum of a $4$ kg cart at $5$ m/s.",
+      "correct_answer": "$20$ kg·m/s",
+      "solution_steps": [
+        "$p=mv$.",
+        "$=4(5)$.",
+        "$20$ kg·m/s."
+      ],
+      "hint": "$p=mv$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $15$ N force acts for $3$ s. Find the impulse.",
+      "correct_answer": "$45$ N·s",
+      "solution_steps": [
+        "$J=F\\Delta t$.",
+        "$=15(3)$.",
+        "$45$ N·s."
+      ],
+      "hint": "$J=F\\Delta t$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $3$ kg ball at $4$ m/s sticks to a $1$ kg ball at rest. Find their speed.",
+      "correct_answer": "$3$ m/s",
+      "solution_steps": [
+        "$3(4)=(4)v$.",
+        "$v=12/4$.",
+        "$3$ m/s."
+      ],
+      "hint": "Perfectly inelastic."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $0.4$ kg ball hits a wall at $5$ m/s and bounces at $5$ m/s. Find the impulse.",
+      "correct_answer": "$4$ N·s",
+      "solution_steps": [
+        "$\\Delta p=0.4(5-(-5))$.",
+        "$=0.4(10)$.",
+        "$4$ N·s."
+      ],
+      "hint": "Account for direction reversal."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $50$ kg skater throws a $4$ kg ball at $6$ m/s. Find her recoil speed.",
+      "correct_answer": "$0.48$ m/s",
+      "solution_steps": [
+        "$0=50v-4(6)$.",
+        "$v=24/50$.",
+        "$0.48$ m/s."
+      ],
+      "hint": "Total momentum stays zero."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $2000$ kg truck at $15$ m/s hits a stopped $1000$ kg car; they stick. Find their speed.",
+      "correct_answer": "$10$ m/s",
+      "solution_steps": [
+        "$2000(15)=3000v$.",
+        "$v=30000/3000$.",
+        "$10$ m/s."
+      ],
+      "hint": "Inelastic conservation."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Equal masses collide elastically, one at $8$ m/s, one at rest. Find the final speeds.",
+      "correct_answer": "$0$ and $8$ m/s",
+      "solution_steps": [
+        "Equal-mass elastic ⇒ exchange velocities.",
+        "First stops, second moves at $8$ m/s.",
+        "Done."
+      ],
+      "hint": "They swap velocities."
+    }
+  ]
+}

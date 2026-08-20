@@ -1,0 +1,238 @@
+{
+  "title": "Oscillations",
+  "summary": "Simple harmonic motion arises from a restoring force proportional to displacement ($F=-kx$). Its motion is sinusoidal with period $T=2\\pi\\sqrt{m/k}$ (spring) or $2\\pi\\sqrt{L/g}$ (pendulum). Energy trades between kinetic and elastic potential.",
+  "glossary": {
+    "simple harmonic motion": {
+      "plain": "Oscillation with a linear restoring force.",
+      "in_class": "$F=-kx$; sinusoidal in time."
+    },
+    "restoring force": {
+      "plain": "A force pulling back toward equilibrium.",
+      "in_class": "Proportional to displacement in SHM."
+    },
+    "period": {
+      "plain": "Time for one full cycle.",
+      "in_class": "$T$; spring $2\\pi\\sqrt{m/k}$, pendulum $2\\pi\\sqrt{L/g}$."
+    },
+    "frequency": {
+      "plain": "Cycles per second.",
+      "in_class": "$f=1/T$, in hertz."
+    },
+    "amplitude": {
+      "plain": "Maximum displacement from equilibrium.",
+      "in_class": "Sets the energy $\\tfrac12kA^2$."
+    },
+    "angular frequency": {
+      "plain": "$\\omega=2\\pi f=\\sqrt{k/m}$.",
+      "in_class": "Appears in $x(t)=A\\cos(\\omega t)$."
+    },
+    "spring constant": {
+      "plain": "Stiffness of a spring.",
+      "in_class": "$k$; larger $k$ ⇒ faster oscillation."
+    },
+    "SHM energy": {
+      "plain": "Trades between kinetic and elastic PE.",
+      "in_class": "Total $\\tfrac12kA^2$ is constant."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The restoring force",
+      "explanation": "SHM occurs when the restoring force is proportional to displacement: $F=-kx$. The minus sign means it always points back toward equilibrium.",
+      "math_steps": [
+        "Check the force is $\\propto-x$.",
+        "That guarantees SHM.",
+        "Identify the effective $k$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-c1.svg",
+        "caption": "The restoring force"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Period and frequency",
+      "explanation": "For a mass–spring, $T=2\\pi\\sqrt{m/k}$; for a small-angle pendulum, $T=2\\pi\\sqrt{L/g}$. Frequency is $f=1/T$.",
+      "math_steps": [
+        "Pick the right formula.",
+        "Plug in $m,k$ or $L,g$.",
+        "Frequency $=1/T$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-c2.svg",
+        "caption": "Period and frequency"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The motion in time",
+      "explanation": "Displacement follows $x(t)=A\\cos(\\omega t+\\phi)$ with $\\omega=\\sqrt{k/m}$. Velocity and acceleration are its derivatives, peaking a quarter cycle apart.",
+      "math_steps": [
+        "Write $x(t)=A\\cos(\\omega t)$.",
+        "Differentiate for $v$ and $a$.",
+        "Max speed at equilibrium, max $|a|$ at the ends."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-c3.svg",
+        "caption": "The motion in time"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Energy in SHM",
+      "explanation": "Total energy $\\tfrac12kA^2$ trades between kinetic and elastic potential. At the extremes it's all potential; at equilibrium all kinetic.",
+      "math_steps": [
+        "Total energy $=\\tfrac12kA^2$.",
+        "At $x=A$: all PE; at $x=0$: all KE.",
+        "Max speed $v_{max}=\\omega A$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-c4.svg",
+        "caption": "Energy in SHM"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "The pendulum",
+      "explanation": "A pendulum approximates SHM for small angles, with period depending only on length and gravity — not on mass or amplitude.",
+      "math_steps": [
+        "Assume a small angle.",
+        "$T=2\\pi\\sqrt{L/g}$.",
+        "Independent of mass and amplitude."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-c5.svg",
+        "caption": "The pendulum"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A grandfather clock",
+      "scenario": "A pendulum keeps time.",
+      "how_the_math_applies": "Its period $2\\pi\\sqrt{L/g}$ depends only on length, so the clock is set by adjusting $L$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-e1.svg",
+        "caption": "A grandfather clock"
+      }
+    },
+    {
+      "title": "Car suspension",
+      "scenario": "Springs absorb bumps.",
+      "how_the_math_applies": "The suspension is a mass–spring oscillator; damping stops it from bouncing forever.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-e2.svg",
+        "caption": "Car suspension"
+      }
+    },
+    {
+      "title": "A vibrating guitar string",
+      "scenario": "A plucked string oscillates.",
+      "how_the_math_applies": "It undergoes harmonic motion whose frequency sets the pitch.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-12-oscillations-e3.svg",
+        "caption": "A vibrating guitar string"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "simple harmonic motion restoring force period frequency",
+    "math_query": "spring pendulum period energy SHM examples",
+    "combined_query": "physics 1 oscillations SHM worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A spring has $k=200$ N/m and mass $0.5$ kg. Find the period.",
+      "correct_answer": "$\\approx0.314$ s",
+      "solution_steps": [
+        "$T=2\\pi\\sqrt{m/k}$.",
+        "$=2\\pi\\sqrt{0.5/200}$.",
+        "$\\approx0.314$ s."
+      ],
+      "hint": "$T=2\\pi\\sqrt{m/k}$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A pendulum is $1$ m long. Find its period.",
+      "correct_answer": "$\\approx2.01$ s",
+      "solution_steps": [
+        "$T=2\\pi\\sqrt{L/g}$.",
+        "$=2\\pi\\sqrt{1/9.8}$.",
+        "$\\approx2.01$ s."
+      ],
+      "hint": "$T=2\\pi\\sqrt{L/g}$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A spring–mass system has $T=0.5$ s. Find the frequency.",
+      "correct_answer": "$2$ Hz",
+      "solution_steps": [
+        "$f=1/T$.",
+        "$=1/0.5$.",
+        "$2$ Hz."
+      ],
+      "hint": "$f=1/T$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the angular frequency for $k=100$ N/m, $m=4$ kg.",
+      "correct_answer": "$5$ rad/s",
+      "solution_steps": [
+        "$\\omega=\\sqrt{k/m}$.",
+        "$=\\sqrt{100/4}$.",
+        "$5$ rad/s."
+      ],
+      "hint": "$\\omega=\\sqrt{k/m}$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $0.2$ kg mass on a spring ($k=50$) has amplitude $0.1$ m. Find the total energy.",
+      "correct_answer": "$0.25$ J",
+      "solution_steps": [
+        "$E=\\tfrac12kA^2$.",
+        "$=\\tfrac12(50)(0.01)$.",
+        "$0.25$ J."
+      ],
+      "hint": "$\\tfrac12kA^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "For the previous system, find the maximum speed.",
+      "correct_answer": "$\\approx1.58$ m/s",
+      "solution_steps": [
+        "$\\omega=\\sqrt{50/0.2}=15.8$; $v_{max}=\\omega A$.",
+        "$=15.8(0.1)$.",
+        "$\\approx1.58$ m/s."
+      ],
+      "hint": "$v_{max}=\\omega A$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "How does the pendulum period change if length is quadrupled?",
+      "correct_answer": "Doubles",
+      "solution_steps": [
+        "$T\\propto\\sqrt L$.",
+        "$\\sqrt4=2$.",
+        "Period doubles."
+      ],
+      "hint": "$T\\propto\\sqrt{L}$."
+    }
+  ]
+}

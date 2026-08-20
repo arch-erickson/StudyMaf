@@ -4443,6 +4443,3823 @@
           ]
         }
       ]
+    },
+    {
+      "code": "PHYS1441",
+      "name": "Physics I — Calculus Based",
+      "institution": "NYC College of Technology (CUNY)",
+      "semester": "Fall",
+      "year": "2025",
+      "textbooks": [
+        "University Physics Volume 1 — OpenStax"
+      ],
+      "lessons": [
+        {
+          "id": "phys1441-01-units",
+          "chapter": "Vol. 1, Ch. 1",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Convert $72$ km/h to m/s.",
+              "correct_answer": "$20$ m/s",
+              "solution_steps": [
+                "$72\\,\\tfrac{km}{h}\\times\\tfrac{1000\\,m}{km}\\times\\tfrac{1\\,h}{3600\\,s}$.",
+                "$=72/3.6$.",
+                "$=20$ m/s."
+              ],
+              "hint": "Divide km/h by 3.6."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "How many sig figs in $0.00450$?",
+              "correct_answer": "$3$",
+              "solution_steps": [
+                "Leading zeros don't count.",
+                "$4,5,0$ are significant.",
+                "$3$."
+              ],
+              "hint": "Trailing zero after a decimal counts."
+            },
+            {
+              "id": "p03",
+              "difficulty": "easy",
+              "prompt": "What are the SI units of force?",
+              "correct_answer": "$\\text{kg·m/s}^2$ (N)",
+              "solution_steps": [
+                "$F=ma$.",
+                "$\\text{kg}\\cdot\\text{m/s}^2$.",
+                "= newton (N)."
+              ],
+              "hint": "Use $F=ma$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Convert $5.0\\ \\text{m}^2$ to cm².",
+              "correct_answer": "$5.0\\times10^{4}$ cm²",
+              "solution_steps": [
+                "$1\\,m=100\\,cm$, so $1\\,m^2=10^4\\,cm^2$.",
+                "$5.0\\times10^4$.",
+                "cm²."
+              ],
+              "hint": "Square the length conversion."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Is $x=\\tfrac12 at^2$ dimensionally consistent? ($a$ in m/s², $t$ in s)",
+              "correct_answer": "Yes (both sides m)",
+              "solution_steps": [
+                "$a t^2$: $\\tfrac{m}{s^2}\\cdot s^2=m$.",
+                "Left side $x$ is m.",
+                "Consistent."
+              ],
+              "hint": "Check the units of $at^2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "medium",
+              "prompt": "Estimate the order of magnitude of the number of seconds in a year.",
+              "correct_answer": "$10^{7}$",
+              "solution_steps": [
+                "$\\sim3\\times10^7$ s.",
+                "Nearest power of ten.",
+                "$10^7$."
+              ],
+              "hint": "$365\\times24\\times3600$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A rectangle is $2.5\\ \\text{m}\\times1.20\\ \\text{m}$. Give the area with correct sig figs.",
+              "correct_answer": "$3.0\\ \\text{m}^2$",
+              "solution_steps": [
+                "$2.5\\times1.20=3.00$.",
+                "Fewest sig figs is 2.",
+                "$3.0\\ \\text{m}^2$."
+              ],
+              "hint": "×/÷ keeps the fewest sig figs."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-02-kinematics-1d",
+          "chapter": "Vol. 1, Ch. 3",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A car goes from $0$ to $20$ m/s in $4$ s. Find its acceleration.",
+              "correct_answer": "$5$ m/s²",
+              "solution_steps": [
+                "$a=\\Delta v/\\Delta t$.",
+                "$=20/4$.",
+                "$5$ m/s²."
+              ],
+              "hint": "$a=\\Delta v/\\Delta t$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A ball is dropped from rest. Find its speed after $2$ s.",
+              "correct_answer": "$\\approx19.6$ m/s",
+              "solution_steps": [
+                "$v=gt$.",
+                "$=9.8(2)$.",
+                "$19.6$ m/s."
+              ],
+              "hint": "$v=v_0+at$ with $v_0=0$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A car at $30$ m/s brakes at $6$ m/s². Find the stopping distance.",
+              "correct_answer": "$75$ m",
+              "solution_steps": [
+                "$v^2=v_0^2+2a\\Delta x$, $0=900-12\\Delta x$.",
+                "$\\Delta x=900/12$.",
+                "$75$ m."
+              ],
+              "hint": "Use $v^2=v_0^2+2a\\Delta x$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A ball thrown up at $20$ m/s reaches what maximum height?",
+              "correct_answer": "$\\approx20.4$ m",
+              "solution_steps": [
+                "At top $v=0$: $0=400-2(9.8)h$.",
+                "$h=400/19.6$.",
+                "$20.4$ m."
+              ],
+              "hint": "$v=0$ at the peak."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "How far does a car travel from rest in $5$ s at $4$ m/s²?",
+              "correct_answer": "$50$ m",
+              "solution_steps": [
+                "$x=\\tfrac12 at^2$.",
+                "$=\\tfrac12(4)(25)$.",
+                "$50$ m."
+              ],
+              "hint": "$x=\\tfrac12 at^2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A ball thrown up at $15$ m/s — how long until it returns to the thrower's hand?",
+              "correct_answer": "$\\approx3.06$ s",
+              "solution_steps": [
+                "Time up: $v=0$ at $t=15/9.8=1.53$ s.",
+                "Total is twice that.",
+                "$\\approx3.06$ s."
+              ],
+              "hint": "Up-time equals down-time."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Position $x(t)=3t^2-2t$. Find the velocity at $t=2$ s.",
+              "correct_answer": "$10$ m/s",
+              "solution_steps": [
+                "$v=dx/dt=6t-2$.",
+                "At $t=2$: $12-2$.",
+                "$10$ m/s."
+              ],
+              "hint": "Differentiate position."
+            },
+            {
+              "id": "p08",
+              "difficulty": "stretch",
+              "prompt": "A stone dropped takes $3$ s to hit the ground. How tall is the cliff?",
+              "correct_answer": "$\\approx44.1$ m",
+              "solution_steps": [
+                "$h=\\tfrac12 g t^2$.",
+                "$=\\tfrac12(9.8)(9)$.",
+                "$44.1$ m."
+              ],
+              "hint": "$h=\\tfrac12 g t^2$."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-03-vectors-2d",
+          "chapter": "Vol. 1, Ch. 2 & 4",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A vector has magnitude $10$ at $30^\\circ$. Find its $x$-component.",
+              "correct_answer": "$\\approx8.66$",
+              "solution_steps": [
+                "$A_x=A\\cos\\theta$.",
+                "$=10\\cos30^\\circ$.",
+                "$\\approx8.66$."
+              ],
+              "hint": "$A_x=A\\cos\\theta$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the magnitude of a vector with components $(3,4)$.",
+              "correct_answer": "$5$",
+              "solution_steps": [
+                "$\\sqrt{3^2+4^2}$.",
+                "$=\\sqrt{25}$.",
+                "$5$."
+              ],
+              "hint": "Pythagoras."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A ball is launched horizontally at $10$ m/s from $20$ m high. How long to land?",
+              "correct_answer": "$\\approx2.02$ s",
+              "solution_steps": [
+                "$y$: $20=\\tfrac12(9.8)t^2$.",
+                "$t=\\sqrt{40/9.8}$.",
+                "$\\approx2.02$ s."
+              ],
+              "hint": "Vertical motion sets the time."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "In the previous problem, how far horizontally does it land?",
+              "correct_answer": "$\\approx20.2$ m",
+              "solution_steps": [
+                "$x=v_{0x}t=10(2.02)$.",
+                "$\\approx20.2$ m.",
+                "Done."
+              ],
+              "hint": "Range $=v_x\\times t$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A projectile is launched at $20$ m/s, $30^\\circ$. Find $v_{0y}$.",
+              "correct_answer": "$10$ m/s",
+              "solution_steps": [
+                "$v_{0y}=20\\sin30^\\circ$.",
+                "$=20(0.5)$.",
+                "$10$ m/s."
+              ],
+              "hint": "$v_{0y}=v_0\\sin\\theta$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "For that launch ($20$ m/s, $30^\\circ$), find the time of flight on level ground.",
+              "correct_answer": "$\\approx2.04$ s",
+              "solution_steps": [
+                "$t=2v_{0y}/g=2(10)/9.8$.",
+                "$\\approx2.04$ s.",
+                "Done."
+              ],
+              "hint": "Flight time $=2v_{0y}/g$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Find the range for that launch.",
+              "correct_answer": "$\\approx35.3$ m",
+              "solution_steps": [
+                "$R=v_{0x}t=20\\cos30^\\circ\\times2.04$.",
+                "$\\approx17.3\\times2.04$.",
+                "$\\approx35.3$ m."
+              ],
+              "hint": "Range $=v_x\\times$ flight time."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-04-newtons-laws",
+          "chapter": "Vol. 1, Ch. 5",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $10$ kg box has a net force of $30$ N. Find its acceleration.",
+              "correct_answer": "$3$ m/s²",
+              "solution_steps": [
+                "$a=F/m$.",
+                "$=30/10$.",
+                "$3$ m/s²."
+              ],
+              "hint": "$a=F_{net}/m$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "What is the weight of a $5$ kg object?",
+              "correct_answer": "$\\approx49$ N",
+              "solution_steps": [
+                "$W=mg$.",
+                "$=5(9.8)$.",
+                "$49$ N."
+              ],
+              "hint": "$W=mg$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $2$ kg block is pushed with $12$ N against $4$ N of friction. Find its acceleration.",
+              "correct_answer": "$4$ m/s²",
+              "solution_steps": [
+                "Net $=12-4=8$ N.",
+                "$a=8/2$.",
+                "$4$ m/s²."
+              ],
+              "hint": "Subtract friction, then $a=F_{net}/m$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $3$ kg mass hangs from a rope in equilibrium. Find the tension.",
+              "correct_answer": "$\\approx29.4$ N",
+              "solution_steps": [
+                "Equilibrium: $T=mg$.",
+                "$=3(9.8)$.",
+                "$29.4$ N."
+              ],
+              "hint": "Tension balances weight."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "An elevator accelerates up at $2$ m/s² with a $60$ kg person. Find the normal force.",
+              "correct_answer": "$\\approx708$ N",
+              "solution_steps": [
+                "$N-mg=ma$.",
+                "$N=60(9.8+2)$.",
+                "$708$ N."
+              ],
+              "hint": "$N=m(g+a)$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $5$ kg block on a frictionless $30^\\circ$ incline — find its acceleration.",
+              "correct_answer": "$\\approx4.9$ m/s²",
+              "solution_steps": [
+                "$a=g\\sin\\theta$.",
+                "$=9.8\\sin30^\\circ$.",
+                "$4.9$ m/s²."
+              ],
+              "hint": "$a=g\\sin\\theta$ on a frictionless incline."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Two masses $3$ kg and $2$ kg connected over a frictionless pulley (Atwood). Find the acceleration.",
+              "correct_answer": "$\\approx1.96$ m/s²",
+              "solution_steps": [
+                "$a=\\dfrac{(m_1-m_2)g}{m_1+m_2}=\\dfrac{(1)(9.8)}{5}$.",
+                "$=1.96$ m/s².",
+                "Done."
+              ],
+              "hint": "Atwood: $a=(m_1-m_2)g/(m_1+m_2)$."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-05-applications-gravity",
+          "chapter": "Vol. 1, Ch. 6 & 13",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $10$ kg box on a floor has $\\mu_k=0.3$. Find the kinetic friction force.",
+              "correct_answer": "$\\approx29.4$ N",
+              "solution_steps": [
+                "$N=mg=98$ N.",
+                "$f=\\mu N=0.3(98)$.",
+                "$29.4$ N."
+              ],
+              "hint": "$f=\\mu N$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $2$ kg ball moves in a circle of radius $1$ m at $3$ m/s. Find the centripetal force.",
+              "correct_answer": "$18$ N",
+              "solution_steps": [
+                "$F_c=mv^2/r$.",
+                "$=2(9)/1$.",
+                "$18$ N."
+              ],
+              "hint": "$F_c=mv^2/r$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Find the centripetal acceleration for $v=10$ m/s, $r=25$ m.",
+              "correct_answer": "$4$ m/s²",
+              "solution_steps": [
+                "$a_c=v^2/r$.",
+                "$=100/25$.",
+                "$4$ m/s²."
+              ],
+              "hint": "$a_c=v^2/r$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Two $1000$ kg masses are $2$ m apart. Find the gravitational force.",
+              "correct_answer": "$\\approx1.67\\times10^{-5}$ N",
+              "solution_steps": [
+                "$F=G m_1m_2/r^2$.",
+                "$=6.67\\times10^{-11}(10^6)/4$.",
+                "$\\approx1.67\\times10^{-5}$ N."
+              ],
+              "hint": "$F=Gm_1m_2/r^2$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $5$ kg block is pushed at constant velocity against $\\mu_k=0.4$. Find the push force.",
+              "correct_answer": "$\\approx19.6$ N",
+              "solution_steps": [
+                "Constant velocity ⇒ push $=f=\\mu mg$.",
+                "$=0.4(5)(9.8)$.",
+                "$19.6$ N."
+              ],
+              "hint": "At constant velocity, push equals friction."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Find the orbital speed at radius $r=7\\times10^6$ m around Earth ($M=5.97\\times10^{24}$ kg).",
+              "correct_answer": "$\\approx7.5\\times10^3$ m/s",
+              "solution_steps": [
+                "$v=\\sqrt{GM/r}$.",
+                "$=\\sqrt{6.67\\times10^{-11}(5.97\\times10^{24})/7\\times10^6}$.",
+                "$\\approx7.5$ km/s."
+              ],
+              "hint": "$v=\\sqrt{GM/r}$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A car rounds a flat curve ($r=50$ m, $\\mu_s=0.8$). Find the maximum speed.",
+              "correct_answer": "$\\approx19.8$ m/s",
+              "solution_steps": [
+                "$\\mu_s mg=mv^2/r$ ⇒ $v=\\sqrt{\\mu_s g r}$.",
+                "$=\\sqrt{0.8(9.8)(50)}$.",
+                "$\\approx19.8$ m/s."
+              ],
+              "hint": "$v=\\sqrt{\\mu_s g r}$."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-06-work-energy",
+          "chapter": "Vol. 1, Ch. 7",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $50$ N force pushes a box $4$ m in the direction of motion. Find the work.",
+              "correct_answer": "$200$ J",
+              "solution_steps": [
+                "$W=Fd\\cos0$.",
+                "$=50(4)$.",
+                "$200$ J."
+              ],
+              "hint": "$W=Fd$ when aligned."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the kinetic energy of a $2$ kg ball moving at $5$ m/s.",
+              "correct_answer": "$25$ J",
+              "solution_steps": [
+                "$KE=\\tfrac12mv^2$.",
+                "$=\\tfrac12(2)(25)$.",
+                "$25$ J."
+              ],
+              "hint": "$\\tfrac12mv^2$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $10$ N force acts at $60^\\circ$ to a $5$ m displacement. Find the work.",
+              "correct_answer": "$25$ J",
+              "solution_steps": [
+                "$W=Fd\\cos60^\\circ$.",
+                "$=10(5)(0.5)$.",
+                "$25$ J."
+              ],
+              "hint": "Include $\\cos\\theta$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Net work of $100$ J is done on a $4$ kg cart at rest. Find its final speed.",
+              "correct_answer": "$\\approx7.07$ m/s",
+              "solution_steps": [
+                "$W=\\tfrac12mv^2$.",
+                "$100=2v^2\\Rightarrow v^2=50$.",
+                "$v\\approx7.07$ m/s."
+              ],
+              "hint": "Work–energy theorem."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A motor does $600$ J in $3$ s. Find its power.",
+              "correct_answer": "$200$ W",
+              "solution_steps": [
+                "$P=W/t$.",
+                "$=600/3$.",
+                "$200$ W."
+              ],
+              "hint": "$P=W/t$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A spring ($k=200$ N/m) is compressed $0.1$ m. Find the stored energy.",
+              "correct_answer": "$1$ J",
+              "solution_steps": [
+                "$W=\\tfrac12kx^2$.",
+                "$=\\tfrac12(200)(0.01)$.",
+                "$1$ J."
+              ],
+              "hint": "$\\tfrac12kx^2$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A car needs $8000$ N of force to move at $25$ m/s. Find the power.",
+              "correct_answer": "$200$ kW",
+              "solution_steps": [
+                "$P=Fv$.",
+                "$=8000(25)$.",
+                "$200{,}000$ W = 200 kW."
+              ],
+              "hint": "$P=Fv$."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-07-potential-energy",
+          "chapter": "Vol. 1, Ch. 8",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the gravitational PE of a $2$ kg book $3$ m high.",
+              "correct_answer": "$\\approx58.8$ J",
+              "solution_steps": [
+                "$U=mgh$.",
+                "$=2(9.8)(3)$.",
+                "$58.8$ J."
+              ],
+              "hint": "$U=mgh$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A spring ($k=100$ N/m) is stretched $0.2$ m. Find the stored energy.",
+              "correct_answer": "$2$ J",
+              "solution_steps": [
+                "$U=\\tfrac12kx^2$.",
+                "$=\\tfrac12(100)(0.04)$.",
+                "$2$ J."
+              ],
+              "hint": "$\\tfrac12kx^2$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A ball dropped from $5$ m — find its speed at the bottom (energy method).",
+              "correct_answer": "$\\approx9.9$ m/s",
+              "solution_steps": [
+                "$mgh=\\tfrac12mv^2$ ⇒ $v=\\sqrt{2gh}$.",
+                "$=\\sqrt{2(9.8)(5)}$.",
+                "$\\approx9.9$ m/s."
+              ],
+              "hint": "$v=\\sqrt{2gh}$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A pendulum released from height $0.2$ m — find the speed at the bottom.",
+              "correct_answer": "$\\approx1.98$ m/s",
+              "solution_steps": [
+                "$v=\\sqrt{2gh}$.",
+                "$=\\sqrt{2(9.8)(0.2)}$.",
+                "$\\approx1.98$ m/s."
+              ],
+              "hint": "All PE becomes KE."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $1$ kg block slides down a frictionless $2$ m-high ramp. Find its final KE.",
+              "correct_answer": "$\\approx19.6$ J",
+              "solution_steps": [
+                "$KE=mgh$.",
+                "$=1(9.8)(2)$.",
+                "$19.6$ J."
+              ],
+              "hint": "KE gained equals PE lost."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $3$ kg block slides down a $4$ m-high slope, arriving at $6$ m/s. How much energy went to friction?",
+              "correct_answer": "$\\approx63.6$ J",
+              "solution_steps": [
+                "$mgh=117.6$ J; $KE=\\tfrac12(3)(36)=54$ J.",
+                "Friction $=117.6-54$.",
+                "$\\approx63.6$ J."
+              ],
+              "hint": "Friction loss = PE − KE."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A $2$ kg ball is launched up a spring ($k=800$ N/m) compressed $0.1$ m. Find the max height (ignore mass of spring).",
+              "correct_answer": "$\\approx0.204$ m",
+              "solution_steps": [
+                "$\\tfrac12kx^2=mgh$: $4=2(9.8)h$.",
+                "$h=4/19.6$.",
+                "$\\approx0.204$ m."
+              ],
+              "hint": "Spring PE → gravitational PE."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-08-momentum",
+          "chapter": "Vol. 1, Ch. 9",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the momentum of a $3$ kg cart at $4$ m/s.",
+              "correct_answer": "$12$ kg·m/s",
+              "solution_steps": [
+                "$p=mv$.",
+                "$=3(4)$.",
+                "$12$ kg·m/s."
+              ],
+              "hint": "$p=mv$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $10$ N force acts for $2$ s. Find the impulse.",
+              "correct_answer": "$20$ N·s",
+              "solution_steps": [
+                "$J=F\\Delta t$.",
+                "$=10(2)$.",
+                "$20$ N·s."
+              ],
+              "hint": "$J=F\\Delta t$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $2$ kg ball at $3$ m/s hits and sticks to a $1$ kg ball at rest. Find their common speed.",
+              "correct_answer": "$2$ m/s",
+              "solution_steps": [
+                "$p$: $2(3)=(3)v$.",
+                "$v=6/3$.",
+                "$2$ m/s."
+              ],
+              "hint": "Perfectly inelastic: stick together."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $0.5$ kg ball hits a wall at $4$ m/s and bounces back at $4$ m/s. Find the impulse.",
+              "correct_answer": "$4$ N·s",
+              "solution_steps": [
+                "$\\Delta p=m(v_f-v_i)=0.5(4-(-4))$.",
+                "$=0.5(8)$.",
+                "$4$ N·s."
+              ],
+              "hint": "Include the direction change."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $60$ kg skater throws a $2$ kg ball at $10$ m/s. Find the skater's recoil speed.",
+              "correct_answer": "$\\approx0.33$ m/s",
+              "solution_steps": [
+                "$0=60v-2(10)$.",
+                "$v=20/60$.",
+                "$0.33$ m/s."
+              ],
+              "hint": "Total momentum starts at zero."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $1$ kg cart at $6$ m/s collides elastically with an equal cart at rest. Find the final speeds.",
+              "correct_answer": "$0$ and $6$ m/s",
+              "solution_steps": [
+                "Equal masses, elastic: they exchange velocities.",
+                "First stops, second moves at $6$ m/s.",
+                "Done."
+              ],
+              "hint": "Equal-mass elastic ⇒ swap velocities."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A $1500$ kg car at $20$ m/s hits a stopped $1000$ kg car; they stick. Find their speed.",
+              "correct_answer": "$12$ m/s",
+              "solution_steps": [
+                "$1500(20)=2500v$.",
+                "$v=30000/2500$.",
+                "$12$ m/s."
+              ],
+              "hint": "Inelastic momentum conservation."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-09-rotation",
+          "chapter": "Vol. 1, Ch. 10 & 11",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A wheel spins at $10$ rad/s, radius $0.5$ m. Find the rim speed.",
+              "correct_answer": "$5$ m/s",
+              "solution_steps": [
+                "$v=r\\omega$.",
+                "$=0.5(10)$.",
+                "$5$ m/s."
+              ],
+              "hint": "$v=r\\omega$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $20$ N force acts $0.3$ m from an axis, perpendicular. Find the torque.",
+              "correct_answer": "$6$ N·m",
+              "solution_steps": [
+                "$\\tau=rF$.",
+                "$=0.3(20)$.",
+                "$6$ N·m."
+              ],
+              "hint": "$\\tau=rF\\sin90^\\circ$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A torque of $12$ N·m acts on $I=4$ kg·m². Find the angular acceleration.",
+              "correct_answer": "$3$ rad/s²",
+              "solution_steps": [
+                "$\\alpha=\\tau/I$.",
+                "$=12/4$.",
+                "$3$ rad/s²."
+              ],
+              "hint": "$\\tau=I\\alpha$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Find the rotational KE of $I=2$ kg·m² spinning at $5$ rad/s.",
+              "correct_answer": "$25$ J",
+              "solution_steps": [
+                "$KE=\\tfrac12I\\omega^2$.",
+                "$=\\tfrac12(2)(25)$.",
+                "$25$ J."
+              ],
+              "hint": "$\\tfrac12I\\omega^2$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $30$ N force acts $0.4$ m from an axis at $30^\\circ$. Find the torque.",
+              "correct_answer": "$6$ N·m",
+              "solution_steps": [
+                "$\\tau=rF\\sin\\theta$.",
+                "$=0.4(30)(0.5)$.",
+                "$6$ N·m."
+              ],
+              "hint": "Include $\\sin\\theta$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A skater with $I=4$ kg·m² at $2$ rad/s pulls in to $I=1$ kg·m². Find the new $\\omega$.",
+              "correct_answer": "$8$ rad/s",
+              "solution_steps": [
+                "$I_i\\omega_i=I_f\\omega_f$: $4(2)=1\\omega$.",
+                "$\\omega=8$.",
+                "$8$ rad/s."
+              ],
+              "hint": "Conserve $L=I\\omega$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A wheel accelerates from rest at $2$ rad/s² for $3$ s. Find its final angular velocity and angle turned.",
+              "correct_answer": "$6$ rad/s, $9$ rad",
+              "solution_steps": [
+                "$\\omega=\\alpha t=6$; $\\theta=\\tfrac12\\alpha t^2=9$.",
+                "Done.",
+                "$6$ rad/s, $9$ rad."
+              ],
+              "hint": "Rotational kinematics."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-10-equilibrium",
+          "chapter": "Vol. 1, Ch. 12",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A uniform $4$ m beam weighs $200$ N. Find the torque of its weight about one end.",
+              "correct_answer": "$400$ N·m",
+              "solution_steps": [
+                "Weight acts at center ($2$ m).",
+                "$\\tau=2(200)$.",
+                "$400$ N·m."
+              ],
+              "hint": "Center of gravity at the middle."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Two children balance a seesaw: $30$ kg at $2$ m. Find the torque about the pivot.",
+              "correct_answer": "$\\approx588$ N·m",
+              "solution_steps": [
+                "$\\tau=r(mg)=2(30)(9.8)$.",
+                "$=588$.",
+                "N·m."
+              ],
+              "hint": "$\\tau=r\\,mg$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $50$ N weight sits $1$ m left of a pivot. What weight $3$ m right balances it?",
+              "correct_answer": "$\\approx16.7$ N",
+              "solution_steps": [
+                "$50(1)=W(3)$.",
+                "$W=50/3$.",
+                "$16.7$ N."
+              ],
+              "hint": "Set the two torques equal."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A wire has $\\sigma=F/A$ with $F=100$ N, $A=2\\times10^{-6}$ m². Find the stress.",
+              "correct_answer": "$5\\times10^{7}$ Pa",
+              "solution_steps": [
+                "$\\sigma=F/A$.",
+                "$=100/(2\\times10^{-6})$.",
+                "$5\\times10^7$ Pa."
+              ],
+              "hint": "$\\sigma=F/A$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $2$ m rod stretches $0.001$ m. Find the strain.",
+              "correct_answer": "$5\\times10^{-4}$",
+              "solution_steps": [
+                "$\\varepsilon=\\Delta L/L$.",
+                "$=0.001/2$.",
+                "$5\\times10^{-4}$."
+              ],
+              "hint": "$\\varepsilon=\\Delta L/L$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A uniform $6$ m beam ($100$ N) rests on two supports at the ends, with a $200$ N load $2$ m from the left. Find the left support force.",
+              "correct_answer": "$\\approx183$ N",
+              "solution_steps": [
+                "Torque about right end: $F_L(6)=100(3)+200(4)$.",
+                "$F_L=1100/6$.",
+                "$\\approx183$ N."
+              ],
+              "hint": "Take torques about the right support."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-11-fluids",
+          "chapter": "Vol. 1, Ch. 14",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the pressure $10$ m deep in water ($\\rho=1000$, ignore atmosphere).",
+              "correct_answer": "$\\approx9.8\\times10^{4}$ Pa",
+              "solution_steps": [
+                "$P=\\rho gh$.",
+                "$=1000(9.8)(10)$.",
+                "$9.8\\times10^4$ Pa."
+              ],
+              "hint": "$P=\\rho gh$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the density of a $6$ kg object of volume $0.002$ m³.",
+              "correct_answer": "$3000$ kg/m³",
+              "solution_steps": [
+                "$\\rho=m/V$.",
+                "$=6/0.002$.",
+                "$3000$ kg/m³."
+              ],
+              "hint": "$\\rho=m/V$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "An object displaces $0.01$ m³ of water. Find the buoyant force.",
+              "correct_answer": "$\\approx98$ N",
+              "solution_steps": [
+                "$F_b=\\rho Vg$.",
+                "$=1000(0.01)(9.8)$.",
+                "$98$ N."
+              ],
+              "hint": "$F_b=\\rho_{fluid}Vg$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Water flows at $2$ m/s in a pipe of area $0.1$ m². Find the speed where the area is $0.05$ m².",
+              "correct_answer": "$4$ m/s",
+              "solution_steps": [
+                "$A_1v_1=A_2v_2$.",
+                "$0.1(2)=0.05v$.",
+                "$v=4$ m/s."
+              ],
+              "hint": "Continuity: $Av$ constant."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A hydraulic lift: $F_1=100$ N on $A_1=0.01$ m². Find the lift force on $A_2=0.5$ m².",
+              "correct_answer": "$5000$ N",
+              "solution_steps": [
+                "$F_2=F_1 A_2/A_1$.",
+                "$=100(0.5/0.01)$.",
+                "$5000$ N."
+              ],
+              "hint": "$F_1/A_1=F_2/A_2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Find the total pressure $5$ m deep in water (add atmosphere $1.0\\times10^5$ Pa).",
+              "correct_answer": "$\\approx1.49\\times10^{5}$ Pa",
+              "solution_steps": [
+                "$P=P_0+\\rho gh=10^5+1000(9.8)(5)$.",
+                "$=10^5+4.9\\times10^4$.",
+                "$\\approx1.49\\times10^5$ Pa."
+              ],
+              "hint": "Add atmospheric pressure."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A block of density $600$ kg/m³ floats in water. What fraction is submerged?",
+              "correct_answer": "$0.6$",
+              "solution_steps": [
+                "Fraction $=\\rho_{obj}/\\rho_{water}$.",
+                "$=600/1000$.",
+                "$0.6$."
+              ],
+              "hint": "Float fraction is the density ratio."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-12-oscillations",
+          "chapter": "Vol. 1, Ch. 15",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A spring has $k=200$ N/m and mass $0.5$ kg. Find the period.",
+              "correct_answer": "$\\approx0.314$ s",
+              "solution_steps": [
+                "$T=2\\pi\\sqrt{m/k}$.",
+                "$=2\\pi\\sqrt{0.5/200}$.",
+                "$\\approx0.314$ s."
+              ],
+              "hint": "$T=2\\pi\\sqrt{m/k}$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A pendulum is $1$ m long. Find its period.",
+              "correct_answer": "$\\approx2.01$ s",
+              "solution_steps": [
+                "$T=2\\pi\\sqrt{L/g}$.",
+                "$=2\\pi\\sqrt{1/9.8}$.",
+                "$\\approx2.01$ s."
+              ],
+              "hint": "$T=2\\pi\\sqrt{L/g}$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A spring–mass system has $T=0.5$ s. Find the frequency.",
+              "correct_answer": "$2$ Hz",
+              "solution_steps": [
+                "$f=1/T$.",
+                "$=1/0.5$.",
+                "$2$ Hz."
+              ],
+              "hint": "$f=1/T$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Find the angular frequency for $k=100$ N/m, $m=4$ kg.",
+              "correct_answer": "$5$ rad/s",
+              "solution_steps": [
+                "$\\omega=\\sqrt{k/m}$.",
+                "$=\\sqrt{100/4}$.",
+                "$5$ rad/s."
+              ],
+              "hint": "$\\omega=\\sqrt{k/m}$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $0.2$ kg mass on a spring ($k=50$) has amplitude $0.1$ m. Find the total energy.",
+              "correct_answer": "$0.25$ J",
+              "solution_steps": [
+                "$E=\\tfrac12kA^2$.",
+                "$=\\tfrac12(50)(0.01)$.",
+                "$0.25$ J."
+              ],
+              "hint": "$\\tfrac12kA^2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "For the previous system, find the maximum speed.",
+              "correct_answer": "$\\approx1.58$ m/s",
+              "solution_steps": [
+                "$\\omega=\\sqrt{50/0.2}=15.8$; $v_{max}=\\omega A$.",
+                "$=15.8(0.1)$.",
+                "$\\approx1.58$ m/s."
+              ],
+              "hint": "$v_{max}=\\omega A$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "How does the pendulum period change if length is quadrupled?",
+              "correct_answer": "Doubles",
+              "solution_steps": [
+                "$T\\propto\\sqrt L$.",
+                "$\\sqrt4=2$.",
+                "Period doubles."
+              ],
+              "hint": "$T\\propto\\sqrt{L}$."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-13-temperature-heat",
+          "chapter": "Vol. 2, Ch. 1 & 2",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "How much heat raises $2$ kg of water ($c=4186$) by $10$ K?",
+              "correct_answer": "$\\approx83720$ J",
+              "solution_steps": [
+                "$Q=mc\\Delta T$.",
+                "$=2(4186)(10)$.",
+                "$83720$ J."
+              ],
+              "hint": "$Q=mc\\Delta T$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Convert $27^\\circ$C to kelvin.",
+              "correct_answer": "$300$ K",
+              "solution_steps": [
+                "$K=C+273$.",
+                "$27+273$.",
+                "$300$ K."
+              ],
+              "hint": "Add 273."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Melt $0.5$ kg of ice ($L_f=3.34\\times10^5$ J/kg). Find the heat.",
+              "correct_answer": "$\\approx1.67\\times10^{5}$ J",
+              "solution_steps": [
+                "$Q=mL$.",
+                "$=0.5(3.34\\times10^5)$.",
+                "$1.67\\times10^5$ J."
+              ],
+              "hint": "$Q=mL$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $2$ m steel rod ($\\alpha=1.2\\times10^{-5}$) heats by $50$ K. Find $\\Delta L$.",
+              "correct_answer": "$1.2\\times10^{-3}$ m",
+              "solution_steps": [
+                "$\\Delta L=\\alpha L\\Delta T$.",
+                "$=1.2\\times10^{-5}(2)(50)$.",
+                "$1.2\\times10^{-3}$ m."
+              ],
+              "hint": "$\\Delta L=\\alpha L\\Delta T$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A gas at $2$ atm, $300$ K is heated to $600$ K at constant volume. Find the new pressure.",
+              "correct_answer": "$4$ atm",
+              "solution_steps": [
+                "$P_1/T_1=P_2/T_2$.",
+                "$2/300=P/600$.",
+                "$4$ atm."
+              ],
+              "hint": "Constant $V$: $P\\propto T$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Find the temperature of $1$ mol of gas at $P=1.0\\times10^5$ Pa, $V=0.025$ m³ ($R=8.31$).",
+              "correct_answer": "$\\approx301$ K",
+              "solution_steps": [
+                "$T=PV/(nR)$.",
+                "$=10^5(0.025)/8.31$.",
+                "$\\approx301$ K."
+              ],
+              "hint": "$PV=nRT$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "How much heat warms $0.5$ kg of water from $20^\\circ$C to $100^\\circ$C, then boils it all ($L_v=2.26\\times10^6$)? ($c=4186$)",
+              "correct_answer": "$\\approx1.30\\times10^{6}$ J",
+              "solution_steps": [
+                "Heat: $0.5(4186)(80)=1.67\\times10^5$ J.",
+                "Boil: $0.5(2.26\\times10^6)=1.13\\times10^6$ J.",
+                "Total $\\approx1.30\\times10^6$ J."
+              ],
+              "hint": "Add $mc\\Delta T$ then $mL_v$."
+            }
+          ]
+        },
+        {
+          "id": "phys1441-14-thermodynamics",
+          "chapter": "Vol. 2, Ch. 3 & 4",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A gas absorbs $500$ J of heat and does $200$ J of work. Find $\\Delta U$.",
+              "correct_answer": "$300$ J",
+              "solution_steps": [
+                "$\\Delta U=Q-W$.",
+                "$=500-200$.",
+                "$300$ J."
+              ],
+              "hint": "$\\Delta U=Q-W$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A gas expands at constant $P=2\\times10^5$ Pa by $\\Delta V=0.001$ m³. Find the work.",
+              "correct_answer": "$200$ J",
+              "solution_steps": [
+                "$W=P\\Delta V$.",
+                "$=2\\times10^5(0.001)$.",
+                "$200$ J."
+              ],
+              "hint": "$W=P\\Delta V$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "An engine takes $1000$ J and exhausts $600$ J. Find its efficiency.",
+              "correct_answer": "$0.4$ (40%)",
+              "solution_steps": [
+                "$e=1-Q_c/Q_h$.",
+                "$=1-600/1000$.",
+                "$0.4$."
+              ],
+              "hint": "$e=1-Q_c/Q_h$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Find the Carnot efficiency between $600$ K and $300$ K.",
+              "correct_answer": "$0.5$ (50%)",
+              "solution_steps": [
+                "$e=1-T_c/T_h$.",
+                "$=1-300/600$.",
+                "$0.5$."
+              ],
+              "hint": "Use kelvin."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "An engine does $400$ J of work per cycle taking in $1000$ J. Find the heat exhausted.",
+              "correct_answer": "$600$ J",
+              "solution_steps": [
+                "$Q_c=Q_h-W$.",
+                "$=1000-400$.",
+                "$600$ J."
+              ],
+              "hint": "$Q_c=Q_h-W$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A gas releases $300$ J of heat while $150$ J of work is done on it. Find $\\Delta U$.",
+              "correct_answer": "$-150$ J",
+              "solution_steps": [
+                "$Q=-300$, $W=-150$ (on the gas).",
+                "$\\Delta U=Q-W=-300-(-150)$.",
+                "$-150$ J."
+              ],
+              "hint": "Mind the signs of $Q$ and $W$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A real engine between $500$ K and $300$ K has efficiency $0.25$. What fraction of the Carnot limit is that?",
+              "correct_answer": "$\\approx0.625$",
+              "solution_steps": [
+                "Carnot $=1-300/500=0.4$.",
+                "Ratio $=0.25/0.4$.",
+                "$\\approx0.625$."
+              ],
+              "hint": "Compare to $e_{max}=1-T_c/T_h$."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "PHYS1433",
+      "name": "Physics I — Algebra Based",
+      "institution": "NYC College of Technology (CUNY)",
+      "semester": "Fall",
+      "year": "2025",
+      "textbooks": [
+        "College Physics — OpenStax"
+      ],
+      "lessons": [
+        {
+          "id": "phys1433-01-units",
+          "chapter": "Ch. 1",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Convert $90$ km/h to m/s.",
+              "correct_answer": "$25$ m/s",
+              "solution_steps": [
+                "Divide by $3.6$.",
+                "$90/3.6$.",
+                "$25$ m/s."
+              ],
+              "hint": "km/h ÷ 3.6 = m/s."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "How many significant figures in $3.020$?",
+              "correct_answer": "$4$",
+              "solution_steps": [
+                "All shown digits count here.",
+                "$3,0,2,0$.",
+                "$4$."
+              ],
+              "hint": "Trailing zero after a decimal counts."
+            },
+            {
+              "id": "p03",
+              "difficulty": "easy",
+              "prompt": "What SI unit is energy measured in?",
+              "correct_answer": "Joule (J)",
+              "solution_steps": [
+                "$J=N\\cdot m$.",
+                "Work/energy unit.",
+                "Joule."
+              ],
+              "hint": "Energy = force × distance."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Convert $2.5$ hours to seconds.",
+              "correct_answer": "$9000$ s",
+              "solution_steps": [
+                "$2.5\\times3600$.",
+                "$=9000$.",
+                "s."
+              ],
+              "hint": "1 h = 3600 s."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A field is $50.0$ m by $30$ m. Area with correct sig figs?",
+              "correct_answer": "$1500$ m² (2 sf)",
+              "solution_steps": [
+                "$50.0\\times30=1500$.",
+                "Fewest sig figs is 2.",
+                "$1.5\\times10^3$ m²."
+              ],
+              "hint": "×/÷ keeps fewest sig figs."
+            },
+            {
+              "id": "p06",
+              "difficulty": "medium",
+              "prompt": "Estimate the order of magnitude of a person's height in meters.",
+              "correct_answer": "$10^0$",
+              "solution_steps": [
+                "$\\sim1.7$ m.",
+                "Nearest power of ten.",
+                "$10^0$."
+              ],
+              "hint": "About 1 meter."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Convert $60$ mph to m/s ($1$ mi $=1609$ m).",
+              "correct_answer": "$\\approx26.8$ m/s",
+              "solution_steps": [
+                "$60\\times1609/3600$.",
+                "$=96540/3600$.",
+                "$\\approx26.8$ m/s."
+              ],
+              "hint": "Convert miles to m, hours to s."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-02-kinematics-1d",
+          "chapter": "Ch. 2",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A car speeds from $10$ to $30$ m/s in $5$ s. Find the acceleration.",
+              "correct_answer": "$4$ m/s²",
+              "solution_steps": [
+                "$a=\\Delta v/\\Delta t$.",
+                "$=(30-10)/5$.",
+                "$4$ m/s²."
+              ],
+              "hint": "$a=\\Delta v/\\Delta t$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A rock falls from rest for $3$ s. Find its speed.",
+              "correct_answer": "$\\approx29.4$ m/s",
+              "solution_steps": [
+                "$v=gt$.",
+                "$=9.8(3)$.",
+                "$29.4$ m/s."
+              ],
+              "hint": "$v=gt$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A car at $25$ m/s decelerates at $5$ m/s². How far to stop?",
+              "correct_answer": "$62.5$ m",
+              "solution_steps": [
+                "$0=v_0^2+2a\\Delta x$: $0=625-10\\Delta x$.",
+                "$\\Delta x=62.5$.",
+                "m."
+              ],
+              "hint": "$v^2=v_0^2+2a\\Delta x$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A ball is thrown up at $12$ m/s. Find the max height.",
+              "correct_answer": "$\\approx7.35$ m",
+              "solution_steps": [
+                "$0=v_0^2-2gh$.",
+                "$h=144/19.6$.",
+                "$7.35$ m."
+              ],
+              "hint": "$v=0$ at the top."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "From rest at $3$ m/s², how far in $4$ s?",
+              "correct_answer": "$24$ m",
+              "solution_steps": [
+                "$x=\\tfrac12 at^2$.",
+                "$=\\tfrac12(3)(16)$.",
+                "$24$ m."
+              ],
+              "hint": "$x=\\tfrac12 at^2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A car travels $100$ m while speeding from $10$ to $30$ m/s. Find its acceleration.",
+              "correct_answer": "$4$ m/s²",
+              "solution_steps": [
+                "$v^2=v_0^2+2a\\Delta x$: $900=100+200a$.",
+                "$a=800/200$.",
+                "$4$ m/s²."
+              ],
+              "hint": "Solve $v^2=v_0^2+2a\\Delta x$ for $a$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A ball thrown up at $20$ m/s — total time in the air (returns to start)?",
+              "correct_answer": "$\\approx4.08$ s",
+              "solution_steps": [
+                "Up time $=20/9.8=2.04$ s.",
+                "Double it.",
+                "$4.08$ s."
+              ],
+              "hint": "Symmetric up and down."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-03-kinematics-2d",
+          "chapter": "Ch. 3",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $12$-unit vector points at $60^\\circ$. Find its $y$-component.",
+              "correct_answer": "$\\approx10.4$",
+              "solution_steps": [
+                "$A_y=A\\sin\\theta$.",
+                "$=12\\sin60^\\circ$.",
+                "$\\approx10.4$."
+              ],
+              "hint": "$A_y=A\\sin\\theta$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the magnitude of components $(6,8)$.",
+              "correct_answer": "$10$",
+              "solution_steps": [
+                "$\\sqrt{36+64}$.",
+                "$=\\sqrt{100}$.",
+                "$10$."
+              ],
+              "hint": "Pythagoras."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A ball rolls off a $1.8$ m table at $2$ m/s. How long to land?",
+              "correct_answer": "$\\approx0.606$ s",
+              "solution_steps": [
+                "$1.8=\\tfrac12(9.8)t^2$.",
+                "$t=\\sqrt{3.6/9.8}$.",
+                "$\\approx0.606$ s."
+              ],
+              "hint": "Height sets the time."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "In the previous problem, how far from the table does it land?",
+              "correct_answer": "$\\approx1.21$ m",
+              "solution_steps": [
+                "$x=v t=2(0.606)$.",
+                "$\\approx1.21$ m.",
+                "Done."
+              ],
+              "hint": "Range = horizontal speed × time."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A projectile launches at $30$ m/s, $30^\\circ$. Find $v_{0x}$.",
+              "correct_answer": "$\\approx26$ m/s",
+              "solution_steps": [
+                "$v_{0x}=30\\cos30^\\circ$.",
+                "$=30(0.866)$.",
+                "$\\approx26$ m/s."
+              ],
+              "hint": "$v_{0x}=v_0\\cos\\theta$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Find the range for a $20$ m/s launch at $45^\\circ$.",
+              "correct_answer": "$\\approx40.8$ m",
+              "solution_steps": [
+                "$R=v_0^2\\sin2\\theta/g=400\\sin90^\\circ/9.8$.",
+                "$=400/9.8$.",
+                "$\\approx40.8$ m."
+              ],
+              "hint": "$R=v_0^2\\sin2\\theta/g$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Which two launch angles give the same range?",
+              "correct_answer": "Complementary (e.g. $30^\\circ$ & $60^\\circ$)",
+              "solution_steps": [
+                "$\\sin2\\theta=\\sin2(90-\\theta)$.",
+                "Complementary angles match.",
+                "$30^\\circ$ and $60^\\circ$."
+              ],
+              "hint": "$\\theta$ and $90-\\theta$."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-04-newtons-laws",
+          "chapter": "Ch. 4",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $6$ kg object accelerates at $2$ m/s². Find the net force.",
+              "correct_answer": "$12$ N",
+              "solution_steps": [
+                "$F=ma$.",
+                "$=6(2)$.",
+                "$12$ N."
+              ],
+              "hint": "$F=ma$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the weight of a $12$ kg mass.",
+              "correct_answer": "$\\approx117.6$ N",
+              "solution_steps": [
+                "$W=mg$.",
+                "$=12(9.8)$.",
+                "$117.6$ N."
+              ],
+              "hint": "$W=mg$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $4$ kg box is pulled with $20$ N against $8$ N friction. Find its acceleration.",
+              "correct_answer": "$3$ m/s²",
+              "solution_steps": [
+                "Net $=20-8=12$ N.",
+                "$a=12/4$.",
+                "$3$ m/s²."
+              ],
+              "hint": "Subtract friction first."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $2$ kg lamp hangs at rest. Find the cord tension.",
+              "correct_answer": "$\\approx19.6$ N",
+              "solution_steps": [
+                "$T=mg$.",
+                "$=2(9.8)$.",
+                "$19.6$ N."
+              ],
+              "hint": "Tension balances weight."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $70$ kg person in an elevator accelerating up at $1.5$ m/s². Find the normal force.",
+              "correct_answer": "$\\approx791$ N",
+              "solution_steps": [
+                "$N=m(g+a)$.",
+                "$=70(11.3)$.",
+                "$791$ N."
+              ],
+              "hint": "$N=m(g+a)$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $10$ kg block on a frictionless $37^\\circ$ incline. Find the acceleration.",
+              "correct_answer": "$\\approx5.9$ m/s²",
+              "solution_steps": [
+                "$a=g\\sin37^\\circ$.",
+                "$=9.8(0.6)$.",
+                "$\\approx5.9$ m/s²."
+              ],
+              "hint": "$a=g\\sin\\theta$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Masses $4$ kg and $6$ kg over a frictionless pulley. Find the acceleration.",
+              "correct_answer": "$\\approx1.96$ m/s²",
+              "solution_steps": [
+                "$a=(m_2-m_1)g/(m_1+m_2)=2(9.8)/10$.",
+                "$=1.96$ m/s².",
+                "Done."
+              ],
+              "hint": "Atwood machine."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-05-friction-circular",
+          "chapter": "Ch. 5 & 6",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $5$ kg box on a floor, $\\mu_k=0.2$. Find the kinetic friction.",
+              "correct_answer": "$\\approx9.8$ N",
+              "solution_steps": [
+                "$N=mg=49$ N.",
+                "$f=0.2(49)$.",
+                "$9.8$ N."
+              ],
+              "hint": "$f=\\mu N$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $1$ kg ball circles at $2$ m/s, radius $0.5$ m. Find the centripetal force.",
+              "correct_answer": "$8$ N",
+              "solution_steps": [
+                "$F_c=mv^2/r$.",
+                "$=1(4)/0.5$.",
+                "$8$ N."
+              ],
+              "hint": "$F_c=mv^2/r$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Find the centripetal acceleration for $v=15$ m/s, $r=45$ m.",
+              "correct_answer": "$5$ m/s²",
+              "solution_steps": [
+                "$a_c=v^2/r$.",
+                "$=225/45$.",
+                "$5$ m/s²."
+              ],
+              "hint": "$a_c=v^2/r$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $2$ kg mass on a $1$ m string swings in a horizontal circle at $4$ m/s. Find the tension.",
+              "correct_answer": "$32$ N",
+              "solution_steps": [
+                "$T=mv^2/r$.",
+                "$=2(16)/1$.",
+                "$32$ N."
+              ],
+              "hint": "Tension provides $F_c$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Maximum static friction for a $10$ kg box, $\\mu_s=0.5$.",
+              "correct_answer": "$\\approx49$ N",
+              "solution_steps": [
+                "$f_{max}=\\mu_s mg$.",
+                "$=0.5(10)(9.8)$.",
+                "$49$ N."
+              ],
+              "hint": "$f_s\\le\\mu_s N$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A car rounds a flat curve, $r=80$ m, $\\mu_s=0.6$. Find the max speed.",
+              "correct_answer": "$\\approx21.7$ m/s",
+              "solution_steps": [
+                "$v=\\sqrt{\\mu_s g r}$.",
+                "$=\\sqrt{0.6(9.8)(80)}$.",
+                "$\\approx21.7$ m/s."
+              ],
+              "hint": "$v=\\sqrt{\\mu_s g r}$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A ball on a string swings in a vertical circle ($r=1$ m). Find the minimum speed at the top.",
+              "correct_answer": "$\\approx3.13$ m/s",
+              "solution_steps": [
+                "At the top, gravity provides $F_c$: $v=\\sqrt{gr}$.",
+                "$=\\sqrt{9.8}$.",
+                "$\\approx3.13$ m/s."
+              ],
+              "hint": "Minimum: gravity alone supplies $mv^2/r$."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-06-gravitation",
+          "chapter": "Ch. 6",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Two $500$ kg masses are $1$ m apart. Find the gravitational force.",
+              "correct_answer": "$\\approx1.67\\times10^{-5}$ N",
+              "solution_steps": [
+                "$F=Gm_1m_2/r^2$.",
+                "$=6.67\\times10^{-11}(2.5\\times10^5)/1$.",
+                "$\\approx1.67\\times10^{-5}$ N."
+              ],
+              "hint": "$F=Gm_1m_2/r^2$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "If distance doubles, how does gravitational force change?",
+              "correct_answer": "Quarter",
+              "solution_steps": [
+                "$F\\propto1/r^2$.",
+                "$1/2^2=1/4$.",
+                "Quarter."
+              ],
+              "hint": "Inverse-square."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Find $g$ at Earth's surface ($M=5.97\\times10^{24}$ kg, $R=6.37\\times10^6$ m).",
+              "correct_answer": "$\\approx9.8$ m/s²",
+              "solution_steps": [
+                "$g=GM/R^2$.",
+                "$=6.67\\times10^{-11}(5.97\\times10^{24})/(6.37\\times10^6)^2$.",
+                "$\\approx9.8$ m/s²."
+              ],
+              "hint": "$g=GM/R^2$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Your mass is $70$ kg. Your weight where $g=3.7$ m/s² (Mars)?",
+              "correct_answer": "$259$ N",
+              "solution_steps": [
+                "$W=mg$.",
+                "$=70(3.7)$.",
+                "$259$ N."
+              ],
+              "hint": "Use the local $g$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Find the orbital speed at $r=8\\times10^6$ m around Earth.",
+              "correct_answer": "$\\approx7.05\\times10^3$ m/s",
+              "solution_steps": [
+                "$v=\\sqrt{GM/r}$.",
+                "$=\\sqrt{6.67\\times10^{-11}(5.97\\times10^{24})/8\\times10^6}$.",
+                "$\\approx7.05$ km/s."
+              ],
+              "hint": "$v=\\sqrt{GM/r}$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Two planets: one twice the mass, twice the radius. How does surface gravity compare?",
+              "correct_answer": "Half",
+              "solution_steps": [
+                "$g=GM/R^2$; $g'=G(2M)/(2R)^2=GM/(2R^2)$.",
+                "Half of original.",
+                "$g'=g/2$."
+              ],
+              "hint": "Plug $2M$ and $2R$ into $GM/R^2$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "If orbit radius quadruples, how does the period change? ($T^2\\propto r^3$)",
+              "correct_answer": "×8",
+              "solution_steps": [
+                "$T^2\\propto r^3$; $r\\to4r$ ⇒ $T^2\\times64$.",
+                "$T\\times8$.",
+                "Period is 8× longer."
+              ],
+              "hint": "$T\\propto r^{3/2}$."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-07-work-energy-power",
+          "chapter": "Ch. 7",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A $40$ N force moves a box $3$ m in its direction. Find the work.",
+              "correct_answer": "$120$ J",
+              "solution_steps": [
+                "$W=Fd$.",
+                "$=40(3)$.",
+                "$120$ J."
+              ],
+              "hint": "$W=Fd$ when aligned."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the KE of a $3$ kg ball at $4$ m/s.",
+              "correct_answer": "$24$ J",
+              "solution_steps": [
+                "$KE=\\tfrac12mv^2$.",
+                "$=\\tfrac12(3)(16)$.",
+                "$24$ J."
+              ],
+              "hint": "$\\tfrac12mv^2$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $30$ N force acts at $37^\\circ$ over $5$ m. Find the work.",
+              "correct_answer": "$\\approx120$ J",
+              "solution_steps": [
+                "$W=Fd\\cos37^\\circ$.",
+                "$=30(5)(0.8)$.",
+                "$120$ J."
+              ],
+              "hint": "Include $\\cos\\theta$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A ball falls from $10$ m — speed at the bottom (energy method)?",
+              "correct_answer": "$\\approx14$ m/s",
+              "solution_steps": [
+                "$v=\\sqrt{2gh}$.",
+                "$=\\sqrt{2(9.8)(10)}$.",
+                "$\\approx14$ m/s."
+              ],
+              "hint": "$v=\\sqrt{2gh}$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A crane lifts $500$ N a height of $12$ m in $6$ s. Find the power.",
+              "correct_answer": "$1000$ W",
+              "solution_steps": [
+                "$P=W/t=(500\\cdot12)/6$.",
+                "$=6000/6$.",
+                "$1000$ W."
+              ],
+              "hint": "$P=W/t$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $2$ kg block hits a spring ($k=200$ N/m) at $3$ m/s. Find the max compression.",
+              "correct_answer": "$\\approx0.3$ m",
+              "solution_steps": [
+                "$\\tfrac12mv^2=\\tfrac12kx^2$: $9=100x^2$? No: $\\tfrac12(2)(9)=\\tfrac12(200)x^2$.",
+                "$9=100x^2\\Rightarrow x^2=0.09$.",
+                "$x=0.3$ m."
+              ],
+              "hint": "KE → spring PE."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A car engine delivers $60$ kW at $30$ m/s. Find the driving force.",
+              "correct_answer": "$2000$ N",
+              "solution_steps": [
+                "$P=Fv$ ⇒ $F=P/v$.",
+                "$=60000/30$.",
+                "$2000$ N."
+              ],
+              "hint": "$F=P/v$."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-08-momentum",
+          "chapter": "Ch. 8",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the momentum of a $4$ kg cart at $5$ m/s.",
+              "correct_answer": "$20$ kg·m/s",
+              "solution_steps": [
+                "$p=mv$.",
+                "$=4(5)$.",
+                "$20$ kg·m/s."
+              ],
+              "hint": "$p=mv$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $15$ N force acts for $3$ s. Find the impulse.",
+              "correct_answer": "$45$ N·s",
+              "solution_steps": [
+                "$J=F\\Delta t$.",
+                "$=15(3)$.",
+                "$45$ N·s."
+              ],
+              "hint": "$J=F\\Delta t$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $3$ kg ball at $4$ m/s sticks to a $1$ kg ball at rest. Find their speed.",
+              "correct_answer": "$3$ m/s",
+              "solution_steps": [
+                "$3(4)=(4)v$.",
+                "$v=12/4$.",
+                "$3$ m/s."
+              ],
+              "hint": "Perfectly inelastic."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $0.4$ kg ball hits a wall at $5$ m/s and bounces at $5$ m/s. Find the impulse.",
+              "correct_answer": "$4$ N·s",
+              "solution_steps": [
+                "$\\Delta p=0.4(5-(-5))$.",
+                "$=0.4(10)$.",
+                "$4$ N·s."
+              ],
+              "hint": "Account for direction reversal."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $50$ kg skater throws a $4$ kg ball at $6$ m/s. Find her recoil speed.",
+              "correct_answer": "$0.48$ m/s",
+              "solution_steps": [
+                "$0=50v-4(6)$.",
+                "$v=24/50$.",
+                "$0.48$ m/s."
+              ],
+              "hint": "Total momentum stays zero."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $2000$ kg truck at $15$ m/s hits a stopped $1000$ kg car; they stick. Find their speed.",
+              "correct_answer": "$10$ m/s",
+              "solution_steps": [
+                "$2000(15)=3000v$.",
+                "$v=30000/3000$.",
+                "$10$ m/s."
+              ],
+              "hint": "Inelastic conservation."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Equal masses collide elastically, one at $8$ m/s, one at rest. Find the final speeds.",
+              "correct_answer": "$0$ and $8$ m/s",
+              "solution_steps": [
+                "Equal-mass elastic ⇒ exchange velocities.",
+                "First stops, second moves at $8$ m/s.",
+                "Done."
+              ],
+              "hint": "They swap velocities."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-09-rotation-torque",
+          "chapter": "Ch. 9 & 10",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A wheel spins at $8$ rad/s, radius $0.25$ m. Find the rim speed.",
+              "correct_answer": "$2$ m/s",
+              "solution_steps": [
+                "$v=r\\omega$.",
+                "$=0.25(8)$.",
+                "$2$ m/s."
+              ],
+              "hint": "$v=r\\omega$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $25$ N force acts $0.4$ m from an axis, perpendicular. Find the torque.",
+              "correct_answer": "$10$ N·m",
+              "solution_steps": [
+                "$\\tau=rF$.",
+                "$=0.4(25)$.",
+                "$10$ N·m."
+              ],
+              "hint": "$\\tau=rF$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Torque $18$ N·m on $I=6$ kg·m². Find $\\alpha$.",
+              "correct_answer": "$3$ rad/s²",
+              "solution_steps": [
+                "$\\alpha=\\tau/I$.",
+                "$=18/6$.",
+                "$3$ rad/s²."
+              ],
+              "hint": "$\\tau=I\\alpha$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $40$ N force acts $0.5$ m from a pivot at $30^\\circ$. Find the torque.",
+              "correct_answer": "$10$ N·m",
+              "solution_steps": [
+                "$\\tau=rF\\sin\\theta$.",
+                "$=0.5(40)(0.5)$.",
+                "$10$ N·m."
+              ],
+              "hint": "Include $\\sin\\theta$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Rotational KE of $I=3$ kg·m² at $4$ rad/s.",
+              "correct_answer": "$24$ J",
+              "solution_steps": [
+                "$\\tfrac12I\\omega^2$.",
+                "$=\\tfrac12(3)(16)$.",
+                "$24$ J."
+              ],
+              "hint": "$\\tfrac12I\\omega^2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A diver with $I=6$ kg·m² at $1.5$ rad/s tucks to $I=2$. Find the new $\\omega$.",
+              "correct_answer": "$4.5$ rad/s",
+              "solution_steps": [
+                "$6(1.5)=2\\omega$.",
+                "$\\omega=9/2$.",
+                "$4.5$ rad/s."
+              ],
+              "hint": "Conserve $L=I\\omega$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A balanced seesaw: a $40$ kg child sits $1.5$ m left. A $30$ kg child sits how far right?",
+              "correct_answer": "$2$ m",
+              "solution_steps": [
+                "$40(1.5)=30 d$.",
+                "$d=60/30$.",
+                "$2$ m."
+              ],
+              "hint": "Set torques equal."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-10-equilibrium",
+          "chapter": "Ch. 11",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A uniform $6$ m beam weighs $300$ N. Find the torque of its weight about one end.",
+              "correct_answer": "$900$ N·m",
+              "solution_steps": [
+                "Weight at center (3 m).",
+                "$\\tau=3(300)$.",
+                "$900$ N·m."
+              ],
+              "hint": "Center of gravity at the middle."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A $60$ N weight is $2$ m from a pivot. Find its torque.",
+              "correct_answer": "$120$ N·m",
+              "solution_steps": [
+                "$\\tau=rF$.",
+                "$=2(60)$.",
+                "$120$ N·m."
+              ],
+              "hint": "$\\tau=rF$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "A $40$ N weight $1$ m left of a pivot — what weight $2$ m right balances it?",
+              "correct_answer": "$20$ N",
+              "solution_steps": [
+                "$40(1)=W(2)$.",
+                "$W=40/2$.",
+                "$20$ N."
+              ],
+              "hint": "Set torques equal."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Two supports hold a $200$ N uniform beam at its ends. Find each support force.",
+              "correct_answer": "$100$ N each",
+              "solution_steps": [
+                "Symmetry splits the weight.",
+                "$200/2$.",
+                "$100$ N each."
+              ],
+              "hint": "Symmetric load splits evenly."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "A $500$ N sign hangs $1.2$ m from a wall on a bracket. Find the torque about the wall.",
+              "correct_answer": "$600$ N·m",
+              "solution_steps": [
+                "$\\tau=rF$.",
+                "$=1.2(500)$.",
+                "$600$ N·m."
+              ],
+              "hint": "$\\tau=rF$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A $4$ m beam ($120$ N) on end supports has a $300$ N load $1$ m from the left. Find the left support force.",
+              "correct_answer": "$285$ N",
+              "solution_steps": [
+                "Torque about right end: $F_L(4)=120(2)+300(3)$.",
+                "$F_L=1140/4$.",
+                "$285$ N."
+              ],
+              "hint": "Take torques about the right support."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A ladder's weight $150$ N acts at its center $2$ m up a $4$ m ladder. Torque about the base foot?",
+              "correct_answer": "$300$ N·m (× horizontal factor)",
+              "solution_steps": [
+                "Weight torque uses horizontal distance from the base.",
+                "For a vertical ladder, $\\tau=0$; tilted, $\\tau=150\\times(\\text{horizontal offset})$.",
+                "Depends on the angle."
+              ],
+              "hint": "Torque uses the horizontal lever arm."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-11-fluids",
+          "chapter": "Ch. 12",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the pressure $4$ m deep in water ($\\rho=1000$, ignore atmosphere).",
+              "correct_answer": "$\\approx3.92\\times10^{4}$ Pa",
+              "solution_steps": [
+                "$P=\\rho gh$.",
+                "$=1000(9.8)(4)$.",
+                "$3.92\\times10^4$ Pa."
+              ],
+              "hint": "$P=\\rho gh$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the density of $9$ kg in $0.003$ m³.",
+              "correct_answer": "$3000$ kg/m³",
+              "solution_steps": [
+                "$\\rho=m/V$.",
+                "$=9/0.003$.",
+                "$3000$ kg/m³."
+              ],
+              "hint": "$\\rho=m/V$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "An object displaces $0.02$ m³ of water. Find the buoyant force.",
+              "correct_answer": "$196$ N",
+              "solution_steps": [
+                "$F_b=\\rho Vg$.",
+                "$=1000(0.02)(9.8)$.",
+                "$196$ N."
+              ],
+              "hint": "$F_b=\\rho_{fluid}Vg$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Water at $3$ m/s in area $0.2$ m². Find the speed where area is $0.05$ m².",
+              "correct_answer": "$12$ m/s",
+              "solution_steps": [
+                "$A_1v_1=A_2v_2$.",
+                "$0.2(3)=0.05v$.",
+                "$12$ m/s."
+              ],
+              "hint": "Continuity."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Hydraulic lift: $200$ N on $0.02$ m². Find the force on $0.5$ m².",
+              "correct_answer": "$5000$ N",
+              "solution_steps": [
+                "$F_2=F_1A_2/A_1$.",
+                "$=200(0.5/0.02)$.",
+                "$5000$ N."
+              ],
+              "hint": "$F_1/A_1=F_2/A_2$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A block of density $800$ kg/m³ floats in water. What fraction is submerged?",
+              "correct_answer": "$0.8$",
+              "solution_steps": [
+                "Fraction $=\\rho_{obj}/\\rho_{water}$.",
+                "$=800/1000$.",
+                "$0.8$."
+              ],
+              "hint": "Density ratio."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Total pressure $3$ m deep in water (atmosphere $1.0\\times10^5$ Pa).",
+              "correct_answer": "$\\approx1.29\\times10^{5}$ Pa",
+              "solution_steps": [
+                "$P=P_0+\\rho gh=10^5+1000(9.8)(3)$.",
+                "$=10^5+2.94\\times10^4$.",
+                "$\\approx1.29\\times10^5$ Pa."
+              ],
+              "hint": "Add atmospheric pressure."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-12-temperature-heat",
+          "chapter": "Ch. 13",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Heat to warm $1$ kg of water ($c=4186$) by $20$ K?",
+              "correct_answer": "$\\approx83720$ J",
+              "solution_steps": [
+                "$Q=mc\\Delta T$.",
+                "$=1(4186)(20)$.",
+                "$83720$ J."
+              ],
+              "hint": "$Q=mc\\Delta T$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Convert $100^\\circ$C to kelvin.",
+              "correct_answer": "$373$ K",
+              "solution_steps": [
+                "$K=C+273$.",
+                "$100+273$.",
+                "$373$ K."
+              ],
+              "hint": "Add 273."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Melt $0.2$ kg of ice ($L_f=3.34\\times10^5$). Find the heat.",
+              "correct_answer": "$\\approx66800$ J",
+              "solution_steps": [
+                "$Q=mL$.",
+                "$=0.2(3.34\\times10^5)$.",
+                "$66800$ J."
+              ],
+              "hint": "$Q=mL$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $3$ m aluminum rod ($\\alpha=2.4\\times10^{-5}$) heats by $40$ K. Find $\\Delta L$.",
+              "correct_answer": "$\\approx2.88\\times10^{-3}$ m",
+              "solution_steps": [
+                "$\\Delta L=\\alpha L\\Delta T$.",
+                "$=2.4\\times10^{-5}(3)(40)$.",
+                "$2.88\\times10^{-3}$ m."
+              ],
+              "hint": "$\\Delta L=\\alpha L\\Delta T$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Which transfers heat with no medium: conduction, convection, or radiation?",
+              "correct_answer": "Radiation",
+              "solution_steps": [
+                "Radiation uses EM waves.",
+                "No medium needed.",
+                "Radiation."
+              ],
+              "hint": "Sunlight through space."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Heat $0.3$ kg of water from $25^\\circ$C to $100^\\circ$C ($c=4186$).",
+              "correct_answer": "$\\approx94185$ J",
+              "solution_steps": [
+                "$Q=mc\\Delta T=0.3(4186)(75)$.",
+                "$=94185$ J.",
+                "Done."
+              ],
+              "hint": "$Q=mc\\Delta T$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A $0.1$ kg ice cube at $0^\\circ$C melts then warms to $20^\\circ$C. Total heat? ($L_f=3.34\\times10^5$, $c=4186$)",
+              "correct_answer": "$\\approx41772$ J",
+              "solution_steps": [
+                "Melt: $0.1(3.34\\times10^5)=33400$ J.",
+                "Warm: $0.1(4186)(20)=8372$ J.",
+                "Total $\\approx41772$ J."
+              ],
+              "hint": "Add $mL_f$ then $mc\\Delta T$."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-13-thermodynamics",
+          "chapter": "Ch. 14 & 15",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A gas absorbs $400$ J and does $150$ J of work. Find $\\Delta U$.",
+              "correct_answer": "$250$ J",
+              "solution_steps": [
+                "$\\Delta U=Q-W$.",
+                "$=400-150$.",
+                "$250$ J."
+              ],
+              "hint": "$\\Delta U=Q-W$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A gas expands at $1.5\\times10^5$ Pa by $0.002$ m³. Find the work.",
+              "correct_answer": "$300$ J",
+              "solution_steps": [
+                "$W=P\\Delta V$.",
+                "$=1.5\\times10^5(0.002)$.",
+                "$300$ J."
+              ],
+              "hint": "$W=P\\Delta V$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "An engine takes $2000$ J, exhausts $1400$ J. Find the efficiency.",
+              "correct_answer": "$0.3$ (30%)",
+              "solution_steps": [
+                "$e=1-Q_c/Q_h$.",
+                "$=1-1400/2000$.",
+                "$0.3$."
+              ],
+              "hint": "$e=1-Q_c/Q_h$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Carnot efficiency between $500$ K and $250$ K.",
+              "correct_answer": "$0.5$ (50%)",
+              "solution_steps": [
+                "$e=1-T_c/T_h$.",
+                "$=1-250/500$.",
+                "$0.5$."
+              ],
+              "hint": "Kelvin temperatures."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "An engine does $500$ J from $1250$ J input. Find the exhaust heat.",
+              "correct_answer": "$750$ J",
+              "solution_steps": [
+                "$Q_c=Q_h-W$.",
+                "$=1250-500$.",
+                "$750$ J."
+              ],
+              "hint": "$Q_c=Q_h-W$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A gas releases $200$ J while $80$ J of work is done on it. Find $\\Delta U$.",
+              "correct_answer": "$-120$ J",
+              "solution_steps": [
+                "$Q=-200$, $W=-80$ (on the gas).",
+                "$\\Delta U=-200-(-80)$.",
+                "$-120$ J."
+              ],
+              "hint": "Mind the signs."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "An engine between $600$ K and $400$ K runs at efficiency $0.2$. What fraction of Carnot is that?",
+              "correct_answer": "$\\approx0.6$",
+              "solution_steps": [
+                "Carnot $=1-400/600=0.333$.",
+                "$0.2/0.333$.",
+                "$\\approx0.6$."
+              ],
+              "hint": "Compare to $1-T_c/T_h$."
+            }
+          ]
+        },
+        {
+          "id": "phys1433-14-waves-sound",
+          "chapter": "Ch. 16",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "A wave has $f=2$ Hz and $\\lambda=3$ m. Find its speed.",
+              "correct_answer": "$6$ m/s",
+              "solution_steps": [
+                "$v=f\\lambda$.",
+                "$=2(3)$.",
+                "$6$ m/s."
+              ],
+              "hint": "$v=f\\lambda$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "A wave has period $0.25$ s. Find its frequency.",
+              "correct_answer": "$4$ Hz",
+              "solution_steps": [
+                "$f=1/T$.",
+                "$=1/0.25$.",
+                "$4$ Hz."
+              ],
+              "hint": "$f=1/T$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Sound ($v=343$ m/s) has $f=686$ Hz. Find the wavelength.",
+              "correct_answer": "$0.5$ m",
+              "solution_steps": [
+                "$\\lambda=v/f$.",
+                "$=343/686$.",
+                "$0.5$ m."
+              ],
+              "hint": "$\\lambda=v/f$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A $2$ m string's fundamental has $\\lambda=4$ m. If $v=200$ m/s, find $f_1$.",
+              "correct_answer": "$50$ Hz",
+              "solution_steps": [
+                "$f=v/\\lambda$.",
+                "$=200/4$.",
+                "$50$ Hz."
+              ],
+              "hint": "Fundamental $\\lambda=2L$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Is sound a transverse or longitudinal wave?",
+              "correct_answer": "Longitudinal",
+              "solution_steps": [
+                "Vibration is along travel.",
+                "Pressure wave.",
+                "Longitudinal."
+              ],
+              "hint": "Compressions and rarefactions."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "A string's fundamental is $100$ Hz. Find the third harmonic.",
+              "correct_answer": "$300$ Hz",
+              "solution_steps": [
+                "$f_n=n f_1$.",
+                "$3(100)$.",
+                "$300$ Hz."
+              ],
+              "hint": "Harmonics are multiples."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Light travels at $3\\times10^8$ m/s. A radio wave has $f=100$ MHz. Find $\\lambda$.",
+              "correct_answer": "$3$ m",
+              "solution_steps": [
+                "$\\lambda=c/f$.",
+                "$=3\\times10^8/10^8$.",
+                "$3$ m."
+              ],
+              "hint": "$\\lambda=v/f$ with $v=c$."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MAT1375",
+      "name": "Precalculus",
+      "institution": "NYC College of Technology (CUNY)",
+      "semester": "Spring",
+      "year": "2026",
+      "textbooks": [
+        "Precalculus — Tradler & Carley (City Tech)",
+        "Precalculus — OpenStax"
+      ],
+      "lessons": [
+        {
+          "id": "precalc-01-functions",
+          "chapter": "Ch. 1",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Is $\\{(1,2),(3,4),(1,5)\\}$ a function?",
+              "correct_answer": "No",
+              "solution_steps": [
+                "Input $1$ maps to $2$ and $5$.",
+                "Two outputs for one input.",
+                "Not a function."
+              ],
+              "hint": "Check for repeated inputs."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the domain of $f(x)=\\dfrac{1}{x-3}$.",
+              "correct_answer": "$x\\neq3$",
+              "solution_steps": [
+                "Denominator zero at $x=3$.",
+                "Exclude it.",
+                "$x\\neq3$."
+              ],
+              "hint": "Set the denominator to zero."
+            },
+            {
+              "id": "p03",
+              "difficulty": "easy",
+              "prompt": "Write $-2\\le x<5$ in interval notation.",
+              "correct_answer": "$[-2,5)$",
+              "solution_steps": [
+                "$-2$ included, $5$ excluded.",
+                "Bracket then parenthesis.",
+                "$[-2,5)$."
+              ],
+              "hint": "Brackets include, parentheses exclude."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Find the domain of $f(x)=\\sqrt{x-4}$.",
+              "correct_answer": "$x\\ge4$ i.e. $[4,\\infty)$",
+              "solution_steps": [
+                "Need $x-4\\ge0$.",
+                "$x\\ge4$.",
+                "$[4,\\infty)$."
+              ],
+              "hint": "Even roots need nonnegative inside."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "If $f(x)=3x-1$, find $f(4)$.",
+              "correct_answer": "$11$",
+              "solution_steps": [
+                "Substitute $x=4$.",
+                "$3(4)-1$.",
+                "$11$."
+              ],
+              "hint": "Plug in the input."
+            },
+            {
+              "id": "p06",
+              "difficulty": "medium",
+              "prompt": "Does the vertical line test pass for a circle $x^2+y^2=4$?",
+              "correct_answer": "No (not a function)",
+              "solution_steps": [
+                "A vertical line hits it twice.",
+                "Two outputs per input.",
+                "Not a function."
+              ],
+              "hint": "A circle fails the test."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Find the domain of $f(x)=\\dfrac{\\sqrt{x}}{x-2}$.",
+              "correct_answer": "$x\\ge0,\\ x\\neq2$",
+              "solution_steps": [
+                "Need $x\\ge0$ (root) and $x\\neq2$ (denominator).",
+                "Combine.",
+                "$[0,2)\\cup(2,\\infty)$."
+              ],
+              "hint": "Combine both restrictions."
+            }
+          ]
+        },
+        {
+          "id": "precalc-02-function-formulas",
+          "chapter": "Ch. 2",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "If $f(x)=x^2+1$, find $f(3)$.",
+              "correct_answer": "$10$",
+              "solution_steps": [
+                "$3^2+1$.",
+                "$=9+1$.",
+                "$10$."
+              ],
+              "hint": "Substitute 3."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "If $f(x)=2x-5$, find $f(0)$.",
+              "correct_answer": "$-5$",
+              "solution_steps": [
+                "$2(0)-5$.",
+                "$=-5$.",
+                "Done."
+              ],
+              "hint": "Plug in 0."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "If $f(x)=x^2$, find $f(x+1)$.",
+              "correct_answer": "$x^2+2x+1$",
+              "solution_steps": [
+                "$(x+1)^2$.",
+                "$=x^2+2x+1$.",
+                "Done."
+              ],
+              "hint": "Substitute $(x+1)$ and expand."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Average rate of change of $f(x)=x^2$ on $[1,3]$.",
+              "correct_answer": "$4$",
+              "solution_steps": [
+                "$\\dfrac{9-1}{3-1}$.",
+                "$=8/2$.",
+                "$4$."
+              ],
+              "hint": "$\\dfrac{f(b)-f(a)}{b-a}$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Simplify the difference quotient for $f(x)=3x$.",
+              "correct_answer": "$3$",
+              "solution_steps": [
+                "$\\dfrac{3(x+h)-3x}{h}=\\dfrac{3h}{h}$.",
+                "$=3$.",
+                "Done."
+              ],
+              "hint": "The $h$ cancels."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Difference quotient for $f(x)=x^2$.",
+              "correct_answer": "$2x+h$",
+              "solution_steps": [
+                "$\\dfrac{(x+h)^2-x^2}{h}=\\dfrac{2xh+h^2}{h}$.",
+                "$=2x+h$.",
+                "Done."
+              ],
+              "hint": "Expand and cancel $h$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "For $f(x)=\\{2x\\ (x<0);\\ x^2\\ (x\\ge0)\\}$, find $f(-3)$ and $f(2)$.",
+              "correct_answer": "$-6$ and $4$",
+              "solution_steps": [
+                "$-3<0$: $2(-3)=-6$.",
+                "$2\\ge0$: $2^2=4$.",
+                "$-6,\\ 4$."
+              ],
+              "hint": "Pick the right branch."
+            }
+          ]
+        },
+        {
+          "id": "precalc-03-function-graphs",
+          "chapter": "Ch. 3",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the y-intercept of $f(x)=x^2-4$.",
+              "correct_answer": "$-4$",
+              "solution_steps": [
+                "$f(0)=0-4$.",
+                "$=-4$.",
+                "Done."
+              ],
+              "hint": "Compute $f(0)$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the x-intercepts of $f(x)=x^2-9$.",
+              "correct_answer": "$x=\\pm3$",
+              "solution_steps": [
+                "$x^2-9=0$.",
+                "$x=\\pm3$.",
+                "Done."
+              ],
+              "hint": "Set $y=0$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Is $f(x)=x^2$ even, odd, or neither?",
+              "correct_answer": "Even",
+              "solution_steps": [
+                "$f(-x)=(-x)^2=x^2=f(x)$.",
+                "Symmetric about y-axis.",
+                "Even."
+              ],
+              "hint": "Check $f(-x)$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Is $f(x)=x^3$ even, odd, or neither?",
+              "correct_answer": "Odd",
+              "solution_steps": [
+                "$f(-x)=-x^3=-f(x)$.",
+                "Origin symmetry.",
+                "Odd."
+              ],
+              "hint": "Compare to $-f(x)$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Where is $f(x)=x^2$ decreasing?",
+              "correct_answer": "$x<0$",
+              "solution_steps": [
+                "Left of the vertex it falls.",
+                "$x<0$.",
+                "Done."
+              ],
+              "hint": "Look left of the vertex."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Is $f(x)=x^3-x$ even, odd, or neither?",
+              "correct_answer": "Odd",
+              "solution_steps": [
+                "$f(-x)=-x^3+x=-(x^3-x)$.",
+                "$=-f(x)$.",
+                "Odd."
+              ],
+              "hint": "Test $f(-x)=-f(x)$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A parabola opens up with vertex $(2,-1)$. Is that a max or min, and its value?",
+              "correct_answer": "Minimum, $-1$",
+              "solution_steps": [
+                "Opens up ⇒ vertex is lowest.",
+                "Minimum value $-1$.",
+                "At $x=2$."
+              ],
+              "hint": "Upward parabola has a minimum."
+            }
+          ]
+        },
+        {
+          "id": "precalc-04-transformations",
+          "chapter": "Ch. 4",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "How does $f(x)+3$ transform the graph of $f$?",
+              "correct_answer": "Shifts up 3",
+              "solution_steps": [
+                "Adding outside.",
+                "Moves up.",
+                "By 3."
+              ],
+              "hint": "Outside +k shifts vertically."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "How does $f(x-2)$ transform the graph?",
+              "correct_answer": "Shifts right 2",
+              "solution_steps": [
+                "Inside $x-2$.",
+                "Opposite sign ⇒ right.",
+                "By 2."
+              ],
+              "hint": "Inside shift is opposite."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Describe $-f(x)$.",
+              "correct_answer": "Reflection over the x-axis",
+              "solution_steps": [
+                "Minus outside.",
+                "Flips vertically.",
+                "Over the x-axis."
+              ],
+              "hint": "Outside minus flips over x-axis."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Describe $2f(x)$.",
+              "correct_answer": "Vertical stretch by 2",
+              "solution_steps": [
+                "Multiply outputs by 2.",
+                "Taller graph.",
+                "Stretch factor 2."
+              ],
+              "hint": "Outside factor stretches vertically."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "The vertex of $y=x^2$ is $(0,0)$. Find it for $y=(x-3)^2+1$.",
+              "correct_answer": "$(3,1)$",
+              "solution_steps": [
+                "Right 3, up 1.",
+                "Vertex moves.",
+                "$(3,1)$."
+              ],
+              "hint": "Shift the vertex accordingly."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Describe the graph of $y=-(x+2)^2-3$ from $y=x^2$.",
+              "correct_answer": "Left 2, reflect over x-axis, down 3",
+              "solution_steps": [
+                "Inside $+2$ ⇒ left 2.",
+                "Minus ⇒ flip.",
+                "$-3$ ⇒ down 3."
+              ],
+              "hint": "Combine the transformations."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Find the vertex of $y=2(x-1)^2+5$.",
+              "correct_answer": "$(1,5)$",
+              "solution_steps": [
+                "Right 1, up 5 (stretch doesn't move vertex).",
+                "Vertex $(1,5)$.",
+                "Done."
+              ],
+              "hint": "Stretch keeps the vertex fixed."
+            }
+          ]
+        },
+        {
+          "id": "precalc-05-operations",
+          "chapter": "Ch. 5",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "If $f(x)=x+2$ and $g(x)=3x$, find $(f+g)(1)$.",
+              "correct_answer": "$6$",
+              "solution_steps": [
+                "$f(1)+g(1)=3+3$.",
+                "$=6$.",
+                "Done."
+              ],
+              "hint": "Add the outputs."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "With those functions, find $(f\\circ g)(1)$.",
+              "correct_answer": "$5$",
+              "solution_steps": [
+                "$g(1)=3$; $f(3)=5$.",
+                "$=5$.",
+                "Done."
+              ],
+              "hint": "Inner first."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "If $f(x)=x^2$ and $g(x)=x+1$, find $f(g(x))$.",
+              "correct_answer": "$(x+1)^2$",
+              "solution_steps": [
+                "Substitute $g$ into $f$.",
+                "$(x+1)^2$.",
+                "Done."
+              ],
+              "hint": "Replace $x$ in $f$ with $g(x)$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "With the same functions, find $g(f(x))$.",
+              "correct_answer": "$x^2+1$",
+              "solution_steps": [
+                "$f(x)=x^2$; then $g$: $x^2+1$.",
+                "Done.",
+                "Order differs from p03."
+              ],
+              "hint": "Compose the other way."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "If $f(x)=2x$ and $g(x)=x-3$, find $(fg)(4)$.",
+              "correct_answer": "$8$",
+              "solution_steps": [
+                "$f(4)=8$, $g(4)=1$.",
+                "$8\\times1$.",
+                "$8$."
+              ],
+              "hint": "Multiply outputs."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "If $f(x)=\\sqrt{x}$ and $g(x)=x-4$, find the domain of $f(g(x))$.",
+              "correct_answer": "$x\\ge4$",
+              "solution_steps": [
+                "Need $g(x)\\ge0$: $x-4\\ge0$.",
+                "$x\\ge4$.",
+                "$[4,\\infty)$."
+              ],
+              "hint": "The inside of the root must be $\\ge0$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Decompose $h(x)=\\sqrt{x^2+1}$ as $f(g(x))$.",
+              "correct_answer": "$f(u)=\\sqrt{u},\\ g(x)=x^2+1$",
+              "solution_steps": [
+                "Inner: $x^2+1$.",
+                "Outer: $\\sqrt{\\ }$.",
+                "$f(u)=\\sqrt u$, $g=x^2+1$."
+              ],
+              "hint": "Name the inside as $g$."
+            }
+          ]
+        },
+        {
+          "id": "precalc-06-inverse",
+          "chapter": "Ch. 6",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Find the inverse of $f(x)=x+5$.",
+              "correct_answer": "$f^{-1}(x)=x-5$",
+              "solution_steps": [
+                "Swap and solve: $x=y+5$.",
+                "$y=x-5$.",
+                "Done."
+              ],
+              "hint": "Undo the addition."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Find the inverse of $f(x)=2x$.",
+              "correct_answer": "$f^{-1}(x)=x/2$",
+              "solution_steps": [
+                "$x=2y$.",
+                "$y=x/2$.",
+                "Done."
+              ],
+              "hint": "Undo the multiplication."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Find the inverse of $f(x)=3x-1$.",
+              "correct_answer": "$f^{-1}(x)=\\dfrac{x+1}{3}$",
+              "solution_steps": [
+                "$x=3y-1$.",
+                "$y=(x+1)/3$.",
+                "Done."
+              ],
+              "hint": "Swap, then solve for $y$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Does $f(x)=x^2$ (all reals) have an inverse?",
+              "correct_answer": "No (not one-to-one)",
+              "solution_steps": [
+                "Horizontal line hits twice.",
+                "Not one-to-one.",
+                "No inverse unless restricted."
+              ],
+              "hint": "Apply the horizontal line test."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "If $f(3)=7$, what is $f^{-1}(7)$?",
+              "correct_answer": "$3$",
+              "solution_steps": [
+                "Inverse reverses the pair.",
+                "$(3,7)\\to(7,3)$.",
+                "$3$."
+              ],
+              "hint": "Swap the coordinates."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Find the inverse of $f(x)=\\dfrac{x+2}{x-1}$.",
+              "correct_answer": "$f^{-1}(x)=\\dfrac{x+2}{x-1}$",
+              "solution_steps": [
+                "$x(y-1)=y+2$; $xy-x=y+2$.",
+                "$y(x-1)=x+2$; $y=\\dfrac{x+2}{x-1}$.",
+                "Self-inverse here."
+              ],
+              "hint": "Solve $x=f(y)$ for $y$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Find the inverse of $f(x)=\\sqrt{x-1}$, $x\\ge1$.",
+              "correct_answer": "$f^{-1}(x)=x^2+1,\\ x\\ge0$",
+              "solution_steps": [
+                "$x=\\sqrt{y-1}$; square: $x^2=y-1$.",
+                "$y=x^2+1$.",
+                "Domain $x\\ge0$."
+              ],
+              "hint": "Square both sides, note the domain."
+            }
+          ]
+        },
+        {
+          "id": "precalc-07-poly-division",
+          "chapter": "Ch. 7",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Divide $x^2+3x+2$ by $x+1$.",
+              "correct_answer": "$x+2$",
+              "solution_steps": [
+                "$(x+1)(x+2)=x^2+3x+2$.",
+                "Quotient $x+2$, remainder 0.",
+                "$x+2$."
+              ],
+              "hint": "It factors evenly."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Use the Remainder Theorem: remainder of $P(x)=x^2+1$ divided by $x-2$.",
+              "correct_answer": "$5$",
+              "solution_steps": [
+                "$P(2)=4+1$.",
+                "$=5$.",
+                "Remainder 5."
+              ],
+              "hint": "Remainder $=P(a)$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Is $x-3$ a factor of $P(x)=x^2-9$?",
+              "correct_answer": "Yes",
+              "solution_steps": [
+                "$P(3)=9-9=0$.",
+                "Zero remainder.",
+                "Factor."
+              ],
+              "hint": "Check $P(3)$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Divide $x^2-5x+6$ by $x-2$.",
+              "correct_answer": "$x-3$",
+              "solution_steps": [
+                "$(x-2)(x-3)=x^2-5x+6$.",
+                "Quotient $x-3$.",
+                "Remainder 0."
+              ],
+              "hint": "Factor and match."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Remainder of $x^3-2x+1$ divided by $x-1$.",
+              "correct_answer": "$0$",
+              "solution_steps": [
+                "$P(1)=1-2+1$.",
+                "$=0$.",
+                "So $x-1$ is a factor."
+              ],
+              "hint": "Evaluate $P(1)$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Divide $2x^2+3x-2$ by $x+2$.",
+              "correct_answer": "$2x-1$",
+              "solution_steps": [
+                "$(x+2)(2x-1)=2x^2+3x-2$.",
+                "Quotient $2x-1$.",
+                "Remainder 0."
+              ],
+              "hint": "Check by multiplying back."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Given $x=2$ is a root of $x^3-3x^2+4$, factor it.",
+              "correct_answer": "$(x-2)(x^2-x-2)=(x-2)^2(x+1)$",
+              "solution_steps": [
+                "Divide by $x-2$: quotient $x^2-x-2$.",
+                "Factor that: $(x-2)(x+1)$.",
+                "$(x-2)^2(x+1)$."
+              ],
+              "hint": "Divide out $x-2$, then factor."
+            }
+          ]
+        },
+        {
+          "id": "precalc-08-poly-graphs",
+          "chapter": "Ch. 8",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "End behavior of $f(x)=x^2$: both ends go?",
+              "correct_answer": "Up",
+              "solution_steps": [
+                "Even degree, positive lead.",
+                "Both ends up.",
+                "Done."
+              ],
+              "hint": "Even degree ⇒ ends match."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "How many x-intercepts does $f(x)=(x-1)(x+2)$ have?",
+              "correct_answer": "$2$",
+              "solution_steps": [
+                "Zeros at $1$ and $-2$.",
+                "Two intercepts.",
+                "Done."
+              ],
+              "hint": "One per distinct factor."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "At the zero of $(x-3)^2$, does the graph cross or touch?",
+              "correct_answer": "Touch",
+              "solution_steps": [
+                "Multiplicity 2 (even).",
+                "Touches and turns.",
+                "Touch."
+              ],
+              "hint": "Even multiplicity touches."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "End behavior of $f(x)=-x^3$: as $x\\to\\infty$, $y\\to$?",
+              "correct_answer": "$-\\infty$",
+              "solution_steps": [
+                "Odd degree, negative lead.",
+                "Right end goes down.",
+                "$-\\infty$."
+              ],
+              "hint": "Negative lead flips the ends."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Max number of turning points for a degree-4 polynomial?",
+              "correct_answer": "$3$",
+              "solution_steps": [
+                "At most $n-1$.",
+                "$4-1$.",
+                "$3$."
+              ],
+              "hint": "$n-1$ turning points."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "At the zero of $(x+1)^3$, cross or touch?",
+              "correct_answer": "Cross",
+              "solution_steps": [
+                "Multiplicity 3 (odd).",
+                "Crosses (with a flattening).",
+                "Cross."
+              ],
+              "hint": "Odd multiplicity crosses."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Find the y-intercept of $f(x)=(x-2)(x+1)(x-3)$.",
+              "correct_answer": "$6$",
+              "solution_steps": [
+                "$f(0)=(-2)(1)(-3)$.",
+                "$=6$.",
+                "Done."
+              ],
+              "hint": "Evaluate at $x=0$."
+            }
+          ]
+        },
+        {
+          "id": "precalc-09-poly-roots",
+          "chapter": "Ch. 9",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "How many roots (with multiplicity) does a degree-3 polynomial have?",
+              "correct_answer": "$3$",
+              "solution_steps": [
+                "Fundamental Theorem.",
+                "Degree 3.",
+                "$3$ roots."
+              ],
+              "hint": "Count equals the degree."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "List possible rational roots of $x^2-5x+6$.",
+              "correct_answer": "$\\pm1,\\pm2,\\pm3,\\pm6$",
+              "solution_steps": [
+                "Factors of 6 over factors of 1.",
+                "$\\pm1,2,3,6$.",
+                "Test these."
+              ],
+              "hint": "$p/q$ with $p\\mid6$, $q\\mid1$."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Find the roots of $x^2-5x+6$.",
+              "correct_answer": "$x=2,3$",
+              "solution_steps": [
+                "Factor $(x-2)(x-3)$.",
+                "Roots $2,3$.",
+                "Both rational."
+              ],
+              "hint": "Factor the quadratic."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "If $2+i$ is a root of a real polynomial, name another root.",
+              "correct_answer": "$2-i$",
+              "solution_steps": [
+                "Complex roots pair as conjugates.",
+                "$2-i$.",
+                "Done."
+              ],
+              "hint": "Conjugate pair."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Given $x=1$ is a root of $x^3-1$, find the depressed polynomial.",
+              "correct_answer": "$x^2+x+1$",
+              "solution_steps": [
+                "Divide $x^3-1$ by $x-1$.",
+                "$x^2+x+1$.",
+                "Done."
+              ],
+              "hint": "Synthetic division by $x-1$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Find all roots of $x^3-1=0$.",
+              "correct_answer": "$1,\\ \\dfrac{-1\\pm\\sqrt3\\,i}{2}$",
+              "solution_steps": [
+                "$x=1$; then $x^2+x+1=0$.",
+                "Quadratic formula gives complex pair.",
+                "$\\dfrac{-1\\pm\\sqrt3 i}{2}$."
+              ],
+              "hint": "Solve the quadratic factor."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A cubic has roots $2, 2, -1$. Write it (leading coefficient 1).",
+              "correct_answer": "$(x-2)^2(x+1)$",
+              "solution_steps": [
+                "Repeated root at 2, single at $-1$.",
+                "$(x-2)^2(x+1)$.",
+                "Done."
+              ],
+              "hint": "Include the multiplicity."
+            }
+          ]
+        },
+        {
+          "id": "precalc-10-rational",
+          "chapter": "Ch. 10",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Vertical asymptote of $R(x)=\\dfrac{1}{x-4}$.",
+              "correct_answer": "$x=4$",
+              "solution_steps": [
+                "Denominator zero at 4.",
+                "Numerator nonzero.",
+                "$x=4$."
+              ],
+              "hint": "Where the bottom is zero."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Horizontal asymptote of $R(x)=\\dfrac{3x}{x+2}$.",
+              "correct_answer": "$y=3$",
+              "solution_steps": [
+                "Equal degrees.",
+                "Ratio $3/1$.",
+                "$y=3$."
+              ],
+              "hint": "Compare leading coefficients."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Horizontal asymptote of $R(x)=\\dfrac{2x}{x^2+1}$.",
+              "correct_answer": "$y=0$",
+              "solution_steps": [
+                "Bottom degree bigger.",
+                "$y=0$.",
+                "Done."
+              ],
+              "hint": "Bottom degree larger ⇒ $y=0$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Find the hole of $R(x)=\\dfrac{(x-1)(x+2)}{x-1}$.",
+              "correct_answer": "$x=1$",
+              "solution_steps": [
+                "$(x-1)$ cancels.",
+                "Hole where it did.",
+                "$x=1$."
+              ],
+              "hint": "Cancelling factor gives a hole."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "x-intercept of $R(x)=\\dfrac{x-5}{x+2}$.",
+              "correct_answer": "$x=5$",
+              "solution_steps": [
+                "Numerator zero at 5.",
+                "Denominator nonzero.",
+                "$x=5$."
+              ],
+              "hint": "Set the numerator to zero."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Does $R(x)=\\dfrac{x^2+1}{x}$ have a slant asymptote? Give it.",
+              "correct_answer": "Yes, $y=x$",
+              "solution_steps": [
+                "Degree top = bottom + 1.",
+                "Divide: $x+1/x$.",
+                "Slant $y=x$."
+              ],
+              "hint": "Top degree one more ⇒ divide."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Domain of $R(x)=\\dfrac{x}{x^2-4}$.",
+              "correct_answer": "$x\\neq\\pm2$",
+              "solution_steps": [
+                "$x^2-4=0$ at $\\pm2$.",
+                "Exclude them.",
+                "$x\\neq\\pm2$."
+              ],
+              "hint": "Zeros of the denominator."
+            }
+          ]
+        },
+        {
+          "id": "precalc-11-asymptotes",
+          "chapter": "Ch. 11",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "What kind of discontinuity does $\\dfrac{x-2}{x-2}$ have at $x=2$?",
+              "correct_answer": "Removable (hole)",
+              "solution_steps": [
+                "Factor cancels.",
+                "Leaves a hole.",
+                "Removable."
+              ],
+              "hint": "Cancelling ⇒ hole."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Vertical asymptote of $\\dfrac{1}{x+3}$?",
+              "correct_answer": "$x=-3$",
+              "solution_steps": [
+                "Denominator zero at $-3$.",
+                "Doesn't cancel.",
+                "$x=-3$."
+              ],
+              "hint": "Non-cancelling denominator zero."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Horizontal asymptote of $\\dfrac{5x^2}{x^2-1}$?",
+              "correct_answer": "$y=5$",
+              "solution_steps": [
+                "Equal degrees.",
+                "Ratio $5/1$.",
+                "$y=5$."
+              ],
+              "hint": "Compare leading coefficients."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "As $x\\to\\infty$, what does $\\dfrac{2x+1}{x}$ approach?",
+              "correct_answer": "$2$",
+              "solution_steps": [
+                "Divide: $2+1/x$.",
+                "$\\to2$.",
+                "$y=2$."
+              ],
+              "hint": "End behavior."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Does $\\dfrac{(x-1)(x+2)}{(x-1)}$ have an asymptote or a hole at $x=1$?",
+              "correct_answer": "Hole",
+              "solution_steps": [
+                "$(x-1)$ cancels.",
+                "Hole at $x=1$.",
+                "Not an asymptote."
+              ],
+              "hint": "Cancelling factor ⇒ hole."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Slant asymptote of $\\dfrac{x^2-1}{x}$?",
+              "correct_answer": "$y=x$",
+              "solution_steps": [
+                "Divide: $x-1/x$.",
+                "As $x\\to\\infty$, $\\to x$.",
+                "$y=x$."
+              ],
+              "hint": "Top degree one more ⇒ divide."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Near $x=0^+$, does $\\dfrac1x\\to+\\infty$ or $-\\infty$?",
+              "correct_answer": "$+\\infty$",
+              "solution_steps": [
+                "Small positive $x$ ⇒ large positive $1/x$.",
+                "$\\to+\\infty$.",
+                "Done."
+              ],
+              "hint": "Test the sign just right of 0."
+            }
+          ]
+        },
+        {
+          "id": "precalc-12-inequalities",
+          "chapter": "Ch. 12",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Solve $x-3>0$.",
+              "correct_answer": "$x>3$",
+              "solution_steps": [
+                "Add 3.",
+                "$x>3$.",
+                "$(3,\\infty)$."
+              ],
+              "hint": "Isolate $x$."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Critical values of $(x-1)(x+2)$.",
+              "correct_answer": "$x=1,-2$",
+              "solution_steps": [
+                "Set each factor to zero.",
+                "$1$ and $-2$.",
+                "Done."
+              ],
+              "hint": "Zeros of the factors."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "Solve $(x-1)(x+2)>0$.",
+              "correct_answer": "$x<-2$ or $x>1$",
+              "solution_steps": [
+                "Sign chart: + outside the roots.",
+                "Test points confirm.",
+                "$(-\\infty,-2)\\cup(1,\\infty)$."
+              ],
+              "hint": "Positive outside the roots."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Solve $x^2-4\\le0$.",
+              "correct_answer": "$-2\\le x\\le2$",
+              "solution_steps": [
+                "Roots $\\pm2$; parabola $\\le0$ between them.",
+                "$[-2,2]$.",
+                "Done."
+              ],
+              "hint": "Between the roots for $\\le0$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Solve $\\dfrac{1}{x-2}>0$.",
+              "correct_answer": "$x>2$",
+              "solution_steps": [
+                "Positive when $x-2>0$.",
+                "$x>2$.",
+                "Exclude 2."
+              ],
+              "hint": "Fraction positive when denominator positive."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Solve $\\dfrac{x-1}{x+2}\\ge0$.",
+              "correct_answer": "$x<-2$ or $x\\ge1$",
+              "solution_steps": [
+                "Critical: $1$ (zero), $-2$ (undefined).",
+                "Sign chart: + outside, include $1$, exclude $-2$.",
+                "$(-\\infty,-2)\\cup[1,\\infty)$."
+              ],
+              "hint": "Include the numerator zero, exclude the denominator zero."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Solve $x^2-x-6<0$.",
+              "correct_answer": "$-2<x<3$",
+              "solution_steps": [
+                "Factor $(x-3)(x+2)$; roots $3,-2$.",
+                "Negative between them.",
+                "$(-2,3)$."
+              ],
+              "hint": "Between the roots for $<0$."
+            }
+          ]
+        },
+        {
+          "id": "precalc-13-exponential",
+          "chapter": "Ch. 13",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "For $f(x)=2^x$, find $f(3)$.",
+              "correct_answer": "$8$",
+              "solution_steps": [
+                "$2^3$.",
+                "$=8$.",
+                "Done."
+              ],
+              "hint": "Evaluate the power."
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Is $f(x)=3(0.5)^x$ growth or decay?",
+              "correct_answer": "Decay",
+              "solution_steps": [
+                "Base $0.5<1$.",
+                "Shrinks each step.",
+                "Decay."
+              ],
+              "hint": "Base below 1 ⇒ decay."
+            },
+            {
+              "id": "p03",
+              "difficulty": "medium",
+              "prompt": "For $f(x)=5\\cdot2^x$, find the initial value.",
+              "correct_answer": "$5$",
+              "solution_steps": [
+                "$f(0)=5\\cdot1$.",
+                "$=5$.",
+                "The coefficient."
+              ],
+              "hint": "Initial value is $a$."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "A population triples each year, starting at 100. Write the model.",
+              "correct_answer": "$P=100\\cdot3^t$",
+              "solution_steps": [
+                "$a=100$, $b=3$.",
+                "$P=100(3^t)$.",
+                "Done."
+              ],
+              "hint": "$a\\,b^t$ with $b=3$."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "What is the horizontal asymptote of $f(x)=2^x$?",
+              "correct_answer": "$y=0$",
+              "solution_steps": [
+                "As $x\\to-\\infty$, $2^x\\to0$.",
+                "Asymptote $y=0$.",
+                "Done."
+              ],
+              "hint": "Exponentials flatten to 0."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "$500$ grows continuously at $4\\%$. Find the amount after $10$ years.",
+              "correct_answer": "$\\approx746$",
+              "solution_steps": [
+                "$A=500e^{0.04(10)}=500e^{0.4}$.",
+                "$e^{0.4}\\approx1.492$.",
+                "$\\approx746$."
+              ],
+              "hint": "$A=Pe^{rt}$."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "A quantity halves every $5$ years. What fraction remains after $15$ years?",
+              "correct_answer": "$1/8$",
+              "solution_steps": [
+                "$15/5=3$ half-lives.",
+                "$(1/2)^3$.",
+                "$1/8$."
+              ],
+              "hint": "Count the half-lives."
+            }
+          ]
+        },
+        {
+          "id": "precalc-14-logarithmic",
+          "chapter": "Ch. 13",
+          "problems": [
+            {
+              "id": "p01",
+              "difficulty": "easy",
+              "prompt": "Evaluate $\\log_2 16$.",
+              "correct_answer": "$4$",
+              "solution_steps": [
+                "$2^4=16$.",
+                "$4$.",
+                "Done."
+              ],
+              "hint": "What power of 2 is 16?"
+            },
+            {
+              "id": "p02",
+              "difficulty": "easy",
+              "prompt": "Evaluate $\\log_{10} 100$.",
+              "correct_answer": "$2$",
+              "solution_steps": [
+                "$10^2=100$.",
+                "$2$.",
+                "Done."
+              ],
+              "hint": "Powers of 10."
+            },
+            {
+              "id": "p03",
+              "difficulty": "easy",
+              "prompt": "Rewrite $\\log_3 81=4$ in exponential form.",
+              "correct_answer": "$3^4=81$",
+              "solution_steps": [
+                "$\\log_b x=y\\iff b^y=x$.",
+                "$3^4=81$.",
+                "Done."
+              ],
+              "hint": "Definition of a log."
+            },
+            {
+              "id": "p04",
+              "difficulty": "medium",
+              "prompt": "Expand $\\log(x^3 y)$.",
+              "correct_answer": "$3\\log x+\\log y$",
+              "solution_steps": [
+                "Power then product law.",
+                "$3\\log x+\\log y$.",
+                "Done."
+              ],
+              "hint": "Combine power and product laws."
+            },
+            {
+              "id": "p05",
+              "difficulty": "medium",
+              "prompt": "Evaluate $\\ln e^5$.",
+              "correct_answer": "$5$",
+              "solution_steps": [
+                "Inverses cancel.",
+                "$\\ln e^5=5$.",
+                "Done."
+              ],
+              "hint": "$\\ln$ undoes $e$."
+            },
+            {
+              "id": "p06",
+              "difficulty": "hard",
+              "prompt": "Solve $3^x=81$.",
+              "correct_answer": "$x=4$",
+              "solution_steps": [
+                "$81=3^4$.",
+                "$x=4$.",
+                "Or take $\\log_3$."
+              ],
+              "hint": "Match the bases."
+            },
+            {
+              "id": "p07",
+              "difficulty": "hard",
+              "prompt": "Solve $2e^{x}=14$.",
+              "correct_answer": "$x=\\ln 7\\approx1.95$",
+              "solution_steps": [
+                "$e^x=7$.",
+                "$x=\\ln7$.",
+                "$\\approx1.95$."
+              ],
+              "hint": "Isolate the exponential, then take $\\ln$."
+            }
+          ]
+        }
+      ]
     }
   ]
 }

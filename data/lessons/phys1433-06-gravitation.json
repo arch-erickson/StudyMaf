@@ -1,0 +1,238 @@
+{
+  "title": "Gravitation",
+  "summary": "Newton's law of universal gravitation, $F=Gm_1m_2/r^2$, describes the attraction between any two masses. Surface gravity is $g=GM/R^2$, and for circular orbits gravity supplies the centripetal force, giving $v=\\sqrt{GM/r}$.",
+  "glossary": {
+    "universal gravitation": {
+      "plain": "Every mass attracts every other.",
+      "in_class": "$F=G\\dfrac{m_1m_2}{r^2}$."
+    },
+    "gravitational constant": {
+      "plain": "The constant $G$.",
+      "in_class": "$6.67\\times10^{-11}\\ \\text{N·m}^2/\\text{kg}^2$."
+    },
+    "inverse-square law": {
+      "plain": "Force falls off as $1/r^2$.",
+      "in_class": "Double the distance ⇒ quarter the force."
+    },
+    "surface gravity": {
+      "plain": "Local free-fall acceleration.",
+      "in_class": "$g=GM/R^2$."
+    },
+    "orbital speed": {
+      "plain": "Speed for a circular orbit.",
+      "in_class": "$v=\\sqrt{GM/r}$."
+    },
+    "orbital period": {
+      "plain": "Time for one orbit.",
+      "in_class": "$T=2\\pi r/v$; Kepler's third law."
+    },
+    "weight on a planet": {
+      "plain": "Gravitational force there.",
+      "in_class": "$W=mg$ with that planet's $g$."
+    },
+    "Kepler's laws": {
+      "plain": "Rules of planetary orbits.",
+      "in_class": "Ellipses; equal areas; $T^2\\propto r^3$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Universal gravitation",
+      "explanation": "Any two masses attract with $F=Gm_1m_2/r^2$, directed along the line joining them — the same inverse-square form as the electric force.",
+      "math_steps": [
+        "Insert the masses and separation.",
+        "$F=Gm_1m_2/r^2$.",
+        "The force is attractive."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-c1.svg",
+        "caption": "Universal gravitation"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The inverse-square law",
+      "explanation": "Gravity weakens with the square of the distance: doubling $r$ cuts the force to a quarter. This shapes orbits and tides.",
+      "math_steps": [
+        "Compare distances as a ratio.",
+        "Force scales as $1/r^2$.",
+        "Twice as far ⇒ one-quarter as strong."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-c2.svg",
+        "caption": "The inverse-square law"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Surface gravity",
+      "explanation": "A planet's surface gravity is $g=GM/R^2$. Weight $mg$ therefore depends on the planet's mass and radius, not just your mass.",
+      "math_steps": [
+        "Compute $g=GM/R^2$.",
+        "Weight $=mg$ locally.",
+        "Mass is unchanged everywhere."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-c3.svg",
+        "caption": "Surface gravity"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Orbits",
+      "explanation": "For a circular orbit, gravity is the centripetal force: $GMm/r^2=mv^2/r$, so orbital speed is $v=\\sqrt{GM/r}$.",
+      "math_steps": [
+        "Set gravity $=mv^2/r$.",
+        "Solve $v=\\sqrt{GM/r}$.",
+        "Higher orbits move slower."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-c4.svg",
+        "caption": "Orbits"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Kepler's third law",
+      "explanation": "Orbital period grows with radius: $T^2\\propto r^3$. Combining $v=\\sqrt{GM/r}$ with $T=2\\pi r/v$ gives the relation.",
+      "math_steps": [
+        "Use $T=2\\pi r/v$.",
+        "Substitute $v=\\sqrt{GM/r}$.",
+        "Get $T^2\\propto r^3$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-c5.svg",
+        "caption": "Kepler's third law"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "GPS satellites",
+      "scenario": "Satellites orbit at a set altitude.",
+      "how_the_math_applies": "Their orbital speed follows $v=\\sqrt{GM/r}$, fixing the orbit's period.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-e1.svg",
+        "caption": "GPS satellites"
+      }
+    },
+    {
+      "title": "Weight on the Moon",
+      "scenario": "You'd weigh less on the Moon.",
+      "how_the_math_applies": "The Moon's smaller $GM/R^2$ makes $g$ about $1/6$ of Earth's.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-e2.svg",
+        "caption": "Weight on the Moon"
+      }
+    },
+    {
+      "title": "Ocean tides",
+      "scenario": "The Moon raises tides on Earth.",
+      "how_the_math_applies": "The inverse-square gravity is slightly stronger on the near side, stretching the oceans.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-06-gravitation-e3.svg",
+        "caption": "Ocean tides"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "universal gravitation inverse square law surface gravity",
+    "math_query": "orbital speed keplers laws examples",
+    "combined_query": "physics 1 gravitation worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Two $500$ kg masses are $1$ m apart. Find the gravitational force.",
+      "correct_answer": "$\\approx1.67\\times10^{-5}$ N",
+      "solution_steps": [
+        "$F=Gm_1m_2/r^2$.",
+        "$=6.67\\times10^{-11}(2.5\\times10^5)/1$.",
+        "$\\approx1.67\\times10^{-5}$ N."
+      ],
+      "hint": "$F=Gm_1m_2/r^2$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "If distance doubles, how does gravitational force change?",
+      "correct_answer": "Quarter",
+      "solution_steps": [
+        "$F\\propto1/r^2$.",
+        "$1/2^2=1/4$.",
+        "Quarter."
+      ],
+      "hint": "Inverse-square."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find $g$ at Earth's surface ($M=5.97\\times10^{24}$ kg, $R=6.37\\times10^6$ m).",
+      "correct_answer": "$\\approx9.8$ m/s²",
+      "solution_steps": [
+        "$g=GM/R^2$.",
+        "$=6.67\\times10^{-11}(5.97\\times10^{24})/(6.37\\times10^6)^2$.",
+        "$\\approx9.8$ m/s²."
+      ],
+      "hint": "$g=GM/R^2$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Your mass is $70$ kg. Your weight where $g=3.7$ m/s² (Mars)?",
+      "correct_answer": "$259$ N",
+      "solution_steps": [
+        "$W=mg$.",
+        "$=70(3.7)$.",
+        "$259$ N."
+      ],
+      "hint": "Use the local $g$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Find the orbital speed at $r=8\\times10^6$ m around Earth.",
+      "correct_answer": "$\\approx7.05\\times10^3$ m/s",
+      "solution_steps": [
+        "$v=\\sqrt{GM/r}$.",
+        "$=\\sqrt{6.67\\times10^{-11}(5.97\\times10^{24})/8\\times10^6}$.",
+        "$\\approx7.05$ km/s."
+      ],
+      "hint": "$v=\\sqrt{GM/r}$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Two planets: one twice the mass, twice the radius. How does surface gravity compare?",
+      "correct_answer": "Half",
+      "solution_steps": [
+        "$g=GM/R^2$; $g'=G(2M)/(2R)^2=GM/(2R^2)$.",
+        "Half of original.",
+        "$g'=g/2$."
+      ],
+      "hint": "Plug $2M$ and $2R$ into $GM/R^2$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "If orbit radius quadruples, how does the period change? ($T^2\\propto r^3$)",
+      "correct_answer": "×8",
+      "solution_steps": [
+        "$T^2\\propto r^3$; $r\\to4r$ ⇒ $T^2\\times64$.",
+        "$T\\times8$.",
+        "Period is 8× longer."
+      ],
+      "hint": "$T\\propto r^{3/2}$."
+    }
+  ]
+}

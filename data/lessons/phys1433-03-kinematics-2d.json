@@ -1,0 +1,238 @@
+{
+  "title": "Two-Dimensional Motion & Projectiles",
+  "summary": "Vectors add by components ($A_x=A\\cos\\theta$, $A_y=A\\sin\\theta$). In two dimensions, horizontal and vertical motions are independent: a projectile keeps constant horizontal velocity while undergoing vertical free fall, tracing a parabola.",
+  "glossary": {
+    "vector": {
+      "plain": "A quantity with magnitude and direction.",
+      "in_class": "Add by components."
+    },
+    "components": {
+      "plain": "Projections onto the x and y axes.",
+      "in_class": "$A_x=A\\cos\\theta$, $A_y=A\\sin\\theta$."
+    },
+    "resultant": {
+      "plain": "The vector sum.",
+      "in_class": "$\\sqrt{R_x^2+R_y^2}$ at angle $\\arctan(R_y/R_x)$."
+    },
+    "projectile": {
+      "plain": "An object moving under gravity only.",
+      "in_class": "Horizontal constant velocity; vertical free fall."
+    },
+    "range": {
+      "plain": "Horizontal distance traveled.",
+      "in_class": "Largest at a $45^\\circ$ launch on level ground."
+    },
+    "time of flight": {
+      "plain": "How long a projectile is airborne.",
+      "in_class": "Set by the vertical motion."
+    },
+    "independence of motion": {
+      "plain": "x and y motions don't interact.",
+      "in_class": "Linked only by shared time."
+    },
+    "trajectory": {
+      "plain": "The projectile's path.",
+      "in_class": "A parabola."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Vectors and components",
+      "explanation": "Split each vector into $A_x=A\\cos\\theta$ and $A_y=A\\sin\\theta$; components add as plain numbers, then recombine into magnitude and direction.",
+      "math_steps": [
+        "Resolve into $x$ and $y$.",
+        "Add components separately.",
+        "Recombine: $\\sqrt{R_x^2+R_y^2}$, angle from $\\arctan$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-c1.svg",
+        "caption": "Vectors and components"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Independence of motion",
+      "explanation": "In 2D, horizontal and vertical motions proceed independently, sharing only the clock. Solve each with 1D kinematics.",
+      "math_steps": [
+        "Separate into $x$ and $y$ motions.",
+        "Apply kinematics to each.",
+        "Connect through the common time."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-c2.svg",
+        "caption": "Independence of motion"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Projectile launch",
+      "explanation": "Resolve the launch velocity: $v_{0x}=v_0\\cos\\theta$ (constant) and $v_{0y}=v_0\\sin\\theta$ (free fall). These drive the whole trajectory.",
+      "math_steps": [
+        "Find $v_{0x}$ and $v_{0y}$.",
+        "$x$: constant velocity; $y$: free fall.",
+        "Combine for the path."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-c3.svg",
+        "caption": "Projectile launch"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Time of flight and range",
+      "explanation": "Vertical motion sets the flight time; multiplying by the constant horizontal velocity gives the range.",
+      "math_steps": [
+        "Find flight time from $y$-motion.",
+        "Range $=v_{0x}\\times$ time.",
+        "Max height when $v_y=0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-c4.svg",
+        "caption": "Time of flight and range"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Maximum range",
+      "explanation": "On level ground, range is $R=\\dfrac{v_0^2\\sin2\\theta}{g}$, greatest at $\\theta=45^\\circ$.",
+      "math_steps": [
+        "Use $R=v_0^2\\sin2\\theta/g$.",
+        "$\\sin2\\theta$ peaks at $45^\\circ$.",
+        "Complementary angles give the same range."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-c5.svg",
+        "caption": "Maximum range"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A long jump",
+      "scenario": "An athlete leaps at an angle.",
+      "how_the_math_applies": "Range depends on takeoff speed and angle — near $45^\\circ$ for maximum distance.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-e1.svg",
+        "caption": "A long jump"
+      }
+    },
+    {
+      "title": "A thrown basketball",
+      "scenario": "A shot arcs toward the hoop.",
+      "how_the_math_applies": "The parabolic path comes from horizontal constant velocity plus vertical gravity.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-e2.svg",
+        "caption": "A thrown basketball"
+      }
+    },
+    {
+      "title": "A plane dropping supplies",
+      "scenario": "A package released from a moving plane.",
+      "how_the_math_applies": "It keeps the plane's horizontal velocity while falling — independent motions.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-03-kinematics-2d-e3.svg",
+        "caption": "A plane dropping supplies"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "vectors components projectile motion algebra",
+    "math_query": "projectile range time of flight height examples",
+    "combined_query": "physics 1 two dimensional projectile worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $12$-unit vector points at $60^\\circ$. Find its $y$-component.",
+      "correct_answer": "$\\approx10.4$",
+      "solution_steps": [
+        "$A_y=A\\sin\\theta$.",
+        "$=12\\sin60^\\circ$.",
+        "$\\approx10.4$."
+      ],
+      "hint": "$A_y=A\\sin\\theta$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the magnitude of components $(6,8)$.",
+      "correct_answer": "$10$",
+      "solution_steps": [
+        "$\\sqrt{36+64}$.",
+        "$=\\sqrt{100}$.",
+        "$10$."
+      ],
+      "hint": "Pythagoras."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A ball rolls off a $1.8$ m table at $2$ m/s. How long to land?",
+      "correct_answer": "$\\approx0.606$ s",
+      "solution_steps": [
+        "$1.8=\\tfrac12(9.8)t^2$.",
+        "$t=\\sqrt{3.6/9.8}$.",
+        "$\\approx0.606$ s."
+      ],
+      "hint": "Height sets the time."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "In the previous problem, how far from the table does it land?",
+      "correct_answer": "$\\approx1.21$ m",
+      "solution_steps": [
+        "$x=v t=2(0.606)$.",
+        "$\\approx1.21$ m.",
+        "Done."
+      ],
+      "hint": "Range = horizontal speed × time."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A projectile launches at $30$ m/s, $30^\\circ$. Find $v_{0x}$.",
+      "correct_answer": "$\\approx26$ m/s",
+      "solution_steps": [
+        "$v_{0x}=30\\cos30^\\circ$.",
+        "$=30(0.866)$.",
+        "$\\approx26$ m/s."
+      ],
+      "hint": "$v_{0x}=v_0\\cos\\theta$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the range for a $20$ m/s launch at $45^\\circ$.",
+      "correct_answer": "$\\approx40.8$ m",
+      "solution_steps": [
+        "$R=v_0^2\\sin2\\theta/g=400\\sin90^\\circ/9.8$.",
+        "$=400/9.8$.",
+        "$\\approx40.8$ m."
+      ],
+      "hint": "$R=v_0^2\\sin2\\theta/g$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Which two launch angles give the same range?",
+      "correct_answer": "Complementary (e.g. $30^\\circ$ & $60^\\circ$)",
+      "solution_steps": [
+        "$\\sin2\\theta=\\sin2(90-\\theta)$.",
+        "Complementary angles match.",
+        "$30^\\circ$ and $60^\\circ$."
+      ],
+      "hint": "$\\theta$ and $90-\\theta$."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "title": "The Laws of Thermodynamics",
+  "summary": "The first law is energy conservation for heat and work: $\\Delta U=Q-W$. The second law says heat flows spontaneously hot → cold and no engine is perfectly efficient. Engine efficiency is bounded by the Carnot limit $1-T_c/T_h$.",
+  "glossary": {
+    "internal energy": {
+      "plain": "Total microscopic energy of a system.",
+      "in_class": "Changes via heat and work: $\\Delta U=Q-W$."
+    },
+    "first law": {
+      "plain": "Energy conservation with heat and work.",
+      "in_class": "$\\Delta U=Q-W$."
+    },
+    "work by a gas": {
+      "plain": "Work done as a gas expands.",
+      "in_class": "$W=\\int P\\,dV$; area under the $P$-$V$ curve."
+    },
+    "second law": {
+      "plain": "Heat won't flow cold → hot on its own; entropy tends to increase.",
+      "in_class": "Limits engine efficiency."
+    },
+    "heat engine": {
+      "plain": "A device converting heat to work.",
+      "in_class": "Efficiency $e=W/Q_h$."
+    },
+    "efficiency": {
+      "plain": "Fraction of heat turned into work.",
+      "in_class": "$e=W/Q_h=1-Q_c/Q_h$."
+    },
+    "Carnot efficiency": {
+      "plain": "The maximum possible efficiency.",
+      "in_class": "$e_{max}=1-T_c/T_h$ (kelvin)."
+    },
+    "entropy": {
+      "plain": "A measure of disorder.",
+      "in_class": "Increases for spontaneous processes."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The first law",
+      "explanation": "Energy is conserved: the change in internal energy equals heat added minus work done by the system, $\\Delta U=Q-W$. Track signs carefully.",
+      "math_steps": [
+        "Identify heat in $Q$ and work out $W$.",
+        "$\\Delta U=Q-W$.",
+        "Positive $Q$ adds energy; positive $W$ removes it."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-c1.svg",
+        "caption": "The first law"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Work in thermodynamic processes",
+      "explanation": "A gas does work $W=\\int P\\,dV$ as it expands — the area under the $P$–$V$ curve. Constant-pressure work is $W=P\\Delta V$.",
+      "math_steps": [
+        "Sketch the $P$–$V$ path.",
+        "Work is the area under it.",
+        "Constant $P$: $W=P\\Delta V$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-c2.svg",
+        "caption": "Work in thermodynamic processes"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The second law",
+      "explanation": "Heat flows spontaneously from hot to cold, never the reverse without work, and entropy tends to increase. No process can convert heat entirely into work.",
+      "math_steps": [
+        "Heat flows hot → cold naturally.",
+        "Entropy of an isolated system increases.",
+        "No 100%-efficient engine exists."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-c3.svg",
+        "caption": "The second law"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Heat engines and efficiency",
+      "explanation": "An engine takes in $Q_h$, does work $W$, and dumps $Q_c$: efficiency $e=W/Q_h=1-Q_c/Q_h$. Real engines are well below the ideal.",
+      "math_steps": [
+        "Find $Q_h$, $Q_c$, and $W=Q_h-Q_c$.",
+        "$e=W/Q_h$.",
+        "Compare to the Carnot limit."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-c4.svg",
+        "caption": "Heat engines and efficiency"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "The Carnot limit",
+      "explanation": "The maximum efficiency between reservoirs at $T_h$ and $T_c$ (kelvin) is $e_{max}=1-T_c/T_h$. No engine can beat it.",
+      "math_steps": [
+        "Use absolute temperatures.",
+        "$e_{max}=1-T_c/T_h$.",
+        "Real efficiency is always lower."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-c5.svg",
+        "caption": "The Carnot limit"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A car engine",
+      "scenario": "Fuel burns to drive the car.",
+      "how_the_math_applies": "Only a fraction of the heat becomes work; the Carnot limit caps how good it can be.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-e1.svg",
+        "caption": "A car engine"
+      }
+    },
+    {
+      "title": "A refrigerator",
+      "scenario": "Heat is moved from cold to hot.",
+      "how_the_math_applies": "This requires work input — the second law forbids it happening for free.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-e2.svg",
+        "caption": "A refrigerator"
+      }
+    },
+    {
+      "title": "Steam power plants",
+      "scenario": "High-temperature steam drives turbines.",
+      "how_the_math_applies": "Higher $T_h$ raises the Carnot efficiency, so plants run as hot as materials allow.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-14-thermodynamics-e3.svg",
+        "caption": "Steam power plants"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "first law thermodynamics internal energy heat work",
+    "math_query": "heat engine efficiency carnot second law examples",
+    "combined_query": "physics 1 thermodynamics worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A gas absorbs $500$ J of heat and does $200$ J of work. Find $\\Delta U$.",
+      "correct_answer": "$300$ J",
+      "solution_steps": [
+        "$\\Delta U=Q-W$.",
+        "$=500-200$.",
+        "$300$ J."
+      ],
+      "hint": "$\\Delta U=Q-W$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A gas expands at constant $P=2\\times10^5$ Pa by $\\Delta V=0.001$ m³. Find the work.",
+      "correct_answer": "$200$ J",
+      "solution_steps": [
+        "$W=P\\Delta V$.",
+        "$=2\\times10^5(0.001)$.",
+        "$200$ J."
+      ],
+      "hint": "$W=P\\Delta V$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "An engine takes $1000$ J and exhausts $600$ J. Find its efficiency.",
+      "correct_answer": "$0.4$ (40%)",
+      "solution_steps": [
+        "$e=1-Q_c/Q_h$.",
+        "$=1-600/1000$.",
+        "$0.4$."
+      ],
+      "hint": "$e=1-Q_c/Q_h$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the Carnot efficiency between $600$ K and $300$ K.",
+      "correct_answer": "$0.5$ (50%)",
+      "solution_steps": [
+        "$e=1-T_c/T_h$.",
+        "$=1-300/600$.",
+        "$0.5$."
+      ],
+      "hint": "Use kelvin."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "An engine does $400$ J of work per cycle taking in $1000$ J. Find the heat exhausted.",
+      "correct_answer": "$600$ J",
+      "solution_steps": [
+        "$Q_c=Q_h-W$.",
+        "$=1000-400$.",
+        "$600$ J."
+      ],
+      "hint": "$Q_c=Q_h-W$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A gas releases $300$ J of heat while $150$ J of work is done on it. Find $\\Delta U$.",
+      "correct_answer": "$-150$ J",
+      "solution_steps": [
+        "$Q=-300$, $W=-150$ (on the gas).",
+        "$\\Delta U=Q-W=-300-(-150)$.",
+        "$-150$ J."
+      ],
+      "hint": "Mind the signs of $Q$ and $W$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A real engine between $500$ K and $300$ K has efficiency $0.25$. What fraction of the Carnot limit is that?",
+      "correct_answer": "$\\approx0.625$",
+      "solution_steps": [
+        "Carnot $=1-300/500=0.4$.",
+        "Ratio $=0.25/0.4$.",
+        "$\\approx0.625$."
+      ],
+      "hint": "Compare to $e_{max}=1-T_c/T_h$."
+    }
+  ]
+}

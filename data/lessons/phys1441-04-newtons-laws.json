@@ -1,0 +1,238 @@
+{
+  "title": "Newton's Laws of Motion",
+  "summary": "Newton's three laws govern dynamics: an object keeps its velocity unless a net force acts (inertia); $\\vec F_{net}=m\\vec a$; and forces come in equal-and-opposite pairs. Free-body diagrams turn a situation into equations.",
+  "glossary": {
+    "Newton's first law": {
+      "plain": "Inertia: no net force ⇒ constant velocity.",
+      "in_class": "Objects resist changes in motion."
+    },
+    "Newton's second law": {
+      "plain": "Net force equals mass times acceleration.",
+      "in_class": "$\\vec F_{net}=m\\vec a$."
+    },
+    "Newton's third law": {
+      "plain": "Every force has an equal, opposite reaction.",
+      "in_class": "$\\vec F_{AB}=-\\vec F_{BA}$."
+    },
+    "free-body diagram": {
+      "plain": "A sketch of all forces on one object.",
+      "in_class": "The basis for writing $\\sum F=ma$."
+    },
+    "net force": {
+      "plain": "The vector sum of all forces.",
+      "in_class": "Determines the acceleration."
+    },
+    "mass vs weight": {
+      "plain": "Amount of matter vs gravitational force on it.",
+      "in_class": "$W=mg$; mass is constant, weight varies with $g$."
+    },
+    "normal force": {
+      "plain": "Support force perpendicular to a surface.",
+      "in_class": "Adjusts to prevent objects sinking through surfaces."
+    },
+    "inertia": {
+      "plain": "Resistance to acceleration.",
+      "in_class": "Measured by mass."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "First law: inertia",
+      "explanation": "Without a net force, an object's velocity stays constant — at rest or moving straight at constant speed. Motion doesn't need a force to continue, only to change.",
+      "math_steps": [
+        "Check whether the net force is zero.",
+        "If so, velocity is constant.",
+        "A force is needed only to change motion."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-c1.svg",
+        "caption": "First law: inertia"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Second law: $F=ma$",
+      "explanation": "The net force equals mass times acceleration. Solve problems by summing forces along each axis and setting $\\sum F=ma$.",
+      "math_steps": [
+        "Draw a free-body diagram.",
+        "Sum forces along each axis.",
+        "Set $\\sum F=ma$ and solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-c2.svg",
+        "caption": "Second law: $F=ma$"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Free-body diagrams",
+      "explanation": "Isolate one object and draw every force acting on it (gravity, normal, tension, friction, applied). This converts the physics into solvable equations.",
+      "math_steps": [
+        "Pick one object.",
+        "Draw all forces as arrows.",
+        "Choose axes and resolve into components."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-c3.svg",
+        "caption": "Free-body diagrams"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Third law: action–reaction",
+      "explanation": "Forces occur in pairs: if A pushes B, B pushes A equally and oppositely. The pair acts on different objects, so they don't cancel on one object.",
+      "math_steps": [
+        "Identify the interacting pair.",
+        "The forces are equal and opposite.",
+        "They act on different bodies."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-c4.svg",
+        "caption": "Third law: action–reaction"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Weight and normal force",
+      "explanation": "Weight is $W=mg$. The normal force is the surface's perpendicular support; on a flat surface with no vertical acceleration it equals the weight (or its perpendicular component on an incline).",
+      "math_steps": [
+        "Compute weight $W=mg$.",
+        "Balance vertical forces if no vertical acceleration.",
+        "On an incline, $N=mg\\cos\\theta$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-c5.svg",
+        "caption": "Weight and normal force"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Seatbelts and inertia",
+      "scenario": "A car stops suddenly.",
+      "how_the_math_applies": "Your body continues forward by inertia (first law) until the belt applies a force.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-e1.svg",
+        "caption": "Seatbelts and inertia"
+      }
+    },
+    {
+      "title": "Rocket propulsion",
+      "scenario": "A rocket pushes gas out the back.",
+      "how_the_math_applies": "By the third law, the gas pushes the rocket forward.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-e2.svg",
+        "caption": "Rocket propulsion"
+      }
+    },
+    {
+      "title": "An elevator ride",
+      "scenario": "You feel heavier as the elevator accelerates up.",
+      "how_the_math_applies": "The normal force exceeds your weight: $N-mg=ma$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-04-newtons-laws-e3.svg",
+        "caption": "An elevator ride"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "newtons three laws of motion explained free body diagram",
+    "math_query": "F=ma newtons second law tension normal force examples",
+    "combined_query": "physics 1 newtons laws worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $10$ kg box has a net force of $30$ N. Find its acceleration.",
+      "correct_answer": "$3$ m/s²",
+      "solution_steps": [
+        "$a=F/m$.",
+        "$=30/10$.",
+        "$3$ m/s²."
+      ],
+      "hint": "$a=F_{net}/m$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "What is the weight of a $5$ kg object?",
+      "correct_answer": "$\\approx49$ N",
+      "solution_steps": [
+        "$W=mg$.",
+        "$=5(9.8)$.",
+        "$49$ N."
+      ],
+      "hint": "$W=mg$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $2$ kg block is pushed with $12$ N against $4$ N of friction. Find its acceleration.",
+      "correct_answer": "$4$ m/s²",
+      "solution_steps": [
+        "Net $=12-4=8$ N.",
+        "$a=8/2$.",
+        "$4$ m/s²."
+      ],
+      "hint": "Subtract friction, then $a=F_{net}/m$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $3$ kg mass hangs from a rope in equilibrium. Find the tension.",
+      "correct_answer": "$\\approx29.4$ N",
+      "solution_steps": [
+        "Equilibrium: $T=mg$.",
+        "$=3(9.8)$.",
+        "$29.4$ N."
+      ],
+      "hint": "Tension balances weight."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "An elevator accelerates up at $2$ m/s² with a $60$ kg person. Find the normal force.",
+      "correct_answer": "$\\approx708$ N",
+      "solution_steps": [
+        "$N-mg=ma$.",
+        "$N=60(9.8+2)$.",
+        "$708$ N."
+      ],
+      "hint": "$N=m(g+a)$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $5$ kg block on a frictionless $30^\\circ$ incline — find its acceleration.",
+      "correct_answer": "$\\approx4.9$ m/s²",
+      "solution_steps": [
+        "$a=g\\sin\\theta$.",
+        "$=9.8\\sin30^\\circ$.",
+        "$4.9$ m/s²."
+      ],
+      "hint": "$a=g\\sin\\theta$ on a frictionless incline."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Two masses $3$ kg and $2$ kg connected over a frictionless pulley (Atwood). Find the acceleration.",
+      "correct_answer": "$\\approx1.96$ m/s²",
+      "solution_steps": [
+        "$a=\\dfrac{(m_1-m_2)g}{m_1+m_2}=\\dfrac{(1)(9.8)}{5}$.",
+        "$=1.96$ m/s².",
+        "Done."
+      ],
+      "hint": "Atwood: $a=(m_1-m_2)g/(m_1+m_2)$."
+    }
+  ]
+}

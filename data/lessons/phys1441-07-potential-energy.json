@@ -1,0 +1,238 @@
+{
+  "title": "Potential Energy & Conservation of Energy",
+  "summary": "Potential energy is stored energy of position: gravitational $U=mgh$ and elastic $U=\\tfrac12kx^2$. When only conservative forces act, mechanical energy $KE+U$ is conserved. Friction removes mechanical energy as heat.",
+  "glossary": {
+    "potential energy": {
+      "plain": "Stored energy due to position or configuration.",
+      "in_class": "Gravitational $mgh$; elastic $\\tfrac12kx^2$."
+    },
+    "conservative force": {
+      "plain": "A force whose work is path-independent.",
+      "in_class": "Gravity, springs; defines a potential energy."
+    },
+    "mechanical energy": {
+      "plain": "Kinetic plus potential energy.",
+      "in_class": "$E=KE+U$."
+    },
+    "conservation of energy": {
+      "plain": "Total energy is constant if no energy leaves.",
+      "in_class": "$KE_i+U_i=KE_f+U_f$ (no friction)."
+    },
+    "gravitational PE": {
+      "plain": "Energy of height in gravity.",
+      "in_class": "$U=mgh$."
+    },
+    "elastic PE": {
+      "plain": "Energy stored in a stretched/compressed spring.",
+      "in_class": "$U=\\tfrac12kx^2$."
+    },
+    "non-conservative force": {
+      "plain": "A force that dissipates energy (friction).",
+      "in_class": "Converts mechanical energy to heat."
+    },
+    "reference level": {
+      "plain": "Where $U=0$ is chosen.",
+      "in_class": "Only changes in $U$ matter."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Gravitational potential energy",
+      "explanation": "Raising a mass stores energy $U=mgh$ (relative to a chosen zero). Only differences in height matter.",
+      "math_steps": [
+        "Choose a reference height.",
+        "$U=mgh$ above it.",
+        "Track changes $\\Delta U=mg\\Delta h$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-c1.svg",
+        "caption": "Gravitational potential energy"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Elastic potential energy",
+      "explanation": "A spring displaced by $x$ stores $U=\\tfrac12kx^2$. This is the work done to stretch or compress it.",
+      "math_steps": [
+        "Measure displacement from equilibrium.",
+        "$U=\\tfrac12kx^2$.",
+        "It's always nonnegative."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-c2.svg",
+        "caption": "Elastic potential energy"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Conservation of mechanical energy",
+      "explanation": "If only conservative forces act, $KE+U$ stays constant. Set the total energy at two points equal to solve for speed or height.",
+      "math_steps": [
+        "Write $E=KE+U$ at two points.",
+        "Set them equal (no friction).",
+        "Solve for the unknown."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-c3.svg",
+        "caption": "Conservation of mechanical energy"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Energy with friction",
+      "explanation": "Friction does negative work, removing mechanical energy as heat: $KE_i+U_i=KE_f+U_f+|W_{friction}|$. Energy is still conserved overall, just not the mechanical part.",
+      "math_steps": [
+        "Compute the friction work $f\\cdot d$.",
+        "Subtract it from the initial mechanical energy.",
+        "Solve for the final state."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-c4.svg",
+        "caption": "Energy with friction"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Energy diagrams",
+      "explanation": "A plot of $U$ vs position shows equilibria (minima), turning points (where $KE=0$), and allowed regions (where $E\\ge U$).",
+      "math_steps": [
+        "Plot $U(x)$ and the total energy line $E$.",
+        "Turning points where $U=E$.",
+        "Motion is allowed where $E\\ge U$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-c5.svg",
+        "caption": "Energy diagrams"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A roller coaster",
+      "scenario": "A car dips and rises over hills.",
+      "how_the_math_applies": "Energy trades between $mgh$ and $\\tfrac12mv^2$; the first hill can't be taller than the drop.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-e1.svg",
+        "caption": "A roller coaster"
+      }
+    },
+    {
+      "title": "A pendulum swing",
+      "scenario": "A bob swings up and down.",
+      "how_the_math_applies": "At the bottom it's all $KE$; at the top all $U$ — conservation gives the speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-e2.svg",
+        "caption": "A pendulum swing"
+      }
+    },
+    {
+      "title": "A slide with friction",
+      "scenario": "A child slows on a rough slide.",
+      "how_the_math_applies": "Some potential energy becomes heat, so they arrive slower than energy conservation alone predicts.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-07-potential-energy-e3.svg",
+        "caption": "A slide with friction"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "potential energy gravitational elastic conservation of energy",
+    "math_query": "conservation of mechanical energy friction examples",
+    "combined_query": "physics 1 energy conservation worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the gravitational PE of a $2$ kg book $3$ m high.",
+      "correct_answer": "$\\approx58.8$ J",
+      "solution_steps": [
+        "$U=mgh$.",
+        "$=2(9.8)(3)$.",
+        "$58.8$ J."
+      ],
+      "hint": "$U=mgh$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A spring ($k=100$ N/m) is stretched $0.2$ m. Find the stored energy.",
+      "correct_answer": "$2$ J",
+      "solution_steps": [
+        "$U=\\tfrac12kx^2$.",
+        "$=\\tfrac12(100)(0.04)$.",
+        "$2$ J."
+      ],
+      "hint": "$\\tfrac12kx^2$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A ball dropped from $5$ m — find its speed at the bottom (energy method).",
+      "correct_answer": "$\\approx9.9$ m/s",
+      "solution_steps": [
+        "$mgh=\\tfrac12mv^2$ ⇒ $v=\\sqrt{2gh}$.",
+        "$=\\sqrt{2(9.8)(5)}$.",
+        "$\\approx9.9$ m/s."
+      ],
+      "hint": "$v=\\sqrt{2gh}$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A pendulum released from height $0.2$ m — find the speed at the bottom.",
+      "correct_answer": "$\\approx1.98$ m/s",
+      "solution_steps": [
+        "$v=\\sqrt{2gh}$.",
+        "$=\\sqrt{2(9.8)(0.2)}$.",
+        "$\\approx1.98$ m/s."
+      ],
+      "hint": "All PE becomes KE."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $1$ kg block slides down a frictionless $2$ m-high ramp. Find its final KE.",
+      "correct_answer": "$\\approx19.6$ J",
+      "solution_steps": [
+        "$KE=mgh$.",
+        "$=1(9.8)(2)$.",
+        "$19.6$ J."
+      ],
+      "hint": "KE gained equals PE lost."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $3$ kg block slides down a $4$ m-high slope, arriving at $6$ m/s. How much energy went to friction?",
+      "correct_answer": "$\\approx63.6$ J",
+      "solution_steps": [
+        "$mgh=117.6$ J; $KE=\\tfrac12(3)(36)=54$ J.",
+        "Friction $=117.6-54$.",
+        "$\\approx63.6$ J."
+      ],
+      "hint": "Friction loss = PE − KE."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A $2$ kg ball is launched up a spring ($k=800$ N/m) compressed $0.1$ m. Find the max height (ignore mass of spring).",
+      "correct_answer": "$\\approx0.204$ m",
+      "solution_steps": [
+        "$\\tfrac12kx^2=mgh$: $4=2(9.8)h$.",
+        "$h=4/19.6$.",
+        "$\\approx0.204$ m."
+      ],
+      "hint": "Spring PE → gravitational PE."
+    }
+  ]
+}

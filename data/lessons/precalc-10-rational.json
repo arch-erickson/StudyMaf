@@ -1,0 +1,238 @@
+{
+  "title": "Rational Functions",
+  "summary": "A rational function is a ratio of polynomials. Its domain excludes zeros of the denominator; those give vertical asymptotes or holes. End behavior (from the degrees) gives horizontal or slant asymptotes, and factoring reveals intercepts.",
+  "glossary": {
+    "rational function": {
+      "plain": "A ratio of two polynomials.",
+      "in_class": "$R(x)=P(x)/Q(x)$."
+    },
+    "vertical asymptote": {
+      "plain": "A line the graph shoots along.",
+      "in_class": "Where $Q=0$ but $P\\neq0$."
+    },
+    "hole": {
+      "plain": "A removable gap in the graph.",
+      "in_class": "Where a factor cancels top and bottom."
+    },
+    "horizontal asymptote": {
+      "plain": "A level the graph approaches far out.",
+      "in_class": "From comparing degrees."
+    },
+    "slant asymptote": {
+      "plain": "A diagonal end-behavior line.",
+      "in_class": "When the top's degree is one more than the bottom's."
+    },
+    "x-intercept": {
+      "plain": "Where the numerator is zero.",
+      "in_class": "Provided the denominator isn't."
+    },
+    "domain (rational)": {
+      "plain": "All inputs except zeros of the denominator.",
+      "in_class": "Excludes vertical asymptotes and holes."
+    },
+    "end behavior (rational)": {
+      "plain": "Behavior as $x\\to\\pm\\infty$.",
+      "in_class": "Set by the leading terms."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Domain and vertical asymptotes",
+      "explanation": "The domain excludes zeros of the denominator. At those points you get a vertical asymptote (if the numerator isn't also zero there) or a hole (if a factor cancels).",
+      "math_steps": [
+        "Set the denominator to zero.",
+        "If the factor cancels ⇒ hole.",
+        "Otherwise ⇒ vertical asymptote."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-c1.svg",
+        "caption": "Domain and vertical asymptotes"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Horizontal asymptotes",
+      "explanation": "Compare degrees: bottom bigger ⇒ $y=0$; equal ⇒ ratio of leading coefficients; top bigger ⇒ no horizontal asymptote (possibly a slant).",
+      "math_steps": [
+        "Compare numerator and denominator degrees.",
+        "Apply the degree rule.",
+        "Read off the horizontal asymptote (if any)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-c2.svg",
+        "caption": "Horizontal asymptotes"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Slant asymptotes",
+      "explanation": "When the numerator's degree is exactly one more than the denominator's, long division gives a linear quotient — the slant asymptote.",
+      "math_steps": [
+        "Confirm the degree difference is 1.",
+        "Do polynomial division.",
+        "The linear quotient is the slant asymptote."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-c3.svg",
+        "caption": "Slant asymptotes"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Intercepts",
+      "explanation": "The x-intercepts are zeros of the numerator (where the denominator isn't zero); the y-intercept is $R(0)$.",
+      "math_steps": [
+        "Set the numerator to zero for x-intercepts.",
+        "Exclude any that zero the denominator.",
+        "Compute $R(0)$ for the y-intercept."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-c4.svg",
+        "caption": "Intercepts"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Sketching",
+      "explanation": "Combine domain restrictions, asymptotes (vertical, horizontal/slant), holes, and intercepts to sketch the graph piece by piece.",
+      "math_steps": [
+        "Draw asymptotes as guides.",
+        "Plot intercepts and holes.",
+        "Sketch each branch toward the asymptotes."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-c5.svg",
+        "caption": "Sketching"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Average cost per unit",
+      "scenario": "Total cost divided by quantity.",
+      "how_the_math_applies": "Average cost is a rational function with a horizontal asymptote — the minimum long-run cost.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-e1.svg",
+        "caption": "Average cost per unit"
+      }
+    },
+    {
+      "title": "Concentration over time",
+      "scenario": "A drug's concentration decays.",
+      "how_the_math_applies": "A rational model has a horizontal asymptote at zero as time grows.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-e2.svg",
+        "caption": "Concentration over time"
+      }
+    },
+    {
+      "title": "Lens and focal length",
+      "scenario": "The thin-lens equation is rational.",
+      "how_the_math_applies": "Solving it involves rational-function manipulation and excluded values.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-10-rational-e3.svg",
+        "caption": "Lens and focal length"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "rational functions vertical horizontal asymptotes holes",
+    "math_query": "rational function slant asymptote intercepts examples",
+    "combined_query": "precalculus rational functions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Vertical asymptote of $R(x)=\\dfrac{1}{x-4}$.",
+      "correct_answer": "$x=4$",
+      "solution_steps": [
+        "Denominator zero at 4.",
+        "Numerator nonzero.",
+        "$x=4$."
+      ],
+      "hint": "Where the bottom is zero."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Horizontal asymptote of $R(x)=\\dfrac{3x}{x+2}$.",
+      "correct_answer": "$y=3$",
+      "solution_steps": [
+        "Equal degrees.",
+        "Ratio $3/1$.",
+        "$y=3$."
+      ],
+      "hint": "Compare leading coefficients."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Horizontal asymptote of $R(x)=\\dfrac{2x}{x^2+1}$.",
+      "correct_answer": "$y=0$",
+      "solution_steps": [
+        "Bottom degree bigger.",
+        "$y=0$.",
+        "Done."
+      ],
+      "hint": "Bottom degree larger ⇒ $y=0$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the hole of $R(x)=\\dfrac{(x-1)(x+2)}{x-1}$.",
+      "correct_answer": "$x=1$",
+      "solution_steps": [
+        "$(x-1)$ cancels.",
+        "Hole where it did.",
+        "$x=1$."
+      ],
+      "hint": "Cancelling factor gives a hole."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "x-intercept of $R(x)=\\dfrac{x-5}{x+2}$.",
+      "correct_answer": "$x=5$",
+      "solution_steps": [
+        "Numerator zero at 5.",
+        "Denominator nonzero.",
+        "$x=5$."
+      ],
+      "hint": "Set the numerator to zero."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Does $R(x)=\\dfrac{x^2+1}{x}$ have a slant asymptote? Give it.",
+      "correct_answer": "Yes, $y=x$",
+      "solution_steps": [
+        "Degree top = bottom + 1.",
+        "Divide: $x+1/x$.",
+        "Slant $y=x$."
+      ],
+      "hint": "Top degree one more ⇒ divide."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Domain of $R(x)=\\dfrac{x}{x^2-4}$.",
+      "correct_answer": "$x\\neq\\pm2$",
+      "solution_steps": [
+        "$x^2-4=0$ at $\\pm2$.",
+        "Exclude them.",
+        "$x\\neq\\pm2$."
+      ],
+      "hint": "Zeros of the denominator."
+    }
+  ]
+}

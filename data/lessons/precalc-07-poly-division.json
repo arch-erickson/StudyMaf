@@ -1,0 +1,238 @@
+{
+  "title": "Dividing Polynomials",
+  "summary": "Polynomial long division (and the shortcut, synthetic division) rewrites $P(x)/D(x)$ as a quotient plus a remainder. The Remainder Theorem says the remainder when dividing by $x-a$ is $P(a)$, and the Factor Theorem links zero remainders to factors.",
+  "glossary": {
+    "polynomial long division": {
+      "plain": "Dividing polynomials like long division of numbers.",
+      "in_class": "Gives a quotient and remainder."
+    },
+    "synthetic division": {
+      "plain": "A shortcut for dividing by $x-a$.",
+      "in_class": "Uses only coefficients."
+    },
+    "quotient": {
+      "plain": "The main result of the division.",
+      "in_class": "Plus a remainder over the divisor."
+    },
+    "remainder": {
+      "plain": "What's left after dividing.",
+      "in_class": "Degree less than the divisor's."
+    },
+    "Remainder Theorem": {
+      "plain": "Remainder of $P(x)\\div(x-a)$ is $P(a)$.",
+      "in_class": "A fast way to evaluate."
+    },
+    "Factor Theorem": {
+      "plain": "$x-a$ is a factor iff $P(a)=0$.",
+      "in_class": "Links roots and factors."
+    },
+    "divisor": {
+      "plain": "The polynomial you divide by.",
+      "in_class": "$D(x)$ in $P/D$."
+    },
+    "degree": {
+      "plain": "Highest power in a polynomial.",
+      "in_class": "The quotient's degree is deg P − deg D."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Long division of polynomials",
+      "explanation": "Divide the leading terms, multiply back, subtract, and bring down — just like numerical long division — until the remainder's degree is below the divisor's.",
+      "math_steps": [
+        "Divide leading terms for the next quotient term.",
+        "Multiply and subtract.",
+        "Repeat until the remainder is low-degree."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-c1.svg",
+        "caption": "Long division of polynomials"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Synthetic division",
+      "explanation": "When dividing by $x-a$, synthetic division uses only the coefficients and $a$ — faster and less error-prone than long division.",
+      "math_steps": [
+        "Write the coefficients and $a$.",
+        "Bring down, multiply by $a$, add.",
+        "The last number is the remainder."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-c2.svg",
+        "caption": "Synthetic division"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The Remainder Theorem",
+      "explanation": "The remainder of $P(x)\\div(x-a)$ is exactly $P(a)$ — so you can evaluate a polynomial by dividing (or vice versa).",
+      "math_steps": [
+        "Divide by $x-a$.",
+        "The remainder equals $P(a)$.",
+        "Use it to evaluate quickly."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-c3.svg",
+        "caption": "The Remainder Theorem"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The Factor Theorem",
+      "explanation": "$x-a$ is a factor of $P$ exactly when $P(a)=0$. A zero remainder means you've found a factor and a root.",
+      "math_steps": [
+        "Compute $P(a)$.",
+        "Zero ⇒ $x-a$ is a factor.",
+        "Nonzero ⇒ not a factor."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-c4.svg",
+        "caption": "The Factor Theorem"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Writing the result",
+      "explanation": "Express the division as $P(x)=D(x)\\cdot Q(x)+R(x)$, or $\\dfrac{P}{D}=Q+\\dfrac{R}{D}$ — useful for graphing and integration later.",
+      "math_steps": [
+        "Assemble quotient and remainder.",
+        "Write $P=DQ+R$.",
+        "Or $P/D=Q+R/D$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-c5.svg",
+        "caption": "Writing the result"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Simplifying a rational expression",
+      "scenario": "Reduce an improper polynomial fraction.",
+      "how_the_math_applies": "Division rewrites it as a polynomial plus a proper remainder — easier to analyze.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-e1.svg",
+        "caption": "Simplifying a rational expression"
+      }
+    },
+    {
+      "title": "Testing a suspected root",
+      "scenario": "Is $x=2$ a root of a cubic?",
+      "how_the_math_applies": "The Remainder Theorem: evaluate $P(2)$; zero means yes.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-e2.svg",
+        "caption": "Testing a suspected root"
+      }
+    },
+    {
+      "title": "Factoring a cubic",
+      "scenario": "Break a cubic into linear factors.",
+      "how_the_math_applies": "Find one root, divide it out, then factor the remaining quadratic.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-07-poly-division-e3.svg",
+        "caption": "Factoring a cubic"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "polynomial long division synthetic division",
+    "math_query": "remainder theorem factor theorem examples",
+    "combined_query": "precalculus dividing polynomials worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Divide $x^2+3x+2$ by $x+1$.",
+      "correct_answer": "$x+2$",
+      "solution_steps": [
+        "$(x+1)(x+2)=x^2+3x+2$.",
+        "Quotient $x+2$, remainder 0.",
+        "$x+2$."
+      ],
+      "hint": "It factors evenly."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Use the Remainder Theorem: remainder of $P(x)=x^2+1$ divided by $x-2$.",
+      "correct_answer": "$5$",
+      "solution_steps": [
+        "$P(2)=4+1$.",
+        "$=5$.",
+        "Remainder 5."
+      ],
+      "hint": "Remainder $=P(a)$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Is $x-3$ a factor of $P(x)=x^2-9$?",
+      "correct_answer": "Yes",
+      "solution_steps": [
+        "$P(3)=9-9=0$.",
+        "Zero remainder.",
+        "Factor."
+      ],
+      "hint": "Check $P(3)$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Divide $x^2-5x+6$ by $x-2$.",
+      "correct_answer": "$x-3$",
+      "solution_steps": [
+        "$(x-2)(x-3)=x^2-5x+6$.",
+        "Quotient $x-3$.",
+        "Remainder 0."
+      ],
+      "hint": "Factor and match."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Remainder of $x^3-2x+1$ divided by $x-1$.",
+      "correct_answer": "$0$",
+      "solution_steps": [
+        "$P(1)=1-2+1$.",
+        "$=0$.",
+        "So $x-1$ is a factor."
+      ],
+      "hint": "Evaluate $P(1)$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Divide $2x^2+3x-2$ by $x+2$.",
+      "correct_answer": "$2x-1$",
+      "solution_steps": [
+        "$(x+2)(2x-1)=2x^2+3x-2$.",
+        "Quotient $2x-1$.",
+        "Remainder 0."
+      ],
+      "hint": "Check by multiplying back."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Given $x=2$ is a root of $x^3-3x^2+4$, factor it.",
+      "correct_answer": "$(x-2)(x^2-x-2)=(x-2)^2(x+1)$",
+      "solution_steps": [
+        "Divide by $x-2$: quotient $x^2-x-2$.",
+        "Factor that: $(x-2)(x+1)$.",
+        "$(x-2)^2(x+1)$."
+      ],
+      "hint": "Divide out $x-2$, then factor."
+    }
+  ]
+}

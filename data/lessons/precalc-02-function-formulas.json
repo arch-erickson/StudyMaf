@@ -1,0 +1,238 @@
+{
+  "title": "Functions via Formulas",
+  "summary": "Function notation $f(x)$ evaluates and combines formulas. Evaluating at expressions, and computing the difference quotient $\\dfrac{f(x+h)-f(x)}{h}$, prepares the ground for calculus and reveals average rates of change.",
+  "glossary": {
+    "function notation": {
+      "plain": "Writing outputs as $f(x)$.",
+      "in_class": "$f(3)$ means the output when the input is 3."
+    },
+    "evaluate": {
+      "plain": "Substitute a value and simplify.",
+      "in_class": "Replace $x$ everywhere, then compute."
+    },
+    "difference quotient": {
+      "plain": "Average rate of change formula.",
+      "in_class": "$\\dfrac{f(x+h)-f(x)}{h}$."
+    },
+    "average rate of change": {
+      "plain": "Slope between two points on a graph.",
+      "in_class": "$\\dfrac{f(b)-f(a)}{b-a}$."
+    },
+    "piecewise function": {
+      "plain": "Different formulas on different intervals.",
+      "in_class": "Choose the branch matching the input."
+    },
+    "input expression": {
+      "plain": "Plugging an expression (not just a number) into $f$.",
+      "in_class": "e.g. $f(x+2)$ or $f(2x)$."
+    },
+    "linear function": {
+      "plain": "A function with a constant rate of change.",
+      "in_class": "$f(x)=mx+b$; graph is a line."
+    },
+    "constant function": {
+      "plain": "Same output for every input.",
+      "in_class": "$f(x)=c$; a horizontal line."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Function notation",
+      "explanation": "$f(x)$ names the output for input $x$. To evaluate $f(a)$, substitute $a$ for every $x$ and simplify.",
+      "math_steps": [
+        "Replace each $x$ with the input.",
+        "Simplify carefully with signs.",
+        "The result is the output."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-c1.svg",
+        "caption": "Function notation"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Evaluating at expressions",
+      "explanation": "You can input whole expressions: $f(x+h)$ means replace $x$ with $(x+h)$ throughout, keeping parentheses to avoid sign errors.",
+      "math_steps": [
+        "Substitute the expression in parentheses.",
+        "Expand carefully.",
+        "Simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-c2.svg",
+        "caption": "Evaluating at expressions"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Average rate of change",
+      "explanation": "Between $x=a$ and $x=b$, the average rate is $\\dfrac{f(b)-f(a)}{b-a}$ — the slope of the secant line.",
+      "math_steps": [
+        "Compute $f(a)$ and $f(b)$.",
+        "Divide the output change by the input change.",
+        "That's the secant slope."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-c3.svg",
+        "caption": "Average rate of change"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The difference quotient",
+      "explanation": "$\\dfrac{f(x+h)-f(x)}{h}$ generalizes the average rate over a small step $h$. Simplifying it (canceling $h$) is the key precalculus-to-calculus skill.",
+      "math_steps": [
+        "Compute $f(x+h)$.",
+        "Subtract $f(x)$ and divide by $h$.",
+        "Simplify until $h$ cancels."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-c4.svg",
+        "caption": "The difference quotient"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Piecewise functions",
+      "explanation": "A piecewise function uses different rules on different intervals. To evaluate, first find which interval the input lies in, then use that branch.",
+      "math_steps": [
+        "Locate the input's interval.",
+        "Use the matching formula.",
+        "Evaluate there."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-c5.svg",
+        "caption": "Piecewise functions"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A cell phone plan",
+      "scenario": "Cost jumps after a data cap.",
+      "how_the_math_applies": "The bill is a piecewise function: one rate below the cap, another above.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-e1.svg",
+        "caption": "A cell phone plan"
+      }
+    },
+    {
+      "title": "Average speed of a trip",
+      "scenario": "Distance over two time points.",
+      "how_the_math_applies": "The average rate of change of position gives the trip's average speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-e2.svg",
+        "caption": "Average speed of a trip"
+      }
+    },
+    {
+      "title": "Slope of a hill",
+      "scenario": "Rise over run between two markers.",
+      "how_the_math_applies": "The difference quotient measures the average steepness between points.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-02-function-formulas-e3.svg",
+        "caption": "Slope of a hill"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "function notation evaluate difference quotient",
+    "math_query": "difference quotient average rate of change examples",
+    "combined_query": "precalculus function notation worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "If $f(x)=x^2+1$, find $f(3)$.",
+      "correct_answer": "$10$",
+      "solution_steps": [
+        "$3^2+1$.",
+        "$=9+1$.",
+        "$10$."
+      ],
+      "hint": "Substitute 3."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "If $f(x)=2x-5$, find $f(0)$.",
+      "correct_answer": "$-5$",
+      "solution_steps": [
+        "$2(0)-5$.",
+        "$=-5$.",
+        "Done."
+      ],
+      "hint": "Plug in 0."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "If $f(x)=x^2$, find $f(x+1)$.",
+      "correct_answer": "$x^2+2x+1$",
+      "solution_steps": [
+        "$(x+1)^2$.",
+        "$=x^2+2x+1$.",
+        "Done."
+      ],
+      "hint": "Substitute $(x+1)$ and expand."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Average rate of change of $f(x)=x^2$ on $[1,3]$.",
+      "correct_answer": "$4$",
+      "solution_steps": [
+        "$\\dfrac{9-1}{3-1}$.",
+        "$=8/2$.",
+        "$4$."
+      ],
+      "hint": "$\\dfrac{f(b)-f(a)}{b-a}$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Simplify the difference quotient for $f(x)=3x$.",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "$\\dfrac{3(x+h)-3x}{h}=\\dfrac{3h}{h}$.",
+        "$=3$.",
+        "Done."
+      ],
+      "hint": "The $h$ cancels."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Difference quotient for $f(x)=x^2$.",
+      "correct_answer": "$2x+h$",
+      "solution_steps": [
+        "$\\dfrac{(x+h)^2-x^2}{h}=\\dfrac{2xh+h^2}{h}$.",
+        "$=2x+h$.",
+        "Done."
+      ],
+      "hint": "Expand and cancel $h$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "For $f(x)=\\{2x\\ (x<0);\\ x^2\\ (x\\ge0)\\}$, find $f(-3)$ and $f(2)$.",
+      "correct_answer": "$-6$ and $4$",
+      "solution_steps": [
+        "$-3<0$: $2(-3)=-6$.",
+        "$2\\ge0$: $2^2=4$.",
+        "$-6,\\ 4$."
+      ],
+      "hint": "Pick the right branch."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "title": "Operations & Composition of Functions",
+  "summary": "Functions combine by addition, subtraction, multiplication, and division, and by composition $f(g(x))$ — feeding one function's output into another. Composition's domain excludes inputs that break either function.",
+  "glossary": {
+    "sum/difference of functions": {
+      "plain": "Add or subtract outputs.",
+      "in_class": "$(f\\pm g)(x)=f(x)\\pm g(x)$."
+    },
+    "product/quotient": {
+      "plain": "Multiply or divide outputs.",
+      "in_class": "$(fg)(x)=f(x)g(x)$; watch zero denominators."
+    },
+    "composition": {
+      "plain": "Feed one function into another.",
+      "in_class": "$(f\\circ g)(x)=f(g(x))$."
+    },
+    "inner function": {
+      "plain": "The one evaluated first in a composition.",
+      "in_class": "$g$ in $f(g(x))$."
+    },
+    "outer function": {
+      "plain": "Applied to the inner's output.",
+      "in_class": "$f$ in $f(g(x))$."
+    },
+    "composition domain": {
+      "plain": "Inputs valid for the whole composition.",
+      "in_class": "Must work in $g$ and then in $f$."
+    },
+    "decompose": {
+      "plain": "Write a function as a composition.",
+      "in_class": "Identify inner and outer pieces."
+    },
+    "order matters": {
+      "plain": "$f\\circ g\\neq g\\circ f$ in general.",
+      "in_class": "Composition is not commutative."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Arithmetic of functions",
+      "explanation": "Combine functions pointwise: $(f\\pm g)(x)=f(x)\\pm g(x)$, $(fg)(x)=f(x)g(x)$, $(f/g)(x)=f(x)/g(x)$ where $g(x)\\neq0$.",
+      "math_steps": [
+        "Evaluate each function.",
+        "Combine the outputs.",
+        "Exclude zeros of the denominator for quotients."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-c1.svg",
+        "caption": "Arithmetic of functions"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Composition",
+      "explanation": "$(f\\circ g)(x)=f(g(x))$: evaluate $g$ first, then apply $f$ to that result. Substitute $g(x)$ everywhere $f$ has an $x$.",
+      "math_steps": [
+        "Compute the inner value $g(x)$.",
+        "Substitute it into $f$.",
+        "Simplify."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-c2.svg",
+        "caption": "Composition"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Order matters",
+      "explanation": "In general $f\\circ g\\neq g\\circ f$ — composition isn't commutative, so keep the order straight.",
+      "math_steps": [
+        "Identify which is inner and outer.",
+        "Compose in the stated order.",
+        "Don't assume they're equal."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-c3.svg",
+        "caption": "Order matters"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Domain of a composition",
+      "explanation": "An input must be valid for $g$ and yield a value valid for $f$. Exclude inputs that break either step.",
+      "math_steps": [
+        "Require $x$ in the domain of $g$.",
+        "Require $g(x)$ in the domain of $f$.",
+        "Intersect the restrictions."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-c4.svg",
+        "caption": "Domain of a composition"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Decomposing functions",
+      "explanation": "To use the chain rule later, practice writing a complicated function as $f(g(x))$ — naming a natural inner piece.",
+      "math_steps": [
+        "Spot a natural 'inside' expression.",
+        "Call it $g(x)$.",
+        "The rest is $f$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-c5.svg",
+        "caption": "Decomposing functions"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Discount then tax",
+      "scenario": "A price gets a discount, then tax added.",
+      "how_the_math_applies": "Applying one function after another is composition — order changes the result.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-e1.svg",
+        "caption": "Discount then tax"
+      }
+    },
+    {
+      "title": "Unit conversion chain",
+      "scenario": "Feet → inches → centimeters.",
+      "how_the_math_applies": "Chaining conversions composes the individual conversion functions.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-e2.svg",
+        "caption": "Unit conversion chain"
+      }
+    },
+    {
+      "title": "Total revenue model",
+      "scenario": "Revenue = price × quantity, each a function.",
+      "how_the_math_applies": "Multiplying two functions builds the revenue function.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-05-operations-e3.svg",
+        "caption": "Total revenue model"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "operations on functions composition f(g(x))",
+    "math_query": "function composition domain decompose examples",
+    "combined_query": "precalculus function operations worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "If $f(x)=x+2$ and $g(x)=3x$, find $(f+g)(1)$.",
+      "correct_answer": "$6$",
+      "solution_steps": [
+        "$f(1)+g(1)=3+3$.",
+        "$=6$.",
+        "Done."
+      ],
+      "hint": "Add the outputs."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "With those functions, find $(f\\circ g)(1)$.",
+      "correct_answer": "$5$",
+      "solution_steps": [
+        "$g(1)=3$; $f(3)=5$.",
+        "$=5$.",
+        "Done."
+      ],
+      "hint": "Inner first."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "If $f(x)=x^2$ and $g(x)=x+1$, find $f(g(x))$.",
+      "correct_answer": "$(x+1)^2$",
+      "solution_steps": [
+        "Substitute $g$ into $f$.",
+        "$(x+1)^2$.",
+        "Done."
+      ],
+      "hint": "Replace $x$ in $f$ with $g(x)$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "With the same functions, find $g(f(x))$.",
+      "correct_answer": "$x^2+1$",
+      "solution_steps": [
+        "$f(x)=x^2$; then $g$: $x^2+1$.",
+        "Done.",
+        "Order differs from p03."
+      ],
+      "hint": "Compose the other way."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "If $f(x)=2x$ and $g(x)=x-3$, find $(fg)(4)$.",
+      "correct_answer": "$8$",
+      "solution_steps": [
+        "$f(4)=8$, $g(4)=1$.",
+        "$8\\times1$.",
+        "$8$."
+      ],
+      "hint": "Multiply outputs."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "If $f(x)=\\sqrt{x}$ and $g(x)=x-4$, find the domain of $f(g(x))$.",
+      "correct_answer": "$x\\ge4$",
+      "solution_steps": [
+        "Need $g(x)\\ge0$: $x-4\\ge0$.",
+        "$x\\ge4$.",
+        "$[4,\\infty)$."
+      ],
+      "hint": "The inside of the root must be $\\ge0$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Decompose $h(x)=\\sqrt{x^2+1}$ as $f(g(x))$.",
+      "correct_answer": "$f(u)=\\sqrt{u},\\ g(x)=x^2+1$",
+      "solution_steps": [
+        "Inner: $x^2+1$.",
+        "Outer: $\\sqrt{\\ }$.",
+        "$f(u)=\\sqrt u$, $g=x^2+1$."
+      ],
+      "hint": "Name the inside as $g$."
+    }
+  ]
+}

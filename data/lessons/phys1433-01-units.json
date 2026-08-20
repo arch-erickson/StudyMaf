@@ -1,0 +1,238 @@
+{
+  "title": "Units, Measurement & Problem-Solving",
+  "summary": "Physics uses SI units and a consistent problem-solving method: list knowns, choose the right equation, check units, and evaluate with sensible significant figures. Unit conversion and order-of-magnitude estimation keep answers grounded.",
+  "glossary": {
+    "SI units": {
+      "plain": "Standard metric units of measurement.",
+      "in_class": "meter, kilogram, second, and derived N, J, W."
+    },
+    "unit conversion": {
+      "plain": "Rewriting a value in other units.",
+      "in_class": "Multiply by ratios equal to 1 so units cancel."
+    },
+    "significant figures": {
+      "plain": "The reliable digits of a measurement.",
+      "in_class": "The result can't be more precise than its inputs."
+    },
+    "dimensional analysis": {
+      "plain": "Checking equations by their units.",
+      "in_class": "Both sides must share the same units."
+    },
+    "order of magnitude": {
+      "plain": "The nearest power of ten.",
+      "in_class": "For fast estimates and reality checks."
+    },
+    "scientific notation": {
+      "plain": "Numbers as $c\\times10^n$.",
+      "in_class": "Handles very large or small values."
+    },
+    "problem-solving strategy": {
+      "plain": "A systematic approach to physics problems.",
+      "in_class": "Knowns → equation → solve → check units."
+    },
+    "accuracy vs precision": {
+      "plain": "Correctness vs repeatability.",
+      "in_class": "Accurate ≈ true; precise ≈ consistent."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "SI units",
+      "explanation": "Mechanical quantities build from meter, kilogram, and second; derived units like the newton ($\\text{kg·m/s}^2$) and joule ($\\text{N·m}$) combine them.",
+      "math_steps": [
+        "Identify the base units.",
+        "Combine per the definition.",
+        "Name the derived unit."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-c1.svg",
+        "caption": "SI units"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Unit conversion",
+      "explanation": "Convert by multiplying by ratios equal to 1, arranged so unwanted units cancel and the target unit remains.",
+      "math_steps": [
+        "Write the starting value.",
+        "Multiply by cancelling ratios.",
+        "Simplify to the desired unit."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-c2.svg",
+        "caption": "Unit conversion"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Significant figures",
+      "explanation": "Report only the digits your data support: multiplication/division keeps the fewest significant figures, addition keeps the fewest decimal places.",
+      "math_steps": [
+        "Count sig figs in each input.",
+        "×/÷ → fewest sig figs.",
+        "+/− → fewest decimals."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-c3.svg",
+        "caption": "Significant figures"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Dimensional checks",
+      "explanation": "A correct equation is dimensionally consistent — every term has the same units. A mismatch signals an error before you even plug in numbers.",
+      "math_steps": [
+        "List the units of each term.",
+        "Require them to match.",
+        "Fix the equation if they don't."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-c4.svg",
+        "caption": "Dimensional checks"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Estimation and strategy",
+      "explanation": "Approach every problem the same way: identify knowns and the unknown, pick an equation, solve symbolically, then evaluate — and use order-of-magnitude estimates to sanity-check.",
+      "math_steps": [
+        "List knowns and the unknown.",
+        "Choose and solve the equation.",
+        "Check units and magnitude."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-c5.svg",
+        "caption": "Estimation and strategy"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Speed limit conversion",
+      "scenario": "A sign reads 100 km/h; you think in mph.",
+      "how_the_math_applies": "Unit conversion turns km/h into mph using cancelling ratios.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-e1.svg",
+        "caption": "Speed limit conversion"
+      }
+    },
+    {
+      "title": "Checking an answer's size",
+      "scenario": "You compute a person's mass as 5000 kg.",
+      "how_the_math_applies": "An order-of-magnitude check flags it as unreasonable — a units or arithmetic slip.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-e2.svg",
+        "caption": "Checking an answer's size"
+      }
+    },
+    {
+      "title": "Lab measurement precision",
+      "scenario": "A ruler reads to the millimeter.",
+      "how_the_math_applies": "Significant-figure rules keep the reported result honest about its precision.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-01-units-e3.svg",
+        "caption": "Lab measurement precision"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "SI units measurement significant figures physics",
+    "math_query": "unit conversion dimensional analysis estimation examples",
+    "combined_query": "physics 1 algebra measurement units worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Convert $90$ km/h to m/s.",
+      "correct_answer": "$25$ m/s",
+      "solution_steps": [
+        "Divide by $3.6$.",
+        "$90/3.6$.",
+        "$25$ m/s."
+      ],
+      "hint": "km/h ÷ 3.6 = m/s."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "How many significant figures in $3.020$?",
+      "correct_answer": "$4$",
+      "solution_steps": [
+        "All shown digits count here.",
+        "$3,0,2,0$.",
+        "$4$."
+      ],
+      "hint": "Trailing zero after a decimal counts."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "What SI unit is energy measured in?",
+      "correct_answer": "Joule (J)",
+      "solution_steps": [
+        "$J=N\\cdot m$.",
+        "Work/energy unit.",
+        "Joule."
+      ],
+      "hint": "Energy = force × distance."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Convert $2.5$ hours to seconds.",
+      "correct_answer": "$9000$ s",
+      "solution_steps": [
+        "$2.5\\times3600$.",
+        "$=9000$.",
+        "s."
+      ],
+      "hint": "1 h = 3600 s."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A field is $50.0$ m by $30$ m. Area with correct sig figs?",
+      "correct_answer": "$1500$ m² (2 sf)",
+      "solution_steps": [
+        "$50.0\\times30=1500$.",
+        "Fewest sig figs is 2.",
+        "$1.5\\times10^3$ m²."
+      ],
+      "hint": "×/÷ keeps fewest sig figs."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Estimate the order of magnitude of a person's height in meters.",
+      "correct_answer": "$10^0$",
+      "solution_steps": [
+        "$\\sim1.7$ m.",
+        "Nearest power of ten.",
+        "$10^0$."
+      ],
+      "hint": "About 1 meter."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Convert $60$ mph to m/s ($1$ mi $=1609$ m).",
+      "correct_answer": "$\\approx26.8$ m/s",
+      "solution_steps": [
+        "$60\\times1609/3600$.",
+        "$=96540/3600$.",
+        "$\\approx26.8$ m/s."
+      ],
+      "hint": "Convert miles to m, hours to s."
+    }
+  ]
+}

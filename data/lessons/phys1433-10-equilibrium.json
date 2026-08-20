@@ -1,0 +1,238 @@
+{
+  "title": "Static Equilibrium",
+  "summary": "An object is in static equilibrium when the net force and the net torque are both zero. Solving involves drawing forces, picking a convenient pivot to eliminate an unknown, and applying $\\sum F=0$ and $\\sum\\tau=0$.",
+  "glossary": {
+    "static equilibrium": {
+      "plain": "At rest with zero net force and torque.",
+      "in_class": "$\\sum F=0$ and $\\sum\\tau=0$."
+    },
+    "pivot": {
+      "plain": "The axis chosen for torque calculations.",
+      "in_class": "Pick it at an unknown force to simplify."
+    },
+    "center of gravity": {
+      "plain": "Where weight effectively acts.",
+      "in_class": "Used for the weight's torque."
+    },
+    "torque balance": {
+      "plain": "Clockwise torques equal counterclockwise.",
+      "in_class": "$\\sum\\tau=0$."
+    },
+    "force balance": {
+      "plain": "Up forces equal down; left equal right.",
+      "in_class": "$\\sum F=0$ per axis."
+    },
+    "support force": {
+      "plain": "Upward force from a support or hinge.",
+      "in_class": "An unknown to solve for."
+    },
+    "stability": {
+      "plain": "Resistance to tipping.",
+      "in_class": "Related to the base and center of gravity."
+    },
+    "moment": {
+      "plain": "Another word for torque.",
+      "in_class": "Force times lever arm."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "The equilibrium conditions",
+      "explanation": "Both conditions must hold: no net force (won't accelerate) and no net torque (won't rotate). Each yields equations.",
+      "math_steps": [
+        "$\\sum F_x=0$, $\\sum F_y=0$.",
+        "$\\sum\\tau=0$.",
+        "Solve the system."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-c1.svg",
+        "caption": "The equilibrium conditions"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Choosing a pivot",
+      "explanation": "Since torque depends on the axis, put the pivot at an unknown force to drop it from the torque equation.",
+      "math_steps": [
+        "Locate an unknown force.",
+        "Take torques there.",
+        "It vanishes from $\\sum\\tau=0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-c2.svg",
+        "caption": "Choosing a pivot"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Center of gravity",
+      "explanation": "Treat an object's weight as acting at its center of gravity when computing its torque.",
+      "math_steps": [
+        "Find the center of gravity.",
+        "Weight acts there.",
+        "Include its torque."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-c3.svg",
+        "caption": "Center of gravity"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Solving beam problems",
+      "explanation": "Draw all forces (weights, supports, loads), choose a pivot, write $\\sum\\tau=0$, then use $\\sum F=0$ for the remaining unknown.",
+      "math_steps": [
+        "Draw the free-body diagram.",
+        "$\\sum\\tau=0$ about a chosen pivot.",
+        "$\\sum F=0$ for the rest."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-c4.svg",
+        "caption": "Solving beam problems"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Stability",
+      "explanation": "An object is stable while its center of gravity stays over its base of support; it tips when the center passes the base's edge.",
+      "math_steps": [
+        "Locate the center of gravity.",
+        "Keep it over the base.",
+        "Tipping starts at the edge."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-c5.svg",
+        "caption": "Stability"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A hanging sign",
+      "scenario": "A sign hangs from a bracket.",
+      "how_the_math_applies": "Force and torque balance give the tension and hinge force.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-e1.svg",
+        "caption": "A hanging sign"
+      }
+    },
+    {
+      "title": "A person on a diving board",
+      "scenario": "Someone stands near the end.",
+      "how_the_math_applies": "Torque balance about the fixed support finds the reaction forces.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-e2.svg",
+        "caption": "A person on a diving board"
+      }
+    },
+    {
+      "title": "Stacking blocks",
+      "scenario": "How far can a block overhang?",
+      "how_the_math_applies": "The stack stays up while the combined center of gravity is over the base.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-10-equilibrium-e3.svg",
+        "caption": "Stacking blocks"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "static equilibrium force torque balance algebra",
+    "math_query": "beam problems pivot center of gravity examples",
+    "combined_query": "physics 1 equilibrium worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A uniform $6$ m beam weighs $300$ N. Find the torque of its weight about one end.",
+      "correct_answer": "$900$ N·m",
+      "solution_steps": [
+        "Weight at center (3 m).",
+        "$\\tau=3(300)$.",
+        "$900$ N·m."
+      ],
+      "hint": "Center of gravity at the middle."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $60$ N weight is $2$ m from a pivot. Find its torque.",
+      "correct_answer": "$120$ N·m",
+      "solution_steps": [
+        "$\\tau=rF$.",
+        "$=2(60)$.",
+        "$120$ N·m."
+      ],
+      "hint": "$\\tau=rF$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $40$ N weight $1$ m left of a pivot — what weight $2$ m right balances it?",
+      "correct_answer": "$20$ N",
+      "solution_steps": [
+        "$40(1)=W(2)$.",
+        "$W=40/2$.",
+        "$20$ N."
+      ],
+      "hint": "Set torques equal."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Two supports hold a $200$ N uniform beam at its ends. Find each support force.",
+      "correct_answer": "$100$ N each",
+      "solution_steps": [
+        "Symmetry splits the weight.",
+        "$200/2$.",
+        "$100$ N each."
+      ],
+      "hint": "Symmetric load splits evenly."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $500$ N sign hangs $1.2$ m from a wall on a bracket. Find the torque about the wall.",
+      "correct_answer": "$600$ N·m",
+      "solution_steps": [
+        "$\\tau=rF$.",
+        "$=1.2(500)$.",
+        "$600$ N·m."
+      ],
+      "hint": "$\\tau=rF$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $4$ m beam ($120$ N) on end supports has a $300$ N load $1$ m from the left. Find the left support force.",
+      "correct_answer": "$285$ N",
+      "solution_steps": [
+        "Torque about right end: $F_L(4)=120(2)+300(3)$.",
+        "$F_L=1140/4$.",
+        "$285$ N."
+      ],
+      "hint": "Take torques about the right support."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A ladder's weight $150$ N acts at its center $2$ m up a $4$ m ladder. Torque about the base foot?",
+      "correct_answer": "$300$ N·m (× horizontal factor)",
+      "solution_steps": [
+        "Weight torque uses horizontal distance from the base.",
+        "For a vertical ladder, $\\tau=0$; tilted, $\\tau=150\\times(\\text{horizontal offset})$.",
+        "Depends on the angle."
+      ],
+      "hint": "Torque uses the horizontal lever arm."
+    }
+  ]
+}

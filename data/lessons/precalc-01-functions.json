@@ -1,0 +1,238 @@
+{
+  "title": "Numbers & Functions",
+  "summary": "A function assigns exactly one output to each input. Functions are described by tables, formulas, graphs, or words, and live on a domain of allowed inputs. Interval notation names sets of real numbers compactly.",
+  "glossary": {
+    "function": {
+      "plain": "A rule giving exactly one output per input.",
+      "in_class": "Passes the vertical line test on a graph."
+    },
+    "domain": {
+      "plain": "The set of allowed inputs.",
+      "in_class": "Exclude values causing division by zero or even roots of negatives."
+    },
+    "range": {
+      "plain": "The set of possible outputs.",
+      "in_class": "All $y$-values the function actually takes."
+    },
+    "independent variable": {
+      "plain": "The input, usually $x$.",
+      "in_class": "You choose it freely within the domain."
+    },
+    "dependent variable": {
+      "plain": "The output, usually $y$ or $f(x)$.",
+      "in_class": "Determined by the input."
+    },
+    "interval notation": {
+      "plain": "A compact way to write a set of numbers.",
+      "in_class": "$[a,b]$ includes ends; $(a,b)$ excludes them."
+    },
+    "vertical line test": {
+      "plain": "A graph is a function if no vertical line hits it twice.",
+      "in_class": "Ensures one output per input."
+    },
+    "relation": {
+      "plain": "Any pairing of inputs and outputs.",
+      "in_class": "A function is a special relation."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "What a function is",
+      "explanation": "A function assigns each input exactly one output. The same input can't produce two different outputs — that's the defining rule.",
+      "math_steps": [
+        "Check each input has one output.",
+        "Two outputs for one input ⇒ not a function.",
+        "On a graph, use the vertical line test."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-c1.svg",
+        "caption": "What a function is"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Four representations",
+      "explanation": "Functions appear as tables, formulas, graphs, and verbal descriptions. Being fluent in translating among them is essential.",
+      "math_steps": [
+        "Read the function from any form.",
+        "Convert between table, formula, graph, words.",
+        "Pick the most useful representation."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-c2.svg",
+        "caption": "Four representations"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Domain and range",
+      "explanation": "The domain is the set of valid inputs; the range is the set of resulting outputs. Exclude inputs that break the formula (zero denominators, negative even-roots).",
+      "math_steps": [
+        "Find inputs that break the rule.",
+        "Exclude them from the domain.",
+        "Determine the outputs for the range."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-c3.svg",
+        "caption": "Domain and range"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Interval notation",
+      "explanation": "Write sets of numbers as intervals: brackets include an endpoint, parentheses exclude it, and $\\infty$ always gets a parenthesis.",
+      "math_steps": [
+        "Brackets $[\\,]$ include endpoints.",
+        "Parentheses $(\\,)$ exclude them.",
+        "Combine pieces with $\\cup$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-c4.svg",
+        "caption": "Interval notation"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "The vertical line test",
+      "explanation": "A graph represents a function exactly when no vertical line crosses it more than once — guaranteeing one output per input.",
+      "math_steps": [
+        "Scan vertical lines across the graph.",
+        "More than one hit ⇒ not a function.",
+        "One hit everywhere ⇒ a function."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-c5.svg",
+        "caption": "The vertical line test"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A vending machine",
+      "scenario": "Each button gives one item.",
+      "how_the_math_applies": "It's a function: one input (button) maps to one output (snack).",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-e1.svg",
+        "caption": "A vending machine"
+      }
+    },
+    {
+      "title": "A pricing table",
+      "scenario": "Weight determines shipping cost.",
+      "how_the_math_applies": "The table defines a function of weight; interval notation gives the weight brackets.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-e2.svg",
+        "caption": "A pricing table"
+      }
+    },
+    {
+      "title": "A thermometer reading",
+      "scenario": "Time determines temperature.",
+      "how_the_math_applies": "Temperature is a function of time — one value at each instant.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-01-functions-e3.svg",
+        "caption": "A thermometer reading"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "what is a function domain range vertical line test",
+    "math_query": "interval notation functions representations examples",
+    "combined_query": "precalculus functions introduction worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Is $\\{(1,2),(3,4),(1,5)\\}$ a function?",
+      "correct_answer": "No",
+      "solution_steps": [
+        "Input $1$ maps to $2$ and $5$.",
+        "Two outputs for one input.",
+        "Not a function."
+      ],
+      "hint": "Check for repeated inputs."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the domain of $f(x)=\\dfrac{1}{x-3}$.",
+      "correct_answer": "$x\\neq3$",
+      "solution_steps": [
+        "Denominator zero at $x=3$.",
+        "Exclude it.",
+        "$x\\neq3$."
+      ],
+      "hint": "Set the denominator to zero."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Write $-2\\le x<5$ in interval notation.",
+      "correct_answer": "$[-2,5)$",
+      "solution_steps": [
+        "$-2$ included, $5$ excluded.",
+        "Bracket then parenthesis.",
+        "$[-2,5)$."
+      ],
+      "hint": "Brackets include, parentheses exclude."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the domain of $f(x)=\\sqrt{x-4}$.",
+      "correct_answer": "$x\\ge4$ i.e. $[4,\\infty)$",
+      "solution_steps": [
+        "Need $x-4\\ge0$.",
+        "$x\\ge4$.",
+        "$[4,\\infty)$."
+      ],
+      "hint": "Even roots need nonnegative inside."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "If $f(x)=3x-1$, find $f(4)$.",
+      "correct_answer": "$11$",
+      "solution_steps": [
+        "Substitute $x=4$.",
+        "$3(4)-1$.",
+        "$11$."
+      ],
+      "hint": "Plug in the input."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Does the vertical line test pass for a circle $x^2+y^2=4$?",
+      "correct_answer": "No (not a function)",
+      "solution_steps": [
+        "A vertical line hits it twice.",
+        "Two outputs per input.",
+        "Not a function."
+      ],
+      "hint": "A circle fails the test."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the domain of $f(x)=\\dfrac{\\sqrt{x}}{x-2}$.",
+      "correct_answer": "$x\\ge0,\\ x\\neq2$",
+      "solution_steps": [
+        "Need $x\\ge0$ (root) and $x\\neq2$ (denominator).",
+        "Combine.",
+        "$[0,2)\\cup(2,\\infty)$."
+      ],
+      "hint": "Combine both restrictions."
+    }
+  ]
+}

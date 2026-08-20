@@ -1,0 +1,238 @@
+{
+  "title": "Units, Measurement & Estimation",
+  "summary": "Physics rests on SI units, dimensional consistency, significant figures, and order-of-magnitude estimates. Every equation must balance units, and unit conversions use ratios that cancel to leave the target unit.",
+  "glossary": {
+    "SI units": {
+      "plain": "The standard metric base units of physics.",
+      "in_class": "meter (m), kilogram (kg), second (s), and derived units like N, J, W."
+    },
+    "dimension": {
+      "plain": "The physical type of a quantity (length, time, mass).",
+      "in_class": "Both sides of a valid equation share the same dimensions."
+    },
+    "dimensional analysis": {
+      "plain": "Checking or deriving relations by their units.",
+      "in_class": "If units don't match, the equation is wrong."
+    },
+    "significant figures": {
+      "plain": "The meaningful digits in a measurement.",
+      "in_class": "The answer's precision can't exceed the least-precise input."
+    },
+    "unit conversion": {
+      "plain": "Rewriting a quantity in different units.",
+      "in_class": "Multiply by ratios equal to 1 so unwanted units cancel."
+    },
+    "order of magnitude": {
+      "plain": "The nearest power of ten of a quantity.",
+      "in_class": "For quick estimates and sanity checks."
+    },
+    "scientific notation": {
+      "plain": "Writing numbers as $c\\times10^n$.",
+      "in_class": "Keeps track of very large or small values."
+    },
+    "accuracy vs precision": {
+      "plain": "Closeness to truth vs repeatability.",
+      "in_class": "Accurate ≈ correct; precise ≈ consistent."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "SI base units",
+      "explanation": "All mechanical quantities build from meter, kilogram, and second. Derived units combine them: velocity is m/s, force is $\\text{kg·m/s}^2=\\text{N}$, energy is $\\text{N·m}=\\text{J}$.",
+      "math_steps": [
+        "Identify the base units involved.",
+        "Combine them per the definition.",
+        "Name the derived unit (N, J, W…)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-c1.svg",
+        "caption": "SI base units"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Dimensional analysis",
+      "explanation": "Every term in an equation must have the same dimensions. Checking units catches errors and can even reveal the form of a relation up to a constant.",
+      "math_steps": [
+        "Write each quantity's dimensions.",
+        "Require both sides to match.",
+        "A mismatch means a mistake."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-c2.svg",
+        "caption": "Dimensional analysis"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Unit conversion",
+      "explanation": "Multiply by conversion ratios (each equal to 1) arranged so the unwanted units cancel and the desired unit remains.",
+      "math_steps": [
+        "Write the starting quantity.",
+        "Multiply by ratios that cancel unwanted units.",
+        "Simplify to the target unit."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-c3.svg",
+        "caption": "Unit conversion"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Significant figures",
+      "explanation": "Report only as many digits as your least-precise measurement justifies. Multiplication/division keeps the fewest sig figs; addition keeps the fewest decimal places.",
+      "math_steps": [
+        "Count sig figs in each input.",
+        "For ×/÷ keep the fewest sig figs.",
+        "For +/− keep the fewest decimals."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-c4.svg",
+        "caption": "Significant figures"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Estimation",
+      "explanation": "An order-of-magnitude estimate rounds each quantity to the nearest power of ten and combines them — a fast reality check on any calculation.",
+      "math_steps": [
+        "Round inputs to powers of ten.",
+        "Combine the exponents.",
+        "Compare to your detailed answer."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-c5.svg",
+        "caption": "Estimation"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Reading a car's fuel economy",
+      "scenario": "A car is rated in miles per gallon.",
+      "how_the_math_applies": "Converting mpg to km/L is a unit conversion using ratios that cancel miles and gallons.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-e1.svg",
+        "caption": "Reading a car's fuel economy"
+      }
+    },
+    {
+      "title": "Checking a physics formula",
+      "scenario": "You're unsure if $v=\\sqrt{2gh}$ is right.",
+      "how_the_math_applies": "Dimensional analysis confirms both sides are m/s, a quick correctness check.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-e2.svg",
+        "caption": "Checking a physics formula"
+      }
+    },
+    {
+      "title": "Estimating a stadium crowd",
+      "scenario": "How many people fill a stadium?",
+      "how_the_math_applies": "An order-of-magnitude estimate multiplies rough area by density to a power of ten.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-01-units-e3.svg",
+        "caption": "Estimating a stadium crowd"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "SI units dimensional analysis significant figures physics",
+    "math_query": "unit conversion significant figures example problems",
+    "combined_query": "physics 1 measurement units estimation worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Convert $72$ km/h to m/s.",
+      "correct_answer": "$20$ m/s",
+      "solution_steps": [
+        "$72\\,\\tfrac{km}{h}\\times\\tfrac{1000\\,m}{km}\\times\\tfrac{1\\,h}{3600\\,s}$.",
+        "$=72/3.6$.",
+        "$=20$ m/s."
+      ],
+      "hint": "Divide km/h by 3.6."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "How many sig figs in $0.00450$?",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "Leading zeros don't count.",
+        "$4,5,0$ are significant.",
+        "$3$."
+      ],
+      "hint": "Trailing zero after a decimal counts."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "What are the SI units of force?",
+      "correct_answer": "$\\text{kg·m/s}^2$ (N)",
+      "solution_steps": [
+        "$F=ma$.",
+        "$\\text{kg}\\cdot\\text{m/s}^2$.",
+        "= newton (N)."
+      ],
+      "hint": "Use $F=ma$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Convert $5.0\\ \\text{m}^2$ to cm².",
+      "correct_answer": "$5.0\\times10^{4}$ cm²",
+      "solution_steps": [
+        "$1\\,m=100\\,cm$, so $1\\,m^2=10^4\\,cm^2$.",
+        "$5.0\\times10^4$.",
+        "cm²."
+      ],
+      "hint": "Square the length conversion."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Is $x=\\tfrac12 at^2$ dimensionally consistent? ($a$ in m/s², $t$ in s)",
+      "correct_answer": "Yes (both sides m)",
+      "solution_steps": [
+        "$a t^2$: $\\tfrac{m}{s^2}\\cdot s^2=m$.",
+        "Left side $x$ is m.",
+        "Consistent."
+      ],
+      "hint": "Check the units of $at^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "medium",
+      "prompt": "Estimate the order of magnitude of the number of seconds in a year.",
+      "correct_answer": "$10^{7}$",
+      "solution_steps": [
+        "$\\sim3\\times10^7$ s.",
+        "Nearest power of ten.",
+        "$10^7$."
+      ],
+      "hint": "$365\\times24\\times3600$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A rectangle is $2.5\\ \\text{m}\\times1.20\\ \\text{m}$. Give the area with correct sig figs.",
+      "correct_answer": "$3.0\\ \\text{m}^2$",
+      "solution_steps": [
+        "$2.5\\times1.20=3.00$.",
+        "Fewest sig figs is 2.",
+        "$3.0\\ \\text{m}^2$."
+      ],
+      "hint": "×/÷ keeps the fewest sig figs."
+    }
+  ]
+}

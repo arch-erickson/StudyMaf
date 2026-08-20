@@ -1,0 +1,238 @@
+{
+  "title": "Inverse Functions",
+  "summary": "An inverse function undoes another: if $f$ sends $a$ to $b$, then $f^{-1}$ sends $b$ back to $a$. A function has an inverse only if it's one-to-one (passes the horizontal line test); their graphs mirror across $y=x$.",
+  "glossary": {
+    "inverse function": {
+      "plain": "Undoes the original function.",
+      "in_class": "$f^{-1}(f(x))=x$."
+    },
+    "one-to-one": {
+      "plain": "Each output comes from a single input.",
+      "in_class": "Required for an inverse."
+    },
+    "horizontal line test": {
+      "plain": "No horizontal line hits the graph twice.",
+      "in_class": "Confirms one-to-one."
+    },
+    "swap x and y": {
+      "plain": "The algebra for finding an inverse.",
+      "in_class": "Solve $x=f(y)$ for $y$."
+    },
+    "reflection over y=x": {
+      "plain": "Inverse graphs mirror across this line.",
+      "in_class": "Points $(a,b)$ become $(b,a)$."
+    },
+    "domain/range swap": {
+      "plain": "Inverse's domain is the original's range.",
+      "in_class": "And vice versa."
+    },
+    "restricting the domain": {
+      "plain": "Limiting inputs to make a function invertible.",
+      "in_class": "e.g. $x\\ge0$ for $x^2$."
+    },
+    "composition check": {
+      "plain": "Verify with $f(f^{-1}(x))=x$.",
+      "in_class": "Confirms a correct inverse."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "What an inverse does",
+      "explanation": "The inverse reverses the mapping: $f^{-1}$ takes outputs back to inputs, so $f^{-1}(f(x))=x$ and $f(f^{-1}(x))=x$.",
+      "math_steps": [
+        "The inverse undoes $f$.",
+        "$f^{-1}(f(x))=x$.",
+        "Composing them returns $x$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-c1.svg",
+        "caption": "What an inverse does"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "One-to-one functions",
+      "explanation": "Only one-to-one functions (each output from a unique input) have inverses. The horizontal line test checks this on a graph.",
+      "math_steps": [
+        "Check each output has one input.",
+        "Use the horizontal line test.",
+        "Fails ⇒ no inverse (unless you restrict)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-c2.svg",
+        "caption": "One-to-one functions"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Finding an inverse algebraically",
+      "explanation": "Write $y=f(x)$, swap $x$ and $y$, then solve for $y$: that's $f^{-1}(x)$.",
+      "math_steps": [
+        "Set $y=f(x)$.",
+        "Swap $x$ and $y$.",
+        "Solve for $y$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-c3.svg",
+        "caption": "Finding an inverse algebraically"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Graphs and domains",
+      "explanation": "Inverse graphs are reflections across $y=x$; the inverse's domain and range are the original's range and domain, swapped.",
+      "math_steps": [
+        "Reflect the graph over $y=x$.",
+        "Domain and range swap.",
+        "Points $(a,b)\\to(b,a)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-c4.svg",
+        "caption": "Graphs and domains"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Restricting the domain",
+      "explanation": "Functions that aren't one-to-one (like $x^2$) become invertible on a restricted domain (like $x\\ge0$), giving a valid inverse there.",
+      "math_steps": [
+        "Restrict to a one-to-one piece.",
+        "Find the inverse on it.",
+        "State the restricted domain."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-c5.svg",
+        "caption": "Restricting the domain"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Encoding and decoding",
+      "scenario": "A cipher scrambles a message; decoding unscrambles it.",
+      "how_the_math_applies": "Decoding is the inverse function of encoding.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-e1.svg",
+        "caption": "Encoding and decoding"
+      }
+    },
+    {
+      "title": "Celsius and Fahrenheit",
+      "scenario": "Convert one temperature scale to the other and back.",
+      "how_the_math_applies": "The two conversions are inverse functions.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-e2.svg",
+        "caption": "Celsius and Fahrenheit"
+      }
+    },
+    {
+      "title": "Solving for time from distance",
+      "scenario": "Distance is a function of time; invert to get time.",
+      "how_the_math_applies": "The inverse expresses time in terms of distance.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-06-inverse-e3.svg",
+        "caption": "Solving for time from distance"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "inverse functions one to one horizontal line test",
+    "math_query": "finding inverse function swap solve reflection examples",
+    "combined_query": "precalculus inverse functions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the inverse of $f(x)=x+5$.",
+      "correct_answer": "$f^{-1}(x)=x-5$",
+      "solution_steps": [
+        "Swap and solve: $x=y+5$.",
+        "$y=x-5$.",
+        "Done."
+      ],
+      "hint": "Undo the addition."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the inverse of $f(x)=2x$.",
+      "correct_answer": "$f^{-1}(x)=x/2$",
+      "solution_steps": [
+        "$x=2y$.",
+        "$y=x/2$.",
+        "Done."
+      ],
+      "hint": "Undo the multiplication."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the inverse of $f(x)=3x-1$.",
+      "correct_answer": "$f^{-1}(x)=\\dfrac{x+1}{3}$",
+      "solution_steps": [
+        "$x=3y-1$.",
+        "$y=(x+1)/3$.",
+        "Done."
+      ],
+      "hint": "Swap, then solve for $y$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Does $f(x)=x^2$ (all reals) have an inverse?",
+      "correct_answer": "No (not one-to-one)",
+      "solution_steps": [
+        "Horizontal line hits twice.",
+        "Not one-to-one.",
+        "No inverse unless restricted."
+      ],
+      "hint": "Apply the horizontal line test."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "If $f(3)=7$, what is $f^{-1}(7)$?",
+      "correct_answer": "$3$",
+      "solution_steps": [
+        "Inverse reverses the pair.",
+        "$(3,7)\\to(7,3)$.",
+        "$3$."
+      ],
+      "hint": "Swap the coordinates."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the inverse of $f(x)=\\dfrac{x+2}{x-1}$.",
+      "correct_answer": "$f^{-1}(x)=\\dfrac{x+2}{x-1}$",
+      "solution_steps": [
+        "$x(y-1)=y+2$; $xy-x=y+2$.",
+        "$y(x-1)=x+2$; $y=\\dfrac{x+2}{x-1}$.",
+        "Self-inverse here."
+      ],
+      "hint": "Solve $x=f(y)$ for $y$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the inverse of $f(x)=\\sqrt{x-1}$, $x\\ge1$.",
+      "correct_answer": "$f^{-1}(x)=x^2+1,\\ x\\ge0$",
+      "solution_steps": [
+        "$x=\\sqrt{y-1}$; square: $x^2=y-1$.",
+        "$y=x^2+1$.",
+        "Domain $x\\ge0$."
+      ],
+      "hint": "Square both sides, note the domain."
+    }
+  ]
+}

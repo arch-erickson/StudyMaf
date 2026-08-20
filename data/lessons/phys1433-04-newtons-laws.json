@@ -1,0 +1,238 @@
+{
+  "title": "Newton's Laws of Motion",
+  "summary": "Newton's laws relate force and motion: inertia keeps velocity constant without a net force; $F_{net}=ma$; and forces occur in equal-and-opposite pairs. Free-body diagrams turn scenarios into force equations for tension, weight, and the normal force.",
+  "glossary": {
+    "Newton's first law": {
+      "plain": "No net force ⇒ constant velocity.",
+      "in_class": "Inertia — objects resist changes in motion."
+    },
+    "Newton's second law": {
+      "plain": "Net force = mass × acceleration.",
+      "in_class": "$F_{net}=ma$."
+    },
+    "Newton's third law": {
+      "plain": "Forces come in equal, opposite pairs.",
+      "in_class": "Action–reaction on different objects."
+    },
+    "free-body diagram": {
+      "plain": "All forces on one object drawn as arrows.",
+      "in_class": "The setup for $\\sum F=ma$."
+    },
+    "weight": {
+      "plain": "Gravitational force on a mass.",
+      "in_class": "$W=mg$."
+    },
+    "normal force": {
+      "plain": "Perpendicular support from a surface.",
+      "in_class": "Balances the perpendicular load."
+    },
+    "tension": {
+      "plain": "Pulling force through a rope or cable.",
+      "in_class": "Same throughout an ideal massless rope."
+    },
+    "net force": {
+      "plain": "Vector sum of all forces.",
+      "in_class": "Sets the acceleration."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Inertia (first law)",
+      "explanation": "An object maintains its velocity unless a net force acts. Motion doesn't require a continuous force — only changes in motion do.",
+      "math_steps": [
+        "Check whether the net force is zero.",
+        "If zero, velocity is constant.",
+        "A force changes, not maintains, motion."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-c1.svg",
+        "caption": "Inertia (first law)"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "F = ma (second law)",
+      "explanation": "The net force equals mass times acceleration. Solve by drawing a free-body diagram and summing forces along each axis.",
+      "math_steps": [
+        "Draw the free-body diagram.",
+        "Sum forces per axis.",
+        "Set $\\sum F=ma$ and solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-c2.svg",
+        "caption": "F = ma (second law)"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Weight and normal force",
+      "explanation": "Weight is $W=mg$, always downward. The normal force is the surface's perpendicular push, equal to the perpendicular load when there's no perpendicular acceleration.",
+      "math_steps": [
+        "Weight $=mg$ downward.",
+        "Normal balances the perpendicular forces.",
+        "On an incline, $N=mg\\cos\\theta$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-c3.svg",
+        "caption": "Weight and normal force"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Tension and connected objects",
+      "explanation": "Ropes transmit tension. For connected masses, apply $F=ma$ to each and use the shared acceleration to link them.",
+      "math_steps": [
+        "Assign a tension to each rope.",
+        "Write $F=ma$ for each object.",
+        "Solve using the common acceleration."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-c4.svg",
+        "caption": "Tension and connected objects"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Action–reaction (third law)",
+      "explanation": "Every force has an equal, opposite partner acting on the other object. Because they act on different bodies, they never cancel on a single object.",
+      "math_steps": [
+        "Identify the interacting pair.",
+        "The forces are equal and opposite.",
+        "They act on different objects."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-c5.svg",
+        "caption": "Action–reaction (third law)"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Pulling a sled",
+      "scenario": "A rope pulls a sled across snow.",
+      "how_the_math_applies": "Tension minus friction gives the net force; $F=ma$ yields the acceleration.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-e1.svg",
+        "caption": "Pulling a sled"
+      }
+    },
+    {
+      "title": "Standing on the ground",
+      "scenario": "You push down; the ground pushes up.",
+      "how_the_math_applies": "The normal force (third-law partner) supports your weight.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-e2.svg",
+        "caption": "Standing on the ground"
+      }
+    },
+    {
+      "title": "Tug of war",
+      "scenario": "Two teams pull a rope.",
+      "how_the_math_applies": "Net force decides the motion; the rope's tension is the same throughout.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-04-newtons-laws-e3.svg",
+        "caption": "Tug of war"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "newtons laws of motion free body diagram algebra",
+    "math_query": "F=ma tension normal force weight examples",
+    "combined_query": "physics 1 newtons laws worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $6$ kg object accelerates at $2$ m/s². Find the net force.",
+      "correct_answer": "$12$ N",
+      "solution_steps": [
+        "$F=ma$.",
+        "$=6(2)$.",
+        "$12$ N."
+      ],
+      "hint": "$F=ma$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the weight of a $12$ kg mass.",
+      "correct_answer": "$\\approx117.6$ N",
+      "solution_steps": [
+        "$W=mg$.",
+        "$=12(9.8)$.",
+        "$117.6$ N."
+      ],
+      "hint": "$W=mg$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $4$ kg box is pulled with $20$ N against $8$ N friction. Find its acceleration.",
+      "correct_answer": "$3$ m/s²",
+      "solution_steps": [
+        "Net $=20-8=12$ N.",
+        "$a=12/4$.",
+        "$3$ m/s²."
+      ],
+      "hint": "Subtract friction first."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $2$ kg lamp hangs at rest. Find the cord tension.",
+      "correct_answer": "$\\approx19.6$ N",
+      "solution_steps": [
+        "$T=mg$.",
+        "$=2(9.8)$.",
+        "$19.6$ N."
+      ],
+      "hint": "Tension balances weight."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $70$ kg person in an elevator accelerating up at $1.5$ m/s². Find the normal force.",
+      "correct_answer": "$\\approx791$ N",
+      "solution_steps": [
+        "$N=m(g+a)$.",
+        "$=70(11.3)$.",
+        "$791$ N."
+      ],
+      "hint": "$N=m(g+a)$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $10$ kg block on a frictionless $37^\\circ$ incline. Find the acceleration.",
+      "correct_answer": "$\\approx5.9$ m/s²",
+      "solution_steps": [
+        "$a=g\\sin37^\\circ$.",
+        "$=9.8(0.6)$.",
+        "$\\approx5.9$ m/s²."
+      ],
+      "hint": "$a=g\\sin\\theta$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Masses $4$ kg and $6$ kg over a frictionless pulley. Find the acceleration.",
+      "correct_answer": "$\\approx1.96$ m/s²",
+      "solution_steps": [
+        "$a=(m_2-m_1)g/(m_1+m_2)=2(9.8)/10$.",
+        "$=1.96$ m/s².",
+        "Done."
+      ],
+      "hint": "Atwood machine."
+    }
+  ]
+}

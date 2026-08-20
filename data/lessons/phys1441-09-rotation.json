@@ -1,0 +1,238 @@
+{
+  "title": "Rotational Motion & Angular Momentum",
+  "summary": "Rotation parallels linear motion: angular position, velocity, and acceleration, with torque $\\tau=rF\\sin\\theta$ as the rotational force and moment of inertia $I$ as rotational mass. $\\tau=I\\alpha$, rotational KE is $\\tfrac12I\\omega^2$, and angular momentum $L=I\\omega$ is conserved.",
+  "glossary": {
+    "angular velocity": {
+      "plain": "Rotation rate.",
+      "in_class": "$\\omega=d\\theta/dt$, in rad/s; $v=r\\omega$."
+    },
+    "angular acceleration": {
+      "plain": "Rate of change of angular velocity.",
+      "in_class": "$\\alpha=d\\omega/dt$; $a=r\\alpha$."
+    },
+    "torque": {
+      "plain": "The rotational effect of a force.",
+      "in_class": "$\\tau=rF\\sin\\theta$; causes angular acceleration."
+    },
+    "moment of inertia": {
+      "plain": "Rotational 'mass' — resistance to angular acceleration.",
+      "in_class": "$I$ depends on mass distribution."
+    },
+    "rotational Newton's law": {
+      "plain": "Torque equals $I$ times angular acceleration.",
+      "in_class": "$\\tau=I\\alpha$."
+    },
+    "rotational kinetic energy": {
+      "plain": "Energy of spinning.",
+      "in_class": "$KE=\\tfrac12I\\omega^2$."
+    },
+    "angular momentum": {
+      "plain": "Rotational momentum.",
+      "in_class": "$L=I\\omega$; conserved with no external torque."
+    },
+    "rolling": {
+      "plain": "Combined translation and rotation.",
+      "in_class": "$v=r\\omega$ for rolling without slipping."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Rotational kinematics",
+      "explanation": "Angular quantities mirror linear ones: $\\omega=d\\theta/dt$, $\\alpha=d\\omega/dt$, with the same constant-$\\alpha$ equations. Link to linear motion by $v=r\\omega$, $a=r\\alpha$.",
+      "math_steps": [
+        "Use $\\theta,\\omega,\\alpha$ like $x,v,a$.",
+        "Apply the rotational kinematic equations.",
+        "Convert with $v=r\\omega$ when needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-c1.svg",
+        "caption": "Rotational kinematics"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Torque",
+      "explanation": "Torque $\\tau=rF\\sin\\theta$ measures a force's turning effect — larger with more force, a longer lever arm, or a perpendicular push.",
+      "math_steps": [
+        "Find the force and its distance from the axis.",
+        "$\\tau=rF\\sin\\theta$.",
+        "Maximum when the force is perpendicular."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-c2.svg",
+        "caption": "Torque"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Moment of inertia and $\\tau=I\\alpha$",
+      "explanation": "Moment of inertia $I$ plays the role of mass in rotation, depending on how mass is distributed. Newton's second law becomes $\\tau=I\\alpha$.",
+      "math_steps": [
+        "Determine $I$ for the shape.",
+        "Sum torques.",
+        "Set $\\sum\\tau=I\\alpha$ and solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-c3.svg",
+        "caption": "Moment of inertia and $\\tau=I\\alpha$"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Rotational energy",
+      "explanation": "A spinning body has $KE=\\tfrac12I\\omega^2$. A rolling object has both translational and rotational kinetic energy.",
+      "math_steps": [
+        "Compute $\\tfrac12I\\omega^2$.",
+        "For rolling, add $\\tfrac12mv^2$.",
+        "Use $v=r\\omega$ to combine."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-c4.svg",
+        "caption": "Rotational energy"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Conservation of angular momentum",
+      "explanation": "With no external torque, $L=I\\omega$ is constant. Reducing $I$ (pulling mass inward) speeds up rotation — the skater effect.",
+      "math_steps": [
+        "Set $I_i\\omega_i=I_f\\omega_f$.",
+        "Decrease $I$ ⇒ increase $\\omega$.",
+        "Solve for the new spin rate."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-c5.svg",
+        "caption": "Conservation of angular momentum"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A figure skater's spin",
+      "scenario": "A skater pulls in their arms and spins faster.",
+      "how_the_math_applies": "Angular momentum $I\\omega$ is conserved, so smaller $I$ means larger $\\omega$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-e1.svg",
+        "caption": "A figure skater's spin"
+      }
+    },
+    {
+      "title": "Opening a door",
+      "scenario": "You push far from the hinges.",
+      "how_the_math_applies": "A larger lever arm gives more torque for the same force.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-e2.svg",
+        "caption": "Opening a door"
+      }
+    },
+    {
+      "title": "A rolling ball down a ramp",
+      "scenario": "A ball rolls without slipping.",
+      "how_the_math_applies": "Its energy splits between translation and rotation, so it's slower than a sliding block.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-09-rotation-e3.svg",
+        "caption": "A rolling ball down a ramp"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "rotational motion torque moment of inertia angular",
+    "math_query": "angular momentum conservation rotational energy examples",
+    "combined_query": "physics 1 rotation torque worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A wheel spins at $10$ rad/s, radius $0.5$ m. Find the rim speed.",
+      "correct_answer": "$5$ m/s",
+      "solution_steps": [
+        "$v=r\\omega$.",
+        "$=0.5(10)$.",
+        "$5$ m/s."
+      ],
+      "hint": "$v=r\\omega$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $20$ N force acts $0.3$ m from an axis, perpendicular. Find the torque.",
+      "correct_answer": "$6$ N·m",
+      "solution_steps": [
+        "$\\tau=rF$.",
+        "$=0.3(20)$.",
+        "$6$ N·m."
+      ],
+      "hint": "$\\tau=rF\\sin90^\\circ$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A torque of $12$ N·m acts on $I=4$ kg·m². Find the angular acceleration.",
+      "correct_answer": "$3$ rad/s²",
+      "solution_steps": [
+        "$\\alpha=\\tau/I$.",
+        "$=12/4$.",
+        "$3$ rad/s²."
+      ],
+      "hint": "$\\tau=I\\alpha$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Find the rotational KE of $I=2$ kg·m² spinning at $5$ rad/s.",
+      "correct_answer": "$25$ J",
+      "solution_steps": [
+        "$KE=\\tfrac12I\\omega^2$.",
+        "$=\\tfrac12(2)(25)$.",
+        "$25$ J."
+      ],
+      "hint": "$\\tfrac12I\\omega^2$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $30$ N force acts $0.4$ m from an axis at $30^\\circ$. Find the torque.",
+      "correct_answer": "$6$ N·m",
+      "solution_steps": [
+        "$\\tau=rF\\sin\\theta$.",
+        "$=0.4(30)(0.5)$.",
+        "$6$ N·m."
+      ],
+      "hint": "Include $\\sin\\theta$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A skater with $I=4$ kg·m² at $2$ rad/s pulls in to $I=1$ kg·m². Find the new $\\omega$.",
+      "correct_answer": "$8$ rad/s",
+      "solution_steps": [
+        "$I_i\\omega_i=I_f\\omega_f$: $4(2)=1\\omega$.",
+        "$\\omega=8$.",
+        "$8$ rad/s."
+      ],
+      "hint": "Conserve $L=I\\omega$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A wheel accelerates from rest at $2$ rad/s² for $3$ s. Find its final angular velocity and angle turned.",
+      "correct_answer": "$6$ rad/s, $9$ rad",
+      "solution_steps": [
+        "$\\omega=\\alpha t=6$; $\\theta=\\tfrac12\\alpha t^2=9$.",
+        "Done.",
+        "$6$ rad/s, $9$ rad."
+      ],
+      "hint": "Rotational kinematics."
+    }
+  ]
+}

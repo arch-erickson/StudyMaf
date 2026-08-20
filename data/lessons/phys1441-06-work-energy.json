@@ -1,0 +1,238 @@
+{
+  "title": "Work & Kinetic Energy",
+  "summary": "Work is force acting through a distance, $W=Fd\\cos\\theta$ (or $\\int F\\,dx$ for varying force). The work–energy theorem says net work equals the change in kinetic energy, $W_{net}=\\Delta KE$. Power is the rate of doing work.",
+  "glossary": {
+    "work": {
+      "plain": "Energy transferred by a force over a distance.",
+      "in_class": "$W=Fd\\cos\\theta$; zero if force ⟂ motion."
+    },
+    "kinetic energy": {
+      "plain": "Energy of motion.",
+      "in_class": "$KE=\\tfrac12mv^2$."
+    },
+    "work-energy theorem": {
+      "plain": "Net work equals change in kinetic energy.",
+      "in_class": "$W_{net}=\\Delta KE$."
+    },
+    "power": {
+      "plain": "Rate of doing work.",
+      "in_class": "$P=\\dfrac{W}{t}=Fv$, in watts."
+    },
+    "variable force work": {
+      "plain": "Work when force changes with position.",
+      "in_class": "$W=\\int F\\,dx$ — area under the $F$-$x$ curve."
+    },
+    "joule": {
+      "plain": "The SI unit of energy/work.",
+      "in_class": "$1\\ \\text{J}=1\\ \\text{N·m}$."
+    },
+    "watt": {
+      "plain": "The SI unit of power.",
+      "in_class": "$1\\ \\text{W}=1\\ \\text{J/s}$."
+    },
+    "dot product": {
+      "plain": "Work as $\\vec F\\cdot\\vec d$.",
+      "in_class": "Picks out the component of force along motion."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Work by a constant force",
+      "explanation": "Work is $W=Fd\\cos\\theta$, where $\\theta$ is the angle between force and displacement. A perpendicular force does no work; an opposing force does negative work.",
+      "math_steps": [
+        "Identify force, displacement, and angle.",
+        "$W=Fd\\cos\\theta$.",
+        "Check the sign from $\\cos\\theta$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-c1.svg",
+        "caption": "Work by a constant force"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Work by a variable force",
+      "explanation": "When force depends on position, work is the integral $W=\\int F\\,dx$ — the area under the force–position graph. A spring gives $W=\\tfrac12kx^2$.",
+      "math_steps": [
+        "Express $F$ as a function of $x$.",
+        "Integrate $\\int F\\,dx$ over the path.",
+        "For a spring, $W=\\tfrac12kx^2$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-c2.svg",
+        "caption": "Work by a variable force"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Kinetic energy",
+      "explanation": "A moving mass carries $KE=\\tfrac12mv^2$. It scales with the square of speed — doubling speed quadruples the energy.",
+      "math_steps": [
+        "Compute $\\tfrac12mv^2$.",
+        "Note the $v^2$ dependence.",
+        "Units are joules."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-c3.svg",
+        "caption": "Kinetic energy"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The work–energy theorem",
+      "explanation": "The net work done on an object equals its change in kinetic energy: $W_{net}=\\tfrac12mv_f^2-\\tfrac12mv_i^2$. This links forces to speed changes without needing acceleration explicitly.",
+      "math_steps": [
+        "Compute total (net) work.",
+        "Set it equal to $\\Delta KE$.",
+        "Solve for the unknown speed or distance."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-c4.svg",
+        "caption": "The work–energy theorem"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Power",
+      "explanation": "Power is how fast work is done: $P=W/t$, or $P=Fv$ for a force acting at speed $v$. Measured in watts.",
+      "math_steps": [
+        "Divide work by time, or use $P=Fv$.",
+        "Keep units in J/s = W.",
+        "Larger power ⇒ faster energy transfer."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-c5.svg",
+        "caption": "Power"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Lifting weights",
+      "scenario": "Raising a barbell a set height.",
+      "how_the_math_applies": "Work $W=mgh$ is done against gravity; power depends on how fast you lift.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-e1.svg",
+        "caption": "Lifting weights"
+      }
+    },
+    {
+      "title": "A car engine's power",
+      "scenario": "An engine sustains speed against drag.",
+      "how_the_math_applies": "$P=Fv$ gives the power needed to overcome resistance at a given speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-e2.svg",
+        "caption": "A car engine's power"
+      }
+    },
+    {
+      "title": "A compressed spring launcher",
+      "scenario": "A spring flings a ball.",
+      "how_the_math_applies": "The stored $\\tfrac12kx^2$ becomes the ball's kinetic energy.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-06-work-energy-e3.svg",
+        "caption": "A compressed spring launcher"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "work force distance kinetic energy work energy theorem",
+    "math_query": "power P=Fv variable force spring work examples",
+    "combined_query": "physics 1 work energy power worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $50$ N force pushes a box $4$ m in the direction of motion. Find the work.",
+      "correct_answer": "$200$ J",
+      "solution_steps": [
+        "$W=Fd\\cos0$.",
+        "$=50(4)$.",
+        "$200$ J."
+      ],
+      "hint": "$W=Fd$ when aligned."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the kinetic energy of a $2$ kg ball moving at $5$ m/s.",
+      "correct_answer": "$25$ J",
+      "solution_steps": [
+        "$KE=\\tfrac12mv^2$.",
+        "$=\\tfrac12(2)(25)$.",
+        "$25$ J."
+      ],
+      "hint": "$\\tfrac12mv^2$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $10$ N force acts at $60^\\circ$ to a $5$ m displacement. Find the work.",
+      "correct_answer": "$25$ J",
+      "solution_steps": [
+        "$W=Fd\\cos60^\\circ$.",
+        "$=10(5)(0.5)$.",
+        "$25$ J."
+      ],
+      "hint": "Include $\\cos\\theta$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Net work of $100$ J is done on a $4$ kg cart at rest. Find its final speed.",
+      "correct_answer": "$\\approx7.07$ m/s",
+      "solution_steps": [
+        "$W=\\tfrac12mv^2$.",
+        "$100=2v^2\\Rightarrow v^2=50$.",
+        "$v\\approx7.07$ m/s."
+      ],
+      "hint": "Work–energy theorem."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A motor does $600$ J in $3$ s. Find its power.",
+      "correct_answer": "$200$ W",
+      "solution_steps": [
+        "$P=W/t$.",
+        "$=600/3$.",
+        "$200$ W."
+      ],
+      "hint": "$P=W/t$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A spring ($k=200$ N/m) is compressed $0.1$ m. Find the stored energy.",
+      "correct_answer": "$1$ J",
+      "solution_steps": [
+        "$W=\\tfrac12kx^2$.",
+        "$=\\tfrac12(200)(0.01)$.",
+        "$1$ J."
+      ],
+      "hint": "$\\tfrac12kx^2$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A car needs $8000$ N of force to move at $25$ m/s. Find the power.",
+      "correct_answer": "$200$ kW",
+      "solution_steps": [
+        "$P=Fv$.",
+        "$=8000(25)$.",
+        "$200{,}000$ W = 200 kW."
+      ],
+      "hint": "$P=Fv$."
+    }
+  ]
+}

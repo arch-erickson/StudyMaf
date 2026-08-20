@@ -1,0 +1,238 @@
+{
+  "title": "Logarithmic Functions",
+  "summary": "A logarithm inverts an exponential: $\\log_b x=y$ means $b^y=x$. The log laws convert products, quotients, and powers into sums, differences, and multiples, and taking a log solves exponential equations for the unknown exponent.",
+  "glossary": {
+    "logarithm": {
+      "plain": "The inverse of an exponential.",
+      "in_class": "$\\log_b x=y\\iff b^y=x$."
+    },
+    "common log": {
+      "plain": "Base-10 logarithm.",
+      "in_class": "$\\log x$."
+    },
+    "natural log": {
+      "plain": "Base-$e$ logarithm.",
+      "in_class": "$\\ln x$."
+    },
+    "product law": {
+      "plain": "Log of a product is a sum.",
+      "in_class": "$\\log(MN)=\\log M+\\log N$."
+    },
+    "quotient law": {
+      "plain": "Log of a quotient is a difference.",
+      "in_class": "$\\log(M/N)=\\log M-\\log N$."
+    },
+    "power law": {
+      "plain": "Log of a power pulls the exponent out.",
+      "in_class": "$\\log M^p=p\\log M$."
+    },
+    "change of base": {
+      "plain": "Rewrite a log in another base.",
+      "in_class": "$\\log_b x=\\dfrac{\\ln x}{\\ln b}$."
+    },
+    "log-exponential inverse": {
+      "plain": "They undo each other.",
+      "in_class": "$b^{\\log_b x}=x$, $\\log_b(b^x)=x$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Logarithms as inverses",
+      "explanation": "$\\log_b x$ answers 'what power of $b$ gives $x$?'. It undoes the exponential, so $b^{\\log_b x}=x$.",
+      "math_steps": [
+        "Rewrite $\\log_b x=y$ as $b^y=x$.",
+        "Evaluate simple logs by inspection.",
+        "Use it to invert exponentials."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-c1.svg",
+        "caption": "Logarithms as inverses"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Common and natural logs",
+      "explanation": "$\\log$ means base 10; $\\ln$ means base $e$. Calculators provide both, and change-of-base handles any other base.",
+      "math_steps": [
+        "$\\log=\\log_{10}$; $\\ln=\\log_e$.",
+        "Use the matching calculator key.",
+        "Change base with $\\dfrac{\\ln x}{\\ln b}$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-c2.svg",
+        "caption": "Common and natural logs"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "The log laws",
+      "explanation": "Products become sums, quotients differences, and powers coefficients: $\\log(MN)=\\log M+\\log N$, etc. Use them to expand or condense.",
+      "math_steps": [
+        "Expand products/quotients.",
+        "Pull exponents to the front.",
+        "Condense back when needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-c3.svg",
+        "caption": "The log laws"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Solving exponential equations",
+      "explanation": "Take a logarithm of both sides to bring a variable exponent down, then solve the resulting linear equation.",
+      "math_steps": [
+        "Isolate the exponential.",
+        "Take $\\log$ or $\\ln$ of both sides.",
+        "Use the power law and solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-c4.svg",
+        "caption": "Solving exponential equations"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Solving logarithmic equations",
+      "explanation": "Condense to a single log, rewrite in exponential form, and solve — then check for extraneous solutions (logs need positive arguments).",
+      "math_steps": [
+        "Combine into one log.",
+        "Rewrite as an exponential.",
+        "Solve and discard non-positive arguments."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-c5.svg",
+        "caption": "Solving logarithmic equations"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "The Richter scale",
+      "scenario": "Earthquake magnitude is logarithmic.",
+      "how_the_math_applies": "Each unit is a tenfold energy increase — a base-10 logarithm.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-e1.svg",
+        "caption": "The Richter scale"
+      }
+    },
+    {
+      "title": "Sound in decibels",
+      "scenario": "Loudness uses a log scale.",
+      "how_the_math_applies": "Decibels are $10\\log$ of an intensity ratio.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-e2.svg",
+        "caption": "Sound in decibels"
+      }
+    },
+    {
+      "title": "Solving for time in growth",
+      "scenario": "How long until an investment doubles?",
+      "how_the_math_applies": "Taking a log of $b^t=2$ solves for the time $t$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-14-logarithmic-e3.svg",
+        "caption": "Solving for time in growth"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "logarithm definition inverse of exponential log laws",
+    "math_query": "log laws solving exponential logarithmic equations examples",
+    "combined_query": "precalculus logarithmic functions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\log_2 16$.",
+      "correct_answer": "$4$",
+      "solution_steps": [
+        "$2^4=16$.",
+        "$4$.",
+        "Done."
+      ],
+      "hint": "What power of 2 is 16?"
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Evaluate $\\log_{10} 100$.",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "$10^2=100$.",
+        "$2$.",
+        "Done."
+      ],
+      "hint": "Powers of 10."
+    },
+    {
+      "id": "p03",
+      "difficulty": "easy",
+      "prompt": "Rewrite $\\log_3 81=4$ in exponential form.",
+      "correct_answer": "$3^4=81$",
+      "solution_steps": [
+        "$\\log_b x=y\\iff b^y=x$.",
+        "$3^4=81$.",
+        "Done."
+      ],
+      "hint": "Definition of a log."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Expand $\\log(x^3 y)$.",
+      "correct_answer": "$3\\log x+\\log y$",
+      "solution_steps": [
+        "Power then product law.",
+        "$3\\log x+\\log y$.",
+        "Done."
+      ],
+      "hint": "Combine power and product laws."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Evaluate $\\ln e^5$.",
+      "correct_answer": "$5$",
+      "solution_steps": [
+        "Inverses cancel.",
+        "$\\ln e^5=5$.",
+        "Done."
+      ],
+      "hint": "$\\ln$ undoes $e$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Solve $3^x=81$.",
+      "correct_answer": "$x=4$",
+      "solution_steps": [
+        "$81=3^4$.",
+        "$x=4$.",
+        "Or take $\\log_3$."
+      ],
+      "hint": "Match the bases."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Solve $2e^{x}=14$.",
+      "correct_answer": "$x=\\ln 7\\approx1.95$",
+      "solution_steps": [
+        "$e^x=7$.",
+        "$x=\\ln7$.",
+        "$\\approx1.95$."
+      ],
+      "hint": "Isolate the exponential, then take $\\ln$."
+    }
+  ]
+}

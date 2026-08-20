@@ -1,0 +1,238 @@
+{
+  "title": "Functions via Graphs",
+  "summary": "A graph shows a function's behavior at a glance: intercepts, increasing/decreasing intervals, maxima/minima, and symmetry (even or odd). Reading these features connects the picture to the formula.",
+  "glossary": {
+    "x-intercept": {
+      "plain": "Where the graph crosses the x-axis.",
+      "in_class": "Set $y=0$ and solve; a zero of the function."
+    },
+    "y-intercept": {
+      "plain": "Where the graph crosses the y-axis.",
+      "in_class": "The value $f(0)$."
+    },
+    "increasing": {
+      "plain": "Rising as $x$ grows.",
+      "in_class": "Graph goes up left-to-right there."
+    },
+    "decreasing": {
+      "plain": "Falling as $x$ grows.",
+      "in_class": "Graph goes down left-to-right."
+    },
+    "even function": {
+      "plain": "Symmetric about the y-axis.",
+      "in_class": "$f(-x)=f(x)$."
+    },
+    "odd function": {
+      "plain": "Symmetric about the origin.",
+      "in_class": "$f(-x)=-f(x)$."
+    },
+    "maximum/minimum": {
+      "plain": "Highest or lowest points.",
+      "in_class": "Local peaks and valleys."
+    },
+    "zero of a function": {
+      "plain": "An input where output is 0.",
+      "in_class": "Same as an x-intercept."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Intercepts",
+      "explanation": "The x-intercepts are where $f(x)=0$ (the zeros); the y-intercept is $f(0)$. They anchor a sketch.",
+      "math_steps": [
+        "Set $y=0$ for x-intercepts.",
+        "Compute $f(0)$ for the y-intercept.",
+        "Plot these first."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-c1.svg",
+        "caption": "Intercepts"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Increasing and decreasing",
+      "explanation": "A function increases where the graph rises left to right and decreases where it falls. Describe these as intervals of $x$.",
+      "math_steps": [
+        "Scan left to right.",
+        "Rising ⇒ increasing; falling ⇒ decreasing.",
+        "Report the $x$-intervals."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-c2.svg",
+        "caption": "Increasing and decreasing"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Maxima and minima",
+      "explanation": "Local maxima are peaks, local minima are valleys — where the graph turns from rising to falling or vice versa.",
+      "math_steps": [
+        "Find turning points.",
+        "Peak ⇒ local max; valley ⇒ local min.",
+        "Note the $x$ and $y$ values."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-c3.svg",
+        "caption": "Maxima and minima"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Even and odd symmetry",
+      "explanation": "Even functions mirror across the y-axis ($f(-x)=f(x)$); odd functions have 180° rotational symmetry about the origin ($f(-x)=-f(x)$).",
+      "math_steps": [
+        "Compute $f(-x)$.",
+        "Equals $f(x)$ ⇒ even; equals $-f(x)$ ⇒ odd.",
+        "Neither ⇒ no symmetry."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-c4.svg",
+        "caption": "Even and odd symmetry"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Reading a graph",
+      "explanation": "Combine intercepts, intervals of increase/decrease, extrema, and symmetry to describe or reconstruct a function from its picture.",
+      "math_steps": [
+        "List intercepts and extrema.",
+        "Note increasing/decreasing intervals.",
+        "Check symmetry."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-c5.svg",
+        "caption": "Reading a graph"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A stock chart",
+      "scenario": "Price rises and falls over time.",
+      "how_the_math_applies": "Increasing/decreasing intervals and peaks/valleys describe the trend.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-e1.svg",
+        "caption": "A stock chart"
+      }
+    },
+    {
+      "title": "A projectile's height graph",
+      "scenario": "Height vs time is a downward parabola.",
+      "how_the_math_applies": "The maximum marks the peak; the x-intercepts are launch and landing.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-e2.svg",
+        "caption": "A projectile's height graph"
+      }
+    },
+    {
+      "title": "A symmetric bridge arch",
+      "scenario": "The arch mirrors left and right.",
+      "how_the_math_applies": "It models an even function, symmetric about its center line.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-03-function-graphs-e3.svg",
+        "caption": "A symmetric bridge arch"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "reading graphs intercepts increasing decreasing even odd",
+    "math_query": "even odd functions symmetry maxima minima examples",
+    "combined_query": "precalculus graphs of functions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the y-intercept of $f(x)=x^2-4$.",
+      "correct_answer": "$-4$",
+      "solution_steps": [
+        "$f(0)=0-4$.",
+        "$=-4$.",
+        "Done."
+      ],
+      "hint": "Compute $f(0)$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the x-intercepts of $f(x)=x^2-9$.",
+      "correct_answer": "$x=\\pm3$",
+      "solution_steps": [
+        "$x^2-9=0$.",
+        "$x=\\pm3$.",
+        "Done."
+      ],
+      "hint": "Set $y=0$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Is $f(x)=x^2$ even, odd, or neither?",
+      "correct_answer": "Even",
+      "solution_steps": [
+        "$f(-x)=(-x)^2=x^2=f(x)$.",
+        "Symmetric about y-axis.",
+        "Even."
+      ],
+      "hint": "Check $f(-x)$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Is $f(x)=x^3$ even, odd, or neither?",
+      "correct_answer": "Odd",
+      "solution_steps": [
+        "$f(-x)=-x^3=-f(x)$.",
+        "Origin symmetry.",
+        "Odd."
+      ],
+      "hint": "Compare to $-f(x)$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Where is $f(x)=x^2$ decreasing?",
+      "correct_answer": "$x<0$",
+      "solution_steps": [
+        "Left of the vertex it falls.",
+        "$x<0$.",
+        "Done."
+      ],
+      "hint": "Look left of the vertex."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Is $f(x)=x^3-x$ even, odd, or neither?",
+      "correct_answer": "Odd",
+      "solution_steps": [
+        "$f(-x)=-x^3+x=-(x^3-x)$.",
+        "$=-f(x)$.",
+        "Odd."
+      ],
+      "hint": "Test $f(-x)=-f(x)$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A parabola opens up with vertex $(2,-1)$. Is that a max or min, and its value?",
+      "correct_answer": "Minimum, $-1$",
+      "solution_steps": [
+        "Opens up ⇒ vertex is lowest.",
+        "Minimum value $-1$.",
+        "At $x=2$."
+      ],
+      "hint": "Upward parabola has a minimum."
+    }
+  ]
+}

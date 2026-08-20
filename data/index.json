@@ -284,6 +284,216 @@
       "id": "alg-14-exp-log",
       "title": "Exponential & Logarithmic Expressions",
       "file": "lessons/alg-14-exp-log.json"
+    },
+    {
+      "id": "phys1441-01-units",
+      "title": "Units, Measurement & Estimation",
+      "file": "lessons/phys1441-01-units.json"
+    },
+    {
+      "id": "phys1441-02-kinematics-1d",
+      "title": "Kinematics in One Dimension",
+      "file": "lessons/phys1441-02-kinematics-1d.json"
+    },
+    {
+      "id": "phys1441-03-vectors-2d",
+      "title": "Vectors & Motion in Two Dimensions",
+      "file": "lessons/phys1441-03-vectors-2d.json"
+    },
+    {
+      "id": "phys1441-04-newtons-laws",
+      "title": "Newton's Laws of Motion",
+      "file": "lessons/phys1441-04-newtons-laws.json"
+    },
+    {
+      "id": "phys1441-05-applications-gravity",
+      "title": "Applications of Newton's Laws & Gravitation",
+      "file": "lessons/phys1441-05-applications-gravity.json"
+    },
+    {
+      "id": "phys1441-06-work-energy",
+      "title": "Work & Kinetic Energy",
+      "file": "lessons/phys1441-06-work-energy.json"
+    },
+    {
+      "id": "phys1441-07-potential-energy",
+      "title": "Potential Energy & Conservation of Energy",
+      "file": "lessons/phys1441-07-potential-energy.json"
+    },
+    {
+      "id": "phys1441-08-momentum",
+      "title": "Linear Momentum & Collisions",
+      "file": "lessons/phys1441-08-momentum.json"
+    },
+    {
+      "id": "phys1441-09-rotation",
+      "title": "Rotational Motion & Angular Momentum",
+      "file": "lessons/phys1441-09-rotation.json"
+    },
+    {
+      "id": "phys1441-10-equilibrium",
+      "title": "Static Equilibrium & Elasticity",
+      "file": "lessons/phys1441-10-equilibrium.json"
+    },
+    {
+      "id": "phys1441-11-fluids",
+      "title": "Fluid Mechanics",
+      "file": "lessons/phys1441-11-fluids.json"
+    },
+    {
+      "id": "phys1441-12-oscillations",
+      "title": "Oscillations",
+      "file": "lessons/phys1441-12-oscillations.json"
+    },
+    {
+      "id": "phys1441-13-temperature-heat",
+      "title": "Temperature, Heat & Kinetic Theory",
+      "file": "lessons/phys1441-13-temperature-heat.json"
+    },
+    {
+      "id": "phys1441-14-thermodynamics",
+      "title": "The Laws of Thermodynamics",
+      "file": "lessons/phys1441-14-thermodynamics.json"
+    },
+    {
+      "id": "phys1433-01-units",
+      "title": "Units, Measurement & Problem-Solving",
+      "file": "lessons/phys1433-01-units.json"
+    },
+    {
+      "id": "phys1433-02-kinematics-1d",
+      "title": "Motion Along a Straight Line",
+      "file": "lessons/phys1433-02-kinematics-1d.json"
+    },
+    {
+      "id": "phys1433-03-kinematics-2d",
+      "title": "Two-Dimensional Motion & Projectiles",
+      "file": "lessons/phys1433-03-kinematics-2d.json"
+    },
+    {
+      "id": "phys1433-04-newtons-laws",
+      "title": "Newton's Laws of Motion",
+      "file": "lessons/phys1433-04-newtons-laws.json"
+    },
+    {
+      "id": "phys1433-05-friction-circular",
+      "title": "Friction & Circular Motion",
+      "file": "lessons/phys1433-05-friction-circular.json"
+    },
+    {
+      "id": "phys1433-06-gravitation",
+      "title": "Gravitation",
+      "file": "lessons/phys1433-06-gravitation.json"
+    },
+    {
+      "id": "phys1433-07-work-energy-power",
+      "title": "Work, Energy & Power",
+      "file": "lessons/phys1433-07-work-energy-power.json"
+    },
+    {
+      "id": "phys1433-08-momentum",
+      "title": "Momentum & Collisions",
+      "file": "lessons/phys1433-08-momentum.json"
+    },
+    {
+      "id": "phys1433-09-rotation-torque",
+      "title": "Rotational Motion & Torque",
+      "file": "lessons/phys1433-09-rotation-torque.json"
+    },
+    {
+      "id": "phys1433-10-equilibrium",
+      "title": "Static Equilibrium",
+      "file": "lessons/phys1433-10-equilibrium.json"
+    },
+    {
+      "id": "phys1433-11-fluids",
+      "title": "Fluids",
+      "file": "lessons/phys1433-11-fluids.json"
+    },
+    {
+      "id": "phys1433-12-temperature-heat",
+      "title": "Temperature & Heat",
+      "file": "lessons/phys1433-12-temperature-heat.json"
+    },
+    {
+      "id": "phys1433-13-thermodynamics",
+      "title": "Thermodynamics",
+      "file": "lessons/phys1433-13-thermodynamics.json"
+    },
+    {
+      "id": "phys1433-14-waves-sound",
+      "title": "Waves & Sound",
+      "file": "lessons/phys1433-14-waves-sound.json"
+    },
+    {
+      "id": "precalc-01-functions",
+      "title": "Numbers & Functions",
+      "file": "lessons/precalc-01-functions.json"
+    },
+    {
+      "id": "precalc-02-function-formulas",
+      "title": "Functions via Formulas",
+      "file": "lessons/precalc-02-function-formulas.json"
+    },
+    {
+      "id": "precalc-03-function-graphs",
+      "title": "Functions via Graphs",
+      "file": "lessons/precalc-03-function-graphs.json"
+    },
+    {
+      "id": "precalc-04-transformations",
+      "title": "Transformations of Functions",
+      "file": "lessons/precalc-04-transformations.json"
+    },
+    {
+      "id": "precalc-05-operations",
+      "title": "Operations & Composition of Functions",
+      "file": "lessons/precalc-05-operations.json"
+    },
+    {
+      "id": "precalc-06-inverse",
+      "title": "Inverse Functions",
+      "file": "lessons/precalc-06-inverse.json"
+    },
+    {
+      "id": "precalc-07-poly-division",
+      "title": "Dividing Polynomials",
+      "file": "lessons/precalc-07-poly-division.json"
+    },
+    {
+      "id": "precalc-08-poly-graphs",
+      "title": "Graphing Polynomials",
+      "file": "lessons/precalc-08-poly-graphs.json"
+    },
+    {
+      "id": "precalc-09-poly-roots",
+      "title": "Roots of Polynomials",
+      "file": "lessons/precalc-09-poly-roots.json"
+    },
+    {
+      "id": "precalc-10-rational",
+      "title": "Rational Functions",
+      "file": "lessons/precalc-10-rational.json"
+    },
+    {
+      "id": "precalc-11-asymptotes",
+      "title": "Discontinuities & Asymptotes",
+      "file": "lessons/precalc-11-asymptotes.json"
+    },
+    {
+      "id": "precalc-12-inequalities",
+      "title": "Polynomial & Rational Inequalities",
+      "file": "lessons/precalc-12-inequalities.json"
+    },
+    {
+      "id": "precalc-13-exponential",
+      "title": "Exponential Functions",
+      "file": "lessons/precalc-13-exponential.json"
+    },
+    {
+      "id": "precalc-14-logarithmic",
+      "title": "Logarithmic Functions",
+      "file": "lessons/precalc-14-logarithmic.json"
     }
   ]
 }

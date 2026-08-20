@@ -1,0 +1,250 @@
+{
+  "title": "Kinematics in One Dimension",
+  "summary": "Motion along a line is described by position, velocity, and acceleration. Velocity is $v=dx/dt$ and acceleration $a=dv/dt$. For constant acceleration, the kinematic equations relate displacement, velocity, acceleration, and time.",
+  "glossary": {
+    "displacement": {
+      "plain": "Change in position (a vector).",
+      "in_class": "$\\Delta x=x_f-x_i$; direction matters."
+    },
+    "velocity": {
+      "plain": "Rate of change of position.",
+      "in_class": "$v=\\dfrac{dx}{dt}$; average is $\\Delta x/\\Delta t$."
+    },
+    "acceleration": {
+      "plain": "Rate of change of velocity.",
+      "in_class": "$a=\\dfrac{dv}{dt}$."
+    },
+    "kinematic equations": {
+      "plain": "Constant-acceleration motion formulas.",
+      "in_class": "$v=v_0+at$, $x=x_0+v_0t+\\tfrac12at^2$, $v^2=v_0^2+2a\\Delta x$."
+    },
+    "free fall": {
+      "plain": "Motion under gravity alone.",
+      "in_class": "$a=-g\\approx-9.8\\ \\text{m/s}^2$ (downward)."
+    },
+    "average vs instantaneous": {
+      "plain": "Over an interval vs at an instant.",
+      "in_class": "Average $=\\Delta x/\\Delta t$; instantaneous $=dx/dt$."
+    },
+    "speed": {
+      "plain": "Magnitude of velocity.",
+      "in_class": "Always $\\ge0$; ignores direction."
+    },
+    "position-time graph": {
+      "plain": "A plot of $x$ vs $t$.",
+      "in_class": "Its slope is velocity."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Position, velocity, acceleration",
+      "explanation": "Velocity is the derivative of position, $v=dx/dt$; acceleration is the derivative of velocity, $a=dv/dt$. On graphs, slope of $x(t)$ is $v$, slope of $v(t)$ is $a$.",
+      "math_steps": [
+        "Differentiate position to get velocity.",
+        "Differentiate velocity to get acceleration.",
+        "Read slopes off the graphs."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-c1.svg",
+        "caption": "Position, velocity, acceleration"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The kinematic equations",
+      "explanation": "For constant $a$: $v=v_0+at$, $x=x_0+v_0t+\\tfrac12at^2$, and $v^2=v_0^2+2a\\Delta x$. Pick the equation missing the variable you don't have.",
+      "math_steps": [
+        "List knowns and the unknown.",
+        "Choose the equation without the extra variable.",
+        "Solve for the unknown."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-c2.svg",
+        "caption": "The kinematic equations"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Free fall",
+      "explanation": "Near Earth, gravity gives constant downward acceleration $g\\approx9.8\\ \\text{m/s}^2$. The same kinematic equations apply with $a=-g$.",
+      "math_steps": [
+        "Set $a=-g$ (down negative).",
+        "Apply the kinematic equations.",
+        "At the peak, $v=0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-c3.svg",
+        "caption": "Free fall"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Graphical analysis",
+      "explanation": "Slopes give rates (position→velocity→acceleration); areas give accumulations (area under $v(t)$ is displacement).",
+      "math_steps": [
+        "Slope of $x$-$t$ = velocity.",
+        "Slope of $v$-$t$ = acceleration.",
+        "Area under $v$-$t$ = displacement."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-c4.svg",
+        "caption": "Graphical analysis"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Average vs instantaneous",
+      "explanation": "Average velocity is total displacement over total time; instantaneous velocity is the limit as the interval shrinks — the derivative.",
+      "math_steps": [
+        "Average $=\\Delta x/\\Delta t$.",
+        "Instantaneous $=\\lim_{\\Delta t\\to0}\\Delta x/\\Delta t$.",
+        "They differ when velocity changes."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-c5.svg",
+        "caption": "Average vs instantaneous"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Braking distance",
+      "scenario": "A car brakes to a stop.",
+      "how_the_math_applies": "$v^2=v_0^2+2a\\Delta x$ finds the stopping distance from speed and deceleration.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-e1.svg",
+        "caption": "Braking distance"
+      }
+    },
+    {
+      "title": "Dropping a ball off a cliff",
+      "scenario": "A stone falls from a height.",
+      "how_the_math_applies": "Free-fall kinematics with $a=-g$ gives the fall time and impact speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-e2.svg",
+        "caption": "Dropping a ball off a cliff"
+      }
+    },
+    {
+      "title": "A sprinter's start",
+      "scenario": "A runner accelerates from the blocks.",
+      "how_the_math_applies": "Average vs instantaneous velocity distinguishes the whole race from the top speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-02-kinematics-1d-e3.svg",
+        "caption": "A sprinter's start"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "kinematics position velocity acceleration derivatives",
+    "math_query": "kinematic equations constant acceleration free fall examples",
+    "combined_query": "physics 1 one dimensional motion worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A car goes from $0$ to $20$ m/s in $4$ s. Find its acceleration.",
+      "correct_answer": "$5$ m/s²",
+      "solution_steps": [
+        "$a=\\Delta v/\\Delta t$.",
+        "$=20/4$.",
+        "$5$ m/s²."
+      ],
+      "hint": "$a=\\Delta v/\\Delta t$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A ball is dropped from rest. Find its speed after $2$ s.",
+      "correct_answer": "$\\approx19.6$ m/s",
+      "solution_steps": [
+        "$v=gt$.",
+        "$=9.8(2)$.",
+        "$19.6$ m/s."
+      ],
+      "hint": "$v=v_0+at$ with $v_0=0$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A car at $30$ m/s brakes at $6$ m/s². Find the stopping distance.",
+      "correct_answer": "$75$ m",
+      "solution_steps": [
+        "$v^2=v_0^2+2a\\Delta x$, $0=900-12\\Delta x$.",
+        "$\\Delta x=900/12$.",
+        "$75$ m."
+      ],
+      "hint": "Use $v^2=v_0^2+2a\\Delta x$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A ball thrown up at $20$ m/s reaches what maximum height?",
+      "correct_answer": "$\\approx20.4$ m",
+      "solution_steps": [
+        "At top $v=0$: $0=400-2(9.8)h$.",
+        "$h=400/19.6$.",
+        "$20.4$ m."
+      ],
+      "hint": "$v=0$ at the peak."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "How far does a car travel from rest in $5$ s at $4$ m/s²?",
+      "correct_answer": "$50$ m",
+      "solution_steps": [
+        "$x=\\tfrac12 at^2$.",
+        "$=\\tfrac12(4)(25)$.",
+        "$50$ m."
+      ],
+      "hint": "$x=\\tfrac12 at^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A ball thrown up at $15$ m/s — how long until it returns to the thrower's hand?",
+      "correct_answer": "$\\approx3.06$ s",
+      "solution_steps": [
+        "Time up: $v=0$ at $t=15/9.8=1.53$ s.",
+        "Total is twice that.",
+        "$\\approx3.06$ s."
+      ],
+      "hint": "Up-time equals down-time."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Position $x(t)=3t^2-2t$. Find the velocity at $t=2$ s.",
+      "correct_answer": "$10$ m/s",
+      "solution_steps": [
+        "$v=dx/dt=6t-2$.",
+        "At $t=2$: $12-2$.",
+        "$10$ m/s."
+      ],
+      "hint": "Differentiate position."
+    },
+    {
+      "id": "p08",
+      "difficulty": "stretch",
+      "prompt": "A stone dropped takes $3$ s to hit the ground. How tall is the cliff?",
+      "correct_answer": "$\\approx44.1$ m",
+      "solution_steps": [
+        "$h=\\tfrac12 g t^2$.",
+        "$=\\tfrac12(9.8)(9)$.",
+        "$44.1$ m."
+      ],
+      "hint": "$h=\\tfrac12 g t^2$."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "title": "Fluid Mechanics",
+  "summary": "Fluids exert pressure that increases with depth ($P=P_0+\\rho gh$). Buoyancy (Archimedes) lifts submerged objects by the weight of displaced fluid. Flowing fluids obey continuity ($Av$ constant) and Bernoulli's equation relating pressure, speed, and height.",
+  "glossary": {
+    "pressure": {
+      "plain": "Force per unit area in a fluid.",
+      "in_class": "$P=F/A$, in pascals; acts in all directions."
+    },
+    "density": {
+      "plain": "Mass per unit volume.",
+      "in_class": "$\\rho=m/V$."
+    },
+    "pressure with depth": {
+      "plain": "Pressure rises with depth in a fluid.",
+      "in_class": "$P=P_0+\\rho gh$."
+    },
+    "buoyant force": {
+      "plain": "Upward force on a submerged object.",
+      "in_class": "Equals the weight of displaced fluid (Archimedes)."
+    },
+    "Archimedes' principle": {
+      "plain": "Buoyancy equals displaced fluid weight.",
+      "in_class": "$F_b=\\rho_{fluid}Vg$."
+    },
+    "continuity equation": {
+      "plain": "Flow rate is constant along a pipe.",
+      "in_class": "$A_1v_1=A_2v_2$."
+    },
+    "Bernoulli's equation": {
+      "plain": "Energy conservation for flowing fluids.",
+      "in_class": "$P+\\tfrac12\\rho v^2+\\rho gh=\\text{constant}$."
+    },
+    "Pascal's principle": {
+      "plain": "Pressure applied to a fluid transmits undiminished.",
+      "in_class": "Basis of hydraulic lifts."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Pressure and depth",
+      "explanation": "Pressure in a static fluid increases with depth: $P=P_0+\\rho gh$. It acts equally in all directions at a point.",
+      "math_steps": [
+        "Start from surface pressure $P_0$.",
+        "Add $\\rho gh$ for depth $h$.",
+        "Pressure is the same at equal depths."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-c1.svg",
+        "caption": "Pressure and depth"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Buoyancy",
+      "explanation": "A submerged object feels an upward buoyant force equal to the weight of the fluid it displaces: $F_b=\\rho_{fluid}Vg$. It floats if $F_b\\ge$ weight.",
+      "math_steps": [
+        "Find the displaced volume $V$.",
+        "$F_b=\\rho_{fluid}Vg$.",
+        "Compare to the object's weight."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-c2.svg",
+        "caption": "Buoyancy"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Pascal's principle and hydraulics",
+      "explanation": "Pressure applied to an enclosed fluid transmits equally everywhere, so a small force on a small piston lifts a large load on a big piston: $F_1/A_1=F_2/A_2$.",
+      "math_steps": [
+        "Equal pressure on both pistons.",
+        "$F_1/A_1=F_2/A_2$.",
+        "Larger area ⇒ larger force."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-c3.svg",
+        "caption": "Pascal's principle and hydraulics"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Continuity",
+      "explanation": "For incompressible flow, what enters must exit: $A_1v_1=A_2v_2$. A narrower pipe means faster flow.",
+      "math_steps": [
+        "Flow rate $Av$ is constant.",
+        "Smaller area ⇒ higher speed.",
+        "Solve $A_1v_1=A_2v_2$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-c4.svg",
+        "caption": "Continuity"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Bernoulli's equation",
+      "explanation": "Along a streamline, $P+\\tfrac12\\rho v^2+\\rho gh$ is constant — faster flow means lower pressure. It explains lift and flow through pipes.",
+      "math_steps": [
+        "Write Bernoulli at two points.",
+        "Higher speed ⇒ lower pressure.",
+        "Solve for the unknown $P$, $v$, or $h$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-c5.svg",
+        "caption": "Bernoulli's equation"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Why ships float",
+      "scenario": "A steel ship floats though steel sinks.",
+      "how_the_math_applies": "Its shape displaces enough water that buoyancy equals the ship's weight.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-e1.svg",
+        "caption": "Why ships float"
+      }
+    },
+    {
+      "title": "A hydraulic car lift",
+      "scenario": "A small pump raises a heavy car.",
+      "how_the_math_applies": "Pascal's principle multiplies force by the piston-area ratio.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-e2.svg",
+        "caption": "A hydraulic car lift"
+      }
+    },
+    {
+      "title": "Airplane lift / a shower curtain",
+      "scenario": "Fast air lowers pressure.",
+      "how_the_math_applies": "Bernoulli's equation links higher speed to lower pressure, creating lift or suction.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-11-fluids-e3.svg",
+        "caption": "Airplane lift / a shower curtain"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "fluid pressure depth buoyancy archimedes principle",
+    "math_query": "continuity bernoulli equation flow examples",
+    "combined_query": "physics 1 fluids worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the pressure $10$ m deep in water ($\\rho=1000$, ignore atmosphere).",
+      "correct_answer": "$\\approx9.8\\times10^{4}$ Pa",
+      "solution_steps": [
+        "$P=\\rho gh$.",
+        "$=1000(9.8)(10)$.",
+        "$9.8\\times10^4$ Pa."
+      ],
+      "hint": "$P=\\rho gh$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the density of a $6$ kg object of volume $0.002$ m³.",
+      "correct_answer": "$3000$ kg/m³",
+      "solution_steps": [
+        "$\\rho=m/V$.",
+        "$=6/0.002$.",
+        "$3000$ kg/m³."
+      ],
+      "hint": "$\\rho=m/V$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "An object displaces $0.01$ m³ of water. Find the buoyant force.",
+      "correct_answer": "$\\approx98$ N",
+      "solution_steps": [
+        "$F_b=\\rho Vg$.",
+        "$=1000(0.01)(9.8)$.",
+        "$98$ N."
+      ],
+      "hint": "$F_b=\\rho_{fluid}Vg$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Water flows at $2$ m/s in a pipe of area $0.1$ m². Find the speed where the area is $0.05$ m².",
+      "correct_answer": "$4$ m/s",
+      "solution_steps": [
+        "$A_1v_1=A_2v_2$.",
+        "$0.1(2)=0.05v$.",
+        "$v=4$ m/s."
+      ],
+      "hint": "Continuity: $Av$ constant."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A hydraulic lift: $F_1=100$ N on $A_1=0.01$ m². Find the lift force on $A_2=0.5$ m².",
+      "correct_answer": "$5000$ N",
+      "solution_steps": [
+        "$F_2=F_1 A_2/A_1$.",
+        "$=100(0.5/0.01)$.",
+        "$5000$ N."
+      ],
+      "hint": "$F_1/A_1=F_2/A_2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Find the total pressure $5$ m deep in water (add atmosphere $1.0\\times10^5$ Pa).",
+      "correct_answer": "$\\approx1.49\\times10^{5}$ Pa",
+      "solution_steps": [
+        "$P=P_0+\\rho gh=10^5+1000(9.8)(5)$.",
+        "$=10^5+4.9\\times10^4$.",
+        "$\\approx1.49\\times10^5$ Pa."
+      ],
+      "hint": "Add atmospheric pressure."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A block of density $600$ kg/m³ floats in water. What fraction is submerged?",
+      "correct_answer": "$0.6$",
+      "solution_steps": [
+        "Fraction $=\\rho_{obj}/\\rho_{water}$.",
+        "$=600/1000$.",
+        "$0.6$."
+      ],
+      "hint": "Float fraction is the density ratio."
+    }
+  ]
+}

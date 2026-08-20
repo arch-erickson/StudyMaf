@@ -1,0 +1,238 @@
+{
+  "title": "Vectors & Motion in Two Dimensions",
+  "summary": "Vectors have magnitude and direction; they add by components. In two dimensions, motion separates into independent $x$ and $y$ parts — the key to projectile motion, where horizontal velocity is constant and vertical motion is free fall.",
+  "glossary": {
+    "vector": {
+      "plain": "A quantity with magnitude and direction.",
+      "in_class": "Add by components, not by simple sums."
+    },
+    "components": {
+      "plain": "A vector's projections onto the axes.",
+      "in_class": "$A_x=A\\cos\\theta$, $A_y=A\\sin\\theta$."
+    },
+    "resultant": {
+      "plain": "The vector sum of several vectors.",
+      "in_class": "Add components, then recombine."
+    },
+    "magnitude": {
+      "plain": "A vector's length.",
+      "in_class": "$|\\vec A|=\\sqrt{A_x^2+A_y^2}$."
+    },
+    "projectile motion": {
+      "plain": "Motion under gravity in 2D.",
+      "in_class": "Constant horizontal velocity; vertical free fall."
+    },
+    "range": {
+      "plain": "Horizontal distance a projectile travels.",
+      "in_class": "Maximized at a $45^\\circ$ launch (level ground)."
+    },
+    "independence of motion": {
+      "plain": "$x$ and $y$ motions don't affect each other.",
+      "in_class": "Solve them separately, linked only by time."
+    },
+    "trajectory": {
+      "plain": "The path of a projectile.",
+      "in_class": "A parabola for constant gravity."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Vector components",
+      "explanation": "Break a vector into $A_x=A\\cos\\theta$ and $A_y=A\\sin\\theta$. Components add like ordinary numbers, which makes vector addition manageable.",
+      "math_steps": [
+        "Resolve each vector into $x$ and $y$.",
+        "Add the $x$'s and the $y$'s separately.",
+        "Recombine: magnitude $\\sqrt{R_x^2+R_y^2}$, angle $\\tan^{-1}(R_y/R_x)$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-c1.svg",
+        "caption": "Vector components"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Adding vectors",
+      "explanation": "The resultant is found by summing components, then converting back to magnitude and direction. Graphically it's the tip-to-tail sum.",
+      "math_steps": [
+        "Sum $x$-components → $R_x$.",
+        "Sum $y$-components → $R_y$.",
+        "Magnitude $\\sqrt{R_x^2+R_y^2}$, direction from $\\arctan$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-c2.svg",
+        "caption": "Adding vectors"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Independence of 2D motion",
+      "explanation": "Horizontal and vertical motions are independent, connected only through the shared time. Analyze each with 1D kinematics.",
+      "math_steps": [
+        "Split into $x$ and $y$ problems.",
+        "Apply kinematics to each.",
+        "Use the common time to link them."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-c3.svg",
+        "caption": "Independence of 2D motion"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Projectile motion",
+      "explanation": "With gravity only, horizontal velocity stays constant and vertical motion is free fall. The path is a parabola.",
+      "math_steps": [
+        "$x$: constant velocity, $x=v_{0x}t$.",
+        "$y$: free fall, $y=v_{0y}t-\\tfrac12gt^2$.",
+        "Combine for time of flight, range, height."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-c4.svg",
+        "caption": "Projectile motion"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Range and maximum height",
+      "explanation": "Time of flight comes from the vertical motion; range is horizontal velocity times that time; max height occurs when $v_y=0$.",
+      "math_steps": [
+        "Find flight time from $y$-motion.",
+        "Range $=v_{0x}\\times$ flight time.",
+        "Max height when $v_y=0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-c5.svg",
+        "caption": "Range and maximum height"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A kicked football",
+      "scenario": "A ball launched at an angle.",
+      "how_the_math_applies": "Its range and hang time come from splitting the launch velocity into components.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-e1.svg",
+        "caption": "A kicked football"
+      }
+    },
+    {
+      "title": "A boat crossing a river",
+      "scenario": "A boat aims across a current.",
+      "how_the_math_applies": "The boat's velocity and the current add as vectors to give the real path.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-e2.svg",
+        "caption": "A boat crossing a river"
+      }
+    },
+    {
+      "title": "Water from a hose",
+      "scenario": "A stream arcs to the ground.",
+      "how_the_math_applies": "The parabolic trajectory follows from independent horizontal and vertical motion.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-03-vectors-2d-e3.svg",
+        "caption": "Water from a hose"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "vectors components addition physics",
+    "math_query": "projectile motion range height components examples",
+    "combined_query": "physics 1 two dimensional motion vectors worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A vector has magnitude $10$ at $30^\\circ$. Find its $x$-component.",
+      "correct_answer": "$\\approx8.66$",
+      "solution_steps": [
+        "$A_x=A\\cos\\theta$.",
+        "$=10\\cos30^\\circ$.",
+        "$\\approx8.66$."
+      ],
+      "hint": "$A_x=A\\cos\\theta$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the magnitude of a vector with components $(3,4)$.",
+      "correct_answer": "$5$",
+      "solution_steps": [
+        "$\\sqrt{3^2+4^2}$.",
+        "$=\\sqrt{25}$.",
+        "$5$."
+      ],
+      "hint": "Pythagoras."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A ball is launched horizontally at $10$ m/s from $20$ m high. How long to land?",
+      "correct_answer": "$\\approx2.02$ s",
+      "solution_steps": [
+        "$y$: $20=\\tfrac12(9.8)t^2$.",
+        "$t=\\sqrt{40/9.8}$.",
+        "$\\approx2.02$ s."
+      ],
+      "hint": "Vertical motion sets the time."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "In the previous problem, how far horizontally does it land?",
+      "correct_answer": "$\\approx20.2$ m",
+      "solution_steps": [
+        "$x=v_{0x}t=10(2.02)$.",
+        "$\\approx20.2$ m.",
+        "Done."
+      ],
+      "hint": "Range $=v_x\\times t$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A projectile is launched at $20$ m/s, $30^\\circ$. Find $v_{0y}$.",
+      "correct_answer": "$10$ m/s",
+      "solution_steps": [
+        "$v_{0y}=20\\sin30^\\circ$.",
+        "$=20(0.5)$.",
+        "$10$ m/s."
+      ],
+      "hint": "$v_{0y}=v_0\\sin\\theta$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "For that launch ($20$ m/s, $30^\\circ$), find the time of flight on level ground.",
+      "correct_answer": "$\\approx2.04$ s",
+      "solution_steps": [
+        "$t=2v_{0y}/g=2(10)/9.8$.",
+        "$\\approx2.04$ s.",
+        "Done."
+      ],
+      "hint": "Flight time $=2v_{0y}/g$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the range for that launch.",
+      "correct_answer": "$\\approx35.3$ m",
+      "solution_steps": [
+        "$R=v_{0x}t=20\\cos30^\\circ\\times2.04$.",
+        "$\\approx17.3\\times2.04$.",
+        "$\\approx35.3$ m."
+      ],
+      "hint": "Range $=v_x\\times$ flight time."
+    }
+  ]
+}

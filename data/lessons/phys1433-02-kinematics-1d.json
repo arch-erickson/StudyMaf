@@ -1,0 +1,238 @@
+{
+  "title": "Motion Along a Straight Line",
+  "summary": "One-dimensional motion is described by displacement, velocity, and acceleration. The kinematic equations $v=v_0+at$, $x=x_0+v_0t+\\tfrac12at^2$, and $v^2=v_0^2+2a\\Delta x$ solve constant-acceleration problems, including free fall.",
+  "glossary": {
+    "displacement": {
+      "plain": "Change in position (with direction).",
+      "in_class": "$\\Delta x=x_f-x_i$."
+    },
+    "velocity": {
+      "plain": "Displacement per unit time.",
+      "in_class": "$v=\\Delta x/\\Delta t$; a vector."
+    },
+    "acceleration": {
+      "plain": "Change in velocity per unit time.",
+      "in_class": "$a=\\Delta v/\\Delta t$."
+    },
+    "kinematic equations": {
+      "plain": "Constant-acceleration formulas.",
+      "in_class": "$v=v_0+at$; $x=x_0+v_0t+\\tfrac12at^2$; $v^2=v_0^2+2a\\Delta x$."
+    },
+    "free fall": {
+      "plain": "Motion under gravity alone.",
+      "in_class": "$a=g\\approx9.8\\ \\text{m/s}^2$ downward."
+    },
+    "speed": {
+      "plain": "Magnitude of velocity.",
+      "in_class": "Ignores direction."
+    },
+    "deceleration": {
+      "plain": "Slowing down (acceleration opposite to motion).",
+      "in_class": "Negative acceleration relative to velocity."
+    },
+    "graphs of motion": {
+      "plain": "Position/velocity vs time plots.",
+      "in_class": "Slopes give rates; areas give distances."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Position, velocity, acceleration",
+      "explanation": "Velocity is how fast position changes; acceleration is how fast velocity changes. Signs indicate direction along the line.",
+      "math_steps": [
+        "Track position along the line.",
+        "Velocity $=\\Delta x/\\Delta t$.",
+        "Acceleration $=\\Delta v/\\Delta t$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-c1.svg",
+        "caption": "Position, velocity, acceleration"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The kinematic equations",
+      "explanation": "For constant acceleration, three equations connect $x,v,a,t$. Choose the one that omits the quantity you neither know nor want.",
+      "math_steps": [
+        "List knowns and the unknown.",
+        "Pick the equation missing the unwanted variable.",
+        "Solve."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-c2.svg",
+        "caption": "The kinematic equations"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Free fall",
+      "explanation": "Ignoring air resistance, all objects fall with $a=g\\approx9.8\\ \\text{m/s}^2$. Apply the kinematic equations with that acceleration.",
+      "math_steps": [
+        "Set $a=g$ (downward positive or negative by choice).",
+        "Apply the kinematic equations.",
+        "Velocity is zero at the top of a rise."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-c3.svg",
+        "caption": "Free fall"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Graphs of motion",
+      "explanation": "The slope of a position–time graph is velocity; the slope of a velocity–time graph is acceleration; the area under a velocity–time graph is displacement.",
+      "math_steps": [
+        "Slope of $x$-$t$ = velocity.",
+        "Slope of $v$-$t$ = acceleration.",
+        "Area under $v$-$t$ = displacement."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-c4.svg",
+        "caption": "Graphs of motion"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Average vs instantaneous",
+      "explanation": "Average velocity uses total displacement over total time; instantaneous velocity is the value at a single instant. They match only for constant velocity.",
+      "math_steps": [
+        "Average $=\\Delta x/\\Delta t$ over the trip.",
+        "Instantaneous is at one moment.",
+        "Equal only when velocity is constant."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-c5.svg",
+        "caption": "Average vs instantaneous"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Reaction and braking distance",
+      "scenario": "A driver reacts, then brakes.",
+      "how_the_math_applies": "Kinematics finds reaction distance (constant speed) plus braking distance ($v^2=v_0^2+2a\\Delta x$).",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-e1.svg",
+        "caption": "Reaction and braking distance"
+      }
+    },
+    {
+      "title": "Dropping keys from a window",
+      "scenario": "Keys fall to a friend below.",
+      "how_the_math_applies": "Free-fall equations give the fall time and catch speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-e2.svg",
+        "caption": "Dropping keys from a window"
+      }
+    },
+    {
+      "title": "A drag race",
+      "scenario": "A car accelerates down a strip.",
+      "how_the_math_applies": "$x=\\tfrac12at^2$ relates the run to the acceleration and time.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-02-kinematics-1d-e3.svg",
+        "caption": "A drag race"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "one dimensional motion kinematic equations algebra",
+    "math_query": "kinematics constant acceleration free fall examples",
+    "combined_query": "physics 1 straight line motion worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A car speeds from $10$ to $30$ m/s in $5$ s. Find the acceleration.",
+      "correct_answer": "$4$ m/s²",
+      "solution_steps": [
+        "$a=\\Delta v/\\Delta t$.",
+        "$=(30-10)/5$.",
+        "$4$ m/s²."
+      ],
+      "hint": "$a=\\Delta v/\\Delta t$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A rock falls from rest for $3$ s. Find its speed.",
+      "correct_answer": "$\\approx29.4$ m/s",
+      "solution_steps": [
+        "$v=gt$.",
+        "$=9.8(3)$.",
+        "$29.4$ m/s."
+      ],
+      "hint": "$v=gt$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A car at $25$ m/s decelerates at $5$ m/s². How far to stop?",
+      "correct_answer": "$62.5$ m",
+      "solution_steps": [
+        "$0=v_0^2+2a\\Delta x$: $0=625-10\\Delta x$.",
+        "$\\Delta x=62.5$.",
+        "m."
+      ],
+      "hint": "$v^2=v_0^2+2a\\Delta x$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A ball is thrown up at $12$ m/s. Find the max height.",
+      "correct_answer": "$\\approx7.35$ m",
+      "solution_steps": [
+        "$0=v_0^2-2gh$.",
+        "$h=144/19.6$.",
+        "$7.35$ m."
+      ],
+      "hint": "$v=0$ at the top."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "From rest at $3$ m/s², how far in $4$ s?",
+      "correct_answer": "$24$ m",
+      "solution_steps": [
+        "$x=\\tfrac12 at^2$.",
+        "$=\\tfrac12(3)(16)$.",
+        "$24$ m."
+      ],
+      "hint": "$x=\\tfrac12 at^2$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A car travels $100$ m while speeding from $10$ to $30$ m/s. Find its acceleration.",
+      "correct_answer": "$4$ m/s²",
+      "solution_steps": [
+        "$v^2=v_0^2+2a\\Delta x$: $900=100+200a$.",
+        "$a=800/200$.",
+        "$4$ m/s²."
+      ],
+      "hint": "Solve $v^2=v_0^2+2a\\Delta x$ for $a$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A ball thrown up at $20$ m/s — total time in the air (returns to start)?",
+      "correct_answer": "$\\approx4.08$ s",
+      "solution_steps": [
+        "Up time $=20/9.8=2.04$ s.",
+        "Double it.",
+        "$4.08$ s."
+      ],
+      "hint": "Symmetric up and down."
+    }
+  ]
+}

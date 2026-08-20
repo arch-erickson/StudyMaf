@@ -1,0 +1,238 @@
+{
+  "title": "Waves & Sound",
+  "summary": "Waves carry energy without transporting matter. The wave relation $v=f\\lambda$ links speed, frequency, and wavelength. Sound is a longitudinal wave; standing waves on strings and in pipes set musical pitches, and the Doppler effect shifts observed frequency with motion.",
+  "glossary": {
+    "wave": {
+      "plain": "A disturbance carrying energy through a medium.",
+      "in_class": "Transverse or longitudinal."
+    },
+    "wavelength": {
+      "plain": "Distance between successive crests.",
+      "in_class": "$\\lambda$."
+    },
+    "frequency": {
+      "plain": "Cycles per second.",
+      "in_class": "$f$, in hertz; $f=1/T$."
+    },
+    "wave speed": {
+      "plain": "How fast the wave travels.",
+      "in_class": "$v=f\\lambda$."
+    },
+    "amplitude": {
+      "plain": "Maximum displacement.",
+      "in_class": "Sets loudness/brightness."
+    },
+    "longitudinal wave": {
+      "plain": "Vibration along the travel direction.",
+      "in_class": "Sound is longitudinal."
+    },
+    "standing wave": {
+      "plain": "A fixed pattern from interference.",
+      "in_class": "Nodes and antinodes; sets pitches."
+    },
+    "Doppler effect": {
+      "plain": "Frequency shift from relative motion.",
+      "in_class": "Higher approaching, lower receding."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Wave basics",
+      "explanation": "A wave transfers energy without moving the medium along with it. Key quantities: wavelength $\\lambda$, frequency $f$, and amplitude.",
+      "math_steps": [
+        "Identify wavelength and frequency.",
+        "Amplitude sets the energy.",
+        "The medium oscillates in place."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-c1.svg",
+        "caption": "Wave basics"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "The wave equation",
+      "explanation": "Speed, frequency, and wavelength are tied together by $v=f\\lambda$. Solve for any one given the others.",
+      "math_steps": [
+        "Write $v=f\\lambda$.",
+        "Rearrange for the unknown.",
+        "Wave speed is set by the medium."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-c2.svg",
+        "caption": "The wave equation"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Sound as a longitudinal wave",
+      "explanation": "Sound is a pressure wave whose vibrations run along the travel direction. Its speed depends on the medium (fastest in solids).",
+      "math_steps": [
+        "Sound vibrates along its path.",
+        "Speed depends on the medium.",
+        "$\\approx343$ m/s in air."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-c3.svg",
+        "caption": "Sound as a longitudinal wave"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Standing waves and pitch",
+      "explanation": "Reflections create standing waves with fixed nodes; strings and pipes support specific wavelengths (harmonics) that set musical pitches.",
+      "math_steps": [
+        "Fixed ends force nodes there.",
+        "Allowed wavelengths give harmonics.",
+        "$f_n=n f_1$ for a string."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-c4.svg",
+        "caption": "Standing waves and pitch"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "The Doppler effect",
+      "explanation": "When a source and observer move relative to each other, the observed frequency rises on approach and falls on recession.",
+      "math_steps": [
+        "Approaching ⇒ higher frequency.",
+        "Receding ⇒ lower frequency.",
+        "The shift grows with relative speed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-c5.svg",
+        "caption": "The Doppler effect"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Tuning a guitar",
+      "scenario": "Adjusting string tension changes pitch.",
+      "how_the_math_applies": "The standing-wave frequency $v=f\\lambda$ shifts with wave speed on the string.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-e1.svg",
+        "caption": "Tuning a guitar"
+      }
+    },
+    {
+      "title": "An ambulance siren",
+      "scenario": "The pitch drops as it passes.",
+      "how_the_math_applies": "The Doppler effect raises then lowers the observed frequency.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-e2.svg",
+        "caption": "An ambulance siren"
+      }
+    },
+    {
+      "title": "Echoes in a canyon",
+      "scenario": "A shout returns after a delay.",
+      "how_the_math_applies": "Sound's finite speed and $v=f\\lambda$ set the echo timing.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-14-waves-sound-e3.svg",
+        "caption": "Echoes in a canyon"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "waves wavelength frequency wave speed v=flambda",
+    "math_query": "sound standing waves doppler effect examples",
+    "combined_query": "physics 1 waves sound worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A wave has $f=2$ Hz and $\\lambda=3$ m. Find its speed.",
+      "correct_answer": "$6$ m/s",
+      "solution_steps": [
+        "$v=f\\lambda$.",
+        "$=2(3)$.",
+        "$6$ m/s."
+      ],
+      "hint": "$v=f\\lambda$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A wave has period $0.25$ s. Find its frequency.",
+      "correct_answer": "$4$ Hz",
+      "solution_steps": [
+        "$f=1/T$.",
+        "$=1/0.25$.",
+        "$4$ Hz."
+      ],
+      "hint": "$f=1/T$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Sound ($v=343$ m/s) has $f=686$ Hz. Find the wavelength.",
+      "correct_answer": "$0.5$ m",
+      "solution_steps": [
+        "$\\lambda=v/f$.",
+        "$=343/686$.",
+        "$0.5$ m."
+      ],
+      "hint": "$\\lambda=v/f$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $2$ m string's fundamental has $\\lambda=4$ m. If $v=200$ m/s, find $f_1$.",
+      "correct_answer": "$50$ Hz",
+      "solution_steps": [
+        "$f=v/\\lambda$.",
+        "$=200/4$.",
+        "$50$ Hz."
+      ],
+      "hint": "Fundamental $\\lambda=2L$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Is sound a transverse or longitudinal wave?",
+      "correct_answer": "Longitudinal",
+      "solution_steps": [
+        "Vibration is along travel.",
+        "Pressure wave.",
+        "Longitudinal."
+      ],
+      "hint": "Compressions and rarefactions."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A string's fundamental is $100$ Hz. Find the third harmonic.",
+      "correct_answer": "$300$ Hz",
+      "solution_steps": [
+        "$f_n=n f_1$.",
+        "$3(100)$.",
+        "$300$ Hz."
+      ],
+      "hint": "Harmonics are multiples."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Light travels at $3\\times10^8$ m/s. A radio wave has $f=100$ MHz. Find $\\lambda$.",
+      "correct_answer": "$3$ m",
+      "solution_steps": [
+        "$\\lambda=c/f$.",
+        "$=3\\times10^8/10^8$.",
+        "$3$ m."
+      ],
+      "hint": "$\\lambda=v/f$ with $v=c$."
+    }
+  ]
+}

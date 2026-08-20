@@ -1,0 +1,238 @@
+{
+  "title": "Discontinuities & Asymptotes",
+  "summary": "Rational and related functions have discontinuities: removable holes (canceling factors) and infinite discontinuities (vertical asymptotes). End behavior gives horizontal or slant asymptotes. Understanding these previews limits in calculus.",
+  "glossary": {
+    "discontinuity": {
+      "plain": "A break in the graph.",
+      "in_class": "Removable (hole) or infinite (asymptote)."
+    },
+    "removable discontinuity": {
+      "plain": "A hole that could be 'plugged'.",
+      "in_class": "From a cancelling factor."
+    },
+    "infinite discontinuity": {
+      "plain": "The function blows up.",
+      "in_class": "A vertical asymptote."
+    },
+    "vertical asymptote": {
+      "plain": "A line the graph races along to $\\pm\\infty$.",
+      "in_class": "Non-cancelling denominator zero."
+    },
+    "horizontal asymptote": {
+      "plain": "A far-out level the graph nears.",
+      "in_class": "From degree comparison."
+    },
+    "slant asymptote": {
+      "plain": "A diagonal end-behavior line.",
+      "in_class": "Top degree one more than bottom."
+    },
+    "end behavior": {
+      "plain": "Behavior as $x\\to\\pm\\infty$.",
+      "in_class": "Set by leading terms."
+    },
+    "limit (informal)": {
+      "plain": "The value a function approaches.",
+      "in_class": "Formalized in calculus."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Removable vs infinite",
+      "explanation": "A factor that cancels top and bottom leaves a hole (removable); a denominator zero that doesn't cancel gives a vertical asymptote (infinite).",
+      "math_steps": [
+        "Factor numerator and denominator.",
+        "Cancelling factor ⇒ hole.",
+        "Remaining denominator zero ⇒ asymptote."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-c1.svg",
+        "caption": "Removable vs infinite"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Vertical asymptotes",
+      "explanation": "Near a vertical asymptote the function shoots to $+\\infty$ or $-\\infty$. Check the sign on each side to draw the branches.",
+      "math_steps": [
+        "Find non-cancelling denominator zeros.",
+        "Test the sign on each side.",
+        "Draw branches to $\\pm\\infty$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-c2.svg",
+        "caption": "Vertical asymptotes"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Horizontal asymptotes",
+      "explanation": "For large $|x|$, a rational function levels off according to the degree comparison — the horizontal asymptote (or none).",
+      "math_steps": [
+        "Compare degrees.",
+        "Apply the rule ($0$, coefficient ratio, or none).",
+        "Draw the horizontal guide."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-c3.svg",
+        "caption": "Horizontal asymptotes"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Slant asymptotes",
+      "explanation": "If the top's degree exceeds the bottom's by one, dividing gives a line the graph approaches diagonally.",
+      "math_steps": [
+        "Check degree difference is 1.",
+        "Divide to get the linear quotient.",
+        "That line is the slant asymptote."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-c4.svg",
+        "caption": "Slant asymptotes"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "A preview of limits",
+      "explanation": "These behaviors describe what a function approaches near a point or at infinity — exactly the idea of a limit, which calculus makes precise.",
+      "math_steps": [
+        "Describe behavior near holes and asymptotes.",
+        "Describe end behavior.",
+        "This is limit thinking."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-c5.svg",
+        "caption": "A preview of limits"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Signal clipping",
+      "scenario": "Output saturates at a ceiling.",
+      "how_the_math_applies": "A horizontal asymptote models the maximum the signal approaches.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-e1.svg",
+        "caption": "Signal clipping"
+      }
+    },
+    {
+      "title": "Population carrying capacity",
+      "scenario": "Growth levels off at a limit.",
+      "how_the_math_applies": "The horizontal asymptote is the environment's carrying capacity.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-e2.svg",
+        "caption": "Population carrying capacity"
+      }
+    },
+    {
+      "title": "A resonance blow-up",
+      "scenario": "Response spikes near a critical frequency.",
+      "how_the_math_applies": "A vertical asymptote models the runaway response.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-11-asymptotes-e3.svg",
+        "caption": "A resonance blow-up"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "removable infinite discontinuity asymptotes rational",
+    "math_query": "vertical horizontal slant asymptote end behavior examples",
+    "combined_query": "precalculus asymptotes discontinuities worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "What kind of discontinuity does $\\dfrac{x-2}{x-2}$ have at $x=2$?",
+      "correct_answer": "Removable (hole)",
+      "solution_steps": [
+        "Factor cancels.",
+        "Leaves a hole.",
+        "Removable."
+      ],
+      "hint": "Cancelling ⇒ hole."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Vertical asymptote of $\\dfrac{1}{x+3}$?",
+      "correct_answer": "$x=-3$",
+      "solution_steps": [
+        "Denominator zero at $-3$.",
+        "Doesn't cancel.",
+        "$x=-3$."
+      ],
+      "hint": "Non-cancelling denominator zero."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Horizontal asymptote of $\\dfrac{5x^2}{x^2-1}$?",
+      "correct_answer": "$y=5$",
+      "solution_steps": [
+        "Equal degrees.",
+        "Ratio $5/1$.",
+        "$y=5$."
+      ],
+      "hint": "Compare leading coefficients."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "As $x\\to\\infty$, what does $\\dfrac{2x+1}{x}$ approach?",
+      "correct_answer": "$2$",
+      "solution_steps": [
+        "Divide: $2+1/x$.",
+        "$\\to2$.",
+        "$y=2$."
+      ],
+      "hint": "End behavior."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Does $\\dfrac{(x-1)(x+2)}{(x-1)}$ have an asymptote or a hole at $x=1$?",
+      "correct_answer": "Hole",
+      "solution_steps": [
+        "$(x-1)$ cancels.",
+        "Hole at $x=1$.",
+        "Not an asymptote."
+      ],
+      "hint": "Cancelling factor ⇒ hole."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Slant asymptote of $\\dfrac{x^2-1}{x}$?",
+      "correct_answer": "$y=x$",
+      "solution_steps": [
+        "Divide: $x-1/x$.",
+        "As $x\\to\\infty$, $\\to x$.",
+        "$y=x$."
+      ],
+      "hint": "Top degree one more ⇒ divide."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Near $x=0^+$, does $\\dfrac1x\\to+\\infty$ or $-\\infty$?",
+      "correct_answer": "$+\\infty$",
+      "solution_steps": [
+        "Small positive $x$ ⇒ large positive $1/x$.",
+        "$\\to+\\infty$.",
+        "Done."
+      ],
+      "hint": "Test the sign just right of 0."
+    }
+  ]
+}

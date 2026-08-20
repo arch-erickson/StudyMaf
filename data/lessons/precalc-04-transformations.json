@@ -1,0 +1,238 @@
+{
+  "title": "Transformations of Functions",
+  "summary": "Starting from toolkit functions, shifts, reflections, and stretches build new graphs. $f(x)+k$ shifts up, $f(x-h)$ shifts right, $-f(x)$ reflects over the x-axis, and $af(x)$ stretches vertically — a fast way to graph without plotting many points.",
+  "glossary": {
+    "toolkit functions": {
+      "plain": "Basic parent graphs.",
+      "in_class": "$x$, $x^2$, $x^3$, $\\sqrt{x}$, $|x|$, $1/x$."
+    },
+    "vertical shift": {
+      "plain": "Moving a graph up or down.",
+      "in_class": "$f(x)+k$: up for $k>0$."
+    },
+    "horizontal shift": {
+      "plain": "Moving left or right.",
+      "in_class": "$f(x-h)$: right for $h>0$ (opposite of the sign)."
+    },
+    "reflection": {
+      "plain": "Flipping over an axis.",
+      "in_class": "$-f(x)$ over x-axis; $f(-x)$ over y-axis."
+    },
+    "vertical stretch": {
+      "plain": "Scaling heights by a factor.",
+      "in_class": "$af(x)$: stretch if $a>1$, compress if $0<a<1$."
+    },
+    "horizontal stretch": {
+      "plain": "Scaling widths.",
+      "in_class": "$f(bx)$: compress if $b>1$."
+    },
+    "order of transformations": {
+      "plain": "Apply inside-then-outside carefully.",
+      "in_class": "Horizontal first, then vertical, watching signs."
+    },
+    "parent function": {
+      "plain": "The base graph before transforming.",
+      "in_class": "Transformations modify it."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Toolkit functions",
+      "explanation": "Memorize the shapes of the parent functions ($x$, $x^2$, $x^3$, $\\sqrt{x}$, $|x|$, $1/x$). Transformations reshape these familiar graphs.",
+      "math_steps": [
+        "Know each parent's shape.",
+        "Identify which parent a formula comes from.",
+        "Transform from there."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-c1.svg",
+        "caption": "Toolkit functions"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Vertical shifts and stretches",
+      "explanation": "$f(x)+k$ moves the graph up ($k>0$) or down; $af(x)$ stretches it vertically (|a|>1) or compresses it, and reflects over the x-axis if $a<0$.",
+      "math_steps": [
+        "Add $k$ to shift up/down.",
+        "Multiply by $a$ to stretch/compress.",
+        "Negative $a$ flips vertically."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-c2.svg",
+        "caption": "Vertical shifts and stretches"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Horizontal shifts and stretches",
+      "explanation": "$f(x-h)$ shifts right by $h$ (note the opposite sign); $f(bx)$ compresses horizontally by $b$, and $f(-x)$ reflects over the y-axis.",
+      "math_steps": [
+        "$x-h$ shifts right by $h$.",
+        "$bx$ compresses by factor $b$.",
+        "$-x$ reflects over the y-axis."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-c3.svg",
+        "caption": "Horizontal shifts and stretches"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Reflections",
+      "explanation": "A minus outside the function ($-f$) flips it over the x-axis; a minus inside ($f(-x)$) flips it over the y-axis.",
+      "math_steps": [
+        "Outside minus ⇒ x-axis flip.",
+        "Inside minus ⇒ y-axis flip.",
+        "Combine with shifts as needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-c4.svg",
+        "caption": "Reflections"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Combining transformations",
+      "explanation": "Apply them in order: horizontal changes (inside the function) first, then vertical (outside). Track the vertex or a key point through each step.",
+      "math_steps": [
+        "Handle inside (horizontal) changes first.",
+        "Then outside (vertical) changes.",
+        "Follow a reference point through."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-c5.svg",
+        "caption": "Combining transformations"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Adjusting a thermostat schedule",
+      "scenario": "Shift every temperature setpoint up 2°.",
+      "how_the_math_applies": "Adding a constant is a vertical shift of the schedule function.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-e1.svg",
+        "caption": "Adjusting a thermostat schedule"
+      }
+    },
+    {
+      "title": "Rescaling a graph for a report",
+      "scenario": "Double the height of a trend for emphasis.",
+      "how_the_math_applies": "A vertical stretch $af(x)$ scales the values.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-e2.svg",
+        "caption": "Rescaling a graph for a report"
+      }
+    },
+    {
+      "title": "Mirror-image design",
+      "scenario": "A logo reflects across a line.",
+      "how_the_math_applies": "Reflection $f(-x)$ or $-f(x)$ produces the mirrored graph.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-04-transformations-e3.svg",
+        "caption": "Mirror-image design"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "function transformations shifts reflections stretches",
+    "math_query": "graph transformations vertical horizontal examples",
+    "combined_query": "precalculus transformations of functions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "How does $f(x)+3$ transform the graph of $f$?",
+      "correct_answer": "Shifts up 3",
+      "solution_steps": [
+        "Adding outside.",
+        "Moves up.",
+        "By 3."
+      ],
+      "hint": "Outside +k shifts vertically."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "How does $f(x-2)$ transform the graph?",
+      "correct_answer": "Shifts right 2",
+      "solution_steps": [
+        "Inside $x-2$.",
+        "Opposite sign ⇒ right.",
+        "By 2."
+      ],
+      "hint": "Inside shift is opposite."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Describe $-f(x)$.",
+      "correct_answer": "Reflection over the x-axis",
+      "solution_steps": [
+        "Minus outside.",
+        "Flips vertically.",
+        "Over the x-axis."
+      ],
+      "hint": "Outside minus flips over x-axis."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "Describe $2f(x)$.",
+      "correct_answer": "Vertical stretch by 2",
+      "solution_steps": [
+        "Multiply outputs by 2.",
+        "Taller graph.",
+        "Stretch factor 2."
+      ],
+      "hint": "Outside factor stretches vertically."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "The vertex of $y=x^2$ is $(0,0)$. Find it for $y=(x-3)^2+1$.",
+      "correct_answer": "$(3,1)$",
+      "solution_steps": [
+        "Right 3, up 1.",
+        "Vertex moves.",
+        "$(3,1)$."
+      ],
+      "hint": "Shift the vertex accordingly."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Describe the graph of $y=-(x+2)^2-3$ from $y=x^2$.",
+      "correct_answer": "Left 2, reflect over x-axis, down 3",
+      "solution_steps": [
+        "Inside $+2$ ⇒ left 2.",
+        "Minus ⇒ flip.",
+        "$-3$ ⇒ down 3."
+      ],
+      "hint": "Combine the transformations."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "Find the vertex of $y=2(x-1)^2+5$.",
+      "correct_answer": "$(1,5)$",
+      "solution_steps": [
+        "Right 1, up 5 (stretch doesn't move vertex).",
+        "Vertex $(1,5)$.",
+        "Done."
+      ],
+      "hint": "Stretch keeps the vertex fixed."
+    }
+  ]
+}

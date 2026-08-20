@@ -1,0 +1,226 @@
+{
+  "title": "Static Equilibrium & Elasticity",
+  "summary": "An object is in static equilibrium when both net force and net torque are zero. Solving requires choosing a pivot to eliminate unknowns. Materials deform under stress; within the elastic limit, strain is proportional to stress (Hooke's law for solids).",
+  "glossary": {
+    "static equilibrium": {
+      "plain": "At rest with no net force and no net torque.",
+      "in_class": "$\\sum F=0$ and $\\sum\\tau=0$."
+    },
+    "pivot choice": {
+      "plain": "Picking an axis to zero out an unknown force's torque.",
+      "in_class": "Choose where an unknown acts."
+    },
+    "center of gravity": {
+      "plain": "Where weight effectively acts.",
+      "in_class": "Used to compute the weight's torque."
+    },
+    "stress": {
+      "plain": "Force per unit area on a material.",
+      "in_class": "$\\sigma=F/A$, in pascals."
+    },
+    "strain": {
+      "plain": "Fractional deformation.",
+      "in_class": "$\\varepsilon=\\Delta L/L$; dimensionless."
+    },
+    "Young's modulus": {
+      "plain": "Stiffness of a material.",
+      "in_class": "$Y=\\text{stress}/\\text{strain}$."
+    },
+    "elastic limit": {
+      "plain": "Beyond it, deformation is permanent.",
+      "in_class": "Hooke's law holds only below it."
+    },
+    "torque balance": {
+      "plain": "Clockwise torques equal counterclockwise.",
+      "in_class": "$\\sum\\tau=0$ about any pivot."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Conditions for equilibrium",
+      "explanation": "Two conditions must hold: the net force is zero (no translation) and the net torque is zero (no rotation). Both give equations to solve.",
+      "math_steps": [
+        "Set $\\sum F_x=0$ and $\\sum F_y=0$.",
+        "Set $\\sum\\tau=0$.",
+        "Solve the system for the unknowns."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-c1.svg",
+        "caption": "Conditions for equilibrium"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Choosing a pivot",
+      "explanation": "Torque depends on the chosen axis, so pick the pivot at an unknown force to eliminate its torque and simplify the equations.",
+      "math_steps": [
+        "Locate an unknown force.",
+        "Take torques about that point.",
+        "Its torque drops out of $\\sum\\tau=0$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-c2.svg",
+        "caption": "Choosing a pivot"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Center of gravity",
+      "explanation": "An extended object's weight acts at its center of gravity. Use that point when computing the weight's torque.",
+      "math_steps": [
+        "Find the center of gravity.",
+        "Weight acts there.",
+        "Include its torque about the pivot."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-c3.svg",
+        "caption": "Center of gravity"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Stress and strain",
+      "explanation": "Stress is force per area, strain is fractional length change, and within the elastic limit they're proportional: $\\sigma=Y\\varepsilon$.",
+      "math_steps": [
+        "Stress $=F/A$.",
+        "Strain $=\\Delta L/L$.",
+        "Relate them with Young's modulus $Y$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-c4.svg",
+        "caption": "Stress and strain"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Elasticity limits",
+      "explanation": "Materials behave elastically (returning to shape) only up to the elastic limit; beyond it they deform permanently and eventually fracture.",
+      "math_steps": [
+        "Stay below the elastic limit for Hooke's law.",
+        "Beyond it, deformation is permanent.",
+        "Further stress leads to fracture."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-c5.svg",
+        "caption": "Elasticity limits"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A ladder against a wall",
+      "scenario": "A ladder leans without slipping.",
+      "how_the_math_applies": "Force and torque balance (with friction at the base) keep it in equilibrium.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-e1.svg",
+        "caption": "A ladder against a wall"
+      }
+    },
+    {
+      "title": "A cantilever beam",
+      "scenario": "A balcony juts from a wall.",
+      "how_the_math_applies": "Torque balance about the wall determines the support forces.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-e2.svg",
+        "caption": "A cantilever beam"
+      }
+    },
+    {
+      "title": "Stretching a steel cable",
+      "scenario": "A cable elongates under load.",
+      "how_the_math_applies": "Stress and Young's modulus predict the stretch $\\Delta L$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-10-equilibrium-e3.svg",
+        "caption": "Stretching a steel cable"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "static equilibrium torque force balance physics",
+    "math_query": "stress strain youngs modulus examples",
+    "combined_query": "physics 1 equilibrium elasticity worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A uniform $4$ m beam weighs $200$ N. Find the torque of its weight about one end.",
+      "correct_answer": "$400$ N·m",
+      "solution_steps": [
+        "Weight acts at center ($2$ m).",
+        "$\\tau=2(200)$.",
+        "$400$ N·m."
+      ],
+      "hint": "Center of gravity at the middle."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Two children balance a seesaw: $30$ kg at $2$ m. Find the torque about the pivot.",
+      "correct_answer": "$\\approx588$ N·m",
+      "solution_steps": [
+        "$\\tau=r(mg)=2(30)(9.8)$.",
+        "$=588$.",
+        "N·m."
+      ],
+      "hint": "$\\tau=r\\,mg$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $50$ N weight sits $1$ m left of a pivot. What weight $3$ m right balances it?",
+      "correct_answer": "$\\approx16.7$ N",
+      "solution_steps": [
+        "$50(1)=W(3)$.",
+        "$W=50/3$.",
+        "$16.7$ N."
+      ],
+      "hint": "Set the two torques equal."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A wire has $\\sigma=F/A$ with $F=100$ N, $A=2\\times10^{-6}$ m². Find the stress.",
+      "correct_answer": "$5\\times10^{7}$ Pa",
+      "solution_steps": [
+        "$\\sigma=F/A$.",
+        "$=100/(2\\times10^{-6})$.",
+        "$5\\times10^7$ Pa."
+      ],
+      "hint": "$\\sigma=F/A$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $2$ m rod stretches $0.001$ m. Find the strain.",
+      "correct_answer": "$5\\times10^{-4}$",
+      "solution_steps": [
+        "$\\varepsilon=\\Delta L/L$.",
+        "$=0.001/2$.",
+        "$5\\times10^{-4}$."
+      ],
+      "hint": "$\\varepsilon=\\Delta L/L$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A uniform $6$ m beam ($100$ N) rests on two supports at the ends, with a $200$ N load $2$ m from the left. Find the left support force.",
+      "correct_answer": "$\\approx183$ N",
+      "solution_steps": [
+        "Torque about right end: $F_L(6)=100(3)+200(4)$.",
+        "$F_L=1100/6$.",
+        "$\\approx183$ N."
+      ],
+      "hint": "Take torques about the right support."
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "title": "Exponential Functions",
+  "summary": "An exponential function $f(x)=a\\cdot b^x$ multiplies by a constant factor each step — growth if $b>1$, decay if $0<b<1$. Its graph has a horizontal asymptote, and the natural base $e$ models continuous growth.",
+  "glossary": {
+    "exponential function": {
+      "plain": "A constant base raised to a variable power.",
+      "in_class": "$f(x)=a\\,b^x$."
+    },
+    "growth factor": {
+      "plain": "The base $b>1$ multiplying each step.",
+      "in_class": "Percent growth $=b-1$."
+    },
+    "decay factor": {
+      "plain": "A base $0<b<1$.",
+      "in_class": "The quantity shrinks each step."
+    },
+    "base e": {
+      "plain": "Euler's number $\\approx2.718$.",
+      "in_class": "The base for continuous growth."
+    },
+    "horizontal asymptote": {
+      "plain": "The level the graph approaches.",
+      "in_class": "Usually $y=0$ for $a\\,b^x$."
+    },
+    "initial value": {
+      "plain": "The output at $x=0$.",
+      "in_class": "The coefficient $a$."
+    },
+    "continuous growth": {
+      "plain": "Growth compounding every instant.",
+      "in_class": "$A=Pe^{rt}$."
+    },
+    "doubling time": {
+      "plain": "Time to double under growth.",
+      "in_class": "From $b^t=2$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Exponential form",
+      "explanation": "$f(x)=a\\,b^x$ starts at $a$ (when $x=0$) and multiplies by $b$ for each unit increase in $x$. The base sets growth or decay.",
+      "math_steps": [
+        "Identify $a$ (initial) and $b$ (base).",
+        "Growth if $b>1$, decay if $0<b<1$.",
+        "Each step multiplies by $b$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-c1.svg",
+        "caption": "Exponential form"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Growth vs decay",
+      "explanation": "For $b>1$ the function grows; for $0<b<1$ it decays toward zero. The percent change per step is $b-1$.",
+      "math_steps": [
+        "Compare $b$ to 1.",
+        "Growth or decay accordingly.",
+        "Percent change $=(b-1)\\times100\\%$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-c2.svg",
+        "caption": "Growth vs decay"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Graphs and asymptotes",
+      "explanation": "Exponential graphs rise or fall steeply and flatten toward a horizontal asymptote (typically $y=0$), never crossing it.",
+      "math_steps": [
+        "Plot the initial value $a$.",
+        "Curve steepens on one side.",
+        "Approaches the asymptote on the other."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-c3.svg",
+        "caption": "Graphs and asymptotes"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "The natural base $e$",
+      "explanation": "Continuous growth uses base $e\\approx2.718$: $A=Pe^{rt}$. It arises whenever growth compounds every instant.",
+      "math_steps": [
+        "Use $A=Pe^{rt}$ for continuous growth.",
+        "$r$ is the rate, $t$ the time.",
+        "$e$ is the continuous-compounding base."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-c4.svg",
+        "caption": "The natural base $e$"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Modeling with exponentials",
+      "explanation": "Fit $a$ from the initial amount and $b$ (or $r$) from the growth rate; solve for time or amount as needed.",
+      "math_steps": [
+        "Set $a$ from the start value.",
+        "Set $b$ or $r$ from the rate.",
+        "Solve for the unknown quantity or time."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-c5.svg",
+        "caption": "Modeling with exponentials"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Compound interest",
+      "scenario": "Savings grow at a fixed annual rate.",
+      "how_the_math_applies": "Balance is exponential; continuous compounding uses $Pe^{rt}$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-e1.svg",
+        "caption": "Compound interest"
+      }
+    },
+    {
+      "title": "Radioactive decay",
+      "scenario": "A sample loses a fixed fraction per period.",
+      "how_the_math_applies": "The amount follows an exponential decay with $0<b<1$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-e2.svg",
+        "caption": "Radioactive decay"
+      }
+    },
+    {
+      "title": "Viral spread",
+      "scenario": "Cases multiply early in an outbreak.",
+      "how_the_math_applies": "Early growth is exponential until limits kick in.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/precalc-13-exponential-e3.svg",
+        "caption": "Viral spread"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "exponential functions growth decay base e",
+    "math_query": "exponential function graph asymptote modeling examples",
+    "combined_query": "precalculus exponential functions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "For $f(x)=2^x$, find $f(3)$.",
+      "correct_answer": "$8$",
+      "solution_steps": [
+        "$2^3$.",
+        "$=8$.",
+        "Done."
+      ],
+      "hint": "Evaluate the power."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Is $f(x)=3(0.5)^x$ growth or decay?",
+      "correct_answer": "Decay",
+      "solution_steps": [
+        "Base $0.5<1$.",
+        "Shrinks each step.",
+        "Decay."
+      ],
+      "hint": "Base below 1 ⇒ decay."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "For $f(x)=5\\cdot2^x$, find the initial value.",
+      "correct_answer": "$5$",
+      "solution_steps": [
+        "$f(0)=5\\cdot1$.",
+        "$=5$.",
+        "The coefficient."
+      ],
+      "hint": "Initial value is $a$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A population triples each year, starting at 100. Write the model.",
+      "correct_answer": "$P=100\\cdot3^t$",
+      "solution_steps": [
+        "$a=100$, $b=3$.",
+        "$P=100(3^t)$.",
+        "Done."
+      ],
+      "hint": "$a\\,b^t$ with $b=3$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "What is the horizontal asymptote of $f(x)=2^x$?",
+      "correct_answer": "$y=0$",
+      "solution_steps": [
+        "As $x\\to-\\infty$, $2^x\\to0$.",
+        "Asymptote $y=0$.",
+        "Done."
+      ],
+      "hint": "Exponentials flatten to 0."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "$500$ grows continuously at $4\\%$. Find the amount after $10$ years.",
+      "correct_answer": "$\\approx746$",
+      "solution_steps": [
+        "$A=500e^{0.04(10)}=500e^{0.4}$.",
+        "$e^{0.4}\\approx1.492$.",
+        "$\\approx746$."
+      ],
+      "hint": "$A=Pe^{rt}$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A quantity halves every $5$ years. What fraction remains after $15$ years?",
+      "correct_answer": "$1/8$",
+      "solution_steps": [
+        "$15/5=3$ half-lives.",
+        "$(1/2)^3$.",
+        "$1/8$."
+      ],
+      "hint": "Count the half-lives."
+    }
+  ]
+}

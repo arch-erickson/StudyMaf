@@ -1,0 +1,238 @@
+{
+  "title": "Friction & Circular Motion",
+  "summary": "Friction opposes sliding, $f=\\mu N$, with static friction up to a maximum before slipping. Uniform circular motion requires a centripetal (inward) force $F_c=mv^2/r$, supplied by friction, tension, gravity, or a banked road.",
+  "glossary": {
+    "kinetic friction": {
+      "plain": "Friction while surfaces slide.",
+      "in_class": "$f_k=\\mu_k N$."
+    },
+    "static friction": {
+      "plain": "Friction preventing sliding, up to a max.",
+      "in_class": "$f_s\\le\\mu_s N$."
+    },
+    "coefficient of friction": {
+      "plain": "Sets friction's strength.",
+      "in_class": "$\\mu$; static usually larger than kinetic."
+    },
+    "centripetal force": {
+      "plain": "Net inward force for circular motion.",
+      "in_class": "$F_c=mv^2/r$."
+    },
+    "centripetal acceleration": {
+      "plain": "Inward acceleration in a circle.",
+      "in_class": "$a_c=v^2/r$."
+    },
+    "banked curve": {
+      "plain": "A tilted road aiding turning.",
+      "in_class": "The normal force's component turns the car."
+    },
+    "period (circular)": {
+      "plain": "Time for one revolution.",
+      "in_class": "$T=2\\pi r/v$."
+    },
+    "uniform circular motion": {
+      "plain": "Constant speed around a circle.",
+      "in_class": "Speed constant, velocity direction changing."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Kinetic friction",
+      "explanation": "While an object slides, kinetic friction opposes the motion with magnitude $f_k=\\mu_k N$. Include it in the force balance along the surface.",
+      "math_steps": [
+        "Find the normal force $N$.",
+        "$f_k=\\mu_k N$, opposing motion.",
+        "Add it to $\\sum F=ma$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-c1.svg",
+        "caption": "Kinetic friction"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Static friction",
+      "explanation": "Static friction adjusts to prevent sliding up to a maximum $f_{s,\\max}=\\mu_s N$. An object stays put until the applied force exceeds this.",
+      "math_steps": [
+        "Static friction matches the applied force.",
+        "Its max is $\\mu_s N$.",
+        "Slipping begins beyond that."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-c2.svg",
+        "caption": "Static friction"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Centripetal acceleration",
+      "explanation": "An object moving in a circle at constant speed accelerates toward the center: $a_c=v^2/r$. Its velocity direction constantly changes.",
+      "math_steps": [
+        "Speed constant, direction changing.",
+        "$a_c=v^2/r$, pointing inward.",
+        "It needs a net inward force."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-c3.svg",
+        "caption": "Centripetal acceleration"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Centripetal force",
+      "explanation": "Some real force must provide the inward pull: $F_c=mv^2/r$. Identify it (friction, tension, gravity) and set it equal to $mv^2/r$.",
+      "math_steps": [
+        "Identify the inward force source.",
+        "Set it equal to $mv^2/r$.",
+        "Solve for the unknown."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-c4.svg",
+        "caption": "Centripetal force"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Cars on curves",
+      "explanation": "On a flat curve, static friction supplies the centripetal force, giving a maximum safe speed $v=\\sqrt{\\mu_s g r}$; banking lets a road turn cars with less reliance on friction.",
+      "math_steps": [
+        "Flat curve: $\\mu_s mg=mv^2/r$.",
+        "Max speed $v=\\sqrt{\\mu_s g r}$.",
+        "Banking adds a normal-force component."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-c5.svg",
+        "caption": "Cars on curves"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Anti-lock brakes",
+      "scenario": "Brakes prevent wheel lockup.",
+      "how_the_math_applies": "They keep tires in static (not kinetic) friction, which grips better for shorter stops.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-e1.svg",
+        "caption": "Anti-lock brakes"
+      }
+    },
+    {
+      "title": "A car on a highway ramp",
+      "scenario": "A curved ramp turns a car.",
+      "how_the_math_applies": "Friction (or banking) supplies $mv^2/r$; exceed the max speed and it skids.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-e2.svg",
+        "caption": "A car on a highway ramp"
+      }
+    },
+    {
+      "title": "A spinning bucket of water",
+      "scenario": "Water stays in an over-the-top swing.",
+      "how_the_math_applies": "The required centripetal force keeps the water pressed inward at the top.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-05-friction-circular-e3.svg",
+        "caption": "A spinning bucket of water"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "friction static kinetic centripetal force circular motion",
+    "math_query": "coefficient of friction centripetal acceleration examples",
+    "combined_query": "physics 1 friction circular motion worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $5$ kg box on a floor, $\\mu_k=0.2$. Find the kinetic friction.",
+      "correct_answer": "$\\approx9.8$ N",
+      "solution_steps": [
+        "$N=mg=49$ N.",
+        "$f=0.2(49)$.",
+        "$9.8$ N."
+      ],
+      "hint": "$f=\\mu N$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $1$ kg ball circles at $2$ m/s, radius $0.5$ m. Find the centripetal force.",
+      "correct_answer": "$8$ N",
+      "solution_steps": [
+        "$F_c=mv^2/r$.",
+        "$=1(4)/0.5$.",
+        "$8$ N."
+      ],
+      "hint": "$F_c=mv^2/r$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Find the centripetal acceleration for $v=15$ m/s, $r=45$ m.",
+      "correct_answer": "$5$ m/s²",
+      "solution_steps": [
+        "$a_c=v^2/r$.",
+        "$=225/45$.",
+        "$5$ m/s²."
+      ],
+      "hint": "$a_c=v^2/r$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $2$ kg mass on a $1$ m string swings in a horizontal circle at $4$ m/s. Find the tension.",
+      "correct_answer": "$32$ N",
+      "solution_steps": [
+        "$T=mv^2/r$.",
+        "$=2(16)/1$.",
+        "$32$ N."
+      ],
+      "hint": "Tension provides $F_c$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Maximum static friction for a $10$ kg box, $\\mu_s=0.5$.",
+      "correct_answer": "$\\approx49$ N",
+      "solution_steps": [
+        "$f_{max}=\\mu_s mg$.",
+        "$=0.5(10)(9.8)$.",
+        "$49$ N."
+      ],
+      "hint": "$f_s\\le\\mu_s N$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A car rounds a flat curve, $r=80$ m, $\\mu_s=0.6$. Find the max speed.",
+      "correct_answer": "$\\approx21.7$ m/s",
+      "solution_steps": [
+        "$v=\\sqrt{\\mu_s g r}$.",
+        "$=\\sqrt{0.6(9.8)(80)}$.",
+        "$\\approx21.7$ m/s."
+      ],
+      "hint": "$v=\\sqrt{\\mu_s g r}$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A ball on a string swings in a vertical circle ($r=1$ m). Find the minimum speed at the top.",
+      "correct_answer": "$\\approx3.13$ m/s",
+      "solution_steps": [
+        "At the top, gravity provides $F_c$: $v=\\sqrt{gr}$.",
+        "$=\\sqrt{9.8}$.",
+        "$\\approx3.13$ m/s."
+      ],
+      "hint": "Minimum: gravity alone supplies $mv^2/r$."
+    }
+  ]
+}

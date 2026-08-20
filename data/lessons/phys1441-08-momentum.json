@@ -1,0 +1,238 @@
+{
+  "title": "Linear Momentum & Collisions",
+  "summary": "Momentum $\\vec p=m\\vec v$ changes by impulse $\\vec J=\\vec F\\Delta t=\\Delta\\vec p$. In an isolated system total momentum is conserved. Collisions are elastic (kinetic energy conserved) or inelastic (some KE lost); perfectly inelastic ones stick together.",
+  "glossary": {
+    "momentum": {
+      "plain": "Mass times velocity — 'quantity of motion'.",
+      "in_class": "$\\vec p=m\\vec v$; a vector."
+    },
+    "impulse": {
+      "plain": "The change in momentum from a force over time.",
+      "in_class": "$\\vec J=\\vec F\\,\\Delta t=\\Delta\\vec p$."
+    },
+    "conservation of momentum": {
+      "plain": "Total momentum is constant with no external force.",
+      "in_class": "$\\sum p_i=\\sum p_f$."
+    },
+    "elastic collision": {
+      "plain": "Kinetic energy is conserved.",
+      "in_class": "Both momentum and KE are conserved."
+    },
+    "inelastic collision": {
+      "plain": "Some kinetic energy is lost.",
+      "in_class": "Momentum conserved, KE not."
+    },
+    "perfectly inelastic": {
+      "plain": "Objects stick together after impact.",
+      "in_class": "Maximum KE lost; move with common velocity."
+    },
+    "center of mass": {
+      "plain": "The average position of a system's mass.",
+      "in_class": "Moves as if all mass and external force were there."
+    },
+    "recoil": {
+      "plain": "Backward motion when mass is ejected.",
+      "in_class": "Momentum conservation from rest."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Momentum and impulse",
+      "explanation": "Momentum is $\\vec p=m\\vec v$. A force over time delivers impulse $\\vec J=\\vec F\\Delta t$, which equals the momentum change $\\Delta\\vec p$.",
+      "math_steps": [
+        "Compute $p=mv$.",
+        "Impulse $=F\\Delta t=\\Delta p$.",
+        "A longer time reduces the force for the same $\\Delta p$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-c1.svg",
+        "caption": "Momentum and impulse"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Conservation of momentum",
+      "explanation": "With no net external force, the total momentum of a system is unchanged. Set total momentum before equal to total after.",
+      "math_steps": [
+        "Sum momenta before the interaction.",
+        "Sum momenta after.",
+        "Set them equal (external force ≈ 0)."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-c2.svg",
+        "caption": "Conservation of momentum"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Elastic collisions",
+      "explanation": "Both momentum and kinetic energy are conserved. For two objects, this gives two equations to solve for the final velocities.",
+      "math_steps": [
+        "Write momentum conservation.",
+        "Write KE conservation.",
+        "Solve the two equations for the final speeds."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-c3.svg",
+        "caption": "Elastic collisions"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Inelastic collisions",
+      "explanation": "Momentum is conserved but kinetic energy isn't. In a perfectly inelastic collision the objects stick and move together at a common velocity.",
+      "math_steps": [
+        "Use momentum conservation.",
+        "For 'stick together', one common final velocity.",
+        "KE lost = initial KE − final KE."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-c4.svg",
+        "caption": "Inelastic collisions"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Impulse and safety",
+      "explanation": "Spreading a collision over more time reduces the peak force ($F=\\Delta p/\\Delta t$) — the principle behind airbags and crumple zones.",
+      "math_steps": [
+        "Fix the momentum change $\\Delta p$.",
+        "Increase $\\Delta t$ to lower $F$.",
+        "That's how safety devices work."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-c5.svg",
+        "caption": "Impulse and safety"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Airbags",
+      "scenario": "A crash stops a driver quickly.",
+      "how_the_math_applies": "The airbag lengthens the stopping time, cutting the force via $F=\\Delta p/\\Delta t$.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-e1.svg",
+        "caption": "Airbags"
+      }
+    },
+    {
+      "title": "Rocket recoil",
+      "scenario": "A gun or rocket ejects mass.",
+      "how_the_math_applies": "Momentum conservation from rest gives equal-and-opposite momenta — recoil.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-e2.svg",
+        "caption": "Rocket recoil"
+      }
+    },
+    {
+      "title": "Billiard balls",
+      "scenario": "One ball strikes another.",
+      "how_the_math_applies": "A near-elastic collision conserves both momentum and kinetic energy.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1441-08-momentum-e3.svg",
+        "caption": "Billiard balls"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "momentum impulse conservation of momentum physics",
+    "math_query": "elastic inelastic collision examples momentum",
+    "combined_query": "physics 1 momentum collisions worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Find the momentum of a $3$ kg cart at $4$ m/s.",
+      "correct_answer": "$12$ kg·m/s",
+      "solution_steps": [
+        "$p=mv$.",
+        "$=3(4)$.",
+        "$12$ kg·m/s."
+      ],
+      "hint": "$p=mv$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "A $10$ N force acts for $2$ s. Find the impulse.",
+      "correct_answer": "$20$ N·s",
+      "solution_steps": [
+        "$J=F\\Delta t$.",
+        "$=10(2)$.",
+        "$20$ N·s."
+      ],
+      "hint": "$J=F\\Delta t$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $2$ kg ball at $3$ m/s hits and sticks to a $1$ kg ball at rest. Find their common speed.",
+      "correct_answer": "$2$ m/s",
+      "solution_steps": [
+        "$p$: $2(3)=(3)v$.",
+        "$v=6/3$.",
+        "$2$ m/s."
+      ],
+      "hint": "Perfectly inelastic: stick together."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $0.5$ kg ball hits a wall at $4$ m/s and bounces back at $4$ m/s. Find the impulse.",
+      "correct_answer": "$4$ N·s",
+      "solution_steps": [
+        "$\\Delta p=m(v_f-v_i)=0.5(4-(-4))$.",
+        "$=0.5(8)$.",
+        "$4$ N·s."
+      ],
+      "hint": "Include the direction change."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A $60$ kg skater throws a $2$ kg ball at $10$ m/s. Find the skater's recoil speed.",
+      "correct_answer": "$\\approx0.33$ m/s",
+      "solution_steps": [
+        "$0=60v-2(10)$.",
+        "$v=20/60$.",
+        "$0.33$ m/s."
+      ],
+      "hint": "Total momentum starts at zero."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $1$ kg cart at $6$ m/s collides elastically with an equal cart at rest. Find the final speeds.",
+      "correct_answer": "$0$ and $6$ m/s",
+      "solution_steps": [
+        "Equal masses, elastic: they exchange velocities.",
+        "First stops, second moves at $6$ m/s.",
+        "Done."
+      ],
+      "hint": "Equal-mass elastic ⇒ swap velocities."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A $1500$ kg car at $20$ m/s hits a stopped $1000$ kg car; they stick. Find their speed.",
+      "correct_answer": "$12$ m/s",
+      "solution_steps": [
+        "$1500(20)=2500v$.",
+        "$v=30000/2500$.",
+        "$12$ m/s."
+      ],
+      "hint": "Inelastic momentum conservation."
+    }
+  ]
+}

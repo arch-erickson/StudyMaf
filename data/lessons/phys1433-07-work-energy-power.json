@@ -1,0 +1,238 @@
+{
+  "title": "Work, Energy & Power",
+  "summary": "Work is $W=Fd\\cos\\theta$; it changes kinetic energy ($W_{net}=\\Delta KE$). Gravitational and elastic potential energy store work, and mechanical energy is conserved without friction. Power is the rate of doing work, $P=W/t=Fv$.",
+  "glossary": {
+    "work": {
+      "plain": "Energy transferred by a force over distance.",
+      "in_class": "$W=Fd\\cos\\theta$."
+    },
+    "kinetic energy": {
+      "plain": "Energy of motion.",
+      "in_class": "$KE=\\tfrac12mv^2$."
+    },
+    "potential energy": {
+      "plain": "Stored energy of position.",
+      "in_class": "$U=mgh$ (gravity), $\\tfrac12kx^2$ (spring)."
+    },
+    "work-energy theorem": {
+      "plain": "Net work equals change in KE.",
+      "in_class": "$W_{net}=\\Delta KE$."
+    },
+    "conservation of energy": {
+      "plain": "Mechanical energy constant without friction.",
+      "in_class": "$KE_i+U_i=KE_f+U_f$."
+    },
+    "power": {
+      "plain": "Rate of doing work.",
+      "in_class": "$P=W/t=Fv$, in watts."
+    },
+    "efficiency": {
+      "plain": "Useful output over input energy.",
+      "in_class": "Always less than 100% in real machines."
+    },
+    "joule": {
+      "plain": "The SI unit of energy.",
+      "in_class": "$1\\ \\text{J}=1\\ \\text{N·m}$."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Work",
+      "explanation": "Work is force times displacement in the force's direction: $W=Fd\\cos\\theta$. A perpendicular force does no work; friction does negative work.",
+      "math_steps": [
+        "Identify force, displacement, angle.",
+        "$W=Fd\\cos\\theta$.",
+        "Sign follows $\\cos\\theta$."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-c1.svg",
+        "caption": "Work"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Kinetic energy and the work–energy theorem",
+      "explanation": "A moving mass has $KE=\\tfrac12mv^2$, and the net work done on it equals the change in that energy: $W_{net}=\\Delta KE$.",
+      "math_steps": [
+        "Compute $\\tfrac12mv^2$.",
+        "Net work $=\\Delta KE$.",
+        "Solve for speed or distance."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-c2.svg",
+        "caption": "Kinetic energy and the work–energy theorem"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Potential energy",
+      "explanation": "Gravitational PE is $U=mgh$; elastic PE is $\\tfrac12kx^2$. These store the work done against gravity or in a spring.",
+      "math_steps": [
+        "Choose a reference for height.",
+        "$U=mgh$ or $\\tfrac12kx^2$.",
+        "Only changes in $U$ matter."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-c3.svg",
+        "caption": "Potential energy"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Conservation of energy",
+      "explanation": "Without friction, mechanical energy $KE+U$ is conserved; set the total at two points equal to find a speed or height. Friction converts some to heat.",
+      "math_steps": [
+        "Write $KE+U$ at two points.",
+        "Set them equal (no friction).",
+        "With friction, subtract the heat lost."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-c4.svg",
+        "caption": "Conservation of energy"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Power",
+      "explanation": "Power measures how fast work is done: $P=W/t$, or $P=Fv$ for a steady force at speed $v$. Its unit is the watt.",
+      "math_steps": [
+        "Divide work by time, or use $Fv$.",
+        "Units are J/s = W.",
+        "More power ⇒ faster energy delivery."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-c5.svg",
+        "caption": "Power"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "Climbing stairs",
+      "scenario": "You raise your body up several floors.",
+      "how_the_math_applies": "Work $mgh$ is done against gravity; power depends on how fast you climb.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-e1.svg",
+        "caption": "Climbing stairs"
+      }
+    },
+    {
+      "title": "A roller coaster drop",
+      "scenario": "A car speeds up going downhill.",
+      "how_the_math_applies": "Potential energy converts to kinetic — conservation of energy without much friction.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-e2.svg",
+        "caption": "A roller coaster drop"
+      }
+    },
+    {
+      "title": "An electric motor's rating",
+      "scenario": "A motor lists its wattage.",
+      "how_the_math_applies": "$P=Fv$ tells the force it can sustain at a given speed.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-07-work-energy-power-e3.svg",
+        "caption": "An electric motor's rating"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "work energy theorem kinetic potential energy algebra",
+    "math_query": "conservation of energy power P=Fv examples",
+    "combined_query": "physics 1 work energy power worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "A $40$ N force moves a box $3$ m in its direction. Find the work.",
+      "correct_answer": "$120$ J",
+      "solution_steps": [
+        "$W=Fd$.",
+        "$=40(3)$.",
+        "$120$ J."
+      ],
+      "hint": "$W=Fd$ when aligned."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Find the KE of a $3$ kg ball at $4$ m/s.",
+      "correct_answer": "$24$ J",
+      "solution_steps": [
+        "$KE=\\tfrac12mv^2$.",
+        "$=\\tfrac12(3)(16)$.",
+        "$24$ J."
+      ],
+      "hint": "$\\tfrac12mv^2$."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "A $30$ N force acts at $37^\\circ$ over $5$ m. Find the work.",
+      "correct_answer": "$\\approx120$ J",
+      "solution_steps": [
+        "$W=Fd\\cos37^\\circ$.",
+        "$=30(5)(0.8)$.",
+        "$120$ J."
+      ],
+      "hint": "Include $\\cos\\theta$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A ball falls from $10$ m — speed at the bottom (energy method)?",
+      "correct_answer": "$\\approx14$ m/s",
+      "solution_steps": [
+        "$v=\\sqrt{2gh}$.",
+        "$=\\sqrt{2(9.8)(10)}$.",
+        "$\\approx14$ m/s."
+      ],
+      "hint": "$v=\\sqrt{2gh}$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "A crane lifts $500$ N a height of $12$ m in $6$ s. Find the power.",
+      "correct_answer": "$1000$ W",
+      "solution_steps": [
+        "$P=W/t=(500\\cdot12)/6$.",
+        "$=6000/6$.",
+        "$1000$ W."
+      ],
+      "hint": "$P=W/t$."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "A $2$ kg block hits a spring ($k=200$ N/m) at $3$ m/s. Find the max compression.",
+      "correct_answer": "$\\approx0.3$ m",
+      "solution_steps": [
+        "$\\tfrac12mv^2=\\tfrac12kx^2$: $9=100x^2$? No: $\\tfrac12(2)(9)=\\tfrac12(200)x^2$.",
+        "$9=100x^2\\Rightarrow x^2=0.09$.",
+        "$x=0.3$ m."
+      ],
+      "hint": "KE → spring PE."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A car engine delivers $60$ kW at $30$ m/s. Find the driving force.",
+      "correct_answer": "$2000$ N",
+      "solution_steps": [
+        "$P=Fv$ ⇒ $F=P/v$.",
+        "$=60000/30$.",
+        "$2000$ N."
+      ],
+      "hint": "$F=P/v$."
+    }
+  ]
+}

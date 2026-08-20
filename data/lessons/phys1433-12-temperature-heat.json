@@ -1,0 +1,238 @@
+{
+  "title": "Temperature & Heat",
+  "summary": "Temperature measures molecular kinetic energy; heat is energy that flows between objects at different temperatures. $Q=mc\\Delta T$ warms things, $Q=mL$ changes phase, and materials expand as $\\Delta L=\\alpha L\\Delta T$. Heat moves by conduction, convection, and radiation.",
+  "glossary": {
+    "temperature": {
+      "plain": "Measure of average molecular KE.",
+      "in_class": "Use kelvin for gas calculations."
+    },
+    "heat": {
+      "plain": "Energy transferred by a temperature difference.",
+      "in_class": "$Q$, in joules; hot → cold."
+    },
+    "specific heat": {
+      "plain": "Heat to warm 1 kg by 1 K.",
+      "in_class": "$Q=mc\\Delta T$."
+    },
+    "latent heat": {
+      "plain": "Heat for a phase change.",
+      "in_class": "$Q=mL$ (fusion or vaporization)."
+    },
+    "thermal expansion": {
+      "plain": "Growth with temperature.",
+      "in_class": "$\\Delta L=\\alpha L\\Delta T$."
+    },
+    "conduction": {
+      "plain": "Heat through direct contact.",
+      "in_class": "Fast in metals."
+    },
+    "convection": {
+      "plain": "Heat carried by moving fluid.",
+      "in_class": "Warm fluid rises."
+    },
+    "radiation": {
+      "plain": "Heat as electromagnetic waves.",
+      "in_class": "No medium needed."
+    }
+  },
+  "concept_sections": [
+    {
+      "level": 1,
+      "heading": "Temperature vs heat",
+      "explanation": "Temperature is a measure of molecular kinetic energy; heat is energy transferred because of a temperature difference, flowing hot to cold.",
+      "math_steps": [
+        "Temperature ↔ molecular KE.",
+        "Heat is energy in transit.",
+        "Flows hot → cold."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-c1.svg",
+        "caption": "Temperature vs heat"
+      }
+    },
+    {
+      "level": 2,
+      "heading": "Specific heat",
+      "explanation": "Warming (without phase change) needs $Q=mc\\Delta T$. Water's high $c$ makes it slow to heat and cool.",
+      "math_steps": [
+        "Find $m$, $c$, $\\Delta T$.",
+        "$Q=mc\\Delta T$.",
+        "Positive warms, negative cools."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-c2.svg",
+        "caption": "Specific heat"
+      }
+    },
+    {
+      "level": 3,
+      "heading": "Phase changes",
+      "explanation": "Melting and boiling absorb heat at constant temperature: $Q=mL$. Full heating curves combine $mc\\Delta T$ and $mL$ segments.",
+      "math_steps": [
+        "Use $Q=mL$ for the change.",
+        "Temperature holds during it.",
+        "Add heating segments as needed."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-c3.svg",
+        "caption": "Phase changes"
+      }
+    },
+    {
+      "level": 4,
+      "heading": "Thermal expansion",
+      "explanation": "Materials generally expand when heated: $\\Delta L=\\alpha L\\Delta T$ — the reason for expansion gaps in bridges and rails.",
+      "math_steps": [
+        "Find $\\alpha$.",
+        "$\\Delta L=\\alpha L\\Delta T$.",
+        "Areas and volumes expand too."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-c4.svg",
+        "caption": "Thermal expansion"
+      }
+    },
+    {
+      "level": 5,
+      "heading": "Heat transfer",
+      "explanation": "Heat moves three ways: conduction (contact), convection (fluid motion), and radiation (electromagnetic waves, no medium required).",
+      "math_steps": [
+        "Conduction: through materials.",
+        "Convection: via moving fluid.",
+        "Radiation: through empty space."
+      ],
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-c5.svg",
+        "caption": "Heat transfer"
+      }
+    }
+  ],
+  "real_world_examples": [
+    {
+      "title": "A metal spoon in soup",
+      "scenario": "The handle heats up.",
+      "how_the_math_applies": "Conduction carries heat along the metal, which conducts well.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-e1.svg",
+        "caption": "A metal spoon in soup"
+      }
+    },
+    {
+      "title": "Boiling water for pasta",
+      "scenario": "Water heats then boils.",
+      "how_the_math_applies": "Specific heat warms it to $100^\\circ$C; latent heat drives the boiling.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-e2.svg",
+        "caption": "Boiling water for pasta"
+      }
+    },
+    {
+      "title": "Feeling the sun's warmth",
+      "scenario": "You warm up in sunlight.",
+      "how_the_math_applies": "Radiation transfers heat across empty space to your skin.",
+      "figure": {
+        "type": "svg",
+        "src": "data/diagrams/phys1433-12-temperature-heat-e3.svg",
+        "caption": "Feeling the sun's warmth"
+      }
+    }
+  ],
+  "videos": {
+    "concept_query": "temperature heat specific heat latent heat conduction convection radiation",
+    "math_query": "specific heat phase change thermal expansion examples",
+    "combined_query": "physics 1 heat worked problems"
+  },
+  "problems": [
+    {
+      "id": "p01",
+      "difficulty": "easy",
+      "prompt": "Heat to warm $1$ kg of water ($c=4186$) by $20$ K?",
+      "correct_answer": "$\\approx83720$ J",
+      "solution_steps": [
+        "$Q=mc\\Delta T$.",
+        "$=1(4186)(20)$.",
+        "$83720$ J."
+      ],
+      "hint": "$Q=mc\\Delta T$."
+    },
+    {
+      "id": "p02",
+      "difficulty": "easy",
+      "prompt": "Convert $100^\\circ$C to kelvin.",
+      "correct_answer": "$373$ K",
+      "solution_steps": [
+        "$K=C+273$.",
+        "$100+273$.",
+        "$373$ K."
+      ],
+      "hint": "Add 273."
+    },
+    {
+      "id": "p03",
+      "difficulty": "medium",
+      "prompt": "Melt $0.2$ kg of ice ($L_f=3.34\\times10^5$). Find the heat.",
+      "correct_answer": "$\\approx66800$ J",
+      "solution_steps": [
+        "$Q=mL$.",
+        "$=0.2(3.34\\times10^5)$.",
+        "$66800$ J."
+      ],
+      "hint": "$Q=mL$."
+    },
+    {
+      "id": "p04",
+      "difficulty": "medium",
+      "prompt": "A $3$ m aluminum rod ($\\alpha=2.4\\times10^{-5}$) heats by $40$ K. Find $\\Delta L$.",
+      "correct_answer": "$\\approx2.88\\times10^{-3}$ m",
+      "solution_steps": [
+        "$\\Delta L=\\alpha L\\Delta T$.",
+        "$=2.4\\times10^{-5}(3)(40)$.",
+        "$2.88\\times10^{-3}$ m."
+      ],
+      "hint": "$\\Delta L=\\alpha L\\Delta T$."
+    },
+    {
+      "id": "p05",
+      "difficulty": "medium",
+      "prompt": "Which transfers heat with no medium: conduction, convection, or radiation?",
+      "correct_answer": "Radiation",
+      "solution_steps": [
+        "Radiation uses EM waves.",
+        "No medium needed.",
+        "Radiation."
+      ],
+      "hint": "Sunlight through space."
+    },
+    {
+      "id": "p06",
+      "difficulty": "hard",
+      "prompt": "Heat $0.3$ kg of water from $25^\\circ$C to $100^\\circ$C ($c=4186$).",
+      "correct_answer": "$\\approx94185$ J",
+      "solution_steps": [
+        "$Q=mc\\Delta T=0.3(4186)(75)$.",
+        "$=94185$ J.",
+        "Done."
+      ],
+      "hint": "$Q=mc\\Delta T$."
+    },
+    {
+      "id": "p07",
+      "difficulty": "hard",
+      "prompt": "A $0.1$ kg ice cube at $0^\\circ$C melts then warms to $20^\\circ$C. Total heat? ($L_f=3.34\\times10^5$, $c=4186$)",
+      "correct_answer": "$\\approx41772$ J",
+      "solution_steps": [
+        "Melt: $0.1(3.34\\times10^5)=33400$ J.",
+        "Warm: $0.1(4186)(20)=8372$ J.",
+        "Total $\\approx41772$ J."
+      ],
+      "hint": "Add $mL_f$ then $mc\\Delta T$."
+    }
+  ]
+}
