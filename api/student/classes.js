@@ -4,7 +4,7 @@ module.exports = async function handler(req, res) {
   if (!auth.cors(req, res)) return;
   if (req.method !== 'GET') return auth.json(res, 405, { error: 'Method not allowed.' });
   try {
-    var account = await auth.authenticated(req, res);
+    var account = await auth.requireWorkspace(req, res, ['student']);
     if (!account) return;
     var uid = account.user.id, email = String(account.user.email || '').toLowerCase();
     // Link any invited-by-email enrollments to this signed-in student so that classes

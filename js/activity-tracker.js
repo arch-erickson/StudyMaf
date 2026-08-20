@@ -24,7 +24,7 @@ function context() {
 function add(event) { pending.push(Object.assign({}, context(), event)); }
 async function flush(force) {
   const now = Date.now();
-  if (!Auth.getAccount()) { pending = []; lastFlushedAt = now; return; }
+  if (!Auth.getAccount() || Auth.getAccount().role !== 'student') { pending = []; lastFlushedAt = now; return; }
   const idle = now - lastActiveAt > 90000;
   const elapsed = Math.floor((now - lastFlushedAt) / 1000);
   if (!idle && (force || elapsed >= 30)) add({ event_type: 'study_time', duration_seconds: Math.min(300, elapsed) });

@@ -5,7 +5,7 @@ let started = false, muted = false, timer = 0;
 function pause(milliseconds) { return new Promise(function (resolve) { setTimeout(resolve, milliseconds); }); }
 
 function uploadSoon() {
-  if (muted || !Auth.getAccount()) return;
+  if (muted || !Auth.getAccount() || Auth.getAccount().role !== 'student') return;
   clearTimeout(timer);
   timer = setTimeout(async function () {
     try { await Auth.api('/api/student/progress', { method: 'PUT', body: JSON.stringify({ state: Store.cloudProgress() }) }); }
@@ -16,7 +16,7 @@ function uploadSoon() {
 async function switchAccount(account) {
   clearTimeout(timer); muted = true;
   try {
-    if (!account) { window.StudyMAFPrivateCourseDocuments = {}; Store.setAccount(null); return; }
+    if (!account || account.role !== 'student') { window.StudyMAFPrivateCourseDocuments = {}; Store.setAccount(null); return; }
     Store.setAccount(account.user.id);
     // Progress is useful, but it must never block professor-assigned classes.
     try {

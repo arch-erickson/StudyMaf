@@ -21,7 +21,7 @@ function cors(req, res) {
   if (!allowedOrigin(origin)) { res.status(403).json({ error: 'This service is available only from StudyMAF.' }); return false; }
   if (origin) res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Vary', 'Origin');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-StudyMAF-Workspace');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
   if (req.method === 'OPTIONS') { res.status(204).end(); return false; }
   return true;
@@ -106,6 +106,65 @@ async function authenticated(req, res) {
   return { user: user, role: role };
 }
 
+function requestedWorkspace(req) {
+  var value = req.headers['x-studymaf-workspace'];
+  if (Array.isArray(value)) value = value[0];
+  value = String(value || '').trim().toLowerCase();
+  return ['student', 'professor', 'admin'].indexOf(value) >= 0 ? value : '';
+}
+
+async function hasActiveStudentEnrollment(account) {
+  var studentEmail = email(account && account.user && account.user.email);
+  if (!studentEmail) return false;
+  var rows = await db('class_enrollments?student_email=eq.' + encodeURIComponent(studentEmail) + '&status=in.(active,invited)&select=id&limit=1');
+  return !!(rows && rows.length);
+}
+
+/*
+ * A permanent role is never changed by a login-screen choice. Instead, the
+ * requested workspace is checked against server data on every request. This
+ * lets a professor use the student workspace only after their own email is
+ * enrolled in a class, without accidentally granting student access to every
+ * professor account.
+ */
+async function resolveWorkspace(req, account) {
+  var baseRole = account.role;
+  var available = [];
+  if (baseRole === 'student') available.push('student');
+  if (baseRole === 'professor') {
+    available.push('professor');
+    if (await hasActiveStudentEnrollment(account)) available.push('student');
+  }
+  if (baseRole === 'admin') available.push('admin');
+
+  var requested = requestedWorkspace(req);
+  var workspace = requested || baseRole;
+  if (available.indexOf(workspace) < 0) {
+    if (workspace === 'student' && baseRole === 'professor') {
+      throw new Error('This professor email is not enrolled in a class as a student yet. Add the same email to a class roster first.');
+    }
+    throw new Error('This account cannot use the requested workspace.');
+  }
+  return { role: workspace, base_role: baseRole, available_workspaces: available };
+}
+
+async function requireWorkspace(req, res, workspaces) {
+  var account = await authenticated(req, res);
+  if (!account) return null;
+  try {
+    var workspace = await resolveWorkspace(req, account);
+    if (workspaces.indexOf(workspace.role) < 0) {
+      json(res, 403, { error: 'Select the Student workspace at sign-in to use learning tools.' });
+      return null;
+    }
+    account.workspace = workspace;
+    return account;
+  } catch (error) {
+    json(res, 403, { error: error.message || 'This account cannot use the requested workspace.' });
+    return null;
+  }
+}
+
 async function requireRole(req, res, roles) {
   var account = await authenticated(req, res);
   if (!account) return null;
@@ -118,4 +177,4 @@ async function ownedSection(sectionId, professorId) {
   return rows && rows[0] || null;
 }
 
-module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, signedCourseDocument: signedCourseDocument, signedCourseDocuments: signedCourseDocuments, authenticated: authenticated, requireRole: requireRole, ownedSection: ownedSection };
+module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, signedCourseDocument: signedCourseDocument, signedCourseDocuments: signedCourseDocuments, authenticated: authenticated, requireRole: requireRole, resolveWorkspace: resolveWorkspace, requireWorkspace: requireWorkspace, ownedSection: ownedSection };

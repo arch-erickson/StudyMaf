@@ -3,15 +3,19 @@ import { STUDYMAF_AUTH_CONFIG as config } from './auth-config.js';
 /* Minimal Supabase Auth client for the static GitHub Pages app. It uses only
  * the publishable key and keeps all roles/classes behind the Vercel API. */
 const SESSION_KEY = 'studymaf.auth.session.v1';
+const WORKSPACE_KEY = 'studymaf.auth.workspace.v1';
 let session = null;
 let account = null;
+let workspace = storedWorkspace();
 const listeners = [];
 
 function configured() { return /^https:\/\//.test(config.supabaseUrl || '') && /^sb_publishable_/.test(config.publishableKey || ''); }
 function notify() { window.StudyMAFAccount = account; window.StudyMAFSession = session; listeners.slice().forEach(function (fn) { try { fn(account); } catch (e) {} }); }
 function save(next) { session = next || null; window.StudyMAFSession = session; try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch (e) {} }
-function clear() { session = null; account = null; window.StudyMAFAccount = null; window.StudyMAFSession = null; try { localStorage.removeItem(SESSION_KEY); } catch (e) {} notify(); }
+function clear() { session = null; account = null; workspace = ''; window.StudyMAFAccount = null; window.StudyMAFSession = null; try { localStorage.removeItem(SESSION_KEY); localStorage.removeItem(WORKSPACE_KEY); } catch (e) {} notify(); }
 function stored() { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch (e) { return null; } }
+function storedWorkspace() { try { var value = String(localStorage.getItem(WORKSPACE_KEY) || '').toLowerCase(); return ['student', 'professor', 'admin'].indexOf(value) >= 0 ? value : ''; } catch (e) { return ''; } }
+function workspaceHeaders() { return workspace ? { 'X-StudyMAF-Workspace': workspace } : {}; }
 
 async function request(path, options) {
   if (!configured()) throw new Error('Sign-in has not been configured yet.');
@@ -46,7 +50,7 @@ async function refreshIfNeeded() {
 
 async function loadAccount() {
   if (!session || !session.access_token) { account = null; notify(); return null; }
-  const response = await fetch(config.apiUrl.replace(/\/$/, '') + '/api/account/me', { headers: { Authorization: 'Bearer ' + session.access_token } });
+  const response = await fetch(config.apiUrl.replace(/\/$/, '') + '/api/account/me', { headers: Object.assign({ Authorization: 'Bearer ' + session.access_token }, workspaceHeaders()) });
   if (response.status === 401) { clear(); return null; }
   const data = await response.json().catch(function () { return {}; });
   if (!response.ok) throw new Error(data.error || 'Could not load your account.');
@@ -67,6 +71,13 @@ export const Auth = {
   configured: configured,
   getSession: function () { return session; },
   getAccount: function () { return account; },
+  getWorkspace: function () { return workspace; },
+  setWorkspace: function (next) {
+    next = String(next || '').trim().toLowerCase();
+    workspace = ['student', 'professor', 'admin'].indexOf(next) >= 0 ? next : '';
+    try { if (workspace) localStorage.setItem(WORKSPACE_KEY, workspace); else localStorage.removeItem(WORKSPACE_KEY); } catch (e) {}
+    return workspace;
+  },
   onChange: function (fn) { listeners.push(fn); return function () { const n = listeners.indexOf(fn); if (n >= 0) listeners.splice(n, 1); }; },
   async sendEmailCode(email, redirectTo) {
     var body = { email: String(email || '').trim(), create_user: true };
@@ -106,9 +117,10 @@ export const Auth = {
   async api(path, options) {
     await refreshIfNeeded();
     if (!session || !session.access_token) throw new Error('Sign in required.');
-    const response = await fetch(config.apiUrl.replace(/\/$/, '') + path, Object.assign({
-      headers: { Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' }
-    }, options || {}));
+    options = options || {};
+    const response = await fetch(config.apiUrl.replace(/\/$/, '') + path, Object.assign({}, options, {
+      headers: Object.assign({ Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' }, workspaceHeaders(), options.headers || {})
+    }));
     const data = await response.json().catch(function () { return {}; });
     if (!response.ok) throw new Error(data.error || 'Request failed.');
     return data;

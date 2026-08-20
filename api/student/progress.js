@@ -33,7 +33,7 @@ function activityRows(value, account) {
 module.exports = async function handler(req, res) {
   if (!auth.cors(req, res)) return;
   try {
-    var account = await auth.authenticated(req, res);
+    var account = await auth.requireWorkspace(req, res, ['student']);
     if (!account) return;
     if (req.method === 'GET') {
       var rows = await auth.db('account_progress?user_id=eq.' + encodeURIComponent(account.user.id) + '&select=state,updated_at');
