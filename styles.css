@@ -849,3 +849,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .roster-list > div > p { flex: 1; }
 .roster-list > div > .btn { flex: 0 0 auto; }
 .class-preview-btn { justify-self: start; margin-top: -4px; }
+
+/* Professor workspace: natural-height panels + collapsible class list. */
+.professor-top-layout { align-items: start; }
+.professor-show-more { width: 100%; margin-top: 4px; justify-content: center; }
