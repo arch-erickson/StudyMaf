@@ -68,15 +68,32 @@ export function createAccountUI(options) {
   }
   function openFeedback() {
     var a = account();
-    var m = modal('<div class="control-eyebrow">Feedback</div><h2>Share your feedback</h2><p class="modal-sub">Tell us what is working, what is confusing, or what you would like to see next. We read every note.</p><form class="account-form" id="feedback-form"><label>Your message<textarea name="message" rows="5" required placeholder="What is on your mind?"></textarea></label><div id="feedback-error"></div><div class="modal-actions"><button class="btn subtle" type="button" data-close>Cancel</button><button class="btn primary" type="submit">Send feedback</button></div></form>');
-    m.querySelector('#feedback-form').onsubmit = function (event) {
+    var categories = ['Bug — something is broken', 'Feature request', 'Lesson or question content', 'Confusing UI / UX', 'Performance / speed', 'Praise / what you like', 'Other'];
+    var m = modal('<div class="control-eyebrow">Feedback</div><h2>Share your feedback</h2><p class="modal-sub">Pick a topic, tell us what is on your mind, and attach a screenshot if it helps.</p><form class="account-form" id="feedback-form"><label>Topic<select name="category" required>' + categories.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('') + '</select></label><label>Your message<textarea name="message" rows="5" required placeholder="What is on your mind?"></textarea></label><label>Screenshot (optional)<input name="image" type="file" accept="image/*"></label><div id="feedback-preview"></div><div id="feedback-error"></div><div class="modal-actions"><button class="btn subtle" type="button" data-close>Cancel</button><button class="btn primary" type="submit">Send feedback</button></div></form>');
+    var imageData = null, fileInput = m.querySelector('input[name="image"]'), preview = m.querySelector('#feedback-preview');
+    fileInput.onchange = function () {
+      var f = fileInput.files[0]; imageData = null; preview.innerHTML = ''; m.querySelector('#feedback-error').innerHTML = '';
+      if (!f) return;
+      if (f.size > 4 * 1024 * 1024) { m.querySelector('#feedback-error').innerHTML = error('That image is over 4 MB — please attach a smaller one.'); fileInput.value = ''; return; }
+      var reader = new FileReader();
+      reader.onload = function () { imageData = { name: f.name, type: f.type, dataUrl: reader.result }; preview.innerHTML = '<img class="feedback-thumb" alt="screenshot preview" src="' + reader.result + '">'; };
+      reader.readAsDataURL(f);
+    };
+    m.querySelector('#feedback-form').onsubmit = async function (event) {
       event.preventDefault();
-      var message = String(new FormData(event.currentTarget).get('message') || '').trim();
+      var fd = new FormData(event.currentTarget), category = String(fd.get('category') || 'Other'), message = String(fd.get('message') || '').trim();
       if (!message) { m.querySelector('#feedback-error').innerHTML = error('Please write a short message first.'); return; }
-      var subject = encodeURIComponent('StudyMAF feedback');
-      var body = encodeURIComponent(message + '\n\n— ' + ((a && a.user.email) || 'a StudyMAF user'));
-      window.location.href = 'mailto:' + FEEDBACK_EMAIL + '?subject=' + subject + '&body=' + body;
-      closeModal();
+      var submit = event.currentTarget.querySelector('[type="submit"]'); submit.disabled = true; submit.textContent = 'Sending…';
+      try {
+        await Auth.api('/api/feedback', { method: 'POST', body: JSON.stringify({ category: category, message: message, page: location.href, image: imageData }) });
+        closeModal();
+      } catch (reason) {
+        // No feedback endpoint yet: fall back to email (text only — mail can't carry the image).
+        var subject = encodeURIComponent('StudyMAF feedback — ' + category);
+        var body = encodeURIComponent(message + '\n\nTopic: ' + category + (imageData ? '\n(Screenshot attached in-app; email cannot include it.)' : '') + '\n— ' + ((a && a.user.email) || 'a StudyMAF user'));
+        window.location.href = 'mailto:' + FEEDBACK_EMAIL + '?subject=' + subject + '&body=' + body;
+        closeModal();
+      }
     };
   }
   function openAccount() {

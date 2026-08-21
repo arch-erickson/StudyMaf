@@ -2,7 +2,7 @@ import { Auth } from '../js/auth.js';
 import '../js/generators.js';
 import '../js/generators-math.js';
 import '../js/generators-more.js';
-import { createAccountUI } from '../js/account-ui.js?v=21';
+import { createAccountUI } from '../js/account-ui.js?v=22';
 
 const shell = document.querySelector('.control-shell');
 const card = document.querySelector('.auth-card');

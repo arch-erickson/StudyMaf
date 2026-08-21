@@ -395,11 +395,18 @@ window.App = (function () {
     var mode = Store.getMode(id);
     var tb = el("div", "toolbar");
     var g1 = el("div", "group");
+    function aiMark(btn) { var s = el("span", "btn-ai"); s.title = "Uses the online tutor"; s.innerHTML = SPARKLE_SVG; btn.appendChild(s); return btn; }
     var calcBtn = ib("btn ghost", "calculator", "Calculator"); calcBtn.onclick = function () { Calculator.open(); };
-    var hwBtn = ib("btn ghost", "edit", "Homework"); hwBtn.onclick = function () { homeworkMode(id); };
-    var testBtn = ib("btn ghost", "target", "Test mode"); testBtn.onclick = function () { testModeIntro(id); };
+    var testBtn = ib("btn ghost", "target", "Test mode"); testBtn.onclick = function () { testMode(id); };
     var matBtn = ib("btn ghost", "book", "Materials"); matBtn.onclick = function () { materialsDialog(id); };
-    g1.append(calcBtn, hwBtn, testBtn, matBtn);
+    g1.append(calcBtn, testBtn, matBtn);
+    // Test mode incorporates AI when the online tutor is on — mark it, and
+    // reveal Homework (an AI-only feature) to the right of Materials.
+    if (mode.online) {
+      aiMark(testBtn);
+      var hwBtn = ib("btn ghost", "edit", "Homework"); hwBtn.onclick = function () { homeworkMode(id); }; aiMark(hwBtn);
+      g1.appendChild(hwBtn);
+    }
     tb.appendChild(g1);
     tb.appendChild(el("div", "spacer"));
     // online toggle
@@ -1535,14 +1542,46 @@ window.App = (function () {
   // TEST MODE — practice exam (timer, N questions, per-question hint,
   //             all visible + verify one at a time, scoring, XP if perfect)
   // ====================================================================
-  function testModeIntro(id) {
-    modal(
-      "<h2>Test mode</h2>" +
-      "<div class='notice'><strong>How it works.</strong>Test mode drills you until your mistakes are cleared, then lets you take a timed practice exam. " +
-      "In the full AI stage it will target your specific weak spots; for now it builds the exam from your lesson's problem bank.</div>" +
-      "<p class='modal-sub'>Open a lesson below and choose <strong>Practice test</strong> to configure a timed exam.</p>" +
-      "<div class='modal-actions'><button class='btn primary' data-close>Got it</button></div>"
+  // Class-wide timed exam. Builds from every lesson's problem bank, filtered by
+  // difficulty. With the online tutor on, this is where Rho targets weak spots
+  // (see the Codex prompt / /api/tutor for the AI selection + grading stage).
+  function testMode(id) {
+    var cls = Store.getClass(id); if (!cls) return;
+    var lessonIds = cls.lessonIds || [];
+    if (!lessonIds.length) { toast("This class has no lessons yet."); return; }
+    var online = isOnline(cls);
+    var order = ["easy", "medium", "hard", "extreme"];
+    var pillHtml = [{ v: "mixed", l: "Mixed" }].concat(order.map(function (d) { return { v: d, l: diffLabel(d) }; }))
+      .map(function (o, i) { return "<button type='button' class='lp-pill" + (i === 0 ? " on" : "") + "' data-v='" + o.v + "'>" + o.l + "</button>"; }).join("");
+    var m = modal(
+      "<div class='control-eyebrow'>Test mode</div><h2>Practice exam — " + esc(cls.name) + "</h2>" +
+      "<p class='modal-sub'>A timed exam drawn from across this class. Each question has a hint; you verify one at a time and get a review of what to relearn at the end." +
+      (online ? " <strong>Online tutor is on</strong> — Rho focuses the exam on your weak spots." : "") + "</p>" +
+      "<div class='row2'>" +
+      "<div class='field'><label>Questions</label><input id='tm-n' type='number' min='1' max='40' value='10'></div>" +
+      "<div class='field'><label>Time limit (minutes)</label><input id='tm-min' type='number' min='1' max='180' value='20'></div>" +
+      "</div>" +
+      "<div class='field'><label>Difficulty</label><div class='lp-diff' id='tm-diff'>" + pillHtml + "</div></div>" +
+      "<div id='tm-error'></div>" +
+      "<div class='modal-actions'><button class='btn subtle' type='button' data-close>Cancel</button><button class='btn primary' id='tm-go'>Start test</button></div>"
     );
+    var chosen = "mixed";
+    m.querySelectorAll("#tm-diff .lp-pill").forEach(function (b) { b.onclick = function () { chosen = b.getAttribute("data-v"); m.querySelectorAll("#tm-diff .lp-pill").forEach(function (x) { x.classList.toggle("on", x === b); }); }; });
+    m.querySelector("#tm-go").onclick = function () {
+      var n = Math.max(1, Math.min(40, +m.querySelector("#tm-n").value || 10));
+      var mins = Math.max(1, +m.querySelector("#tm-min").value || 20);
+      var go = m.querySelector("#tm-go"); go.disabled = true; go.textContent = "Building…";
+      Promise.all(lessonIds.map(function (lid) { return loadLesson(lid).then(function (L) { return { lid: lid, L: L }; }).catch(function () { return null; }); }))
+        .then(function (loaded) {
+          var pool = [];
+          loaded.filter(Boolean).forEach(function (item) { (item.L.problems || []).forEach(function (p) { pool.push(Object.assign({}, p, { _lid: item.lid })); }); });
+          if (chosen !== "mixed") { var want = chosen === "extreme" ? "stretch" : chosen; var f = pool.filter(function (p) { return p.difficulty === want; }); if (f.length) pool = f; }
+          if (!pool.length) { m.querySelector("#tm-error").innerHTML = "<p class='account-error'>No questions are available for this class yet.</p>"; go.disabled = false; go.textContent = "Start test"; return; }
+          var questions = shuffle(pool).slice(0, Math.min(n, pool.length));
+          closeModal();
+          runExam(cls, questions[0]._lid || lessonIds[0], questions, mins);
+        });
+    };
   }
 
   function startTest(cls, lid, lesson) {
@@ -2208,7 +2247,7 @@ window.App = (function () {
     bindHeader();
     // Accounts are isolated in a small ES module so the static app can still
     // load even if an auth provider is temporarily unavailable.
-    import("./account-ui.js?v=21").then(function (mod) {
+    import("./account-ui.js?v=22").then(function (mod) {
       AccountUI = mod.createAccountUI({ modal: modal, closeModal: closeModal, reroute: route });
       AccountUI.mountHeader();
       return AccountUI.ready();
