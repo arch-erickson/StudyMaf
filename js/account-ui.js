@@ -30,7 +30,7 @@ export function createAccountUI(options) {
     if (!header) return;
     var a = account(); header.hidden = !a;
     if (!a) return;
-    header.innerHTML = '<span class="account-icon">' + HEADSHOT_SVG + '</span><span class="account-header-label">' + esc((a.user.name || a.user.email).split(' ')[0]) + '</span>';
+    header.innerHTML = '<span class="account-icon">' + HEADSHOT_SVG + '</span>';
     header.setAttribute('aria-label', 'Open account menu for ' + a.user.email);
   }
   function openSettings() {

@@ -899,3 +899,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 /* Account header: minimalistic outline headshot (matches the calculator icon). */
 .account-header-name .account-icon { display: inline-flex; align-items: center; }
 .account-header-name .account-icon .icon { width: 20px; height: 20px; }
+
+/* Icon-only account button. */
+.account-header-name { padding: 7px !important; }
+.account-header-name .account-header-label { display: none; }
