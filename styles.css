@@ -895,3 +895,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 
 /* Running XP counter in Learn/Practice session headers (not quiz/test). */
 .session-xp { font-weight: 800; color: var(--ink-soft); font-size: .9rem; display: inline-flex; align-items: center; white-space: nowrap; }
+
+/* Account header: minimalistic outline headshot (matches the calculator icon). */
+.account-header-name .account-icon { display: inline-flex; align-items: center; }
+.account-header-name .account-icon .icon { width: 20px; height: 20px; }

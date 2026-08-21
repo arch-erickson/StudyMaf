@@ -1,6 +1,8 @@
 import { Auth } from './auth.js?v=2';
 
 function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+// Minimalistic outline headshot, matching the Feather-style header icons.
+var HEADSHOT_SVG = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 function n(value) { return Math.max(0, Number(value) || 0); }
 function pct(value) { return Math.max(0, Math.min(100, Math.round(n(value)))); }
 function time(value) { value = Math.round(n(value)); if (value < 60) return value ? '<1m' : '0m'; var h = Math.floor(value / 3600), m = Math.round(value % 3600 / 60); return h ? h + 'h ' + m + 'm' : m + 'm'; }
@@ -28,7 +30,7 @@ export function createAccountUI(options) {
     if (!header) return;
     var a = account(); header.hidden = !a;
     if (!a) return;
-    header.innerHTML = '<span class="account-avatar">' + initials(a.user.name || a.user.email) + '</span><span class="account-header-label">' + esc((a.user.name || a.user.email).split(' ')[0]) + '</span>';
+    header.innerHTML = '<span class="account-icon">' + HEADSHOT_SVG + '</span><span class="account-header-label">' + esc((a.user.name || a.user.email).split(' ')[0]) + '</span>';
     header.setAttribute('aria-label', 'Open account menu for ' + a.user.email);
   }
   function openSettings() {
