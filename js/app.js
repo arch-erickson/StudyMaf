@@ -1963,12 +1963,23 @@ window.App = (function () {
     if (ctx.question_id) chip("Problem: " + ctx.question_id, function () { openTutorProblem(ctx); });
     return refs.childNodes.length ? refs : null;
   }
-  function tutorAvatar() {
+  function tutorSvgFace() {
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "-32 -34 64 78"); svg.setAttribute("aria-hidden", "true");
     var group = document.createElementNS("http://www.w3.org/2000/svg", "g"); svg.appendChild(group);
     if (window.Figures && Figures.LIB && Figures.LIB.person) Figures.LIB.person(group, { color: "accent", hair: "up" });
     return svg;
+  }
+  function tutorAvatar() {
+    var v = document.createElement("video");
+    v.className = "rho-avatar";
+    v.muted = true; v.defaultMuted = true; v.loop = true; v.autoplay = true; v.preload = "auto";
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("autoplay", ""); v.setAttribute("loop", ""); v.setAttribute("aria-hidden", "true");
+    v.src = "assets/Design/Rho%20Animation.mp4";
+    var swapped = false;
+    v.addEventListener("error", function () { if (swapped || !v.parentNode) return; swapped = true; v.parentNode.replaceChild(tutorSvgFace(), v); });
+    setTimeout(function () { try { var p = v.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {} }, 0);
+    return v;
   }
   function compressTutorImage(file) {
     return new Promise(function (resolve, reject) {
