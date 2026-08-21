@@ -1215,6 +1215,20 @@ window.App = (function () {
       hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
       padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: p.id, problemLabel: "Problem " + (idx + 1), prompt: p.prompt, hasSession: true }); };
       calcBtn.onclick = function () { Calculator.open(); };
+      // ONLINE: Rho is available right on the practice problem — hints first, adapts on request.
+      if (isOnline(cls)) {
+        tutorPanel(inner, {
+          context: { page: "online practice", question_prompt: p.prompt, difficulty: p.difficulty || "" },
+          intro: "Practice with me — I lead with hints and adapt to you. Ask for harder, easier, or more detail.",
+          quick: [
+            { label: "Hint", prompt: "Give ONE hint for this problem, not the answer. Keep it to the syllabus/textbook method. Problem: " + p.prompt },
+            { label: "Explain in detail", prompt: "Explain how to approach this problem step by step (method, not the final number). Problem: " + p.prompt },
+            { label: "Make it harder", prompt: "Give me a harder variation of this problem to try, on the same topic. Problem: " + p.prompt },
+            { label: "Make it easier", prompt: "Give me an easier warm-up version of this problem. Problem: " + p.prompt },
+            { label: "Be straightforward", prompt: "Just explain this clearly and directly, then show the final answer. Problem: " + p.prompt }
+          ]
+        });
+      }
       field.addEventListener("keydown", function (e) { if (e.key === "Enter") nextBtn.click(); });
 
       state.checked = false; verdict.textContent = ""; verdict.className = "verdict"; nextBtn.textContent = "Check";
