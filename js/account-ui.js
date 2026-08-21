@@ -3,6 +3,8 @@ import { Auth } from './auth.js?v=2';
 function esc(value) { return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
 // Minimalistic outline headshot, matching the Feather-style header icons.
 var HEADSHOT_SVG = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+// Where the account "Feedback" action sends mail. Change to your support inbox.
+var FEEDBACK_EMAIL = 'feedback@studymaf.com';
 function n(value) { return Math.max(0, Number(value) || 0); }
 function pct(value) { return Math.max(0, Math.min(100, Math.round(n(value)))); }
 function time(value) { value = Math.round(n(value)); if (value < 60) return value ? '<1m' : '0m'; var h = Math.floor(value / 3600), m = Math.round(value % 3600 / 60); return h ? h + 'h ' + m + 'm' : m + 'm'; }
@@ -42,12 +44,58 @@ export function createAccountUI(options) {
       catch (reason) { m.querySelector('#profile-error').innerHTML = error(reason.message); }
     };
   }
+  var accountMenu = null;
+  function closeAccountMenu() {
+    if (!accountMenu) return false;
+    accountMenu.remove(); accountMenu = null;
+    document.removeEventListener('click', onAccountDocClick, true);
+    document.removeEventListener('keydown', onAccountEsc, true);
+    window.removeEventListener('resize', closeAccountMenu);
+    window.removeEventListener('scroll', closeAccountMenu, true);
+    if (header) header.setAttribute('aria-expanded', 'false');
+    return true;
+  }
+  function onAccountDocClick(event) { if (accountMenu && !accountMenu.contains(event.target) && header && !header.contains(event.target)) closeAccountMenu(); }
+  function onAccountEsc(event) { if (event.key === 'Escape') closeAccountMenu(); }
+  function positionAccountMenu() {
+    if (!accountMenu || !header) return;
+    var r = header.getBoundingClientRect();
+    accountMenu.style.top = (r.bottom + 8) + 'px';
+    accountMenu.style.right = Math.max(8, window.innerWidth - r.right) + 'px';
+  }
+  function openFeedback() {
+    var a = account();
+    var m = modal('<div class="control-eyebrow">Feedback</div><h2>Share your feedback</h2><p class="modal-sub">Tell us what is working, what is confusing, or what you would like to see next. We read every note.</p><form class="account-form" id="feedback-form"><label>Your message<textarea name="message" rows="5" required placeholder="What is on your mind?"></textarea></label><div id="feedback-error"></div><div class="modal-actions"><button class="btn subtle" type="button" data-close>Cancel</button><button class="btn primary" type="submit">Send feedback</button></div></form>');
+    m.querySelector('#feedback-form').onsubmit = function (event) {
+      event.preventDefault();
+      var message = String(new FormData(event.currentTarget).get('message') || '').trim();
+      if (!message) { m.querySelector('#feedback-error').innerHTML = error('Please write a short message first.'); return; }
+      var subject = encodeURIComponent('StudyMAF feedback');
+      var body = encodeURIComponent(message + '\n\n— ' + ((a && a.user.email) || 'a StudyMAF user'));
+      window.location.href = 'mailto:' + FEEDBACK_EMAIL + '?subject=' + subject + '&body=' + body;
+      closeModal();
+    };
+  }
   function openAccount() {
     var a = account(); if (!a) return;
-    var m = modal('<div class="account-menu-head"><span class="account-avatar large">' + initials(a.user.name || a.user.email) + '</span><div><strong>' + esc(a.user.name || a.user.email) + '</strong><p>' + esc(a.user.email) + '</p></div></div><span class="role-pill">' + esc(roleName(a.role)) + '</span><div class="account-menu-actions"><button class="btn primary" id="account-dashboard">Dashboard</button><button class="btn ghost" id="account-settings">Settings</button><button class="btn danger" id="account-logout">Sign out</button></div>');
-    m.querySelector('#account-dashboard').onclick = function () { location.assign(dashboardUrl()); };
-    m.querySelector('#account-settings').onclick = openSettings;
-    m.querySelector('#account-logout').onclick = signOut;
+    if (closeAccountMenu()) return; // toggle
+    var menu = document.createElement('div');
+    menu.className = 'account-dropdown';
+    menu.innerHTML = '<div class="account-menu-head"><span class="account-avatar large">' + initials(a.user.name || a.user.email) + '</span><div><strong>' + esc(a.user.name || a.user.email) + '</strong><p>' + esc(a.user.email) + '</p></div></div><span class="role-pill">' + esc(roleName(a.role)) + '</span><div class="account-menu-actions"><button class="btn ghost" id="account-dashboard">Dashboard</button><button class="btn ghost" id="account-settings">Settings</button><button class="btn ghost" id="account-feedback">Feedback</button><button class="btn danger" id="account-logout">Sign out</button></div>';
+    document.body.appendChild(menu);
+    accountMenu = menu;
+    if (header) header.setAttribute('aria-expanded', 'true');
+    positionAccountMenu();
+    menu.querySelector('#account-dashboard').onclick = function () { closeAccountMenu(); location.assign(dashboardUrl()); };
+    menu.querySelector('#account-settings').onclick = function () { closeAccountMenu(); openSettings(); };
+    menu.querySelector('#account-feedback').onclick = function () { closeAccountMenu(); openFeedback(); };
+    menu.querySelector('#account-logout').onclick = function () { closeAccountMenu(); signOut(); };
+    setTimeout(function () {
+      document.addEventListener('click', onAccountDocClick, true);
+      document.addEventListener('keydown', onAccountEsc, true);
+      window.addEventListener('resize', closeAccountMenu);
+      window.addEventListener('scroll', closeAccountMenu, true);
+    }, 0);
   }
   function metricCard(value, label, tint) { return '<section class="metric-card ' + (tint || 'orange') + '"><strong>' + esc(value) + '</strong><span>' + esc(label) + '</span></section>'; }
   function progressLine(value) { return '<span class="completion"><span class="line"><i style="width:' + pct(value) + '%"></i></span><b>' + pct(value) + '%</b></span>'; }
