@@ -10,6 +10,6 @@
   },
   "dependencies": {
     "katex": "^0.16.11",
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "2.4.5"
   }
 }

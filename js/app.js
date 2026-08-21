@@ -28,6 +28,14 @@ window.App = (function () {
   var SPARKLE_SVG = '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M10 2c.35 4.2 2.3 6.15 6.5 6.5-4.2.35-6.15 2.3-6.5 6.5-.35-4.2-2.3-6.15-6.5-6.5C7.7 8.15 9.65 6.2 10 2Z"/><path d="M18 13.5c.18 2.1 1.15 3.07 3.25 3.25-2.1.18-3.07 1.15-3.25 3.25-.18-2.1-1.15-3.07-3.25-3.25 2.1-.18 3.07-1.15 3.25-3.25Z"/></svg>';
   var TUTOR_URL = "REPLACE_WITH_YOUR_TUTOR_URL"; // legacy external-tutor URL (no longer surfaced in the UI)
   var TUTOR_API_URL = "https://studymaf-tutor.vercel.app/api/tutor/chat";
+  function tutorAppApi(path, body) {
+    var session = window.StudyMAFSession, account = window.StudyMAFAccount;
+    if (!session || !session.access_token) return Promise.reject(new Error("Sign in to use this online tutor feature."));
+    var headers = { "Content-Type": "application/json", Authorization: "Bearer " + session.access_token };
+    if (account && account.role) headers["X-StudyMAF-Workspace"] = account.role;
+    return fetch(TUTOR_API_URL.replace(/\/api\/tutor\/chat$/, "") + path, { method: "POST", headers: headers, body: JSON.stringify(body || {}) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Online tutor unavailable."); return j; }); });
+  }
   // This is updated as a student moves through StudyMAF. The API receives the
   // exact lesson/problem text; the tutor does not have to guess from the URL.
   var tutorContext = { page: "dashboard", lesson_id: "", lesson_title: "", chapter: "", textbook: "", question_id: "", question_prompt: "", hint: "" };
@@ -1492,9 +1500,12 @@ window.App = (function () {
   function mathToPlain(latex) {
     var s = String(latex || "");
     s = s.replace(/\\left|\\right/g, "");
-    for (var k = 0; k < 4; k++) s = s.replace(/\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, "($1)/($2)");
-    s = s.replace(/\\sqrt\s*\[([^\]]*)\]\s*\{([^{}]*)\}/g, "($2)^(1/($1))");
-    s = s.replace(/\\sqrt\s*\{([^{}]*)\}/g, "sqrt($1)");
+    // sqrt before frac so a root inside a fraction leaves brace-free args
+    for (var j = 0; j < 4; j++) {
+      s = s.replace(/\\sqrt\s*\[([^\[\]{}]*)\]\s*\{([^{}]*)\}/g, "($2)^(1/($1))");
+      s = s.replace(/\\sqrt\s*\{([^{}]*)\}/g, "sqrt($1)");
+      s = s.replace(/\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, "($1)/($2)");
+    }
     s = s.replace(/\\cdot|\\times/g, "*");
     s = s.replace(/\\pi/g, "pi");
     s = s.replace(/\\infty/g, "Infinity");
@@ -1505,6 +1516,8 @@ window.App = (function () {
   }
   function safeNum(expr) {
     var s = String(expr).replace(/\s+/g, "").replace(/,/g, "").replace(/×10\^?/gi, "e");
+    // implicit multiplication: 2(3) -> 2*(3), 2pi -> 2*pi, )2 -> )*2
+    s = s.replace(/([0-9)])(\()/g, "$1*$2").replace(/([0-9)])(pi|sqrt)/gi, "$1*$2").replace(/(\))([0-9])/g, "$1*$2");
     s = s.replace(/pi/gi, "(" + Math.PI + ")").replace(/\bsqrt\b/gi, "Math.sqrt").replace(/\^/g, "**");
     if (!/^[-+*/().0-9eE]*$/.test(s.replace(/Math\.sqrt/g, ""))) return NaN;
     try { var v = Function('"use strict";return (' + s + ")")(); return (typeof v === "number" && isFinite(v)) ? v : NaN; }
@@ -1613,11 +1626,15 @@ window.App = (function () {
         .then(function (loaded) {
           var pool = [];
           loaded.filter(Boolean).forEach(function (item) { (item.L.problems || []).forEach(function (p) { pool.push(Object.assign({}, p, { _lid: item.lid })); }); });
-          if (chosen !== "mixed") { var want = chosen === "extreme" ? "stretch" : chosen; var f = pool.filter(function (p) { return p.difficulty === want; }); if (f.length) pool = f; }
           if (!pool.length) { m.querySelector("#tm-error").innerHTML = "<p class='account-error'>No questions are available for this class yet.</p>"; go.disabled = false; go.textContent = "Start test"; return; }
-          var questions = shuffle(pool).slice(0, Math.min(n, pool.length));
-          closeModal();
-          runExam(cls, questions[0]._lid || lessonIds[0], questions, mins);
+          var localPool = pool.slice();
+          if (chosen !== "mixed") { var want = chosen === "extreme" ? "stretch" : chosen; var filtered = localPool.filter(function (p) { return p.difficulty === want; }); if (filtered.length) localPool = filtered; }
+          var fallback = shuffle(localPool).slice(0, Math.min(n, localPool.length));
+          if (!online) { closeModal(); return runExam(cls, fallback[0]._lid || lessonIds[0], fallback, mins); }
+          var sentPool = pool.map(function (p, index) { return Object.assign({}, p, { id: p.id || (p._lid + ":exam-" + index), lesson_id: p._lid }); });
+          tutorAppApi("/api/tutor/exam", { action: "select", class_code: cls.code || "", lesson_ids: lessonIds, count: n, difficulty: chosen, questions: sentPool })
+            .then(function (result) { var questions = (result.questions || []).map(function (p) { p._lid = p.lesson_id || p._lid; return p; }); if (!questions.length) throw new Error("Rho did not return any questions."); closeModal(); runExam(cls, questions[0]._lid || lessonIds[0], questions, mins, { aiGrading: true }); })
+            .catch(function () { closeModal(); runExam(cls, fallback[0]._lid || lessonIds[0], fallback, mins, { aiGrading: true }); });
         });
     };
   }
@@ -1646,12 +1663,13 @@ window.App = (function () {
       var n = Math.max(1, Math.min(pool.length, +m.querySelector("#t-n").value || 10));
       var mins = Math.max(1, +m.querySelector("#t-min").value || 15);
       closeModal();
-      runExam(cls, lid, shuffle(pool).slice(0, n), mins);
+      runExam(cls, lid, shuffle(pool).slice(0, n), mins, { aiGrading: isOnline(cls) });
     };
   }
   function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
 
-  function runExam(cls, lid, problems, minutes) {
+  function runExam(cls, lid, problems, minutes, options) {
+    options = options || {};
     var session = el("div", "session");
     var top = el("div", "session-top");
     var closeX = el("button", "close-x"); closeX.innerHTML = icon("x"); closeX.onclick = function () { clearInterval(timer); session.remove(); renderClass(cls.id); };
@@ -1687,11 +1705,21 @@ window.App = (function () {
       if (remaining <= 0) { clearInterval(timer); grade(); }
     }, 1000);
 
-    function grade() {
+    var graded = false;
+    async function grade() {
+      if (graded) return;
+      graded = true; submit.disabled = true; submit.textContent = options.aiGrading ? "Rho is grading…" : "Grading…";
       clearInterval(timer);
       var correct = 0, wrong = [];
-      inputs.forEach(function (o) {
-        var ok = isCorrect(o.input.value, o.p.correct_answer);
+      var grades = await Promise.all(inputs.map(function (o) {
+        var fallback = { correct: isCorrect(o.input.value, o.p.correct_answer), explanation: "" };
+        if (!options.aiGrading) return Promise.resolve(fallback);
+        return tutorAppApi("/api/tutor/exam", { action: "grade", class_code: cls.code || "", lesson_id: o.p.lesson_id || o.p._lid || lid, question_id: o.p.id || (o.p._lid || lid) + ":exam", prompt: o.p.prompt, correct_answer: o.p.correct_answer, student_answer: o.input.value })
+          .catch(function () { return fallback; });
+      }));
+      inputs.forEach(function (o, index) {
+        var result = grades[index], ok = !!result.correct;
+        o.p._gradeExplanation = result.explanation || "";
         o.card.style.borderColor = ok ? "var(--easy)" : "var(--hard)";
         o.card.style.borderWidth = "2px";
         if (ok) correct++; else wrong.push(o.p);
@@ -1713,11 +1741,12 @@ window.App = (function () {
       if (list) wrong.forEach(function (p) {
         var c = el("div", "steps-panel"); c.hidden = false; c.style.marginBottom = "12px";
         var pr = el("div"); pr.style.fontWeight = "700"; pr.style.marginBottom = "6px"; pr.textContent = p.prompt; c.appendChild(pr);
+        if (p._gradeExplanation) c.appendChild(el("p", "modal-sub", p._gradeExplanation));
         var ans = el("p", null, "Correct answer: " + p.correct_answer); c.appendChild(ans);
         var ol = document.createElement("ol"); (p.solution_steps || []).forEach(function (s) { ol.appendChild(el("li", null, s)); });
         c.appendChild(ol); list.appendChild(c); StudyMath.render(c);
       });
-      m.querySelector("#fb-retry").onclick = function () { closeModal(); clearInterval(timer); session.remove(); startTest(cls, lid, { title: "Retry", problems: problems }); };
+      m.querySelector("#fb-retry").onclick = function () { closeModal(); clearInterval(timer); session.remove(); runExam(cls, lid, problems, minutes, options); };
     }
   }
 
@@ -1766,17 +1795,28 @@ window.App = (function () {
   }
 
   function homeworkMode(id) {
+    var cls = Store.getClass(id); if (!cls) return;
     var m = modal(
       "<h2>Homework mode</h2>" +
       "<div class='notice'><strong>Study for a specific assignment.</strong>Upload a homework file and the AI stage will build " +
-      "practice around exactly those question types. For now you can attach it and practice from your lesson bank.</div>" +
-      "<div class='field'><label>Homework file</label><input id='hw-file' type='file' accept='.pdf,.doc,.docx,.txt,.png,.jpg'></div>" +
-      "<div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='hw-save'>Attach</button></div>"
+      "practice around exactly those question types. Your file is stored privately and used only to create your practice set.</div>" +
+      "<div class='field'><label>Homework PDF or image</label><input id='hw-file' type='file' accept='application/pdf,image/png,image/jpeg,image/webp'></div><p class='modal-sub'>Maximum file size: 4 MB.</p></div>" +
+      "<div id='hw-error'></div><div class='modal-actions'><button class='btn subtle' data-close>Cancel</button><button class='btn primary' id='hw-save'>Build practice</button></div>"
     );
     m.querySelector("#hw-save").onclick = function () {
       var f = m.querySelector("#hw-file").files[0];
-      if (f) { Store.setUpload(id, "homework", f.name); toast("Homework attached ✓"); }
-      closeModal();
+      var error = m.querySelector("#hw-error"), submit = m.querySelector("#hw-save");
+      if (!f) { error.innerHTML = "<p class='account-error'>Choose a PDF or image first.</p>"; return; }
+      if (f.size > 4 * 1024 * 1024) { error.innerHTML = "<p class='account-error'>That file is over 4 MB.</p>"; return; }
+      submit.disabled = true; submit.textContent = "Reading homework…"; error.innerHTML = "";
+      var reader = new FileReader();
+      reader.onerror = function () { submit.disabled = false; submit.textContent = "Build practice"; error.innerHTML = "<p class='account-error'>Could not read that file.</p>"; };
+      reader.onload = function () {
+        tutorAppApi("/api/tutor/homework", { file: { name: f.name, type: f.type, dataUrl: reader.result }, class_section_id: cls.serverSectionId || "", class_code: cls.code || "", lesson_ids: cls.lessonIds || [] })
+          .then(function (result) { var questions = (result.questions || []).map(function (p) { p._lid = p.lesson_id || (cls.lessonIds || [])[0]; return p; }); if (!questions.length) throw new Error("No practice questions were created."); Store.setUpload(id, "homework", f.name); closeModal(); toast("Homework practice is ready ✓"); runExam(cls, questions[0]._lid || (cls.lessonIds || [])[0], questions, 30, { aiGrading: true, homework: true }); })
+          .catch(function (reason) { submit.disabled = false; submit.textContent = "Build practice"; error.innerHTML = "<p class='account-error'>" + esc(reason.message) + "</p>"; });
+      };
+      reader.readAsDataURL(f);
     };
   }
 

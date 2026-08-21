@@ -1,6 +1,9 @@
 {
   "rewrites": [
     { "source": "/api/tutor/history", "destination": "/api/tutor-memory?action=history" },
-    { "source": "/api/tutor/attempts", "destination": "/api/tutor-memory?action=attempts" }
+    { "source": "/api/tutor/attempts", "destination": "/api/tutor-memory?action=attempts" },
+    { "source": "/api/feedback", "destination": "/api/tutor-memory?action=feedback" },
+    { "source": "/api/tutor/exam", "destination": "/api/tutor-memory?action=exam" },
+    { "source": "/api/tutor/homework", "destination": "/api/tutor-memory?action=homework" }
   ]
 }
