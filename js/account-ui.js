@@ -45,6 +45,9 @@ export function createAccountUI(options) {
     };
   }
   var accountMenu = null;
+  // The button the menu anchors to: the dashboard header button, or the admin
+  // Control profile button.
+  function accountTrigger() { return header || document.getElementById('control-profile'); }
   function closeAccountMenu() {
     if (!accountMenu) return false;
     accountMenu.remove(); accountMenu = null;
@@ -52,14 +55,14 @@ export function createAccountUI(options) {
     document.removeEventListener('keydown', onAccountEsc, true);
     window.removeEventListener('resize', closeAccountMenu);
     window.removeEventListener('scroll', closeAccountMenu, true);
-    if (header) header.setAttribute('aria-expanded', 'false');
+    var t = accountTrigger(); if (t) t.setAttribute('aria-expanded', 'false');
     return true;
   }
-  function onAccountDocClick(event) { if (accountMenu && !accountMenu.contains(event.target) && header && !header.contains(event.target)) closeAccountMenu(); }
+  function onAccountDocClick(event) { var t = accountTrigger(); if (accountMenu && !accountMenu.contains(event.target) && (!t || !t.contains(event.target))) closeAccountMenu(); }
   function onAccountEsc(event) { if (event.key === 'Escape') closeAccountMenu(); }
   function positionAccountMenu() {
-    if (!accountMenu || !header) return;
-    var r = header.getBoundingClientRect();
+    var t = accountTrigger(); if (!accountMenu || !t) return;
+    var r = t.getBoundingClientRect();
     accountMenu.style.top = (r.bottom + 8) + 'px';
     accountMenu.style.right = Math.max(8, window.innerWidth - r.right) + 'px';
   }
@@ -84,7 +87,7 @@ export function createAccountUI(options) {
     menu.innerHTML = '<div class="account-menu-head"><span class="account-avatar large">' + initials(a.user.name || a.user.email) + '</span><div><strong>' + esc(a.user.name || a.user.email) + '</strong><p>' + esc(a.user.email) + '</p></div></div><span class="role-pill">' + esc(roleName(a.role)) + '</span><div class="account-menu-actions"><button class="btn ghost" id="account-dashboard">Dashboard</button><button class="btn ghost" id="account-settings">Settings</button><button class="btn ghost" id="account-feedback">Feedback</button><button class="btn danger" id="account-logout">Sign out</button></div>';
     document.body.appendChild(menu);
     accountMenu = menu;
-    if (header) header.setAttribute('aria-expanded', 'true');
+    var trigger = accountTrigger(); if (trigger) trigger.setAttribute('aria-expanded', 'true');
     positionAccountMenu();
     menu.querySelector('#account-dashboard').onclick = function () { closeAccountMenu(); location.assign(dashboardUrl()); };
     menu.querySelector('#account-settings').onclick = function () { closeAccountMenu(); openSettings(); };
