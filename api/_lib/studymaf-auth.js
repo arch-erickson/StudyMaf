@@ -81,6 +81,29 @@ async function signedCourseDocuments(courseId, expiresIn) {
   return Promise.all((documents || []).map(function (document) { return signedCourseDocument(document, expiresIn); }));
 }
 
+async function uploadPrivateObject(bucket, path, body, mimeType) {
+  if (!/^[a-z0-9-]{1,80}$/i.test(String(bucket || ''))) throw new Error('Invalid private storage bucket.');
+  if (!/^[a-zA-Z0-9_./-]{1,700}$/.test(String(path || ''))) throw new Error('Invalid private storage path.');
+  var c = config();
+  var response = await fetch(c.url + '/storage/v1/object/' + encodeURIComponent(bucket) + '/' + String(path).split('/').map(encodeURIComponent).join('/'), {
+    method: 'POST',
+    headers: { apikey: c.key, Authorization: 'Bearer ' + c.key, 'Content-Type': mimeType || 'application/octet-stream', 'x-upsert': 'false' },
+    body: body
+  });
+  var raw = await response.text(), data = null;
+  try { data = raw ? JSON.parse(raw) : null; } catch (error) {}
+  if (!response.ok) throw new Error(data && (data.message || data.error) || 'Could not save the private file.');
+  return data;
+}
+
+async function removePrivateObject(bucket, path) {
+  var c = config();
+  var response = await fetch(c.url + '/storage/v1/object/' + encodeURIComponent(bucket) + '/' + String(path).split('/').map(encodeURIComponent).join('/'), {
+    method: 'DELETE', headers: { apikey: c.key, Authorization: 'Bearer ' + c.key }
+  });
+  if (!response.ok && response.status !== 404) throw new Error('Could not remove the private file.');
+}
+
 async function ensureProfile(user) {
   var name = user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name);
   var body = { id: user.id, email: String(user.email || '').toLowerCase(), last_seen_at: new Date().toISOString() };
@@ -177,4 +200,4 @@ async function ownedSection(sectionId, professorId) {
   return rows && rows[0] || null;
 }
 
-module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, signedCourseDocument: signedCourseDocument, signedCourseDocuments: signedCourseDocuments, authenticated: authenticated, requireRole: requireRole, resolveWorkspace: resolveWorkspace, requireWorkspace: requireWorkspace, ownedSection: ownedSection };
+module.exports = { cors: cors, json: json, text: text, email: email, code: code, db: db, deleteAuthUser: deleteAuthUser, signedCourseDocument: signedCourseDocument, signedCourseDocuments: signedCourseDocuments, uploadPrivateObject: uploadPrivateObject, removePrivateObject: removePrivateObject, authenticated: authenticated, requireRole: requireRole, resolveWorkspace: resolveWorkspace, requireWorkspace: requireWorkspace, ownedSection: ownedSection };

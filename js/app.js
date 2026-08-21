@@ -206,6 +206,9 @@ window.App = (function () {
     // numeric compare
     var un = parseFloat(u), an = parseFloat(a);
     if (!isNaN(un) && !isNaN(an) && Math.abs(un - an) < 1e-9) return true;
+    // expression compare (fractions, sqrt, pi from the math keyboard) with tolerance
+    var us = safeNum(userRaw), as = safeNum(answerRaw);
+    if (!isNaN(us) && !isNaN(as) && (Math.abs(us - as) < 1e-9 || (as !== 0 && Math.abs(us - as) / Math.abs(as) <= 0.03))) return true;
     return false;
   }
 
@@ -889,7 +892,7 @@ window.App = (function () {
       card.appendChild(el("span", "q-badge " + (q.difficulty || "medium"), "Q" + (i + 1) + " · " + (q.difficulty || "")));
       var pr = el("div", "q-prompt"); pr.textContent = q.prompt; card.appendChild(pr);
       var inputs = [];
-      if (q.isStatic) { var ab = el("div", "answer-box"); var input = document.createElement("input"); input.type = "text"; input.placeholder = "Answer…"; ab.appendChild(input); card.appendChild(ab); inputs.push({ kind: "static", el: input }); }
+      if (q.isStatic) { var sa = answerBox("Answer…"); card.appendChild(sa.box); inputs.push({ kind: "static", el: sa.valueEl }); }
       else if (q.type === "numeric") inputs.push(numericField(card, q));
       else if (q.type === "mc") renderChoices(card, q, function () {});
       else if (q.type === "multi") q.parts.forEach(function (part, pi) { inputs.push(partField(card, part, pi)); });
@@ -1049,10 +1052,10 @@ window.App = (function () {
         });
         controlHost.appendChild(box);
       } else if (ctl.type === "input") {
-        var wrap = el("div", "answer-box"); var inp = document.createElement("input"); inp.type = "text"; inp.placeholder = ctl.label || "Answer…";
+        var ca = answerBox(ctl.label || "Answer…");
         var chk = el("button", "btn subtle sm", "Check");
-        chk.onclick = function () { var ok = isCorrect(inp.value, ctl.answer); var fb = el("div", "verdict " + (ok ? "right" : "wrong")); fb.textContent = ok ? "Correct!" : "Not quite."; controlHost.appendChild(fb); };
-        wrap.append(inp, chk); controlHost.appendChild(wrap);
+        chk.onclick = function () { var ok = isCorrect(ca.valueEl.value, ctl.answer); var fb = el("div", "verdict " + (ok ? "right" : "wrong")); fb.textContent = ok ? "Correct!" : "Not quite."; controlHost.appendChild(fb); };
+        ca.box.appendChild(chk); controlHost.appendChild(ca.box);
       }
     });
   }
@@ -1178,9 +1181,7 @@ window.App = (function () {
       inner.appendChild(count);
       var prompt = el("div", "q-prompt"); prompt.textContent = p.prompt; inner.appendChild(prompt); StudyMath.render(prompt);
 
-      var ab = el("div", "answer-box");
-      var input = document.createElement("input"); input.type = "text"; input.placeholder = "Your answer…"; input.id = "ans";
-      ab.appendChild(input); inner.appendChild(ab);
+      var qa = answerBox("Your answer…"); var input = qa.valueEl, field = qa.field; inner.appendChild(qa.box);
 
       var tools = el("div", "q-tools");
       var hintBtn = ib("btn subtle", "bulb", "Hint");
@@ -1206,10 +1207,10 @@ window.App = (function () {
       hintBtn.onclick = function () { hintPanel.hidden = !hintPanel.hidden; StudyMath.render(hintPanel); };
       padBtn.onclick = function () { Notebook.openScratch({ classId: cls.id, lessonId: lid, lessonName: lesson.title, problemId: p.id, problemLabel: "Problem " + (idx + 1), prompt: p.prompt, hasSession: true }); };
       calcBtn.onclick = function () { Calculator.open(); };
-      input.addEventListener("keydown", function (e) { if (e.key === "Enter") nextBtn.click(); });
+      field.addEventListener("keydown", function (e) { if (e.key === "Enter") nextBtn.click(); });
 
       state.checked = false; verdict.textContent = ""; verdict.className = "verdict"; nextBtn.textContent = "Check";
-      input.focus();
+      try { field.focus(); } catch (e) {}
 
       nextBtn.onclick = function () {
         if (!state.checked) {
@@ -1486,15 +1487,52 @@ window.App = (function () {
   }
 
   // ---- generative-question field builders + checker ----
+  // ---- math answer entry: a MathLive field (scientific virtual keyboard, LaTeX)
+  //      with a hidden mirror holding a plain value the checkers already read.
+  function mathToPlain(latex) {
+    var s = String(latex || "");
+    s = s.replace(/\\left|\\right/g, "");
+    for (var k = 0; k < 4; k++) s = s.replace(/\\(?:d|t)?frac\s*\{([^{}]*)\}\s*\{([^{}]*)\}/g, "($1)/($2)");
+    s = s.replace(/\\sqrt\s*\[([^\]]*)\]\s*\{([^{}]*)\}/g, "($2)^(1/($1))");
+    s = s.replace(/\\sqrt\s*\{([^{}]*)\}/g, "sqrt($1)");
+    s = s.replace(/\\cdot|\\times/g, "*");
+    s = s.replace(/\\pi/g, "pi");
+    s = s.replace(/\\infty/g, "Infinity");
+    s = s.replace(/\^\s*\{([^{}]*)\}/g, "^($1)");
+    s = s.replace(/\\[a-zA-Z]+\s?/g, "");
+    s = s.replace(/[{}]/g, "");
+    return s.trim();
+  }
+  function safeNum(expr) {
+    var s = String(expr).replace(/\s+/g, "").replace(/,/g, "").replace(/×10\^?/gi, "e");
+    s = s.replace(/pi/gi, "(" + Math.PI + ")").replace(/\bsqrt\b/gi, "Math.sqrt").replace(/\^/g, "**");
+    if (!/^[-+*/().0-9eE]*$/.test(s.replace(/Math\.sqrt/g, ""))) return NaN;
+    try { var v = Function('"use strict";return (' + s + ")")(); return (typeof v === "number" && isFinite(v)) ? v : NaN; }
+    catch (e) { return NaN; }
+  }
+  var MATHLIVE_OK = !!(window.customElements && window.MathfieldElement);
+  function answerBox(placeholder) {
+    var box = el("div", "answer-box");
+    if (MATHLIVE_OK) {
+      var mf = document.createElement("math-field");
+      mf.className = "answer-math"; mf.setAttribute("placeholder", placeholder || "Your answer…");
+      try { mf.mathVirtualKeyboardPolicy = "onfocus"; } catch (e) {}
+      var hidden = document.createElement("input"); hidden.type = "hidden";
+      mf.addEventListener("input", function () { var plain = mathToPlain(mf.value); var n = safeNum(plain); hidden.value = isNaN(n) ? plain : String(n); hidden._latex = mf.value; });
+      box.append(mf, hidden);
+      setTimeout(function () { try { mf.focus(); } catch (e) {} }, 30);
+      return { box: box, valueEl: hidden, field: mf };
+    }
+    var input = document.createElement("input"); input.type = "text"; input.inputMode = "text"; input.placeholder = placeholder || "Your answer…";
+    box.appendChild(input);
+    setTimeout(function () { try { input.focus(); } catch (e) {} }, 30);
+    return { box: box, valueEl: input, field: input };
+  }
   function numericField(container, inst) {
-    var ab = el("div", "answer-box");
-    var input = document.createElement("input"); input.type = "text"; input.inputMode = "text";
-    input.placeholder = "Your answer" + (inst.unit ? " (" + inst.unit + ")" : "") + "…";
-    ab.appendChild(input);
-    if (inst.unit) ab.appendChild(el("span", "answer-unit", inst.unit));
-    container.appendChild(ab);
-    setTimeout(function () { input.focus(); }, 30);
-    return { kind: "numeric", el: input, spec: inst };
+    var a = answerBox("Your answer" + (inst.unit ? " (" + inst.unit + ")" : "") + "…");
+    if (inst.unit) a.box.appendChild(el("span", "answer-unit", inst.unit));
+    container.appendChild(a.box);
+    return { kind: "numeric", el: a.valueEl, spec: inst };
   }
   function partField(container, part, pi) {
     var wrap = el("div", "part-block");
@@ -1505,9 +1543,8 @@ window.App = (function () {
       renderChoices(wrap, part, function (i) { sel.idx = i; });
       container.appendChild(wrap); return { kind: "mc", sel: sel, spec: part };
     }
-    var ab = el("div", "answer-box"); var input = document.createElement("input"); input.type = "text";
-    input.placeholder = "Answer…"; ab.appendChild(input); wrap.appendChild(ab); container.appendChild(wrap);
-    return { kind: "numeric", el: input, spec: part };
+    var a = answerBox("Answer…"); wrap.appendChild(a.box); container.appendChild(wrap);
+    return { kind: "numeric", el: a.valueEl, spec: part };
   }
   function renderChoices(container, spec, onpick) {
     var box = el("div", "choice-box"); var picked = { i: null }; var btns = [];
@@ -1520,7 +1557,8 @@ window.App = (function () {
     return picked;
   }
   function numMatch(user, value, tol) {
-    var u = parseFloat(String(user).replace(/,/g, "").replace(/×10\^?/gi, "e").replace(/\s/g, ""));
+    var u = safeNum(user);
+    if (isNaN(u)) u = parseFloat(String(user).replace(/,/g, "").replace(/×10\^?/gi, "e").replace(/\s/g, ""));
     if (isNaN(u)) return false;
     if (value === 0) return Math.abs(u) < 1e-9;
     return Math.abs(u - value) / Math.abs(value) <= (tol || 0.03) + 1e-9;
@@ -1629,8 +1667,7 @@ window.App = (function () {
       var card = el("div", "steps-panel"); card.hidden = false; card.style.marginBottom = "18px";
       card.appendChild(el("span", "q-badge " + p.difficulty, "Q" + (i + 1) + " · " + p.difficulty));
       var pr = el("div", "q-prompt"); pr.style.fontSize = "1.1rem"; pr.textContent = p.prompt; card.appendChild(pr);
-      var ab = el("div", "answer-box"); var input = document.createElement("input"); input.type = "text"; input.placeholder = "Answer…";
-      ab.appendChild(input); card.appendChild(ab); inputs.push({ input: input, p: p, card: card });
+      var ea = answerBox("Answer…"); card.appendChild(ea.box); inputs.push({ input: ea.valueEl, p: p, card: card });
       var tools = el("div", "q-tools");
       var hintBtn = ib("btn subtle", "bulb", "Hint");
       var hp = el("p"); hp.hidden = true; hp.style.fontStyle = "italic"; hp.style.color = "var(--ink-soft)"; hp.textContent = p.hint;

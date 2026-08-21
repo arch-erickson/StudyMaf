@@ -920,3 +920,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .btn-ai svg { width: 15px; height: 15px; }
 /* Feedback screenshot preview. */
 .feedback-thumb { display: block; max-width: 100%; max-height: 180px; margin-top: 6px; border: 1px solid var(--line); border-radius: 10px; }
+
+/* Math answer entry (MathLive) — scientific keyboard + LaTeX, styled like inputs. */
+.answer-box .answer-math { flex: 1 1 240px; min-width: 0; font-size: 1.15rem; padding: 8px 12px; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); --caret-color: var(--accent); --selection-background-color: var(--accent-soft); }
+.answer-box .answer-math:focus-within { border-color: var(--accent); outline: none; }

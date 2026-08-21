@@ -9,6 +9,7 @@
     "build:dge-examples": "node tools/build-dge-examples.js"
   },
   "dependencies": {
-    "katex": "^0.16.11"
+    "katex": "^0.16.11",
+    "pdf-parse": "^2.4.5"
   }
 }
