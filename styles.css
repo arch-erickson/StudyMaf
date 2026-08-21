@@ -68,7 +68,7 @@ h1,h2,h3 { letter-spacing: -0.02em; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 16px; }
 .brand { font-size: 1.4rem; font-weight: 800; text-decoration: none; color: var(--ink); }
 .brand span { color: var(--accent); }
-.header-actions { display: flex; align-items: center; gap: 10px; }
+.header-actions { display: flex; align-items: stretch; gap: 10px; }
 .site-footer { flex-shrink: 0; border-top: 1px solid var(--line); background: var(--surface); }
 .site-footer p { color: var(--ink-soft); font-size: .82rem; padding: 18px 0; margin: 0; text-align: center; }
 
@@ -901,7 +901,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 .account-header-name .account-icon .icon { width: 20px; height: 20px; }
 
 /* Icon-only account button — square boundary. */
-.account-header-name { align-self: center; width: auto; height: auto; gap: 0 !important; padding: 9px !important; display: inline-grid; place-items: center; box-sizing: border-box; }
+.account-header-name { align-self: stretch; width: 45.5px; height: auto; min-width: 45.5px; gap: 0 !important; padding: 0 !important; display: grid; place-items: center; box-sizing: border-box; }
 .account-header-name .account-header-label { display: none; }
 .account-header-name .account-icon { display: inline-flex; }
 
