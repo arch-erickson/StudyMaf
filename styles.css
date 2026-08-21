@@ -928,3 +928,7 @@ body.immersive main#app { height: 100vh; overflow-y: auto; -webkit-overflow-scro
 /* Rho animated avatar (video) — fills the circular avatar in header and messages. */
 .tutor-avatar .rho-avatar { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
 .tutor-message > .rho-avatar { width: 29px; height: 29px; flex: 0 0 29px; object-fit: cover; border-radius: 50%; background: #f6e4d8; }
+
+/* Rho video: never let iOS paint a black frame; keep it clipped in any context. */
+video.rho-avatar { background: #f6e4d8; object-fit: cover; border-radius: 50%; }
+.close-x { -webkit-appearance: none; appearance: none; }

@@ -1988,7 +1988,9 @@ window.App = (function () {
     var v = document.createElement("video");
     v.className = "rho-avatar";
     v.muted = true; v.defaultMuted = true; v.loop = true; v.autoplay = true; v.preload = "auto";
-    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("autoplay", ""); v.setAttribute("loop", ""); v.setAttribute("aria-hidden", "true");
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", ""); v.setAttribute("autoplay", ""); v.setAttribute("loop", ""); v.setAttribute("aria-hidden", "true");
+    // Warm poster so iOS never flashes a black frame before/if autoplay starts.
+    v.setAttribute("poster", "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='48'%20height='48'%3E%3Crect%20width='48'%20height='48'%20fill='%23f6e4d8'/%3E%3C/svg%3E");
     v.src = "assets/Design/Rho%20Animation.mp4";
     var swapped = false;
     v.addEventListener("error", function () { if (swapped || !v.parentNode) return; swapped = true; v.parentNode.replaceChild(tutorSvgFace(), v); });
