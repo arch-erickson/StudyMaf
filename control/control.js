@@ -1,4 +1,7 @@
-import { Auth } from '../js/auth.js';
+// Keep this exact module URL aligned with account-ui.js. Importing the same
+// module under two URLs creates two separate in-memory sessions, which made a
+// valid admin appear signed out inside the Control dashboard.
+import { Auth } from '../js/auth.js?v=2';
 import '../js/generators.js';
 import '../js/generators-math.js';
 import '../js/generators-more.js';
